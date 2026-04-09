@@ -1,0 +1,84 @@
+{
+  "topics": [
+    {
+      "id": "topic-001",
+      "status": "done",
+      "title_hint": "Miten parturi-kampaamo voi kasvattaa asiakaskuntaa tekoälyllä",
+      "category": "toimiala",
+      "keywords": ["parturi", "kampaamo", "tekoäly", "ajanvaraus", "asiakaspalvelu"],
+      "unsplash_query": "barber shop salon interior"
+    },
+    {
+      "id": "topic-002",
+      "status": "pending",
+      "title_hint": "GDPR ja tekoälyvastaanottaja: mitä suomalaisen yrittäjän täytyy tietää",
+      "category": "opas",
+      "keywords": ["GDPR", "tietosuoja", "tekoäly", "pk-yritys", "henkilötieto"],
+      "unsplash_query": "data privacy security office"
+    },
+    {
+      "id": "topic-003",
+      "status": "pending",
+      "title_hint": "Fysioterapiavastaanotto ilman sihteeristöä – onko se mahdollista?",
+      "category": "toimiala",
+      "keywords": ["fysioterapia", "terveydenhuolto", "ajanvaraus", "tekoäly", "vastaanotto"],
+      "unsplash_query": "physiotherapy clinic reception"
+    },
+    {
+      "id": "topic-004",
+      "status": "pending",
+      "title_hint": "5 merkkiä siitä, että yrityksesi tarvitsee tekoälyvastaanottajan nyt",
+      "category": "ongelma",
+      "keywords": ["merkit", "ongelma", "puhelimet", "vastaamatta", "kasvu", "liidien hankinta"],
+      "unsplash_query": "busy small business phone calls"
+    },
+    {
+      "id": "topic-005",
+      "status": "pending",
+      "title_hint": "Ravintolan puhelinruuhka: kuinka tekoäly auttaa pöytävarausten hallinnassa",
+      "category": "toimiala",
+      "keywords": ["ravintola", "pöytävaraus", "ruuhka", "tekoäly", "asiakaspalvelu"],
+      "unsplash_query": "restaurant dining reservation"
+    },
+    {
+      "id": "topic-006",
+      "status": "pending",
+      "title_hint": "Pk-yrityksen verkkosivut 2026: miksi ne ratkaisevat asiakashankinnan",
+      "category": "opas",
+      "keywords": ["verkkosivut", "asiakashankinta", "pk-yritys", "digimarkkinointi", "liidien hankinta", "konversio"],
+      "unsplash_query": "modern website design laptop business"
+    },
+    {
+      "id": "topic-007",
+      "status": "pending",
+      "title_hint": "5 tapaa saada enemmän asiakkaita verkosta ilman lisää markkinointibudjettia",
+      "category": "opas",
+      "keywords": ["liidit", "asiakashankinta", "digimarkkinointi", "kasvu", "myynti", "ilmainen markkinointi", "yrityksen kasvu"],
+      "unsplash_query": "business growth digital marketing strategy"
+    },
+    {
+      "id": "topic-008",
+      "status": "pending",
+      "title_hint": "Tekoäly + verkkosivut yhdessä: näin suomalainen yrittäjä kasvattaa myyntiä 24/7",
+      "category": "opas",
+      "keywords": ["tekoäly", "verkkosivut", "myynti", "automaatio", "liidien hankinta", "yrityksen kasvu", "digitalisaatio"],
+      "unsplash_query": "AI technology business automation growth"
+    },
+    {
+      "id": "topic-009",
+      "status": "pending",
+      "title_hint": "Miksi pienyrityksen verkkosivut eivät tuota asiakkaita – ja miten se korjataan",
+      "category": "ongelma",
+      "keywords": ["verkkosivut", "konversio", "liidit", "hakukonenäkyvyys", "SEO", "asiakkaat", "pienyritys"],
+      "unsplash_query": "website analytics conversion rate"
+    },
+    {
+      "id": "topic-010",
+      "status": "pending",
+      "title_hint": "Kauneushoitolan ja kampaamon digitaalinen kasvu: verkkosivut, ajanvaraus ja tekoäly",
+      "category": "toimiala",
+      "keywords": ["kauneushoitola", "kampaamo", "verkkosivut", "ajanvaraus", "tekoäly", "digitalisaatio", "asiakashankinta"],
+      "unsplash_query": "beauty salon spa modern interior"
+    }
+  ]
+}

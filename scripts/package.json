@@ -1,0 +1,13 @@
+{
+  "name": "selora-blog-generator",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "generate": "node generate-post.js",
+    "dry-run": "node generate-post.js --dry-run"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "jsdom": "^26.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+scripts/node_modules/
+scripts/.env
+.DS_Store
+*.zip
+index-91bf7433.html
+agency-website.textClipping
+lead-scraper/credentials.json
+.claude/
