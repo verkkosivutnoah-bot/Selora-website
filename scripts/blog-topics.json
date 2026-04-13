@@ -5,15 +5,27 @@
       "status": "done",
       "title_hint": "Miten parturi-kampaamo voi kasvattaa asiakaskuntaa tekoälyllä",
       "category": "toimiala",
-      "keywords": ["parturi", "kampaamo", "tekoäly", "ajanvaraus", "asiakaspalvelu"],
+      "keywords": [
+        "parturi",
+        "kampaamo",
+        "tekoäly",
+        "ajanvaraus",
+        "asiakaspalvelu"
+      ],
       "unsplash_query": "barber shop salon interior"
     },
     {
       "id": "topic-002",
-      "status": "pending",
+      "status": "done",
       "title_hint": "GDPR ja tekoälyvastaanottaja: mitä suomalaisen yrittäjän täytyy tietää",
       "category": "opas",
-      "keywords": ["GDPR", "tietosuoja", "tekoäly", "pk-yritys", "henkilötieto"],
+      "keywords": [
+        "GDPR",
+        "tietosuoja",
+        "tekoäly",
+        "pk-yritys",
+        "henkilötieto"
+      ],
       "unsplash_query": "data privacy security office"
     },
     {
@@ -21,7 +33,13 @@
       "status": "pending",
       "title_hint": "Fysioterapiavastaanotto ilman sihteeristöä – onko se mahdollista?",
       "category": "toimiala",
-      "keywords": ["fysioterapia", "terveydenhuolto", "ajanvaraus", "tekoäly", "vastaanotto"],
+      "keywords": [
+        "fysioterapia",
+        "terveydenhuolto",
+        "ajanvaraus",
+        "tekoäly",
+        "vastaanotto"
+      ],
       "unsplash_query": "physiotherapy clinic reception"
     },
     {
@@ -29,7 +47,14 @@
       "status": "pending",
       "title_hint": "5 merkkiä siitä, että yrityksesi tarvitsee tekoälyvastaanottajan nyt",
       "category": "ongelma",
-      "keywords": ["merkit", "ongelma", "puhelimet", "vastaamatta", "kasvu", "liidien hankinta"],
+      "keywords": [
+        "merkit",
+        "ongelma",
+        "puhelimet",
+        "vastaamatta",
+        "kasvu",
+        "liidien hankinta"
+      ],
       "unsplash_query": "busy small business phone calls"
     },
     {
@@ -37,7 +62,13 @@
       "status": "pending",
       "title_hint": "Ravintolan puhelinruuhka: kuinka tekoäly auttaa pöytävarausten hallinnassa",
       "category": "toimiala",
-      "keywords": ["ravintola", "pöytävaraus", "ruuhka", "tekoäly", "asiakaspalvelu"],
+      "keywords": [
+        "ravintola",
+        "pöytävaraus",
+        "ruuhka",
+        "tekoäly",
+        "asiakaspalvelu"
+      ],
       "unsplash_query": "restaurant dining reservation"
     },
     {
@@ -45,7 +76,14 @@
       "status": "pending",
       "title_hint": "Pk-yrityksen verkkosivut 2026: miksi ne ratkaisevat asiakashankinnan",
       "category": "opas",
-      "keywords": ["verkkosivut", "asiakashankinta", "pk-yritys", "digimarkkinointi", "liidien hankinta", "konversio"],
+      "keywords": [
+        "verkkosivut",
+        "asiakashankinta",
+        "pk-yritys",
+        "digimarkkinointi",
+        "liidien hankinta",
+        "konversio"
+      ],
       "unsplash_query": "modern website design laptop business"
     },
     {
@@ -53,7 +91,15 @@
       "status": "pending",
       "title_hint": "5 tapaa saada enemmän asiakkaita verkosta ilman lisää markkinointibudjettia",
       "category": "opas",
-      "keywords": ["liidit", "asiakashankinta", "digimarkkinointi", "kasvu", "myynti", "ilmainen markkinointi", "yrityksen kasvu"],
+      "keywords": [
+        "liidit",
+        "asiakashankinta",
+        "digimarkkinointi",
+        "kasvu",
+        "myynti",
+        "ilmainen markkinointi",
+        "yrityksen kasvu"
+      ],
       "unsplash_query": "business growth digital marketing strategy"
     },
     {
@@ -61,7 +107,15 @@
       "status": "pending",
       "title_hint": "Tekoäly + verkkosivut yhdessä: näin suomalainen yrittäjä kasvattaa myyntiä 24/7",
       "category": "opas",
-      "keywords": ["tekoäly", "verkkosivut", "myynti", "automaatio", "liidien hankinta", "yrityksen kasvu", "digitalisaatio"],
+      "keywords": [
+        "tekoäly",
+        "verkkosivut",
+        "myynti",
+        "automaatio",
+        "liidien hankinta",
+        "yrityksen kasvu",
+        "digitalisaatio"
+      ],
       "unsplash_query": "AI technology business automation growth"
     },
     {
@@ -69,7 +123,15 @@
       "status": "pending",
       "title_hint": "Miksi pienyrityksen verkkosivut eivät tuota asiakkaita – ja miten se korjataan",
       "category": "ongelma",
-      "keywords": ["verkkosivut", "konversio", "liidit", "hakukonenäkyvyys", "SEO", "asiakkaat", "pienyritys"],
+      "keywords": [
+        "verkkosivut",
+        "konversio",
+        "liidit",
+        "hakukonenäkyvyys",
+        "SEO",
+        "asiakkaat",
+        "pienyritys"
+      ],
       "unsplash_query": "website analytics conversion rate"
     },
     {
@@ -77,7 +139,15 @@
       "status": "pending",
       "title_hint": "Kauneushoitolan ja kampaamon digitaalinen kasvu: verkkosivut, ajanvaraus ja tekoäly",
       "category": "toimiala",
-      "keywords": ["kauneushoitola", "kampaamo", "verkkosivut", "ajanvaraus", "tekoäly", "digitalisaatio", "asiakashankinta"],
+      "keywords": [
+        "kauneushoitola",
+        "kampaamo",
+        "verkkosivut",
+        "ajanvaraus",
+        "tekoäly",
+        "digitalisaatio",
+        "asiakashankinta"
+      ],
       "unsplash_query": "beauty salon spa modern interior"
     }
   ]
