@@ -70,7 +70,7 @@ serve(async (req) => {
     }
 
     // ── Create web call in Retell ─────────────────────────────────────────────
-    const retellResp = await fetch("https://api.retellai.com/v2/create-web-call", {
+    const retellResp = await fetch("https://api.retellai.com/create-web-call", {
       method: "POST",
       headers: {
         "Content-Type":  "application/json",

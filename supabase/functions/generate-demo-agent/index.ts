@@ -275,7 +275,7 @@ serve(async (req) => {
     if (!retellLlmId) throw new Error("Retell did not return an llm_id");
 
     // ── Create Retell Agent ──────────────────────────────────────────────────
-    const agentResp = await fetch("https://api.retellai.com/v2/create-agent", {
+    const agentResp = await fetch("https://api.retellai.com/create-agent", {
       method: "POST",
       headers: {
         "Content-Type":  "application/json",
