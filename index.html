@@ -522,8 +522,9 @@
     /* Left card */
     .roi-full-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 1.5rem; padding: 2.5rem; display: flex; flex-direction: column; }
     @media(max-width:640px) { .roi-full-card { padding: 1.75rem 1.5rem; } }
-    .roi-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
+    .roi-inputs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 0; }
     @media(max-width:520px) { .roi-inputs-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .roi-close-row { margin-top: 2rem; margin-bottom: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.07); }
     .roi-lbl { font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.45); margin-bottom: 0.45rem; display: block; }
     .roi-num-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.85rem; }
     .roi-num { font-size: 2rem; font-weight: 600; letter-spacing: -0.04em; color: #fff; line-height: 1; transition: color 0.2s; }
@@ -822,6 +823,7 @@
         <a href="yhteystiedot.html">Yhteystiedot</a>
       </nav>
       <div class="nav-right">
+        <a href="kirjaudu.html" class="btn btn-nav-cta" style="padding:0.45rem 1rem;font-size:0.75rem;color:rgba(255,255,255,0.75);text-decoration:none;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.75)'">Kirjaudu</a>
         <a href="yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
         <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" onclick="toggleMobileMenu()">
           <svg class="menu-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1214,6 +1216,16 @@
             <input type="range" class="roi-track" id="sl-missed" min="1" max="50" value="5" oninput="roiCalc()">
             <div class="roi-hints"><span>1 puhelu</span><span>50 puhelua</span></div>
           </div>
+        </div>
+
+        <div class="roi-close-row">
+          <label class="roi-lbl">Kuinka monta prosenttia liideistä yleensä klousaat?</label>
+          <div class="roi-num-row">
+            <span class="roi-num" id="lbl-close">30</span>
+            <span class="roi-unit">% liideistä</span>
+          </div>
+          <input type="range" class="roi-track" id="sl-close" min="1" max="100" value="30" oninput="roiCalc()">
+          <div class="roi-hints"><span>1 %</span><span>100 %</span></div>
         </div>
 
         <div class="roi-divline"></div>
@@ -1968,9 +1980,10 @@
   /* ── Main calc ── */
   var prevDaily=0, prevMonthly=0, prevAnnual=0, prevSelora=0;
   window.roiCalc = function () {
-    var leadVal = +document.getElementById('sl-leadval').value;
-    var missed  = +document.getElementById('sl-missed').value;
-    var daily   = missed * leadVal;
+    var leadVal   = +document.getElementById('sl-leadval').value;
+    var missed    = +document.getElementById('sl-missed').value;
+    var closeRate = +document.getElementById('sl-close').value;
+    var daily   = missed * leadVal * (closeRate / 100);
     var monthly = daily * 22;
     var annual  = monthly * 12;
     var selora  = monthly * 0.78;
@@ -1978,12 +1991,15 @@
     /* Update slider labels */
     document.getElementById('lbl-leadval').textContent = Math.round(leadVal).toLocaleString('fi-FI');
     document.getElementById('lbl-missed').textContent  = missed;
+    document.getElementById('lbl-close').textContent   = closeRate;
 
     /* Fill slider tracks */
     var slLv = document.getElementById('sl-leadval');
     var slMs = document.getElementById('sl-missed');
+    var slCl = document.getElementById('sl-close');
     if (slLv) fillTrack(slLv);
     if (slMs) fillTrack(slMs);
+    if (slCl) fillTrack(slCl);
 
     /* Animate numbers */
     animateVal('roi-daily',   daily);
@@ -2009,8 +2025,10 @@
   /* Init tracks + calc on load */
   var slLvInit = document.getElementById('sl-leadval');
   var slMsInit = document.getElementById('sl-missed');
+  var slClInit = document.getElementById('sl-close');
   if (slLvInit) fillTrack(slLvInit);
   if (slMsInit) fillTrack(slMsInit);
+  if (slClInit) fillTrack(slClInit);
 
   /* Start when ROI section scrolls into view */
   var roiSection = document.getElementById('roi');
@@ -2035,7 +2053,8 @@
     resizeTimer = setTimeout(function () {
       var lv = +document.getElementById('sl-leadval').value;
       var ms = +document.getElementById('sl-missed').value;
-      drawChart(lv * ms * 22 * 0.78);
+      var cr = +document.getElementById('sl-close').value;
+      drawChart(lv * ms * (cr / 100) * 22 * 0.78);
     }, 120);
   });
 })();

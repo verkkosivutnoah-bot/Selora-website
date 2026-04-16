@@ -190,12 +190,19 @@ All pages have custom `<meta name="description">` tags. Sitemap and robots.txt n
 
 ## Pending Tasks
 
+### Website
 - [ ] **Formspree**: Add real endpoint to contact form in `yhteystiedot.html`
 - [ ] **Favicon**: Create and add favicon to all pages
 - [ ] **sitemap.xml** + **robots.txt**: Create for SEO
 - [ ] **Blog backend**: Set up automated blog post creation/posting
 - [ ] **Newsletter**: Wire subscription form backend (user said: later)
 - [ ] **Blog articles**: Write and publish actual blog posts (currently 3 "coming soon")
+
+### Client Portal (priority)
+- [ ] **Deploy Edge Functions**: `supabase functions deploy generate-demo-agent` + `supabase functions deploy create-web-call`
+- [ ] **Set secrets**: `ANTHROPIC_API_KEY` + `RETELL_API_KEY` via `supabase secrets set` or dashboard
+- [ ] **Run SQL schema**: Execute `supabase-setup.sql` in Supabase SQL editor
+- [ ] **Email automation**: Onboarding email sequence for new signups (planned, not started)
 
 ---
 
@@ -207,3 +214,82 @@ All pages have custom `<meta name="description">` tags. Sitemap and robots.txt n
 - Ghost buttons inside light sections need dark styling: `color: #1e293b; border-color: rgba(15,23,42,0.22)`
 - Do NOT use `display: ''` to show hidden elements — always use `display: 'inline'` or `display: 'block'`
 - The `#prosessi` section on index.html replaced the deleted prosessi.html page entirely
+
+---
+
+## Client Portal
+
+The website has a full client portal built with Supabase Auth + vanilla HTML/JS. No frameworks.
+
+### Auth Pages
+| File | Description |
+|------|-------------|
+| `kirjaudu.html` | Sign-in page — Supabase email+password, forgot password, Finnish error messages |
+| `rekisteroidy.html` | Sign-up page — name, company, phone, email, password with live strength meter |
+| `dashboard.html` | Main client dashboard — dark themed, Siri orb call widget, 3 views, 3 states |
+| `onboarding.html` | 7-step questionnaire — collects business info, then calls Edge Function to create Retell agent |
+
+### Supabase Project
+- **Project URL:** `https://zubhxdlssoochwbwyxlp.supabase.co`
+- **Anon key:** `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1Ymh4ZGxzc29vY2h3Ynd5eGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyOTM1ODQsImV4cCI6MjA5MTg2OTU4NH0.czrg_VzVMobfT0lMSZhggBYSV-VEIcggmufUOCntexU`
+- **Project ref:** `zubhxdlssoochwbwyxlp`
+
+### Database Schema (`supabase-setup.sql`)
+Four tables, all with RLS enabled:
+
+| Table | Key columns | Notes |
+|-------|-------------|-------|
+| `profiles` | `id` (FK auth.users), `full_name`, `company_name`, `phone`, `has_active_plan` (bool), `plan_type` ('demo'\|'aloitus'\|'kasvu') | Auto-created by trigger on signup |
+| `onboarding` | `user_id`, `business_name`, `industry`, `city`, `services`, `hours`, `tasks` (text[]), `tone`, `language`, `extra_info`, `completed_at`, `agent_generated` (bool) | One row per user |
+| `retell_agents` | `user_id`, `retell_agent_id`, `agent_name`, `system_prompt`, `voice_id`, `active` (bool), `demo_calls_used` (int), `demo_calls_limit` (int, default 5), `onboarding_id` | Created by generate-demo-agent Edge Function |
+| `call_logs` | `user_id`, `agent_id`, `caller_number`, `called_at`, `duration_secs`, `outcome` ('completed'\|'missed'\|'transferred'\|'voicemail'\|'in_progress'), `summary` | Populated by create-web-call + Retell webhooks |
+
+**Admin function:** `upgrade_user_plan(target_user_id UUID, new_plan TEXT)` — sets `has_active_plan=true` and `plan_type`.
+
+### Edge Functions (`supabase/functions/`)
+
+#### `generate-demo-agent/index.ts`
+Called from `onboarding.html` after questionnaire submission.
+1. Authenticates user via JWT
+2. Calls **Claude Opus** with business details → generates personalised Finnish agent system prompt
+3. Creates agent in **Retell AI** (`POST /v2/create-agent`) with voice `fi-FI-SelmaNeural`
+4. Saves agent to `retell_agents` table
+5. Returns `{ success, agent_id, agent_name }`
+
+**Required secrets:** `ANTHROPIC_API_KEY`, `RETELL_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+
+#### `create-web-call/index.ts`
+Called from `dashboard.html` when user clicks the Siri orb / call button.
+1. Authenticates user, verifies they own the agent
+2. Checks demo call limit (5 calls max unless `has_active_plan=true`)
+3. Calls **Retell AI** (`POST /v2/create-web-call`) → gets `access_token`
+4. Increments `demo_calls_used` in `retell_agents`
+5. Logs call in `call_logs`
+6. Returns `{ access_token }` to frontend
+
+**Required secrets:** `RETELL_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+
+### Dashboard States
+The dashboard (`dashboard.html`) detects user state on load and renders accordingly:
+- **No onboarding** (`onboarding.completed_at` is null) → Welcome card + "Luo oma agenttini →" CTA → links to `onboarding.html`
+- **Demo** (`has_active_plan=false`, onboarding done) → Siri orb call widget, demo progress bar (x/5 calls), upgrade nudge
+- **Active client** (`has_active_plan=true`) → Full stats, unlimited call widget, call log
+
+### Siri Orb
+The call widget uses the exact same Siri orb animation as `index.html#demo`:
+- CSS `@property --siri-angle` + conic-gradient + `blur(18px) contrast(1.9)` = fluid colour blob
+- States: `idle → connecting → listening → speaking → ended`
+- Breathing rings (`.orb-ring`) pulse on listening/speaking
+- Wave bars animate when agent is speaking
+
+### Nav: "Kirjaudu" link
+All 8 main HTML pages have a "Kirjaudu" text link added before the "Varaa demo" CTA button in the nav-right.
+
+### Deploy Commands (run once)
+```bash
+supabase link --project-ref zubhxdlssoochwbwyxlp
+supabase db push  # runs supabase-setup.sql
+supabase functions deploy generate-demo-agent
+supabase functions deploy create-web-call
+supabase secrets set ANTHROPIC_API_KEY=sk-ant-... RETELL_API_KEY=key_...
+```
