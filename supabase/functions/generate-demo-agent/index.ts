@@ -243,7 +243,6 @@ serve(async (req) => {
     });
 
     const agentName    = `${business_name} — Tekoälyvastaanottaja`;
-    const retellVoice  = "fi-FI-SelmaNeural";
     const beginMessage = `Hei, olet soittanut ${business_name}:een. Kuinka voin auttaa sinua tänään?`;
 
     // ── Create Retell LLM ────────────────────────────────────────────────────
@@ -283,7 +282,6 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         agent_name: agentName,
-        voice_id:   retellVoice,
         language:   "fi-FI",
         response_engine: {
           type:   "retell-llm",
@@ -320,7 +318,6 @@ serve(async (req) => {
       retell_llm_id:    retellLlmId,
       agent_name:       agentName,
       system_prompt:    agentPrompt,
-      voice_id:         retellVoice,
       active:           true,
       demo_calls_used:  0,
       demo_calls_limit: 5,
