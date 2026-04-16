@@ -834,10 +834,12 @@ async function generateAgent() {
 
   try {
     const { data: { session } } = await sb.auth.getSession();
+    const { data: { user } } = await sb.auth.getUser();
+    if (!user) throw new Error('Ei istuntoa — kirjaudu uudelleen.');
 
     // Save onboarding data to DB first
     const { data: obData, error: obErr } = await sb.from('onboarding').upsert({
-      user_id:       session.user.id,
+      user_id:       user.id,
       business_name: payload.business_name,
       industry:      payload.industry,
       city:          payload.city,
@@ -857,7 +859,7 @@ async function generateAgent() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + session.access_token,
+        'Authorization': 'Bearer ' + session?.access_token,
       },
       body: JSON.stringify({ onboarding_id: obData.id, ...payload }),
     });
