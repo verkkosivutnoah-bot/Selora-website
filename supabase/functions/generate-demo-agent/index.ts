@@ -247,7 +247,7 @@ serve(async (req) => {
     const beginMessage = `Hei, olet soittanut ${business_name}:een. Kuinka voin auttaa sinua tänään?`;
 
     // ── Create Retell LLM ────────────────────────────────────────────────────
-    const llmResp = await fetch("https://api.retellai.com/v2/create-retell-llm", {
+    const llmResp = await fetch("https://api.retellai.com/create-retell-llm", {
       method: "POST",
       headers: {
         "Content-Type":  "application/json",
