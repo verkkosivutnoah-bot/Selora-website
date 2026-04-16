@@ -10,8 +10,9 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.3";
 
-const RETELL_API_KEY = Deno.env.get("RETELL_API_KEY")!;
-const SUPABASE_URL   = Deno.env.get("SUPABASE_URL")!;
+const RETELL_API_KEY   = Deno.env.get("RETELL_API_KEY")!;
+const SUPABASE_URL     = Deno.env.get("SUPABASE_URL")!;
+const SUPABASE_ANON    = Deno.env.get("SUPABASE_ANON_KEY")!;
 const SUPABASE_SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 
 const CORS = {
@@ -27,11 +28,15 @@ serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) return json({ error: "Unauthorized" }, 401);
 
-    const sb = createClient(SUPABASE_URL, SUPABASE_SERVICE);
-    const { data: { user }, error: authErr } = await sb.auth.getUser(
-      authHeader.replace("Bearer ", "")
-    );
+    // Use anon client with user's token to verify identity (supports ES256)
+    const userSb = createClient(SUPABASE_URL, SUPABASE_ANON, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: { user }, error: authErr } = await userSb.auth.getUser();
     if (authErr || !user) return json({ error: "Unauthorized" }, 401);
+
+    // Service role client for DB reads/writes (bypasses RLS)
+    const sb = createClient(SUPABASE_URL, SUPABASE_SERVICE);
 
     // ── Payload ───────────────────────────────────────────────────────────────
     const { agent_id } = await req.json();
