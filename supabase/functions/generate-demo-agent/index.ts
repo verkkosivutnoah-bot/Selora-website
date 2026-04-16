@@ -311,6 +311,7 @@ serve(async (req) => {
         },
         speech_to_text: {
           provider: "azure",
+          language: "fi-FI",
         },
         enable_backchannel:        true,
         backchannel_frequency:     0.8,
