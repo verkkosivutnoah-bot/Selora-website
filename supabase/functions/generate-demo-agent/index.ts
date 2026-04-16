@@ -282,10 +282,14 @@ serve(async (req) => {
       },
       body: JSON.stringify({
         agent_name: agentName,
+        voice_id:   "custom_voice_5b5439b90723dfeab0c58c448a",
         language:   "fi-FI",
         response_engine: {
           type:   "retell-llm",
           llm_id: retellLlmId,
+        },
+        speech_to_text: {
+          provider: "azure",
         },
         enable_backchannel:        true,
         backchannel_frequency:     0.8,
