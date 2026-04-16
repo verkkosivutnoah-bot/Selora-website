@@ -775,9 +775,94 @@
       .sidebar { display: none; }
       .main { margin-left: 0; padding-bottom: 70px; }
       .mobile-bar { display: block; }
-      .page-content { padding: 1.25rem; }
+      .page-content { padding: 1.25rem; gap: 0.75rem; }
       .topbar { padding: 0 1.25rem; }
+      .topbar-title { font-size: 1rem; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .card { padding: 1rem; }
+      .stat-card { padding: 1rem; }
+      .orb-widget { padding: 1.5rem 1rem; width: 100%; text-align: center; }
+      .settings-grid { grid-template-columns: 1fr !important; }
+      .form-group.full { grid-column: 1; }
+      .section-cols { grid-template-columns: 1fr !important; }
     }
+
+    /* ── BUSINESS INFO CARD ─────────────────────────────────── */
+    .biz-card {
+      background: var(--card);
+      border: 1px solid var(--card-b);
+      border-left: 3px solid var(--blue);
+      border-radius: 14px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .biz-card-body { flex: 1; min-width: 0; }
+    .biz-card-name { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 0.2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .biz-card-meta { font-size: 0.78rem; color: var(--text-3); margin-bottom: 0.6rem; }
+    .biz-card-snippet { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; margin-bottom: 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .biz-card-edit {
+      flex-shrink: 0;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--blue-light);
+      background: rgba(29,78,216,0.12);
+      border: none;
+      border-radius: 20px;
+      padding: 0.38rem 0.9rem;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .biz-card-edit:hover { background: rgba(29,78,216,0.25); }
+
+    /* ── SETTINGS SECTION CARDS ──────────────────────────────── */
+    .settings-section {
+      margin-bottom: 1.75rem;
+    }
+    .settings-section-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-3);
+      margin-bottom: 0.6rem;
+      padding-left: 0.1rem;
+    }
+    .btn-agent-update {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(29,78,216,0.25));
+      color: var(--blue-light);
+      border: 1px solid rgba(96,165,250,0.3);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-agent-update:hover { background: linear-gradient(135deg, rgba(96,165,250,0.28), rgba(29,78,216,0.38)); transform: translateY(-1px); }
+
+    /* ── EXPANDABLE CALL ROWS ────────────────────────────────── */
+    tbody tr.call-row { cursor: pointer; user-select: none; }
+    tbody tr.call-row td.chevron-cell { color: var(--text-3); font-size: 0.75rem; transition: transform 0.2s; }
+    tbody tr.call-row.expanded td.chevron-cell { transform: rotate(90deg); }
+    tbody tr.call-detail-row td {
+      padding: 0.75rem 1rem;
+      font-size: 0.82rem;
+      color: var(--text-2);
+      background: rgba(255,255,255,0.02);
+      border-top: none !important;
+      line-height: 1.55;
+    }
+    tbody tr.call-detail-row { display: none; }
+    tbody tr.call-detail-row.visible { display: table-row; }
 
     /* ── DOT INDICATOR ───────────────────────────────────────── */
     .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
@@ -962,6 +1047,17 @@
             </div>
           </div>
 
+          <!-- Business Info Card (Demo) -->
+          <div class="biz-card" id="biz-card-demo" style="display:none;">
+            <div class="biz-card-body">
+              <div class="biz-card-name" id="biz-name-demo">–</div>
+              <div class="biz-card-meta" id="biz-meta-demo"></div>
+              <div class="biz-card-snippet" id="biz-services-demo"></div>
+              <div class="biz-card-snippet" id="biz-hours-demo" style="color:var(--text-3);"></div>
+            </div>
+            <button class="biz-card-edit" onclick="switchView('settings')">Muokkaa →</button>
+          </div>
+
           <!-- Siri Orb Call Widget (Demo) -->
           <div class="orb-widget">
             <div class="orb-ambient" id="orb-ambient-demo"></div>
@@ -1045,6 +1141,17 @@
             </div>
           </div>
 
+          <!-- Business Info Card (Active) -->
+          <div class="biz-card" id="biz-card-active" style="display:none;">
+            <div class="biz-card-body">
+              <div class="biz-card-name" id="biz-name-active">–</div>
+              <div class="biz-card-meta" id="biz-meta-active"></div>
+              <div class="biz-card-snippet" id="biz-services-active"></div>
+              <div class="biz-card-snippet" id="biz-hours-active" style="color:var(--text-3);"></div>
+            </div>
+            <button class="biz-card-edit" onclick="switchView('settings')">Muokkaa →</button>
+          </div>
+
           <!-- Siri Orb (Active) -->
           <div class="orb-widget">
             <div class="orb-ambient" id="orb-ambient-active"></div>
@@ -1100,7 +1207,7 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th>Numero</th><th>Pvm &amp; aika</th><th>Kesto</th><th>Tulos</th><th>Yhteenveto</th></tr>
+              <tr><th></th><th>Numero</th><th>Pvm &amp; aika</th><th>Kesto</th><th>Tulos</th><th>Yhteenveto</th></tr>
             </thead>
             <tbody id="call-log-tbody">
               <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita vielä.</td></tr>
@@ -1113,59 +1220,91 @@
            VIEW: SETTINGS
       ════════════════════════════════════════ -->
       <div id="view-settings" style="display:none;">
-        <div class="section-h" style="margin-top:0;">Yritystiedot</div>
-        <div class="card">
-          <div class="settings-grid">
-            <div class="form-group"><label>Yrityksen nimi</label><input type="text" id="set-company" placeholder="Parturi Kallio Oy"></div>
-            <div class="form-group"><label>Toimiala</label>
-              <select id="set-industry">
-                <option value="">Valitse...</option>
-                <option value="parturi-kampaamo">Parturi / Kampaamo</option>
-                <option value="ravintola">Ravintola / Kahvila</option>
-                <option value="laakariasema">Lääkäriasema / Klinikka</option>
-                <option value="kauneudenhoito">Kauneudenhoito / Spa</option>
-                <option value="autokorjaamo">Autokorjaamo</option>
-                <option value="kiinteistojenvalitys">Kiinteistönvälitys</option>
-                <option value="tilitoimisto">Tilitoimisto</option>
-                <option value="lakitoimisto">Lakitoimisto</option>
-                <option value="muu">Muu</option>
-              </select>
-            </div>
-            <div class="form-group"><label>Kaupunki</label><input type="text" id="set-city" placeholder="Helsinki"></div>
-            <div class="form-group"><label>Yrityksen puhelin</label><input type="tel" id="set-phone" placeholder="+358 9 1234 5678"></div>
-            <div class="form-group full"><label>Lisätietoja agentille</label><textarea id="set-extra" placeholder="Erikoistarjoukset, erityisohjeet..."></textarea></div>
-          </div>
-        </div>
 
-        <div class="section-h">Agentin tyyli</div>
-        <div class="card mt-2">
-          <div class="settings-grid">
-            <div class="form-group"><label>Äänensävy</label>
-              <select id="set-tone">
-                <option value="professional">Ammattimainen</option>
-                <option value="friendly">Ystävällinen</option>
-                <option value="casual">Rento</option>
-              </select>
-            </div>
-            <div class="form-group"><label>Kieli</label>
-              <select id="set-lang">
-                <option value="fi">Suomi</option>
-                <option value="fi,en">Suomi + Englanti</option>
-                <option value="fi,sv">Suomi + Ruotsi</option>
-                <option value="fi,sv,en">Suomi + Ruotsi + Englanti</option>
-              </select>
+        <!-- Yritystiedot -->
+        <div class="settings-section">
+          <div class="settings-section-label">Yritystiedot</div>
+          <div class="card">
+            <div class="settings-grid">
+              <div class="form-group"><label>Yrityksen nimi</label><input type="text" id="set-company" placeholder="Parturi Kallio Oy"></div>
+              <div class="form-group"><label>Toimiala</label>
+                <select id="set-industry">
+                  <option value="">Valitse...</option>
+                  <option value="parturi-kampaamo">Parturi / Kampaamo</option>
+                  <option value="ravintola">Ravintola / Kahvila</option>
+                  <option value="laakariasema">Lääkäriasema / Klinikka</option>
+                  <option value="kauneudenhoito">Kauneudenhoito / Spa</option>
+                  <option value="autokorjaamo">Autokorjaamo</option>
+                  <option value="kiinteistojenvalitys">Kiinteistönvälitys</option>
+                  <option value="tilitoimisto">Tilitoimisto</option>
+                  <option value="lakitoimisto">Lakitoimisto</option>
+                  <option value="lvi">LVI-asennus</option>
+                  <option value="sahkoasennus">Sähköasennus</option>
+                  <option value="rakennus">Rakennus / Remontointi</option>
+                  <option value="muu">Muu</option>
+                </select>
+              </div>
+              <div class="form-group"><label>Kaupunki</label><input type="text" id="set-city" placeholder="Helsinki"></div>
+              <div class="form-group"><label>Yrityksen puhelin</label><input type="tel" id="set-phone" placeholder="+358 9 1234 5678"></div>
+              <div class="form-group full"><label>Lisätietoja agentille</label><textarea id="set-extra" placeholder="Erikoistarjoukset, erityisohjeet..."></textarea></div>
             </div>
           </div>
         </div>
 
-        <div class="section-h">Tilisi</div>
-        <div class="card mt-2">
-          <div class="settings-grid">
-            <div class="form-group"><label>Koko nimi</label><input type="text" id="set-fullname"></div>
-            <div class="form-group"><label>Sähköposti</label><input type="email" id="set-email" readonly></div>
+        <!-- Agentin asetukset -->
+        <div class="settings-section">
+          <div class="settings-section-label">Agentin asetukset</div>
+          <div class="card">
+            <div class="settings-grid">
+              <div class="form-group"><label>Äänensävy</label>
+                <select id="set-tone">
+                  <option value="professional">Ammattimainen</option>
+                  <option value="friendly">Ystävällinen</option>
+                  <option value="casual">Rento</option>
+                </select>
+              </div>
+              <div class="form-group"><label>Kieli</label>
+                <select id="set-lang">
+                  <option value="fi">Suomi</option>
+                  <option value="fi,en">Suomi + Englanti</option>
+                  <option value="fi,sv">Suomi + Ruotsi</option>
+                  <option value="fi,sv,en">Suomi + Ruotsi + Englanti</option>
+                </select>
+              </div>
+              <div class="form-group full"><label>Palvelut ja hinnat</label>
+                <textarea id="set-services" rows="4" placeholder="Miesten leikkaus 25€, naisten leikkaus 35€..."></textarea>
+              </div>
+              <div class="form-group full"><label>Aukioloajat</label>
+                <textarea id="set-hours" rows="3" placeholder="Ma-Pe: 09:00-18:00, La: 10:00-15:00, Su: suljettu"></textarea>
+              </div>
+              <div class="form-group full"><label>Aloitusviesti (mitä agentti sanoo ensimmäisenä)</label>
+                <input type="text" id="set-greeting" placeholder="Hei, olet soittanut...">
+              </div>
+            </div>
+            <div style="margin-top:1.1rem;display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+              <button class="btn-agent-update" id="btn-update-agent" onclick="updateAgent()">
+                <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                Päivitä agentti
+              </button>
+              <span style="font-size:0.75rem;color:var(--text-3);">Luo uuden promptin agentille palveluiden ja aukioloaikojen perusteella</span>
+            </div>
           </div>
         </div>
-        <div class="mt-3">
+
+        <!-- Tilisi -->
+        <div class="settings-section">
+          <div class="settings-section-label">Tilisi</div>
+          <div class="card">
+            <div class="settings-grid">
+              <div class="form-group"><label>Koko nimi</label><input type="text" id="set-fullname"></div>
+              <div class="form-group"><label>Sähköposti</label><input type="email" id="set-email" readonly></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:0.5rem;">
           <button class="btn-primary" onclick="saveSettings()">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
@@ -1272,13 +1411,16 @@ function renderUI() {
   document.getElementById('set-fullname').value = p?.full_name || '';
   document.getElementById('set-email').value    = appState.user.email || '';
   if (ob) {
-    document.getElementById('set-company').value = ob.business_name || '';
-    document.getElementById('set-city').value    = ob.city || '';
-    if (ob.tone) document.getElementById('set-tone').value = ob.tone;
-    if (ob.language) document.getElementById('set-lang').value = ob.language;
+    document.getElementById('set-company').value  = ob.business_name || '';
+    document.getElementById('set-city').value     = ob.city || '';
+    if (ob.tone)     document.getElementById('set-tone').value     = ob.tone;
+    if (ob.language) document.getElementById('set-lang').value     = ob.language;
     if (ob.industry) document.getElementById('set-industry').value = ob.industry;
-    document.getElementById('set-extra').value   = ob.extra_info || '';
+    document.getElementById('set-extra').value    = ob.extra_info || '';
+    document.getElementById('set-services').value = ob.services || '';
+    document.getElementById('set-hours').value    = ob.hours || '';
   }
+  document.getElementById('set-greeting').value = ag?.begin_message || '';
   if (p?.phone) document.getElementById('set-phone').value = p.phone;
 
   // State detection
@@ -1293,6 +1435,7 @@ function renderUI() {
   }
 
   renderCallLogTable(appState.callLogs);
+  renderBizCard(ob);
 
   // Topbar status
   if (ag) {
@@ -1353,14 +1496,25 @@ function renderRecentCalls(logs, containerId) {
     el.innerHTML = '<div style="padding:1.5rem;text-align:center;font-size:0.82rem;color:var(--text-3);">Ei puheluita vielä.</div>';
     return;
   }
-  el.innerHTML = `<div class="table-wrap"><table>
-    <thead><tr><th>Numero</th><th>Aika</th><th>Kesto</th><th>Tulos</th></tr></thead>
-    <tbody>${logs.map(l=>`<tr>
+  let rows = '';
+  logs.forEach((l, i) => {
+    const rowId = containerId + '-row-' + i;
+    const detailId = containerId + '-detail-' + i;
+    const summary = l.summary || 'Ei yhteenvetoa saatavilla.';
+    rows += `<tr class="call-row" id="${rowId}" onclick="toggleCallDetail('${rowId}','${detailId}')">
+      <td class="chevron-cell" style="width:20px;padding-right:0;">›</td>
       <td>${l.caller_number||'–'}</td>
       <td>${fmtDate(l.called_at)}</td>
       <td>${fmtDur(l.duration_secs)}</td>
       <td>${outcomeBadge(l.outcome)}</td>
-    </tr>`).join('')}</tbody></table></div>`;
+    </tr>
+    <tr class="call-detail-row" id="${detailId}">
+      <td colspan="5">${escHtml(summary)}</td>
+    </tr>`;
+  });
+  el.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr><th></th><th>Numero</th><th>Aika</th><th>Kesto</th><th>Tulos</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
 }
 
 function renderCallLogTable(logs) {
@@ -1368,16 +1522,41 @@ function renderCallLogTable(logs) {
   const rows = f==='all' ? logs : logs.filter(l=>l.outcome===f);
   const tbody = document.getElementById('call-log-tbody');
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita.</td></tr>';
     return;
   }
-  tbody.innerHTML = rows.map(l=>`<tr>
-    <td>${l.caller_number||'–'}</td>
-    <td>${fmtDate(l.called_at)}</td>
-    <td>${fmtDur(l.duration_secs)}</td>
-    <td>${outcomeBadge(l.outcome)}</td>
-    <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${l.summary||'–'}</td>
-  </tr>`).join('');
+  let html = '';
+  rows.forEach((l, i) => {
+    const rowId = 'log-row-' + i;
+    const detailId = 'log-detail-' + i;
+    const summary = l.summary || 'Ei yhteenvetoa saatavilla.';
+    const summarySnippet = l.summary ? (l.summary.length > 60 ? l.summary.slice(0,60)+'…' : l.summary) : '–';
+    html += `<tr class="call-row" id="${rowId}" onclick="toggleCallDetail('${rowId}','${detailId}')">
+      <td class="chevron-cell" style="width:20px;padding-right:0;">›</td>
+      <td>${l.caller_number||'–'}</td>
+      <td>${fmtDate(l.called_at)}</td>
+      <td>${fmtDur(l.duration_secs)}</td>
+      <td>${outcomeBadge(l.outcome)}</td>
+      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-3);font-size:0.8rem;">${escHtml(summarySnippet)}</td>
+    </tr>
+    <tr class="call-detail-row" id="${detailId}">
+      <td colspan="6">${escHtml(summary)}</td>
+    </tr>`;
+  });
+  tbody.innerHTML = html;
+}
+
+function toggleCallDetail(rowId, detailId) {
+  const row    = document.getElementById(rowId);
+  const detail = document.getElementById(detailId);
+  if (!row || !detail) return;
+  const isOpen = detail.classList.contains('visible');
+  detail.classList.toggle('visible', !isOpen);
+  row.classList.toggle('expanded', !isOpen);
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ── HELPERS ──────────────────────────────────────────────
@@ -1560,10 +1739,91 @@ async function saveSettings() {
       tone:          document.getElementById('set-tone').value,
       language:      document.getElementById('set-lang').value,
       extra_info:    document.getElementById('set-extra').value.trim(),
+      services:      document.getElementById('set-services').value.trim(),
+      hours:         document.getElementById('set-hours').value.trim(),
     }).eq('id', appState.onboarding.id);
   }
   showToast('Asetukset tallennettu ✓');
   await loadData(); renderUI();
+}
+
+// ── RENDER BIZ CARD ──────────────────────────────────────
+function renderBizCard(ob) {
+  ['demo', 'active'].forEach(variant => {
+    const card = document.getElementById('biz-card-' + variant);
+    if (!card) return;
+    if (!ob || !ob.completed_at) { card.style.display = 'none'; return; }
+    card.style.display = 'flex';
+    document.getElementById('biz-name-' + variant).textContent = ob.business_name || '–';
+    const metaParts = [ob.industry || '', ob.city || ''].filter(Boolean);
+    document.getElementById('biz-meta-' + variant).textContent = metaParts.join(' · ');
+    const svc = ob.services || '';
+    document.getElementById('biz-services-' + variant).textContent = svc ? (svc.length > 120 ? svc.slice(0, 120) + '…' : svc) : '';
+    const hrs = ob.hours || '';
+    document.getElementById('biz-hours-' + variant).textContent = hrs ? (hrs.length > 80 ? hrs.slice(0, 80) + '…' : hrs) : '';
+  });
+}
+
+// ── UPDATE AGENT ─────────────────────────────────────────
+async function updateAgent() {
+  const ag = appState.agent;
+  if (!ag?.retell_agent_id) { showToast('Agenttia ei löydy. Suorita onboarding ensin.'); return; }
+  if (!ag?.retell_llm_id)   { showToast('LLM-id puuttuu — ota yhteyttä tukeen.'); return; }
+
+  const btn = document.getElementById('btn-update-agent');
+  btn.disabled = true;
+  btn.textContent = 'Päivitetään...';
+
+  try {
+    // First save updated fields to onboarding table
+    if (appState.onboarding) {
+      await sb.from('onboarding').update({
+        services:  document.getElementById('set-services').value.trim(),
+        hours:     document.getElementById('set-hours').value.trim(),
+        tone:      document.getElementById('set-tone').value,
+        language:  document.getElementById('set-lang').value,
+        industry:  document.getElementById('set-industry').value,
+        business_name: document.getElementById('set-company').value.trim(),
+        city:      document.getElementById('set-city').value.trim(),
+      }).eq('id', appState.onboarding.id);
+    }
+
+    const { data: { session } } = await sb.auth.getSession();
+    const ob = appState.onboarding || {};
+
+    const resp = await fetch(SUPABASE_URL + '/functions/v1/update-agent', {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + session.access_token,
+      },
+      body: JSON.stringify({
+        agent_id:      ag.retell_agent_id,
+        llm_id:        ag.retell_llm_id,
+        business_name: document.getElementById('set-company').value.trim(),
+        industry:      document.getElementById('set-industry').value,
+        city:          document.getElementById('set-city').value.trim(),
+        business_phone: document.getElementById('set-phone').value.trim(),
+        services:      document.getElementById('set-services').value.trim(),
+        hours:         document.getElementById('set-hours').value.trim(),
+        tasks:         ob.tasks || [],
+        tone:          document.getElementById('set-tone').value,
+        languages:     (document.getElementById('set-lang').value || 'fi').split(','),
+        extra_info:    document.getElementById('set-extra').value.trim(),
+        greeting:      document.getElementById('set-greeting').value.trim(),
+      }),
+    });
+
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    showToast('Agentti päivitetty ✓');
+    await loadData(); renderUI();
+  } catch (e) {
+    console.error(e);
+    showToast('Päivitys epäonnistui');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Päivitä agentti`;
+  }
 }
 
 // ── SIGN OUT ─────────────────────────────────────────────
