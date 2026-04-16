@@ -28,12 +28,13 @@ serve(async (req) => {
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) return json({ error: "Unauthorized" }, 401);
 
-    // Use anon client with user's token to verify identity (supports ES256)
-    const userSb = createClient(SUPABASE_URL, SUPABASE_ANON, {
-      global: { headers: { Authorization: authHeader } },
+    // Call Auth API directly — avoids local JWT verification, works with ES256
+    const authResp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: { Authorization: authHeader, apikey: SUPABASE_ANON },
     });
-    const { data: { user }, error: authErr } = await userSb.auth.getUser();
-    if (authErr || !user) return json({ error: "Unauthorized" }, 401);
+    if (!authResp.ok) return json({ error: "Unauthorized" }, 401);
+    const user = await authResp.json();
+    if (!user?.id) return json({ error: "Unauthorized" }, 401);
 
     // Service role client for DB reads/writes (bypasses RLS)
     const sb = createClient(SUPABASE_URL, SUPABASE_SERVICE);
