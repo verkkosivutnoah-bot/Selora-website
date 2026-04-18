@@ -1,4 +1,11 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.selora.fi/sitemap.xml
+# Keep auth and client portal pages private
+Disallow: /dashboard.html
+Disallow: /onboarding.html
+Disallow: /kirjaudu.html
+Disallow: /rekisteroidy.html
+Disallow: /checkout.html
+
+Sitemap: https://selora.fi/sitemap.xml

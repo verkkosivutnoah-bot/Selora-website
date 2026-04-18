@@ -2,8 +2,9 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Luo demo-agenttisi — Selora</title>
+  <title>Personoi agenttisi — Selora</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -577,7 +578,7 @@
     <div class="step" id="step-7">
       <div class="step-label">Vaihe 7 / 7</div>
       <h1 class="step-title">Kaikki <span class="accent">valmista</span>!</h1>
-      <p class="step-sub">Tarkista tiedot ja luo personoitu demo-agenttisi.</p>
+      <p class="step-sub" id="step7-sub">Tarkista tiedot ja luo personoitu agenttisi.</p>
 
       <div class="summary-list" id="summary-list">
         <!-- Filled by JS -->
@@ -634,16 +635,34 @@ let currentStep = 1;
 const TOTAL_STEPS = 7;
 
 // ── INIT ─────────────────────────────────────────────
+// ── Mode: 'demo' (default) or 'production' (post-purchase) ──────────
+const IS_PURCHASED = new URLSearchParams(window.location.search).get('purchased') === 'true';
+const PLAN = new URLSearchParams(window.location.search).get('plan') || '';
+
 async function init() {
   // Auth check
   const { data: { session } } = await sb.auth.getSession();
   if (!session) { window.location.href = 'kirjaudu.html'; return; }
 
-  // Check if already onboarded
-  const { data: ob } = await sb.from('onboarding').select('*').eq('user_id', session.user.id).maybeSingle();
-  if (ob?.completed_at) {
-    window.location.href = 'dashboard.html';
-    return;
+  // If coming from a completed purchase, always allow onboarding (even if previously done)
+  if (!IS_PURCHASED) {
+    const { data: ob } = await sb.from('onboarding').select('*').eq('user_id', session.user.id).maybeSingle();
+    if (ob?.completed_at) {
+      window.location.href = 'dashboard.html';
+      return;
+    }
+  }
+
+  // Apply production-mode UI adjustments
+  if (IS_PURCHASED) {
+    document.title = 'Personoi agenttisi — Selora';
+    const stepSub7 = document.querySelector('#step-7 .step-sub');
+    if (stepSub7) stepSub7.textContent = 'Tarkista tiedot ja luo täysin personoitu tuotantoagenttisi.';
+    const genTitle = document.querySelector('.gen-title');
+    if (genTitle) genTitle.textContent = 'Rakennetaan tuotantoagenttiasi...';
+    // Update nav subtitle if present
+    const navSub = document.querySelector('.nav-sub');
+    if (navSub) navSub.textContent = 'Tuotantoagentti';
   }
 
   buildHoursGrid();
@@ -861,7 +880,7 @@ async function generateAgent() {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + session?.access_token,
       },
-      body: JSON.stringify({ onboarding_id: obData.id, ...payload }),
+      body: JSON.stringify({ onboarding_id: obData.id, is_production: IS_PURCHASED, plan: PLAN, ...payload }),
     });
 
     if (!resp.ok) {
