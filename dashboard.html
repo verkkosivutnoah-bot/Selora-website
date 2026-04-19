@@ -1898,15 +1898,23 @@ async function startCall(variant) {
     if (!resp.ok) throw new Error('Token error: '+resp.status);
     const { access_token } = await resp.json();
 
-    if (!window.RetellWebClient) {
+    if (!window._retellSDK) {
       await new Promise((res,rej)=>{
         const s=document.createElement('script');
-        s.src='https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/dist/index.umd.js';
-        s.onload=res; s.onerror=rej; document.head.appendChild(s);
+        s.type='module';
+        s.textContent=`
+          import { RetellWebClient } from 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/+esm';
+          window._retellSDK = RetellWebClient;
+        `;
+        document.head.appendChild(s);
+        // wait a tick for the module to execute
+        setTimeout(res, 800);
       });
     }
 
-    retellClient = new window.RetellWebClient();
+    const SDKClass = window._retellSDK;
+    if (!SDKClass) throw new Error('Retell SDK failed to load');
+    retellClient = new SDKClass();
     retellClient.on('call_started',        ()=>setOrbState(variant,'listening'));
     retellClient.on('agent_start_talking', ()=>setOrbState(variant,'speaking'));
     retellClient.on('agent_stop_talking',  ()=>setOrbState(variant,'listening'));
