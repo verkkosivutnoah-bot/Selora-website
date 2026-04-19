@@ -51,7 +51,10 @@ serve(async (req) => {
       .eq("retell_agent_id", agent_id)
       .maybeSingle();
 
-    if (agentErr || !agentRow) return json({ error: "Agent not found" }, 404);
+    if (agentErr || !agentRow) {
+      console.error("Agent lookup failed — user_id:", user.id, "agent_id:", agent_id, "err:", agentErr);
+      return json({ error: "Agent not found", detail: agentErr?.message }, 404);
+    }
 
     // Check if user has an active plan (no limit) or is on demo
     const { data: profile } = await sb
@@ -70,37 +73,28 @@ serve(async (req) => {
     }
 
     // ── Create web call in Retell ─────────────────────────────────────────────
-    const retellResp = await fetch("https://api.retellai.com/create-web-call", {
+    console.log("Creating web call for retell_agent_id:", agentRow.retell_agent_id);
+
+    const retellResp = await fetch("https://api.retellai.com/v2/create-web-call", {
       method: "POST",
       headers: {
         "Content-Type":  "application/json",
         "Authorization": `Bearer ${RETELL_API_KEY}`,
       },
-      body: JSON.stringify({ agent_id }),
+      body: JSON.stringify({ agent_id: agentRow.retell_agent_id }),
     });
 
-    let callData: Record<string, unknown>;
     if (!retellResp.ok) {
-      // Fallback to v1
-      const v1Resp = await fetch("https://api.retellai.com/create-web-call", {
-        method: "POST",
-        headers: {
-          "Content-Type":  "application/json",
-          "Authorization": `Bearer ${RETELL_API_KEY}`,
-        },
-        body: JSON.stringify({ agent_id }),
-      });
-      if (!v1Resp.ok) {
-        const errText = await v1Resp.text();
-        throw new Error(`Retell error: ${errText}`);
-      }
-      callData = await v1Resp.json();
-    } else {
-      callData = await retellResp.json();
+      const errText = await retellResp.text();
+      console.error("Retell create-web-call error:", retellResp.status, errText);
+      throw new Error(`Retell error ${retellResp.status}: ${errText}`);
     }
 
+    const callData = await retellResp.json() as Record<string, unknown>;
+    console.log("Retell response keys:", Object.keys(callData));
+
     const accessToken = callData.access_token as string;
-    if (!accessToken) throw new Error("No access_token in Retell response");
+    if (!accessToken) throw new Error(`No access_token in Retell response: ${JSON.stringify(callData)}`);
 
     // ── Increment demo_calls_used ─────────────────────────────────────────────
     if (isDemo) {
