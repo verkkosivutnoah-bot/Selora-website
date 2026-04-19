@@ -24,5 +24,6 @@ jobs:
           supabase functions deploy update-agent --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy create-checkout-session --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy stripe-webhook --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
+          supabase functions deploy retell-webhook --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
