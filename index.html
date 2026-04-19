@@ -602,8 +602,8 @@
     .hero-announce {
       position: absolute;
       bottom: 5.5rem; /* sits just above stats bar */
-      right: 2.5rem;
-      z-index: 10;
+      right: calc(300px + 2.75rem + 1.25rem); /* to the left of the carousel column */
+      z-index: 12;
     }
     .hac-card {
       background: rgba(4, 10, 22, 0.82);
@@ -775,6 +775,7 @@
       right: 2.75rem;
       transform: translateY(-48%);
       width: 300px;
+      z-index: 15;
     }
     .hc-card {
       background: rgba(4, 10, 22, 0.82);
