@@ -120,6 +120,37 @@
     .dot.green { background:#10b981; }
     .dot.amber { background:#f59e0b; }
     .dot.gray  { background:#64748b; }
+
+    /* Activity log */
+    .log-entry {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.12s;
+    }
+    .log-entry:last-child { border-bottom: none; }
+    .log-entry:hover { background: rgba(255,255,255,0.02); }
+    .log-time { font-size: 0.75rem; color: var(--text-3); line-height:1.4; }
+    .log-time .log-date { font-weight:500; color:var(--text-2); }
+    .log-body { display:flex; flex-direction:column; gap:3px; }
+    .log-name { font-size:0.88rem; font-weight:500; }
+    .log-meta { display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; font-size:0.75rem; color:var(--text-3); }
+    .log-badges { display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; }
+    .log-pill {
+      font-size:0.68rem; font-weight:600; padding:2px 8px; border-radius:20px;
+      border: 1px solid transparent;
+    }
+    .log-pill.active   { background:rgba(16,185,129,0.12);  color:#34d399;  border-color:rgba(16,185,129,0.25); }
+    .log-pill.demo     { background:rgba(245,158,11,0.12);  color:#fbbf24;  border-color:rgba(245,158,11,0.25); }
+    .log-pill.onboarded{ background:rgba(96,165,250,0.12);  color:#60a5fa;  border-color:rgba(96,165,250,0.25); }
+    .log-pill.no-onboard{ background:rgba(100,116,139,0.1); color:#94a3b8;  border-color:rgba(100,116,139,0.2); }
+    .log-pill.has-agent { background:rgba(16,185,129,0.1);  color:#34d399;  border-color:rgba(16,185,129,0.2); }
+    .log-pill.plan-aloitus { background:rgba(29,78,216,0.12); color:#60a5fa; border-color:rgba(29,78,216,0.25); }
+    .log-pill.plan-kasvu   { background:rgba(124,58,237,0.12); color:#a78bfa; border-color:rgba(124,58,237,0.25); }
+    .log-pill.plan-yritys  { background:rgba(16,185,129,0.12); color:#34d399; border-color:rgba(16,185,129,0.25); }
   </style>
 </head>
 <body>
@@ -286,6 +317,18 @@
       </div>
 
     </div>
+
+    <!-- Activity log -->
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-header">
+        <span class="card-title">Rekisteröintiloki</span>
+        <span style="font-size:0.75rem;color:var(--text-3);">Kaikki Seloraan rekisteröityneet tilit</span>
+      </div>
+      <div id="activity-log" style="padding:0;">
+        <div style="padding:2rem;text-align:center;color:var(--text-3);font-size:0.84rem;">Ladataan…</div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -385,17 +428,20 @@ async function init() {
 
 // ── Load all clients ──────────────────────────────────────────────────────────
 async function loadClients() {
-  const { data: profiles } = await sb
-    .from('profiles')
-    .select('*')
-    .neq('id', session.user.id)   // exclude admin
-    .order('created_at', { ascending: false });
-
-  const { data: agents } = await sb.from('retell_agents').select('user_id, retell_agent_id, active');
+  const [
+    { data: profiles },
+    { data: agents },
+    { data: onboardings },
+  ] = await Promise.all([
+    sb.from('profiles').select('*').neq('id', session.user.id).order('created_at', { ascending: false }),
+    sb.from('retell_agents').select('user_id, retell_agent_id, active'),
+    sb.from('onboarding').select('user_id, completed_at, industry, business_name, agent_generated'),
+  ]);
 
   allClients = (profiles || []).map(p => ({
     ...p,
-    agent: (agents || []).find(a => a.user_id === p.id) || null,
+    agent:      (agents     || []).find(a => a.user_id === p.id) || null,
+    onboarding: (onboardings|| []).find(o => o.user_id === p.id) || null,
   }));
 
   // Stats
@@ -405,6 +451,60 @@ async function loadClients() {
   document.getElementById('stat-agents').textContent = allClients.filter(c => c.agent).length;
 
   renderClients(allClients);
+  renderActivityLog(allClients);
+}
+
+// ── Activity log ──────────────────────────────────────────────────────────────
+function renderActivityLog(clients) {
+  const el = document.getElementById('activity-log');
+  if (!clients.length) {
+    el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:0.84rem;">Ei rekisteröintejä vielä.</div>';
+    return;
+  }
+
+  // Sort newest first
+  const sorted = [...clients].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  el.innerHTML = sorted.map(c => {
+    const dt = c.created_at ? new Date(c.created_at) : null;
+    const dateStr = dt ? dt.toLocaleDateString('fi-FI', { day:'2-digit', month:'2-digit', year:'numeric' }) : '–';
+    const timeStr = dt ? dt.toLocaleTimeString('fi-FI', { hour:'2-digit', minute:'2-digit' }) : '';
+
+    const planPill = c.has_active_plan
+      ? `<span class="log-pill plan-${c.plan_type||'aloitus'}">${planLabel(c.plan_type||'aloitus')}</span>`
+      : `<span class="log-pill demo">Demo</span>`;
+
+    const onboardPill = c.onboarding?.completed_at
+      ? `<span class="log-pill onboarded">Onboarding tehty</span>`
+      : `<span class="log-pill no-onboard">Ei onboardingia</span>`;
+
+    const agentPill = c.agent
+      ? `<span class="log-pill has-agent">Agentti: ${esc(c.agent.retell_agent_id||'')}</span>`
+      : '';
+
+    const industry = c.onboarding?.industry
+      ? `<span>${esc(c.onboarding.industry)}</span>` : '';
+
+    return `<div class="log-entry">
+      <div class="log-time">
+        <div class="log-date">${dateStr}</div>
+        <div>${timeStr}</div>
+      </div>
+      <div class="log-body">
+        <div class="log-name">${esc(c.full_name||'–')} <span style="color:var(--text-3);font-weight:400;">— ${esc(c.company_name||'')}</span></div>
+        <div class="log-meta">
+          <span>${esc(c.email||'')}</span>
+          ${c.phone ? `<span>·</span><span>${esc(c.phone)}</span>` : ''}
+          ${industry ? `<span>·</span>${industry}` : ''}
+        </div>
+      </div>
+      <div class="log-badges">
+        ${planPill}
+        ${onboardPill}
+        ${agentPill}
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function filterClients(q) {
