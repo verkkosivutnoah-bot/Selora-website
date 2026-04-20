@@ -92,6 +92,32 @@ serve(async (req) => {
     return new Response("DB error", { status: 500 });
   }
 
+  // ── Auto-create or update contact record ──────────────────────────────────
+  if (callerNumber && callerNumber !== "Tuntematon") {
+    const { data: existingContact } = await sb
+      .from("contacts")
+      .select("id, call_count")
+      .eq("user_id", userId)
+      .eq("phone_number", callerNumber)
+      .maybeSingle();
+
+    if (existingContact) {
+      // Update existing contact: increment call count + last called
+      await sb.from("contacts").update({
+        call_count:    (existingContact.call_count || 1) + 1,
+        last_called_at: calledAt,
+      }).eq("id", existingContact.id);
+    } else {
+      // Create new contact from this call
+      await sb.from("contacts").insert({
+        user_id:        userId,
+        phone_number:   callerNumber,
+        last_called_at: calledAt,
+        call_count:     1,
+      });
+    }
+  }
+
   // ── Send email notification to client ─────────────────────────────────────
   const { data: profile } = await sb
     .from("profiles")

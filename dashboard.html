@@ -1024,6 +1024,29 @@
     tbody tr.call-detail-row { display: none; }
     tbody tr.call-detail-row.visible { display: table-row; }
 
+    /* ── CRM ─────────────────────────────── */
+    .crm-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      transition: background 0.15s;
+    }
+    .crm-contact-row:hover { background: rgba(255,255,255,0.04); }
+    .crm-contact-row.selected { background: rgba(29,78,216,0.13); border-left: 2px solid var(--blue); }
+    .crm-avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: linear-gradient(135deg, #1D4ED8, #3b82f6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.78rem; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .crm-avatar-lg { width: 52px; height: 52px; font-size: 1rem; }
+    .crm-contact-info { flex: 1; min-width: 0; }
+    .crm-contact-name { font-size: 0.88rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .crm-contact-sub  { font-size: 0.76rem; color: var(--text-3); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
     /* ── DOTS ─────────────────────────────── */
     .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; }
     .dot.green { background: var(--green); box-shadow: 0 0 8px rgba(34,197,94,0.5); }
@@ -1083,6 +1106,10 @@
       <button class="nav-item active" id="nav-overview" onclick="switchView('overview')">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Yleiskatsaus
+      </button>
+      <button class="nav-item" id="nav-asiakkaat" onclick="switchView('asiakkaat')">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Asiakkaat
       </button>
       <button class="nav-item" id="nav-calls" onclick="switchView('calls')">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.948V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
@@ -1372,6 +1399,67 @@
       <!-- ═══════════════════════════
            VIEW: CALL LOG
       ═══════════════════════════ -->
+      <!-- ═══════════════════════════
+           VIEW: ASIAKKAAT (CRM)
+      ═══════════════════════════ -->
+      <div id="view-asiakkaat" style="display:none;">
+
+        <!-- Top bar -->
+        <div class="filter-bar" style="justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+            <input id="crm-search" type="text" placeholder="Hae nimellä tai numerolla…" oninput="renderCRM()"
+              style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.4rem 0.8rem;color:var(--text);font-size:0.82rem;outline:none;width:200px;">
+            <button class="filter-btn active" id="crm-filter-all"      onclick="setCRMFilter('all',this)">Kaikki</button>
+            <button class="filter-btn"         id="crm-filter-new"      onclick="setCRMFilter('new',this)">Uudet</button>
+          </div>
+          <button class="btn-agent-update" onclick="openNewContactModal()" style="padding:0.4rem 1rem;font-size:0.82rem;">
+            + Uusi asiakas
+          </button>
+        </div>
+
+        <!-- Two-panel layout -->
+        <div id="crm-layout" style="display:flex;gap:0;height:calc(100vh - 180px);min-height:400px;">
+
+          <!-- Left: contact list -->
+          <div id="crm-list" style="width:340px;flex-shrink:0;overflow-y:auto;border-right:1px solid rgba(255,255,255,0.07);padding-right:0;">
+            <div id="crm-contact-list">
+              <div style="padding:2rem;text-align:center;color:var(--text-3);font-size:0.82rem;">Ei asiakkaita vielä.<br>Puhelut luovat asiakaskortit automaattisesti.</div>
+            </div>
+          </div>
+
+          <!-- Right: contact detail panel -->
+          <div id="crm-detail" style="flex:1;overflow-y:auto;padding:1.5rem 1.75rem;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;color:var(--text-3);">
+              <svg width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" style="opacity:0.3;margin-bottom:0.75rem;"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <p style="font-size:0.85rem;">Valitse asiakas vasemmalta</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- New contact modal -->
+        <div id="crm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;align-items:center;justify-content:center;">
+          <div style="background:#0f172a;border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:2rem;width:90%;max-width:460px;">
+            <h3 style="margin:0 0 1.25rem;font-size:1rem;font-weight:600;">Uusi asiakas</h3>
+            <div style="display:flex;flex-direction:column;gap:0.75rem;">
+              <input id="nc-name"    type="text"  placeholder="Nimi" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-size:0.85rem;outline:none;">
+              <input id="nc-phone"   type="tel"   placeholder="Puhelinnumero" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-size:0.85rem;outline:none;">
+              <input id="nc-email"   type="email" placeholder="Sähköposti" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-size:0.85rem;outline:none;">
+              <input id="nc-service" type="text"  placeholder="Tilattu palvelu" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-size:0.85rem;outline:none;">
+              <input id="nc-time"    type="datetime-local" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.6rem 0.8rem;color:var(--text);font-size:0.85rem;outline:none;">
+            </div>
+            <div style="display:flex;gap:0.75rem;margin-top:1.25rem;justify-content:flex-end;">
+              <button onclick="document.getElementById('crm-modal').style.display='none'" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:0.5rem 1rem;color:var(--text-2);font-size:0.85rem;cursor:pointer;">Peruuta</button>
+              <button onclick="saveNewContact()" style="background:var(--blue);border:none;border-radius:8px;padding:0.5rem 1.25rem;color:#fff;font-weight:600;font-size:0.85rem;cursor:pointer;">Tallenna</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /view-asiakkaat -->
+
+      <!-- ═══════════════════════════
+           VIEW: CALL LOG
+      ═══════════════════════════ -->
       <div id="view-calls" style="display:none;">
         <div class="filter-bar">
           <button class="filter-btn active" onclick="filterCalls('all',this)">Kaikki</button>
@@ -1523,7 +1611,8 @@ const DOT_HTML = `<span class="btn-pulse"></span>`;
 
 let appState = {
   user: null, profile: null, onboarding: null, agent: null,
-  callLogs: [], currentView: 'overview', callFilter: 'all',
+  callLogs: [], contacts: [], currentView: 'overview', callFilter: 'all',
+  crmFilter: 'all', selectedContactId: null,
 };
 let retellClient = null;
 let callVariant  = null;
@@ -1541,16 +1630,18 @@ async function init() {
 
 async function loadData() {
   const uid = appState.user.id;
-  const [p, ob, ag, logs] = await Promise.all([
+  const [p, ob, ag, logs, contacts] = await Promise.all([
     sb.from('profiles').select('*').eq('id', uid).maybeSingle(),
     sb.from('onboarding').select('*').eq('user_id', uid).order('created_at',{ascending:false}).limit(1).maybeSingle(),
     sb.from('retell_agents').select('*').eq('user_id', uid).eq('active', true).order('created_at',{ascending:false}).limit(1).maybeSingle(),
-    sb.from('call_logs').select('*').eq('user_id', uid).order('called_at',{ascending:false}).limit(50),
+    sb.from('call_logs').select('*').eq('user_id', uid).order('called_at',{ascending:false}).limit(200),
+    sb.from('contacts').select('*').eq('user_id', uid).order('last_called_at',{ascending:false}),
   ]);
-  appState.profile   = p.data;
+  appState.profile    = p.data;
   appState.onboarding = ob.data;
-  appState.agent     = ag.data;
-  appState.callLogs  = logs.data || [];
+  appState.agent      = ag.data;
+  appState.callLogs   = logs.data || [];
+  appState.contacts   = contacts.data || [];
 }
 
 function renderUI() {
@@ -1794,15 +1885,16 @@ function filterCalls(f, btn) {
   renderCallLogTable(appState.callLogs);
 }
 
-const VIEW_TITLES = {overview:'Yleiskatsaus',calls:'Puheluloki',settings:'Asetukset'};
+const VIEW_TITLES = {overview:'Yleiskatsaus', asiakkaat:'Asiakkaat', calls:'Puheluloki', settings:'Asetukset'};
 function switchView(v) {
   appState.currentView = v;
-  ['overview','calls','settings'].forEach(x=>{
+  ['overview','asiakkaat','calls','settings'].forEach(x=>{
     document.getElementById('view-'+x).style.display = x===v?'block':'none';
     const ni=document.getElementById('nav-'+x); if(ni) ni.classList.toggle('active',x===v);
     const mi=document.getElementById('mob-'+x); if(mi) mi.classList.toggle('active',x===v);
   });
   document.getElementById('topbar-title').textContent = VIEW_TITLES[v]||v;
+  if (v === 'asiakkaat') renderCRM();
 }
 
 function setOrbState(variant, s) {
@@ -2050,6 +2142,207 @@ function showToast(msg) {
 }
 
 init();
+
+// ═══════════════════════════════════════════════════════
+// CRM — Asiakkaat view
+// ═══════════════════════════════════════════════════════
+
+let crmFilter = 'all';
+
+function setCRMFilter(f, btn) {
+  crmFilter = f;
+  document.querySelectorAll('#view-asiakkaat .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCRM();
+}
+
+function renderCRM() {
+  const search = (document.getElementById('crm-search')?.value || '').toLowerCase();
+  let contacts = appState.contacts || [];
+
+  // Apply search
+  if (search) {
+    contacts = contacts.filter(c =>
+      (c.name || '').toLowerCase().includes(search) ||
+      (c.phone_number || '').includes(search) ||
+      (c.email || '').toLowerCase().includes(search)
+    );
+  }
+
+  // Apply filter
+  if (crmFilter === 'new') {
+    const threeDays = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000);
+    contacts = contacts.filter(c => c.call_count === 1 && new Date(c.created_at) > threeDays);
+  }
+
+  const listEl = document.getElementById('crm-contact-list');
+  if (!contacts.length) {
+    listEl.innerHTML = `<div style="padding:2rem;text-align:center;color:var(--text-3);font-size:0.82rem;">
+      ${search ? 'Ei hakutuloksia.' : 'Ei asiakkaita vielä.<br>Puhelut luovat asiakaskortit automaattisesti.'}
+    </div>`;
+    return;
+  }
+
+  listEl.innerHTML = contacts.map(c => {
+    const isSelected = c.id === appState.selectedContactId;
+    const initials = c.name
+      ? c.name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase()
+      : (c.phone_number || '?').slice(-2);
+    const lastCall = c.last_called_at ? fmtDate(c.last_called_at) : '–';
+    return `
+      <div class="crm-contact-row ${isSelected ? 'selected' : ''}" onclick="selectContact('${c.id}')">
+        <div class="crm-avatar">${initials}</div>
+        <div class="crm-contact-info">
+          <div class="crm-contact-name">${escHtml(c.name || c.phone_number || '–')}</div>
+          <div class="crm-contact-sub">${escHtml(c.phone_number || '')}${c.service_ordered ? ' · ' + escHtml(c.service_ordered) : ''}</div>
+          <div class="crm-contact-sub" style="font-size:0.72rem;">${lastCall} · ${c.call_count || 1} puhelu${(c.call_count||1)>1?'a':''}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function selectContact(id) {
+  appState.selectedContactId = id;
+  const contact = appState.contacts.find(c => c.id === id);
+  if (!contact) return;
+
+  // Re-render list to highlight selected
+  renderCRM();
+
+  // Get this contact's calls
+  const calls = (appState.callLogs || []).filter(l =>
+    l.caller_number && contact.phone_number &&
+    l.caller_number === contact.phone_number
+  );
+
+  const detail = document.getElementById('crm-detail');
+  const serviceTimeStr = contact.service_time
+    ? new Date(contact.service_time).toLocaleString('fi-FI', {timeZone:'Europe/Helsinki', day:'numeric', month:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit'})
+    : '';
+
+  detail.innerHTML = `
+    <div style="width:100%;">
+
+      <!-- Contact card -->
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:1.5rem;margin-bottom:1.25rem;">
+        <div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.25rem;">
+          <div class="crm-avatar crm-avatar-lg">${(contact.name ? contact.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase() : (contact.phone_number||'?').slice(-2))}</div>
+          <div style="flex:1;">
+            <input id="edit-name"    type="text"  value="${escHtml(contact.name||'')}"    placeholder="Nimi"
+              style="width:100%;background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,0.1);color:var(--text);font-size:1rem;font-weight:600;padding:2px 0 6px;outline:none;margin-bottom:4px;">
+            <div style="font-size:0.82rem;color:var(--text-3);">${escHtml(contact.phone_number||'')}</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+          <div>
+            <div style="font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;">Sähköposti</div>
+            <input id="edit-email" type="email" value="${escHtml(contact.email||'')}" placeholder="sähköposti@yritys.fi"
+              style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.45rem 0.65rem;color:var(--text);font-size:0.82rem;outline:none;box-sizing:border-box;">
+          </div>
+          <div>
+            <div style="font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;">Tilattu palvelu</div>
+            <input id="edit-service" type="text" value="${escHtml(contact.service_ordered||'')}" placeholder="esim. Leikkaus"
+              style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.45rem 0.65rem;color:var(--text);font-size:0.82rem;outline:none;box-sizing:border-box;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;">Palveluaika</div>
+            <input id="edit-service-time" type="datetime-local" value="${contact.service_time ? new Date(contact.service_time).toISOString().slice(0,16) : ''}"
+              style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.45rem 0.65rem;color:var(--text);font-size:0.82rem;outline:none;box-sizing:border-box;">
+          </div>
+          <div style="grid-column:1/-1;">
+            <div style="font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;">Muistiinpanot</div>
+            <textarea id="edit-notes" rows="2" placeholder="Lisätieto asiakkaasta…"
+              style="width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:0.45rem 0.65rem;color:var(--text);font-size:0.82rem;outline:none;resize:vertical;box-sizing:border-box;font-family:inherit;">${escHtml(contact.notes||'')}</textarea>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.5rem;justify-content:flex-end;">
+          <button onclick="deleteContact('${contact.id}')" style="background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);border-radius:8px;padding:0.4rem 0.9rem;color:#f87171;font-size:0.8rem;cursor:pointer;">Poista</button>
+          <button onclick="saveContact('${contact.id}')" style="background:var(--blue);border:none;border-radius:8px;padding:0.4rem 1rem;color:#fff;font-weight:600;font-size:0.8rem;cursor:pointer;">Tallenna</button>
+        </div>
+      </div>
+
+      <!-- Call history -->
+      <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:0.75rem;">
+        Puheluhistoria (${calls.length})
+      </div>
+
+      ${calls.length === 0
+        ? `<div style="color:var(--text-3);font-size:0.82rem;padding:1rem 0;">Ei puheluita rekisteröity tälle numerolle.</div>`
+        : calls.map((l,i) => `
+          <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1rem;margin-bottom:0.6rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:${l.summary ? '0.6rem' : '0'};">
+              <div style="display:flex;align-items:center;gap:0.6rem;">
+                ${outcomeBadge(l.outcome)}
+                ${l.sentiment ? sentimentBadge(l.sentiment) : ''}
+              </div>
+              <div style="font-size:0.78rem;color:var(--text-3);">${fmtDate(l.called_at)} · ${fmtDur(l.duration_secs)}</div>
+            </div>
+            ${l.summary ? `<div style="font-size:0.82rem;color:var(--text-2);line-height:1.5;">${escHtml(l.summary)}</div>` : ''}
+            ${l.action_items && l.action_items.length ? `
+              <div style="margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:0.35rem;">
+                ${l.action_items.map(a=>`<span style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:5px;padding:2px 8px;font-size:0.72rem;color:#fcd34d;">${escHtml(a)}</span>`).join('')}
+              </div>` : ''}
+          </div>`).join('')
+      }
+    </div>`;
+}
+
+async function saveContact(id) {
+  const updates = {
+    name:            document.getElementById('edit-name')?.value || null,
+    email:           document.getElementById('edit-email')?.value || null,
+    service_ordered: document.getElementById('edit-service')?.value || null,
+    service_time:    document.getElementById('edit-service-time')?.value || null,
+    notes:           document.getElementById('edit-notes')?.value || null,
+  };
+  const { error } = await sb.from('contacts').update(updates).eq('id', id);
+  if (error) { showToast('Tallennus epäonnistui'); return; }
+  // Update local state
+  const idx = appState.contacts.findIndex(c => c.id === id);
+  if (idx >= 0) appState.contacts[idx] = { ...appState.contacts[idx], ...updates };
+  showToast('Asiakastiedot tallennettu ✓');
+  renderCRM();
+}
+
+async function deleteContact(id) {
+  if (!confirm('Poistetaanko asiakas? Tätä ei voi peruuttaa.')) return;
+  const { error } = await sb.from('contacts').delete().eq('id', id);
+  if (error) { showToast('Poisto epäonnistui'); return; }
+  appState.contacts = appState.contacts.filter(c => c.id !== id);
+  appState.selectedContactId = null;
+  document.getElementById('crm-detail').innerHTML = `<div style="text-align:center;color:var(--text-3);"><p style="font-size:0.85rem;">Valitse asiakas vasemmalta</p></div>`;
+  showToast('Asiakas poistettu');
+  renderCRM();
+}
+
+function openNewContactModal() {
+  ['nc-name','nc-phone','nc-email','nc-service'].forEach(id => {
+    const el = document.getElementById(id); if(el) el.value = '';
+  });
+  const t = document.getElementById('nc-time'); if(t) t.value = '';
+  document.getElementById('crm-modal').style.display = 'flex';
+}
+
+async function saveNewContact() {
+  const phone = document.getElementById('nc-phone')?.value?.trim();
+  if (!phone) { showToast('Puhelinnumero vaaditaan'); return; }
+  const { data, error } = await sb.from('contacts').insert({
+    user_id:        appState.user.id,
+    name:           document.getElementById('nc-name')?.value || null,
+    phone_number:   phone,
+    email:          document.getElementById('nc-email')?.value || null,
+    service_ordered:document.getElementById('nc-service')?.value || null,
+    service_time:   document.getElementById('nc-time')?.value || null,
+    call_count:     0,
+  }).select().maybeSingle();
+  if (error) { showToast('Tallennus epäonnistui: ' + error.message); return; }
+  document.getElementById('crm-modal').style.display = 'none';
+  if (data) appState.contacts.unshift(data);
+  showToast('Asiakas lisätty ✓');
+  renderCRM();
+}
 </script>
 </body>
 </html>
