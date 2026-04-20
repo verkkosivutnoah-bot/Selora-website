@@ -1,6 +1,6 @@
 // Supabase Edge Function: admin-create-client
 // Called from admin.html to manually onboard a paying client.
-// Only callable by the admin account (noah@selora.fi).
+// Only callable by the admin account (selora.tuki@gmail.com).
 // Flow:
 //   1. Verify caller is admin
 //   2. Create Supabase auth user
@@ -17,7 +17,7 @@ const SUPABASE_ANON     = Deno.env.get("SUPABASE_ANON_KEY")!;
 const SUPABASE_SERVICE  = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const RETELL_API_KEY    = Deno.env.get("RETELL_API_KEY")!;
 const RESEND_API_KEY    = Deno.env.get("RESEND_API_KEY")!;
-const ADMIN_EMAIL       = "noah@selora.fi";
+const ADMIN_EMAIL       = "selora.tuki@gmail.com";
 
 const CORS = {
   "Access-Control-Allow-Origin":  "*",
