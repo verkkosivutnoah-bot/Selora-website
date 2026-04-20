@@ -92,6 +92,74 @@ serve(async (req) => {
     return new Response("DB error", { status: 500 });
   }
 
+  // ── Auto-create draft appointment when booking detected ───────────────────
+  const hasBooking = actionItems.some(item => item.toLowerCase().includes("varaus"));
+  if (hasBooking) {
+    // Try to extract customer name from summary
+    let customerName: string | null = null;
+    const nameMatch = summary.match(/asiakkaan nimi on ([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i)
+      || summary.match(/([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*) haluaa ajan/i);
+    if (nameMatch) customerName = nameMatch[1];
+
+    // Try to extract time from summary
+    let startTime: string | null = null;
+    const now = new Date();
+
+    // Try to detect Finnish weekday references and "klo HH" / "HH:MM"
+    const weekdayMap: Record<string, number> = {
+      maanantai: 1, tiistai: 2, keskiviikko: 3, torstai: 4,
+      perjantai: 5, lauantai: 6, sunnuntai: 0,
+    };
+    let targetHour = 9;
+    let targetMinute = 0;
+    let targetDay: Date | null = null;
+
+    const timeMatch = summary.match(/klo\s+(\d{1,2})(?::(\d{2}))?/i)
+      || summary.match(/\b(\d{1,2}):(\d{2})\b/);
+    if (timeMatch) {
+      targetHour   = parseInt(timeMatch[1], 10);
+      targetMinute = parseInt(timeMatch[2] || "0", 10);
+    }
+
+    for (const [fi, dow] of Object.entries(weekdayMap)) {
+      if (summary.toLowerCase().includes(fi)) {
+        const today = now.getDay(); // 0=Sun
+        let diff = (dow - today + 7) % 7;
+        if (diff === 0) diff = 7; // next week if same day
+        targetDay = new Date(now);
+        targetDay.setDate(now.getDate() + diff);
+        break;
+      }
+    }
+
+    // If no weekday found, fall back to next business day
+    if (!targetDay) {
+      targetDay = new Date(now);
+      targetDay.setDate(now.getDate() + 1);
+      // Skip weekend
+      const wd = targetDay.getDay();
+      if (wd === 6) targetDay.setDate(targetDay.getDate() + 2);
+      else if (wd === 0) targetDay.setDate(targetDay.getDate() + 1);
+    }
+
+    targetDay.setHours(targetHour, targetMinute, 0, 0);
+    startTime = targetDay.toISOString();
+
+    await sb.from("appointments").insert({
+      user_id:       userId,
+      title:         "📋 AI-varaus — " + callerNumber,
+      customer_name: customerName,
+      caller_number: callerNumber,
+      description:   summary,
+      start_time:    startTime,
+      status:        "pending",
+      source:        "retell",
+      color:         "#f59e0b",
+      type:          "appointment",
+    });
+    console.log("Auto-created draft appointment for caller:", callerNumber);
+  }
+
   // ── Auto-create or update contact record ──────────────────────────────────
   if (callerNumber && callerNumber !== "Tuntematon") {
     const { data: existingContact } = await sb
