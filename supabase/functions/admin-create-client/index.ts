@@ -3,9 +3,9 @@
 // Only callable by the admin account (selora.tuki@gmail.com).
 // Flow:
 //   1. Verify caller is admin
-//   2. Create Supabase auth user
+//   2. Create OR find existing Supabase auth user
 //   3. Upsert profile + onboarding rows
-//   4. Generate Retell agent from industry template
+//   4. Create new Retell agent OR link existing one
 //   5. Upgrade plan to active
 //   6. Send welcome email with credentials via Resend
 
@@ -46,33 +46,66 @@ serve(async (req) => {
       full_name, company_name, email, phone,
       industry, services, hours, tone, extra_info,
       plan_type,
+      existing_retell_agent_id,   // optional: link existing Retell agent instead of creating
     } = await req.json();
 
     if (!email || !full_name) return json({ error: "email and full_name required" }, 400);
 
-    // ── Generate password ─────────────────────────────────────────────────────
-    const password = "Selora-" + new Date().getFullYear() + "-" + randomStr(6);
+    // ── Find or create Supabase auth user ────────────────────────────────────
+    let userId: string;
+    let password: string | null = null;
+    let isExistingUser = false;
 
-    // ── Create Supabase auth user ─────────────────────────────────────────────
-    const { data: newUser, error: createErr } = await sb.auth.admin.createUser({
-      email,
-      password,
-      email_confirm: true,
-      user_metadata: { full_name, company_name, phone },
-    });
-    if (createErr) throw new Error("Auth create error: " + createErr.message);
-    const userId = newUser.user!.id;
+    // Try to find existing user by email in profiles table first
+    const { data: existingProfile } = await sb
+      .from("profiles")
+      .select("id")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (existingProfile?.id) {
+      // User already exists — just upgrade them
+      userId = existingProfile.id;
+      isExistingUser = true;
+      console.log("Found existing user:", userId);
+    } else {
+      // Try creating new auth user
+      password = "Selora-" + new Date().getFullYear() + "-" + randomStr(6);
+      const { data: newUser, error: createErr } = await sb.auth.admin.createUser({
+        email,
+        password,
+        email_confirm: true,
+        user_metadata: { full_name, company_name, phone },
+      });
+
+      if (createErr) {
+        // If "already registered" — find via admin listUsers
+        if (createErr.message.toLowerCase().includes("already")) {
+          const { data: listData } = await sb.auth.admin.listUsers({ perPage: 1000 });
+          const found = listData?.users?.find((u: any) => u.email === email);
+          if (!found) throw new Error("User exists in auth but not found in list: " + createErr.message);
+          userId = found.id;
+          isExistingUser = true;
+          password = null; // don't overwrite existing password
+          console.log("Found existing auth user:", userId);
+        } else {
+          throw new Error("Auth create error: " + createErr.message);
+        }
+      } else {
+        userId = newUser.user!.id;
+      }
+    }
 
     // ── Upsert profile ────────────────────────────────────────────────────────
     await sb.from("profiles").upsert({
-      id:             userId,
+      id:              userId,
       email,
       full_name,
       company_name,
       phone,
       has_active_plan: true,
       plan_type:       plan_type || "aloitus",
-    });
+    }, { onConflict: "id" });
 
     // ── Upsert onboarding ─────────────────────────────────────────────────────
     await sb.from("onboarding").upsert({
@@ -85,80 +118,114 @@ serve(async (req) => {
       extra_info:    extra_info || "",
       tasks:         ["puheluihin vastaaminen", "ajanvaraus"],
       completed_at:  new Date().toISOString(),
-      agent_generated: false,
+      agent_generated: true,
     }, { onConflict: "user_id" });
 
-    // ── Build agent prompt from template ──────────────────────────────────────
-    const systemPrompt = buildPrompt({
-      business_name: company_name, industry: industry || "muu",
-      services: services || "", hours: hours || "Ma–Pe 8–17",
-      tone: tone || "ystävällinen", extra_info: extra_info || "",
-      tasks: ["puheluihin vastaaminen", "ajanvaraus"],
-      language: "fi",
-    });
+    // ── Handle Retell agent ───────────────────────────────────────────────────
+    let retellAgentId: string;
 
-    // ── Create Retell LLM ────────────────────────────────────────────────────
-    const llmResp = await fetch("https://api.retellai.com/create-retell-llm", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${RETELL_API_KEY}` },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        general_prompt: systemPrompt,
-        general_tools: [],
-      }),
-    });
-    if (!llmResp.ok) throw new Error("Retell LLM error: " + await llmResp.text());
-    const llmData = await llmResp.json();
-    const llmId = llmData.llm_id;
+    if (existing_retell_agent_id) {
+      // Link existing agent — verify it exists in Retell
+      const checkResp = await fetch(`https://api.retellai.com/get-agent/${existing_retell_agent_id}`, {
+        headers: { "Authorization": `Bearer ${RETELL_API_KEY}` },
+      });
+      if (!checkResp.ok) throw new Error(`Retell agent not found: ${existing_retell_agent_id}`);
+      const agentInfo = await checkResp.json();
 
-    // ── Create Retell agent ───────────────────────────────────────────────────
-    const agentResp = await fetch("https://api.retellai.com/create-agent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": `Bearer ${RETELL_API_KEY}` },
-      body: JSON.stringify({
-        llm_websocket_url: `wss://api.retellai.com/llm-websocket/${llmId}`,
-        agent_name:        `${company_name} — Tekoälyvastaanottaja`,
-        voice_id:          "custom_voice_5b5439b90723dfeab0c58c448a",
-        language:          "fi-FI",
-        speech_to_text: { provider: "azure", language: "fi-FI" },
-        enable_backchannel: true,
-        backchannel_frequency: 0.7,
-        responsiveness: 1,
-        interruption_sensitivity: 1,
-        reminder_trigger_ms: 10000,
-        reminder_max_count: 2,
-      }),
-    });
-    if (!agentResp.ok) throw new Error("Retell agent error: " + await agentResp.text());
-    const agentData = await agentResp.json();
-    const retellAgentId = agentData.agent_id;
+      retellAgentId = existing_retell_agent_id;
 
-    // ── Save agent to DB ─────────────────────────────────────────────────────
-    await sb.from("retell_agents").insert({
-      user_id:         userId,
-      retell_agent_id: retellAgentId,
-      retell_llm_id:   llmId,
-      agent_name:      `${company_name} — Tekoälyvastaanottaja`,
-      system_prompt:   systemPrompt,
-      voice_id:        "custom_voice_5b5439b90723dfeab0c58c448a",
-      active:          true,
-      is_demo:         false,
-      demo_calls_used: 0,
-      demo_calls_limit: 999,
-    });
+      // Remove any previous agent rows for this user, then insert the linked one
+      await sb.from("retell_agents").delete().eq("user_id", userId);
+      await sb.from("retell_agents").insert({
+        user_id:          userId,
+        retell_agent_id:  retellAgentId,
+        agent_name:       agentInfo.agent_name || `${company_name} — Tekoälyvastaanottaja`,
+        system_prompt:    "",
+        voice_id:         agentInfo.voice_id || "custom_voice_5b5439b90723dfeab0c58c448a",
+        active:           true,
+        is_demo:          false,
+        demo_calls_used:  0,
+        demo_calls_limit: 999,
+      });
 
-    // ── Mark onboarding agent_generated ──────────────────────────────────────
-    await sb.from("onboarding").update({ agent_generated: true }).eq("user_id", userId);
+      console.log("Linked existing agent:", retellAgentId);
 
-    // ── Send welcome email ────────────────────────────────────────────────────
-    await sendWelcomeEmail({ email, full_name, company_name, password, plan_type: plan_type || "aloitus" });
+    } else {
+      // Create brand-new Retell LLM + agent
+      const systemPrompt = buildPrompt({
+        business_name: company_name, industry: industry || "muu",
+        services: services || "", hours: hours || "Ma–Pe 8–17",
+        tone: tone || "ystävällinen", extra_info: extra_info || "",
+        tasks: ["puheluihin vastaaminen", "ajanvaraus"],
+        language: "fi",
+      });
+
+      // Create Retell LLM
+      const llmResp = await fetch("https://api.retellai.com/create-retell-llm", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${RETELL_API_KEY}` },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          general_prompt: systemPrompt,
+          general_tools: [],
+        }),
+      });
+      if (!llmResp.ok) throw new Error("Retell LLM error: " + await llmResp.text());
+      const llmData = await llmResp.json();
+      const llmId = llmData.llm_id;
+
+      // Create Retell agent
+      const agentResp = await fetch("https://api.retellai.com/create-agent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${RETELL_API_KEY}` },
+        body: JSON.stringify({
+          llm_websocket_url: `wss://api.retellai.com/llm-websocket/${llmId}`,
+          agent_name:        `${company_name} — Tekoälyvastaanottaja`,
+          voice_id:          "custom_voice_5b5439b90723dfeab0c58c448a",
+          language:          "fi-FI",
+          speech_to_text: { provider: "azure", language: "fi-FI" },
+          enable_backchannel: true,
+          backchannel_frequency: 0.7,
+          responsiveness: 1,
+          interruption_sensitivity: 1,
+          reminder_trigger_ms: 10000,
+          reminder_max_count: 2,
+        }),
+      });
+      if (!agentResp.ok) throw new Error("Retell agent error: " + await agentResp.text());
+      const agentData = await agentResp.json();
+      retellAgentId = agentData.agent_id;
+
+      // Remove old agents for this user, save new one
+      await sb.from("retell_agents").delete().eq("user_id", userId);
+      await sb.from("retell_agents").insert({
+        user_id:          userId,
+        retell_agent_id:  retellAgentId,
+        retell_llm_id:    llmId,
+        agent_name:       `${company_name} — Tekoälyvastaanottaja`,
+        system_prompt:    systemPrompt,
+        voice_id:         "custom_voice_5b5439b90723dfeab0c58c448a",
+        active:           true,
+        is_demo:          false,
+        demo_calls_used:  0,
+        demo_calls_limit: 999,
+      });
+    }
+
+    // ── Send welcome email (only for new users) ───────────────────────────────
+    if (!isExistingUser && password) {
+      await sendWelcomeEmail({ email, full_name, company_name, password, plan_type: plan_type || "aloitus" });
+    }
 
     return json({
-      success:    true,
-      user_id:    userId,
-      agent_id:   retellAgentId,
-      password,
-      message:    `Client ${full_name} created and agent deployed.`,
+      success:       true,
+      user_id:       userId,
+      agent_id:      retellAgentId,
+      password:      password || "(existing account — password unchanged)",
+      is_existing:   isExistingUser,
+      message:       isExistingUser
+        ? `Existing user ${full_name} upgraded and agent linked.`
+        : `New client ${full_name} created and agent deployed.`,
     });
 
   } catch (err) {
@@ -261,7 +328,7 @@ async function sendWelcomeEmail(opts: {
 
     <tr>
       <td style="padding:16px 36px;border-top:1px solid #e2e8f0;text-align:center;">
-        <p style="margin:0;font-size:12px;color:#94a3b8;">Kysyttävää? <a href="mailto:noah@selora.fi" style="color:#1D4ED8;text-decoration:none;">noah@selora.fi</a> · Selora</p>
+        <p style="margin:0;font-size:12px;color:#94a3b8;">Kysyttävää? <a href="mailto:selora.tuki@gmail.com" style="color:#1D4ED8;text-decoration:none;">selora.tuki@gmail.com</a> · Selora</p>
       </td>
     </tr>
 
@@ -284,7 +351,7 @@ async function sendWelcomeEmail(opts: {
   if (!resp.ok) console.error("Resend error:", await resp.text());
 }
 
-// ── Prompt builder (same as generate-demo-agent) ──────────────────────────────
+// ── Prompt builder ────────────────────────────────────────────────────────────
 function buildPrompt(data: {
   business_name: string; industry: string; services: string;
   hours: string; tone: string; extra_info: string;

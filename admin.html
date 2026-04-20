@@ -186,14 +186,15 @@
               <tr>
                 <th>Asiakas</th>
                 <th>Yritys</th>
+                <th>Puhelin</th>
                 <th>Suunnitelma</th>
-                <th>Agentti</th>
-                <th>Luotu</th>
+                <th>Agent ID</th>
+                <th>Rekisteröity</th>
                 <th></th>
               </tr>
             </thead>
             <tbody id="client-tbody">
-              <tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-3);">Ladataan…</td></tr>
+              <tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-3);">Ladataan…</td></tr>
             </tbody>
           </table>
         </div>
@@ -270,6 +271,10 @@
                 <option value="yritys">Yrityspaketti</option>
               </select>
             </div>
+            <div class="form-group form-full">
+              <label class="form-label">Olemassa oleva Retell Agent ID <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;">(valinnainen — jätä tyhjäksi luodaksesi uuden)</span></label>
+              <input id="f-retell-agent" class="form-input" type="text" placeholder="agent_xxxxxxxxxxxxxxxxxxxxxxxx">
+            </div>
           </div>
 
           <button class="btn-primary" id="create-btn" onclick="createClient()">
@@ -287,7 +292,7 @@
 <!-- Credentials modal -->
 <div id="creds-modal">
   <div class="creds-box">
-    <h3 style="margin-bottom:1rem;font-size:1rem;font-weight:600;">✅ Asiakastili luotu!</h3>
+    <h3 id="creds-modal-title" style="margin-bottom:1rem;font-size:1rem;font-weight:600;">✅ Asiakastili luotu!</h3>
     <p style="font-size:0.82rem;color:var(--text-2);margin-bottom:1.25rem;">Välitä nämä tiedot asiakkaalle tai lähetä sähköposti on lähetetty automaattisesti.</p>
     <div style="background:rgba(255,255,255,0.05);border-radius:10px;padding:1rem;margin-bottom:1rem;">
       <div style="display:grid;gap:0.5rem;">
@@ -331,6 +336,26 @@
         style="flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:9px;color:var(--text-2);font-size:0.85rem;padding:0.6rem;cursor:pointer;">Peruuta</button>
       <button onclick="savePlan()"
         style="flex:2;background:var(--blue);border:none;border-radius:9px;color:#fff;font-weight:600;font-size:0.85rem;padding:0.6rem;cursor:pointer;">Tallenna</button>
+    </div>
+  </div>
+</div>
+
+<!-- Link Agent modal -->
+<div id="link-agent-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:999;align-items:center;justify-content:center;">
+  <div class="creds-box">
+    <h3 style="margin-bottom:0.5rem;font-size:1rem;font-weight:600;">Linkitä Retell-agentti</h3>
+    <p style="font-size:0.8rem;color:var(--text-3);margin-bottom:1rem;" id="link-agent-name"></p>
+    <input type="hidden" id="link-agent-user-id">
+    <div class="form-group" style="margin-bottom:1rem;">
+      <label class="form-label">Retell Agent ID</label>
+      <input id="link-agent-id-input" class="form-input" type="text" placeholder="agent_xxxxxxxxxxxxxxxxxxxxxxxx">
+    </div>
+    <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:1rem;">Tämä korvaa käyttäjän nykyisen agentin ja linkittää olemassa olevan Retell-agentin suoraan heidän tililleen.</p>
+    <div style="display:flex;gap:0.5rem;">
+      <button onclick="document.getElementById('link-agent-modal').style.display='none'"
+        style="flex:1;background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:9px;color:var(--text-2);font-size:0.85rem;padding:0.6rem;cursor:pointer;">Peruuta</button>
+      <button onclick="saveLinkAgent()"
+        style="flex:2;background:var(--blue);border:none;border-radius:9px;color:#fff;font-weight:600;font-size:0.85rem;padding:0.6rem;cursor:pointer;">Linkitä →</button>
     </div>
   </div>
 </div>
@@ -394,17 +419,20 @@ function filterClients(q) {
 function renderClients(clients) {
   const tbody = document.getElementById('client-tbody');
   if (!clients.length) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-3);">Ei asiakkaita.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--text-3);">Ei asiakkaita.</td></tr>';
     return;
   }
   tbody.innerHTML = clients.map(c => {
-    const plan = c.has_active_plan ? c.plan_type : 'demo';
     const planBadge = c.has_active_plan
       ? `<span class="badge ${c.plan_type}">${planLabel(c.plan_type)}</span>`
       : `<span class="badge demo">Demo</span>`;
-    const agentStatus = c.agent
-      ? `<span><span class="dot green"></span>Aktiivinen</span>`
+    const agentCell = c.agent
+      ? `<div style="display:flex;flex-direction:column;gap:2px;">
+           <span><span class="dot green"></span>Aktiivinen</span>
+           <span style="font-size:0.68rem;color:var(--text-3);font-family:monospace;">${esc(c.agent.retell_agent_id||'')}</span>
+         </div>`
       : `<span style="color:var(--text-3);">–</span>`;
+    const phone = c.phone ? esc(c.phone) : `<span style="color:var(--text-3);">–</span>`;
     const created = c.created_at ? new Date(c.created_at).toLocaleDateString('fi-FI') : '–';
     return `<tr>
       <td>
@@ -412,13 +440,15 @@ function renderClients(clients) {
         <div style="font-size:0.75rem;color:var(--text-3);">${esc(c.email||'')}</div>
       </td>
       <td>${esc(c.company_name||'–')}</td>
+      <td style="font-size:0.8rem;">${phone}</td>
       <td>${planBadge}</td>
-      <td>${agentStatus}</td>
-      <td style="color:var(--text-3);">${created}</td>
+      <td>${agentCell}</td>
+      <td style="color:var(--text-3);font-size:0.8rem;">${created}</td>
       <td>
-        <div style="display:flex;gap:0.4rem;">
+        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
           <button class="btn-sm" onclick="openPlanModal('${c.id}','${c.plan_type||'aloitus'}')">Suunnitelma</button>
           ${!c.has_active_plan ? `<button class="btn-sm" onclick="grantAccess('${c.id}')">Aktivoi</button>` : ''}
+          <button class="btn-sm" onclick="openLinkAgentModal('${c.id}','${esc(c.full_name||'')}')">Linkitä agentti</button>
           <button class="btn-danger" onclick="deleteClient('${c.id}','${esc(c.full_name||'')}')">Poista</button>
         </div>
       </td>
@@ -436,7 +466,8 @@ async function createClient() {
   const btn    = document.getElementById('create-btn');
   const status = document.getElementById('create-status');
   btn.disabled = true;
-  btn.textContent = 'Luodaan tiliä ja agenttia…';
+  const retellAgentId = document.getElementById('f-retell-agent').value.trim();
+  btn.textContent = retellAgentId ? 'Linkitetään agenttia…' : 'Luodaan tiliä ja agenttia…';
   status.textContent = '⏳ Tämä voi kestää 15–30 sekuntia…';
 
   try {
@@ -450,13 +481,14 @@ async function createClient() {
         full_name:    name,
         company_name: company,
         email,
-        phone:        document.getElementById('f-phone').value.trim(),
-        industry:     document.getElementById('f-industry').value,
-        services:     document.getElementById('f-services').value.trim(),
-        hours:        document.getElementById('f-hours').value.trim(),
-        tone:         document.getElementById('f-tone').value,
-        extra_info:   document.getElementById('f-extra').value.trim(),
-        plan_type:    document.getElementById('f-plan').value,
+        phone:                    document.getElementById('f-phone').value.trim(),
+        industry:                 document.getElementById('f-industry').value,
+        services:                 document.getElementById('f-services').value.trim(),
+        hours:                    document.getElementById('f-hours').value.trim(),
+        tone:                     document.getElementById('f-tone').value,
+        extra_info:               document.getElementById('f-extra').value.trim(),
+        plan_type:                document.getElementById('f-plan').value,
+        existing_retell_agent_id: retellAgentId || undefined,
       }),
     });
 
@@ -464,17 +496,22 @@ async function createClient() {
     if (!resp.ok) throw new Error(data.error || 'Virhe');
 
     // Show credentials modal
+    document.getElementById('creds-modal-title').textContent = data.is_existing
+      ? '✅ Olemassa oleva tili päivitetty!'
+      : '✅ Asiakastili luotu!';
     document.getElementById('creds-email').textContent    = email;
-    document.getElementById('creds-password').textContent = data.password;
+    document.getElementById('creds-password').textContent = data.is_existing
+      ? '(Olemassa oleva tili — salasana ei muuttunut)'
+      : data.password;
     document.getElementById('creds-agent').textContent    = data.agent_id || '–';
     document.getElementById('creds-modal').style.display  = 'flex';
 
     // Reset form
-    ['f-name','f-company','f-email','f-phone','f-services','f-hours','f-extra'].forEach(id => {
+    ['f-name','f-company','f-email','f-phone','f-services','f-hours','f-extra','f-retell-agent'].forEach(id => {
       document.getElementById(id).value = '';
     });
     status.textContent = '';
-    showToast('Asiakastili luotu ✓');
+    showToast(data.is_existing ? 'Tili päivitetty ✓' : 'Asiakastili luotu ✓');
 
   } catch(e) {
     status.textContent = '❌ ' + e.message;
@@ -508,6 +545,56 @@ async function savePlan() {
   document.getElementById('plan-modal').style.display = 'none';
   showToast('Suunnitelma päivitetty ✓');
   await loadClients();
+}
+
+// ── Link existing Retell agent ────────────────────────────────────────────────
+function openLinkAgentModal(userId, name) {
+  document.getElementById('link-agent-user-id').value = userId;
+  document.getElementById('link-agent-name').textContent = 'Asiakas: ' + name;
+  document.getElementById('link-agent-id-input').value = '';
+  document.getElementById('link-agent-modal').style.display = 'flex';
+}
+
+async function saveLinkAgent() {
+  const userId  = document.getElementById('link-agent-user-id').value;
+  const agentId = document.getElementById('link-agent-id-input').value.trim();
+  if (!agentId) { showToast('Syötä Agent ID'); return; }
+
+  // Find client info
+  const client = allClients.find(c => c.id === userId);
+  if (!client) { showToast('Asiakasta ei löydy'); return; }
+
+  const btn = document.querySelector('#link-agent-modal button:last-child');
+  btn.textContent = 'Linkitetään…';
+  btn.disabled = true;
+
+  try {
+    const resp = await fetch(SUPABASE_URL + '/functions/v1/admin-create-client', {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + session.access_token,
+      },
+      body: JSON.stringify({
+        full_name:                client.full_name,
+        company_name:             client.company_name,
+        email:                    client.email,
+        phone:                    client.phone || '',
+        plan_type:                client.plan_type || 'aloitus',
+        existing_retell_agent_id: agentId,
+      }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Virhe');
+    document.getElementById('link-agent-modal').style.display = 'none';
+    showToast('Agentti linkitetty ✓');
+    await loadClients();
+  } catch(e) {
+    showToast('Virhe: ' + e.message);
+  } finally {
+    btn.textContent = 'Linkitä →';
+    btn.disabled = false;
+  }
 }
 
 // ── Delete client ─────────────────────────────────────────────────────────────
