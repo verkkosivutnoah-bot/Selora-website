@@ -237,6 +237,8 @@ serve(async (req) => {
     const body = await req.json();
     const {
       onboarding_id,
+      is_production  = false,
+      plan           = "",
       business_name,
       industry       = "muu",
       city           = "",
@@ -346,16 +348,26 @@ serve(async (req) => {
       system_prompt:    agentPrompt,
       active:           true,
       demo_calls_used:  0,
-      demo_calls_limit: 5,
+      // Production agents get unlimited calls; demo agents get 5
+      demo_calls_limit: is_production ? 99999 : 5,
     });
 
     if (insertErr) throw insertErr;
 
     if (onboarding_id) {
-      await sb.from("onboarding").update({ agent_generated: true }).eq("id", onboarding_id);
+      await sb.from("onboarding").update({ agent_generated: true, completed_at: new Date().toISOString() }).eq("id", onboarding_id);
     }
 
-    return json({ success: true, agent_id: retellAgentId, agent_name: agentName });
+    // If this is a production purchase, upgrade the user's profile immediately
+    if (is_production) {
+      const planType = plan || "aloitus";
+      await sb.from("profiles").update({
+        has_active_plan: true,
+        plan_type: planType,
+      }).eq("id", user.id);
+    }
+
+    return json({ success: true, agent_id: retellAgentId, agent_name: agentName, is_production });
 
   } catch (err) {
     console.error("generate-demo-agent error:", err);
