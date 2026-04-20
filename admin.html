@@ -58,7 +58,58 @@
 
     /* Two-col layout */
     .cols { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; align-items: start; }
-    @media(max-width:900px) { .cols { grid-template-columns: 1fr; } }
+    @media(max-width:900px) { .cols { grid-template-columns: 1fr; gap: 1rem; } }
+
+    /* ── MOBILE (768px) ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      /* Topbar */
+      .topbar { padding: 0 1rem; }
+      .admin-email { display: none; }
+
+      /* Main */
+      .main { padding: 1rem; }
+      .page-header h1 { font-size: 1.2rem; }
+
+      /* Stats: ensure min size works on small screens */
+      .stats-row { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.75rem; }
+
+      /* Two-col layout */
+      .cols { gap: 1rem; }
+
+      /* Form grid — single column */
+      .form-grid { grid-template-columns: 1fr; }
+      .form-full { grid-column: 1; }
+
+      /* Client table — hide Puhelin (col 3) and Rekisteröity (col 6) */
+      table thead th:nth-child(3),
+      table tbody td:nth-child(3),
+      table thead th:nth-child(6),
+      table tbody td:nth-child(6) { display: none; }
+
+      /* Action buttons in last column — stack them */
+      table tbody td:last-child { white-space: normal; }
+      table tbody td:last-child .btn-sm,
+      table tbody td:last-child .btn-danger { display: block; width: 100%; margin-bottom: 4px; text-align: center; }
+
+      /* Activity log — flex column layout */
+      .log-entry {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        padding: 0.85rem 1rem;
+      }
+      .log-time { display: flex; gap: 0.5rem; align-items: center; }
+      .log-time .log-date { margin-right: 0; }
+      .log-badges { margin-top: 4px; }
+
+      /* Modals */
+      .creds-box {
+        max-height: 90vh;
+        overflow-y: auto;
+        margin: 1rem;
+        width: calc(100% - 2rem) !important;
+        max-width: 100% !important;
+      }
+    }
 
     /* Card */
     .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
