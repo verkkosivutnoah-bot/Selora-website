@@ -955,14 +955,24 @@
     }
     .hc-login-hint a:hover { color: #60A5FA; }
 
-    /* Mobile: hero stays 100vh as before; carousel sits *below* the hero */
+    /* Mobile: hero keeps its 100vh look; carousel sits on a matching dark
+       extension below so the card never lands on the light body bg. */
     @media (max-width: 900px) {
-      #hero { overflow: visible; }
+      /* Give #hero its own dark bg so the area below the clamped canvas
+         (where body's #F8FAFF would otherwise show) stays on-brand. */
+      #hero { overflow: visible; background: #050C1A; }
       .hero-body { flex: 0 0 auto; min-height: 100vh; box-sizing: border-box; }
-      /* Canvas + overlay stay pinned to the viewport area so they don't bleed
-         down into the carousel region below the hero */
+      /* Canvas stops at the viewport. Overlay adds a fade from the radial
+         vignette into the solid dark, so there's no hard seam. */
       #pageCanvas { height: 100vh; top: 0; }
-      #hero::after { height: 100vh; top: 0; bottom: auto; }
+      #hero::after {
+        height: 100vh; top: 0; bottom: auto;
+        background:
+          linear-gradient(to bottom, transparent 70%, #050C1A 100%),
+          radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.5) 100%);
+      }
+
+      /* Carousel — centered block, flattened shadows for narrow widths */
       .hero-carousel {
         position: relative;
         top: auto;
@@ -970,25 +980,59 @@
         transform: none;
         width: calc(100% - 2.5rem);
         max-width: 380px;
-        margin: 2.5rem auto 3rem;
+        margin: 2rem auto 3rem;
         z-index: 5;
       }
-      .hc-card { transform: none; }
-      .hc-card:hover { transform: translateY(-3px); }
+      .hc-card {
+        transform: none;
+        border-radius: 16px;
+        background: rgba(10, 18, 36, 0.92);
+        border-color: rgba(96,165,250,0.14);
+        box-shadow:
+          0 10px 32px rgba(0,0,0,0.45),
+          0 0 0 1px rgba(255,255,255,0.04) inset;
+      }
+      .hc-card:hover {
+        transform: translateY(-3px);
+        box-shadow:
+          0 14px 40px rgba(0,0,0,0.55),
+          0 0 0 1px rgba(255,255,255,0.06) inset;
+      }
+      .hc-slides { height: 172px; }
     }
+
     @media (max-width: 480px) {
       .hero-carousel {
         width: calc(100% - 2rem);
         max-width: 100%;
-        margin: 0 auto 2rem;
+        margin: 1.25rem auto 2.5rem;
       }
-      .hc-slides { height: 180px; }
+      .hc-card {
+        border-radius: 14px;
+        box-shadow:
+          0 8px 26px rgba(0,0,0,0.42),
+          0 0 0 1px rgba(255,255,255,0.04) inset;
+      }
+      /* Tighten density so the card feels deliberate on small phones */
+      .hc-slides { height: 158px; }
       .hc-header { padding: 0.85rem 1rem 0.7rem; }
-      .hc-slide { padding: 1.15rem 1rem 0.85rem; }
+      .hc-slide { padding: 1.1rem 1rem 0.85rem; }
       .hc-progress { margin: 0 1rem; }
-      .hc-dots { padding: 0.65rem 1rem 0; }
-      .hc-cta { margin: 0.7rem 1rem 0.85rem; padding: 0.7rem 0.9rem; }
-      .hc-login-hint { padding-bottom: 0.85rem; }
+      .hc-dots { padding: 0.6rem 1rem 0; }
+      .hc-cta {
+        margin: 0.7rem 1rem 0.9rem;
+        padding: 0.78rem 0.9rem;
+        font-size: 0.82rem;
+      }
+      .hc-login-hint { padding-bottom: 0.9rem; font-size: 0.66rem; }
+      /* Smaller icon + slightly tighter type scale */
+      .hc-slide-icon { width: 30px; height: 30px; margin-bottom: 0.55rem; border-radius: 8px; }
+      .hc-slide-icon svg { width: 14px; height: 14px; }
+      .hc-slide-num { font-size: 0.56rem; margin-bottom: 0.55rem; }
+      .hc-slide-title { font-size: 0.92rem; margin-bottom: 0.3rem; }
+      .hc-slide-desc { font-size: 0.74rem; line-height: 1.5; }
+      .hc-label { font-size: 0.58rem; }
+      .hc-free-badge { font-size: 0.56rem; padding: 2px 7px; }
     }
 </style>
   <!-- Open Graph / Social sharing -->
