@@ -2260,6 +2260,14 @@ function escHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// Returns YYYY-MM-DD in LOCAL time (not UTC) — avoids timezone off-by-one on calendar
+function localDateStr(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+
 function sentimentBadge(s) {
   if (s === 'positive') return '<span style="font-size:0.78rem;color:#10b981;">😊 Positiivinen</span>';
   if (s === 'negative') return '<span style="font-size:0.78rem;color:#ef4444;">😟 Negatiivinen</span>';
@@ -2685,7 +2693,7 @@ function renderMonthView() {
 
 function renderCell(date, otherMonth, today, appts) {
   const isToday = date.getTime() === today.getTime();
-  const dateStr = date.toISOString().slice(0,10);
+  const dateStr = localDateStr(date);
   const dayAppts = appts.filter(a => {
     const s = new Date(a.start_time);
     return s.getFullYear()===date.getFullYear() && s.getMonth()===date.getMonth() && s.getDate()===date.getDate();
@@ -2756,7 +2764,7 @@ function renderWeekView() {
   let gridHtml = '';
   for (let i = 0; i < 7; i++) {
     const colDate = new Date(ws); colDate.setDate(ws.getDate()+i);
-    const colDateStr = colDate.toISOString().slice(0,10);
+    const colDateStr = localDateStr(colDate);
     let colHtml = `<div class="cal-week-col" onclick="openApptModal('${colDateStr}')">`;
     for (let h = 0; h < 24; h++) {
       colHtml += `<div class="cal-week-hour"></div>`;
@@ -2764,7 +2772,7 @@ function renderWeekView() {
     // Overlay appointments
     const dayAppts = appts.filter(a => {
       const s = new Date(a.start_time);
-      return s.toISOString().slice(0,10) === colDateStr;
+      return localDateStr(s) === colDateStr;
     });
     dayAppts.forEach(a => {
       const s = new Date(a.start_time);
@@ -2791,7 +2799,7 @@ function renderDayView() {
   const day  = calState.currentDay;
   const today = new Date(); today.setHours(0,0,0,0);
   const appts = appState.appointments || [];
-  const dateStr = day.toISOString().slice(0,10);
+  const dateStr = localDateStr(day);
 
   // Monday-based day of week (0=Mon, 6=Sun)
   const dow = (day.getDay() + 6) % 7;
@@ -2813,7 +2821,7 @@ function renderDayView() {
 
   const dayAppts = appts.filter(a => {
     const s = new Date(a.start_time);
-    return s.toISOString().slice(0,10) === dateStr;
+    return localDateStr(s) === dateStr;
   });
 
   dayAppts.forEach(a => {
