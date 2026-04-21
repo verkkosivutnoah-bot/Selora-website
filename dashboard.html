@@ -910,6 +910,8 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* ── MOBILE BAR ─────────────────────────────── */
+    .mobile-agent-card { display: none; } /* shown only inside @media 768px block */
+
     .mobile-bar {
       display: none;
       position: fixed;
@@ -960,23 +962,57 @@
       .orb-widget { padding: 1.5rem 1.25rem 1.25rem; }
       .orb-call-btn { width: 100%; justify-content: center; }
 
-      /* Calendar */
-      #view-kalenteri { padding: 1rem; border-radius: 12px; }
-      .cal-topbar { gap: 0.4rem; }
-      .cal-view-toggle { margin-left: 0; }
-      .cal-actions { width: 100%; justify-content: flex-end; }
-      .cal-integration-btn span { display: none; }
-      .cal-cell { min-height: 70px; padding: 0.3rem; }
-      .cal-date-num { font-size: 0.7rem; width: 20px; height: 20px; }
-      .cal-chip { font-size: 0.6rem; padding: 1px 4px; }
-      .cal-week-body { height: calc(100vh - 300px); }
-      .cal-time-slot { height: 40px; }
-      .cal-week-hour  { height: 40px; }
-      .cal-month-label { font-size: 0.88rem; min-width: 110px; }
+      /* ── Calendar mobile ─────────────────────── */
+      #view-kalenteri { padding: 0.75rem; border-radius: 12px; }
 
-      /* "Add appointment" button full width on mobile */
-      #add-appt-btn,
-      button[onclick="openApptModal()"] { width: 100%; margin-top: 0.5rem; }
+      /* Topbar: nav row on top, controls row below */
+      .cal-topbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding-bottom: 0.6rem;
+      }
+      .cal-nav { justify-content: space-between; width: 100%; }
+      .cal-month-label { font-size: 0.9rem; min-width: 0; flex: 1; text-align: center; }
+      .cal-view-toggle { margin-left: 0; align-self: center; }
+      .cal-view-btn { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+      .cal-actions { width: 100%; justify-content: space-between; gap: 0.4rem; }
+      .cal-integration-btn { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
+      .cal-integration-btn span { display: none; }
+      button[onclick="openApptModal()"] { flex: 1; text-align: center; font-size: 0.78rem; padding: 0.35rem 0.5rem; }
+
+      /* Month view cells */
+      .cal-cell { min-height: 58px; padding: 0.2rem; }
+      .cal-date-num { font-size: 0.65rem; width: 18px; height: 18px; }
+      .cal-chip { font-size: 0.58rem; padding: 1px 3px; line-height: 1.4; }
+      .cal-more  { font-size: 0.58rem; }
+      .cal-weekdays { font-size: 0.6rem; }
+
+      /* Week / day view — 3-day on mobile handled in JS */
+      .cal-week-body { height: calc(100vh - 340px); min-height: 320px; }
+      .cal-time-slot { height: 44px; font-size: 0.6rem; padding-right: 4px; width: 36px; }
+      .cal-time-col  { width: 36px; }
+      .cal-week-hour { height: 44px; }
+      .cal-week-day-hdr { font-size: 0.65rem; }
+      .cal-week-appt { font-size: 0.62rem; padding: 2px 4px; }
+      .cal-week-header { grid-template-columns: 36px repeat(3, 1fr); }
+      .cal-week-grid   { grid-template-columns: repeat(3, 1fr); }
+      .cal-day-appt { font-size: 0.72rem; padding: 3px 6px; }
+
+      /* Appointment modal full-screen on mobile */
+      #appt-modal > div {
+        width: 100% !important;
+        max-width: 100% !important;
+        max-height: 92vh !important;
+        border-radius: 16px 16px 0 0 !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        padding: 1.25rem !important;
+      }
+      #appt-modal { align-items: flex-end !important; }
 
       /* CRM — stack panels vertically */
       #crm-layout {
@@ -1029,6 +1065,27 @@
       /* Business info card */
       .biz-card { flex-wrap: wrap; gap: 0.75rem; }
       .biz-card-edit { width: 100%; text-align: center; }
+
+      /* Call log filter bar — scrollable on mobile */
+      .filter-bar { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.25rem; gap: 0.35rem; }
+      .filter-btn { white-space: nowrap; flex-shrink: 0; }
+
+      /* Call log table — hide date column on very small screens */
+      @media (max-width: 400px) {
+        table thead th:nth-child(3),
+        table tbody td:nth-child(3) { display: none; }
+      }
+
+      /* Settings — full-width buttons on mobile */
+      #btn-update-agent { width: 100%; justify-content: center; }
+      .settings-section .card > div[style*="display:flex"] { flex-direction: column; }
+
+      /* Mobile agent card — visible only on mobile */
+      .mobile-agent-card { display: flex; flex-direction: column; gap: 0.5rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 12px; padding: 0.85rem 1rem; margin-bottom: 1rem; }
+
+
+      /* Page content extra bottom padding for mobile nav */
+      .page-content { padding-bottom: 5rem; }
 
       /* Toast offset for bottom nav */
       #toast { bottom: calc(1.75rem + 60px); }
@@ -1899,6 +1956,18 @@
       ═══════════════════════════ -->
       <div id="view-settings" style="display:none;">
 
+        <!-- Mobile-only: agent status + account info -->
+        <div class="mobile-agent-card" id="mob-agent-card">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <span class="dot green" style="flex-shrink:0;"></span>
+            <div style="min-width:0;">
+              <div style="font-size:0.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" id="mob-agent-name">–</div>
+              <div style="font-size:0.72rem;color:var(--text-3);" id="mob-agent-phone">–</div>
+            </div>
+            <span class="plan-badge demo" id="mob-plan-badge" style="margin-left:auto;flex-shrink:0;">Demo</span>
+          </div>
+        </div>
+
         <!-- Yritystiedot -->
         <div class="settings-section">
           <div class="settings-section-label">Yritystiedot</div>
@@ -1982,12 +2051,17 @@
           </div>
         </div>
 
-        <div style="margin-top:0.5rem;">
-          <button class="btn-primary" onclick="saveSettings()">
+        <div style="margin-top:0.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+          <button class="btn-primary" onclick="saveSettings()" style="flex:1;min-width:160px;">
             <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
             </svg>
             Tallenna muutokset
+          </button>
+          <!-- Logout — always accessible from settings (especially needed on mobile) -->
+          <button onclick="signOut()" style="display:flex;align-items:center;gap:0.5rem;background:none;border:1px solid rgba(239,68,68,0.3);border-radius:9px;color:#ef4444;cursor:pointer;padding:0.55rem 1rem;font-size:0.8rem;font-family:'Inter',sans-serif;transition:background 0.15s;" onmouseover="this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.background='none'">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Kirjaudu ulos
           </button>
         </div>
       </div>
@@ -2140,6 +2214,19 @@ function renderUI() {
   if (ag) {
     document.getElementById('agent-status-topbar').innerHTML =
       `<span class="dot green" style="margin-right:4px;"></span>${ag.agent_name || 'Agentti aktiivinen'}`;
+  }
+
+  // Populate mobile agent card in settings (only visible on mobile)
+  if (isMobile()) {
+    const mobName  = document.getElementById('mob-agent-name');
+    const mobPhone = document.getElementById('mob-agent-phone');
+    const mobBadge = document.getElementById('mob-plan-badge');
+    if (mobName)  mobName.textContent  = ag?.agent_name || 'Agentti ei vielä luotu';
+    if (mobPhone) mobPhone.textContent = ag?.retell_phone_num || 'Ei puhelinnumeroa';
+    if (mobBadge) {
+      mobBadge.textContent = p?.has_active_plan ? (p.plan_type === 'kasvu' ? 'Kasvu' : 'Aloitus') : 'Demo';
+      mobBadge.className   = 'plan-badge ' + (p?.has_active_plan ? 'active' : 'demo');
+    }
   }
 }
 
@@ -2587,6 +2674,15 @@ function showToast(msg) {
 
 init();
 
+// Re-render calendar on orientation/resize so week view adapts (3-day ↔ 7-day)
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => {
+    if (calState.view === 'week') renderCalendar();
+  }, 150);
+});
+
 // ═══════════════════════════════════════════════════════
 // CALENDAR — Kalenteri view
 // ═══════════════════════════════════════════════════════
@@ -2619,6 +2715,8 @@ function setCalView(v, btn) {
   renderCalendar();
 }
 
+const isMobile = () => window.innerWidth <= 640;
+
 function calMove(dir) {
   if (calState.view === 'month') {
     calState.month += dir;
@@ -2628,8 +2726,9 @@ function calMove(dir) {
     calState.currentDay = new Date(calState.currentDay);
     calState.currentDay.setDate(calState.currentDay.getDate() + dir);
   } else {
+    const step = isMobile() ? 3 : 7;
     calState.weekStart = new Date(calState.weekStart);
-    calState.weekStart.setDate(calState.weekStart.getDate() + dir * 7);
+    calState.weekStart.setDate(calState.weekStart.getDate() + dir * step);
   }
   renderCalendar();
 }
@@ -2733,25 +2832,40 @@ function renderWeekView() {
   if (!calState.weekStart || isNaN(calState.weekStart.getTime())) {
     calState.weekStart = getMonday(new Date());
   }
-  const ws   = calState.weekStart;
-  const today = new Date(); today.setHours(0,0,0,0);
-  const appts = appState.appointments || [];
+  const ws     = calState.weekStart;
+  const today  = new Date(); today.setHours(0,0,0,0);
+  const appts  = appState.appointments || [];
+  const mobile = isMobile();
+  const numDays = mobile ? 3 : 7;
+  const slotH   = mobile ? 44 : 56;
 
   // Update label
-  const we = new Date(ws); we.setDate(we.getDate()+6);
+  const we = new Date(ws); we.setDate(we.getDate() + numDays - 1);
   document.getElementById('cal-month-label').textContent =
     `${ws.getDate()}.${ws.getMonth()+1}. – ${we.getDate()}.${we.getMonth()+1}. ${ws.getFullYear()}`;
 
-  // Week header
+  // Week header grid columns
+  const weekHeader = document.getElementById('cal-week-header');
+  const weekGrid   = document.getElementById('cal-week-grid');
+  if (mobile) {
+    weekHeader.style.gridTemplateColumns = `36px repeat(3, 1fr)`;
+    weekGrid.style.gridTemplateColumns   = `repeat(3, 1fr)`;
+  } else {
+    weekHeader.style.gridTemplateColumns = `52px repeat(7, 1fr)`;
+    weekGrid.style.gridTemplateColumns   = `repeat(7, 1fr)`;
+  }
+
+  // Day headers
   let hdr = '<div></div>';
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < numDays; i++) {
     const d = new Date(ws); d.setDate(ws.getDate()+i);
+    const dow = (d.getDay() + 6) % 7; // Mon=0
     const isToday = d.getTime() === today.getTime();
     hdr += `<div class="cal-week-day-hdr${isToday?' today':''}">
-      ${FI_DAYS_SHORT[i]}<br><span style="font-size:0.85rem;font-weight:${isToday?700:400};">${d.getDate()}</span>
+      ${FI_DAYS_SHORT[dow]}<br><span style="font-size:0.85rem;font-weight:${isToday?700:400};">${d.getDate()}</span>
     </div>`;
   }
-  document.getElementById('cal-week-header').innerHTML = hdr;
+  weekHeader.innerHTML = hdr;
 
   // Time column
   let timeCols = '';
@@ -2760,35 +2874,32 @@ function renderWeekView() {
   }
   document.getElementById('cal-time-col').innerHTML = timeCols;
 
-  // Week grid: 7 columns × 24 hours
+  // Day columns × 24 hours
   let gridHtml = '';
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < numDays; i++) {
     const colDate = new Date(ws); colDate.setDate(ws.getDate()+i);
     const colDateStr = localDateStr(colDate);
     let colHtml = `<div class="cal-week-col" onclick="openApptModal('${colDateStr}')">`;
     for (let h = 0; h < 24; h++) {
       colHtml += `<div class="cal-week-hour"></div>`;
     }
-    // Overlay appointments
-    const dayAppts = appts.filter(a => {
-      const s = new Date(a.start_time);
-      return localDateStr(s) === colDateStr;
-    });
+    const dayAppts = appts.filter(a => localDateStr(new Date(a.start_time)) === colDateStr);
     dayAppts.forEach(a => {
       const s = new Date(a.start_time);
-      const topPx = (s.getHours() + s.getMinutes()/60) * 56;
-      const heightPx = Math.max(28, ((a.duration_mins||60)/60) * 56);
-      const color = a.color || '#1D4ED8';
-      const timeStr = s.toLocaleTimeString('fi-FI',{hour:'2-digit',minute:'2-digit'});
+      const topPx    = (s.getHours() + s.getMinutes()/60) * slotH;
+      const heightPx = Math.max(28, ((a.duration_mins||60)/60) * slotH);
+      const color    = a.color || '#1D4ED8';
+      const timeStr  = s.toLocaleTimeString('fi-FI',{hour:'2-digit',minute:'2-digit'});
+      const title    = escHtml((a.title||a.service||'Varaus').slice(0, mobile ? 14 : 22));
       colHtml += `<div class="cal-week-appt" style="top:${topPx}px;height:${heightPx}px;background:${color}dd;"
         onclick="event.stopPropagation();editAppt('${a.id}')">
-        <strong>${timeStr}</strong><br>${escHtml((a.title||a.service||'Varaus').slice(0,22))}
+        <strong>${timeStr}</strong><br>${title}
       </div>`;
     });
     colHtml += '</div>';
     gridHtml += colHtml;
   }
-  document.getElementById('cal-week-grid').innerHTML = gridHtml;
+  weekGrid.innerHTML = gridHtml;
 }
 
 function renderDayView() {
