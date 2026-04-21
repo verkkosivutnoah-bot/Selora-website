@@ -405,3 +405,4 @@ function json(data: unknown, status = 200) {
     headers: { ...CORS, "Content-Type": "application/json" },
   });
 }
+
