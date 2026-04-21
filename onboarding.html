@@ -776,7 +776,7 @@
       <div class="gen-steps">
         <div class="gen-step-row" id="gs-1"><div class="gen-dot"></div>Analysoidaan yrityksesi tietoja</div>
         <div class="gen-step-row" id="gs-2"><div class="gen-dot"></div>Luodaan agentin persoonallisuus</div>
-        <div class="gen-step-row" id="gs-3"><div class="gen-dot"></div>Rakennetaan Retell AI -agentti</div>
+        <div class="gen-step-row" id="gs-3"><div class="gen-dot"></div>Rakennetaan ääniyhteys</div>
         <div class="gen-step-row" id="gs-4"><div class="gen-dot"></div>Tallennetaan dashboardiin</div>
         <div class="gen-step-row" id="gs-5"><div class="gen-dot"></div>Viimeistellään — kohta valmis!</div>
       </div>
@@ -1100,7 +1100,7 @@ async function generateAgent() {
 
     if (obErr) throw obErr;
 
-    // Call Edge Function to generate Retell agent
+    // Call Edge Function to generate voice agent
     const resp = await fetch(SUPABASE_URL + '/functions/v1/generate-demo-agent', {
       method: 'POST',
       headers: {

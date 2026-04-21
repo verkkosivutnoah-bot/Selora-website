@@ -2261,7 +2261,7 @@ let appState = {
   currentView: 'overview', callFilter: 'all',
   crmFilter: 'all', selectedContactId: null,
 };
-let retellClient = null;
+let voiceClient = null;
 let callVariant  = null;
 let callState    = 'idle';
 
@@ -2671,13 +2671,13 @@ async function startCall(variant) {
     if (!resp.ok) throw new Error('Token error: '+resp.status);
     const { access_token } = await resp.json();
 
-    if (!window._retellSDK) {
+    if (!window._seloraVoiceSDK) {
       await new Promise((res,rej)=>{
         const s=document.createElement('script');
         s.type='module';
         s.textContent=`
-          import { RetellWebClient } from 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/+esm';
-          window._retellSDK = RetellWebClient;
+          import { RetellWebClient as _VC } from 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk@latest/+esm';
+          window._seloraVoiceSDK = _VC;
         `;
         document.head.appendChild(s);
         // wait a tick for the module to execute
@@ -2685,15 +2685,15 @@ async function startCall(variant) {
       });
     }
 
-    const SDKClass = window._retellSDK;
-    if (!SDKClass) throw new Error('Retell SDK failed to load');
-    retellClient = new SDKClass();
-    retellClient.on('call_started',        ()=>setOrbState(variant,'listening'));
-    retellClient.on('agent_start_talking', ()=>setOrbState(variant,'speaking'));
-    retellClient.on('agent_stop_talking',  ()=>setOrbState(variant,'listening'));
-    retellClient.on('call_ended',          ()=>{ setOrbState(variant,'ended'); retellClient=null; loadData(); });
-    retellClient.on('error',               e =>{ setOrbState(variant,'idle'); showToast('Virhe: '+e); retellClient=null; });
-    await retellClient.startCall({ accessToken: access_token });
+    const SDKClass = window._seloraVoiceSDK;
+    if (!SDKClass) throw new Error('Voice SDK failed to load');
+    voiceClient = new SDKClass();
+    voiceClient.on('call_started',        ()=>setOrbState(variant,'listening'));
+    voiceClient.on('agent_start_talking', ()=>setOrbState(variant,'speaking'));
+    voiceClient.on('agent_stop_talking',  ()=>setOrbState(variant,'listening'));
+    voiceClient.on('call_ended',          ()=>{ setOrbState(variant,'ended'); voiceClient=null; loadData(); });
+    voiceClient.on('error',               e =>{ setOrbState(variant,'idle'); showToast('Virhe: '+e); voiceClient=null; });
+    await voiceClient.startCall({ accessToken: access_token });
   } catch(e) {
     console.error(e);
     setOrbState(variant,'idle');
@@ -2706,7 +2706,7 @@ async function startCall(variant) {
 }
 
 function stopCall() {
-  if (retellClient) { try{ retellClient.stopCall(); }catch(e){} retellClient = null; }
+  if (voiceClient) { try{ voiceClient.stopCall(); }catch(e){} voiceClient = null; }
   if (callVariant) setOrbState(callVariant, 'idle');
 }
 

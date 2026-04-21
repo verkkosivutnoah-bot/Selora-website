@@ -7,10 +7,10 @@
   <title>Selora — Älä enää missaa yhtään puhelua</title>
   <meta name="description" content="Seloran tekoälyvastaanottaja vastaa puheluihisi 24/7, varaa ajat kalenteriisi ja tunnistaa potentiaaliset asiakkaat, täysin automaattisesti. Ilmainen demo, käyttöönotto 48 tunnissa." />
   <script type="module">
-    import { RetellWebClient } from 'https://esm.sh/retell-client-js-sdk';
-    window.RetellWebClient = RetellWebClient;
-    window._retellSDKReady = true;
-    console.log('[Retell] SDK ladattu onnistuneesti');
+    import { RetellWebClient as _VC } from 'https://esm.sh/retell-client-js-sdk';
+    window._seloraVoiceClient = _VC;
+    window._seloraSDKReady = true;
+    console.log('[Selora] SDK ladattu');
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -955,10 +955,14 @@
     }
     .hc-login-hint a:hover { color: #60A5FA; }
 
-    /* Mobile: stack carousel below hero text so it never overlaps */
+    /* Mobile: hero stays 100vh as before; carousel sits *below* the hero */
     @media (max-width: 900px) {
-      #hero { overflow: visible; min-height: auto; }
-      .hero-body { flex: 0 0 auto; padding-bottom: 2rem; }
+      #hero { overflow: visible; }
+      .hero-body { flex: 0 0 auto; min-height: 100vh; box-sizing: border-box; }
+      /* Canvas + overlay stay pinned to the viewport area so they don't bleed
+         down into the carousel region below the hero */
+      #pageCanvas { height: 100vh; top: 0; }
+      #hero::after { height: 100vh; top: 0; bottom: auto; }
       .hero-carousel {
         position: relative;
         top: auto;
@@ -966,7 +970,7 @@
         transform: none;
         width: calc(100% - 2.5rem);
         max-width: 380px;
-        margin: 0 auto 2.5rem;
+        margin: 2.5rem auto 3rem;
         z-index: 5;
       }
       .hc-card { transform: none; }
@@ -1098,7 +1102,7 @@
           <div class="hc-slide-num">03 / 04</div>
           <div class="hc-slide-icon"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="6" height="6" rx="1" stroke-linecap="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2M6 6h12a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg></div>
           <div class="hc-slide-title">AI rakentaa agenttisi</div>
-          <div class="hc-slide-desc">Claude AI luo personoidun vastaanottajan juuri sinun yritykseesi.</div>
+          <div class="hc-slide-desc">Tekoäly luo personoidun vastaanottajan juuri sinun yritykseesi.</div>
         </div>
         <div class="hc-slide" data-slide="3">
           <div class="hc-slide-num">04 / 04</div>
@@ -1817,36 +1821,36 @@
     }
   }
 
-  /* ── RETELL INTEGRATION ─────────────────────────────────────────────── */
-  var RETELL_AGENT_ID = 'agent_17ebc09ad608c41b4092bdf22c';
+  /* ── VOICE AGENT INTEGRATION ────────────────────────────────────────── */
+  var VOICE_AGENT_ID = 'agent_17ebc09ad608c41b4092bdf22c';
   // API key lives server-side in /api/create-call.js — not exposed here.
 
-  var retellClient = null;
+  var voiceClient = null;
 
   function waitForSDK() {
     return new Promise(function (resolve) {
-      if (window.RetellWebClient) { resolve(); return; }
+      if (window._seloraVoiceClient) { resolve(); return; }
       var t = setInterval(function () {
-        if (window.RetellWebClient) { clearInterval(t); resolve(); }
+        if (window._seloraVoiceClient) { clearInterval(t); resolve(); }
       }, 100);
       setTimeout(function () { clearInterval(t); resolve(); }, 5000);
     });
   }
 
-  function initRetell() {
-    if (retellClient) return true;
-    if (!window.RetellWebClient) {
-      console.error('[Retell] SDK ei latautunut — tarkista verkko tai selaimen konsolivirheet.');
+  function initVoiceClient() {
+    if (voiceClient) return true;
+    if (!window._seloraVoiceClient) {
+      console.error('[Selora] SDK ei latautunut — tarkista verkko tai selaimen konsolivirheet.');
       return false;
     }
-    console.log('[Retell] Alustetaan RetellWebClient');
-    retellClient = new window.RetellWebClient();
-    retellClient.on('call_started',        function () { console.log('[Retell] Puhelu alkoi'); setState('listening'); });
-    retellClient.on('agent_start_talking', function () { setState('speaking'); });
-    retellClient.on('agent_stop_talking',  function () { setState('listening'); });
-    retellClient.on('call_ended',          function () { console.log('[Retell] Puhelu päättyi'); clearInterval(cycle); setState('ended'); });
-    retellClient.on('error',               function (err) {
-      console.error('[Retell] Virhe:', err);
+    console.log('[Selora] Alustetaan ääniyhteys');
+    voiceClient = new window._seloraVoiceClient();
+    voiceClient.on('call_started',        function () { console.log('[Selora] Puhelu alkoi'); setState('listening'); });
+    voiceClient.on('agent_start_talking', function () { setState('speaking'); });
+    voiceClient.on('agent_stop_talking',  function () { setState('listening'); });
+    voiceClient.on('call_ended',          function () { console.log('[Selora] Puhelu päättyi'); clearInterval(cycle); setState('ended'); });
+    voiceClient.on('error',               function (err) {
+      console.error('[Selora] Virhe:', err);
       clearInterval(cycle);
       setState('idle');
       if (status) status.textContent = 'Yhteys epäonnistui — yritä uudelleen.';
@@ -1865,41 +1869,41 @@
         var micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
         micStream.getTracks().forEach(function(t) { t.stop(); });
       } catch (micErr) {
-        console.error('[Retell] Mikrofoni estetty:', micErr);
+        console.error('[Selora] Mikrofoni estetty:', micErr);
         setState('idle');
         if (status) status.textContent = 'Salli mikrofonin käyttö selaimessa ja yritä uudelleen.';
         return;
       }
 
       await waitForSDK();
-      if (!initRetell()) {
+      if (!initVoiceClient()) {
         setState('idle');
         if (status) status.textContent = 'SDK ei latautunut — päivitä sivu ja yritä uudelleen.';
         return;
       }
 
       try {
-        console.log('[Retell] Luodaan web-puhelu...');
+        console.log('[Selora] Luodaan web-puhelu...');
         var res = await fetch('/api/create-call', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ agent_id: RETELL_AGENT_ID })
+          body: JSON.stringify({ agent_id: VOICE_AGENT_ID })
         });
         var data = await res.json();
-        console.log('[Retell] API vastaus:', data);
+        console.log('[Selora] API vastaus:', data);
 
         if (!data.access_token) {
           throw new Error('Access token puuttuu: ' + JSON.stringify(data));
         }
 
-        await retellClient.startCall({ accessToken: data.access_token });
+        await voiceClient.startCall({ accessToken: data.access_token });
       } catch (err) {
-        console.error('[Retell] Puhelun aloitus epäonnistui:', err);
+        console.error('[Selora] Puhelun aloitus epäonnistui:', err);
         setState('idle');
         if (status) status.textContent = 'Yhteys epäonnistui — yritä uudelleen.';
       }
     } else {
-      if (retellClient) retellClient.stopCall();
+      if (voiceClient) voiceClient.stopCall();
       clearInterval(cycle);
       setState('ended');
     }
