@@ -100,63 +100,114 @@ serve(async (req) => {
   }
 
   // ── Auto-create draft appointment when booking detected ───────────────────
-  const hasBooking = actionItems.some(item => item.toLowerCase().includes("varaus"));
+  // Detect booking intent: check summary AND transcript for any booking keywords
+  const combinedText = (summary + " " + transcript).toLowerCase();
+  const bookingKeywords = [
+    "varaus", "varaa", "varata", "varattu", "varauksen",
+    "ajanvaraus", "ajanvarauksen", "ajan varaus",
+    "aika", "aikaa", "ajan", "ajalle",
+    "tapaaminen", "tapaamis",
+    "appointment", "booking", "book",
+  ];
+  const hasBooking = bookingKeywords.some(kw => combinedText.includes(kw));
+
   if (hasBooking) {
     // Try to extract customer name from summary
     let customerName: string | null = null;
     const nameMatch = summary.match(/asiakkaan nimi on ([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i)
-      || summary.match(/([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*) haluaa ajan/i);
+      || summary.match(/([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*) haluaa ajan/i)
+      || summary.match(/nimi[:\s]+([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i)
+      || summary.match(/asiakas[:\s]+([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i);
     if (nameMatch) customerName = nameMatch[1];
 
-    // Try to extract time from summary
-    let startTime: string | null = null;
-    const now = new Date();
+    // Detect service type from summary
+    let service: string | null = null;
+    const serviceMatch = summary.match(/palvelu[:\s]+([^\n,\.]+)/i)
+      || summary.match(/varasi[:\s]+([^\n,\.]+)/i)
+      || summary.match(/haluaa[:\s]+([^\n,\.]+)\s+ajan/i);
+    if (serviceMatch) service = serviceMatch[1].trim();
 
-    // Try to detect Finnish weekday references and "klo HH" / "HH:MM"
-    const weekdayMap: Record<string, number> = {
-      maanantai: 1, tiistai: 2, keskiviikko: 3, torstai: 4,
-      perjantai: 5, lauantai: 6, sunnuntai: 0,
-    };
-    let targetHour = 9;
+    // Extract time and date from summary
+    const now = new Date();
+    let targetHour   = 10; // default 10:00
     let targetMinute = 0;
     let targetDay: Date | null = null;
 
-    const timeMatch = summary.match(/klo\s+(\d{1,2})(?::(\d{2}))?/i)
-      || summary.match(/\b(\d{1,2}):(\d{2})\b/);
+    // Time: "klo 14", "klo 14:30", "14:30", "14.30"
+    const timeMatch = summary.match(/klo\s+(\d{1,2})(?:[:\.](\d{2}))?/i)
+      || summary.match(/\b(\d{1,2})[:\.](\d{2})\b/)
+      || transcript.match(/klo\s+(\d{1,2})(?:[:\.](\d{2}))?/i);
     if (timeMatch) {
       targetHour   = parseInt(timeMatch[1], 10);
       targetMinute = parseInt(timeMatch[2] || "0", 10);
     }
 
-    for (const [fi, dow] of Object.entries(weekdayMap)) {
-      if (summary.toLowerCase().includes(fi)) {
-        const today = now.getDay(); // 0=Sun
-        let diff = (dow - today + 7) % 7;
-        if (diff === 0) diff = 7; // next week if same day
-        targetDay = new Date(now);
-        targetDay.setDate(now.getDate() + diff);
-        break;
+    // Date: explicit "DD.MM" or "DD.MM.YYYY"
+    const dateMatch = summary.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?/)
+      || transcript.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?/);
+    if (dateMatch) {
+      const day   = parseInt(dateMatch[1], 10);
+      const month = parseInt(dateMatch[2], 10) - 1;
+      const year  = dateMatch[3] ? parseInt(dateMatch[3], 10) : now.getFullYear();
+      targetDay = new Date(year, month, day);
+      // If date is in the past, push to next year
+      if (targetDay < now) targetDay.setFullYear(now.getFullYear() + 1);
+    }
+
+    // Finnish weekday names
+    if (!targetDay) {
+      const weekdayMap: Record<string, number> = {
+        maanantai: 1, tiistai: 2, keskiviikko: 3, torstai: 4,
+        perjantai: 5, lauantai: 6, sunnuntai: 0,
+      };
+      const searchText = summary.toLowerCase() + " " + transcript.toLowerCase();
+      for (const [fi, dow] of Object.entries(weekdayMap)) {
+        if (searchText.includes(fi)) {
+          const today = now.getDay();
+          let diff = (dow - today + 7) % 7;
+          if (diff === 0) diff = 7; // always next occurrence
+          targetDay = new Date(now);
+          targetDay.setDate(now.getDate() + diff);
+          break;
+        }
       }
     }
 
-    // If no weekday found, fall back to next business day
+    // Relative: "huomenna", "ylihuomenna", "ensi viikolla"
+    if (!targetDay) {
+      const searchText = summary.toLowerCase() + " " + transcript.toLowerCase();
+      if (searchText.includes("ylihuomenna")) {
+        targetDay = new Date(now); targetDay.setDate(now.getDate() + 2);
+      } else if (searchText.includes("huomenna") || searchText.includes("huomiselle")) {
+        targetDay = new Date(now); targetDay.setDate(now.getDate() + 1);
+      } else if (searchText.includes("ensi viikolla") || searchText.includes("ensi viikko")) {
+        // Next Monday
+        targetDay = new Date(now);
+        const daysUntilMonday = (8 - now.getDay()) % 7 || 7;
+        targetDay.setDate(now.getDate() + daysUntilMonday);
+      }
+    }
+
+    // Final fallback: next business day
     if (!targetDay) {
       targetDay = new Date(now);
       targetDay.setDate(now.getDate() + 1);
-      // Skip weekend
       const wd = targetDay.getDay();
       if (wd === 6) targetDay.setDate(targetDay.getDate() + 2);
       else if (wd === 0) targetDay.setDate(targetDay.getDate() + 1);
     }
 
     targetDay.setHours(targetHour, targetMinute, 0, 0);
-    startTime = targetDay.toISOString();
+    const startTime = targetDay.toISOString();
 
     await sb.from("appointments").insert({
       user_id:       userId,
-      title:         "📋 AI-varaus — " + callerNumber,
+      title:         service
+        ? `📋 ${service} — ${customerName || callerNumber}`
+        : `📋 AI-varaus — ${customerName || callerNumber}`,
       customer_name: customerName,
       caller_number: callerNumber,
+      service,
       description:   summary,
       start_time:    startTime,
       status:        "pending",
@@ -164,7 +215,7 @@ serve(async (req) => {
       color:         "#f59e0b",
       type:          "appointment",
     });
-    console.log("Auto-created draft appointment for caller:", callerNumber);
+    console.log("Auto-created draft appointment for caller:", callerNumber, "at", startTime);
   }
 
   // ── Auto-create or update contact record ──────────────────────────────────
