@@ -525,6 +525,14 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, { auth: { s
 let allClients = [];
 let session = null;
 
+// Always get a fresh token — access tokens expire after 1 hour
+async function getToken() {
+  const { data: { session: s } } = await sb.auth.getSession();
+  if (!s) { location.reload(); return null; }
+  session = s;
+  return s.access_token;
+}
+
 // ── Init ──────────────────────────────────────────────────────────────────────
 async function init() {
   const { data: { session: s } } = await sb.auth.getSession();
@@ -728,7 +736,7 @@ async function createClient() {
       method: 'POST',
       headers: {
         'Content-Type':  'application/json',
-        'Authorization': 'Bearer ' + session.access_token,
+        'Authorization': 'Bearer ' + (await getToken()),
       },
       body: JSON.stringify({
         full_name:    name,
@@ -826,7 +834,7 @@ async function saveLinkAgent() {
       method: 'POST',
       headers: {
         'Content-Type':  'application/json',
-        'Authorization': 'Bearer ' + session.access_token,
+        'Authorization': 'Bearer ' + (await getToken()),
       },
       body: JSON.stringify({
         full_name:                client.full_name,
@@ -856,7 +864,7 @@ async function deleteClient(userId, name) {
   try {
     const resp = await fetch(SUPABASE_URL + '/functions/v1/admin-delete-client', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (await getToken()) },
       body: JSON.stringify({ user_id: userId }),
     });
     const data = await resp.json();
