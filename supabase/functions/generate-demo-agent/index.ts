@@ -209,6 +209,14 @@ Esimerkkejä:
 - Asiakas sanoo kirjain kerrallaan: "m-a-t-t-i ät gmail piste com" → VAIN TÄSSÄ tapauksessa toistat kirjain kerrallaan.
 Jos et ole varma sähköpostista, pyydä asiakasta toistamaan se: "Voisitko sanoa sähköpostin vielä kerran, kiitos?"
 
+AJANVARAUKSEN VAHVISTAMINEN:
+Kun asiakas haluaa varata ajan, kerää AINA seuraavat tiedot yksitellen tässä järjestyksessä:
+1. Asiakkaan koko nimi
+2. Mitä palvelua tai hoitoa he haluavat
+3. Toivottu päivä ja päivämäärä (esim. "Ensi tiistai 22. huhtikuuta")
+4. Toivottu kellonaika
+Kun kaikki tiedot on kerätty, toista varaus asiakkaalle: "Selvä, varasin sinulle ajan [palvelu] [päivä] [päivämäärä] klo [aika]. Onko tämä oikein?"
+
 YKSI KYSYMYS KERRALLAAN:
 Älä koskaan kysy useampaa asiaa kerrallaan. Keskity yhteen kysymykseen ja odota vastausta ennen seuraavan esittämistä.`;
 }
@@ -278,13 +286,45 @@ serve(async (req) => {
       body: JSON.stringify({
         general_prompt: agentPrompt,
         begin_message:  beginMessage,
-        general_tools: tasks.includes("booking") ? [
+        general_tools: [
           {
             type:        "end_call",
             name:        "end_call",
             description: "Lopeta puhelu asiallisesti kun asia on hoidettu",
           },
-        ] : [],
+        ],
+        post_call_analysis_data: [
+          {
+            name:        "booking_made",
+            type:        "boolean",
+            description: "True if an appointment or booking was confirmed during this call",
+          },
+          {
+            name:        "customer_name",
+            type:        "string",
+            description: "The full name of the customer as stated during the call",
+          },
+          {
+            name:        "service_requested",
+            type:        "string",
+            description: "The specific service, treatment or type of appointment the customer booked",
+          },
+          {
+            name:        "appointment_date",
+            type:        "string",
+            description: "The appointment date mentioned during the call, e.g. '22.4.2026' or 'tiistai 22. huhtikuuta'",
+          },
+          {
+            name:        "appointment_time",
+            type:        "string",
+            description: "The appointment time mentioned during the call, e.g. '14:00' or 'klo 14'",
+          },
+          {
+            name:        "customer_phone",
+            type:        "string",
+            description: "The customer's phone number if they provided one during the call",
+          },
+        ],
       }),
     });
 

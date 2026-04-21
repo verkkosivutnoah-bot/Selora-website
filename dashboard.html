@@ -1885,7 +1885,7 @@
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th></th><th>Numero</th><th>Pvm &amp; aika</th><th>Kesto</th><th>Tulos</th><th>Yhteenveto</th></tr>
+              <tr><th></th><th>Numero</th><th>Pvm &amp; aika</th><th>Kesto</th><th>Tulos</th></tr>
             </thead>
             <tbody id="call-log-tbody">
               <tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita vielä.</td></tr>
@@ -2226,24 +2226,22 @@ function renderCallLogTable(logs) {
   const rows = f==='all' ? logs : logs.filter(l=>l.outcome===f);
   const tbody = document.getElementById('call-log-tbody');
   if (!rows.length) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:2rem;color:var(--text-3);">Ei puheluita.</td></tr>';
     return;
   }
   let html = '';
   rows.forEach((l, i) => {
     const rowId    = 'log-row-' + i;
     const detailId = 'log-detail-' + i;
-    const summarySnippet = l.summary ? (l.summary.length > 60 ? l.summary.slice(0,60)+'…' : l.summary) : '–';
     html += `<tr class="call-row" id="${rowId}" onclick="toggleCallDetail('${rowId}','${detailId}')">
       <td class="chevron-cell" style="width:20px;padding-right:0;">›</td>
       <td>${l.caller_number||'–'}</td>
       <td>${fmtDate(l.called_at)}</td>
       <td>${fmtDur(l.duration_secs)}</td>
       <td>${outcomeBadge(l.outcome)}</td>
-      <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text-3);font-size:0.8rem;">${escHtml(summarySnippet)}</td>
     </tr>
     <tr class="call-detail-row" id="${detailId}">
-      <td colspan="6">${buildCallDetail(l)}</td>
+      <td colspan="5">${buildCallDetail(l)}</td>
     </tr>`;
   });
   tbody.innerHTML = html;
@@ -2272,19 +2270,10 @@ function sentimentBadge(s) {
 function buildCallDetail(l) {
   let html = '<div style="display:flex;flex-direction:column;gap:0.75rem;padding:0.25rem 0;">';
 
-  // Summary row
-  const summary = l.summary || 'Ei yhteenvetoa saatavilla.';
-  html += `<div style="display:flex;gap:1rem;align-items:flex-start;flex-wrap:wrap;">
-    <div style="flex:1;min-width:200px;">
-      <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-light);margin-bottom:4px;">Yhteenveto</div>
-      <div style="color:var(--text-2);font-size:0.84rem;line-height:1.55;">${escHtml(summary)}</div>
-    </div>`;
-
-  // Sentiment
+  // Sentiment row
   if (l.sentiment) {
-    html += `<div style="flex-shrink:0;">${sentimentBadge(l.sentiment)}</div>`;
+    html += `<div style="display:flex;align-items:center;gap:0.5rem;">${sentimentBadge(l.sentiment)}</div>`;
   }
-  html += '</div>';
 
   // Action items
   if (l.action_items && l.action_items.length > 0) {

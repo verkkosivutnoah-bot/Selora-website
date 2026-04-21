@@ -99,96 +99,80 @@ serve(async (req) => {
     return new Response("DB error", { status: 500 });
   }
 
-  // ── Auto-create draft appointment when booking detected ───────────────────
-  // Detect booking intent: check summary AND transcript for any booking keywords
-  const combinedText = (summary + " " + transcript).toLowerCase();
-  const bookingKeywords = [
-    "varaus", "varaa", "varata", "varattu", "varauksen",
-    "ajanvaraus", "ajanvarauksen", "ajan varaus",
-    "aika", "aikaa", "ajan", "ajalle",
-    "tapaaminen", "tapaamis",
-    "appointment", "booking", "book",
-  ];
-  const hasBooking = bookingKeywords.some(kw => combinedText.includes(kw));
+  // ── Auto-create appointment from structured post-call analysis data ─────────
+  // Retell extracts these fields via post_call_analysis_data configured on the LLM.
+  const structured = analysis.custom_analysis_data as Record<string, unknown> | undefined;
+  const bookingMade     = structured?.booking_made === true;
+  const customerName    = (structured?.customer_name    as string) || null;
+  const serviceReq      = (structured?.service_requested as string) || null;
+  const apptDateStr     = (structured?.appointment_date  as string) || null;
+  const apptTimeStr     = (structured?.appointment_time  as string) || null;
+  const customerPhone   = (structured?.customer_phone    as string) || null;
 
-  if (hasBooking) {
-    // Try to extract customer name from summary
-    let customerName: string | null = null;
-    const nameMatch = summary.match(/asiakkaan nimi on ([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i)
-      || summary.match(/([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*) haluaa ajan/i)
-      || summary.match(/nimi[:\s]+([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i)
-      || summary.match(/asiakas[:\s]+([A-ZÄÖÅ][a-zäöå]+(?: [A-ZÄÖÅ][a-zäöå]+)*)/i);
-    if (nameMatch) customerName = nameMatch[1];
+  console.log("Structured data:", JSON.stringify(structured));
 
-    // Detect service type from summary
-    let service: string | null = null;
-    const serviceMatch = summary.match(/palvelu[:\s]+([^\n,\.]+)/i)
-      || summary.match(/varasi[:\s]+([^\n,\.]+)/i)
-      || summary.match(/haluaa[:\s]+([^\n,\.]+)\s+ajan/i);
-    if (serviceMatch) service = serviceMatch[1].trim();
-
-    // Extract time and date from summary
+  if (bookingMade) {
     const now = new Date();
-    let targetHour   = 10; // default 10:00
-    let targetMinute = 0;
+    let targetHour = 10, targetMinute = 0;
     let targetDay: Date | null = null;
 
-    // Time: "klo 14", "klo 14:30", "14:30", "14.30"
-    const timeMatch = summary.match(/klo\s+(\d{1,2})(?:[:\.](\d{2}))?/i)
-      || summary.match(/\b(\d{1,2})[:\.](\d{2})\b/)
-      || transcript.match(/klo\s+(\d{1,2})(?:[:\.](\d{2}))?/i);
-    if (timeMatch) {
-      targetHour   = parseInt(timeMatch[1], 10);
-      targetMinute = parseInt(timeMatch[2] || "0", 10);
+    // Parse time from structured field: "14:00", "klo 14", "14.30"
+    if (apptTimeStr) {
+      const tm = apptTimeStr.match(/(\d{1,2})[:\.](\d{2})/)
+        || apptTimeStr.match(/(\d{1,2})/);
+      if (tm) {
+        targetHour   = parseInt(tm[1], 10);
+        targetMinute = parseInt(tm[2] || "0", 10);
+      }
     }
 
-    // Date: explicit "DD.MM" or "DD.MM.YYYY"
-    const dateMatch = summary.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?/)
-      || transcript.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?/);
-    if (dateMatch) {
-      const day   = parseInt(dateMatch[1], 10);
-      const month = parseInt(dateMatch[2], 10) - 1;
-      const year  = dateMatch[3] ? parseInt(dateMatch[3], 10) : now.getFullYear();
-      targetDay = new Date(year, month, day);
-      // If date is in the past, push to next year
-      if (targetDay < now) targetDay.setFullYear(now.getFullYear() + 1);
-    }
+    // Parse date from structured field: "22.4.2026", "22.4.", "tiistai 22. huhtikuuta"
+    if (apptDateStr) {
+      // Try DD.MM.YYYY or DD.MM
+      const dm = apptDateStr.match(/(\d{1,2})\.(\d{1,2})(?:\.(\d{4}))?/);
+      if (dm) {
+        const day   = parseInt(dm[1], 10);
+        const month = parseInt(dm[2], 10) - 1;
+        const year  = dm[3] ? parseInt(dm[3], 10) : now.getFullYear();
+        targetDay = new Date(year, month, day);
+        if (targetDay < now) targetDay.setFullYear(now.getFullYear() + 1);
+      }
 
-    // Finnish weekday names
-    if (!targetDay) {
-      const weekdayMap: Record<string, number> = {
-        maanantai: 1, tiistai: 2, keskiviikko: 3, torstai: 4,
-        perjantai: 5, lauantai: 6, sunnuntai: 0,
-      };
-      const searchText = summary.toLowerCase() + " " + transcript.toLowerCase();
-      for (const [fi, dow] of Object.entries(weekdayMap)) {
-        if (searchText.includes(fi)) {
-          const today = now.getDay();
-          let diff = (dow - today + 7) % 7;
-          if (diff === 0) diff = 7; // always next occurrence
+      // Finnish weekday names
+      if (!targetDay) {
+        const weekdayMap: Record<string, number> = {
+          maanantai: 1, tiistai: 2, keskiviikko: 3, torstai: 4,
+          perjantai: 5, lauantai: 6, sunnuntai: 0,
+        };
+        const lower = apptDateStr.toLowerCase();
+        for (const [fi, dow] of Object.entries(weekdayMap)) {
+          if (lower.includes(fi)) {
+            const today = now.getDay();
+            let diff = (dow - today + 7) % 7;
+            if (diff === 0) diff = 7;
+            targetDay = new Date(now);
+            targetDay.setDate(now.getDate() + diff);
+            break;
+          }
+        }
+      }
+
+      // Relative words
+      if (!targetDay) {
+        const lower = apptDateStr.toLowerCase();
+        if (lower.includes("ylihuomenna")) {
+          targetDay = new Date(now); targetDay.setDate(now.getDate() + 2);
+        } else if (lower.includes("huomenna")) {
+          targetDay = new Date(now); targetDay.setDate(now.getDate() + 1);
+        } else if (lower.includes("ensi viikko")) {
           targetDay = new Date(now);
-          targetDay.setDate(now.getDate() + diff);
-          break;
+          const daysUntilMonday = (8 - now.getDay()) % 7 || 7;
+          targetDay.setDate(now.getDate() + daysUntilMonday);
         }
       }
     }
 
-    // Relative: "huomenna", "ylihuomenna", "ensi viikolla"
-    if (!targetDay) {
-      const searchText = summary.toLowerCase() + " " + transcript.toLowerCase();
-      if (searchText.includes("ylihuomenna")) {
-        targetDay = new Date(now); targetDay.setDate(now.getDate() + 2);
-      } else if (searchText.includes("huomenna") || searchText.includes("huomiselle")) {
-        targetDay = new Date(now); targetDay.setDate(now.getDate() + 1);
-      } else if (searchText.includes("ensi viikolla") || searchText.includes("ensi viikko")) {
-        // Next Monday
-        targetDay = new Date(now);
-        const daysUntilMonday = (8 - now.getDay()) % 7 || 7;
-        targetDay.setDate(now.getDate() + daysUntilMonday);
-      }
-    }
-
-    // Final fallback: next business day
+    // Fallback: next business day
     if (!targetDay) {
       targetDay = new Date(now);
       targetDay.setDate(now.getDate() + 1);
@@ -200,22 +184,35 @@ serve(async (req) => {
     targetDay.setHours(targetHour, targetMinute, 0, 0);
     const startTime = targetDay.toISOString();
 
+    const displayName = customerName || callerNumber;
+    const title = serviceReq
+      ? `📋 ${serviceReq} — ${displayName}`
+      : `📋 AI-varaus — ${displayName}`;
+
     await sb.from("appointments").insert({
       user_id:       userId,
-      title:         service
-        ? `📋 ${service} — ${customerName || callerNumber}`
-        : `📋 AI-varaus — ${customerName || callerNumber}`,
+      title,
       customer_name: customerName,
-      caller_number: callerNumber,
-      service,
-      description:   summary,
+      caller_number: customerPhone || callerNumber,
+      service:       serviceReq,
+      description:   summary || transcript?.slice(0, 500) || null,
       start_time:    startTime,
       status:        "pending",
       source:        "retell",
       color:         "#f59e0b",
       type:          "appointment",
     });
-    console.log("Auto-created draft appointment for caller:", callerNumber, "at", startTime);
+    console.log("Created appointment:", title, "at", startTime);
+
+    // Also upsert contact with name if we got it
+    if (customerName && callerNumber && callerNumber !== "Tuntematon") {
+      await sb.from("contacts").upsert({
+        user_id:       userId,
+        phone_number:  customerPhone || callerNumber,
+        name:          customerName,
+        last_called_at: calledAt,
+      }, { onConflict: "user_id,phone_number", ignoreDuplicates: false });
+    }
   }
 
   // ── Auto-create or update contact record ──────────────────────────────────
