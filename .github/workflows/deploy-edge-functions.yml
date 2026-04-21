@@ -29,5 +29,8 @@ jobs:
           supabase functions deploy cal-webhook --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy admin-create-client --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy admin-delete-client --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
+          supabase functions deploy subscribe-newsletter --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
+          supabase functions deploy unsubscribe-newsletter --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
+          supabase functions deploy send-newsletter --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}

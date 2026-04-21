@@ -416,7 +416,29 @@
 
             <!-- RIGHT COLUMN: 2 stacked cards -->
       
-    </div><div class="blog-grid-secondary reveal reveal-delay-2"><a href="blogi/tekoaly-vs-ihmisvastaanottaja.html" class="blog-card blog-card-small" data-categories="opas">
+    </div><div class="blog-grid-secondary reveal reveal-delay-2"><a href="blogi/lvi-yrityksen-hatapuhelut-tekoaly.html" class="blog-card blog-card-small" data-categories="toimiala">
+          <img class="blog-card-image" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&amp;q=85&amp;auto=format&amp;fit=crop" alt="LVI-yritys ja hätäpuhelut" loading="lazy">
+          <div class="blog-card-overlay"></div>
+          <div class="blog-card-overlay-top"></div>
+          <div class="blog-card-content">
+            <div class="card-top">
+              <span class="cat-badge cat-toimiala"><span class="cat-dot"></span>Toimialaopas</span>
+            </div>
+            <div class="card-bottom">
+              <div class="card-meta">
+                <span class="card-meta-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                  7 min lukuaika
+                </span>
+              </div>
+              <h3 class="card-title-small">LVI‑yritys ja hätäpuhelut: mitä tapahtuu, kun asiakas soittaa kello 22</h3>
+              <p class="card-excerpt">Miksi LVI‑yrityksen illat ja viikonloput karkaavat kilpailijalle — ja mitä sille voi tehdä.</p>
+              <div class="card-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H7M17 7v10"></path></svg>
+              </div>
+            </div>
+          </div>
+        </a><a href="blogi/tekoaly-vs-ihmisvastaanottaja.html" class="blog-card blog-card-small" data-categories="opas">
           <img class="blog-card-image" src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&amp;q=80&amp;auto=format&amp;fit=crop" alt="Tekoäly vs ihmisvastaanottaja" loading="lazy">
           <div class="blog-card-overlay"></div>
           <div class="blog-card-overlay-top"></div>
@@ -626,16 +648,46 @@
 })();
 
 /* ── Newsletter form ──────────────────────────────────────────────────── */
-function handleNewsletter(e) {
+const NL_SUPABASE_URL  = 'https://zubhxdlssoochwbwyxlp.supabase.co';
+const NL_SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1Ymh4ZGxzc29vY2h3Ynd5eGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyOTM1ODQsImV4cCI6MjA5MTg2OTU4NH0.czrg_VzVMobfT0lMSZhggBYSV-VEIcggmufUOCntexU';
+
+async function handleNewsletter(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('.newsletter-btn');
+  const btn   = e.target.querySelector('.newsletter-btn');
   const input = e.target.querySelector('.newsletter-input');
-  btn.textContent = 'Tilattu ✓';
-  btn.style.background = '#d1fae5';
-  btn.style.color = '#065f46';
-  input.value = '';
+  const email = input.value.trim();
+  if (!email || !email.includes('@')) return;
+
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Tilataan...';
+
+  try {
+    const resp = await fetch(`${NL_SUPABASE_URL}/functions/v1/subscribe-newsletter`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': NL_SUPABASE_ANON,
+      },
+      body: JSON.stringify({ email }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Virhe');
+
+    btn.textContent = 'Tilattu ✓';
+    btn.style.background = '#d1fae5';
+    btn.style.color = '#065f46';
+    input.value = '';
+  } catch (err) {
+    console.error('Newsletter error:', err);
+    btn.textContent = 'Yritä uudelleen';
+    btn.style.background = '#fee2e2';
+    btn.style.color = '#991b1b';
+  }
+
   setTimeout(() => {
-    btn.textContent = 'Tilaa ilmaiseksi →';
+    btn.disabled = false;
+    btn.textContent = originalText;
     btn.style.background = '';
     btn.style.color = '';
   }, 3500);

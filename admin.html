@@ -440,6 +440,41 @@
       </div>
     </div>
 
+    <!-- Newsletter -->
+    <div class="card" style="margin-top:1.5rem;">
+      <div class="card-header">
+        <span class="card-title">Uutiskirje — Uusi artikkeli</span>
+        <span style="font-size:0.75rem;color:var(--text-3);" id="nl-count">Ladataan tilaajia…</span>
+      </div>
+      <div style="padding:1.5rem;display:grid;gap:1rem;">
+        <div>
+          <label style="font-size:0.78rem;color:var(--text-2);display:block;margin-bottom:0.35rem;">Otsikko</label>
+          <input id="nl-title" placeholder="Esim. Näin tekoäly muuttaa pienyritysten asiakaspalvelua"
+                 style="width:100%;padding:0.65rem 0.85rem;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:0.88rem;">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;color:var(--text-2);display:block;margin-bottom:0.35rem;">Kuvaus (excerpt)</label>
+          <textarea id="nl-excerpt" rows="3" placeholder="Lyhyt 1–2 lauseen esittely artikkelista…"
+                    style="width:100%;padding:0.65rem 0.85rem;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:0.88rem;resize:vertical;"></textarea>
+        </div>
+        <div>
+          <label style="font-size:0.78rem;color:var(--text-2);display:block;margin-bottom:0.35rem;">Artikkelin URL</label>
+          <input id="nl-url" placeholder="https://selora.fi/blogi/artikkeli-slug"
+                 style="width:100%;padding:0.65rem 0.85rem;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:0.88rem;">
+        </div>
+        <div>
+          <label style="font-size:0.78rem;color:var(--text-2);display:block;margin-bottom:0.35rem;">Kansikuva URL (valinnainen)</label>
+          <input id="nl-cover" placeholder="https://… .jpg tai .png"
+                 style="width:100%;padding:0.65rem 0.85rem;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:0.88rem;">
+        </div>
+        <button onclick="sendNewsletter()" id="nl-send-btn"
+                style="padding:0.75rem 1.5rem;border-radius:9px;background:var(--blue);color:#fff;border:none;cursor:pointer;font-weight:600;font-size:0.88rem;justify-self:start;">
+          Lähetä kaikille tilaajille →
+        </button>
+        <div id="nl-result" style="font-size:0.84rem;color:var(--text-2);"></div>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -585,6 +620,73 @@ async function adminLogin() {
   document.getElementById('app').style.display = 'block';
   document.getElementById('admin-email-label').textContent = data.user.email;
   await loadClients();
+  loadNewsletterCount();
+}
+
+// ── Newsletter ──────────────────────────────────────────────────────────
+async function loadNewsletterCount() {
+  try {
+    // Count via RPC or a dedicated endpoint would be cleaner, but for admin
+    // we use the service-role backed Edge Function by attempting a dry send.
+    // Simpler: use a small count endpoint. We'll just hit the send endpoint
+    // with a preview flag, or query the count indirectly.
+    // For now, just show a prompt.
+    document.getElementById('nl-count').textContent = 'Valmiina lähettämään kaikille tilaajille';
+  } catch (_) {
+    document.getElementById('nl-count').textContent = '';
+  }
+}
+
+async function sendNewsletter() {
+  const title   = document.getElementById('nl-title').value.trim();
+  const excerpt = document.getElementById('nl-excerpt').value.trim();
+  const url     = document.getElementById('nl-url').value.trim();
+  const cover   = document.getElementById('nl-cover').value.trim();
+  const resEl   = document.getElementById('nl-result');
+  const btn     = document.getElementById('nl-send-btn');
+
+  if (!title || !excerpt || !url) {
+    resEl.style.color = '#fca5a5';
+    resEl.textContent = 'Täytä kaikki pakolliset kentät (otsikko, kuvaus, URL).';
+    return;
+  }
+  if (!confirm(`Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n"${title}"`)) return;
+
+  btn.disabled = true;
+  btn.textContent = 'Lähetetään...';
+  resEl.style.color = 'var(--text-2)';
+  resEl.textContent = 'Käsitellään…';
+
+  try {
+    const token = await getToken();
+    const resp = await fetch(`${SUPABASE_URL}/functions/v1/send-newsletter`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type':  'application/json',
+        'apikey':        SUPABASE_ANON,
+      },
+      body: JSON.stringify({
+        title, excerpt, url,
+        cover_image_url: cover || null,
+      }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Lähetys epäonnistui');
+
+    resEl.style.color = '#86efac';
+    resEl.textContent = `✓ Lähetetty ${data.sent}/${data.total} tilaajalle${data.failed > 0 ? ` — ${data.failed} epäonnistui` : ''}`;
+    document.getElementById('nl-title').value = '';
+    document.getElementById('nl-excerpt').value = '';
+    document.getElementById('nl-url').value = '';
+    document.getElementById('nl-cover').value = '';
+  } catch (err) {
+    resEl.style.color = '#fca5a5';
+    resEl.textContent = 'Virhe: ' + err.message;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Lähetä kaikille tilaajille →';
 }
 
 // ── Load all clients ──────────────────────────────────────────────────────────
