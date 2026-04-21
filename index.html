@@ -955,14 +955,36 @@
     }
     .hc-login-hint a:hover { color: #60A5FA; }
 
-    /* Mobile: stack carousel below hero text */
+    /* Mobile: stack carousel below hero text so it never overlaps */
     @media (max-width: 900px) {
+      #hero { overflow: visible; min-height: auto; }
+      .hero-body { flex: 0 0 auto; padding-bottom: 2rem; }
+      .hero-carousel {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: calc(100% - 2.5rem);
+        max-width: 380px;
+        margin: 0 auto 2.5rem;
+        z-index: 5;
+      }
       .hc-card { transform: none; }
       .hc-card:hover { transform: translateY(-3px); }
     }
     @media (max-width: 480px) {
-      .hero-carousel { max-width: 100%; }
+      .hero-carousel {
+        width: calc(100% - 2rem);
+        max-width: 100%;
+        margin: 0 auto 2rem;
+      }
       .hc-slides { height: 180px; }
+      .hc-header { padding: 0.85rem 1rem 0.7rem; }
+      .hc-slide { padding: 1.15rem 1rem 0.85rem; }
+      .hc-progress { margin: 0 1rem; }
+      .hc-dots { padding: 0.65rem 1rem 0; }
+      .hc-cta { margin: 0.7rem 1rem 0.85rem; padding: 0.7rem 0.9rem; }
+      .hc-login-hint { padding-bottom: 0.85rem; }
     }
 </style>
   <!-- Open Graph / Social sharing -->
