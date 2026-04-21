@@ -2049,6 +2049,7 @@ async function init() {
   renderUI();
   document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
+  setupRealtime();
 
   // Handle ?payment=success redirect from Stripe
   if (new URLSearchParams(location.search).get('payment') === 'success') {
@@ -3465,6 +3466,114 @@ async function saveNewContact() {
   if (data) appState.contacts.unshift(data);
   showToast('Asiakas lisätty ✓');
   renderCRM();
+}
+
+// ═══════════════════════════════════════════════════════
+// REALTIME — live updates for call logs & appointments
+// ═══════════════════════════════════════════════════════
+function setupRealtime() {
+  const uid = appState.user?.id;
+  if (!uid) return;
+
+  sb.channel('dashboard-realtime')
+    // ── New call log inserted by retell-webhook ──────────────────────────────
+    .on('postgres_changes', {
+      event:  'INSERT',
+      schema: 'public',
+      table:  'call_logs',
+      filter: `user_id=eq.${uid}`,
+    }, payload => {
+      const newLog = payload.new;
+      // Prepend to the list (newest first) and avoid duplicates
+      const already = appState.callLogs.some(l => l.id === newLog.id);
+      if (!already) {
+        appState.callLogs.unshift(newLog);
+        renderCallLogTable(appState.callLogs);
+
+        // Refresh stats counters
+        const p = appState.profile;
+        if (p?.has_active_plan) renderActiveStats();
+        else renderDemoState();
+
+        // Update call count in CRM contact row if it matches
+        if (newLog.caller_number) {
+          const contact = (appState.contacts || []).find(c => c.phone_number === newLog.caller_number);
+          if (contact) {
+            contact.call_count = (contact.call_count || 0) + 1;
+            contact.last_called_at = newLog.called_at;
+            renderCRM();
+          }
+        }
+
+        showToast('📞 Uusi puhelu vastaanotettu');
+      }
+    })
+
+    // ── New appointment created (auto-draft from webhook or manually) ─────────
+    .on('postgres_changes', {
+      event:  'INSERT',
+      schema: 'public',
+      table:  'appointments',
+      filter: `user_id=eq.${uid}`,
+    }, payload => {
+      const newAppt = payload.new;
+      const already = (appState.appointments || []).some(a => a.id === newAppt.id);
+      if (!already) {
+        appState.appointments = [...(appState.appointments || []), newAppt]
+          .sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+        renderCalendar();
+        showToast('📅 Uusi varaus lisätty kalenteriin');
+      }
+    })
+
+    // ── Appointment updated ───────────────────────────────────────────────────
+    .on('postgres_changes', {
+      event:  'UPDATE',
+      schema: 'public',
+      table:  'appointments',
+      filter: `user_id=eq.${uid}`,
+    }, payload => {
+      const updated = payload.new;
+      const idx = (appState.appointments || []).findIndex(a => a.id === updated.id);
+      if (idx >= 0) {
+        appState.appointments[idx] = updated;
+        appState.appointments.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
+        renderCalendar();
+      }
+    })
+
+    // ── Appointment deleted ───────────────────────────────────────────────────
+    .on('postgres_changes', {
+      event:  'DELETE',
+      schema: 'public',
+      table:  'appointments',
+      filter: `user_id=eq.${uid}`,
+    }, payload => {
+      const deletedId = payload.old?.id;
+      if (deletedId) {
+        appState.appointments = (appState.appointments || []).filter(a => a.id !== deletedId);
+        renderCalendar();
+      }
+    })
+
+    // ── New contact inserted by webhook ──────────────────────────────────────
+    .on('postgres_changes', {
+      event:  'INSERT',
+      schema: 'public',
+      table:  'contacts',
+      filter: `user_id=eq.${uid}`,
+    }, payload => {
+      const newContact = payload.new;
+      const already = (appState.contacts || []).some(c => c.id === newContact.id);
+      if (!already) {
+        appState.contacts.unshift(newContact);
+        renderCRM();
+      }
+    })
+
+    .subscribe(status => {
+      console.log('Realtime status:', status);
+    });
 }
 </script>
 </body>
