@@ -291,7 +291,11 @@
 
   // Redirect if already logged in
   sb.auth.getSession().then(function(r) {
-    if (r.data.session) window.location.replace('dashboard.html');
+    if (r.data.session) {
+      var params = new URLSearchParams(location.search);
+      var redirect = params.get('redirect');
+      window.location.replace(redirect === 'checkout' ? 'checkout.html' : 'dashboard.html');
+    }
   });
 
   // Password visibility toggle
@@ -334,7 +338,9 @@
       showError(authMsg(r.error.message));
       btn.disabled = false; btn.textContent = 'Kirjaudu sisään →';
     } else {
-      window.location.replace('dashboard.html');
+      var params = new URLSearchParams(location.search);
+      var redirect = params.get('redirect');
+      window.location.replace(redirect === 'checkout' ? 'checkout.html' : 'dashboard.html');
     }
   });
 

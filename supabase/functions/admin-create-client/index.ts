@@ -133,12 +133,14 @@ serve(async (req) => {
       const agentInfo = await checkResp.json();
 
       retellAgentId = existing_retell_agent_id;
+      const llmId = agentInfo.response_engine?.llm_id || null;
 
       // Remove any previous agent rows for this user, then insert the linked one
       await sb.from("retell_agents").delete().eq("user_id", userId);
       await sb.from("retell_agents").insert({
         user_id:          userId,
         retell_agent_id:  retellAgentId,
+        retell_llm_id:    llmId,
         agent_name:       agentInfo.agent_name || `${company_name} — Tekoälyvastaanottaja`,
         system_prompt:    "",
         voice_id:         agentInfo.voice_id || "custom_voice_5b5439b90723dfeab0c58c448a",
@@ -179,8 +181,8 @@ serve(async (req) => {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${RETELL_API_KEY}` },
         body: JSON.stringify({
-          llm_websocket_url: `wss://api.retellai.com/llm-websocket/${llmId}`,
-          agent_name:        `${company_name} — Tekoälyvastaanottaja`,
+          response_engine: { type: "retell-llm", llm_id: llmId },
+          agent_name:      `${company_name} — Tekoälyvastaanottaja`,
           voice_id:          "custom_voice_5b5439b90723dfeab0c58c448a",
           language:          "fi-FI",
           speech_to_text: { provider: "azure", language: "fi-FI" },

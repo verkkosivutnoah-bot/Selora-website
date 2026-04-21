@@ -38,14 +38,13 @@ serve(async (req) => {
     return new Response("No organizer email", { status: 400 });
   }
 
-  // Find Supabase user by email
-  const { data: authUsers } = await sb.auth.admin.listUsers();
-  const matchedUser = authUsers?.users?.find(u => u.email === organizerEmail);
-  if (!matchedUser) {
+  // Find Supabase user by email via profiles table (faster than listUsers pagination)
+  const { data: profile } = await sb.from("profiles").select("id").eq("email", organizerEmail).maybeSingle();
+  if (!profile?.id) {
     console.error("No Supabase user found for email:", organizerEmail);
     return new Response("User not found", { status: 404 });
   }
-  const userId = matchedUser.id;
+  const userId = profile.id;
 
   // ── Handle events ─────────────────────────────────────────────────────────
   if (triggerEvent === "BOOKING_CREATED" || triggerEvent === "BOOKING_RESCHEDULED") {

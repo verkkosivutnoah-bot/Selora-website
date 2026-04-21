@@ -35,7 +35,10 @@ serve(async (req) => {
     if (!user?.id) return json({ error: "Unauthorized" }, 401);
 
     // ── Payload ───────────────────────────────────────────────────────────────
-    const { price_id, plan, billing } = await req.json();
+    const body = await req.json();
+    const { price_id, plan, billing } = body;
+    const success_url = body.success_url || `${SITE_URL}/dashboard.html?payment=success`;
+    const cancel_url  = body.cancel_url  || `${SITE_URL}/checkout.html`;
     if (!price_id) return json({ error: "price_id required" }, 400);
 
     // ── Create Stripe Checkout session ────────────────────────────────────────
@@ -45,8 +48,8 @@ serve(async (req) => {
       "line_items[0][quantity]":     "1",
       client_reference_id:           user.id,
       customer_email:                user.email ?? "",
-      success_url:                   `${SITE_URL}/dashboard.html?payment=success`,
-      cancel_url:                    `${SITE_URL}/checkout.html`,
+      success_url,
+      cancel_url,
       "metadata[plan]":              plan ?? "",
       "metadata[billing]":           billing ?? "",
       "metadata[user_id]":           user.id,

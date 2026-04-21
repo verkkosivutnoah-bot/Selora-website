@@ -2049,6 +2049,26 @@ async function init() {
   renderUI();
   document.getElementById('loading-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
+
+  // Handle ?payment=success redirect from Stripe
+  if (new URLSearchParams(location.search).get('payment') === 'success') {
+    showToast('Maksu vastaanotettu! Tilisi päivitetään hetken kuluttua…');
+    let attempts = 0;
+    const poll = setInterval(async () => {
+      attempts++;
+      const { data: p } = await sb.from('profiles').select('has_active_plan, plan_type').eq('id', appState.user.id).single();
+      if (p?.has_active_plan || attempts >= 10) {
+        clearInterval(poll);
+        if (p?.has_active_plan) {
+          showToast('Tilisi on nyt aktiivinen!');
+          await loadData();
+          renderUI();
+        }
+      }
+    }, 2000);
+    // Clean URL
+    history.replaceState({}, '', location.pathname);
+  }
 }
 
 async function loadData() {

@@ -853,12 +853,19 @@ async function saveLinkAgent() {
 // ── Delete client ─────────────────────────────────────────────────────────────
 async function deleteClient(userId, name) {
   if (!confirm(`Poistetaanko ${name}? Kaikki data poistetaan pysyvästi.`)) return;
-  // Delete auth user via service role — requires Edge Function or service key
-  // For now just delete profile (cascades to other tables via FK)
-  const { error } = await sb.from('profiles').delete().eq('id', userId);
-  if (error) { showToast('Virhe: ' + error.message); return; }
-  showToast('Asiakas poistettu');
-  await loadClients();
+  try {
+    const resp = await fetch(SUPABASE_URL + '/functions/v1/admin-delete-client', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.access_token },
+      body: JSON.stringify({ user_id: userId }),
+    });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || 'Virhe');
+    showToast('Asiakas poistettu \u2713');
+    await loadClients();
+  } catch(e) {
+    showToast('Virhe: ' + e.message);
+  }
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

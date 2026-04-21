@@ -557,9 +557,7 @@ async function startCheckout(plan) {
     return;
   }
   document.getElementById('checkout-loading').classList.add('show');
-  ['aloitus','kasvu'].forEach(p => {
-    document.getElementById('btn-' + p).disabled = true;
-  });
+  document.querySelectorAll('[id^="btn-"]').forEach(btn => { btn.disabled = true; });
   try {
     const resp = await fetch(SUPABASE_URL + '/functions/v1/create-checkout-session', {
       method: 'POST',
@@ -583,9 +581,7 @@ async function startCheckout(plan) {
     window.location.href = url;
   } catch (e) {
     document.getElementById('checkout-loading').classList.remove('show');
-    ['aloitus','kasvu'].forEach(p => {
-      document.getElementById('btn-' + p).disabled = false;
-    });
+    document.querySelectorAll('[id^="btn-"]').forEach(btn => { btn.disabled = false; });
     alert('Virhe: ' + e.message);
   }
 }
