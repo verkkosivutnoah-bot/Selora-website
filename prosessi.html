@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prosessi — Selora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --brown: #1D4ED8; --brown-light: #60A5FA;
+      --glass-bg: rgba(255,255,255,0.92); --glass-border: rgba(15,23,42,0.1);
+      --text-muted: #64748b;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: #f8fafc; color: #0f172a; font-family: 'Inter', -apple-system, sans-serif; font-weight: 300; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
+    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1D4ED8; margin-bottom: 1rem; }
+    .section-heading { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.15; color: #0f172a; margin-bottom: 1rem; }
+    .section-heading .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
+    .section-sub { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; max-width: 38rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 400; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; }
+    .btn-light { background: #fff; color: #000; border: none; padding: 0.7rem 1.75rem; }
+    .btn-light:hover { background: rgba(255,255,255,0.88); }
+    .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 0.7rem 1.75rem; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.45); }
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.72rem; color: #94a3b8; }
+    .footer-nav { display: flex; gap: 0.25rem; }
+    .footer-nav a { font-size: 0.72rem; color: #94a3b8; text-decoration: none; padding: 0.25rem 0.6rem; border-radius: 9999px; transition: color 0.2s; }
+    .footer-nav a:hover { color: #334155; }
+
+    /* PAGE HERO */
+    .page-hero { position: relative; height: 380px; overflow: hidden; display: flex; flex-direction: column; }
+    #pageCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.55) 100%); z-index: 1; pointer-events: none; }
+    header { position: relative; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 2rem; }
+    .logo { display: flex; align-items: center; gap: 0.55rem; font-size: 0.95rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 0.18em; font-family: 'Inter', sans-serif; }
+    
+    header nav { display: flex; align-items: center; gap: 0.1rem; }
+    header nav a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.78rem; font-weight: 400; padding: 0.5rem 0.85rem; border-radius: 9999px; transition: all 0.2s; }
+    header nav a:hover, header nav a.active { color: #fff; background: rgba(255,255,255,0.08); }
+    .header-cta { display: flex; align-items: center; gap: 0.75rem; }
+    .page-title-block { position: absolute; bottom: 2.5rem; left: 2rem; z-index: 10; }
+    .page-title-block .page-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(96,165,250,0.8); margin-bottom: 0.6rem; }
+    .page-title-block h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
+    .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 0; }
+    .section-alt { background: #eef2f7; border-top: 1px solid rgba(15,23,42,0.07); border-bottom: 1px solid rgba(15,23,42,0.07); padding: 6rem 0; }
+
+    /* STEPS */
+    .steps-list { display: flex; flex-direction: column; gap: 0; margin-top: 3.5rem; }
+    .step-row { display: grid; grid-template-columns: 4rem 1fr; gap: 0; padding: 2.5rem 0; border-bottom: 1px solid rgba(15,23,42,0.08); position: relative; }
+    .step-row:first-child { border-top: 1px solid rgba(15,23,42,0.08); }
+    .step-left { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding-top: 0.15rem; }
+    .step-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 600; color: var(--brown-light); letter-spacing: 0.05em; flex-shrink: 0; }
+    .step-line { width: 1px; flex: 1; background: linear-gradient(to bottom, rgba(37,99,235,0.3), transparent); margin-top: 0.5rem; }
+    .step-right { padding-left: 1.5rem; }
+    .step-right h3 { font-size: 1.2rem; font-weight: 500; color: #0f172a; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+    .step-right p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; max-width: 44rem; }
+    .step-tag { display: inline-flex; margin-top: 1rem; font-size: 0.68rem; font-weight: 500; color: rgba(96,165,250,0.7); letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* TESTIMONIALS */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
+    .testimonial-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.25rem; padding: 1.75rem; }
+    .stars { display: flex; gap: 0.2rem; margin-bottom: 1.1rem; }
+    .stars span { width: 10px; height: 10px; background: var(--brown-light); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+    .testimonial-card blockquote { font-size: 0.82rem; color: #374151; line-height: 1.75; font-style: italic; font-weight: 300; margin-bottom: 1.5rem; }
+    .author { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid rgba(15,23,42,0.07); padding-top: 1rem; }
+    .author-avatar { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.35); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; font-weight: 600; color: var(--brown-light); flex-shrink: 0; }
+    .author-name { font-size: 0.8rem; font-weight: 500; }
+    .author-role { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.1rem; }
+
+    /* CTA */
+    .cta-block { background: rgba(37,99,235,0.07); border: 1px solid rgba(37,99,235,0.2); border-radius: 1.5rem; padding: 3rem; text-align: center; }
+    .cta-block h2 { font-size: clamp(1.75rem,3vw,2.25rem); font-weight: 300; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .cta-block h2 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; }
+    .cta-block p { font-size: 0.85rem; color: var(--text-muted); max-width: 32rem; margin: 0 auto 2rem; line-height: 1.75; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap; }
+
+    @media(max-width:900px){ .testimonials-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:640px){ .testimonials-grid{grid-template-columns:1fr;} header nav{display:none;} .step-row{grid-template-columns:1fr;} .step-left{flex-direction:row;} .step-line{display:none;} .step-right{padding-left:0;padding-top:1rem;} }
+
+    /* === LIGHT THEME OVERRIDES === */
+    /* Hero titles stay white over the dark canvas */
+    .page-title-block h1 { color: #fff; }
+    /* Stats bar text stays light (it sits on the dark canvas) */
+    .stats-bar .stat-value { color: rgba(255,255,255,0.9); }
+    .stats-bar .stat-label { color: rgba(255,255,255,0.5) !important; }
+    /* Card depth on the white background */
+    .pricing-card, .teaser-card, .service-item-card {
+      box-shadow: 0 1px 4px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
+    }
+    .pricing-card.featured { box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
+    /* Ghost buttons in content areas → dark outline on light bg */
+    .section .btn-ghost, .section-alt .btn-ghost,
+    .cta-block .btn-ghost, .contact-section .btn-ghost {
+      color: #1e293b; border-color: rgba(15,23,42,0.22);
+    }
+    .section .btn-ghost:hover, .section-alt .btn-ghost:hover,
+    .cta-block .btn-ghost:hover, .contact-section .btn-ghost:hover {
+      background: rgba(15,23,42,0.05); border-color: rgba(15,23,42,0.4);
+    }
+    /* "Light" (white) buttons in content areas → dark fill so they're visible */
+    .section .btn-light, .section-alt .btn-light,
+    .cta-block .btn-light, .contact-section .btn-light {
+      background: #0f172a; color: #fff;
+    }
+    .section .btn-light:hover, .section-alt .btn-light:hover,
+    .cta-block .btn-light:hover, .contact-section .btn-light:hover {
+      background: #1e293b;
+    }
+
+    /* ROI CALCULATOR */
+    .roi-wrap { padding: 6rem 0; background: #fff; border-top: 1px solid rgba(15,23,42,0.07); border-bottom: 1px solid rgba(15,23,42,0.07); }
+    .roi-intro { margin-bottom: 3rem; }
+    .roi-outer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; align-items: stretch; }
+    @media (max-width: 900px) { .roi-outer-grid { grid-template-columns: 1fr; } }
+    .roi-card { background: #f8fafc; border: 1px solid rgba(15,23,42,0.08); border-radius: 1.5rem; padding: 2.5rem; display: flex; flex-direction: column; }
+    @media (max-width: 640px) { .roi-card { padding: 1.75rem 1.5rem; } }
+    .roi-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 0; }
+    @media (max-width: 520px) { .roi-inputs { grid-template-columns: 1fr; gap: 1.5rem; } }
+    .roi-close-row { padding-top: 2rem; margin-bottom: 2rem; border-top: 1px solid rgba(15,23,42,0.06); margin-top: 2rem; }
+    .roi-input-label { font-size: 0.72rem; font-weight: 500; color: #64748b; margin-bottom: 0.5rem; display: block; letter-spacing: 0.01em; }
+    .roi-val-row { display: flex; align-items: baseline; gap: 0.45rem; margin-bottom: 0.9rem; }
+    .roi-big-num { font-size: 2rem; font-weight: 600; letter-spacing: -0.04em; color: #0f172a; line-height: 1; }
+    .roi-big-unit { font-size: 0.78rem; color: #64748b; }
+    .roi-slider { width: 100%; height: 3px; border-radius: 9999px; appearance: none; -webkit-appearance: none; background: rgba(15,23,42,0.12); outline: none; cursor: pointer; }
+    .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #1D4ED8; cursor: pointer; box-shadow: 0 2px 10px rgba(29,78,216,0.4); border: 2.5px solid #fff; }
+    .roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #1D4ED8; cursor: pointer; box-shadow: 0 2px 10px rgba(29,78,216,0.4); border: 2.5px solid #fff; border-style: solid; }
+    .roi-slider-hints { display: flex; justify-content: space-between; margin-top: 0.4rem; }
+    .roi-slider-hints span { font-size: 0.61rem; color: #94a3b8; }
+    .roi-divider { height: 1px; background: rgba(15,23,42,0.08); margin-bottom: 2rem; }
+    .roi-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(15,23,42,0.08); border-radius: 1rem; overflow: hidden; margin-bottom: 1.25rem; background: #fff; }
+    .roi-stat { padding: 1.1rem 1.2rem; border-right: 1px solid rgba(15,23,42,0.07); }
+    .roi-stat:last-child { border-right: none; background: #fef2f2; }
+    .roi-stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.5rem; }
+    .roi-stat-val { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.03em; color: #0f172a; line-height: 1; }
+    .roi-stat:last-child .roi-stat-val { color: #dc2626; }
+    .roi-stat-period { font-size: 0.62rem; color: #64748b; margin-top: 0.25rem; }
+    .roi-selora-box { background: linear-gradient(135deg, #1D4ED8, #1e40af); border-radius: 1rem; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .roi-selora-tag { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 0.25rem; }
+    .roi-selora-headline { font-size: 0.9rem; font-weight: 500; color: #fff; line-height: 1.3; }
+    .roi-selora-sub { font-size: 0.67rem; color: rgba(255,255,255,0.55); margin-top: 0.2rem; }
+    .roi-selora-amount { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.04em; color: #fff; line-height: 1; white-space: nowrap; }
+    .roi-selora-amount span { font-size: 0.8rem; font-weight: 400; opacity: 0.65; }
+    .roi-selora-note { font-size: 0.6rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; text-align: right; }
+    .roi-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: 1.25rem; }
+    .roi-disclaimer { font-size: 0.61rem; color: #94a3b8; line-height: 1.6; max-width: 22rem; }
+    /* Chart card */
+    .roi-chart-card { background: #0c1220; border-radius: 1.5rem; padding: 2.5rem 2rem 2rem; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; position: relative; }
+    .roi-chart-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 0%, rgba(29,78,216,0.18) 0%, transparent 65%); pointer-events: none; }
+    .roi-chart-header { position: relative; z-index: 1; margin-bottom: 1.75rem; }
+    .roi-chart-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(96,165,250,0.7); margin-bottom: 0.4rem; }
+    .roi-chart-title { font-size: 1.05rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; line-height: 1.3; }
+    .roi-chart-sub { font-size: 0.7rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+    .roi-chart-canvas-wrap { position: relative; flex: 1; min-height: 220px; }
+    #roiChart { width: 100%; height: 100%; display: block; }
+    .roi-chart-legend { display: flex; align-items: center; gap: 1.5rem; margin-top: 1.25rem; position: relative; z-index: 1; flex-wrap: wrap; }
+    .roi-legend-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: rgba(255,255,255,0.55); }
+    .roi-legend-line { width: 20px; height: 2px; border-radius: 9999px; flex-shrink: 0; }
+    .roi-legend-line.blue { background: #60a5fa; }
+    .roi-legend-line.red { background: none; border-top: 1.5px dashed rgba(239,68,68,0.55); height: 0; margin-top: 1px; }
+  </style>
+<script src="/i18n.js" defer></script>
+</head>
+<body>
+
+<div class="page-hero">
+  <canvas id="pageCanvas"></canvas>
+  <header>
+    <a href="index.html" class="logo" style="display:flex;align-items:center;gap:0.55rem;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0"><path d="M12 1L23 12L12 23L1 12Z" stroke="white" stroke-width="1.5"/><path d="M12 5.5L18.5 12L12 18.5L5.5 12Z" fill="#60A5FA" opacity="0.9"/><circle cx="12" cy="12" r="2" fill="white"/></svg>SELORA</a>
+    <nav>
+      <a href="index.html">Etusivu</a>
+      <a href="palvelut.html">Palvelut</a>
+      <a href="prosessi.html" class="active">Prosessi</a>
+      <a href="hinnoittelu.html">Hinnoittelu</a>
+      <a href="yhteystiedot.html">Yhteystiedot</a>
+    </nav>
+    <div class="header-cta">
+      <a href="yhteystiedot.html" class="btn btn-ghost" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Kirjaudu</a>
+      <a href="yhteystiedot.html" class="btn btn-light" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa puhelu →</a>
+    </div>
+  </header>
+  <div class="page-title-block">
+    <p class="page-label">Prosessimme</p>
+    <h1>Käynnissä päivissä,<br><span class="accent">ei kuukausissa.</span></h1>
+  </div>
+</div>
+
+<!-- Steps -->
+<div class="section">
+  <div class="container">
+    <p class="section-label">Miten se toimii</p>
+    <h2 class="section-heading">Tehokas, <span class="accent">nopea</span> käyttöönotto.</h2>
+    <p class="section-sub">Selkeä prosessi, joka kunnioittaa aikaasi ja saa tekoälyjärjestelmäsi toimimaan ilman viikkoja kestävää edestakaisin viestittelyä.</p>
+
+    <div class="steps-list">
+      <div class="step-row reveal">
+        <div class="step-left">
+          <div class="step-num">01</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Kartoituspuhelu</h3>
+          <p>Kartoitamme nykyisen toimintamallisi, löydämme kohdat joissa liidejä menetetään ja määrittelemme mitä kannattaa automatisoida ensin parhaan ROI:n saavuttamiseksi. Puhelun jälkeen sinulla on selkeä kuva siitä, mitä rakennetaan ja milloin.</p>
+          <span class="step-tag">Kesto: 45–60 min</span>
+        </div>
+      </div>
+
+      <div class="step-row reveal reveal-delay-1">
+        <div class="step-left">
+          <div class="step-num">02</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Rakennus ja konfigurointi</h3>
+          <p>Tiimimme rakentaa tekoälyjärjestelmäsi, skriptit ja työnkulut — täysin räätälöitynä brändillesi, äänensävyllesi ja toimialallesi. Ei valmiita malleja, ei kompromisseja. Saat tarkalleen sen mitä yrityksesi tarvitsee.</p>
+          <span class="step-tag">Kesto: 3–7 arkipäivää</span>
+        </div>
+      </div>
+
+      <div class="step-row reveal reveal-delay-2">
+        <div class="step-left">
+          <div class="step-num">03</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-right">
+          <h3>Julkaisu ja luovutus</h3>
+          <p>Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja integraatiot — sinun ei tarvitse koskea koodiin. Saat selkeän kuvan kaikesta käynnissä olevasta.</p>
+          <span class="step-tag">Kesto: 1 arkipäivä</span>
+        </div>
+      </div>
+
+      <div class="step-row reveal reveal-delay-3">
+        <div class="step-left">
+          <div class="step-num">04</div>
+        </div>
+        <div class="step-right">
+          <h3>Optimointi ja kasvu</h3>
+          <p>Kuukausittaiset tarkistukset, reaaliaikainen suorituskykydata ja jatkuva hienosäätö — jotta järjestelmäsi kehittyy ajan myötä ja tulokset kasvavat kuukausittain. Tekoälysi oppii jatkuvasti, ja niin oppii myös strategiasi.</p>
+          <span class="step-tag">Jatkuva tuki</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROI Calculator -->
+<div class="roi-wrap" id="roi">
+  <div class="container">
+    <div class="roi-intro reveal">
+      <p class="section-label">Tuottolaskin</p>
+      <h2 class="section-heading">Kuinka paljon rahaa jää <span class="accent">pöydälle</span>?</h2>
+      <p class="section-sub">Kaksi lukua riittää. Siirrä liukuja ja näe heti, paljonko yrityksesi menettää vastaamattomista puheluista.</p>
+    </div>
+    <div class="roi-outer-grid reveal reveal-delay-1">
+
+      <!-- Left: calculator -->
+      <div class="roi-card">
+        <div class="roi-inputs">
+          <div class="roi-input-group">
+            <label class="roi-input-label">Keskimääräinen tulo yhdestä asiakkaasta</label>
+            <div class="roi-val-row">
+              <span class="roi-big-num" id="lbl-leadval">1 500</span>
+              <span class="roi-big-unit">€ / asiakas</span>
+            </div>
+            <input type="range" class="roi-slider" id="sl-leadval" min="100" max="15000" step="50" value="1500" oninput="roiCalc()">
+            <div class="roi-slider-hints"><span>100 €</span><span>15 000 €</span></div>
+          </div>
+          <div class="roi-input-group">
+            <label class="roi-input-label">Vastaamattomia puheluita päivässä</label>
+            <div class="roi-val-row">
+              <span class="roi-big-num" id="lbl-missed">5</span>
+              <span class="roi-big-unit">puhelua / pv</span>
+            </div>
+            <input type="range" class="roi-slider" id="sl-missed" min="1" max="50" value="5" oninput="roiCalc()">
+            <div class="roi-slider-hints"><span>1 puhelu</span><span>50 puhelua</span></div>
+          </div>
+        </div>
+        <div class="roi-close-row">
+          <label class="roi-input-label">Kuinka monta prosenttia liideistä yleensä klousaat?</label>
+          <div class="roi-val-row">
+            <span class="roi-big-num" id="lbl-close">30</span>
+            <span class="roi-big-unit">% liideistä</span>
+          </div>
+          <input type="range" class="roi-slider" id="sl-close" min="1" max="100" value="30" oninput="roiCalc()">
+          <div class="roi-slider-hints"><span>1 %</span><span>100 %</span></div>
+        </div>
+        <div class="roi-divider"></div>
+        <div class="roi-stats">
+          <div class="roi-stat">
+            <div class="roi-stat-label">Päivässä</div>
+            <div class="roi-stat-val" id="roi-daily">7 500 €</div>
+            <div class="roi-stat-period">menee ohi</div>
+          </div>
+          <div class="roi-stat">
+            <div class="roi-stat-label">Kuukaudessa</div>
+            <div class="roi-stat-val" id="roi-monthly">165 000 €</div>
+            <div class="roi-stat-period">22 työpäivää</div>
+          </div>
+          <div class="roi-stat">
+            <div class="roi-stat-label">Vuodessa</div>
+            <div class="roi-stat-val" id="roi-annual">1 980 000 €</div>
+            <div class="roi-stat-period">menettämätöntä liikevaihtoa</div>
+          </div>
+        </div>
+        <div class="roi-selora-box">
+          <div>
+            <div class="roi-selora-tag">Seloran kanssa</div>
+            <div class="roi-selora-headline">Voisit kaapata takaisin arviolta</div>
+            <div class="roi-selora-sub" id="roi-selora-sub">Tekoäly vastaa jokaiseen puheluun — ei enää vastaamattomuutta</div>
+          </div>
+          <div style="text-align:right; flex-shrink:0;">
+            <div class="roi-selora-amount" id="roi-selora-amount">128 700 €<span>/kk</span></div>
+            <div class="roi-selora-note">konservatiivinen arvio (78 %)</div>
+          </div>
+        </div>
+        <div class="roi-footer">
+          <p class="roi-disclaimer">Luvut perustuvat syöttämiisi tietoihin, mukaan lukien klousausprosenttisi. Selora kaappaa konservatiivisesti 78 % vastaamattomista liideistä.</p>
+          <a href="yhteystiedot.html" class="btn btn-blue">Varaa demo →</a>
+        </div>
+      </div>
+
+      <!-- Right: projection chart -->
+      <div class="roi-chart-card">
+        <div class="roi-chart-header">
+          <div class="roi-chart-eyebrow">Tulopotentiaali</div>
+          <div class="roi-chart-title">Mitä voisit ansaita Seloran<br>kanssa seuraavat 12 kuukautta</div>
+          <div class="roi-chart-sub">Siirrä liukuja vasemmalta — kaavio päivittyy reaaliajassa</div>
+        </div>
+        <div class="roi-chart-canvas-wrap">
+          <canvas id="roiChart"></canvas>
+        </div>
+        <div class="roi-chart-legend">
+          <div class="roi-legend-item">
+            <div class="roi-legend-line blue"></div>
+            Kumulatiivinen lisätulo Seloran kanssa
+          </div>
+          <div class="roi-legend-item">
+            <div class="roi-legend-line red"></div>
+            Ilman Seloraa
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<div class="section-alt">
+  <div class="container">
+    <p class="section-label">Asiakastulokset</p>
+    <h2 class="section-heading">Oikeat yritykset. <span class="accent">Oikea kasvu.</span></h2>
+    <p class="section-sub">Kaikenlaisista yrityksistä — tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p style="font-size:0.72rem;font-weight:600;color:#1D4ED8;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.85rem;">87 % puheluista hoidettu automaattisesti</p>
+        <blockquote>
+          "Tekoälyvastaanottajamme varasi 14 uutta tapaamista jo ensimmäisellä viikolla. Se maksoi itsensä takaisin ennen kuun loppua. En oikeasti tiedä, miten pärjäsin ilman sitä."
+        </blockquote>
+        <div class="author">
+          <div class="author-avatar">JM</div>
+          <div>
+            <div class="author-name">Janne M.</div>
+            <div class="author-role">Omistaja, Elite LVI-Palvelut</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p style="font-size:0.72rem;font-weight:600;color:#1D4ED8;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.85rem;">Säästö 2 400 € / kk henkilöstökuluissa</p>
+        <blockquote>
+          "Uusi verkkosivusto ja sähköpostisekvenssit muuttivat asiakkaidemme onboarding-prosessin täysin. Konversioasteemme kaksinkertaistui kahdessa kuukaudessa."
+        </blockquote>
+        <div class="author">
+          <div class="author-avatar">SR</div>
+          <div>
+            <div class="author-name">Sanna R.</div>
+            <div class="author-role">Perustaja, Radiance Kauneusklinikka</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p style="font-size:0.72rem;font-weight:600;color:#1D4ED8;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:0.85rem;">+34 % enemmän varattuja aikoja ensimmäisessä kuussa</p>
+        <blockquote>
+          "Olin skeptinen tekoälyn suhteen, mutta he tekivät siitä yksinkertaista. Nyt en koskaan menetä liidiä, vaikka olisin työmaalla. Ehdottomasti paras investointi tänä vuonna."
+        </blockquote>
+        <div class="author">
+          <div class="author-avatar">DK</div>
+          <div>
+            <div class="author-name">Dani K.</div>
+            <div class="author-role">Toimitusjohtaja, Keller Kattopalvelut</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Kuulostaa <span class="accent">hyvältä</span>?</h2>
+      <p>Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia — ja sen jälkeen tiedät tarkalleen mitä saisit.</p>
+      <div class="cta-btns">
+        <a href="hinnoittelu.html" class="btn btn-ghost">Katso hinnat</a>
+        <a href="yhteystiedot.html" class="btn btn-light">Varaa puhelu →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 Selora. Kaikki oikeudet pidätetään.</span>
+    <div class="footer-nav">
+      <a href="palvelut.html">Palvelut</a>
+      <a href="prosessi.html">Prosessi</a>
+      <a href="hinnoittelu.html">Hinnoittelu</a>
+      <a href="yhteystiedot.html">Yhteystiedot</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const canvas = document.getElementById('pageCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || 380; }
+  resize(); window.addEventListener('resize', resize);
+  const blobs = [
+    { ox:0.52, oy:0.48, vx:0.00031, vy:0.00024, r:0.70, rgb:[37,99,235],  a:0.50 },
+    { ox:0.22, oy:0.35, vx:-0.00019,vy:0.00028,  r:0.55, rgb:[29,78,216],   a:0.45 },
+    { ox:0.78, oy:0.72, vx:0.00022, vy:-0.00017, r:0.50, rgb:[15,23,42],   a:0.40 },
+    { ox:0.35, oy:0.80, vx:-0.00025,vy:-0.00020, r:0.45, rgb:[67,56,202], a:0.35 },
+    { ox:0.65, oy:0.20, vx:0.00015, vy:0.00032,  r:0.40, rgb:[99,102,241], a:0.25 },
+  ];
+  blobs.forEach(b => { b.x = b.ox; b.y = b.oy; });
+  let t = 0;
+  function draw() {
+    t += 0.25;
+    const w = canvas.width, h = canvas.height;
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
+    ctx.globalCompositeOperation = 'screen';
+    blobs.forEach(b => {
+      b.x = b.ox + 0.22*Math.sin(t*b.vx*600+b.oy*10);
+      b.y = b.oy + 0.18*Math.cos(t*b.vy*600+b.ox*10);
+      const gx=b.x*w, gy=b.y*h, gr=b.r*Math.max(w,h);
+      const g = ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
+      const [r,gv,bv]=b.rgb;
+      g.addColorStop(0,`rgba(${r},${gv},${bv},${b.a})`);
+      g.addColorStop(0.4,`rgba(${r},${gv},${bv},${b.a*0.3})`);
+      g.addColorStop(1,`rgba(${r},${gv},${bv},0)`);
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    });
+    ctx.globalCompositeOperation='source-over';
+    ctx.strokeStyle='rgba(255,255,255,0.025)'; ctx.lineWidth=0.6;
+    for(let i=0;i<6;i++){
+      const phase=(t*0.004)+(i*Math.PI*2/6);
+      const cx=w*(0.5+0.18*Math.cos(phase*0.7)), cy=h*(0.5+0.14*Math.sin(phase*0.5));
+      const rx=w*(0.28+0.04*Math.sin(phase)), ry=h*(0.22+0.04*Math.cos(phase));
+      ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,phase*0.1,0,Math.PI*2); ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+(function(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+
+/* ── ROI CALCULATOR + CHART ──────────────────────────────────────────── */
+(function () {
+  function fmt(n) {
+    return Math.round(n).toLocaleString('fi-FI') + '\u202f€';
+  }
+
+  function fmtShort(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.', ',') + ' M€';
+    if (n >= 1000)    return Math.round(n / 1000) + ' k€';
+    return Math.round(n) + ' €';
+  }
+
+  /* ── CHART ── */
+  function drawChart(monthly, seloraMonthly) {
+    var canvas = document.getElementById('roiChart');
+    if (!canvas || !canvas.getContext) return;
+
+    var wrap = canvas.parentElement;
+    var W = wrap.clientWidth  || 400;
+    var H = wrap.clientHeight || 260;
+
+    var dpr = window.devicePixelRatio || 1;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+
+    var ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    var PAD = { top: 24, right: 24, bottom: 42, left: 62 };
+    var cW = W - PAD.left - PAD.right;
+    var cH = H - PAD.top  - PAD.bottom;
+    var MONTHS = 12;
+
+    /* Data: gainArr = cumulative earnings WITH Selora, baseline = 0 (no Selora = no extra revenue) */
+    var gainArr = [];
+    for (var i = 1; i <= MONTHS; i++) {
+      gainArr.push(seloraMonthly * i);
+    }
+    var maxVal = gainArr[MONTHS - 1] * 1.18;
+
+    function px(i)   { return PAD.left + (i / (MONTHS - 1)) * cW; }
+    function py(val) { return PAD.top  + cH - (val / maxVal) * cH; }
+    var baseline = PAD.top + cH; /* y of 0 */
+
+    /* Clear */
+    ctx.clearRect(0, 0, W, H);
+
+    /* Grid lines + Y labels */
+    var gridSteps = 4;
+    for (var g = 0; g <= gridSteps; g++) {
+      var gy = PAD.top + cH - (g / gridSteps) * cH;
+      ctx.beginPath();
+      ctx.strokeStyle = g === 0 ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)';
+      ctx.lineWidth = 1;
+      ctx.moveTo(PAD.left, gy);
+      ctx.lineTo(PAD.left + cW, gy);
+      ctx.stroke();
+      var yVal = (g / gridSteps) * maxVal;
+      ctx.fillStyle = 'rgba(255,255,255,0.28)';
+      ctx.font = '500 10px Inter, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(fmtShort(yVal), PAD.left - 8, gy + 4);
+    }
+
+    /* Month labels */
+    var mNames = ['Tam','Hel','Maa','Huh','Tou','Kes','Hei','Elo','Syy','Lok','Mar','Jou'];
+    ctx.font = '10px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    for (var m = 0; m < MONTHS; m++) {
+      var mx = px(m);
+      if (m > 0) {
+        ctx.beginPath();
+        ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+        ctx.lineWidth = 1;
+        ctx.moveTo(mx, PAD.top);
+        ctx.lineTo(mx, PAD.top + cH);
+        ctx.stroke();
+      }
+      if (m % 2 === 0 || m === MONTHS - 1) {
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.fillText(mNames[m], mx, PAD.top + cH + 16);
+      }
+    }
+
+    /* Flat "Ilman Seloraa" baseline — dashed red line at zero */
+    ctx.beginPath();
+    ctx.setLineDash([5, 5]);
+    ctx.strokeStyle = 'rgba(239,68,68,0.45)';
+    ctx.lineWidth = 1.5;
+    ctx.moveTo(PAD.left, baseline);
+    ctx.lineTo(PAD.left + cW, baseline);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* Gain area gradient */
+    var grad = ctx.createLinearGradient(0, PAD.top, 0, baseline);
+    grad.addColorStop(0,   'rgba(96,165,250,0.32)');
+    grad.addColorStop(0.65,'rgba(29,78,216,0.1)');
+    grad.addColorStop(1,   'rgba(29,78,216,0.0)');
+
+    ctx.beginPath();
+    ctx.moveTo(PAD.left, baseline);
+    ctx.lineTo(px(0), py(gainArr[0]));
+    for (var i = 1; i < MONTHS; i++) ctx.lineTo(px(i), py(gainArr[i]));
+    ctx.lineTo(px(MONTHS - 1), baseline);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    /* Gain line — thick glowing blue */
+    ctx.shadowColor = 'rgba(96,165,250,0.5)';
+    ctx.shadowBlur  = 10;
+    ctx.beginPath();
+    ctx.strokeStyle = '#60a5fa';
+    ctx.lineWidth   = 3;
+    ctx.lineJoin    = 'round';
+    ctx.moveTo(px(0), py(gainArr[0]));
+    for (var i = 1; i < MONTHS; i++) ctx.lineTo(px(i), py(gainArr[i]));
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    /* Milestone dots at month 3, 6, 12 */
+    var milestones = [2, 5, 11];
+    for (var mi = 0; mi < milestones.length; mi++) {
+      var idx = milestones[mi];
+      var mx2 = px(idx), my2 = py(gainArr[idx]);
+      ctx.beginPath();
+      ctx.arc(mx2, my2, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#93c5fd';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(mx2, my2, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(147,197,253,0.18)';
+      ctx.fill();
+    }
+
+    /* End-point dot + callout label */
+    var ex = px(MONTHS - 1), ey = py(gainArr[MONTHS - 1]);
+    ctx.beginPath();
+    ctx.arc(ex, ey, 5.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#60a5fa';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(ex, ey, 10, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(96,165,250,0.2)';
+    ctx.fill();
+
+    /* Label pill */
+    var label = '+' + fmtShort(gainArr[MONTHS - 1]);
+    ctx.font = '600 11px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    var lw = ctx.measureText(label).width + 16;
+    var lx = ex, ly = ey - 20;
+    if (lx + lw / 2 > PAD.left + cW) lx = PAD.left + cW - lw / 2 - 4;
+    var rx = lx - lw / 2, ry = ly - 13, rw = lw, rh = 18, rr = 5;
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(rx, ry, rw, rh, rr);
+    } else {
+      ctx.moveTo(rx + rr, ry);
+      ctx.lineTo(rx + rw - rr, ry); ctx.arcTo(rx + rw, ry, rx + rw, ry + rr, rr);
+      ctx.lineTo(rx + rw, ry + rh - rr); ctx.arcTo(rx + rw, ry + rh, rx + rw - rr, ry + rh, rr);
+      ctx.lineTo(rx + rr, ry + rh); ctx.arcTo(rx, ry + rh, rx, ry + rh - rr, rr);
+      ctx.lineTo(rx, ry + rr); ctx.arcTo(rx, ry, rx + rr, ry, rr);
+      ctx.closePath();
+    }
+    ctx.fillStyle = 'rgba(96,165,250,0.18)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(96,165,250,0.4)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = '#93c5fd';
+    ctx.fillText(label, lx, ly + 2);
+  }
+
+  /* ── CALC ── */
+  window.roiCalc = function () {
+    var leadVal   = +document.getElementById('sl-leadval').value;
+    var missed    = +document.getElementById('sl-missed').value;
+    var closeRate = +document.getElementById('sl-close').value;
+
+    document.getElementById('lbl-leadval').textContent = Math.round(leadVal).toLocaleString('fi-FI');
+    document.getElementById('lbl-missed').textContent  = missed;
+    document.getElementById('lbl-close').textContent   = closeRate;
+
+    var daily   = missed * leadVal * (closeRate / 100);
+    var monthly = daily * 22;
+    var annual  = monthly * 12;
+    var selora  = monthly * 0.78;
+
+    document.getElementById('roi-daily').textContent   = fmt(daily);
+    document.getElementById('roi-monthly').textContent = fmt(monthly);
+    document.getElementById('roi-annual').textContent  = fmt(annual);
+    document.getElementById('roi-selora-amount').innerHTML = fmt(selora) + '<span>/kk</span>';
+
+    var sub = document.getElementById('roi-selora-sub');
+    if (sub && selora > 0) {
+      var days = Math.max(1, Math.round(499 / (selora / 30)));
+      sub.textContent = 'Palvelu maksaa itsensä takaisin jo päivänä ' + days + ' — loput kuukautta on puhdasta voittoa.';
+    }
+
+    drawChart(monthly, selora);
+  };
+
+  /* Redraw on resize */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var lv = +document.getElementById('sl-leadval').value;
+      var ms = +document.getElementById('sl-missed').value;
+      var cr = +document.getElementById('sl-close').value;
+      var monthly = lv * ms * (cr / 100) * 22;
+      drawChart(monthly, monthly * 0.78);
+    }, 120);
+  });
+
+  roiCalc();
+})();
+</script>
+</body>
+</html>
