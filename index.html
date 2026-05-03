@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selora — Älä enää missaa yhtään puhelua</title>
-  <meta name="description" content="Seloran tekoälyvastaanottaja vastaa puheluihisi 24/7, varaa ajat kalenteriisi ja tunnistaa potentiaaliset asiakkaat, täysin automaattisesti. Ilmainen demo, käyttöönotto 48 tunnissa." />
+  <title>Selora Oy — Tekoälyvastaanottaja suomalaisille pk-yrityksille | selora.fi</title>
+  <meta name="description" content="Selora Oy on suomalainen tekoälyvastaanottaja-palvelu pk-yrityksille (LVI, ravintola, kampaamo, kiinteistövälitys). Vastaa puheluihin 24/7, varaa ajat kalenteriin, tunnistaa potentiaaliset asiakkaat. Ilmainen demo, käyttöönotto 48 tunnissa, alkaen 490 €/kk." />
   <script type="module">
     import { RetellWebClient as _VC } from 'https://esm.sh/retell-client-js-sdk';
     window._seloraVoiceClient = _VC;
@@ -102,6 +102,10 @@
     .hero-desc { font-size: 0.85rem; color: rgba(255,255,255,0.78); line-height: 1.75; margin-bottom: 1.75rem; max-width: 30rem; }
     .hero-btns { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
     .hero-demo-note { margin-top: 1.1rem; font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+    .hero-trust-bar { margin-top: 1.4rem; display: flex; align-items: center; gap: 0.55rem; flex-wrap: wrap; font-size: 0.66rem; letter-spacing: 0.04em; color: rgba(255,255,255,0.55); }
+    .hero-trust-item { font-weight: 500; text-transform: uppercase; padding: 0.28rem 0.6rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); white-space: nowrap; }
+    .hero-trust-dot { color: rgba(255,255,255,0.25); font-weight: 600; }
+    @media (max-width: 640px) { .hero-trust-bar { gap: 0.35rem; font-size: 0.6rem; } .hero-trust-dot { display: none; } .hero-trust-item { padding: 0.22rem 0.5rem; } }
 
     /* STATS BAR */
     .stats-bar { position: relative; z-index: 10; background: rgba(255,255,255,0.025); border-top: 1px solid rgba(255,255,255,0.07); backdrop-filter: blur(8px); }
@@ -1038,14 +1042,89 @@
   <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/" />
-  <meta property="og:title" content="Selora — Älä enää missaa yhtään puhelua" />
-  <meta property="og:description" content="Seloran tekoälyvastaanottaja vastaa puheluihisi 24/7, varaa ajat kalenteriisi ja tunnistaa potentiaaliset asiakkaat. Ilmainen demo, käyttöönotto 48 tunnissa." />
+  <meta property="og:title" content="Selora Oy — Tekoälyvastaanottaja suomalaisille pk-yrityksille" />
+  <meta property="og:description" content="Selora Oy on suomalainen tekoälyvastaanottaja-palvelu pk-yrityksille. Vastaa puheluihin 24/7, varaa ajat, tunnistaa potentiaaliset asiakkaat. Ilmainen demo, käyttöönotto 48 tunnissa." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
+  <meta property="og:site_name" content="Selora Oy" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Selora — Älä enää missaa yhtään puhelua" />
-  <meta name="twitter:description" content="Seloran tekoälyvastaanottaja vastaa puheluihisi 24/7, varaa ajat kalenteriisi ja tunnistaa potentiaaliset asiakkaat. Ilmainen demo, käyttöönotto 48 tunnissa." />
+  <meta name="twitter:title" content="Selora Oy — Tekoälyvastaanottaja suomalaisille pk-yrityksille" />
+  <meta name="twitter:description" content="Selora Oy on suomalainen tekoälyvastaanottaja-palvelu pk-yrityksille. Vastaa puheluihin 24/7, varaa ajat, tunnistaa potentiaaliset asiakkaat." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
+
+  <!-- Structured data: Organization + Person + WebSite for AI/LLM discoverability -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.selora.fi/#organization",
+        "name": "Selora Oy",
+        "alternateName": ["Selora", "Selora.fi"],
+        "url": "https://www.selora.fi/",
+        "logo": "https://www.selora.fi/selora-logo.jpeg",
+        "image": "https://www.selora.fi/selora-logo.jpeg",
+        "description": "Suomalainen tekoälyvastaanottaja-palvelu pk-yrityksille. Vastaa puheluihin 24/7, varaa ajat ja tunnistaa potentiaaliset asiakkaat. Käyttöönotto alle 48 tunnissa.",
+        "foundingDate": "2025",
+        "founder": {
+          "@id": "https://www.selora.fi/#founder"
+        },
+        "vatID": "FI35356779",
+        "taxID": "3535677-9",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "FI"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Finland"
+        },
+        "knowsLanguage": ["fi", "en"],
+        "slogan": "Tekoälyvastaanottaja suomalaisille pk-yrityksille",
+        "sameAs": [
+          "https://www.selora.fi/"
+        ]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.selora.fi/#founder",
+        "name": "Noah Tuokkola",
+        "jobTitle": "Perustaja, Selora Oy",
+        "worksFor": { "@id": "https://www.selora.fi/#organization" },
+        "nationality": "Finnish"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.selora.fi/#website",
+        "url": "https://www.selora.fi/",
+        "name": "Selora Oy",
+        "description": "Tekoälyvastaanottaja suomalaisille pk-yrityksille",
+        "publisher": { "@id": "https://www.selora.fi/#organization" },
+        "inLanguage": "fi-FI"
+      },
+      {
+        "@type": "Service",
+        "name": "Tekoälyvastaanottaja",
+        "provider": { "@id": "https://www.selora.fi/#organization" },
+        "areaServed": "FI",
+        "description": "Tekoälypohjainen puhelinvastaanottaja, joka vastaa puheluihin 24/7, varaa ajat kalenteriin, tunnistaa potentiaaliset asiakkaat ja lähettää vahvistusviestit. Käytetään LVI-, ravintola-, kampaamo-, autokorjaamo- ja kiinteistövälitysaloilla.",
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EUR",
+          "price": "490",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "price": "490",
+            "priceCurrency": "EUR",
+            "unitCode": "MON"
+          }
+        }
+      }
+    ]
+  }
+  </script>
+
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
 <script src="/i18n.js" defer></script>
 </head>
@@ -1110,13 +1189,24 @@
         <span class="accent">yhtään</span> puhelua.
       </h1>
       <p class="hero-desc">
-        Seloran tekoälyvastaanottaja vastaa kaikkiin puheluihisi 24/7, varaa tapaamisia ja tunnistaa potentiaaliset asiakkaat. Täysin automaattisesti, ilman lisähenkilöstöä.
+        Selora Oy on suomalainen tekoälyvastaanottaja LVI-, ravintola-, kampaamo- ja kiinteistöalan pk-yrittäjille. Vastaa iltapuheluihin ja viikonloppuihin ilman päivystysvuoroa, varaa ajat suoraan kalenteriin ja lähettää vahvistusviestit. Suomeksi.
       </p>
       <div class="hero-btns">
         <a href="yhteystiedot.html" class="btn btn-light">Varaa ilmainen demo →</a>
         <a href="#prosessi" class="btn btn-ghost">Katso miten toimii</a>
       </div>
-      <p class="hero-demo-note">Ei luottokorttia. Käyttöönotto alle 48 tunnissa.</p>
+      <p class="hero-demo-note">Alkaen 490 €/kk, ei sitoutumista. Käyttöönotto 48 tunnissa. Ei luottokorttia demoon.</p>
+      <div class="hero-trust-bar" aria-label="Luottamus">
+        <span class="hero-trust-item">GDPR</span>
+        <span class="hero-trust-dot">·</span>
+        <span class="hero-trust-item">EU AI Act</span>
+        <span class="hero-trust-dot">·</span>
+        <span class="hero-trust-item">EU-palvelimet</span>
+        <span class="hero-trust-dot">·</span>
+        <span class="hero-trust-item">99.9 % uptime</span>
+        <span class="hero-trust-dot">·</span>
+        <span class="hero-trust-item">Suomalainen Selora Oy</span>
+      </div>
     </div>
 
   </div>
@@ -1728,6 +1818,7 @@
         </div>
         <div class="footer-col">
           <h4>Yritys</h4>
+          <a href="tietoa-meista.html">Tietoa meistä</a>
           <a href="hinnoittelu.html">Hinnoittelu</a>
           <a href="blogi.html">Blogi</a>
           <a href="yhteystiedot.html">Yhteystiedot</a>
