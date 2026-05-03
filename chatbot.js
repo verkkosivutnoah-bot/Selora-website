@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var API  = '/.netlify/functions/chat';
+  var API  = '/api/chat';
   var BLUE = '#1D4ED8';
   var BLUE_DARK = '#1e40af';
 
