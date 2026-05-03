@@ -64,36 +64,37 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ error: 'messages array required' });
   }
 
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    console.error('[chat] ANTHROPIC_API_KEY not set');
+    console.error('[chat] GROQ_API_KEY not set');
     return res.status(500).json({ error: 'API key not configured' });
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'content-type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
+        model: 'llama-3.1-8b-instant',
         max_tokens: 600,
-        system: SYSTEM_PROMPT,
-        messages: messages.slice(-12), // last 12 messages for context window
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          ...messages.slice(-12),
+        ],
       }),
     });
 
     if (!response.ok) {
       const err = await response.text();
-      console.error('[chat] Anthropic error:', response.status, err);
+      console.error('[chat] Groq error:', response.status, err);
       return res.status(502).json({ error: 'AI service unavailable' });
     }
 
     const data = await response.json();
-    const content = data.content?.[0]?.text ?? 'Pahoittelen, en saanut vastausta.';
+    const content = data.choices?.[0]?.message?.content ?? 'Pahoittelen, en saanut vastausta.';
     return res.status(200).json({ content });
   } catch (err) {
     console.error('[chat] Error:', err);
