@@ -2489,6 +2489,147 @@
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
+
+    // -------- blog: ravintolan-puhelin-lounaskiire-tekoaly --------
+    'Ravintolan puhelin ja lounaskiire: miksi pöytävaraukset menevät metsään juuri kun salin pitäisi tuottaa - Selora Blogi':
+      'A restaurant\'s phone during the lunch rush: why table bookings slip away exactly when the dining room should be earning - Selora Blog',
+    'Ravintolan puhelin ja lounaskiire: miksi pöytävaraukset menevät metsään juuri kun salin pitäisi tuottaa':
+      'A restaurant\'s phone during the lunch rush: why table bookings slip away exactly when the dining room should be earning',
+    'Ravintolan puhelin ja lounaskiire: miksi pöytävaraukset menevät metsään':
+      'A restaurant\'s phone and the lunch rush: why table bookings slip away',
+    'Ravintolan puhelin soi pahimpana mahdollisena hetkenä. Näin tekoälyvastaanottaja ottaa pöytävaraukset, vahvistaa varaukset ja vähentää no-showta ilman lisäkäsipareja salissa.':
+      'A restaurant\'s phone always rings at the worst possible moment. Here\'s how an AI receptionist takes table bookings, confirms reservations and reduces no-shows without extra hands on the floor.',
+    'Vastaamattomat puhelut ja no-showt syövät salin tuloksen. Näin tekoäly hoitaa varaukset.':
+      'Missed calls and no-shows eat into the dining room\'s bottom line. Here\'s how AI handles bookings.',
+    'Ravintolan puhelin ja lounaskiire': 'A restaurant\'s phone and the lunch rush',
+    'Ravintolasali täynnä asiakkaita illan ruuhkassa':
+      'A restaurant dining room full of customers during the evening rush',
+    'Ravintolan puhelin soi lounaskiireessä, perjantain rynnäkössä ja juuri silloin kun keittiöstä tulee viimeinen tilaus. Katsotaan miksi pöytävaraukset karkaavat puolimatkassa, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja täyttää salin ilman että kukaan jättää pannuja paistumaan.':
+      'A restaurant\'s phone rings during the lunch rush, the Friday surge and exactly when the kitchen is firing the last order. Let\'s look at why table bookings slip away halfway through, what that costs per month, and how an AI receptionist fills the dining room without anyone leaving pans burning on the stove.',
+    'Ravintola-alalla puhelin soi pahimpana mahdollisena hetkenä':
+      'In the restaurant business the phone rings at the worst possible moment',
+    'Lounaskiire alkaa yhdeltätoista. Sali täyttyy puolessatoista. Keittiössä juoksee kuusi tilausta yhtä aikaa, sali pyytää lisää leipää ja kassan jonossa odottaa kolme asiakasta. Juuri tällä sekunnilla puhelin alkaa soida.':
+      'The lunch rush starts at eleven. The dining room fills up by half past one. The kitchen is running six orders at once, the floor is asking for more bread and three customers are waiting at the till. At exactly that second the phone starts ringing.',
+    'Ravintolan puhelinpiikit eivät tule satunnaisina hetkinä. Ne tulevat tasan silloin kun kukaan ei voi ottaa puhelinta. Lounaalla varataan iltaa, illallisaikaan varataan viikonloppua ja perjantaina iltapäivällä varataan synttäriä. Joka ikinen kerta soi pahimpana mahdollisena hetkenä, koska se hetki on se hetki jolloin asiakas itsekin miettii ravintolaa.':
+      'A restaurant\'s phone spikes don\'t come at random moments. They come exactly when nobody can pick up the phone. At lunch people book the evening, at dinner time they book the weekend, and on Friday afternoons they book a birthday. Every single time it rings at the worst possible moment, because that moment is the same moment the customer is thinking about restaurants.',
+    'Vastaamatta jäänyt soitto on vastaamatta jäänyt pöytä':
+      'A missed call is a missed table',
+    'Olen jutellut tämän kevään aikana ravintoloitsijoiden kanssa Helsingissä, Tampereella ja Turussa. Kaikki sanovat saman asian:':
+      'Over this spring I\'ve spoken with restaurant owners in Helsinki, Tampere and Turku. They all say the same thing:',
+    'he tietävät että puhelin jää soimaan, mutta eivät tiedä paljonko se maksaa':
+      'they know the phone keeps ringing unanswered, but they don\'t know what it costs',
+    'Kun yksi yhteinen kysymys on "kuinka monta varausta soittaja olisi tehnyt jos olisitte vastanneet", vastaukset ovat järkyttäviä. Puhelin soi keskimäärin 40-90 kertaa päivässä keskikokoisessa lounas- ja illallisravintolassa. Niistä noin 30 % menee vastaamatta. Niistä vastaamatta jääneistä noin puolet on pöytävarauspuheluita.':
+      'When one common question is "how many bookings would the caller have made if you had answered", the answers are shocking. The phone rings on average 40-90 times a day in a mid-sized lunch and dinner restaurant. About 30% of those go unanswered. About half of the unanswered ones are table-booking calls.',
+    'ravintolan puhelinasiakkaista': 'of a restaurant\'s phone customers',
+    'varaa toiseen ravintolaan': 'book a different restaurant',
+    ', jos heille ei vastata kahden minuutin sisällä. He eivät jätä viestiä, koska illan ravintola on löydettävä nyt.':
+      ', if no one picks up within two minutes. They don\'t leave a message, because tonight\'s restaurant has to be found now.',
+    'Pöytävarauslomake verkossa ei ratkaise tätä':
+      'An online booking form doesn\'t solve this',
+    'Moni ravintola on lisännyt verkkosivulleen varauslomakkeen tai TableOnline- ja ResDiary-tyyppisen kalenterin. Hyvä juttu, ne tuovat osan varauksista ilman puhelua. Mutta puhelinvarausten määrä ei tipahda nollaan, vaikka miten paljon mainostaisi nettivaraussivua.':
+      'Many restaurants have added a booking form or a TableOnline or ResDiary-style calendar to their website. Good move, those bring in a share of bookings without a phone call. But the number of phone bookings doesn\'t drop to zero no matter how heavily you promote the online booking page.',
+    'Syyt ovat inhimillisiä. Iso osa Suomen aikuisväestöstä, etenkin yli 45-vuotiaat, varaa edelleen mieluummin puhelimitse. Ryhmävaraukset, allergiat, esteettömyyspyynnöt, syntymäpäivät ja tasapuoliset alennukset hoidetaan kysymällä, ei pudotusvalikolla. Ja kun joku haluaa tarkentaa "onko teillä se ikkunapaikka vapaana", hän soittaa.':
+      'The reasons are human. A large share of Finland\'s adult population, especially the over-45s, still prefers to book by phone. Group bookings, allergies, accessibility requests, birthdays and matching everyone\'s discount are handled by asking, not by a dropdown. And when someone wants to confirm "do you have that window seat available", they call.',
+    'Nettivaraukset ovat täydennys. Puhelin on edelleen pääkanava etenkin ryhmille ja yli 4 hengen pöydille, joissa on isoin keskiostos.':
+      'Online bookings are a complement. The phone is still the main channel, especially for groups and tables of more than 4, which carry the biggest average spend.',
+    'Mitä yksi menetetty puhelu maksaa lounaspaikalle':
+      'What one missed call costs a lunch spot',
+    'Ravintolan tapauksessa yhden puhelun arvo riippuu kahdesta luvusta: pöydän koko ja keskiostos per asiakas. Lounasravintolan keskiostos on tyypillisesti 12-18 €, ala carten 35-65 € ja viikonloppuiltaisin sen päälle juomat. Kun pöytä on neljän hengen ryhmä, yksi vastaamatta jäänyt soitto voi olla 200-300 € liikevaihtoa joka ei tule taloon.':
+      'In a restaurant\'s case the value of one call depends on two numbers: table size and average spend per customer. A lunch restaurant\'s average is typically €12-18, à la carte runs €35-65, and weekend evenings add drinks on top. When the table is a group of four, one missed call can be €200-300 of revenue that never reaches the till.',
+    'Esimerkkilaskelma: keskikokoinen lounas- ja illallisravintola':
+      'Sample calculation: mid-sized lunch and dinner restaurant',
+    'Vastaamattomia puheluita / arkipäivä': 'Missed calls / weekday',
+    'Näistä pöytävaraus- tai ryhmäpuheluita': 'Of these, table booking or group calls',
+    'Keskimääräinen pöytäkoko (ryhmä)': 'Average table size (group)',
+    '3,4 hlö': '3.4 ppl',
+    'Keskimääräinen lasku / pöytä': 'Average bill / table',
+    'Menetys / arkipäivä (jos 50 % olisi konvertoitunut)':
+      'Loss / weekday (if 50% had converted)',
+    'Menetys / vuosi (260 päivää)': 'Loss / year (260 days)',
+    'Tämäkin laskelma on alakanttiin. Mukana ei ole viikonloppujen ryhmävarauksia, syntymäpäiviä, suurempia firmaillallisia tai keikkaa tilaavia asiakkaita, joiden lasku voi olla nelinumeroinen. Kun nuo lasketaan mukaan, monella ravintolalla puhuvat luvut nousevat kuusinumeroisiksi vuodessa.':
+      'Even this calculation runs low. It doesn\'t include weekend group bookings, birthdays, bigger company dinners, or catering customers whose bill can be four figures. When those are factored in, for many restaurants the numbers climb into six figures a year.',
+    '"Me luulimme että somemainonta on se, mihin pitää laittaa lisää rahaa. Sitten katsoimme operaattorin raporttia. Vastaamatta jäi 41 puhelua viikossa. Se ei ollut markkinoinnin ongelma, se oli puhelimen ongelma."':
+      '"We thought social media advertising was the thing we needed to spend more on. Then we looked at the carrier\'s report. We were missing 41 calls a week. It wasn\'t a marketing problem, it was a phone problem."',
+    'Ravintoloitsija, Helsinki': 'Restaurant owner, Helsinki',
+    'No-showt: toinen vuotokohta jonka harva laskee':
+      'No-shows: the second leak few people calculate',
+    'Vastaamatta jääneet puhelut ovat yksi puoli. Toinen on no-showt, eli pöytävaraukset jotka eivät koskaan tule paikalle. Suomessa lukemat vaihtelevat 8-15 % välillä riippuen ravintolasta ja viikonpäivästä. Perjantai-iltana voi olla helposti 10 % varauksista paikalla tulematta.':
+      'Missed calls are one side. The other is no-shows, table bookings that never show up. In Finland the rate varies between 8-15% depending on the restaurant and the day of the week. On a Friday evening you can easily have 10% of bookings not turn up.',
+    'No-show maksaa monta asiaa kerralla. Pöytä on varattu, joten muita asiakkaita on käännytetty pois. Tarjoilijat ovat työvuorossa. Keittiö on tilannut raaka-aineet illan kapasiteetin mukaan. Joka tyhjäksi jäänyt nelosen pöytä on käytännössä tunnin liikevaihto pois.':
+      'A no-show costs several things at once. The table is reserved, so other customers were turned away. Servers are on shift. The kitchen has ordered ingredients to match the evening\'s capacity. Every empty four-top is essentially an hour of revenue gone.',
+    'Yksinkertainen vahvistuspuhelu tai tekstari iltapäivällä laskee no-show-prosentin tutkimusten mukaan suunnilleen puoleen. Ongelma on, että kukaan ei ehdi soittaa 30 vahvistuspuhelua kello 14, koska samaan aikaan keittiö valmistautuu illalla.':
+      'A simple confirmation call or text in the afternoon cuts the no-show rate roughly in half, according to studies. The problem is, nobody has time to make 30 confirmation calls at 2pm, because at the same time the kitchen is prepping for the evening.',
+    'Mitä tekoälyvastaanottaja tekee toisin':
+      'What an AI receptionist does differently',
+    'Tekoälyvastaanottaja vastaa puhelimeen kolmannella soitolla. Lounaskiireessä, perjantai-iltana, juhannuksena. Ravintolakontekstissa tekoälyagentti tekee neljä asiaa, joista jokainen on suoraan rahaksi käännettävää aikaa.':
+      'An AI receptionist answers the phone on the third ring. During the lunch rush, on Friday evening, on Midsummer. In a restaurant context the AI agent does four things, each of which is time directly convertible to money.',
+    'Ottaa pöytävarauksen kalenteriin.': 'Takes a table booking into the calendar.',
+    'Agentti kysyy päivän, kellonajan, henkilömäärän, nimen ja puhelinnumeron. Tarvittaessa myös allergiat tai erikoispyynnöt. Tieto siirtyy suoraan ravintolan varauskalenteriin (TableOnline, ResDiary, Quentic, Google Sheets, sähköposti, oma järjestelmä).':
+      'The agent asks for the day, time, number of guests, name and phone number. If needed, allergies or special requests too. The data flows straight into the restaurant\'s booking calendar (TableOnline, ResDiary, Quentic, Google Sheets, email, your own system).',
+    'Tarkistaa vapauden reaaliajassa.': 'Checks availability in real time.',
+    'Agentti näkee saman kalenterin kuin sinä. Jos perjantai 19:00 on täynnä, se ehdottaa 18:00 tai 20:30. Asiakas saa vastauksen samassa puhelussa, ei "soitamme takaisin huomenna".':
+      'The agent sees the same calendar you do. If Friday 19:00 is full, it offers 18:00 or 20:30. The customer gets an answer in the same call, not "we\'ll call you back tomorrow".',
+    'Vahvistaa varaukset automaattisesti.': 'Confirms bookings automatically.',
+    'Asiakas saa heti tekstiviestivahvistuksen ja muistutusviestin saman päivän aamuna. Tämä yksin pudottaa no-shown puoleen.':
+      'The customer gets an instant text confirmation and a reminder on the morning of the booking. This alone cuts no-shows in half.',
+    'Suodattaa lounas-, kysymys- ja ryhmäpuhelut erilleen.':
+      'Filters lunch, question and group calls into separate streams.',
+    '"Onko teillä gluteenitonta lounasta?" saa suoran vastauksen. "Voinko varata 30 hengen syntymäpäiväillan?" siirtyy sähköpostiin tai päällikön puhelimeen, koska se on iso keskiostos jonka haluat hoitaa itse.':
+      '"Do you have a gluten-free lunch?" gets a direct answer. "Can I book a birthday evening for 30?" goes to email or the manager\'s phone, because that\'s a big-ticket booking you want to handle yourself.',
+    'Käytännön esimerkki perjantai-iltapäivästä':
+      'A practical example from a Friday afternoon',
+    'Perjantai 13:45. Ravintolan puhelin soi. Tarjoilija ei voi vastata, koska kantaa kahta lautasta ja kassalla on jonoa. Puhelu menee tekoälyvastaanottajalle. Ääni vastaa: "Ravintola Lyhty, miten voin auttaa?" Asiakas haluaa varata pöydän neljälle illaksi kello 19. Agentti tarkistaa kalenterin, tarjoaa kahta vapaata aikaa, vahvistaa varauksen, kysyy onko allergioita ja lopuksi: "Lähetän vahvistusviestin numeroosi. Nähdään illalla."':
+      'Friday 13:45. The restaurant\'s phone rings. The server can\'t pick up because they\'re carrying two plates and there\'s a queue at the till. The call goes to the AI receptionist. The voice answers: "Ravintola Lyhty, how can I help?" The customer wants to book a table for four for the evening at 7pm. The agent checks the calendar, offers two open times, confirms the booking, asks about allergies and finishes: "I\'ll send a confirmation message to your number. See you tonight."',
+    'Vahvistusviesti lähtee. Iltapäivällä klo 16 lähtee muistutusviesti: "Hei, muistathan varauksesi tänään 19:00. Vastaa KYLLÄ vahvistaaksesi tai EI peruaksesi." Asiakas vastaa KYLLÄ. No-show ei toteudu. Pöytä tuottaa.':
+      'The confirmation message goes out. At 16:00 in the afternoon a reminder follows: "Hi, remember your booking today at 19:00. Reply YES to confirm or NO to cancel." The customer replies YES. No no-show. The table earns.',
+    'Tarjoilijalta kului tämän puhelun käsittelyyn nolla sekuntia. Pöytä on kalenterissa, varaus on vahvistettu, asiakas on tulossa.':
+      'The server spent zero seconds handling this call. The table is in the calendar, the booking is confirmed, the customer is coming.',
+    'Mitä tämä maksaa verrattuna menetettyyn':
+      'What this costs compared to what you\'re losing',
+    'ROI: yksi säilytetty pöytä per päivä riittää':
+      'ROI: one saved table per day is enough',
+    'Yksi keskikokoinen lasku ravintolassa': 'One mid-sized restaurant bill',
+    'Yksi pelastettu ryhmävaraus (8 hlö illallinen)':
+      'One rescued group booking (8-person dinner)',
+    'ROI, jos pelastaa 5 pöytää/kk + 1 ryhmävaraus':
+      'ROI if it saves 5 tables/month + 1 group booking',
+    'Käytännössä riittää että tekoälyvastaanottaja ottaa kiinni neljä vastaamatta jäävää lounaspuhelua viikossa. Sen jälkeen kaikki muu, eli pelastetut ryhmävaraukset, vähentyneet no-showt ja salin parantunut palvelutaso, on bonusta.':
+      'In practice it\'s enough for the AI receptionist to catch four unanswered lunch calls a week. After that everything else, the rescued group bookings, the lower no-show rate and the better service level on the floor, is a bonus.',
+    'Mitä käyttöönotto ravintolalle oikeasti vaatii':
+      'What onboarding actually requires for a restaurant',
+    'Tämä on se kohta jossa moni ravintoloitsija pudottaa luurin: "minulla ei ole aikaa ottaa uutta järjestelmää käyttöön". Reilu vastaus: käyttöönotto vie noin':
+      'This is the point where many restaurant owners hang up: "I don\'t have time to roll out a new system". Honest answer: onboarding takes about',
+    '60 minuuttia': '60 minutes',
+    'ravintoloitsijalta itseltään.': 'from the owner.',
+    'Käytännössä tarvitaan kolme asiaa:': 'In practice three things are needed:',
+    'Ruokalista, hinnasto karkeasti ja aukioloajat (mitä tarjoatte, mihin hintaan, milloin auki)':
+      'Menu, rough pricing and opening hours (what you serve, at roughly what price, when you\'re open)',
+    'Pöytäkalenteri johon agentti saa kirjoittaa (TableOnline, ResDiary tai jopa Google Calendar käy)':
+      'A booking calendar the agent can write into (TableOnline, ResDiary, even Google Calendar works)',
+    'Sähköposti tai puhelinnumero, johon ryhmävaraukset ja erikoispyynnöt ohjataan':
+      'An email or phone number to forward group bookings and special requests to',
+    'Sen jälkeen agentti koulutetaan ravintolan oman tyylin mukaiseksi, numero ohjataan päälle ruuhka-aikoina (tai aina) ja vahvistusviestit kytketään päälle. Homma on käynnissä saman viikon aikana. Ei uutta kassajärjestelmää, ei sovellusta tarjoilijoille, ei koulutuksia salihenkilökunnalle.':
+      'After that the agent is trained in the restaurant\'s own style, the number is forwarded during peak hours (or always) and confirmation messages are switched on. The whole thing is up and running within the same week. No new POS, no app for the servers, no training sessions for the floor staff.',
+    'Milloin kannattaa harkita tätä': 'When this is worth considering',
+    'Tekoälyvastaanottaja ei ole jokaiselle ravintolalle välttämätön. Se kannattaa kun vähintään yksi seuraavista pätee:':
+      'An AI receptionist isn\'t essential for every restaurant. It\'s worth it when at least one of the following is true:',
+    'Salin täyttöaste on lounaalla tai illalla yli 70 % ja puhelin jää soimaan ruuhka-aikoina':
+      'Your dining room runs above 70% capacity at lunch or dinner and the phone keeps ringing during peak hours',
+    'No-show-prosentti on yli 8 % etkä ehdi tehdä vahvistuspuheluita käsin':
+      'Your no-show rate is over 8% and you don\'t have time to make confirmation calls by hand',
+    'Saat säännöllisesti ryhmävarauspyyntöjä, jotka vaativat takaisinsoittoa tai sähköpostin tarkistusta':
+      'You regularly get group booking requests that require a callback or an email check',
+    'Asiakkaat antavat palautetta että puhelimeen ei vastata, tai et tiedä paljonko menetät vastaamatta jääneistä puheluista':
+      'Customers give feedback that nobody picks up the phone, or you don\'t know how much you\'re losing on missed calls',
+    'Jos ravintola on viiden pöydän bistro jossa omistaja ehtii itse vastata jokaiseen puheluun, tätä ei tarvita. Jos taas olette 40-150 paikan ravintola, lounaspaikka jossa puhelin soi 60 kertaa päivässä, tai useamman toimipisteen ketju, tässä on luultavasti se yksi asia jonka voi automatisoida tänä vuonna ilman että asiakaspalvelun laatu kärsii. Päinvastoin, asiakkaalle puhelin alkaa':
+      'If your restaurant is a five-table bistro where the owner can pick up every call themselves, this isn\'t needed. But if you\'re a 40-150 seat restaurant, a lunch spot where the phone rings 60 times a day, or a multi-location chain, this is probably the one thing you can automate this year without service quality suffering. The opposite, in fact: for the customer the phone starts',
+    'aina vastata': 'always answering',
+    ', ei joskus.': ', not sometimes.',
+    'Katso mitä Selora vastaisi sinun ravintolasi puhelimeen':
+      'See what Selora would say to your restaurant\'s phone',
+    '30 minuutin demossa näet oikean pöytävarauspuhelun alusta loppuun, ravintolan skenaariolla. Ei PowerPointia, ei sitoumuksia.':
+      'In a 30-minute demo you see a real table-booking call from start to finish, with a restaurant scenario. No PowerPoint, no commitments.',
+    'Varaa maksuton demo →': 'Book a free demo →',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
