@@ -99,6 +99,25 @@ serve(async (req) => {
     return new Response("DB error", { status: 500 });
   }
 
+  // ── Push notification: new call ────────────────────────────────────────
+  // Skip in-progress events; only notify on a settled outcome.
+  if (outcome !== "in_progress") {
+    const durStr = fmtDuration(durationSecs);
+    const oc     = outcomeFi(outcome);
+    void sendPush({
+      user_id: userId,
+      type:    "new_call",
+      title:   "Uusi puhelu",
+      body:    `${callerNumber} · ${oc.label} · ${durStr}`,
+      data: {
+        call_id:        call.call_id,
+        caller_number:  callerNumber,
+        outcome,
+        duration_secs:  durationSecs,
+      },
+    });
+  }
+
   // ── Auto-create appointment from structured post-call analysis data ─────────
   // Retell extracts these fields via post_call_analysis_data configured on the LLM.
   const structured = analysis.custom_analysis_data as Record<string, unknown> | undefined;
@@ -203,6 +222,26 @@ serve(async (req) => {
       type:          "appointment",
     });
     console.log("Created appointment:", title, "at", startTime);
+
+    // ── Push notification: new appointment ───────────────────────────────
+    const apptWhen = fmtTime(startTime);
+    const bodyParts = [
+      customerName || displayName,
+      serviceReq || null,
+      apptWhen,
+    ].filter((p): p is string => Boolean(p));
+    void sendPush({
+      user_id: userId,
+      type:    "new_appointment",
+      title:   "Uusi varaus",
+      body:    bodyParts.join(" · "),
+      data: {
+        customer_name: customerName,
+        service:       serviceReq,
+        start_time:    startTime,
+        caller_number: customerPhone || callerNumber,
+      },
+    });
 
     // Also upsert contact with name if we got it
     if (customerName && callerNumber && callerNumber !== "Tuntematon") {
@@ -532,4 +571,30 @@ async function sendCallNotification(opts: {
 
 function escHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// ── Invoke send-push-notification edge function ────────────────────────────
+async function sendPush(payload: {
+  user_id: string;
+  type: "new_call" | "new_appointment" | "daily_summary";
+  title: string;
+  body: string;
+  data?: Record<string, unknown>;
+}): Promise<void> {
+  try {
+    const resp = await fetch(`${SUPABASE_URL}/functions/v1/send-push-notification`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${SUPABASE_SERVICE}`,
+        "Content-Type":  "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!resp.ok) {
+      const text = await resp.text();
+      console.warn("[retell-webhook] push notification failed", resp.status, text);
+    }
+  } catch (err) {
+    console.warn("[retell-webhook] push notification threw", err);
+  }
 }
