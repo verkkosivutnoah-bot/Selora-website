@@ -2782,6 +2782,48 @@
       'See what Selora would say to your repair shop\'s phone',
     '30 minuutin demossa näet oikean ajanvarauspuhelun alusta loppuun, korjaamon skenaariolla. Ei PowerPointia, ei sitoumuksia.':
       'In a 30-minute demo you see a real booking call from start to finish, with a repair shop scenario. No PowerPoint, no commitments.',
+
+    // ---------- mobile app showcase ----------
+    'Selora-sovellus': 'Selora app',
+    'Tulossa pian': 'Coming soon',
+    'Hallinnoi puheluita': 'Manage calls',
+    'kämmenelläsi.': 'in your pocket.',
+    'Mobiilisovellus iOS:lle ja Androidille. Reaaliaikainen näkymä agenttisi puheluihin, varauksiin ja asiakkaisiin. Push-ilmoitukset heti uudesta puhelusta. Julkaistaan kevään aikana.':
+      'Mobile app for iOS and Android. Real-time view of your agent\'s calls, bookings and customers. Push notifications the moment a new call comes in. Launching this spring.',
+    'Puhelin, kalenteri ja asiakkaat, yhdessä paikassa.': 'Phone, calendar and customers, all in one place.',
+    'Selora-mobiilisovellus näyttää reaaliaikaisesti agenttisi puhelut, varaukset ja asiakkaat. Saat push-ilmoituksen heti, kun uusi puhelu vastataan tai aika varataan.':
+      'The Selora mobile app shows your agent\'s calls, bookings and customers in real time. You get a push notification the moment a new call is answered or an appointment is booked.',
+    'Tänään': 'Today',
+    'Kojelauta': 'Dashboard',
+    'Puhelua / vko': 'Calls / wk',
+    'Uusi puhelu vastattu': 'New call answered',
+    '+358 40 123 4567 · 1 m sitten': '+358 40 123 4567 · 1 m ago',
+    'Uusi varaus': 'New booking',
+    'Mari L. · perjantaina 14:30': 'Mari L. · Friday 14:30',
+    '+34 % varauksia': '+34% bookings',
+    'Tällä viikolla': 'This week',
+    'Asiakas vastattu': 'Customer answered',
+    'Heti, 24/7': 'Instant, 24/7',
+    'Lataa': 'Download',
+    'App Storesta': 'on the App Store',
+    'Hanki': 'Get',
+    'Google Playsta': 'on Google Play',
+    'Pian': 'Soon',
+
+    // ---------- a11y / chrome ----------
+    'Hyppää sisältöön': 'Skip to content',
+
+    // ---------- cookie banner ----------
+    'Käytämme välttämättömiä evästeitä': 'We use essential cookies',
+    'Selora käyttää vain teknisesti välttämättömiä evästeitä sivuston toiminnan varmistamiseksi. Emme seuraa käyttöäsi mainostarkoituksiin. Lue lisää tietosuojaselosteestamme.':
+      'Selora uses only essential cookies needed for the site to work. We do not track you for advertising. See our privacy policy for details.',
+    'Selvä': 'Got it',
+
+    // ---------- newsletter GDPR ----------
+    'Tilaamalla hyväksyt, että Selora käyttää sähköpostiosoitettasi uutiskirjeen lähettämiseen. Voit perua tilauksen milloin tahansa jokaisen viestin alalaidan linkistä. Lue tietosuojaseloste.':
+      'By subscribing you agree that Selora uses your email to send the newsletter. You can unsubscribe any time via the link at the bottom of every email. See the privacy policy.',
+    'tietosuojaseloste': 'privacy policy',
+    'Sähköpostiosoite': 'Email address',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

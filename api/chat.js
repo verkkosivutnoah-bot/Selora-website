@@ -59,10 +59,15 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { messages } = req.body || {};
+  const { messages, lang } = req.body || {};
   if (!messages || !Array.isArray(messages) || messages.length === 0) {
     return res.status(400).json({ error: 'messages array required' });
   }
+  const userLang = lang === 'en' ? 'en' : 'fi';
+  const langPrefix = userLang === 'en'
+    ? `IMPORTANT: Respond ONLY in English. Match the user's English. Translate any Finnish content from your knowledge base on the fly. Keep brand name "Selora" untranslated. Currency stays in EUR. Site links: Home /, Services /palvelut.html, Pricing /hinnoittelu.html, Blog /blogi.html, Contact /yhteystiedot.html.\n\n`
+    : `TÄRKEÄÄ: Vastaa AINA suomeksi.\n\n`;
+  const systemForLang = langPrefix + SYSTEM_PROMPT;
 
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
@@ -81,7 +86,7 @@ module.exports = async function handler(req, res) {
         model: 'llama-3.1-8b-instant',
         max_tokens: 600,
         messages: [
-          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'system', content: systemForLang },
           ...messages.slice(-12),
         ],
       }),

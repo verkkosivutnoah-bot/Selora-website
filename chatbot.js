@@ -9,13 +9,30 @@
   var BLUE = '#1D4ED8';
   var BLUE_DARK = '#1e40af';
 
-  var SUGGESTIONS = [
+  function getLang() {
+    try {
+      var v = localStorage.getItem('seloraLang');
+      if (v === 'fi' || v === 'en') return v;
+    } catch (_) {}
+    var html = (document.documentElement.lang || 'fi').slice(0, 2).toLowerCase();
+    return html === 'en' ? 'en' : 'fi';
+  }
+
+  var SUGGESTIONS_FI = [
     'Miten tekoälyvastaanottaja toimii?',
     'Mitä palveluja tarjoatte?',
     'Paljonko se maksaa?',
     'Kuinka nopeasti pääsen alkuun?',
     'Vertaa tekoälyä ja ihmisvastaanottajaa',
   ];
+  var SUGGESTIONS_EN = [
+    'How does the AI receptionist work?',
+    'What services do you offer?',
+    'How much does it cost?',
+    'How fast can I get started?',
+    'Compare AI vs. human receptionist',
+  ];
+  var SUGGESTIONS = getLang() === 'en' ? SUGGESTIONS_EN : SUGGESTIONS_FI;
 
   /* ── CSS ───────────────────────────────────────────────────── */
   var css = [
@@ -316,7 +333,7 @@
     fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history }),
+      body: JSON.stringify({ messages: history, lang: getLang() }),
     })
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
