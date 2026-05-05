@@ -3,7 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prosessi — Selora</title>
+  <title>Prosessi, Selora</title>
+  <meta name="description" content="Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: kartoitus, persoonallisuuden rakentaminen, integraatio ja jatkuva optimointi. Käyttöönotto alle 48 tunnissa." />
+  <link rel="canonical" href="https://selora.fi/prosessi.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Prosessi, Selora" />
+  <meta property="og:description" content="Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: alle 48 tunnissa puhelut hoituvat itsestään." />
+  <meta property="og:url" content="https://selora.fi/prosessi.html" />
+  <meta property="og:image" content="https://selora.fi/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -33,9 +41,9 @@
     .reveal-delay-3 { transition-delay: 0.3s; }
     footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-copy { font-size: 0.72rem; color: #94a3b8; }
+    .footer-copy { font-size: 0.72rem; color: #64748b; }
     .footer-nav { display: flex; gap: 0.25rem; }
-    .footer-nav a { font-size: 0.72rem; color: #94a3b8; text-decoration: none; padding: 0.25rem 0.6rem; border-radius: 9999px; transition: color 0.2s; }
+    .footer-nav a { font-size: 0.72rem; color: #64748b; text-decoration: none; padding: 0.25rem 0.6rem; border-radius: 9999px; transition: color 0.2s; }
     .footer-nav a:hover { color: #334155; }
 
     /* PAGE HERO */
@@ -139,12 +147,12 @@
     .roi-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #1D4ED8; cursor: pointer; box-shadow: 0 2px 10px rgba(29,78,216,0.4); border: 2.5px solid #fff; }
     .roi-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #1D4ED8; cursor: pointer; box-shadow: 0 2px 10px rgba(29,78,216,0.4); border: 2.5px solid #fff; border-style: solid; }
     .roi-slider-hints { display: flex; justify-content: space-between; margin-top: 0.4rem; }
-    .roi-slider-hints span { font-size: 0.61rem; color: #94a3b8; }
+    .roi-slider-hints span { font-size: 0.61rem; color: #64748b; }
     .roi-divider { height: 1px; background: rgba(15,23,42,0.08); margin-bottom: 2rem; }
     .roi-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(15,23,42,0.08); border-radius: 1rem; overflow: hidden; margin-bottom: 1.25rem; background: #fff; }
     .roi-stat { padding: 1.1rem 1.2rem; border-right: 1px solid rgba(15,23,42,0.07); }
     .roi-stat:last-child { border-right: none; background: #fef2f2; }
-    .roi-stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #94a3b8; margin-bottom: 0.5rem; }
+    .roi-stat-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; margin-bottom: 0.5rem; }
     .roi-stat-val { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.03em; color: #0f172a; line-height: 1; }
     .roi-stat:last-child .roi-stat-val { color: #dc2626; }
     .roi-stat-period { font-size: 0.62rem; color: #64748b; margin-top: 0.25rem; }
@@ -156,7 +164,7 @@
     .roi-selora-amount span { font-size: 0.8rem; font-weight: 400; opacity: 0.65; }
     .roi-selora-note { font-size: 0.6rem; color: rgba(255,255,255,0.45); margin-top: 0.2rem; text-align: right; }
     .roi-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: auto; padding-top: 1.25rem; }
-    .roi-disclaimer { font-size: 0.61rem; color: #94a3b8; line-height: 1.6; max-width: 22rem; }
+    .roi-disclaimer { font-size: 0.61rem; color: #64748b; line-height: 1.6; max-width: 22rem; }
     /* Chart card */
     .roi-chart-card { background: #0c1220; border-radius: 1.5rem; padding: 2.5rem 2rem 2rem; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,0.06); overflow: hidden; position: relative; }
     .roi-chart-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 0%, rgba(29,78,216,0.18) 0%, transparent 65%); pointer-events: none; }
@@ -173,8 +181,10 @@
     .roi-legend-line.red { background: none; border-top: 1.5px dashed rgba(239,68,68,0.55); height: 0; margin-top: 1px; }
   </style>
 <script src="/i18n.js" defer></script>
+<style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 </head>
 <body>
+<a href="#main" class="selora-skip">Hyppää sisältöön</a>
 
 <div class="page-hero">
   <canvas id="pageCanvas"></canvas>
@@ -188,7 +198,7 @@
       <a href="yhteystiedot.html">Yhteystiedot</a>
     </nav>
     <div class="header-cta">
-      <!-- HIDDEN: client portal disabled — <a href="yhteystiedot.html" class="btn btn-ghost" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Kirjaudu</a> -->
+      <!-- HIDDEN: client portal disabled, <a href="yhteystiedot.html" class="btn btn-ghost" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Kirjaudu</a> -->
       <a href="yhteystiedot.html" class="btn btn-light" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa puhelu →</a>
     </div>
   </header>
@@ -214,7 +224,7 @@
         <div class="step-right">
           <h3>Kartoituspuhelu</h3>
           <p>Kartoitamme nykyisen toimintamallisi, löydämme kohdat joissa liidejä menetetään ja määrittelemme mitä kannattaa automatisoida ensin parhaan ROI:n saavuttamiseksi. Puhelun jälkeen sinulla on selkeä kuva siitä, mitä rakennetaan ja milloin.</p>
-          <span class="step-tag">Kesto: 45–60 min</span>
+          <span class="step-tag">Kesto: 45, 60 min</span>
         </div>
       </div>
 
@@ -225,8 +235,8 @@
         </div>
         <div class="step-right">
           <h3>Rakennus ja konfigurointi</h3>
-          <p>Tiimimme rakentaa tekoälyjärjestelmäsi, skriptit ja työnkulut — täysin räätälöitynä brändillesi, äänensävyllesi ja toimialallesi. Ei valmiita malleja, ei kompromisseja. Saat tarkalleen sen mitä yrityksesi tarvitsee.</p>
-          <span class="step-tag">Kesto: 3–7 arkipäivää</span>
+          <p>Tiimimme rakentaa tekoälyjärjestelmäsi, skriptit ja työnkulut, täysin räätälöitynä brändillesi, äänensävyllesi ja toimialallesi. Ei valmiita malleja, ei kompromisseja. Saat tarkalleen sen mitä yrityksesi tarvitsee.</p>
+          <span class="step-tag">Kesto: 3, 7 arkipäivää</span>
         </div>
       </div>
 
@@ -237,7 +247,7 @@
         </div>
         <div class="step-right">
           <h3>Julkaisu ja luovutus</h3>
-          <p>Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja integraatiot — sinun ei tarvitse koskea koodiin. Saat selkeän kuvan kaikesta käynnissä olevasta.</p>
+          <p>Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja integraatiot, sinun ei tarvitse koskea koodiin. Saat selkeän kuvan kaikesta käynnissä olevasta.</p>
           <span class="step-tag">Kesto: 1 arkipäivä</span>
         </div>
       </div>
@@ -248,7 +258,7 @@
         </div>
         <div class="step-right">
           <h3>Optimointi ja kasvu</h3>
-          <p>Kuukausittaiset tarkistukset, reaaliaikainen suorituskykydata ja jatkuva hienosäätö — jotta järjestelmäsi kehittyy ajan myötä ja tulokset kasvavat kuukausittain. Tekoälysi oppii jatkuvasti, ja niin oppii myös strategiasi.</p>
+          <p>Kuukausittaiset tarkistukset, reaaliaikainen suorituskykydata ja jatkuva hienosäätö, jotta järjestelmäsi kehittyy ajan myötä ja tulokset kasvavat kuukausittain. Tekoälysi oppii jatkuvasti, ja niin oppii myös strategiasi.</p>
           <span class="step-tag">Jatkuva tuki</span>
         </div>
       </div>
@@ -319,7 +329,7 @@
           <div>
             <div class="roi-selora-tag">Seloran kanssa</div>
             <div class="roi-selora-headline">Voisit kaapata takaisin arviolta</div>
-            <div class="roi-selora-sub" id="roi-selora-sub">Tekoäly vastaa jokaiseen puheluun — ei enää vastaamattomuutta</div>
+            <div class="roi-selora-sub" id="roi-selora-sub">Tekoäly vastaa jokaiseen puheluun, ei enää vastaamattomuutta</div>
           </div>
           <div style="text-align:right; flex-shrink:0;">
             <div class="roi-selora-amount" id="roi-selora-amount">128 700 €<span>/kk</span></div>
@@ -337,7 +347,7 @@
         <div class="roi-chart-header">
           <div class="roi-chart-eyebrow">Tulopotentiaali</div>
           <div class="roi-chart-title">Mitä voisit ansaita Seloran<br>kanssa seuraavat 12 kuukautta</div>
-          <div class="roi-chart-sub">Siirrä liukuja vasemmalta — kaavio päivittyy reaaliajassa</div>
+          <div class="roi-chart-sub">Siirrä liukuja vasemmalta, kaavio päivittyy reaaliajassa</div>
         </div>
         <div class="roi-chart-canvas-wrap">
           <canvas id="roiChart"></canvas>
@@ -363,7 +373,7 @@
   <div class="container">
     <p class="section-label">Asiakastulokset</p>
     <h2 class="section-heading">Oikeat yritykset. <span class="accent">Oikea kasvu.</span></h2>
-    <p class="section-sub">Kaikenlaisista yrityksistä — tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.</p>
+    <p class="section-sub">Kaikenlaisista yrityksistä, tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.</p>
 
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
@@ -419,7 +429,7 @@
   <div class="container">
     <div class="cta-block reveal">
       <h2>Kuulostaa <span class="accent">hyvältä</span>?</h2>
-      <p>Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia — ja sen jälkeen tiedät tarkalleen mitä saisit.</p>
+      <p>Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia, ja sen jälkeen tiedät tarkalleen mitä saisit.</p>
       <div class="cta-btns">
         <a href="hinnoittelu.html" class="btn btn-ghost">Katso hinnat</a>
         <a href="yhteystiedot.html" class="btn btn-light">Varaa puhelu →</a>
@@ -578,7 +588,7 @@
       }
     }
 
-    /* Flat "Ilman Seloraa" baseline — dashed red line at zero */
+    /* Flat "Ilman Seloraa" baseline, dashed red line at zero */
     ctx.beginPath();
     ctx.setLineDash([5, 5]);
     ctx.strokeStyle = 'rgba(239,68,68,0.45)';
@@ -603,7 +613,7 @@
     ctx.fillStyle = grad;
     ctx.fill();
 
-    /* Gain line — thick glowing blue */
+    /* Gain line, thick glowing blue */
     ctx.shadowColor = 'rgba(96,165,250,0.5)';
     ctx.shadowBlur  = 10;
     ctx.beginPath();
@@ -692,7 +702,7 @@
     var sub = document.getElementById('roi-selora-sub');
     if (sub && selora > 0) {
       var days = Math.max(1, Math.round(499 / (selora / 30)));
-      sub.textContent = 'Palvelu maksaa itsensä takaisin jo päivänä ' + days + ' — loput kuukautta on puhdasta voittoa.';
+      sub.textContent = 'Palvelu maksaa itsensä takaisin jo päivänä ' + days + ', loput kuukautta on puhdasta voittoa.';
     }
 
     drawChart(monthly, selora);
@@ -714,5 +724,6 @@
   roiCalc();
 })();
 </script>
+<script src="/assets/cookie-banner.js" defer></script>
 </body>
 </html>

@@ -1,8 +1,44 @@
-scripts/node_modules/
-scripts/.env
+# OS
 .DS_Store
-*.zip
-index-91bf7433.html
-agency-website.textClipping
-lead-scraper/credentials.json
+Thumbs.db
+*.textClipping
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Claude harness
 .claude/
+.claude-plugin/
+
+# Node
+node_modules/
+scripts/node_modules/
+**/node_modules/
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+**/credentials.json
+**/credentials/*.json
+
+# Office
+*.docx
+*.xlsx
+*.pptx
+
+# Archives + backups
+*.zip
+*.tar.gz
+*.original.md
+*.bak
+SELORA-WEBSITE.zip
+
+# Logs
+*.log
+npm-debug.log*
+
+# Per-tool data
+linkedin-posts-*.csv

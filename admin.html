@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — Selora</title>
+  <title>Admin, Selora</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -76,22 +76,22 @@
       /* Two-col layout */
       .cols { gap: 1rem; }
 
-      /* Form grid — single column */
+      /* Form grid, single column */
       .form-grid { grid-template-columns: 1fr; }
       .form-full { grid-column: 1; }
 
-      /* Client table — hide Puhelin (col 3) and Rekisteröity (col 6) */
+      /* Client table, hide Puhelin (col 3) and Rekisteröity (col 6) */
       table thead th:nth-child(3),
       table tbody td:nth-child(3),
       table thead th:nth-child(6),
       table tbody td:nth-child(6) { display: none; }
 
-      /* Action buttons in last column — stack them */
+      /* Action buttons in last column, stack them */
       table tbody td:last-child { white-space: normal; }
       table tbody td:last-child .btn-sm,
       table tbody td:last-child .btn-danger { display: block; width: 100%; margin-bottom: 4px; text-align: center; }
 
-      /* Activity log — flex column layout */
+      /* Activity log, flex column layout */
       .log-entry {
         grid-template-columns: 1fr;
         gap: 0.4rem;
@@ -197,7 +197,7 @@
     .log-pill.active   { background:rgba(16,185,129,0.12);  color:#34d399;  border-color:rgba(16,185,129,0.25); }
     .log-pill.demo     { background:rgba(245,158,11,0.12);  color:#fbbf24;  border-color:rgba(245,158,11,0.25); }
     .log-pill.onboarded{ background:rgba(96,165,250,0.12);  color:#60a5fa;  border-color:rgba(96,165,250,0.25); }
-    .log-pill.no-onboard{ background:rgba(100,116,139,0.1); color:#94a3b8;  border-color:rgba(100,116,139,0.2); }
+    .log-pill.no-onboard{ background:rgba(100,116,139,0.1); color:#64748b;  border-color:rgba(100,116,139,0.2); }
     .log-pill.has-agent { background:rgba(16,185,129,0.1);  color:#34d399;  border-color:rgba(16,185,129,0.2); }
     .log-pill.plan-aloitus { background:rgba(29,78,216,0.12); color:#60a5fa; border-color:rgba(29,78,216,0.25); }
     .log-pill.plan-kasvu   { background:rgba(124,58,237,0.12); color:#a78bfa; border-color:rgba(124,58,237,0.25); }
@@ -294,22 +294,22 @@
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-label">Asiakkaat yhteensä</div>
-        <div class="stat-value" id="stat-total">–</div>
+        <div class="stat-value" id="stat-total">, </div>
         <div class="stat-sub">rekisteröityä tiliä</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Aktiiviset</div>
-        <div class="stat-value" id="stat-active">–</div>
+        <div class="stat-value" id="stat-active">, </div>
         <div class="stat-sub">maksava asiakas</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Demo-käyttäjät</div>
-        <div class="stat-value" id="stat-demo">–</div>
+        <div class="stat-value" id="stat-demo">, </div>
         <div class="stat-sub">ei vielä maksanut</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Agentit</div>
-        <div class="stat-value" id="stat-agents">–</div>
+        <div class="stat-value" id="stat-agents">, </div>
         <div class="stat-sub">Retell-agenttia</div>
       </div>
     </div>
@@ -391,7 +391,7 @@
             </div>
             <div class="form-group">
               <label class="form-label">Aukioloajat</label>
-              <input id="f-hours" class="form-input" type="text" placeholder="Ma–Pe 9–17">
+              <input id="f-hours" class="form-input" type="text" placeholder="Ma, Pe 9, 17">
             </div>
             <div class="form-group">
               <label class="form-label">Sävy</label>
@@ -415,7 +415,7 @@
               </select>
             </div>
             <div class="form-group form-full">
-              <label class="form-label">Olemassa oleva Retell Agent ID <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;">(valinnainen — jätä tyhjäksi luodaksesi uuden)</span></label>
+              <label class="form-label">Olemassa oleva Retell Agent ID <span style="color:var(--text-3);font-weight:400;text-transform:none;letter-spacing:0;">(valinnainen, jätä tyhjäksi luodaksesi uuden)</span></label>
               <input id="f-retell-agent" class="form-input" type="text" placeholder="agent_xxxxxxxxxxxxxxxxxxxxxxxx">
             </div>
           </div>
@@ -444,7 +444,7 @@
     <!-- Newsletter -->
     <div class="card" style="margin-top:1.5rem;">
       <div class="card-header">
-        <span class="card-title">Uutiskirje — Uusi artikkeli</span>
+        <span class="card-title">Uutiskirje, Uusi artikkeli</span>
         <span style="font-size:0.75rem;color:var(--text-3);" id="nl-count">Ladataan tilaajia…</span>
       </div>
       <div style="padding:1.5rem;display:grid;gap:1rem;">
@@ -455,7 +455,7 @@
         </div>
         <div>
           <label style="font-size:0.78rem;color:var(--text-2);display:block;margin-bottom:0.35rem;">Kuvaus (excerpt)</label>
-          <textarea id="nl-excerpt" rows="3" placeholder="Lyhyt 1–2 lauseen esittely artikkelista…"
+          <textarea id="nl-excerpt" rows="3" placeholder="Lyhyt 1, 2 lauseen esittely artikkelista…"
                     style="width:100%;padding:0.65rem 0.85rem;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:0.88rem;resize:vertical;"></textarea>
         </div>
         <div>
@@ -561,7 +561,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, { auth: { s
 let allClients = [];
 let session = null;
 
-// Always get a fresh token — access tokens expire after 1 hour
+// Always get a fresh token, access tokens expire after 1 hour
 async function getToken() {
   const { data: { session: s } } = await sb.auth.getSession();
   if (!s) { location.reload(); return null; }
@@ -615,7 +615,7 @@ async function adminLogin() {
     return;
   }
 
-  // Success — hide login, show app
+  // Success, hide login, show app
   session = data.session;
   document.getElementById('admin-login').style.display = 'none';
   document.getElementById('app').style.display = 'block';
@@ -676,7 +676,7 @@ async function sendNewsletter() {
     if (!resp.ok) throw new Error(data.error || 'Lähetys epäonnistui');
 
     resEl.style.color = '#86efac';
-    resEl.textContent = `✓ Lähetetty ${data.sent}/${data.total} tilaajalle${data.failed > 0 ? ` — ${data.failed} epäonnistui` : ''}`;
+    resEl.textContent = `✓ Lähetetty ${data.sent}/${data.total} tilaajalle${data.failed > 0 ? `, ${data.failed} epäonnistui` : ''}`;
     document.getElementById('nl-title').value = '';
     document.getElementById('nl-excerpt').value = '';
     document.getElementById('nl-url').value = '';
@@ -731,7 +731,7 @@ function renderActivityLog(clients) {
 
   el.innerHTML = sorted.map(c => {
     const dt = c.created_at ? new Date(c.created_at) : null;
-    const dateStr = dt ? dt.toLocaleDateString('fi-FI', { day:'2-digit', month:'2-digit', year:'numeric' }) : '–';
+    const dateStr = dt ? dt.toLocaleDateString('fi-FI', { day:'2-digit', month:'2-digit', year:'numeric' }) : ', ';
     const timeStr = dt ? dt.toLocaleTimeString('fi-FI', { hour:'2-digit', minute:'2-digit' }) : '';
 
     const planPill = c.has_active_plan
@@ -755,7 +755,7 @@ function renderActivityLog(clients) {
         <div>${timeStr}</div>
       </div>
       <div class="log-body">
-        <div class="log-name">${esc(c.full_name||'–')} <span style="color:var(--text-3);font-weight:400;">— ${esc(c.company_name||'')}</span></div>
+        <div class="log-name">${esc(c.full_name||', ')} <span style="color:var(--text-3);font-weight:400;">, ${esc(c.company_name||'')}</span></div>
         <div class="log-meta">
           <span>${esc(c.email||'')}</span>
           ${c.phone ? `<span>·</span><span>${esc(c.phone)}</span>` : ''}
@@ -795,15 +795,15 @@ function renderClients(clients) {
            <span><span class="dot green"></span>Aktiivinen</span>
            <span style="font-size:0.68rem;color:var(--text-3);font-family:monospace;">${esc(c.agent.retell_agent_id||'')}</span>
          </div>`
-      : `<span style="color:var(--text-3);">–</span>`;
-    const phone = c.phone ? esc(c.phone) : `<span style="color:var(--text-3);">–</span>`;
-    const created = c.created_at ? new Date(c.created_at).toLocaleDateString('fi-FI') : '–';
+      : `<span style="color:var(--text-3);">, </span>`;
+    const phone = c.phone ? esc(c.phone) : `<span style="color:var(--text-3);">, </span>`;
+    const created = c.created_at ? new Date(c.created_at).toLocaleDateString('fi-FI') : ', ';
     return `<tr>
       <td>
-        <div style="font-weight:500;">${esc(c.full_name||'–')}</div>
+        <div style="font-weight:500;">${esc(c.full_name||', ')}</div>
         <div style="font-size:0.75rem;color:var(--text-3);">${esc(c.email||'')}</div>
       </td>
-      <td>${esc(c.company_name||'–')}</td>
+      <td>${esc(c.company_name||', ')}</td>
       <td style="font-size:0.8rem;">${phone}</td>
       <td>${planBadge}</td>
       <td>${agentCell}</td>
@@ -832,7 +832,7 @@ async function createClient() {
   btn.disabled = true;
   const retellAgentId = document.getElementById('f-retell-agent').value.trim();
   btn.textContent = retellAgentId ? 'Linkitetään agenttia…' : 'Luodaan tiliä ja agenttia…';
-  status.textContent = '⏳ Tämä voi kestää 15–30 sekuntia…';
+  status.textContent = '⏳ Tämä voi kestää 15, 30 sekuntia…';
 
   try {
     const resp = await fetch(SUPABASE_URL + '/functions/v1/admin-create-client', {
@@ -865,9 +865,9 @@ async function createClient() {
       : '✅ Asiakastili luotu!';
     document.getElementById('creds-email').textContent    = email;
     document.getElementById('creds-password').textContent = data.is_existing
-      ? '(Olemassa oleva tili — salasana ei muuttunut)'
+      ? '(Olemassa oleva tili, salasana ei muuttunut)'
       : data.password;
-    document.getElementById('creds-agent').textContent    = data.agent_id || '–';
+    document.getElementById('creds-agent').textContent    = data.agent_id || ', ';
     document.getElementById('creds-modal').style.display  = 'flex';
 
     // Reset form

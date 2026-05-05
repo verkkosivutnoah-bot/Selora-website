@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu?, Selora Blogi</title>
-  <meta name="description" content="Käytännön opas tekoälyvastaanottajan käyttöönotosta suomalaisessa yrityksessä. Ei teknistä osaamista vaadita." />
+  <title>Autokorjaamon puhelin soi öljynvaihdon aikana: miksi joka kolmas ajanvaraus karkaa kilpailijalle - Selora Blogi</title>
+  <meta name="description" content="Autokorjaamon puhelin soi juuri kun nosturin alla on auto. Katsotaan miksi ajanvarauspuhelut karkaavat kilpailijalle, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ja vapaan paikan ilman että asentajan kädet jäävät pesuun." />
   <link rel="icon" type="image/jpeg" href="../selora-logo.jpeg" />
-  <meta property="og:title" content="Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu?" />
-  <meta property="og:description" content="Käytännön opas ilman IT-jargonia. Käyttöönotto alle 48 tunnissa." />
+  <meta property="og:title" content="Autokorjaamon puhelin soi öljynvaihdon aikana: miksi joka kolmas ajanvaraus karkaa kilpailijalle" />
+  <meta property="og:description" content="Autokorjaamon puhelin soi juuri kun nosturin alla on auto. Katsotaan miksi ajanvarauspuhelut karkaavat kilpailijalle, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ja vapaan paikan." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
-  <meta property="og:url" content="https://www.selora.fi/blogi/tekoalyn-kayttoonotto.html" />
+  <meta property="og:url" content="https://www.selora.fi/blogi/autokorjaamon-puhelin-ajanvaraus-tekoaly.html" />
   <meta property="og:type" content="article" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,7 +23,7 @@
     img { max-width: 100%; height: auto; }
     a { color: inherit; }
 
-    /* ── NAV ── */
+    /* NAV */
     .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0.9rem 2rem; transition: background 0.3s, box-shadow 0.3s; }
     .site-header.scrolled { background: rgba(6,12,24,0.95); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(255,255,255,0.06); }
     .nav-bar { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
@@ -42,13 +42,13 @@
     .hamburger.open .menu-icon { transform: rotate(-45deg); }
     .hamburger.open .menu-path-main { stroke-dasharray: 20 300; stroke-dashoffset: -32.42px; }
 
-    /* ── ARTICLE HERO ── */
+    /* ARTICLE HERO */
     .article-hero { background: #060c18; padding: 9rem 2rem 5rem; position: relative; overflow: hidden; }
-    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(5,150,105,0.15) 0%, transparent 70%); pointer-events: none; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29,78,216,0.18) 0%, transparent 70%); pointer-events: none; }
     .article-hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
     .article-meta-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
     .cat-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.28rem 0.8rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-    .cat-opas { background: rgba(5,150,105,0.45); color: #a7f3d0; border: 1px solid rgba(52,211,153,0.3); }
+    .cat-toimiala { background: rgba(29,78,216,0.55); color: #bfdbfe; border: 1px solid rgba(96,165,250,0.35); }
     .article-date { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
     .article-readtime { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
     .article-hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 300; color: #fff; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
@@ -59,55 +59,55 @@
     .author-name { color: rgba(255,255,255,0.9); font-weight: 500; }
     .author-role { color: rgba(255,255,255,0.45); margin-top: 0.1rem; }
 
-    /* ── FEATURED IMAGE ── */
+    /* FEATURED IMAGE */
     .article-featured-img { max-width: 900px; margin: 0 auto; padding: 0 2rem; margin-top: -2rem; position: relative; z-index: 2; }
     .article-featured-img img { width: 100%; border-radius: 1.25rem; box-shadow: 0 32px 80px rgba(6,12,24,0.35); display: block; aspect-ratio: 16/7; object-fit: cover; }
 
-    /* ── ARTICLE BODY ── */
+    /* ARTICLE BODY */
     .article-body-wrap { max-width: 720px; margin: 4rem auto; padding: 0 2rem; }
     .article-body h2 { font-size: 1.55rem; font-weight: 400; color: #0f172a; letter-spacing: -0.025em; margin: 2.75rem 0 1rem; line-height: 1.3; }
     .article-body h3 { font-size: 1.1rem; font-weight: 500; color: #0f172a; margin: 2rem 0 0.75rem; letter-spacing: -0.01em; }
     .article-body p { font-size: 1rem; color: #334155; line-height: 1.85; margin-bottom: 1.35rem; font-weight: 300; }
     .article-body strong { font-weight: 600; color: #0f172a; }
+    .article-body ul { margin: 0 0 1.5rem 1.25rem; padding-left: 0.5rem; }
+    .article-body ul li { font-size: 1rem; color: #334155; line-height: 1.8; margin-bottom: 0.5rem; font-weight: 300; }
 
-    /* Pull quote */
-    .pull-quote { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #16a34a; border-radius: 0 1rem 1rem 0; padding: 1.5rem 1.75rem; margin: 2.5rem 0; }
-    .pull-quote p { font-size: 1.1rem; font-weight: 400; color: #15803d; line-height: 1.65; margin: 0; font-style: italic; }
+    .pull-quote { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #1D4ED8; border-radius: 0 1rem 1rem 0; padding: 1.5rem 1.75rem; margin: 2.5rem 0; }
+    .pull-quote p { font-size: 1.1rem; font-weight: 400; color: #1e3a8a; line-height: 1.65; margin: 0; font-style: italic; }
     .pull-quote cite { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; font-style: normal; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
 
-    /* Step cards */
-    .steps-grid { display: grid; gap: 1rem; margin: 2.5rem 0; }
-    .step-card { background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.25rem; padding: 1.75rem 2rem; display: flex; gap: 1.5rem; align-items: flex-start; box-shadow: 0 1px 4px rgba(15,23,42,0.04); }
-    .step-number { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #1D4ED8, #3b82f6); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; flex-shrink: 0; }
-    .step-content h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; color: #0f172a; }
-    .step-content p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin: 0; }
-    .step-time { display: inline-block; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); background: #eff6ff; padding: 0.2rem 0.6rem; border-radius: 9999px; margin-top: 0.6rem; }
+    .calc-box { background: #060c18; border-radius: 1.25rem; padding: 2rem 2.25rem; margin: 2.5rem 0; }
+    .calc-box h3 { color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .calc-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .calc-row.total { border-top: 1px solid rgba(255,255,255,0.15); margin-top: 0.5rem; padding-top: 1rem; }
+    .calc-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .calc-value { font-size: 1rem; font-weight: 500; color: #fff; }
+    .calc-row.total .calc-label { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .calc-row.total .calc-value { font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em; color: #fbbf24; }
 
-    /* Checklist box */
-    .checklist-box { background: #f8fafc; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.25rem; padding: 2rem; margin: 2.5rem 0; }
-    .checklist-box h3 { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
-    .check-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(15,23,42,0.05); font-size: 0.9rem; color: #334155; }
-    .check-item:last-of-type { border-bottom: none; padding-bottom: 0; }
-    .check-icon { width: 20px; height: 20px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
-    .check-icon svg { width: 11px; height: 11px; color: #16a34a; }
-
-    /* Stat highlight */
-    .stat-highlight { background: #060c18; border-radius: 1.25rem; padding: 2rem 2.25rem; margin: 2.5rem 0; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .stat-highlight { background: linear-gradient(135deg, #1e3a8a 0%, #1D4ED8 100%); border-radius: 1.25rem; padding: 2rem 2.25rem; margin: 2.5rem 0; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
     .stat-num { font-size: 3rem; font-weight: 300; color: #fff; letter-spacing: -0.04em; line-height: 1; flex-shrink: 0; }
-    .stat-desc { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.65; }
-    .stat-desc strong { color: rgba(255,255,255,0.9); font-weight: 500; }
+    .stat-num span { font-size: 1.5rem; }
+    .stat-desc { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.65; }
+    .stat-desc strong { color: #fff; font-weight: 500; }
 
-    /* ── ARTICLE CTA ── */
+    .roi-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 1.25rem; padding: 2rem; margin: 2.5rem 0; }
+    .roi-card h3 { color: #065f46; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .roi-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(5,150,105,0.1); font-size: 0.9rem; }
+    .roi-row:last-of-type { border-bottom: none; }
+    .roi-row .label { color: #374151; }
+    .roi-row .value { font-weight: 500; color: #065f46; }
+    .roi-row.highlight .value { font-size: 1.2rem; font-weight: 600; color: #16a34a; }
+
     .article-cta { background: linear-gradient(135deg, #1e3a8a 0%, #1D4ED8 100%); border-radius: 1.5rem; padding: 3rem; text-align: center; margin: 4rem 0; }
     .article-cta h3 { font-size: 1.75rem; font-weight: 300; color: #fff; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
     .article-cta p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.75rem; }
 
-    /* ── BACK TO BLOG ── */
     .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; font-weight: 400; }
     .back-link:hover { color: var(--blue); }
     .back-link svg { width: 16px; height: 16px; }
 
-    /* ── FOOTER ── */
     footer { background: #060c18; color: rgba(255,255,255,0.6); padding: 4rem 2rem 2rem; margin-top: 6rem; }
     .footer-inner { max-width: 1160px; margin: 0 auto; }
     .footer-top { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
@@ -122,7 +122,6 @@
     .trust-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
     .trust-badge { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4); }
 
-    /* ── MOBILE MENU ── */
     .mobile-menu { position: fixed; inset: 0; background: #050C1A; z-index: 999; display: flex; flex-direction: column; padding: 1.5rem 2rem 2.5rem; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
     .mobile-menu.open { transform: translateX(0); }
     .mobile-menu-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
@@ -134,16 +133,13 @@
     .mobile-menu-cta { margin-top: 2rem; }
     .mobile-menu-cta a { display: block; text-align: center; background: #1D4ED8; color: #fff; font-size: 0.9rem; font-weight: 500; padding: 1rem; border-radius: 9999px; text-decoration: none; }
 
-    /* ── REVEAL ANIMATION ── */
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
     .reveal.in-view { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
     @media(max-width:768px) {
       .desktop-nav { display: none; }
       .hamburger { display: flex; }
       .btn-nav-cta { display: none !important; }
-      .step-card { flex-direction: column; gap: 1rem; }
       .footer-top { grid-template-columns: 1fr; gap: 2rem; }
       .footer-links { grid-template-columns: repeat(2,1fr); }
     }
@@ -156,7 +152,7 @@
     }
   </style>
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
-<script src="/i18n.js" defer></script>
+  <script src="/i18n.js" defer></script>
 </head>
 <body>
 
@@ -186,16 +182,17 @@
   </div>
 </header>
 
+
 <!-- ARTICLE HERO -->
 <section class="article-hero">
   <div class="article-hero-inner">
     <div class="article-meta-top">
-      <span class="cat-badge cat-opas">Käytännön opas</span>
-      <span class="article-date">7. huhtikuuta 2026</span>
-      <span class="article-readtime">· 6 min lukuaika</span>
+      <span class="cat-badge cat-toimiala">Toimialaopas</span>
+      <span class="article-date">4. toukokuuta 2026</span>
+      <span class="article-readtime">· 7 min lukuaika</span>
     </div>
-    <h1>Tekoälyvastaanottajan käyttöönotto:<br><span class="accent">mitä oikeasti tapahtuu?</span></h1>
-    <p class="article-hero-lead">Ei IT-jargonia, ei kuukausia kestäviä projekteja. Tässä on mitä tapahtuu, kun suomalainen yritys ottaa Seloran käyttöön.</p>
+    <h1>Autokorjaamon puhelin soi öljynvaihdon aikana: miksi joka kolmas ajanvaraus karkaa kilpailijalle</h1>
+    <p class="article-hero-lead">Asentajan kädet ovat öljyssä, nostimella roikkuu Volkkari ja seuraava asiakas odottaa tiskillä. Juuri silloin puhelin soi. Katsotaan miksi autokorjaamon ajanvarauspuhelut ovat kaikkein helpoiten karkaavia, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ilman että kukaan pyyhkii käsiään liinalla.</p>
     <div class="article-author">
       <div class="author-avatar">NT</div>
       <div class="author-info">
@@ -208,7 +205,7 @@
 
 <!-- FEATURED IMAGE -->
 <div class="article-featured-img">
-  <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=85&auto=format&fit=crop" alt="Tekoälyvastaanottajan käyttöönotto yrityksessä" loading="eager" />
+  <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=900&q=85&auto=format&fit=crop" alt="Asentaja työskentelee auton alla nostimella autokorjaamossa" loading="eager" />
 </div>
 
 <!-- ARTICLE BODY -->
@@ -219,113 +216,145 @@
   </a>
 
   <div class="article-body reveal">
-    <p>Sana "tekoäly" saa monet yrittäjät ajattelemaan montaakin asiaa ennen kuin tulee mieleen ratkaisu omaan ongelmaansa. Monimutkainen asennus, kuukausien projekti, IT-asiantuntijat, integraatiot, koodaus. Ehkä jotain, joka sopii isolle pörssifirmalle muttei pienelle parturille tai lääkäriasemalle.</p>
+    <h2>Autokorjaamossa puhelin soi aina väärällä hetkellä</h2>
 
-    <p>Todellisuus on täysin erilainen. Seloran käyttöönotto kestää alle 48 tuntia ja vaatii sinulta yhden puhelinpalaverin. Se siinä.</p>
+    <p>Aamu kahdeksan, hallin ovet juuri auki. Ensimmäinen auto on jo nostimella, toinen tulee tiskille avaimet kourassa ja kolmannen omistaja kysyy "ehtiikö katsastusta ennen perjantaita". Juuri silloin puhelin alkaa soida. Soitto siirtyy vastaajaan, koska tiskillä seisoo asiakas ja asentajan kädet ovat öljyssä.</p>
 
-    <h2>Mitä tapahtuu askel askeleelta</h2>
+    <p>Tämä toistuu noin 30-50 kertaa päivässä keskikokoisessa korjaamossa. Joka soiton takana on potentiaalinen ajanvaraus, hintatiedustelu, varaosakysely tai katsastuskorjaus. Joka soitto on euroja. Ja joka kolmas niistä menee vastaamatta, koska kukaan ei voi olla yhtä aikaa hallissa, tiskillä ja puhelimessa.</p>
 
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Tutustumispuhelu</h3>
-          <p>Käymme läpi yrityksesi tilanteen, asiakaspalvelun haasteet ja mitä haluat tekoälyn tekevän. Puhelulla ei ole myyntipaineita. Se kestää noin 20 minuuttia ja on täysin maksuton.</p>
-          <span class="step-time">20 minuuttia</span>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>Koulutamme tekoälyn sinun yritystäsi varten</h3>
-          <p>Seloran tiimi rakentaa tekoälyagenttisi perustuen antamaasi tietoon: palvelut, hinnat, aukioloajat, usein kysytyt kysymykset ja miten haluat puhelut hoidettavan. Sinulle lähetetään draft kuultavaksi ennen julkaisua.</p>
-          <span class="step-time">24 tunnin kuluessa</span>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>Puhelinnumero tai siirto</h3>
-          <p>Saat joko uuden suomalaisen puhelinnumeron tai teemme siirron olemassa olevasta numerostasi. Kaikki on dokumentoitu selkeästi ja voidaan peruuttaa milloin tahansa.</p>
-          <span class="step-time">Samana päivänä</span>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>Live, ja jatkuva parantaminen</h3>
-          <p>Tekoäly vastaa puheluihin. Saat jokaisen puhelun jälkeen tiivistelmän viestistä. Voit milloin tahansa pyytää muutoksia vastauksiin tai lisätä uusia tietoja. Ajan myötä agentti oppii juuri sinun yrityksesi tilanteen.</p>
-          <span class="step-time">Alle 48 tunnissa käyttöönotosta</span>
-        </div>
-      </div>
-    </div>
+    <h2>Autoala on kilpailluin "kuka vastaa ensin" -peli</h2>
 
-    <h2>Mitä sinulta tarvitaan etukäteen?</h2>
+    <p>Autoasiakas ei ole uskollinen yhdelle korjaamolle samalla tavalla kuin esimerkiksi parturille tai hammaslääkärille. Kun jarrupala kirskuu, akku ei pyöritä starttia tai jakohihna lähestyy 100 000 kilometriä, asiakas tekee yhden asian: <strong>soittaa kolmeen lähimpään korjaamoon ja varaa siltä jossa pääsee nopeimmin</strong>.</p>
 
-    <p>Ei paljon. Ennen tutustumispuhelua on hyödyllistä miettiä muutama asia valmiiksi, mutta emme lähetä mitään lomaketta etukäteen täytettäväksi. Selvitämme kaiken yhdessä palaverissa.</p>
-
-    <div class="checklist-box">
-      <h3>Hyödyllisiä tietoja etukäteen</h3>
-      <div class="check-item">
-        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <span>Yrityksesi palvelut ja hinnat pääpiirteissään</span>
-      </div>
-      <div class="check-item">
-        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <span>Aukioloajat ja sijainti</span>
-      </div>
-      <div class="check-item">
-        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <span>5, 10 yleisintä kysymystä, joita asiakkaat soittavat kysymään</span>
-      </div>
-      <div class="check-item">
-        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <span>Haluatko tekoälyn varaavan aikoja suoraan vai vain keräävän tiedot takaisinsoittoa varten?</span>
-      </div>
-      <div class="check-item">
-        <div class="check-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-        <span>Mahdollinen varausjärjestelmä (esim. Timma, Zingle, tai oma kalenteri)</span>
-      </div>
-    </div>
-
-    <h2>Mitä tapahtuu ensimmäisen viikon aikana?</h2>
-
-    <p>Ensimmäinen viikko on havainnoinnin aikaa. Tekoäly hoitaa puhelut ja sinä saat jokaisen puhelun jälkeen tiivistelmän: mitä asiakas halusi, miten agentti vastasi ja onko jokin kohta, johon pitäisi tehdä muutos. Monet asiakkaat löytävät tässä vaiheessa pari kohtaa, joita haluavat hienosäätää.</p>
-
-    <p>Esimerkiksi eräs tamperelainen parturi huomasi ensimmäisen viikon jälkeen, että tekoäly ei osannut vastata kysymykseen lasten hiusten leikkauksen hinnasta. Muutos tehtiin samana päivänä sähköpostilla. Se siinä.</p>
-
-    <div class="pull-quote">
-      <p>"Pelkäsin, että se olisi monimutkaista. Käyttöönotto kesti kaksi päivää, eikä minun tarvinnut tehdä itse mitään teknistä. Nyt tekoäly vastaa puheluihin viikonloppuisin kun minulla on vapaata."</p>
-      <cite>Kampaamo-asiakas, Turku</cite>
-    </div>
-
-    <h2>Mille yrityksille tämä sopii parhaiten?</h2>
-
-    <p>Tekoälyvastaanottaja sopii parhaiten yrityksille, joille puhelin on tärkeä asiakaskanava mutta joilla ei ole resursseja tai tarvetta palkata kokoaikaista vastaanottovirkailijaa. Käytännössä tämä tarkoittaa suurinta osaa suomalaisista pk-yrityksistä.</p>
-
-    <p>Erityisesti Selora sopii hyvin parturikampaamoihin ja kauneushoitoloihin, joissa ajanvaraukset vievät paljon puhelinaikaa. Ravintoloille, jotka haluavat ottaa pöytävarauksia myös aukioloaikojen ulkopuolella. Kiinteistövälittäjille, jotka saavat kyselyitä epäsäännöllisesti läpi päivän. Lääkäriasemille ja terapeuteille, jotka haluavat pitää puhelinajan hallinnassa ilman, että vastaanotto ruuhkautuu. Autokorjaamoille, joissa mekaanikon on vaikea vastata puhelimeen kesken työn.</p>
+    <p>Olen jutellut tämän vuoden aikana korjaamoyrittäjien kanssa Vantaalla, Lahdessa ja Jyväskylässä. Kaikilla on sama havainto: jos puhelimeen ei vastata kahdella ensimmäisellä soitolla, asiakas soittaa seuraavalle. He ovat itse tehneet sen joka kerta, kun oma auto on hajonnut. Ostopäätös tehdään 5 minuutissa, ei viikossa.</p>
 
     <div class="stat-highlight">
-      <div class="stat-num">48<span>h</span></div>
-      <div class="stat-desc"><strong>Näin nopeasti tekoälyvastaanottaja on toiminnassa</strong> ensimmäisestä yhteydenotosta. Ei kuukausia, ei monimutkaisia projekteja. Vain yksi puhelu ja 48 tuntia.</div>
+      <div class="stat-num">71<span>%</span></div>
+      <div class="stat-desc">korjaamoasiakkaista soittaa <strong>vähintään kahteen korjaamoon</strong> kun auto kaipaa huoltoa. Voittaja on yleensä se, joka vastaa ensimmäisenä ja tarjoaa selkeän ajan saman puhelun aikana.</div>
     </div>
 
-    <h2>Entä jos tekoäly ei osaa vastata johonkin kysymykseen?</h2>
+    <h2>Verkkoajanvaraus ei korvaa puhelinta tällä alalla</h2>
 
-    <p>Tämä on yksi yleisimmistä kysymyksistä. Tekoäly on ohjelmoitu käsittelemään tilanteet, joihin se ei osaa vastata, selkeällä tavalla: se kertoo asiakkaalle, ettei sillä ole tietoa kyseisestä asiasta juuri nyt, ja tarjoaa vaihtoehtona takaisinsoittoa tai viestinvälitystä. Kukaan ei jää tyhjän päälle.</p>
+    <p>Moni korjaamo on ostanut ajanvarauskalenterin verkkoon: Autofutur, Automaster, oma WordPress-kalenteri tai jopa Google Calendar-linkki. Hyvä juttu, ne tuovat osan varauksista ilman puhelua. Mutta autoala on tässä asiassa täysin oma lukunsa: <strong>iso osa asiakkaista haluaa kuvailla ongelmaa ennen ajan varaamista</strong>.</p>
 
-    <p>Lisäksi jokainen tällainen tilanne kirjataan ylös ja sinulle lähetetään tieto siitä. Näin voidaan lisätä puuttuva tieto agenttiin nopeasti, eikä sama tilanne toistu.</p>
+    <p>"Auto rätisee kun kääntää oikealle." "Ohjauspyörä tärisee 100 km/h jälkeen." "Mittariin syttyi keltainen valo joka näyttää öljykannulta." Näitä ei klikata pudotusvalikosta. Asiakas haluaa kuvailla ääneen ja kysyä "mahtaako se olla pakoputki vai pyöränlaakerit". Sitten varataan aika, kun asiakas tietää suurin piirtein mihin on tulossa.</p>
 
-    <h2>Mitä sopimuksessa lukee?</h2>
+    <p>Toinen syy on aikakriittisyys. Katsastus on huomenna umpeutumassa, vakuutusyhtiö pyytää nopeaa korjausta tai työauton on päästävä huomenna työmaalle. Soittajat eivät halua täyttää lomaketta ja odottaa "vahvistamme ajan parin tunnin sisällä". He haluavat ajan nyt, puhelussa.</p>
 
-    <p>Seloran sopimus on kuukausittainen. Ei vuosisopimuksia, ei pitkiä sitoutumisjaksoja. Jos kokeilu ei tunnu toimivan omaan yritykseen, voi lopettaa kuukauden varoitusajalla. Käyttöönottomaksua ei peritä.</p>
+    <h2>Mitä yksi vastaamatta jäänyt soitto maksaa korjaamolle</h2>
 
-    <p>Tämä tarkoittaa käytännössä, että riskiä ei juurikaan ole. Pahin mahdollinen skenaario on, että kokeilet kuukauden, toteat ettei se sovi juuri sinulle ja lopetat. Paras skenaario on, että se vapauttaa merkittävän osan ajastasi ja alkaa tuoda lisää asiakkaita juuri siitä kanavasta, joka ennen toi pelkkiä vastaajakuormia.</p>
+    <p>Korjaamon ajanvarauksen arvo riippuu työn tyypistä. Öljynvaihto on 80-150 €, jarrupalat 250-400 €, jakohihna 500-900 € ja iso vaihteistoremontti voi olla 1500-3500 €. Keskikokoisessa korjaamossa keskimääräinen lasku per käynti pyörii 280-450 € välillä, kun lasketaan myös pelkät katsastukset ja öljynvaihdot mukaan.</p>
+
+    <div class="calc-box">
+      <h3>Esimerkkilaskelma: keskikokoinen monimerkkikorjaamo</h3>
+      <div class="calc-row">
+        <span class="calc-label">Vastaamattomia puheluita / arkipäivä</span>
+        <span class="calc-value">11</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Näistä ajanvaraus- tai työpyyntöpuheluita</span>
+        <span class="calc-value">7</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Keskimääräinen lasku / työmääräys</span>
+        <span class="calc-value">340 €</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Konversio (asiakas valitsee toisen jos ei vastausta)</span>
+        <span class="calc-value">~55 %</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Menetys / arkipäivä</span>
+        <span class="calc-value">~1 300 €</span>
+      </div><div class="calc-row total">
+        <span class="calc-label">Menetys / vuosi (250 työpäivää)</span>
+        <span class="calc-value">~325 000 €</span>
+      </div>
+    </div>
+
+    <p>Tämä luku näyttää järjettömältä, kunnes ajattelee mitä se tarkoittaa: päivässä noin neljä työmääräystä karkaa korjaamolta jossa on vain 2-3 nostinta. Tilaa ei välttämättä riittäisi kaikille kuitenkaan, mutta luku näyttää sen mitä putkesta vuotaa. Suurempi vuoto on toinen: kun asiakas kerran löytää uuden korjaamon joka vastaa puhelimeen, hän palaa sinne myös seuraavalla huoltovälillä. Yksi menetetty soitto on usein menetetty asiakassuhde 3-5 vuoden ajalle.</p>
+
+    <div class="pull-quote">
+      <p>"Me oletettiin että nettiajanvaraus riittää. Sitten katsoin operaattorin raporttia ja näin että soittoja oli 740 kuukaudessa, vastattu 480. Loput 260 menivät vastaajaan. Soitin niistä takaisin viidesosalle, joista jokainen sanoi 'ai, ehdin jo varata muualta'."</p>
+      <cite>Korjaamoyrittäjä, Vantaa</cite>
+    </div>
+
+    <h2>Varaosakyselyt: hidas vuotokohta jonka harva mittaa</h2>
+
+    <p>Ajanvaraukset ovat näkyvin osa puhelinliikennettä. Toinen iso siivu on varaosakyselyt: "onko sopivaa akkua tähän autoon", "kuinka paljon maksaisi etujarrupalat Octaviaan vuosimallia 2018", "voitko tilata pakoputken iltapäiväksi". Nämä eivät aina muutu välittömästi työmääräykseksi, mutta ne ovat ostosignaaleja. Asiakas tutkii eri korjaamojen hintatasoa.</p>
+
+    <p>Jos kaksi korjaamoa antaa hinta-arvion ja kolmannelle ei vastata, kolmas ei yleensä saa työtä. Tämä on hiljaisin liikevaihdon vuoto, koska se ei näy ajanvarauskalenterissa. Se näkyy vain tyhjinä päivinä huoltokauden hiljaisempina viikkoina, kun katsastuskausi on ohi ja kelirikko on loppunut.</p>
+
+    <h2>Mitä tekoälyvastaanottaja tekee toisin</h2>
+
+    <p>Tekoälyvastaanottaja vastaa puhelimeen kolmannella soitolla, joka päivä, joka tunti. Korjaamoympäristössä se tekee viisi asiaa, joista jokainen on suoraan euroja:</p>
+
+    <ul>
+      <li><strong>Ottaa ajanvarauksen suoraan kalenteriin.</strong> Agentti kysyy auton merkin, vuosimallin, ongelman kuvauksen, asiakkaan nimen ja puhelinnumeron. Tieto siirtyy suoraan korjaamon kalenteriin (Autofutur, Automaster, Google Calendar, oma järjestelmä) oikealle nostimelle ja oikealle asentajalle.</li>
+      <li><strong>Tarkistaa vapaat ajat reaaliajassa.</strong> Jos torstai on täynnä, agentti ehdottaa perjantaita aamupäivällä tai ensi maanantaita. Asiakas saa vahvan kyllä-vastauksen samassa puhelussa, ei "tarkistamme ja palaamme".</li>
+      <li><strong>Antaa karkean hinta-arvion tutuille töille.</strong> Öljynvaihto, jarrupalojen vaihto, jakohihna, akku, katsastuskorjaus. Agentti tietää korjaamon hintaluokat ja osaa sanoa "öljynvaihto Octaviaan on meillä noin 110 €, sisältää suodattimen".</li>
+      <li><strong>Vahvistaa ajan tekstiviestillä.</strong> Asiakas saa heti vahvistuksen ja muistutusviestin edellisenä päivänä. Tämä yksin pudottaa peruutusten määrää.</li>
+      <li><strong>Ohjaa monimutkaiset tapaukset oikealle ihmiselle.</strong> "Auto sammui kesken matkan ja tarvii hinauksen" siirtyy päällikön puhelimeen. "Voiko vakuutusyhtiön pelivaroin tehdä korjauksen" siirtyy sähköpostiin. Iso vaihteistoremontti, jossa asiakas haluaa tarkemman arvion, päätyy soittolistalle aamulla.</li>
+    </ul>
+
+    <h3>Käytännön esimerkki tiistaiaamusta</h3>
+
+    <p>Tiistai 9:15. Asentaja on nostimen alla vaihtamassa pakoputkea. Tiskillä asiakas täyttää työmääräystä. Puhelin soi. Soittaja: "Hei, mun Volkkarissa on alkanut tärisemään ohjauspyörä, ehtisikö tällä viikolla katsoa?"</p>
+
+    <p>Tekoälyvastaanottaja vastaa, kysyy auton tiedot, kuvaa ongelman, tarjoaa torstain aamuvuoroon kahden tunnin slottia ja sanoo "todennäköisesti tasapainotus tai pyöränlaakeri, hinta-arvio tasapainotuksesta on 65 €, laakerin vaihto noin 280 €, tarkemmin nähdään kun nostimella tutkitaan". Asiakas ottaa ajan. Vahvistus lähtee tekstiviestillä.</p>
+
+    <p>Asentajalta meni puhelun käsittelyyn nolla sekuntia. Ajanvaraus on kalenterissa, hinta-arvio on annettu ja asiakas tietää suurin piirtein mihin on tulossa. Aamu jatkuu ilman keskeytyksiä.</p>
+
+    <h2>Mitä tämä maksaa verrattuna menetettyyn</h2>
+
+    <div class="roi-card">
+      <h3>ROI: kaksi pelastettua ajanvarausta kuukaudessa riittää</h3>
+      <div class="roi-row">
+        <span class="label">Seloran kuukausihinta (Aloitus)</span>
+        <span class="value">490 €/kk</span>
+      </div><div class="roi-row">
+        <span class="label">Yksi keskimääräinen työmääräys</span>
+        <span class="value">~340 €</span>
+      </div><div class="roi-row">
+        <span class="label">Yksi pelastettu jakohihnatyö</span>
+        <span class="value">600-900 €</span>
+      </div><div class="roi-row highlight">
+        <span class="label">ROI, jos pelastaa 4 työmääräystä/kk</span>
+        <span class="value">+177 %</span>
+      </div>
+    </div>
+
+    <p>Käytännössä riittää että tekoälyvastaanottaja ottaa kiinni neljä vastaamatta jäävää ajanvarauspuhelua kuukaudessa. Sen jälkeen kaikki muu, eli pelastetut isot remontit, varaosakyselyiden seurauksena tulleet työt ja takaisinpalautuvat kanta-asiakkaat, on bonusta.</p>
+
+    <h2>Mitä käyttöönotto korjaamolle oikeasti vaatii</h2>
+
+    <p>Tämä on se kohta jossa moni korjaamoyrittäjä epäilee: "kuka kerkeää opettaa robotille meidän hinnastoa". Reilu vastaus: käyttöönotto vie noin <strong>90 minuuttia</strong> yrittäjältä itseltään.</p>
+
+    <p>Käytännössä tarvitaan neljä asiaa:</p>
+
+    <ul>
+      <li>Hintalista yleisimmistä töistä (öljynvaihto, jarrupalat, jakohihna, akku, katsastuskorjaus, tasapainotus, rengastyöt)</li>
+      <li>Aukioloajat ja kapasiteetti (nostinten määrä, asentajien tyypilliset työajat)</li>
+      <li>Ajanvarauskalenteri johon agentti saa kirjoittaa (Autofutur, Automaster, Google Calendar tai jopa jaettu Excel)</li>
+      <li>Sähköposti tai puhelin, johon hinaukset, vakuutuskorjaukset ja isot remontit ohjataan</li>
+    </ul>
+
+    <p>Sen jälkeen agentti koulutetaan korjaamon oman tyylin mukaiseksi, numero ohjataan päälle (ruuhka-aikoina tai aina, riippuen kuinka usein puhelin jää ilman vastaajaa) ja vahvistusviestit kytketään päälle. Homma on käynnissä saman viikon aikana. Ei uutta hallintajärjestelmää, ei uutta sovellusta asentajille, ei viikon koulutusta tiskihenkilölle.</p>
+
+    <h2>Milloin tämä kannattaa korjaamolle</h2>
+
+    <p>Tekoälyvastaanottaja ei ole jokaiselle korjaamolle pakollinen. Yhden hengen pajalla, jossa omistaja itse vastaa puhelimeen aamukahdeksasta iltaviiteen ilman keskeytyksiä, tätä ei tarvita. Mutta kun jokin seuraavista pätee, laskenta muuttuu nopeasti:</p>
+
+    <ul>
+      <li>Korjaamossa on 2 tai useampaa nostinta ja puhelin jää säännöllisesti soimaan kun asentaja on töissä auton alla</li>
+      <li>Tiskihenkilö joutuu valitsemaan asiakkaan ja puhelimen välillä useamman kerran päivässä</li>
+      <li>Saat säännöllisesti palautetta että "ei oltu päästy soittamaan teille läpi"</li>
+      <li>Et tiedä paljonko menetät vastaamatta jääneistä puheluista, mutta arvelet että lukemia ei kestäisi katsoa</li>
+      <li>Olet ulkoistanut iltavuoron tai viikonloppupäivystyksen vastaajaan, joka ei tuo takaisinsoittoja kunnolla</li>
+    </ul>
+
+    <p>Korjaamoala on viime vuosina muuttunut siten, että asiakas tekee päätöksen yhä useammin sen perusteella, kuka <strong>vastaa puhelimeen ensimmäisenä</strong>. Hinta ratkaisee silloin kun puhutaan isoista remonteista, mutta ajanvarauksessa, varaosatiedusteluissa ja katsastuskorjauksissa voitto menee sille korjaamolle joka on tavoitettavissa. Tekoälyvastaanottaja siirtää sen voiton sinun puolelle, ilman että kukaan jättää työkaluja kädestä kesken nostimen alle.</p>
   </div>
 
   <div class="article-cta reveal">
-    <h3>Valmis kokeilemaan?<br><span class="accent">Se vie 20 minuuttia.</span></h3>
-    <p>Varaa maksuton tutustumispuhelu. Käymme läpi yrityksesi tilanteen ja rakennetaan suunnitelma yhdessä. Ilman sitoumuksia.</p>
+    <h3>Katso mitä Selora vastaisi sinun korjaamosi puhelimeen</h3>
+    <p>30 minuutin demossa näet oikean ajanvarauspuhelun alusta loppuun, korjaamon skenaariolla. Ei PowerPointia, ei sitoumuksia.</p>
     <a href="../yhteystiedot.html" class="btn btn-light" style="font-size:0.9rem;padding:0.85rem 2rem;">Varaa maksuton demo →</a>
   </div>
 </div>
@@ -376,6 +405,7 @@
   </div>
 </footer>
 
+
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <div class="mobile-menu-top">
@@ -397,6 +427,7 @@
   <div class="mobile-menu-cta"><a href="../yhteystiedot.html">Varaa demo →</a></div>
 </div>
 
+
 <script>
 (function(){
   var header = document.getElementById('site-header');
@@ -414,7 +445,6 @@ function toggleMobileMenu(){
   document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 })();
 </script>
-
 <!-- GDPR Cookie Banner -->
 <div id="cookie-banner" aria-live="polite" aria-label="Evästeilmoitus" style="display:none;position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);z-index:9999;max-width:520px;width:calc(100% - 2rem);font-family:'Inter',sans-serif;">
   <div style="background:rgba(6,12,24,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);border-radius:1.25rem;padding:1.5rem;box-shadow:0 24px 64px rgba(0,0,0,0.55);">
@@ -486,6 +516,7 @@ function toggleMobileMenu(){
   });
 })();
 </script>
+
 
   <script src="/chatbot.js" defer></script>
 </body>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Palauta salasana — Selora</title>
+  <title>Palauta salasana, Selora</title>
   <meta name="description" content="Palauta Selora-tilisi salasana." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -199,7 +199,7 @@
   // onAuthStateChange fires PASSWORD_RECOVERY when the token is exchanged.
   sb.auth.onAuthStateChange(async (event, session) => {
     if (event === 'PASSWORD_RECOVERY') {
-      // Token valid — show the update-password form
+      // Token valid, show the update-password form
       requestView.style.display = 'none';
       updateView.style.display  = 'block';
     }
@@ -211,7 +211,7 @@
     // Show update view while waiting (will be confirmed by onAuthStateChange).
     updateView.style.display = 'block';
   } else {
-    // No token — show request form
+    // No token, show request form
     requestView.style.display = 'block';
   }
 

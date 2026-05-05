@@ -2630,6 +2630,158 @@
     '30 minuutin demossa näet oikean pöytävarauspuhelun alusta loppuun, ravintolan skenaariolla. Ei PowerPointia, ei sitoumuksia.':
       'In a 30-minute demo you see a real table-booking call from start to finish, with a restaurant scenario. No PowerPoint, no commitments.',
     'Varaa maksuton demo →': 'Book a free demo →',
+
+    // -------- blog: autokorjaamon-puhelin-ajanvaraus-tekoaly --------
+    'Autokorjaamon puhelin soi öljynvaihdon aikana: miksi joka kolmas ajanvaraus karkaa kilpailijalle - Selora Blogi':
+      'A repair shop\'s phone rings during an oil change: why one in three booking calls slips away to a competitor - Selora Blog',
+    'Autokorjaamon puhelin soi öljynvaihdon aikana: miksi joka kolmas ajanvaraus karkaa kilpailijalle':
+      'A repair shop\'s phone rings during an oil change: why one in three booking calls slips away to a competitor',
+    'Autokorjaamon puhelin: miksi joka kolmas ajanvaraus karkaa kilpailijalle':
+      'A repair shop\'s phone: why one in three bookings slips away to a competitor',
+    'Autokorjaamon puhelin soi juuri kun nosturin alla on auto. Katsotaan miksi ajanvarauspuhelut karkaavat kilpailijalle, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ja vapaan paikan ilman että asentajan kädet jäävät pesuun.':
+      'A repair shop\'s phone rings exactly when there\'s a car on the lift. Let\'s look at why booking calls slip away to a competitor, what that costs per month, and how an AI receptionist takes the booking and finds an open slot without the mechanic having to wash their hands.',
+    'Autokorjaamon puhelin soi juuri kun nosturin alla on auto. Katsotaan miksi ajanvarauspuhelut karkaavat kilpailijalle, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ja vapaan paikan.':
+      'A repair shop\'s phone rings exactly when there\'s a car on the lift. Let\'s look at why booking calls slip away to a competitor, what that costs per month, and how an AI receptionist takes the booking and finds an open slot.',
+    'Asentajan kädet ovat öljyssä kun puhelin soi. Näin tekoäly ottaa ajanvaraukset ilman keskeytyksiä.':
+      'The mechanic\'s hands are covered in oil when the phone rings. Here\'s how AI takes bookings without interruptions.',
+    'Autokorjaamon puhelin ja ajanvaraus': 'A repair shop\'s phone and booking',
+    'Asentaja työskentelee auton alla nostimella autokorjaamossa':
+      'A mechanic working under a car on a lift in a repair shop',
+    '4. toukokuuta 2026': '4 May 2026',
+    'Asentajan kädet ovat öljyssä, nostimella roikkuu Volkkari ja seuraava asiakas odottaa tiskillä. Juuri silloin puhelin soi. Katsotaan miksi autokorjaamon ajanvarauspuhelut ovat kaikkein helpoiten karkaavia, mitä se maksaa kuukaudessa ja miten tekoälyvastaanottaja ottaa varauksen ilman että kukaan pyyhkii käsiään liinalla.':
+      'The mechanic\'s hands are covered in oil, a Volkswagen is hanging on the lift and the next customer is waiting at the counter. That\'s exactly when the phone rings. Let\'s look at why a repair shop\'s booking calls are the easiest to lose, what that costs per month, and how an AI receptionist takes the booking without anyone wiping their hands on a rag.',
+    'Autokorjaamossa puhelin soi aina väärällä hetkellä':
+      'In a repair shop the phone always rings at the wrong moment',
+    'Aamu kahdeksan, hallin ovet juuri auki. Ensimmäinen auto on jo nostimella, toinen tulee tiskille avaimet kourassa ja kolmannen omistaja kysyy "ehtiikö katsastusta ennen perjantaita". Juuri silloin puhelin alkaa soida. Soitto siirtyy vastaajaan, koska tiskillä seisoo asiakas ja asentajan kädet ovat öljyssä.':
+      'Eight in the morning, the workshop doors just opened. The first car is already on the lift, the second is coming to the counter with the keys, and the third owner is asking "can we squeeze in inspection before Friday". Right at that moment the phone starts ringing. The call goes to voicemail, because there\'s a customer at the counter and the mechanic\'s hands are covered in oil.',
+    'Tämä toistuu noin 30-50 kertaa päivässä keskikokoisessa korjaamossa. Joka soiton takana on potentiaalinen ajanvaraus, hintatiedustelu, varaosakysely tai katsastuskorjaus. Joka soitto on euroja. Ja joka kolmas niistä menee vastaamatta, koska kukaan ei voi olla yhtä aikaa hallissa, tiskillä ja puhelimessa.':
+      'This repeats roughly 30-50 times a day in a mid-sized repair shop. Behind every call is a potential booking, a price inquiry, a parts question or an inspection-related repair. Every call is euros. And one in three goes unanswered, because nobody can be in the workshop, at the counter and on the phone at the same time.',
+    'Autoala on kilpailluin "kuka vastaa ensin" -peli':
+      'The auto trade is the most competitive "who answers first" game',
+    'Autoasiakas ei ole uskollinen yhdelle korjaamolle samalla tavalla kuin esimerkiksi parturille tai hammaslääkärille. Kun jarrupala kirskuu, akku ei pyöritä starttia tai jakohihna lähestyy 100 000 kilometriä, asiakas tekee yhden asian:':
+      'A car customer isn\'t loyal to one repair shop the same way they are to a barber or dentist. When a brake pad squeals, the battery won\'t crank the starter, or the timing belt is approaching 100,000 km, the customer does one thing:',
+    'soittaa kolmeen lähimpään korjaamoon ja varaa siltä jossa pääsee nopeimmin':
+      'they call the three nearest repair shops and book with whichever one can take them in fastest',
+    '. Olen jutellut tämän vuoden aikana korjaamoyrittäjien kanssa Vantaalla, Lahdessa ja Jyväskylässä. Kaikilla on sama havainto: jos puhelimeen ei vastata kahdella ensimmäisellä soitolla, asiakas soittaa seuraavalle. He ovat itse tehneet sen joka kerta, kun oma auto on hajonnut. Ostopäätös tehdään 5 minuutissa, ei viikossa.':
+      '. Over this year I\'ve spoken with workshop owners in Vantaa, Lahti and Jyväskylä. They all share the same observation: if the phone isn\'t picked up on the first two calls, the customer calls the next one. They\'ve done it themselves every time their own car has broken down. The buying decision is made in 5 minutes, not in a week.',
+    'Olen jutellut tämän vuoden aikana korjaamoyrittäjien kanssa Vantaalla, Lahdessa ja Jyväskylässä. Kaikilla on sama havainto: jos puhelimeen ei vastata kahdella ensimmäisellä soitolla, asiakas soittaa seuraavalle. He ovat itse tehneet sen joka kerta, kun oma auto on hajonnut. Ostopäätös tehdään 5 minuutissa, ei viikossa.':
+      'Over this year I\'ve spoken with workshop owners in Vantaa, Lahti and Jyväskylä. They all share the same observation: if the phone isn\'t picked up on the first two calls, the customer calls the next one. They\'ve done it themselves every time their own car has broken down. The buying decision is made in 5 minutes, not in a week.',
+    'korjaamoasiakkaista soittaa': 'of repair shop customers call',
+    'vähintään kahteen korjaamoon': 'at least two repair shops',
+    'kun auto kaipaa huoltoa. Voittaja on yleensä se, joka vastaa ensimmäisenä ja tarjoaa selkeän ajan saman puhelun aikana.':
+      'when their car needs servicing. The winner is usually the one who answers first and offers a clear appointment time within the same call.',
+    'Verkkoajanvaraus ei korvaa puhelinta tällä alalla':
+      'Online booking doesn\'t replace the phone in this trade',
+    'Moni korjaamo on ostanut ajanvarauskalenterin verkkoon: Autofutur, Automaster, oma WordPress-kalenteri tai jopa Google Calendar-linkki. Hyvä juttu, ne tuovat osan varauksista ilman puhelua. Mutta autoala on tässä asiassa täysin oma lukunsa:':
+      'Many repair shops have bought an online booking calendar: Autofutur, Automaster, their own WordPress calendar or even a Google Calendar link. Good move, those bring in some bookings without a phone call. But the auto trade is in a league of its own on this:',
+    'iso osa asiakkaista haluaa kuvailla ongelmaa ennen ajan varaamista':
+      'a large share of customers wants to describe the problem before booking a slot',
+    '.':
+      '.',
+    '"Auto rätisee kun kääntää oikealle." "Ohjauspyörä tärisee 100 km/h jälkeen." "Mittariin syttyi keltainen valo joka näyttää öljykannulta." Näitä ei klikata pudotusvalikosta. Asiakas haluaa kuvailla ääneen ja kysyä "mahtaako se olla pakoputki vai pyöränlaakerit". Sitten varataan aika, kun asiakas tietää suurin piirtein mihin on tulossa.':
+      '"The car rattles when I turn right." "The steering wheel vibrates above 100 km/h." "A yellow warning light shaped like an oil can lit up on the dash." These aren\'t clicked from a dropdown. The customer wants to describe it out loud and ask "could it be the exhaust or the wheel bearings". Then a slot is booked, once the customer roughly knows what they\'re coming in for.',
+    'Toinen syy on aikakriittisyys. Katsastus on huomenna umpeutumassa, vakuutusyhtiö pyytää nopeaa korjausta tai työauton on päästävä huomenna työmaalle. Soittajat eivät halua täyttää lomaketta ja odottaa "vahvistamme ajan parin tunnin sisällä". He haluavat ajan nyt, puhelussa.':
+      'The second reason is time pressure. Inspection expires tomorrow, the insurance company is asking for a fast repair, or the work van has to be on a job site tomorrow morning. Callers don\'t want to fill in a form and wait for "we\'ll confirm a slot within a couple of hours". They want a slot now, in the call.',
+    'Mitä yksi vastaamatta jäänyt soitto maksaa korjaamolle':
+      'What one missed call costs a repair shop',
+    'Korjaamon ajanvarauksen arvo riippuu työn tyypistä. Öljynvaihto on 80-150 €, jarrupalat 250-400 €, jakohihna 500-900 € ja iso vaihteistoremontti voi olla 1500-3500 €. Keskikokoisessa korjaamossa keskimääräinen lasku per käynti pyörii 280-450 € välillä, kun lasketaan myös pelkät katsastukset ja öljynvaihdot mukaan.':
+      'The value of a repair shop booking depends on the job type. An oil change is €80-150, brake pads €250-400, a timing belt €500-900, and a major gearbox rebuild can be €1500-3500. In a mid-sized shop the average bill per visit runs between €280-450, including basic inspections and oil changes.',
+    'Esimerkkilaskelma: keskikokoinen monimerkkikorjaamo':
+      'Sample calculation: mid-sized multi-brand repair shop',
+    'Näistä ajanvaraus- tai työpyyntöpuheluita': 'Of these, booking or work-request calls',
+    'Keskimääräinen lasku / työmääräys': 'Average bill / work order',
+    'Konversio (asiakas valitsee toisen jos ei vastausta)':
+      'Conversion (customer picks another if no answer)',
+    'Menetys / arkipäivä': 'Loss / weekday',
+    'Menetys / vuosi (250 työpäivää)': 'Loss / year (250 working days)',
+    'Tämä luku näyttää järjettömältä, kunnes ajattelee mitä se tarkoittaa: päivässä noin neljä työmääräystä karkaa korjaamolta jossa on vain 2-3 nostinta. Tilaa ei välttämättä riittäisi kaikille kuitenkaan, mutta luku näyttää sen mitä putkesta vuotaa. Suurempi vuoto on toinen: kun asiakas kerran löytää uuden korjaamon joka vastaa puhelimeen, hän palaa sinne myös seuraavalla huoltovälillä. Yksi menetetty soitto on usein menetetty asiakassuhde 3-5 vuoden ajalle.':
+      'This number looks absurd until you think about what it means: roughly four work orders a day slip away from a shop with only 2-3 lifts. There might not be capacity for all of them anyway, but the number shows what\'s leaking out of the pipe. The bigger leak is the second one: once a customer finds a new shop that answers the phone, they\'ll come back there at the next service interval too. One missed call is often a lost customer relationship for 3-5 years.',
+    '"Me oletettiin että nettiajanvaraus riittää. Sitten katsoin operaattorin raporttia ja näin että soittoja oli 740 kuukaudessa, vastattu 480. Loput 260 menivät vastaajaan. Soitin niistä takaisin viidesosalle, joista jokainen sanoi \'ai, ehdin jo varata muualta\'."':
+      '"We assumed online booking was enough. Then I looked at the carrier\'s report and saw 740 calls a month, 480 answered. The other 260 went to voicemail. I called back a fifth of those, and every one of them said \'oh, I already booked somewhere else\'."',
+    'Korjaamoyrittäjä, Vantaa': 'Repair shop owner, Vantaa',
+    'Varaosakyselyt: hidas vuotokohta jonka harva mittaa':
+      'Parts inquiries: the slow leak few people measure',
+    'Ajanvaraukset ovat näkyvin osa puhelinliikennettä. Toinen iso siivu on varaosakyselyt: "onko sopivaa akkua tähän autoon", "kuinka paljon maksaisi etujarrupalat Octaviaan vuosimallia 2018", "voitko tilata pakoputken iltapäiväksi". Nämä eivät aina muutu välittömästi työmääräykseksi, mutta ne ovat ostosignaaleja. Asiakas tutkii eri korjaamojen hintatasoa.':
+      'Bookings are the most visible part of phone traffic. The other big slice is parts inquiries: "do you have a battery that fits this car", "how much would front brake pads for a 2018 Octavia cost", "can you order an exhaust for this afternoon". These don\'t always turn into a work order on the spot, but they\'re buying signals. The customer is checking the price level across different shops.',
+    'Jos kaksi korjaamoa antaa hinta-arvion ja kolmannelle ei vastata, kolmas ei yleensä saa työtä. Tämä on hiljaisin liikevaihdon vuoto, koska se ei näy ajanvarauskalenterissa. Se näkyy vain tyhjinä päivinä huoltokauden hiljaisempina viikkoina, kun katsastuskausi on ohi ja kelirikko on loppunut.':
+      'If two shops give a price estimate and the third doesn\'t pick up, the third one usually doesn\'t get the job. This is the quietest revenue leak, because it doesn\'t show up in the booking calendar. It only shows up as empty days during the slower weeks of the service season, once inspection season is over and the spring thaw has ended.',
+    'Mitä tekoälyvastaanottaja tekee toisin':
+      'What an AI receptionist does differently',
+    'Tekoälyvastaanottaja vastaa puhelimeen kolmannella soitolla, joka päivä, joka tunti. Korjaamoympäristössä se tekee viisi asiaa, joista jokainen on suoraan euroja:':
+      'An AI receptionist answers the phone on the third ring, every day, every hour. In a repair shop context it does five things, each of which is directly money:',
+    'Ottaa ajanvarauksen suoraan kalenteriin.': 'Takes the booking straight into the calendar.',
+    'Agentti kysyy auton merkin, vuosimallin, ongelman kuvauksen, asiakkaan nimen ja puhelinnumeron. Tieto siirtyy suoraan korjaamon kalenteriin (Autofutur, Automaster, Google Calendar, oma järjestelmä) oikealle nostimelle ja oikealle asentajalle.':
+      'The agent asks for the car make, year, a description of the problem, the customer\'s name and phone number. The info goes straight into the shop\'s calendar (Autofutur, Automaster, Google Calendar, an in-house system) onto the right lift and the right mechanic.',
+    'Tarkistaa vapaat ajat reaaliajassa.': 'Checks open slots in real time.',
+    'Jos torstai on täynnä, agentti ehdottaa perjantaita aamupäivällä tai ensi maanantaita. Asiakas saa vahvan kyllä-vastauksen samassa puhelussa, ei "tarkistamme ja palaamme".':
+      'If Thursday is full, the agent suggests Friday morning or next Monday. The customer gets a firm yes in the same call, not "we\'ll check and get back to you".',
+    'Antaa karkean hinta-arvion tutuille töille.': 'Gives a rough estimate for familiar jobs.',
+    'Öljynvaihto, jarrupalojen vaihto, jakohihna, akku, katsastuskorjaus. Agentti tietää korjaamon hintaluokat ja osaa sanoa "öljynvaihto Octaviaan on meillä noin 110 €, sisältää suodattimen".':
+      'Oil change, brake pad replacement, timing belt, battery, inspection-related repairs. The agent knows the shop\'s price brackets and can say "an oil change on an Octavia runs about €110 with us, filter included".',
+    'Vahvistaa ajan tekstiviestillä.': 'Confirms the slot by text message.',
+    'Asiakas saa heti vahvistuksen ja muistutusviestin edellisenä päivänä. Tämä yksin pudottaa peruutusten määrää.':
+      'The customer gets an instant confirmation and a reminder the day before. This alone cuts cancellations.',
+    'Ohjaa monimutkaiset tapaukset oikealle ihmiselle.':
+      'Routes complex cases to the right person.',
+    '"Auto sammui kesken matkan ja tarvii hinauksen" siirtyy päällikön puhelimeen. "Voiko vakuutusyhtiön pelivaroin tehdä korjauksen" siirtyy sähköpostiin. Iso vaihteistoremontti, jossa asiakas haluaa tarkemman arvion, päätyy soittolistalle aamulla.':
+      '"The car died mid-trip and needs a tow" goes through to the manager\'s phone. "Can the repair be done on the insurance company\'s tab" goes to email. A major gearbox rebuild where the customer wants a more detailed estimate ends up on the morning callback list.',
+    'Käytännön esimerkki tiistaiaamusta': 'A practical example from a Tuesday morning',
+    'Tiistai 9:15. Asentaja on nostimen alla vaihtamassa pakoputkea. Tiskillä asiakas täyttää työmääräystä. Puhelin soi. Soittaja: "Hei, mun Volkkarissa on alkanut tärisemään ohjauspyörä, ehtisikö tällä viikolla katsoa?"':
+      'Tuesday 9:15. A mechanic is under the lift swapping an exhaust. At the counter a customer is filling out a work order. The phone rings. Caller: "Hi, the steering wheel on my Volkswagen has started vibrating, could you take a look this week?"',
+    'Tekoälyvastaanottaja vastaa, kysyy auton tiedot, kuvaa ongelman, tarjoaa torstain aamuvuoroon kahden tunnin slottia ja sanoo "todennäköisesti tasapainotus tai pyöränlaakeri, hinta-arvio tasapainotuksesta on 65 €, laakerin vaihto noin 280 €, tarkemmin nähdään kun nostimella tutkitaan". Asiakas ottaa ajan. Vahvistus lähtee tekstiviestillä.':
+      'The AI receptionist answers, asks for the car details, describes the issue back, offers a two-hour slot on Thursday morning and says "most likely a balancing job or a wheel bearing, balancing is around €65, bearing replacement around €280, we\'ll see more once it\'s on the lift". The customer takes the slot. Confirmation goes out by text.',
+    'Asentajalta meni puhelun käsittelyyn nolla sekuntia. Ajanvaraus on kalenterissa, hinta-arvio on annettu ja asiakas tietää suurin piirtein mihin on tulossa. Aamu jatkuu ilman keskeytyksiä.':
+      'The mechanic spent zero seconds on this call. The booking is in the calendar, the estimate is given and the customer roughly knows what they\'re coming in for. The morning continues without interruptions.',
+    'Mitä tämä maksaa verrattuna menetettyyn':
+      'What it costs compared to what\'s lost',
+    'ROI: kaksi pelastettua ajanvarausta kuukaudessa riittää':
+      'ROI: two recovered bookings a month is enough',
+    'Yksi keskimääräinen työmääräys': 'One average work order',
+    'Yksi pelastettu jakohihnatyö': 'One recovered timing belt job',
+    'ROI, jos pelastaa 4 työmääräystä/kk':
+      'ROI if you recover 4 work orders per month',
+    'Käytännössä riittää että tekoälyvastaanottaja ottaa kiinni neljä vastaamatta jäävää ajanvarauspuhelua kuukaudessa. Sen jälkeen kaikki muu, eli pelastetut isot remontit, varaosakyselyiden seurauksena tulleet työt ja takaisinpalautuvat kanta-asiakkaat, on bonusta.':
+      'In practice it\'s enough for the AI receptionist to catch four missed booking calls a month. After that, everything else, the recovered big jobs, work that came in via parts inquiries, and returning regulars, is a bonus.',
+    'Mitä käyttöönotto korjaamolle oikeasti vaatii':
+      'What rolling this out actually takes for a repair shop',
+    'Tämä on se kohta jossa moni korjaamoyrittäjä epäilee: "kuka kerkeää opettaa robotille meidän hinnastoa". Reilu vastaus: käyttöönotto vie noin':
+      'This is the point where many shop owners get sceptical: "who has time to teach a robot our pricing". Honest answer: rollout takes about',
+    '90 minuuttia': '90 minutes',
+    'yrittäjältä itseltään.': 'from the owner.',
+    'Käytännössä tarvitaan neljä asiaa:': 'In practice four things are needed:',
+    'Hintalista yleisimmistä töistä (öljynvaihto, jarrupalat, jakohihna, akku, katsastuskorjaus, tasapainotus, rengastyöt)':
+      'A price list for the most common jobs (oil change, brake pads, timing belt, battery, inspection-related repair, wheel balancing, tyre work)',
+    'Aukioloajat ja kapasiteetti (nostinten määrä, asentajien tyypilliset työajat)':
+      'Opening hours and capacity (number of lifts, typical mechanic shifts)',
+    'Ajanvarauskalenteri johon agentti saa kirjoittaa (Autofutur, Automaster, Google Calendar tai jopa jaettu Excel)':
+      'A booking calendar the agent can write into (Autofutur, Automaster, Google Calendar or even a shared Excel)',
+    'Sähköposti tai puhelin, johon hinaukset, vakuutuskorjaukset ja isot remontit ohjataan':
+      'An email or phone number to forward tows, insurance repairs and major jobs to',
+    'Sen jälkeen agentti koulutetaan korjaamon oman tyylin mukaiseksi, numero ohjataan päälle (ruuhka-aikoina tai aina, riippuen kuinka usein puhelin jää ilman vastaajaa) ja vahvistusviestit kytketään päälle. Homma on käynnissä saman viikon aikana. Ei uutta hallintajärjestelmää, ei uutta sovellusta asentajille, ei viikon koulutusta tiskihenkilölle.':
+      'After that the agent is trained in the shop\'s own style, the number is forwarded (during peak hours or always, depending on how often the phone goes unanswered) and confirmation messages are switched on. The whole thing is running within the same week. No new shop management system, no new app for the mechanics, no week-long training for the counter staff.',
+    'Milloin tämä kannattaa korjaamolle':
+      'When this is worth it for a repair shop',
+    'Tekoälyvastaanottaja ei ole jokaiselle korjaamolle pakollinen. Yhden hengen pajalla, jossa omistaja itse vastaa puhelimeen aamukahdeksasta iltaviiteen ilman keskeytyksiä, tätä ei tarvita. Mutta kun jokin seuraavista pätee, laskenta muuttuu nopeasti:':
+      'An AI receptionist isn\'t mandatory for every repair shop. In a one-person workshop where the owner picks up the phone from eight to five without interruptions, this isn\'t needed. But when any of the following is true, the math shifts fast:',
+    'Korjaamossa on 2 tai useampaa nostinta ja puhelin jää säännöllisesti soimaan kun asentaja on töissä auton alla':
+      'The shop has 2 or more lifts and the phone keeps ringing unanswered while the mechanic is under a car',
+    'Tiskihenkilö joutuu valitsemaan asiakkaan ja puhelimen välillä useamman kerran päivässä':
+      'The counter person has to choose between a customer and the phone several times a day',
+    'Saat säännöllisesti palautetta että "ei oltu päästy soittamaan teille läpi"':
+      'You regularly hear "we couldn\'t get through to you" as feedback',
+    'Et tiedä paljonko menetät vastaamatta jääneistä puheluista, mutta arvelet että lukemia ei kestäisi katsoa':
+      'You don\'t know how much you\'re losing on missed calls, but you suspect the numbers would be hard to look at',
+    'Olet ulkoistanut iltavuoron tai viikonloppupäivystyksen vastaajaan, joka ei tuo takaisinsoittoja kunnolla':
+      'You\'ve outsourced the evening shift or weekend on-call to a voicemail service that doesn\'t bring callbacks back properly',
+    'Korjaamoala on viime vuosina muuttunut siten, että asiakas tekee päätöksen yhä useammin sen perusteella, kuka':
+      'The repair trade has shifted in recent years, with customers more and more often deciding based on who',
+    'vastaa puhelimeen ensimmäisenä': 'answers the phone first',
+    '. Hinta ratkaisee silloin kun puhutaan isoista remonteista, mutta ajanvarauksessa, varaosatiedusteluissa ja katsastuskorjauksissa voitto menee sille korjaamolle joka on tavoitettavissa. Tekoälyvastaanottaja siirtää sen voiton sinun puolelle, ilman että kukaan jättää työkaluja kädestä kesken nostimen alle.':
+      '. Price decides on big repairs, but for bookings, parts inquiries and inspection-related work the win goes to the shop that can be reached. An AI receptionist moves that win to your side, without anyone having to drop their tools mid-job under the lift.',
+    'Katso mitä Selora vastaisi sinun korjaamosi puhelimeen':
+      'See what Selora would say to your repair shop\'s phone',
+    '30 minuutin demossa näet oikean ajanvarauspuhelun alusta loppuun, korjaamon skenaariolla. Ei PowerPointia, ei sitoumuksia.':
+      'In a 30-minute demo you see a real booking call from start to finish, with a repair shop scenario. No PowerPoint, no commitments.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
