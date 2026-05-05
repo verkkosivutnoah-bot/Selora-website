@@ -1795,7 +1795,7 @@
     .sma-grid-bg{position:absolute;inset:0;pointer-events:none;background-size:60px 60px;background-image:linear-gradient(to right,rgba(255,255,255,0.04) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.04) 1px,transparent 1px);mask-image:radial-gradient(ellipse at center,#000 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at center,#000 0%,transparent 70%);opacity:.6;}
     .sma-grain{position:absolute;inset:0;pointer-events:none;z-index:50;opacity:.04;mix-blend-mode:overlay;background:url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');}
     .sma-logo{position:relative;display:flex;align-items:center;justify-content:center;gap:0.55rem;margin:0 auto 2rem;opacity:0;transform:translateY(15px);}
-    .sma-logo-dot{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#1D4ED8,#3b82f6);box-shadow:0 6px 18px rgba(29,78,216,0.4);}
+    .sma-logo-dot{width:42px;height:42px;border-radius:10px;object-fit:cover;box-shadow:0 8px 22px rgba(29,78,216,0.45),0 0 0 1px rgba(255,255,255,0.06);}
     .sma-logo-text{font-size:0.95rem;font-weight:600;letter-spacing:0.06em;color:rgba(255,255,255,0.9);}
     .sma-soon-pill{display:inline-flex;align-items:center;gap:0.35rem;padding:0.25rem 0.6rem;margin-right:0.7rem;border-radius:9999px;background:linear-gradient(135deg,rgba(96,165,250,0.18) 0%,rgba(29,78,216,0.28) 100%);border:1px solid rgba(96,165,250,0.35);color:#bfdbfe;font-size:0.6rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;box-shadow:0 0 0 1px rgba(255,255,255,0.04) inset,0 8px 16px rgba(29,78,216,0.18);}
     .sma-soon-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:#60a5fa;box-shadow:0 0 8px rgba(96,165,250,0.85);}
@@ -1885,7 +1885,7 @@
   <div class="sma-grain" aria-hidden="true"></div>
 
   <div class="sma-logo" aria-label="Selora">
-    <span class="sma-logo-dot"></span>
+    <img class="sma-logo-dot" src="/selora-logo.jpeg" alt="Selora" width="42" height="42" loading="lazy">
     <span class="sma-logo-text">SELORA</span>
   </div>
   <p class="sma-eyebrow" data-sma="eyebrow">
