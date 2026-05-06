@@ -982,6 +982,113 @@
       </div>
     </div>
 
+    <!-- ============================================== -->
+    <!-- 7. COACH SELECTION -->
+    <!-- ============================================== -->
+    <div class="flex flex-col items-center">
+      <div class="text-xs font-semibold uppercase tracking-[0.18em] text-gray-500 mb-4">7 · Coach Selection</div>
+      <div class="phone">
+        <div class="phone-screen bg-white">
+          <div class="dynamic-island"></div>
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="status-icons">
+              <i data-lucide="signal" class="w-4 h-4"></i>
+              <i data-lucide="wifi" class="w-4 h-4"></i>
+              <i data-lucide="battery-full" class="w-5 h-5"></i>
+            </div>
+          </div>
+          <div class="screen-content screen-padding-top flex flex-col">
+            <!-- Progress dots: step 2 of 4 -->
+            <div class="px-6 pt-4 flex items-center gap-2">
+              <div class="h-1.5 flex-1 rounded-full bg-brand"></div>
+              <div class="h-1.5 flex-1 rounded-full bg-brand"></div>
+              <div class="h-1.5 flex-1 rounded-full bg-gray-200"></div>
+              <div class="h-1.5 flex-1 rounded-full bg-gray-200"></div>
+            </div>
+            <div class="px-6 mt-2 text-xs text-gray-400 font-medium">Step 2 of 4</div>
+
+            <!-- Heading -->
+            <div class="px-6 pt-6">
+              <h1 class="text-3xl font-bold text-ink leading-tight">Pick your coach</h1>
+              <p class="text-gray-500 mt-2 text-[15px]">You can change this anytime.</p>
+            </div>
+
+            <!-- Coach cards -->
+            <div class="px-5 mt-5 space-y-2.5 flex-1">
+
+              <!-- Sgt. Steel -->
+              <button class="w-full text-left rounded-2xl p-3.5 bg-white border border-gray-200 flex items-center gap-3.5">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-stone-700/30" style="background: linear-gradient(135deg, #4d5a3a, #7a8b56);">
+                  <i data-lucide="shield" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-ink text-[15px]">Sgt. Steel</div>
+                  <div class="text-xs text-gray-500 mt-0.5 leading-tight">Discipline, brevity, no excuses.</div>
+                </div>
+              </button>
+
+              <!-- Maya (default selected) -->
+              <button class="w-full text-left rounded-2xl p-3.5 bg-pink-50/60 ring-2 ring-pink-400 flex items-center gap-3.5">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-pink-300/40" style="background: linear-gradient(135deg, #f9a8d4, #c4b5fd);">
+                  <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-semibold text-ink text-[15px]">Maya</span>
+                    <span class="text-[9px] font-bold text-pink-600 bg-pink-100 px-1.5 py-0.5 rounded uppercase tracking-wider">Default</span>
+                  </div>
+                  <div class="text-xs text-gray-500 mt-0.5 leading-tight">Funny-warm, anti-shame hype bestie.</div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="check" class="w-4 h-4 text-white"></i>
+                </div>
+              </button>
+
+              <!-- Coach Dana -->
+              <button class="w-full text-left rounded-2xl p-3.5 bg-white border border-gray-200 flex items-center gap-3.5">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-slate-700/30" style="background: linear-gradient(135deg, #1e3a5f, #475569);">
+                  <i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-ink text-[15px]">Coach Dana</div>
+                  <div class="text-xs text-gray-500 mt-0.5 leading-tight">Plain, helpful, no character flair.</div>
+                </div>
+              </button>
+
+              <!-- The Goblin (LOCKED) -->
+              <div class="w-full text-left rounded-2xl p-3.5 bg-gray-50 border border-gray-200 flex items-center gap-3.5 opacity-80">
+                <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-purple-500/30" style="background: linear-gradient(135deg, #84cc16, #a855f7);">
+                  <i data-lucide="flame" class="w-6 h-6 text-white"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="font-semibold text-ink text-[15px]">The Goblin</div>
+                  <div class="text-xs text-gray-500 mt-0.5 leading-tight">Gen Z roastmaster. Makes fun of you.</div>
+                  <div class="text-[10px] text-purple-700 font-semibold mt-1 flex items-center gap-1">
+                    <i data-lucide="lock" class="w-2.5 h-2.5"></i>
+                    Unlocks with "roast me" tone next
+                  </div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="lock" class="w-3.5 h-3.5 text-gray-500"></i>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Continue button -->
+            <div class="px-6 pb-8 pt-3">
+              <button class="w-full h-14 rounded-full bg-ink text-white font-semibold text-[15px] flex items-center justify-center gap-2 shadow-lg shadow-ink/20">
+                Continue
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
