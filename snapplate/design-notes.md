@@ -6,7 +6,7 @@
 
 ## The unique angle
 
-The strongest differentiator is **an AI coach persona generated from a questionnaire**. Five distinct vibes (drill sergeant, hype bestie, zen monk, pragmatic trainer, roastmaster). Every notification, meal critique, and workout nudge is in-character. Same data, five completely different apps.
+The strongest differentiator is **an AI coach persona generated from a questionnaire**. Four distinct vibes (drill sergeant, hype bestie, neutral default, roastmaster). Every notification, meal critique, and workout nudge is in-character. Same data, four completely different apps.
 
 Pair it with a **single visible game loop** — your meal photos + workouts feed XP into one "physique avatar" that visibly levels up — rather than scattered streaks/badges/leaderboards.
 
@@ -17,7 +17,7 @@ Pair it with a **single visible game loop** — your meal photos + workouts feed
 ## Onboarding questionnaire (~90 sec, 6 questions)
 
 1. **Goal** — lose / maintain / gain
-2. **Coach vibe** — pick 1 of 5 personas (Sgt. Steel / Maya / Coach Dana / Roshi / The Goblin)
+2. **Coach vibe** — pick 1 of 4 personas (Sgt. Steel / Maya / Coach Dana / The Goblin)
 3. **Tone tolerance** — slider: "be gentle" ↔ "roast me"
 4. **When are you most likely to skip the gym?** — morning / after work / weekends / when stressed (drives smart-timed notifications)
 5. **What's your kryptonite food?** — free text (the AI references this in nudges)
@@ -66,10 +66,9 @@ Funny lines aren't enough. **Build the screenshot loop into the app:**
 
 | Coach | Affinity reward at max |
 |---|---|
-| Sgt. Steel | Unlocks "field promotion" — a one-time clip where he calls you a soldier, not a recruit. |
-| Maya | Unlocks "BFF mode" — voice notes and surprise hype texts on rough days. |
-| Coach Dana | Unlocks "advanced analytics" view — predictive insights normally locked behind Pro. |
-| Roshi | Unlocks a new metaphor library + a "morning sit" guided breath ritual. |
+| Sgt. Steel | Unlocks "Field Promotion" — Steel addresses the user as "Soldier" instead of "Recruit" globally. Recorded as a 6-sec shareable clip. |
+| Maya | Unlocks "BFF Mode" — surprise hype texts on rough days, callback compliments by name, voice notes (Pro). |
+| Coach Dana | No mechanic — Dana is the neutral coach, deliberately gamification-free. Pure tracking for users who don't want personality overlays. |
 | The Goblin | Unlocks "Mode: Hype" — one (1) sincere compliment, recorded as a shareable cinematic clip. |
 
 The Goblin's hype-mode is the most coveted because his is the rarest break in character. People will grind to see it.
@@ -84,7 +83,7 @@ Currently mocked as:
 - **Trial:** 7-day free
 - **CTA:** "Start 7-day free trial" → "Then $39.99/year. Cancel anytime."
 
-Free tier limit (TBD): probably 5 AI scans per week + 1 coach (Maya by default). Pro unlocks all 5 coaches, unlimited scans, advanced macros, custom goals, "drag me" feature, export.
+Free tier limit (TBD): probably 5 AI scans per week + 1 coach (Maya by default). Pro unlocks all 4 coaches, unlimited scans, advanced macros, custom goals, "drag me" feature, export.
 
 The Goblin and any coach-affinity rewards are Pro-only — that's the upgrade hook.
 

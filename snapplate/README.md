@@ -14,16 +14,15 @@ What makes SnapPlate different from Cal AI / MyFitnessPal isn't the calorie trac
 
 ---
 
-## The 5 coach personas
+## The 4 coach personas
 
 The questionnaire-generated coach is the moat. See [`coaches/`](./coaches/) for full specs.
 
 | Coach | Vibe | Best for |
 |---|---|---|
-| **Sgt. Steel** | Drill Sergeant — discipline, structure, military framing | Type-A users who want accountability |
-| **Maya** | Hype Bestie — pure positivity, anti-shame | Burnout-prone users, wellness-leaning |
-| **Coach Dana** | Pragmatic Trainer — data-driven, peer-not-parent | Engineers, data nerds |
-| **Roshi** | Zen Monk — mindful, metaphor, anti-restriction | Mindfulness folks, anti-burnout |
+| **Sgt. Steel** | Drill Sergeant — discipline, brevity, no excuses | Type-A users who want accountability |
+| **Maya** | Hype Bestie — funny-warm, anti-shame, observational | Burnout-prone users, wellness-leaning |
+| **Coach Dana** | Neutral — plain, helpful, no character flair | Users who want pure tracking, no personality overlay |
 | **The Goblin** 🔒 | Roastmaster — Gen Z comedian, makes fun of you | Gen Z, viral / TikTok crowd (opt-in only) |
 
 The Goblin is locked behind a tone-slider opt-in past "be gentle" with a two-tap confirm.
@@ -119,10 +118,9 @@ snapplate/
 └── coaches/
     ├── README.md              ← coach system overview
     ├── goblin.md              ← 🔒 opt-in roastmaster (v3 final)
-    ├── sgt-steel.md           ← drill sergeant
-    ├── maya.md                ← hype bestie
-    ├── coach-dana.md          ← pragmatic trainer
-    └── roshi.md               ← zen monk
+    ├── sgt-steel.md           ← drill sergeant (v2 final)
+    ├── maya.md                ← hype bestie (v2 final)
+    └── coach-dana.md          ← neutral default (v1)
 ```
 
 ---

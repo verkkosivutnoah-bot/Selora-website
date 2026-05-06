@@ -1,6 +1,6 @@
 # SnapPlate Coaches
 
-> Five distinct AI coach personas. The user picks one during onboarding; that coach drives every notification, meal critique, and fitness nudge in-character.
+> Four distinct AI coach personas. The user picks one during onboarding; that coach drives every notification, meal critique, and fitness nudge in-character.
 
 ---
 
@@ -8,24 +8,22 @@
 
 | Coach | File | Vibe | Default? |
 |---|---|---|---|
-| **Sgt. Steel** | [`sgt-steel.md`](./sgt-steel.md) | Drill Sergeant — discipline, structure, military framing | — |
-| **Maya** | [`maya.md`](./maya.md) | Hype Bestie — pure positivity, anti-shame | ✅ default |
-| **Coach Dana** | [`coach-dana.md`](./coach-dana.md) | Pragmatic Trainer — data-driven, peer-not-parent | — |
-| **Roshi** | [`roshi.md`](./roshi.md) | Zen Monk — mindful, metaphor, anti-restriction | — |
+| **Sgt. Steel** | [`sgt-steel.md`](./sgt-steel.md) | Drill Sergeant — discipline, brevity, no excuses | — |
+| **Maya** | [`maya.md`](./maya.md) | Hype Bestie — funny-warm, anti-shame | ✅ default |
+| **Coach Dana** | [`coach-dana.md`](./coach-dana.md) | Neutral — plain, helpful, no character flair | — |
 | **The Goblin** | [`goblin.md`](./goblin.md) | Roastmaster — Gen Z comedian, makes fun of you | 🔒 opt-in only |
 
 ---
 
 ## How they relate
 
-Same data, five different apps. Same trigger ("user logged a 1,200-cal pizza at 9pm"), five completely different responses:
+Same data, four different apps. Same trigger ("user logged a 1,200-cal pizza at 9pm"), four completely different responses:
 
 | Coach | Reaction |
 |---|---|
-| Sgt. Steel | *"Pizza. 2100 hours. We're fixing this tomorrow. 0530. Don't make me find you."* |
-| Maya | *"babe a slice is a SLICE not the apocalypse 🍕 tomorrow we eat like queens"* |
-| Coach Dana | *"Logged 1,230 cal at 21:47. +312 over target. Adjust tomorrow's lunch −300, hit 30g protein at breakfast."* |
-| Roshi | *"The pizza was. The pizza is gone. What will tomorrow's bowl hold?"* |
+| Sgt. Steel | *"Logged. Adjust the next meal. Continue."* |
+| Maya | *"🍕 girl. okay. respectfully — okay 💕"* |
+| Coach Dana | *"Logged 1,230 cal — slightly over today's target. Tomorrow's lunch can balance it."* |
 | The Goblin | *"third pizza monday this month. season finale at this point."* |
 
 The coach is the moat.
@@ -36,7 +34,7 @@ The coach is the moat.
 
 ### Voice
 
-- Each coach has a **distinct address term** (recruit / queen / [name] / friend / bro) and signature phrasing.
+- Each coach has a **distinct address term** (recruit / queen / [name or none] / bro) and signature phrasing.
 - Each coach has a **calibration ratio** — slang frequency, profanity frequency, sentence length.
 - Voice consistency is enforced via system prompt + few-shot examples + post-generation classifier.
 
@@ -58,11 +56,11 @@ Triggers after 2 consecutive bad days (no log / missed gym / way over target). E
 
 ### Coach affinity
 
-Every coach has a relationship meter that levels up with the user's consistency. Higher levels unlock new lines, harder challenges, and (at max) a one-time-only sincere "hype mode" reward unique to each coach. See [`../design-notes.md#coach-affinity-mechanic`](../design-notes.md#coach-affinity-mechanic).
+Three of the four coaches have a relationship meter that levels up with the user's consistency, with a one-time-only sincere "hype mode" reward unique to each. Coach Dana is the exception — she's the neutral coach for users who don't want gamification mechanics. See [`../design-notes.md#coach-affinity-mechanic`](../design-notes.md#coach-affinity-mechanic).
 
 ### Style consistency (visuals)
 
-All five share a unified illustration system: **flat 3/4 portrait, bold cel-shading, distinct silhouette, signature accent color**. Each has one dominant color used to theme the UI when selected (chat bubble color, accent button color, lock-screen widget color all reflect the coach).
+All four share a unified illustration system: **flat 3/4 portrait, bold cel-shading, distinct silhouette, signature accent color**. Each has one dominant color used to theme the UI when selected (chat bubble color, accent button color, lock-screen widget color all reflect the coach).
 
 ---
 
@@ -81,7 +79,7 @@ Each coach's `.md` file contains:
 9. **Notification library** — sample lines organized by trigger
 10. **Implementation notes** — engineering hooks
 
-The Goblin is the most fully-specced (v3 final). The others are at v1 sketch level and will iterate as the app develops.
+The Goblin (v3), Sgt. Steel (v2), and Maya (v2) are at final spec. Coach Dana is at v1 — being repositioned as the neutral default.
 
 ---
 
