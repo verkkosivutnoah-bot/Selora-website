@@ -3129,9 +3129,18 @@
   };
   window.t = t;
 
+  // Defer init to idle so the first paint is not blocked by the DOM walker.
+  // Falls back to a microtask on browsers without requestIdleCallback.
+  function scheduleInit() {
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(init, { timeout: 1500 });
+    } else {
+      setTimeout(init, 0);
+    }
+  }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', scheduleInit);
   } else {
-    init();
+    scheduleInit();
   }
 })();
