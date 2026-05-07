@@ -325,6 +325,7 @@
       <div class="stories-head reveal">
         <div class="section-label" data-i18n="Esimerkkitöitä">Esimerkkitöitä</div>
         <h2 class="section-heading" data-i18n="Sivut, joita olemme rakentaneet.">Sivut, joita olemme <span class="accent" data-i18n="rakentaneet">rakentaneet</span>.</h2>
+        <p class="section-sub" data-i18n="Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.">Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.</p>
       </div>
     </div>
 
@@ -337,7 +338,7 @@
         </div>
         <div class="story-bottom">
           <div class="story-title">Ravintola Luna</div>
-          <div class="story-meta">Kausiravintola · Helsinki</div>
+          <div class="story-meta" data-i18n="Kausiravintola · Helsinki">Kausiravintola · Helsinki</div>
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
@@ -349,7 +350,7 @@
         </div>
         <div class="story-bottom">
           <div class="story-title">Sähkö Pro</div>
-          <div class="story-meta">Sähköurakointi · Espoo</div>
+          <div class="story-meta" data-i18n="Sähköurakointi · Espoo">Sähköurakointi · Espoo</div>
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
@@ -361,7 +362,7 @@
         </div>
         <div class="story-bottom">
           <div class="story-title">Parturi Nordic</div>
-          <div class="story-meta">Parturi · Tampere</div>
+          <div class="story-meta" data-i18n="Parturi · Tampere">Parturi · Tampere</div>
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
@@ -402,6 +403,105 @@
         </div>
       </a>
     </div>
+  </section>
+
+  <!-- ── RAVINTOLARATKAISU (Foozu partnership) ─────────────────────── -->
+  <section class="section" id="ravintolaratkaisu">
+    <div class="container">
+      <div class="foozu-card reveal">
+        <div class="foozu-left">
+          <div class="section-label" data-i18n="Ravintolaratkaisu">Ravintolaratkaisu</div>
+          <h2 class="section-heading">Tilausjärjestelmä ravintolallesi, <span class="accent">kumppanimme Foozun avulla.</span></h2>
+          <p class="section-sub" data-i18n="Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.">Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.</p>
+          <div class="foozu-cta-row">
+            <a href="https://foozu.fi" target="_blank" rel="noopener" class="btn btn-light">
+              <span data-i18n="Tutustu Foozuun →">Tutustu Foozuun →</span>
+            </a>
+            <a href="yhteystiedot.html" class="btn btn-ghost">
+              <span data-i18n="Varaa ravintolademo">Varaa ravintolademo</span>
+            </a>
+          </div>
+        </div>
+        <div class="foozu-right" aria-hidden="true">
+          <div class="foozu-mock">
+            <div class="foozu-mock-bar"><span></span><span></span><span></span></div>
+            <div class="foozu-mock-row foozu-mock-row-1">
+              <div class="foozu-mock-img"></div>
+              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
+              <div class="foozu-mock-price">14 €</div>
+            </div>
+            <div class="foozu-mock-row foozu-mock-row-2">
+              <div class="foozu-mock-img"></div>
+              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
+              <div class="foozu-mock-price">16 €</div>
+            </div>
+            <div class="foozu-mock-row foozu-mock-row-3">
+              <div class="foozu-mock-img"></div>
+              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
+              <div class="foozu-mock-price">12 €</div>
+            </div>
+            <div class="foozu-mock-cta">Tilaa nyt</div>
+            <div class="foozu-badge">Foozu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      #ravintolaratkaisu .foozu-card {
+        background: linear-gradient(140deg, #0a1428 0%, #060c18 100%);
+        border-radius: 24px;
+        padding: 3.5rem 3rem;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 3rem;
+        align-items: center;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+      }
+      #ravintolaratkaisu .foozu-card::before {
+        content: ''; position: absolute; inset: 0; pointer-events: none;
+        background:
+          radial-gradient(ellipse 600px 400px at 85% 10%, rgba(29,78,216,0.32), transparent 60%),
+          radial-gradient(ellipse 500px 350px at 10% 95%, rgba(96,165,250,0.18), transparent 60%);
+      }
+      #ravintolaratkaisu .foozu-left { position: relative; z-index: 1; }
+      #ravintolaratkaisu .foozu-left .section-label { color: #60a5fa; }
+      #ravintolaratkaisu .foozu-left h2 { color: #fff; }
+      #ravintolaratkaisu .foozu-left .accent { color: #93c5fd; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; }
+      #ravintolaratkaisu .foozu-left .section-sub { color: rgba(255,255,255,0.72); margin-bottom: 1.75rem; }
+      #ravintolaratkaisu .foozu-cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+      #ravintolaratkaisu .foozu-cta-row .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.22); }
+      #ravintolaratkaisu .foozu-cta-row .btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.4); }
+
+      #ravintolaratkaisu .foozu-right { position: relative; z-index: 1; }
+      #ravintolaratkaisu .foozu-mock {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 1.25rem;
+        position: relative;
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+      }
+      #ravintolaratkaisu .foozu-mock-bar { display: flex; gap: 6px; margin-bottom: 1rem; }
+      #ravintolaratkaisu .foozu-mock-bar span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+      #ravintolaratkaisu .foozu-mock-row { display: grid; grid-template-columns: 50px 1fr auto; gap: 0.75rem; align-items: center; padding: 0.65rem 0.5rem; border-radius: 10px; transition: background 0.25s; }
+      #ravintolaratkaisu .foozu-mock-row + .foozu-mock-row { border-top: 1px solid rgba(255,255,255,0.05); }
+      #ravintolaratkaisu .foozu-mock-img { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(29,78,216,0.45) 0%, rgba(59,130,246,0.25) 100%); }
+      #ravintolaratkaisu .foozu-mock-text { display: flex; flex-direction: column; gap: 0.35rem; }
+      #ravintolaratkaisu .foozu-mock-line { height: 8px; background: rgba(255,255,255,0.18); border-radius: 4px; width: 70%; }
+      #ravintolaratkaisu .foozu-mock-line.short { height: 6px; width: 45%; background: rgba(255,255,255,0.1); }
+      #ravintolaratkaisu .foozu-mock-price { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; color: #93c5fd; letter-spacing: 0.02em; }
+      #ravintolaratkaisu .foozu-mock-cta { margin-top: 0.85rem; background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%); color: #0f172a; text-align: center; padding: 0.7rem; border-radius: 10px; font-size: 0.82rem; font-weight: 600; box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+      #ravintolaratkaisu .foozu-badge { position: absolute; top: -10px; right: 18px; background: linear-gradient(135deg, #1D4ED8, #3b82f6); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; padding: 0.32rem 0.7rem; border-radius: 9999px; box-shadow: 0 6px 14px rgba(29,78,216,0.5); text-transform: uppercase; }
+
+      @media (max-width: 880px) {
+        #ravintolaratkaisu .foozu-card { grid-template-columns: 1fr; padding: 2.25rem 1.5rem; gap: 2rem; }
+        #ravintolaratkaisu .foozu-cta-row .btn { width: 100%; justify-content: center; }
+      }
+    </style>
   </section>
 
   <section class="section">
