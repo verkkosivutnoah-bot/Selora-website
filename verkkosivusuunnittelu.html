@@ -423,23 +423,53 @@
         </div>
         <div class="foozu-right" aria-hidden="true">
           <div class="foozu-mock">
-            <div class="foozu-mock-bar"><span></span><span></span><span></span></div>
-            <div class="foozu-mock-row foozu-mock-row-1">
-              <div class="foozu-mock-img"></div>
-              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
-              <div class="foozu-mock-price">14 €</div>
+            <div class="foozu-mock-header">
+              <div class="foozu-mock-resto">Ravintola Luna</div>
+              <div class="foozu-mock-bar"><span></span><span></span><span></span></div>
             </div>
-            <div class="foozu-mock-row foozu-mock-row-2">
-              <div class="foozu-mock-img"></div>
-              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
-              <div class="foozu-mock-price">16 €</div>
+            <div class="foozu-mock-cat">Suosituimmat</div>
+
+            <div class="foozu-mock-row">
+              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&h=160&fit=crop&q=80&auto=format" alt="Pizza Margherita" loading="lazy">
+              <div class="foozu-mock-text">
+                <div class="foozu-mock-name">Pizza Margherita</div>
+                <div class="foozu-mock-desc">Tomaatti, mozzarella, tuore basilika</div>
+              </div>
+              <div class="foozu-mock-price">14,50 €</div>
             </div>
-            <div class="foozu-mock-row foozu-mock-row-3">
-              <div class="foozu-mock-img"></div>
-              <div class="foozu-mock-text"><div class="foozu-mock-line"></div><div class="foozu-mock-line short"></div></div>
-              <div class="foozu-mock-price">12 €</div>
+
+            <div class="foozu-mock-row">
+              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=160&h=160&fit=crop&q=80&auto=format" alt="Lohiburgeri" loading="lazy">
+              <div class="foozu-mock-text">
+                <div class="foozu-mock-name">Lohiburgeri</div>
+                <div class="foozu-mock-desc">Itämeren lohi, dilliaioli, salaatti</div>
+              </div>
+              <div class="foozu-mock-price">17,90 €</div>
             </div>
-            <div class="foozu-mock-cta">Tilaa nyt</div>
+
+            <div class="foozu-mock-row">
+              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=160&h=160&fit=crop&q=80&auto=format" alt="Caesar-salaatti" loading="lazy">
+              <div class="foozu-mock-text">
+                <div class="foozu-mock-name">Caesar-salaatti</div>
+                <div class="foozu-mock-desc">Kanafilettä, parmesaani, krutonki</div>
+              </div>
+              <div class="foozu-mock-price">12,50 €</div>
+            </div>
+
+            <div class="foozu-mock-row">
+              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=160&h=160&fit=crop&q=80&auto=format" alt="Tiramisu" loading="lazy">
+              <div class="foozu-mock-text">
+                <div class="foozu-mock-name">Tiramisu</div>
+                <div class="foozu-mock-desc">Mascarpone, espresso, kaakao</div>
+              </div>
+              <div class="foozu-mock-price">8,50 €</div>
+            </div>
+
+            <div class="foozu-mock-total">
+              <span>Yhteensä</span>
+              <span class="foozu-mock-total-price">53,40 €</span>
+            </div>
+            <div class="foozu-mock-cta">Tilaa kotiin →</div>
             <div class="foozu-badge">Foozu</div>
           </div>
         </div>
@@ -484,16 +514,21 @@
         backdrop-filter: blur(12px);
         box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
       }
-      #ravintolaratkaisu .foozu-mock-bar { display: flex; gap: 6px; margin-bottom: 1rem; }
-      #ravintolaratkaisu .foozu-mock-bar span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.22); }
-      #ravintolaratkaisu .foozu-mock-row { display: grid; grid-template-columns: 50px 1fr auto; gap: 0.75rem; align-items: center; padding: 0.65rem 0.5rem; border-radius: 10px; transition: background 0.25s; }
+      #ravintolaratkaisu .foozu-mock-header { display: flex; align-items: center; justify-content: space-between; padding: 0.25rem 0.25rem 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 0.85rem; }
+      #ravintolaratkaisu .foozu-mock-resto { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; color: #fff; letter-spacing: -0.01em; }
+      #ravintolaratkaisu .foozu-mock-bar { display: flex; gap: 5px; }
+      #ravintolaratkaisu .foozu-mock-bar span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+      #ravintolaratkaisu .foozu-mock-cat { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #60a5fa; padding: 0 0.25rem 0.6rem; }
+      #ravintolaratkaisu .foozu-mock-row { display: grid; grid-template-columns: 44px 1fr auto; gap: 0.7rem; align-items: center; padding: 0.6rem 0.25rem; transition: background 0.25s; }
       #ravintolaratkaisu .foozu-mock-row + .foozu-mock-row { border-top: 1px solid rgba(255,255,255,0.05); }
-      #ravintolaratkaisu .foozu-mock-img { width: 44px; height: 44px; border-radius: 10px; background: linear-gradient(135deg, rgba(29,78,216,0.45) 0%, rgba(59,130,246,0.25) 100%); }
-      #ravintolaratkaisu .foozu-mock-text { display: flex; flex-direction: column; gap: 0.35rem; }
-      #ravintolaratkaisu .foozu-mock-line { height: 8px; background: rgba(255,255,255,0.18); border-radius: 4px; width: 70%; }
-      #ravintolaratkaisu .foozu-mock-line.short { height: 6px; width: 45%; background: rgba(255,255,255,0.1); }
-      #ravintolaratkaisu .foozu-mock-price { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; color: #93c5fd; letter-spacing: 0.02em; }
-      #ravintolaratkaisu .foozu-mock-cta { margin-top: 0.85rem; background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%); color: #0f172a; text-align: center; padding: 0.7rem; border-radius: 10px; font-size: 0.82rem; font-weight: 600; box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
+      #ravintolaratkaisu .foozu-mock-img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); display: block; }
+      #ravintolaratkaisu .foozu-mock-text { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
+      #ravintolaratkaisu .foozu-mock-name { font-size: 0.84rem; font-weight: 600; color: #fff; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #ravintolaratkaisu .foozu-mock-desc { font-size: 0.7rem; color: rgba(255,255,255,0.55); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      #ravintolaratkaisu .foozu-mock-price { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; color: #93c5fd; letter-spacing: 0.01em; }
+      #ravintolaratkaisu .foozu-mock-total { display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; padding: 0.7rem 0.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: rgba(255,255,255,0.62); }
+      #ravintolaratkaisu .foozu-mock-total-price { color: #fff; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; }
+      #ravintolaratkaisu .foozu-mock-cta { margin-top: 0.85rem; background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%); color: #0f172a; text-align: center; padding: 0.75rem; border-radius: 10px; font-size: 0.84rem; font-weight: 600; box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
       #ravintolaratkaisu .foozu-badge { position: absolute; top: -10px; right: 18px; background: linear-gradient(135deg, #1D4ED8, #3b82f6); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; padding: 0.32rem 0.7rem; border-radius: 9999px; box-shadow: 0 6px 14px rgba(29,78,216,0.5); text-transform: uppercase; }
 
       @media (max-width: 880px) {
