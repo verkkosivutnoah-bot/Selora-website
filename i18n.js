@@ -2833,6 +2833,29 @@
     'Pizzeria · Turku': 'Pizzeria · Turku',
     'Hammasklinikka · Helsinki': 'Dental clinic · Helsinki',
     'LVI urakointi · Vantaa': 'Plumbing · Vantaa',
+
+    // ---------- nav additions ----------
+    'Tietoa meistä': 'About us',
+
+    // ---------- portfolio carousel meta + disclaimer ----------
+    'Kausiravintola · Helsinki': 'Seasonal restaurant · Helsinki',
+    'Sähköurakointi · Espoo': 'Electrical contracting · Espoo',
+    'Parturi · Tampere': 'Barbershop · Tampere',
+    'Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.':
+      'The sites below are example projects we designed to show what kind of website we can build for your industry. They are not real client projects.',
+
+    // ---------- ravintolaratkaisu (Foozu partnership) ----------
+    'Ravintolaratkaisu': 'Restaurant solution',
+    'Tilausjärjestelmä ravintolallesi,': 'An ordering system for your restaurant,',
+    'kumppanimme Foozun avulla.': 'with our partner Foozu.',
+    'Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.':
+      'We build custom websites for Finnish restaurants with an integrated ordering and reservation system. The ordering system is delivered by our partner Foozu, who specialises in restaurant technology. Read more on Foozu\'s site.',
+    'Tutustu Foozuun →': 'Visit Foozu →',
+    'Varaa ravintolademo': 'Book a restaurant demo',
+
+    // ---------- portfolio demo banner ----------
+    'Tämä on esimerkkisivu, ei oikea asiakasprojekti.': 'This is an example site, not a real client project.',
+    'Tilaa oma sivustosi Seloralta →': 'Order your own site from Selora →',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
