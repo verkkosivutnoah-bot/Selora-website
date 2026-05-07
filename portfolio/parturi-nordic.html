@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parturi Nordic · Klassinen partureiden taidetta Tampereella</title>
+<meta name="description" content="Parturi Nordic. Klassiset hiustenleikkuut, partakäsittelyt ja juhlatyyli. Tampereen ydinkeskustassa." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bone: #ede4d3;
+    --bone-2: #e3d8c2;
+    --brown: #2b2018;
+    --brown-2: #1c1410;
+    --copper: #b87333;
+    --dust: #a89e8c;
+    --line: rgba(43,32,24,0.16);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bone);
+    color: var(--brown);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .display { font-family: 'Playfair Display', serif; }
+  .hand { font-family: 'Caveat', cursive; color: var(--copper); }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 1.6rem; }
+
+  /* Top */
+  header.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.4rem 1.8rem;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s, color 0.4s;
+    color: var(--bone);
+    mix-blend-mode: normal;
+  }
+  header.top.scrolled {
+    background: rgba(237,228,211,0.96);
+    backdrop-filter: blur(10px);
+    color: var(--brown);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 500;
+  }
+  nav.tn { display: flex; gap: 2rem; }
+  nav.tn a {
+    color: inherit; text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    opacity: 0.85; transition: opacity 0.2s;
+  }
+  nav.tn a:hover { opacity: 1; }
+  @media (max-width: 720px) { nav.tn { display: none; } }
+
+  /* Hero */
+  .hero {
+    height: 100vh; min-height: 660px;
+    position: relative; overflow: hidden;
+    color: var(--bone);
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1800&q=85&auto=format') center/cover no-repeat;
+    filter: grayscale(0.18) contrast(1.05) brightness(0.65);
+  }
+  .hero-img::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.55) 100%),
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="3" /></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.25"/></svg>');
+    background-size: cover, 200px 200px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 1.5rem; max-width: 880px; }
+  .hero-tag { font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase; opacity: 0.85; margin-bottom: 2rem; }
+  .hero h1 {
+    font-family: 'DM Sans', sans-serif; font-weight: 600;
+    font-size: clamp(3.2rem, 8vw, 6.4rem);
+    line-height: 0.96; letter-spacing: -0.04em;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+  .hero h1 span { display: block; font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400; text-transform: none; letter-spacing: -0.01em; color: var(--copper); margin-top: 0.2rem; }
+  .hero-sub {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 1.2rem; max-width: 32ch; margin: 0 auto 2.4rem; opacity: 0.85;
+  }
+  .ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    padding: 1rem 2rem;
+    text-decoration: none; font-size: 0.78rem;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.25s;
+    border: 1px solid currentColor;
+  }
+  .btn-fill { background: var(--bone); color: var(--brown); border-color: var(--bone); }
+  .btn-fill:hover { background: var(--copper); color: var(--bone); border-color: var(--copper); }
+  .btn-line { color: var(--bone); }
+  .btn-line:hover { background: var(--bone); color: var(--brown); }
+
+  /* Section heads */
+  .label {
+    font-size: 0.74rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--copper); margin-bottom: 1.6rem; font-weight: 500;
+  }
+  .h-display {
+    font-family: 'Playfair Display', serif; font-weight: 400;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1.05; letter-spacing: -0.015em;
+  }
+  .h-display em { font-style: italic; color: var(--copper); }
+
+  /* Services list */
+  .svc { padding: 8rem 0; }
+  .svc-head { text-align: center; margin-bottom: 5rem; }
+  .svc-head .label { display: inline-block; }
+  .svc-list { max-width: 880px; margin: 0 auto; }
+  .svc-row {
+    display: grid; grid-template-columns: 1fr auto auto;
+    gap: 1.8rem; align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--line);
+    transition: padding 0.3s;
+  }
+  .svc-row:hover { padding: 2rem 1.4rem; background: rgba(184,115,51,0.04); }
+  .svc-row:first-child { border-top: 1px solid var(--line); }
+  .svc-name {
+    font-family: 'Playfair Display', serif; font-size: 1.6rem;
+    font-weight: 400; letter-spacing: -0.005em;
+  }
+  .svc-desc {
+    font-size: 0.92rem; color: rgba(43,32,24,0.65); margin-top: 0.4rem;
+    font-weight: 300;
+  }
+  .svc-time { font-size: 0.85rem; color: var(--dust); letter-spacing: 0.04em; }
+  .svc-price {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    color: var(--copper); font-weight: 500; min-width: 5ch; text-align: right;
+  }
+  @media (max-width: 720px) {
+    .svc-row { grid-template-columns: 1fr auto; gap: 1rem; }
+    .svc-time { display: none; }
+  }
+
+  /* Masters */
+  .masters { padding: 8rem 0; background: var(--brown); color: var(--bone); }
+  .masters .label { color: var(--copper); }
+  .masters .h-display { color: var(--bone); }
+  .masters-head { text-align: center; margin-bottom: 5rem; }
+  .masters-head .label { display: inline-block; }
+  .masters-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .master { text-align: center; }
+  .master-img {
+    width: 200px; height: 200px; border-radius: 50%;
+    margin: 0 auto 1.6rem;
+    object-fit: cover;
+    filter: grayscale(1) contrast(1.05);
+    border: 3px solid var(--copper);
+    transition: filter 0.4s, transform 0.4s;
+  }
+  .master:hover .master-img { filter: grayscale(0) contrast(1); transform: scale(1.04); }
+  .master-name { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.3rem; }
+  .master-spec { font-style: italic; color: var(--copper); margin-bottom: 0.6rem; font-family: 'Playfair Display', serif; }
+  .master-ig { font-size: 0.85rem; color: rgba(237,228,211,0.5); letter-spacing: 0.06em; text-decoration: none; }
+  .master-ig:hover { color: var(--copper); }
+  @media (max-width: 880px) { .masters-grid { grid-template-columns: 1fr; gap: 4rem; } }
+
+  /* Gallery */
+  .gallery { padding: 8rem 0; }
+  .gallery-head { text-align: center; margin-bottom: 4rem; }
+  .gallery-head .label { display: inline-block; }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 250px;
+    gap: 0.8rem;
+  }
+  .gallery-grid img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(0.4) contrast(1.04);
+    transition: filter 0.4s, transform 0.4s;
+    cursor: pointer;
+  }
+  .gallery-grid img:hover { filter: grayscale(0) contrast(1); transform: scale(1.02); }
+  .gallery-grid img:nth-child(1) { grid-row: span 2; }
+  .gallery-grid img:nth-child(4) { grid-column: span 2; }
+  @media (max-width: 720px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+    .gallery-grid img:nth-child(1) { grid-row: span 1; }
+    .gallery-grid img:nth-child(4) { grid-column: span 1; }
+  }
+
+  /* CTA / Calendar */
+  .cta { padding: 8rem 0; background: var(--brown-2); color: var(--bone); position: relative; overflow: hidden; text-align: center; }
+  .cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><filter id="n"><feTurbulence baseFrequency="0.85" numOctaves="2"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.18"/></svg>');
+    background-size: 200px 200px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+  .cta .label { color: var(--copper); display: inline-block; }
+  .cta .h-display { color: var(--bone); margin-bottom: 1.4rem; }
+  .cta-sub { max-width: 50ch; margin: 0 auto 3rem; color: rgba(237,228,211,0.7); font-style: italic; font-family: 'Playfair Display', serif; font-size: 1.15rem; }
+
+  .cal {
+    background: var(--bone); color: var(--brown);
+    padding: 2.5rem; max-width: 540px; margin: 0 auto 3rem;
+    text-align: left; box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+  .cal-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--line); margin-bottom: 1.4rem;
+  }
+  .cal-month { font-family: 'Playfair Display', serif; font-size: 1.4rem; }
+  .cal-nav { color: var(--dust); font-size: 1.2rem; cursor: pointer; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; margin-bottom: 1.6rem; }
+  .cal-dow { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); text-align: center; padding: 0.4rem 0; }
+  .cal-day {
+    aspect-ratio: 1; display: grid; place-items: center;
+    font-size: 0.95rem; cursor: pointer; border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .cal-day:hover:not(.muted) { background: var(--bone-2); }
+  .cal-day.active { background: var(--copper); color: var(--bone); font-weight: 600; }
+  .cal-day.muted { color: var(--dust); opacity: 0.4; }
+  .cal-times { display: flex; flex-wrap: wrap; gap: 0.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+  .cal-time {
+    padding: 0.55rem 1rem; border: 1px solid var(--line);
+    font-size: 0.86rem; cursor: pointer; transition: all 0.2s;
+    border-radius: 4px;
+  }
+  .cal-time:hover { border-color: var(--copper); color: var(--copper); }
+  .cal-time.taken { opacity: 0.35; cursor: not-allowed; text-decoration: line-through; }
+
+  /* Footer */
+  footer.foot {
+    padding: 4rem 0 3rem;
+    background: var(--bone); color: var(--brown);
+    border-top: 1px solid var(--line);
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+  .foot-brand { font-family: 'Playfair Display', serif; font-size: 1.6rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 0.6rem; }
+  .foot-tag { color: rgba(43,32,24,0.6); font-style: italic; font-family: 'Playfair Display', serif; }
+  .foot-title { font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--copper); margin-bottom: 1.1rem; font-weight: 500; }
+  .foot-list { list-style: none; }
+  .foot-list li { font-size: 0.92rem; color: rgba(43,32,24,0.7); padding: 0.3rem 0; }
+  .foot-list a { color: inherit; text-decoration: none; }
+  .foot-list a:hover { color: var(--copper); }
+  .foot-copy { font-size: 0.8rem; color: rgba(43,32,24,0.5); padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  @media (max-width: 720px) {
+    .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.85s ease, transform 0.85s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.12s; }
+  .reveal-d2 { transition-delay: 0.24s; }
+</style>
+</head>
+<body>
+
+<header class="top" id="topbar">
+  <div class="brand">Nordic</div>
+  <nav class="tn">
+    <a href="#palvelut">Palvelut</a>
+    <a href="#mestarit">Mestarit</a>
+    <a href="#galleria">Galleria</a>
+    <a href="#varaa">Varaa aika</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Tampere · Vuodesta 2011</div>
+    <h1>Parturi <span>Nordic</span></h1>
+    <p class="hero-sub">Klassisia leikkauksia ja partoja, kuten ennenkin. Kunnioitamme aikaa, työtä ja asiakasta.</p>
+    <div class="ctas">
+      <a href="#varaa" class="btn btn-fill">Varaa aika</a>
+      <a href="#palvelut" class="btn btn-line">Katso palvelut</a>
+    </div>
+  </div>
+</section>
+
+<section class="svc" id="palvelut">
+  <div class="container">
+    <div class="svc-head reveal">
+      <div class="label">Palvelumme</div>
+      <h2 class="h-display">Hyvin tehty <em>kestää.</em></h2>
+    </div>
+    <div class="svc-list">
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Klassinen leikkaus</div>
+          <div class="svc-desc">Saksilla, koneella ja partaveitsellä. Pesu ja muotoilu mukana.</div>
+        </div>
+        <div class="svc-time">45 min</div>
+        <div class="svc-price">42 €</div>
+      </div>
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Partakäsittely</div>
+          <div class="svc-desc">Höyrypyyhe, partaveitsi, viimeistely partaöljyllä.</div>
+        </div>
+        <div class="svc-time">30 min</div>
+        <div class="svc-price">35 €</div>
+      </div>
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Värinkorjaus</div>
+          <div class="svc-desc">Harmaiden peittäminen luonnollisin sävyin, miehille suunniteltu.</div>
+        </div>
+        <div class="svc-time">60 min</div>
+        <div class="svc-price">58 €</div>
+      </div>
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Juhlatyyli</div>
+          <div class="svc-desc">Häät, valmistujaiset, juhlapaikat. Sisältää kuvauksen lopputuloksesta.</div>
+        </div>
+        <div class="svc-time">75 min</div>
+        <div class="svc-price">75 €</div>
+      </div>
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Lasten leikkaus</div>
+          <div class="svc-desc">Alle 12, vuotiaille. Rauhallisesti, lelut ja palkinto.</div>
+        </div>
+        <div class="svc-time">30 min</div>
+        <div class="svc-price">28 €</div>
+      </div>
+      <div class="svc-row reveal">
+        <div>
+          <div class="svc-name">Lahjakortti</div>
+          <div class="svc-desc">Kaiverrettu nahkakotelo. Voi käyttää mihin tahansa palveluumme.</div>
+        </div>
+        <div class="svc-time">heti</div>
+        <div class="svc-price">alk. 30 €</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="masters" id="mestarit">
+  <div class="container">
+    <div class="masters-head reveal">
+      <div class="label">Tiimimme</div>
+      <h2 class="h-display">Mestarit <em>työn ääressä.</em></h2>
+    </div>
+    <div class="masters-grid">
+      <div class="master reveal">
+        <img class="master-img" src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?w=600&q=85&auto=format" alt="Mestari Aleksi" loading="lazy" />
+        <div class="master-name">Aleksi Virtanen</div>
+        <div class="master-spec">Klassiset leikkaukset</div>
+        <a href="#" class="master-ig">@aleksi.cuts</a>
+      </div>
+      <div class="master reveal reveal-d1">
+        <img class="master-img" src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=600&q=85&auto=format" alt="Mestari Tomi" loading="lazy" />
+        <div class="master-name">Tomi Saarinen</div>
+        <div class="master-spec">Partaveitsi ja shaving</div>
+        <a href="#" class="master-ig">@tomi.razor</a>
+      </div>
+      <div class="master reveal reveal-d2">
+        <img class="master-img" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=85&auto=format" alt="Mestari Mikko" loading="lazy" />
+        <div class="master-name">Mikko Lehtinen</div>
+        <div class="master-spec">Värit ja moderni tyyli</div>
+        <a href="#" class="master-ig">@mikko.barber</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="galleria">
+  <div class="container">
+    <div class="gallery-head reveal">
+      <div class="label">Galleria</div>
+      <h2 class="h-display">Työmme <em>kuvina.</em></h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=900&q=85&auto=format" alt="Parturi 1" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1517241034903-9a4c3ab12f00?w=700&q=85&auto=format" alt="Parturi 2" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=700&q=85&auto=format" alt="Parturi 3" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1517832606299-7ae9b720a186?w=1200&q=85&auto=format" alt="Parturi 4" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1521123845560-14093637aa7d?w=700&q=85&auto=format" alt="Parturi 5" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?w=700&q=85&auto=format" alt="Parturi 6" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="varaa">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="label reveal">Varaa aika</div>
+      <h2 class="h-display reveal">Tule, <em>kun olet valmis.</em></h2>
+      <p class="cta-sub reveal">Valitse päivä ja aika. Vahvistamme tekstiviestillä, ja muistutamme aamulla.</p>
+      <div class="cal reveal reveal-d1">
+        <div class="cal-head">
+          <div class="cal-month">Toukokuu 2026</div>
+          <div>
+            <span class="cal-nav">‹</span>
+            &nbsp;
+            <span class="cal-nav">›</span>
+          </div>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-dow">Ma</div><div class="cal-dow">Ti</div><div class="cal-dow">Ke</div>
+          <div class="cal-dow">To</div><div class="cal-dow">Pe</div><div class="cal-dow">La</div><div class="cal-dow">Su</div>
+          <div class="cal-day muted">28</div><div class="cal-day muted">29</div><div class="cal-day muted">30</div>
+          <div class="cal-day">1</div><div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div>
+          <div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div>
+          <div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div>
+          <div class="cal-day active">12</div><div class="cal-day">13</div><div class="cal-day">14</div>
+          <div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div>
+        </div>
+        <div class="cal-times">
+          <div class="cal-time taken">09:00</div>
+          <div class="cal-time">10:30</div>
+          <div class="cal-time">12:00</div>
+          <div class="cal-time taken">13:30</div>
+          <div class="cal-time">15:00</div>
+          <div class="cal-time">16:30</div>
+        </div>
+      </div>
+      <a href="#" class="hand" style="font-size: 1.6rem;">Nähdään pian.</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Nordic</div>
+        <div class="foot-tag">Tampereen vanhin parturi vuodesta 2011.</div>
+      </div>
+      <div>
+        <div class="foot-title">Aukioloajat</div>
+        <ul class="foot-list">
+          <li>Ma, Pe · 09, 19</li>
+          <li>La · 10, 17</li>
+          <li>Su · suljettu</li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-title">Yhteystiedot</div>
+        <ul class="foot-list">
+          <li>Hämeenkatu 14, 33100 Tampere</li>
+          <li>+358 50 234 5678</li>
+          <li><a href="#">Instagram</a> · <a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-copy">© 2026 Parturi Nordic Oy · Y, tunnus 2987654-1</div>
+  </div>
+</footer>
+
+<script>
+  const tb = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) tb.classList.add('scrolled');
+    else tb.classList.remove('scrolled');
+  });
+  const rio = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.14 });
+  document.querySelectorAll('.reveal').forEach(el => rio.observe(el));
+
+  // Calendar day click
+  document.querySelectorAll('.cal-day:not(.muted)').forEach(d => {
+    d.addEventListener('click', () => {
+      document.querySelectorAll('.cal-day').forEach(x => x.classList.remove('active'));
+      d.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

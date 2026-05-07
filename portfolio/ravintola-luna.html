@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ravintola Luna · Kausiravintola Helsingissä</title>
+<meta name="description" content="Ravintola Luna tarjoaa kauden raaka-aineista valmistettuja annoksia Helsingin sydämessä. Varaa pöytä illalliselle." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --cream: #f5f1e8;
+    --ink: #1a1612;
+    --terracotta: #a8654a;
+    --gold: #c9a84a;
+    --hairline: rgba(26,22,18,0.14);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; }
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 1.75rem; }
+
+  /* Top bar */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 1.4rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s ease, backdrop-filter 0.4s ease;
+  }
+  .topbar.scrolled { background: rgba(245,241,232,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--hairline); }
+  .brand { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 0.06em; color: var(--cream); transition: color 0.3s; }
+  .topbar.scrolled .brand { color: var(--ink); }
+  .topnav { display: flex; gap: 2.2rem; }
+  .topnav a {
+    color: var(--cream); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    transition: color 0.3s, opacity 0.2s;
+    opacity: 0.92;
+  }
+  .topnav a:hover { opacity: 1; }
+  .topbar.scrolled .topnav a { color: var(--ink); }
+  @media (max-width: 720px) { .topnav { display: none; } }
+
+  /* Hero */
+  .hero {
+    position: relative; height: 100vh; min-height: 640px;
+    overflow: hidden; display: flex; align-items: flex-end;
+    color: var(--cream);
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&q=85&auto=format') center/cover no-repeat;
+    animation: kenburns 18s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns {
+    0% { transform: scale(1.05); }
+    100% { transform: scale(1.18); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, rgba(0,0,0,0.65) 100%);
+  }
+  .hero-content { position: relative; z-index: 2; padding: 0 2rem 6rem; max-width: 1180px; margin: 0 auto; width: 100%; }
+  .hero-eyebrow { font-size: 0.74rem; letter-spacing: 0.32em; text-transform: uppercase; opacity: 0.85; margin-bottom: 1.4rem; }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.04;
+    letter-spacing: -0.015em;
+    max-width: 14ch;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    margin-top: 1.6rem;
+    font-size: 1rem; max-width: 38ch; opacity: 0.9;
+    font-weight: 300;
+  }
+  .scroll-cue {
+    position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
+    z-index: 3;
+    width: 1px; height: 64px;
+    background: linear-gradient(to bottom, transparent, var(--cream));
+    opacity: 0.6;
+  }
+
+  /* Section labels */
+  .label {
+    font-size: 0.72rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--terracotta); margin-bottom: 1.4rem; font-weight: 500;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif; font-weight: 300;
+    font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+    line-height: 1.1; letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--terracotta); }
+
+  /* Menu */
+  .menu { padding: 8rem 0 7rem; border-bottom: 1px solid var(--hairline); }
+  .menu-head { text-align: center; margin-bottom: 4.5rem; }
+  .menu-head .label { display: inline-block; }
+  .menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .dish {
+    border: 1px solid var(--hairline);
+    margin: -0.5px;
+    padding: 0;
+    background: transparent;
+    transition: background 0.3s ease;
+  }
+  .dish:hover { background: rgba(168,101,74,0.04); }
+  .dish-img {
+    width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block;
+    filter: saturate(0.95);
+  }
+  .dish-body { padding: 1.6rem 1.6rem 1.8rem; }
+  .dish-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.5rem;
+    margin-bottom: 0.55rem; letter-spacing: 0.005em;
+  }
+  .dish-ing { font-size: 0.85rem; color: rgba(26,22,18,0.7); line-height: 1.6; }
+  .dish-foot {
+    margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--hairline);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem;
+  }
+  .dish-price { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--terracotta); }
+  .dish-tag { color: rgba(26,22,18,0.55); letter-spacing: 0.14em; text-transform: uppercase; font-size: 0.68rem; }
+  @media (max-width: 880px) { .menu-grid { grid-template-columns: 1fr; } }
+
+  /* Philosophy */
+  .philo { padding: 9rem 0; background: #fbf7ee; }
+  .philo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
+  .philo-text .section-title { margin-bottom: 1.8rem; }
+  .philo-text p {
+    font-size: 1.02rem; color: rgba(26,22,18,0.78);
+    margin-bottom: 1.2rem; max-width: 38ch;
+    font-weight: 300;
+  }
+  .philo-img-wrap { position: relative; }
+  .philo-img {
+    width: 100%; aspect-ratio: 4/5; object-fit: cover;
+    filter: saturate(0.92) contrast(1.02);
+  }
+  .philo-sig {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.4rem; margin-top: 2.2rem; color: var(--terracotta);
+  }
+  @media (max-width: 880px) {
+    .philo-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .philo { padding: 6rem 0; }
+  }
+
+  /* Reservation */
+  .reserve { padding: 9rem 0; }
+  .reserve-inner {
+    max-width: 760px; margin: 0 auto; text-align: center;
+  }
+  .reserve-inner .section-title { margin-bottom: 1.2rem; }
+  .reserve-sub { font-size: 1rem; color: rgba(26,22,18,0.7); max-width: 50ch; margin: 0 auto 3.4rem; font-weight: 300; }
+  form.book {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem;
+    text-align: left;
+  }
+  form.book label {
+    display: block; font-size: 0.7rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 0.6rem; font-weight: 500;
+  }
+  form.book input, form.book select, form.book textarea {
+    width: 100%; padding: 0.95rem 0; background: transparent;
+    border: 0; border-bottom: 1px solid var(--hairline);
+    font-family: 'Cormorant Garamond', serif; font-size: 1.1rem;
+    color: var(--ink); outline: none; transition: border-color 0.25s;
+  }
+  form.book input:focus, form.book select:focus, form.book textarea:focus { border-color: var(--terracotta); }
+  form.book .full { grid-column: 1 / -1; }
+  form.book textarea { resize: vertical; min-height: 80px; }
+  .submit-row { grid-column: 1 / -1; text-align: center; margin-top: 1.6rem; }
+  .btn-book {
+    display: inline-block; padding: 1rem 3rem;
+    background: var(--ink); color: var(--cream);
+    border: 0; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    transition: background 0.25s, transform 0.2s;
+  }
+  .btn-book:hover { background: var(--terracotta); transform: translateY(-1px); }
+  @media (max-width: 720px) { form.book { grid-template-columns: 1fr; } }
+
+  /* Location */
+  .location { padding: 9rem 0; background: var(--ink); color: var(--cream); }
+  .location-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; }
+  .location .section-title { color: var(--cream); margin-bottom: 2.2rem; }
+  .location .label { color: var(--gold); }
+  .map-wrap {
+    background: url('https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1200&q=85&auto=format') center/cover no-repeat;
+    aspect-ratio: 4/3;
+    position: relative;
+    filter: saturate(0.7) contrast(1.05);
+  }
+  .map-pin {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 14px; height: 14px; background: var(--gold); border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(201,168,74,0.3), 0 0 0 16px rgba(201,168,74,0.12);
+  }
+  .hours { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+  .hours td { padding: 0.85rem 0; border-bottom: 1px solid rgba(245,241,232,0.12); font-size: 0.92rem; }
+  .hours td:last-child { text-align: right; color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; }
+  .addr { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; line-height: 1.4; }
+  .addr-sub { font-size: 0.88rem; color: rgba(245,241,232,0.6); margin-top: 0.5rem; }
+  @media (max-width: 880px) { .location-grid { grid-template-columns: 1fr; gap: 3rem; } }
+
+  /* Footer */
+  footer.foot { padding: 4rem 0 3rem; background: var(--ink); color: rgba(245,241,232,0.55); border-top: 1px solid rgba(245,241,232,0.08); }
+  .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem; }
+  .foot-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: var(--cream); letter-spacing: 0.08em; }
+  .foot-links { display: flex; gap: 2rem; font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; }
+  .foot-links a { color: rgba(245,241,232,0.55); text-decoration: none; transition: color 0.25s; }
+  .foot-links a:hover { color: var(--gold); }
+  .foot-copy { font-size: 0.74rem; margin-top: 2rem; }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <div class="brand">LUNA</div>
+  <nav class="topnav">
+    <a href="#menu">Menu</a>
+    <a href="#filo">Filosofia</a>
+    <a href="#varaa">Varaukset</a>
+    <a href="#sijainti">Sijainti</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Helsinki, vuodesta 2014</div>
+    <h1>Kauden makuja, <em>kynttilän valossa.</em></h1>
+    <p class="hero-sub">Pieni perheravintola Punavuoressa. Lähituottajilta hankittuja raaka-aineita, kunnioituksella valmistettuja annoksia, hidasta iltaa.</p>
+  </div>
+  <div class="scroll-cue"></div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-head reveal">
+      <div class="label">Tämän viikon menu</div>
+      <h2 class="section-title">Pohjoismainen <em>kausikeittiö.</em></h2>
+    </div>
+    <div class="menu-grid">
+      <article class="dish reveal">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=85&auto=format" alt="Punajuurikarpaccio" loading="lazy" />
+        <div class="dish-body">
+          <h3 class="dish-name">Punajuurikarpaccio</h3>
+          <p class="dish-ing">Hapanleipä, vuohenjuusto, paahdettu saksanpähkinä, katajaöljy.</p>
+          <div class="dish-foot">
+            <span class="dish-tag">Alkuruoka</span>
+            <span class="dish-price">14 €</span>
+          </div>
+        </div>
+      </article>
+      <article class="dish reveal reveal-d1">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&q=85&auto=format" alt="Paistettu siika" loading="lazy" />
+        <div class="dish-body">
+          <h3 class="dish-name">Paistettu siika</h3>
+          <p class="dish-ing">Voissa kuullotettu juuriselleri, hapankerma, tilliöljy, savustettu peruna.</p>
+          <div class="dish-foot">
+            <span class="dish-tag">Pääruoka</span>
+            <span class="dish-price">32 €</span>
+          </div>
+        </div>
+      </article>
+      <article class="dish reveal reveal-d2">
+        <img class="dish-img" src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=900&q=85&auto=format" alt="Pillipuurokakku" loading="lazy" />
+        <div class="dish-body">
+          <h3 class="dish-name">Karpalokakku</h3>
+          <p class="dish-ing">Tervaleipäjäätelö, valkosuklaa, kuusenkerkkä, paahdettu kaurakrokantti.</p>
+          <div class="dish-foot">
+            <span class="dish-tag">Jälkiruoka</span>
+            <span class="dish-price">12 €</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="philo" id="filo">
+  <div class="container">
+    <div class="philo-grid">
+      <div class="philo-text reveal">
+        <div class="label">Filosofia</div>
+        <h2 class="section-title">Aitoa ruokaa, <em>ilman kiirettä.</em></h2>
+        <p>Luna on syntynyt rakkaudesta pohjoiseen luontoon ja sen lyhyisiin, intensiivisiin satokausiin. Jokainen lautanen kertoo viikon, paikan ja sään tarinan.</p>
+        <p>Hankimme kalat suoraan Saaristomereltä, vihannekset Hyvinkään luomutilalta ja sienet metsistämme. Mitään ei tuoda kaukaa, kun lähellä kasvaa parempaa.</p>
+        <div class="philo-sig">Helmi ja Sami Lehtonen</div>
+      </div>
+      <div class="philo-img-wrap reveal reveal-d1">
+        <img class="philo-img" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=85&auto=format" alt="Keittiömestari valmistaa annosta" loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve" id="varaa">
+  <div class="container">
+    <div class="reserve-inner reveal">
+      <div class="label">Varaa pöytä</div>
+      <h2 class="section-title">Tervetuloa <em>illalliselle.</em></h2>
+      <p class="reserve-sub">Pidä pöytä iltaa varten. Vahvistamme varauksen sähköpostitse tunnin sisällä.</p>
+    </div>
+    <form class="book reveal" onsubmit="event.preventDefault(); alert('Kiitos! Vahvistamme varauksen pian.');">
+      <div>
+        <label>Päivämäärä</label>
+        <input type="date" required />
+      </div>
+      <div>
+        <label>Kellonaika</label>
+        <select required>
+          <option>17:00</option><option>18:00</option><option>19:00</option>
+          <option>20:00</option><option>21:00</option>
+        </select>
+      </div>
+      <div>
+        <label>Henkilömäärä</label>
+        <select required>
+          <option>2 henkilöä</option><option>3 henkilöä</option>
+          <option>4 henkilöä</option><option>5 henkilöä</option>
+          <option>6 henkilöä</option><option>7+ henkilöä</option>
+        </select>
+      </div>
+      <div>
+        <label>Nimi</label>
+        <input type="text" placeholder="Etu, ja sukunimi" required />
+      </div>
+      <div class="full">
+        <label>Lisätietoja</label>
+        <textarea placeholder="Allergiat, syntymäpäivä, erikoistoiveet…"></textarea>
+      </div>
+      <div class="submit-row">
+        <button class="btn-book" type="submit">Lähetä varaus</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<section class="location" id="sijainti">
+  <div class="container">
+    <div class="location-grid">
+      <div class="reveal">
+        <div class="map-wrap">
+          <span class="map-pin"></span>
+        </div>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="label">Sijainti ja aukioloajat</div>
+        <h2 class="section-title">Punavuoren <em>sydämessä.</em></h2>
+        <table class="hours">
+          <tr><td>Maanantai</td><td>Suljettu</td></tr>
+          <tr><td>Tiistai, torstai</td><td>17:00, 23:00</td></tr>
+          <tr><td>Perjantai, lauantai</td><td>17:00, 24:00</td></tr>
+          <tr><td>Sunnuntai</td><td>14:00, 21:00</td></tr>
+        </table>
+        <div class="addr">Iso Roobertinkatu 21<br/>00120 Helsinki</div>
+        <div class="addr-sub">+358 40 987 6543 · varaukset@ravintolaluna.fi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-row">
+      <div class="foot-brand">RAVINTOLA LUNA</div>
+      <div class="foot-links">
+        <a href="#">Instagram</a>
+        <a href="#menu">Menu</a>
+        <a href="#varaa">Varaa</a>
+        <a href="mailto:varaukset@ravintolaluna.fi">Sähköposti</a>
+      </div>
+    </div>
+    <div class="foot-copy">© 2026 Ravintola Luna Oy · Helsinki</div>
+  </div>
+</footer>
+
+<style>
+  .reveal-d1 { transition-delay: 0.12s; }
+  .reveal-d2 { transition-delay: 0.24s; }
+</style>
+<script>
+  // Topbar scrolled state
+  const tb = document.getElementById('topbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) tb.classList.add('scrolled');
+    else tb.classList.remove('scrolled');
+  });
+  // Reveal observer
+  const rio = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.16 });
+  document.querySelectorAll('.reveal').forEach(el => rio.observe(el));
+</script>
+</body>
+</html>

@@ -2824,6 +2824,12 @@
       'By subscribing you agree that Selora uses your email to send the newsletter. You can unsubscribe any time via the link at the bottom of every email. See the privacy policy.',
     'tietosuojaseloste': 'privacy policy',
     'Sähköpostiosoite': 'Email address',
+
+    // ---------- portfolio / stories carousel (verkkosivusuunnittelu.html) ----------
+    'Esimerkkitöitä': 'Recent work',
+    'Sivut, joita olemme rakentaneet.': "Sites we've built.",
+    'rakentaneet': 'built',
+    'Katso sivusto →': 'View site →',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

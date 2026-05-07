@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sähkö Pro · Sähköasennukset ja päivystys 24/7</title>
+<meta name="description" content="Sähkö Pro, luotettavat sähköasennukset, vianetsintä, aurinkopaneelit ja LED-valaistus. Hätäpäivystys 24/7 koko Etelä-Suomessa." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0a1628;
+    --navy-2: #0e1c34;
+    --yellow: #f5d800;
+    --slate: #64748b;
+    --line: rgba(255,255,255,0.08);
+    --red: #ef3b3b;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--navy);
+    color: #fff;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 1.75rem; }
+
+  /* Top bar */
+  header.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(10,22,40,0.85); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  .top-inner {
+    max-width: 1240px; margin: 0 auto;
+    padding: 1rem 1.75rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 0.7rem;
+    font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
+  }
+  .logo-mark {
+    width: 28px; height: 28px;
+    background: var(--yellow); color: var(--navy);
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 1rem;
+    clip-path: polygon(50% 0, 0 60%, 38% 60%, 26% 100%, 100% 36%, 60% 36%, 75% 0);
+  }
+  nav.tn { display: flex; gap: 2rem; align-items: center; }
+  nav.tn a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  nav.tn a:hover { color: var(--yellow); }
+  .top-cta {
+    background: var(--yellow); color: var(--navy);
+    padding: 0.65rem 1.2rem; border-radius: 6px;
+    font-weight: 600; font-size: 0.86rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .top-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,216,0,0.25); }
+  @media (max-width: 720px) { nav.tn .lk { display: none; } }
+
+  /* Hero */
+  .hero { padding: 9rem 0 5rem; position: relative; overflow: hidden; }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 56px 56px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at top, #000 30%, transparent 80%);
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.74rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--yellow); margin-bottom: 1.6rem;
+  }
+  .eyebrow::before { content: ''; width: 8px; height: 8px; background: var(--yellow); border-radius: 50%; box-shadow: 0 0 14px var(--yellow); }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-weight: 600; letter-spacing: -0.025em; line-height: 1.02;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--yellow); }
+  .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,0.65); max-width: 48ch; margin-bottom: 2.4rem; font-weight: 300; }
+  .ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 1rem 1.7rem; border-radius: 8px; font-weight: 600;
+    font-size: 0.95rem; cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 0; transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .btn-y { background: var(--yellow); color: var(--navy); }
+  .btn-y:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(245,216,0,0.32); }
+  .btn-o { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.18); }
+  .btn-o:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.32); }
+
+  /* Wave SVG */
+  .wave-box {
+    background: var(--navy-2); border: 1px solid var(--line);
+    border-radius: 12px; padding: 2rem;
+    aspect-ratio: 1.2/1;
+    position: relative; overflow: hidden;
+  }
+  .wave-box::after {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(245,216,0,0.18), transparent 50%);
+    pointer-events: none;
+  }
+  .wave-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.12em;
+  }
+  .wave-dot { width: 9px; height: 9px; background: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80; animation: pulse 1.6s infinite; display: inline-block; vertical-align: middle; margin-right: 6px; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+  .wave-svg { width: 100%; height: calc(100% - 5rem); display: block; }
+  .wave-path { fill: none; stroke: var(--yellow); stroke-width: 1.5; stroke-linecap: round; }
+  .wave-path-2 { stroke: rgba(245,216,0,0.32); }
+
+  /* Stats row */
+  .stats {
+    margin-top: 5rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 2.5rem 0;
+  }
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 2.6rem;
+    font-weight: 500; color: var(--yellow); letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat-lbl { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 0.6rem; letter-spacing: 0.04em; }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; gap: 1.6rem; padding: 2rem 0; }
+    .stat-num { font-size: 2rem; }
+  }
+
+  /* Sections */
+  section.s { padding: 7rem 0; border-bottom: 1px solid var(--line); }
+  .s-head { display: flex; justify-content: space-between; align-items: end; margin-bottom: 3.4rem; gap: 2rem; flex-wrap: wrap; }
+  .s-title {
+    font-size: clamp(2rem, 3.6vw, 2.8rem);
+    font-weight: 500; letter-spacing: -0.02em; line-height: 1.1;
+    max-width: 22ch;
+  }
+  .s-title em { color: var(--yellow); font-style: normal; }
+  .s-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: rgba(255,255,255,0.4); letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Services grid */
+  .svc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .svc {
+    background: var(--navy); padding: 2.4rem 2rem;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .svc:hover { background: var(--navy-2); }
+  .svc-icon {
+    width: 44px; height: 44px;
+    border: 1px solid var(--yellow); border-radius: 8px;
+    display: grid; place-items: center;
+    margin-bottom: 1.6rem;
+    color: var(--yellow);
+  }
+  .svc-num { font-family: 'JetBrains Mono', monospace; font-size: 0.74rem; color: rgba(255,255,255,0.35); margin-bottom: 0.8rem; letter-spacing: 0.12em; }
+  .svc-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.6rem; }
+  .svc-desc { font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+  @media (max-width: 1000px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px) { .svc-grid { grid-template-columns: 1fr; } }
+
+  /* Emergency banner */
+  .em {
+    padding: 4rem 0; background: linear-gradient(135deg, #2a0808 0%, #4a0d0d 100%);
+    position: relative; overflow: hidden;
+  }
+  .em::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent 0 24px, rgba(239,59,59,0.06) 24px 25px);
+  }
+  .em-inner {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 2rem; flex-wrap: wrap; position: relative; z-index: 2;
+  }
+  .em-text .eyebrow { color: var(--red); }
+  .em-text .eyebrow::before { background: var(--red); box-shadow: 0 0 14px var(--red); animation: pulse 1.4s infinite; }
+  .em-text h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 600; letter-spacing: -0.02em; margin-bottom: 0.4rem;
+  }
+  .em-text p { color: rgba(255,255,255,0.7); }
+  .em-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700; color: #fff;
+    text-decoration: none;
+    border: 2px solid var(--red); padding: 1rem 1.6rem; border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    transition: background 0.2s;
+  }
+  .em-phone:hover { background: var(--red); }
+
+  /* Certs */
+  .certs { padding: 5rem 0; border-bottom: 1px solid var(--line); }
+  .cert-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; align-items: center; }
+  .cert {
+    aspect-ratio: 5/3;
+    background: var(--navy-2);
+    border: 1px solid var(--line); border-radius: 8px;
+    display: grid; place-items: center;
+    color: rgba(255,255,255,0.55);
+    font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .cert:hover { border-color: var(--yellow); color: var(--yellow); }
+  @media (max-width: 880px) { .cert-row { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Form */
+  .form-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+  form.qf { display: grid; gap: 1.2rem; }
+  form.qf input, form.qf textarea {
+    width: 100%; padding: 1rem 1.2rem;
+    background: var(--navy-2);
+    border: 1px solid var(--line); border-radius: 8px;
+    color: #fff; font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.25s, background 0.25s;
+  }
+  form.qf input:focus, form.qf textarea:focus { border-color: var(--yellow); background: rgba(245,216,0,0.04); }
+  form.qf textarea { resize: vertical; min-height: 120px; }
+  form.qf input::placeholder, form.qf textarea::placeholder { color: rgba(255,255,255,0.35); }
+  .submit-y {
+    background: var(--yellow); color: var(--navy);
+    border: 0; padding: 1.05rem 1.5rem; font-weight: 700;
+    font-size: 0.92rem; border-radius: 8px; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s; letter-spacing: 0.02em;
+  }
+  .submit-y:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(245,216,0,0.28); }
+  .form-aside h3 { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.015em; }
+  .form-aside p { color: rgba(255,255,255,0.6); margin-bottom: 1.4rem; }
+  .form-meta { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+  .form-meta div { padding: 0.7rem 0; border-bottom: 1px dashed var(--line); }
+  .form-meta strong { color: var(--yellow); font-weight: 500; }
+  @media (max-width: 880px) { .form-wrap { grid-template-columns: 1fr; gap: 3rem; } }
+
+  /* Footer */
+  footer.foot {
+    padding: 3rem 0;
+    background: #07101e;
+  }
+  .foot-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; font-size: 0.86rem; color: rgba(255,255,255,0.5); }
+  .foot-row a { color: rgba(255,255,255,0.5); text-decoration: none; margin-left: 1.4rem; }
+  .foot-row a:hover { color: var(--yellow); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.1s; }
+  .reveal-d2 { transition-delay: 0.2s; }
+  .reveal-d3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="logo"><span class="logo-mark">⚡</span> Sähkö Pro</div>
+    <nav class="tn">
+      <a href="#palvelut" class="lk">Palvelut</a>
+      <a href="#hata" class="lk">Päivystys</a>
+      <a href="#tarjous" class="lk">Tarjous</a>
+      <a href="#tarjous" class="top-cta">Pyydä tarjous</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><span class="wave-dot"></span> Sertifioitu sähköurakoitsija</div>
+        <h1>Sähkötyöt jotka <span>toimivat heti.</span></h1>
+        <p class="hero-sub">Kotitalouksien ja yritysten sähköasennukset, vianetsintä ja päivystys. Yli 500 onnistunutta työmaata Etelä-Suomessa, 24/7 hätäpalvelu.</p>
+        <div class="ctas">
+          <a href="#tarjous" class="btn btn-y">Pyydä tarjous, vastaus 1 h</a>
+          <a href="tel:+358401234567" class="btn btn-o">Soita 040 123 4567</a>
+        </div>
+      </div>
+      <div class="wave-box reveal reveal-d1">
+        <div class="wave-meta">
+          <span><span class="wave-dot"></span>VERKKO ONLINE</span>
+          <span class="mono">230 V · 50 Hz</span>
+        </div>
+        <svg class="wave-svg" viewBox="0 0 400 200" preserveAspectRatio="none">
+          <path class="wave-path wave-path-2" d="M0,100 Q25,30 50,100 T100,100 T150,100 T200,100 T250,100 T300,100 T350,100 T400,100" />
+          <path class="wave-path" d="M0,100 Q25,30 50,100 T100,100 T150,100 T200,100 T250,100 T300,100 T350,100 T400,100">
+            <animate attributeName="d" dur="3s" repeatCount="indefinite"
+              values="
+                M0,100 Q25,30 50,100 T100,100 T150,100 T200,100 T250,100 T300,100 T350,100 T400,100;
+                M0,100 Q25,170 50,100 T100,100 T150,100 T200,100 T250,100 T300,100 T350,100 T400,100;
+                M0,100 Q25,30 50,100 T100,100 T150,100 T200,100 T250,100 T300,100 T350,100 T400,100" />
+          </path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="reveal">
+        <div class="stat-num">24/7</div>
+        <div class="stat-lbl">Hätäpäivystys koko Etelä-Suomessa</div>
+      </div>
+      <div class="reveal reveal-d1">
+        <div class="stat-num">10+</div>
+        <div class="stat-lbl">Vuoden kokemus</div>
+      </div>
+      <div class="reveal reveal-d2">
+        <div class="stat-num">500+</div>
+        <div class="stat-lbl">Onnistunutta työmaata</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="palvelut">
+  <div class="container">
+    <div class="s-head reveal">
+      <h2 class="s-title">Mitä <em>teemme.</em></h2>
+      <span class="s-meta">// 04 palvelua</span>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 L4 14 H11 L11 22 L20 10 H13 Z"/></svg>
+        </div>
+        <div class="svc-num">/ 01</div>
+        <h3 class="svc-name">Sähköasennus</h3>
+        <p class="svc-desc">Uudisrakennukset, saneeraus, keskuspäivitykset ja sähköpääkeskukset. KOE 1, KOE 2, vaativuusluokat A.</p>
+      </div>
+      <div class="svc reveal reveal-d1">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </div>
+        <div class="svc-num">/ 02</div>
+        <h3 class="svc-name">Vianetsintä</h3>
+        <p class="svc-desc">Lämpökuvauksella ja sähkömittauksilla löydämme viat nopeasti. Korjaamme samalla käynnillä.</p>
+      </div>
+      <div class="svc reveal reveal-d2">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>
+        </div>
+        <div class="svc-num">/ 03</div>
+        <h3 class="svc-name">Aurinkopaneelit</h3>
+        <p class="svc-desc">Avaimet käteen, suunnittelusta käyttöönottoon. Asennukset koteihin ja yrityksille, takuu 25 vuotta.</p>
+      </div>
+      <div class="svc reveal reveal-d3">
+        <div class="svc-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M9 8h6M10 8a4 4 0 0 1 4 0v8H10V8zM10 16h4M11 22h2"/></svg>
+        </div>
+        <div class="svc-num">/ 04</div>
+        <h3 class="svc-name">LED, valaistus</h3>
+        <p class="svc-desc">Sisä, ja ulkovalaistus. Energiatehokkaat ratkaisut jotka maksavat itsensä takaisin alle 3 vuodessa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="em" id="hata">
+  <div class="container">
+    <div class="em-inner">
+      <div class="em-text">
+        <div class="eyebrow"><span class="wave-dot"></span> Hätäpäivystys</div>
+        <h2>Sähköongelma juuri nyt?</h2>
+        <p>Vastaamme aina 30 minuutissa, paikalla 2 tunnissa.</p>
+      </div>
+      <a class="em-phone" href="tel:+358401234567">040 123 4567</a>
+    </div>
+  </div>
+</section>
+
+<section class="certs">
+  <div class="container">
+    <div class="s-head reveal">
+      <h2 class="s-title">Sertifikaatit ja <em>luvat.</em></h2>
+      <span class="s-meta">// pätevyydet</span>
+    </div>
+    <div class="cert-row">
+      <div class="cert reveal">TUKES</div>
+      <div class="cert reveal reveal-d1">SETI</div>
+      <div class="cert reveal reveal-d2">RALA</div>
+      <div class="cert reveal reveal-d2">ST, ry</div>
+      <div class="cert reveal reveal-d3">Solar Pro</div>
+    </div>
+  </div>
+</section>
+
+<section class="s" id="tarjous">
+  <div class="container">
+    <div class="form-wrap">
+      <div class="form-aside reveal">
+        <div class="eyebrow">Pyydä tarjous</div>
+        <h3>Vastaamme tunnin sisällä, arkisin 7, 21.</h3>
+        <p>Kerro lyhyesti mitä tarvitset. Saat selkeän kiinteähintaisen tarjouksen ilman piilokuluja.</p>
+        <div class="form-meta">
+          <div>Vastaus, ajalla <strong>~ 47 min</strong></div>
+          <div>Tarjouksen voimassaolo, <strong>30 päivää</strong></div>
+          <div>Maksuehto, <strong>14 päivää, lasku</strong></div>
+          <div>Y, tunnus, <strong>3210987-X</strong></div>
+        </div>
+      </div>
+      <form class="qf reveal reveal-d1" onsubmit="event.preventDefault(); alert('Kiitos! Otamme yhteyttä tunnin sisällä.');">
+        <input type="text" placeholder="Nimi" required />
+        <input type="tel" placeholder="Puhelin" required />
+        <input type="text" placeholder="Osoite (kohteen sijainti)" required />
+        <textarea placeholder="Kuvaus työstä, mitä haluat tehtäväksi?" required></textarea>
+        <button class="submit-y" type="submit">Lähetä, saat tarjouksen 1 h sisällä</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container">
+    <div class="foot-row">
+      <div>© 2026 Sähkö Pro Oy · Y, tunnus 3210987-X · Espoo</div>
+      <div>
+        <a href="#palvelut">Palvelut</a>
+        <a href="#tarjous">Tarjous</a>
+        <a href="tel:+358401234567">040 123 4567</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const rio = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => rio.observe(el));
+
+  // Animate stat numbers
+  const animNums = () => {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const t = el.textContent;
+      // Skip non-numeric
+      if (!/^\d/.test(t)) return;
+      const target = parseInt(t.replace(/\D/g, ''));
+      let cur = 0;
+      const start = performance.now();
+      const dur = 1100;
+      function step(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const v = Math.floor(target * ease);
+        el.textContent = t.replace(/\d+/, v);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = t;
+      }
+      requestAnimationFrame(step);
+    });
+  };
+  // Trigger after small delay
+  setTimeout(animNums, 400);
+</script>
+</body>
+</html>
