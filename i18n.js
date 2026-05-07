@@ -2834,9 +2834,6 @@
     'Hammasklinikka · Helsinki': 'Dental clinic · Helsinki',
     'LVI urakointi · Vantaa': 'Plumbing · Vantaa',
 
-    // ---------- nav additions ----------
-    'Tietoa meistä': 'About us',
-
     // ---------- portfolio carousel meta + disclaimer ----------
     'Kausiravintola · Helsinki': 'Seasonal restaurant · Helsinki',
     'Sähköurakointi · Espoo': 'Electrical contracting · Espoo',

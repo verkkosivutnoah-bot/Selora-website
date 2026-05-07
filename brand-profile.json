@@ -1,0 +1,84 @@
+{
+  "brand": {
+    "name": "Selora",
+    "legalName": "Selora Oy",
+    "tagline_fi": "Tekoälyvastaanottaja suomalaisille pk-yrityksille",
+    "tagline_en": "AI receptionist for Finnish SMBs",
+    "domain": "selora.fi",
+    "country": "Finland",
+    "languages_primary": ["fi", "en"]
+  },
+  "category": "B2B SaaS — AI voice agent for SMB phone reception",
+  "audience": {
+    "primary_fi": "Suomalaiset pk-yrittäjät (kampaamot, autokorjaamot, ravintolat, LVI, kiinteistövälitys, lakitoimistot, terveydenhuolto). 1–25 hlö, asiakaspuhelut paljon.",
+    "primary_en": "Finnish SMB owners (salons, auto repair, restaurants, HVAC, real estate, law, healthcare). 1–25 people, high inbound call volume.",
+    "pains": [
+      "Menetetyt puhelut = menetetty liikevaihto",
+      "Yksinyrittäjä ei ehdi vastata kesken työn",
+      "Ei varaa palkata vastaanottajaa",
+      "Asiakkaat soittavat työajan ulkopuolella ja iltaisin",
+      "Manuaaliset varaukset vie aikaa varsinaiselta työltä"
+    ],
+    "value_props": [
+      "Vastaa 24/7 ilman taukoja",
+      "Varaa ajat suoraan kalenteriin",
+      "78 % menetetyistä puheluista palautuu",
+      "Käyttöönotto alle 48 h",
+      "Ei rekrytointia, ei lomia, ei sairaslomia",
+      "Suomenkielinen tekoäly"
+    ]
+  },
+  "voice": {
+    "tone": "modern, warm, direct, professional but human",
+    "do": ["Lyhyitä lauseita", "konkreettiset numerot", "rauhoittavat lupaukset", "ei jargon"],
+    "dont": ["Em-viiva (—)", "AI-jargon", "yliampuva", "epämääräiset 'parhaat ratkaisut'", "yli 3 lauseen kappaleet"]
+  },
+  "visual": {
+    "primary_color": "#1D4ED8",
+    "primary_color_light": "#3b82f6",
+    "primary_color_glow": "#60a5fa",
+    "dark_bg": "#060c18",
+    "dark_bg_alt": "#080e1c",
+    "light_bg": "#f8fafc",
+    "light_bg_alt": "#eef2f7",
+    "text_primary": "#0f172a",
+    "text_muted": "#64748b",
+    "accent_subtle": "rgba(96, 165, 250, 0.15)",
+    "gradient_brand": "linear-gradient(135deg, #1D4ED8 0%, #3b82f6 100%)",
+    "gradient_dark_aurora": "radial-gradient(ellipse at top, rgba(29,78,216,0.45) 0%, rgba(6,12,24,0) 60%), #060c18",
+    "fonts": {
+      "primary": "Inter",
+      "primary_weights": [300, 400, 500, 600],
+      "accent": "Instrument Serif",
+      "accent_style": "italic"
+    },
+    "logo": {
+      "icon": "/selora-logo.jpeg",
+      "wordmark_text": "SELORA",
+      "wordmark_letterspacing": "0.06em",
+      "wordmark_weight": 600
+    },
+    "imagery_style": "Premium dark backgrounds with subtle blue aurora gradients. Minimal. Negative space. Light backgrounds use soft #f8fafc. Phone-call iconography. Real Finnish small-business contexts (salon chair, repair lift, restaurant counter). No stock-y suit-and-handshake.",
+    "shapes": "Rounded squares (radius 12-16px), pill buttons (full radius), card edges 16-24px, never sharp 90deg.",
+    "shadows": "Layered: soft outer + 1px inset highlight + 1-2px inset darkness for tactile depth on dark surfaces.",
+    "do_not": [
+      "Purple gradients",
+      "AI-generated stock photo people",
+      "Centered-only layouts",
+      "Sharp 90deg cards",
+      "Sans serif italics that look like Comic Sans",
+      "Em dashes in copy"
+    ]
+  },
+  "platforms_to_target": ["meta", "google", "tiktok", "linkedin", "youtube"],
+  "site_structure": {
+    "home": "/",
+    "services": "/palvelut.html",
+    "pricing": "/hinnoittelu.html",
+    "blog": "/blogi.html",
+    "contact": "/yhteystiedot.html",
+    "process": "/prosessi.html",
+    "ai_receptionist": "/tekoalyvastaanottajat.html",
+    "web_design": "/verkkosivusuunnittelu.html"
+  }
+}

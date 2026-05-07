@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Selora — 78 % menetetyistä puheluista takaisin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1080px; height:1920px; overflow:hidden; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #fff;
+    background: #060c18;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .aurora {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 800px at 50% 18%, rgba(29,78,216,0.6) 0%, rgba(6,12,24,0) 60%),
+      radial-gradient(ellipse 900px 700px at 50% 90%, rgba(59,130,246,0.32) 0%, rgba(6,12,24,0) 65%),
+      radial-gradient(ellipse 700px 600px at 50% 50%, rgba(96,165,250,0.16) 0%, rgba(6,12,24,0) 70%),
+      linear-gradient(180deg, #050a14 0%, #060c18 50%, #04080f 100%);
+  }
+
+  .grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(96,165,250,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(96,165,250,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 700px 800px at 50% 50%, #000 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 700px 800px at 50% 50%, #000 0%, transparent 80%);
+  }
+
+  .noise {
+    position:absolute; inset:0;
+    opacity: 0.05; mix-blend-mode: overlay; pointer-events:none;
+  }
+
+  .content { position:relative; z-index:2; width:100%; height:100%; }
+
+  /* Phone glyph + pulse rings — top 25% */
+  .phone-area {
+    position:absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px; height: 360px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ring {
+    position:absolute;
+    border-radius:50%;
+    border: 2px solid rgba(96,165,250,0.6);
+    box-shadow: 0 0 40px rgba(96,165,250,0.25);
+  }
+  .ring-1 { width: 160px; height:160px; opacity: 0.9; }
+  .ring-2 { width: 240px; height:240px; opacity: 0.6; border-color: rgba(96,165,250,0.45); }
+  .ring-3 { width: 340px; height:340px; opacity: 0.35; border-color: rgba(96,165,250,0.3); }
+
+  .phone-icon {
+    width: 88px; height: 88px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, #1D4ED8 0%, #3b82f6 100%);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:
+      0 14px 40px rgba(29,78,216,0.55),
+      inset 0 1px 0 rgba(255,255,255,0.3),
+      inset 0 -1px 0 rgba(0,0,0,0.2);
+    position:relative; z-index:2;
+  }
+  .phone-icon svg { width: 44px; height:44px; }
+
+  /* Stat */
+  .center {
+    position:absolute;
+    top: 670px;
+    left: 0; right: 0;
+    text-align:center;
+  }
+  .stat {
+    font-weight: 900;
+    font-size: 480px;
+    line-height: 0.92;
+    letter-spacing: -0.05em;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.5) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 12px 40px rgba(96,165,250,0.4));
+    margin: 0;
+  }
+  .stat .pct { font-size: 280px; vertical-align: 0.2em; margin-left: -6px; }
+
+  .subhead {
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.22;
+    color: #fff;
+    margin: 60px auto 0;
+    max-width: 880px;
+    letter-spacing: -0.01em;
+  }
+  .subhead em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #93c5fd;
+  }
+
+  /* Bottom logo + CTA + url */
+  .bottom {
+    position:absolute;
+    bottom: 110px; left: 0; right:0;
+    display:flex; flex-direction:column; align-items:center; gap: 36px;
+  }
+  .logo-row {
+    display:flex; align-items:center; gap: 18px;
+  }
+  .logo-mark {
+    width:48px; height:48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1D4ED8 0%, #3b82f6 100%);
+    box-shadow:
+      0 8px 24px rgba(29,78,216,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    position:relative;
+  }
+  .logo-mark::after {
+    content:""; position:absolute; inset:0;
+    border-radius:12px;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.35), transparent 55%);
+  }
+  .logo-text {
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 28px;
+    color: #fff;
+  }
+
+  .cta {
+    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 26px;
+    padding: 24px 44px;
+    border-radius: 999px;
+    box-shadow:
+      0 18px 50px rgba(0,0,0,0.45),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+
+  .url {
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="grid"></div>
+  <svg class="noise" xmlns="http://www.w3.org/2000/svg">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+  <div class="content">
+    <div class="phone-area">
+      <div class="ring ring-3"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-1"></div>
+      <div class="phone-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="center">
+      <div class="stat">78<span class="pct">%</span></div>
+      <div class="subhead">menetetyistä puheluista <em>takaisin</em></div>
+    </div>
+
+    <div class="bottom">
+      <div class="logo-row">
+        <div class="logo-mark"></div>
+        <div class="logo-text">SELORA</div>
+      </div>
+      <div class="cta">Varaa ilmainen demo →</div>
+      <div class="url">selora.fi</div>
+    </div>
+  </div>
+</body>
+</html>

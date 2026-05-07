@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selora — Ad Creatives Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin:0; padding:0; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #0f172a;
+    background: #f8fafc;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .bg {
+    position:fixed; inset:0; z-index: 0;
+    background:
+      radial-gradient(ellipse 1000px 600px at 20% 0%, rgba(29,78,216,0.08) 0%, rgba(248,250,252,0) 60%),
+      radial-gradient(ellipse 800px 600px at 100% 100%, rgba(96,165,250,0.06) 0%, rgba(248,250,252,0) 60%),
+      #f8fafc;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  header {
+    margin-bottom: 60px;
+  }
+  .logo-row {
+    display:flex; align-items:center; gap:14px; margin-bottom: 24px;
+  }
+  .logo-mark {
+    width:40px; height:40px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #1D4ED8 0%, #3b82f6 100%);
+    box-shadow:
+      0 8px 24px rgba(29,78,216,0.3),
+      inset 0 1px 0 rgba(255,255,255,0.35);
+    position:relative;
+  }
+  .logo-mark::after {
+    content:""; position:absolute; inset:0;
+    border-radius:11px;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.45), transparent 55%);
+  }
+  .logo-text {
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 18px;
+    color: #0f172a;
+  }
+  h1 {
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin: 0 0 14px;
+    color: #0f172a;
+  }
+  h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #1D4ED8;
+  }
+  .lede {
+    font-size: 20px;
+    color: #64748b;
+    max-width: 640px;
+    line-height: 1.45;
+    font-weight: 300;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 28px;
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(15,23,42,0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+    display:flex; flex-direction:column;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(29,78,216,0.12);
+    border-color: #c7d2fe;
+  }
+
+  .thumb {
+    width: 100%;
+    aspect-ratio: 1080 / 800;
+    background: #060c18;
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  .thumb iframe {
+    border: 0;
+    transform-origin: top left;
+    pointer-events: none;
+  }
+
+  .meta {
+    padding: 18px 20px 22px;
+  }
+  .platform {
+    display:inline-block;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #1D4ED8;
+    background: rgba(29,78,216,0.08);
+    padding: 5px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .desc {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0 0 12px;
+    line-height: 1.45;
+    font-weight: 400;
+  }
+  .dims {
+    font-size: 12px;
+    color: #94a3b8;
+    font-family: 'Inter', monospace;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  .footer {
+    margin-top: 80px;
+    padding-top: 30px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .footer code {
+    background: #eef2f7;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-family: ui-monospace, monospace;
+    color: #1e293b;
+  }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="container">
+  <header>
+    <div class="logo-row">
+      <div class="logo-mark"></div>
+      <div class="logo-text">SELORA</div>
+    </div>
+    <h1>Ad creatives <em>preview</em></h1>
+    <p class="lede">8 standalone HTML files, sized to exact platform pixel dimensions. Click a card to open the full-size creative. Screenshot with Chrome DevTools (Cmd+Shift+P → "Capture full size screenshot") to export PNG.</p>
+  </header>
+
+  <div class="grid">
+
+    <a class="card" href="meta/concept-a/feed-1080x1350.html" target="_blank">
+      <div class="thumb"><iframe src="meta/concept-a/feed-1080x1350.html" width="1080" height="1350" style="width:1080px;height:1350px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Meta · Feed</span>
+        <h3 class="title">+34 % enemmän varauksia</h3>
+        <p class="desc">Concept A · Lost Call ROI · big silver stat</p>
+        <div class="dims">1080 × 1350</div>
+      </div>
+    </a>
+
+    <a class="card" href="meta/concept-a/reels-1080x1920.html" target="_blank">
+      <div class="thumb" style="aspect-ratio: 1080 / 1920;"><iframe src="meta/concept-a/reels-1080x1920.html" width="1080" height="1920" style="width:1080px;height:1920px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Meta · Reels</span>
+        <h3 class="title">78 % menetetyistä puheluista takaisin</h3>
+        <p class="desc">Concept A · phone glyph + pulse rings</p>
+        <div class="dims">1080 × 1920</div>
+      </div>
+    </a>
+
+    <a class="card" href="google/concept-a/pmax-1200x628.html" target="_blank">
+      <div class="thumb" style="aspect-ratio: 1200 / 628;"><iframe src="google/concept-a/pmax-1200x628.html" width="1200" height="628" style="width:1200px;height:628px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Google · PMax</span>
+        <h3 class="title">Recover 78% of missed calls</h3>
+        <p class="desc">Concept A · English horizontal banner</p>
+        <div class="dims">1200 × 628</div>
+      </div>
+    </a>
+
+    <a class="card" href="meta/concept-b/feed-1080x1350.html" target="_blank">
+      <div class="thumb"><iframe src="meta/concept-b/feed-1080x1350.html" width="1080" height="1350" style="width:1080px;height:1350px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Meta · Feed</span>
+        <h3 class="title">Selora vastaa, sinä työskentelet</h3>
+        <p class="desc">Concept B · phone + dashboard split</p>
+        <div class="dims">1080 × 1350</div>
+      </div>
+    </a>
+
+    <a class="card" href="meta/concept-c/feed-kampaamo-1080x1350.html" target="_blank">
+      <div class="thumb"><iframe src="meta/concept-c/feed-kampaamo-1080x1350.html" width="1080" height="1350" style="width:1080px;height:1350px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Meta · Kampaamot</span>
+        <h3 class="title">Kampaamosi puhelin</h3>
+        <p class="desc">Concept C · industry · salon scene</p>
+        <div class="dims">1080 × 1350</div>
+      </div>
+    </a>
+
+    <a class="card" href="tiktok/concept-c/vertical-korjaamo-1080x1920.html" target="_blank">
+      <div class="thumb" style="aspect-ratio: 1080 / 1920;"><iframe src="tiktok/concept-c/vertical-korjaamo-1080x1920.html" width="1080" height="1920" style="width:1080px;height:1920px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">TikTok · Korjaamot</span>
+        <h3 class="title">Asiakas soittaa. Olet öljyssä.</h3>
+        <p class="desc">Concept C · industry · auto-repair</p>
+        <div class="dims">1080 × 1920</div>
+      </div>
+    </a>
+
+    <a class="card" href="linkedin/concept-d/square-1080x1080.html" target="_blank">
+      <div class="thumb" style="aspect-ratio: 1 / 1;"><iframe src="linkedin/concept-d/square-1080x1080.html" width="1080" height="1080" style="width:1080px;height:1080px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">LinkedIn · Square</span>
+        <h3 class="title">Vertailu — Ihmisvastaanottaja vs Selora</h3>
+        <p class="desc">Concept D · cost comparison</p>
+        <div class="dims">1080 × 1080</div>
+      </div>
+    </a>
+
+    <a class="card" href="google/concept-e/timeline-1200x628.html" target="_blank">
+      <div class="thumb" style="aspect-ratio: 1200 / 628;"><iframe src="google/concept-e/timeline-1200x628.html" width="1200" height="628" style="width:1200px;height:628px;transform:scale(0.34);"></iframe></div>
+      <div class="meta">
+        <span class="platform">Google · PMax</span>
+        <h3 class="title">48 h käyttöönotto</h3>
+        <p class="desc">Concept E · light theme · timeline</p>
+        <div class="dims">1200 × 628</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    <strong style="color:#0f172a;">How to export to PNG:</strong> open any creative in Chrome → DevTools (Cmd+Opt+I) → Cmd+Shift+P → type <code>Capture full size screenshot</code> → Enter. PNG downloads at exact pixel dimensions.
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Selora — Asiakas soittaa, olet öljyssä</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; padding:0; width:1080px; height:1920px; overflow:hidden; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #fff;
+    background: #060c18;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Pollinations free image API — edit prompt or seed to regenerate.
+     https://image.pollinations.ai/prompt/<URL_ENCODED>?width=W&height=H&model=flux&seed=N&nologo=true&enhance=true */
+  .bg-photo {
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit: cover;
+    filter: brightness(0.5) saturate(0.85) contrast(1.1);
+  }
+  .grade {
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 900px 800px at 30% 30%, rgba(29,78,216,0.42) 0%, rgba(6,12,24,0) 65%),
+      radial-gradient(ellipse 900px 800px at 70% 70%, rgba(59,130,246,0.28) 0%, rgba(6,12,24,0) 65%);
+    mix-blend-mode: screen;
+  }
+
+  /* Bottom dark overlay */
+  .overlay {
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height: 1100px;
+    background: linear-gradient(180deg, rgba(6,12,24,0) 0%, rgba(6,12,24,0.78) 35%, rgba(6,12,24,0.97) 100%);
+  }
+
+  .grid {
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(96,165,250,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(96,165,250,0.03) 1px, transparent 1px);
+    background-size: 70px 70px;
+    mask-image: radial-gradient(ellipse 700px 1000px at 50% 50%, #000 0%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 700px 1000px at 50% 50%, #000 0%, transparent 80%);
+    opacity: 0.6;
+  }
+
+  .noise {
+    position:absolute; inset:0;
+    opacity: 0.06; mix-blend-mode: overlay; pointer-events:none;
+  }
+
+  .content { position:relative; z-index:3; width:100%; height:100%; }
+
+  /* Eyebrow at top */
+  .eyebrow {
+    position:absolute;
+    top: 100px; left: 0; right: 0;
+    text-align:center;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #60a5fa;
+  }
+
+  /* Bold headline middle */
+  .headline {
+    position:absolute;
+    top: 920px; left: 60px; right: 60px;
+  }
+
+  .h1 {
+    font-weight: 300;
+    font-size: 110px;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: #fff;
+    text-shadow:
+      0 2px 0 rgba(0,0,0,0.25),
+      0 10px 40px rgba(0,0,0,0.7);
+  }
+  .h1 .line2 {
+    display:block;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #93c5fd;
+    font-size: 100px;
+    margin-top: 6px;
+  }
+  .h1 .line3 {
+    display:block;
+    margin-top: 6px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  /* Bottom logo + CTA */
+  .bottom {
+    position:absolute;
+    bottom: 130px; left: 0; right: 0;
+    display:flex; flex-direction:column; align-items:center; gap: 36px;
+  }
+  .logo-row {
+    display:flex; align-items:center; gap: 18px;
+  }
+  .logo-mark {
+    width:48px; height:48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #1D4ED8 0%, #3b82f6 100%);
+    box-shadow:
+      0 8px 24px rgba(29,78,216,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    position:relative;
+  }
+  .logo-mark::after {
+    content:""; position:absolute; inset:0;
+    border-radius:12px;
+    background: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.35), transparent 55%);
+  }
+  .logo-text {
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 28px;
+    color: #fff;
+  }
+  .cta {
+    background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+    color: #0f172a;
+    font-weight: 600;
+    font-size: 26px;
+    padding: 24px 44px;
+    border-radius: 999px;
+    box-shadow:
+      0 18px 50px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .url {
+    font-size: 22px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+  <!--
+    PHOTO BG SOURCES (free, no key):
+    1. Primary = Unsplash CDN (real photo). Verified IDs: 1486006920555-c77dcf18193c, 1492144534655-ae79c964c9d7
+    2. Fallback (onerror) = Pollinations AI (Flux).
+  -->
+  <img class="bg-photo"
+       src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?w=1080&h=1920&fit=crop&q=85&auto=format"
+       onerror="this.onerror=null;this.src='https://image.pollinations.ai/prompt/Modern%20auto%20repair%20shop%20interior%2C%20car%20on%20hydraulic%20lift%2C%20mechanic%20hands%20on%20engine%2C%20industrial%20steel%20gray%20walls%2C%20dramatic%20overhead%20fluorescent%20lighting%2C%20vertical%20composition%2C%20cinematic%20wide%20angle%2C%20professional%20photography%2C%20editorial%20magazine%20style?width=1080&height=1920&model=flux&seed=33&nologo=true&enhance=true';"
+       alt="">
+  <div class="grade"></div>
+  <div class="overlay"></div>
+  <div class="grid"></div>
+  <svg class="noise" xmlns="http://www.w3.org/2000/svg">
+    <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
+    <rect width="100%" height="100%" filter="url(#n)"/>
+  </svg>
+
+  <div class="content">
+    <div class="eyebrow">Autokorjaamot</div>
+
+    <div class="headline">
+      <div class="h1">
+        Asiakas soittaa.
+        <span class="line2">Olet öljyssä.</span>
+        <span class="line3">Selora hoitaa.</span>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="logo-row">
+        <div class="logo-mark"></div>
+        <div class="logo-text">SELORA</div>
+      </div>
+      <div class="cta">Varaa demo →</div>
+      <div class="url">selora.fi</div>
+    </div>
+  </div>
+</body>
+</html>
