@@ -2830,6 +2830,9 @@
     'Sivut, joita olemme rakentaneet.': "Sites we've built.",
     'rakentaneet': 'built',
     'Katso sivusto →': 'View site →',
+    'Pizzeria · Turku': 'Pizzeria · Turku',
+    'Hammasklinikka · Helsinki': 'Dental clinic · Helsinki',
+    'LVI urakointi · Vantaa': 'Plumbing · Vantaa',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

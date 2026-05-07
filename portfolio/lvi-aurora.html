@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LVI Aurora · Putkimies ja LVI palvelut Vantaalla</title>
+<meta name="description" content="LVI Aurora. Vesivuotojen päivystys, lämmitys, viemärit ja kylpyhuoneremontit pääkaupunkiseudulla. Kiinteät hinnat, ei yllätyksiä." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue: #1e40af;
+    --blue-dark: #1e3a8a;
+    --orange: #ea580c;
+    --slate: #0f172a;
+    --slate-2: #1e293b;
+    --snow: #f6f8fb;
+    --steel: #475569;
+    --line: rgba(15,23,42,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--snow);
+    color: var(--slate);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 1.6rem; }
+
+  /* Top */
+  header.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1rem 1.6rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(15,23,42,0.92);
+    backdrop-filter: blur(12px);
+    color: #fff;
+  }
+  .brand { font-weight: 800; letter-spacing: -0.01em; font-size: 1.3rem; display: flex; align-items: center; gap: 0.6rem; }
+  .brand-mark {
+    width: 28px; height: 28px;
+    background: var(--blue); border-radius: 8px;
+    display: grid; place-items: center;
+    color: #fff; font-weight: 800; font-size: 0.8rem;
+  }
+  nav.tn { display: flex; gap: 1.8rem; align-items: center; }
+  nav.tn a {
+    color: rgba(255,255,255,0.78); text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+  }
+  nav.tn a:hover { color: #fff; }
+  .call-btn {
+    background: var(--orange); color: #fff !important;
+    padding: 0.55rem 1.1rem; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 0.86rem !important; font-weight: 600 !important;
+  }
+  .call-btn:hover { background: #c2410c; }
+  @media (max-width: 880px) { nav.tn a:not(.call-btn) { display: none; } }
+
+  /* Sticky side nav */
+  .side-nav {
+    position: fixed; right: 1.4rem; top: 50%; transform: translateY(-50%);
+    z-index: 40;
+    display: flex; flex-direction: column; gap: 0.9rem;
+  }
+  .side-nav a {
+    display: flex; align-items: center; gap: 0.7rem;
+    color: var(--steel); text-decoration: none;
+    font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .side-nav a::before {
+    content: ''; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--steel); opacity: 0.4;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .side-nav a.active { color: var(--slate); font-weight: 600; }
+  .side-nav a.active::before { background: var(--blue); opacity: 1; transform: scale(1.4); }
+  .side-nav a:hover { color: var(--slate); }
+  .side-nav .label { display: none; }
+  .side-nav a.active .label { display: inline; }
+  @media (max-width: 1080px) { .side-nav { display: none; } }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh; padding: 8rem 1.6rem 4rem;
+    background: var(--snow);
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr;
+    gap: 3rem; align-items: center;
+    max-width: 1240px; margin: 0 auto;
+  }
+  @media (max-width: 940px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero-text .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: #fff; border: 1px solid var(--line);
+    padding: 0.5rem 0.9rem; border-radius: 999px;
+    font-size: 0.78rem; font-weight: 500; color: var(--slate);
+    margin-bottom: 2rem;
+  }
+  .hero-text .eyebrow::before {
+    content: ''; width: 8px; height: 8px;
+    background: #22c55e; border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(34,197,94,0.18); }
+    50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  }
+  .hero-text h1 {
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  .hero-text h1 i {
+    font-style: italic; font-weight: 300;
+    color: var(--blue);
+  }
+  .hero-text p {
+    margin-top: 1.6rem;
+    font-size: 1.1rem; color: var(--steel);
+    max-width: 540px;
+  }
+  .hero-cta {
+    margin-top: 2.4rem;
+    display: flex; gap: 0.7rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.95rem 1.5rem; border-radius: 10px;
+    font-weight: 600; font-size: 0.94rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
+  }
+  .btn-prim { background: var(--blue); color: #fff; }
+  .btn-prim:hover { background: var(--blue-dark); }
+  .btn-orange { background: var(--orange); color: #fff; }
+  .btn-orange:hover { background: #c2410c; }
+  .btn-ghost { color: var(--slate); border: 1px solid var(--line); background: #fff; }
+  .btn-ghost:hover { border-color: var(--slate); }
+
+  .hero-stats {
+    margin-top: 3rem; display: flex; gap: 2.5rem; flex-wrap: wrap;
+    padding-top: 2rem; border-top: 1px solid var(--line);
+  }
+  .stat .num {
+    font-size: 1.8rem; font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--slate);
+  }
+  .stat .lab { font-size: 0.84rem; color: var(--steel); margin-top: 0.2rem; }
+
+  .hero-img {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: var(--slate);
+    aspect-ratio: 4 / 5;
+    box-shadow: 0 24px 60px rgba(15,23,42,0.18);
+  }
+  .hero-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(15,23,42,0.35));
+  }
+  .hero-img .badge {
+    position: absolute; bottom: 1.2rem; left: 1.2rem; right: 1.2rem;
+    background: rgba(255,255,255,0.96);
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 0.9rem;
+    z-index: 2;
+  }
+  .badge-circle {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--orange); display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 0.86rem;
+  }
+  .badge-text .ttl { font-weight: 600; font-size: 0.9rem; }
+  .badge-text .sub { font-size: 0.78rem; color: var(--steel); }
+
+  /* Päivystys */
+  .emergency {
+    background: var(--orange); color: #fff;
+    padding: 4rem 1.6rem;
+    position: relative; overflow: hidden;
+  }
+  .emergency::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 14px, transparent 14px 28px);
+  }
+  .em-grid {
+    max-width: 1240px; margin: 0 auto;
+    display: grid; grid-template-columns: auto 1fr auto;
+    gap: 2rem; align-items: center; position: relative; z-index: 1;
+  }
+  @media (max-width: 880px) { .em-grid { grid-template-columns: 1fr; gap: 1.4rem; text-align: left; } }
+  .em-icon {
+    width: 56px; height: 56px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 14px; display: grid; place-items: center;
+  }
+  .em-icon svg { width: 30px; height: 30px; stroke: #fff; }
+  .em-text .lbl { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; font-weight: 600; }
+  .em-text h3 { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.15; margin-top: 0.4rem; }
+  .em-phone {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1.6rem, 3.4vw, 2.6rem); font-weight: 700;
+    color: #fff; text-decoration: none;
+    background: rgba(0,0,0,0.18);
+    padding: 1rem 1.4rem; border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .em-phone:hover { background: rgba(0,0,0,0.3); }
+
+  /* Mitä teemme - sticky scroll */
+  .services {
+    background: var(--slate);
+    color: #fff;
+    padding: 6rem 1.6rem;
+  }
+  .serv-head { max-width: 720px; margin: 0 auto 4rem; text-align: center; }
+  .serv-head .lab { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--orange); font-weight: 600; }
+  .serv-head h2 {
+    font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+    font-weight: 800; letter-spacing: -0.02em;
+    margin-top: 1rem; line-height: 1.05;
+  }
+  .serv-head h2 i { font-style: italic; font-weight: 300; color: var(--blue); }
+  .serv-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+  }
+  @media (max-width: 720px) { .serv-grid { grid-template-columns: 1fr; } }
+  .serv-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    padding: 2rem;
+    transition: background 0.3s, border 0.3s, transform 0.3s;
+  }
+  .serv-card:hover {
+    background: rgba(30,64,175,0.18);
+    border-color: var(--blue);
+    transform: translateY(-4px);
+  }
+  .serv-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--orange); font-size: 0.86rem; font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .serv-card h3 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.7rem; }
+  .serv-card p { color: rgba(255,255,255,0.65); font-size: 0.96rem; }
+  .serv-card ul { margin-top: 1.1rem; list-style: none; padding: 0; }
+  .serv-card li { font-size: 0.88rem; color: rgba(255,255,255,0.78); padding: 0.3rem 0; padding-left: 1.4rem; position: relative; }
+  .serv-card li::before {
+    content: ''; position: absolute; left: 0; top: 0.7rem;
+    width: 6px; height: 6px; background: var(--blue); border-radius: 50%;
+  }
+
+  /* Hinnoittelu */
+  .pricing { padding: 6rem 1.6rem; }
+  .pr-head { max-width: 720px; margin-bottom: 4rem; }
+  .pr-head .lab { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
+  .pr-head h2 {
+    font-size: clamp(2.2rem, 4.8vw, 3.6rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+    margin-top: 1rem;
+  }
+  .pr-head h2 i { font-style: italic; font-weight: 300; color: var(--blue); }
+  .pr-head p { color: var(--steel); margin-top: 1rem; max-width: 580px; }
+  .pr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+  @media (max-width: 880px) { .pr-grid { grid-template-columns: 1fr; } }
+  .pr-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 2rem;
+    transition: border 0.2s, transform 0.2s, box-shadow 0.2s;
+  }
+  .pr-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 40px rgba(15,23,42,0.08);
+  }
+  .pr-card.featured { background: var(--slate); color: #fff; border-color: var(--slate); }
+  .pr-card .ttl { font-weight: 600; font-size: 1.1rem; }
+  .pr-card .price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2.4rem; font-weight: 700;
+    margin: 1.2rem 0 0.4rem;
+    color: var(--slate);
+  }
+  .pr-card.featured .price { color: #fff; }
+  .pr-card .from { font-size: 0.84rem; color: var(--steel); }
+  .pr-card.featured .from { color: rgba(255,255,255,0.6); }
+  .pr-card ul { margin-top: 1.4rem; padding: 0; list-style: none; }
+  .pr-card li {
+    padding: 0.4rem 0;
+    font-size: 0.92rem;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pr-card.featured li { border-color: rgba(255,255,255,0.1); }
+  .pr-card li:last-child { border: 0; }
+  .pr-tag {
+    display: inline-block;
+    background: var(--orange); color: #fff;
+    font-size: 0.74rem; font-weight: 600;
+    padding: 0.3rem 0.7rem; border-radius: 999px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Testimonials */
+  .testimonials {
+    background: var(--snow);
+    padding: 6rem 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .ts-head { max-width: 720px; margin: 0 auto 3.5rem; text-align: center; }
+  .ts-head .lab { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
+  .ts-head h2 {
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+    margin-top: 1rem;
+  }
+  .ts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 880px) { .ts-grid { grid-template-columns: 1fr; } }
+  .ts-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 2rem;
+  }
+  .stars { color: var(--orange); font-size: 1.1rem; letter-spacing: 0.1em; }
+  .ts-card blockquote {
+    margin: 1.2rem 0 1.4rem;
+    font-size: 1.02rem;
+    color: var(--slate);
+    line-height: 1.6;
+  }
+  .ts-author { display: flex; align-items: center; gap: 0.8rem; }
+  .ts-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    display: grid; place-items: center;
+    font-weight: 600;
+  }
+  .ts-name { font-weight: 600; font-size: 0.94rem; }
+  .ts-loc { font-size: 0.84rem; color: var(--steel); }
+
+  /* Kontakti */
+  .contact {
+    padding: 6rem 1.6rem;
+    background: #fff;
+  }
+  .ct-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 880px) { .ct-grid { grid-template-columns: 1fr; gap: 2rem; } }
+  .ct-text .lab { font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); font-weight: 600; }
+  .ct-text h2 {
+    font-size: clamp(2.2rem, 4.8vw, 3.4rem);
+    font-weight: 800; letter-spacing: -0.02em; line-height: 1.05;
+    margin: 1rem 0;
+  }
+  .ct-text h2 i { font-style: italic; font-weight: 300; color: var(--blue); }
+  .ct-text p { color: var(--steel); max-width: 460px; }
+  .ct-info {
+    margin-top: 2rem; display: grid; gap: 1rem;
+  }
+  .ct-info .row {
+    display: flex; align-items: center; gap: 0.9rem;
+    font-size: 0.96rem;
+  }
+  .ct-info svg { width: 18px; height: 18px; color: var(--blue); flex-shrink: 0; }
+
+  form.ct-form { display: grid; gap: 1rem; }
+  form.ct-form label { font-size: 0.84rem; font-weight: 500; color: var(--steel); }
+  form.ct-form input,
+  form.ct-form textarea,
+  form.ct-form select {
+    width: 100%; padding: 0.95rem 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-family: inherit; font-size: 0.96rem;
+    background: var(--snow);
+    color: var(--slate);
+  }
+  form.ct-form input:focus,
+  form.ct-form textarea:focus,
+  form.ct-form select:focus {
+    outline: none; border-color: var(--blue); background: #fff;
+  }
+  form.ct-form textarea { min-height: 120px; resize: vertical; }
+  form.ct-form button {
+    margin-top: 0.6rem;
+    background: var(--blue); color: #fff;
+    border: 0; padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600; font-size: 0.96rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  form.ct-form button:hover { background: var(--blue-dark); }
+
+  /* Footer */
+  footer {
+    background: var(--slate); color: rgba(255,255,255,0.7);
+    padding: 4rem 1.6rem 2rem;
+  }
+  .ft { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  @media (max-width: 760px) { .ft { grid-template-columns: 1fr; gap: 2rem; } }
+  .ft .brand-big { color: #fff; font-weight: 800; font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+  .ft .brand-big .mark {
+    width: 28px; height: 28px; background: var(--blue);
+    border-radius: 8px; display: grid; place-items: center;
+    font-size: 0.78rem;
+  }
+  .ft .tag { margin-top: 0.7rem; font-size: 0.94rem; max-width: 320px; }
+  .ft h4 { color: #fff; font-size: 0.86rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 600; }
+  .ft a, .ft p { color: rgba(255,255,255,0.7); text-decoration: none; display: block; padding: 0.25rem 0; font-size: 0.92rem; }
+  .ft a:hover { color: #fff; }
+  .ft-bottom {
+    max-width: 1180px; margin: 3rem auto 0; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.78rem; opacity: 0.55;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="brand-mark">A</div>
+    <span>LVI Aurora</span>
+  </div>
+  <nav class="tn">
+    <a href="#palvelut">Palvelut</a>
+    <a href="#hinnoittelu">Hinnoittelu</a>
+    <a href="#kokemukset">Kokemukset</a>
+    <a href="tel:+358101231230" class="call-btn">010 123 1230</a>
+  </nav>
+</header>
+
+<aside class="side-nav" aria-hidden="true">
+  <a href="#hero" class="active"><span class="label">Etusivu</span></a>
+  <a href="#paivystys"><span class="label">Päivystys</span></a>
+  <a href="#palvelut"><span class="label">Palvelut</span></a>
+  <a href="#hinnoittelu"><span class="label">Hinnat</span></a>
+  <a href="#kokemukset"><span class="label">Asiakkaat</span></a>
+  <a href="#yhteys"><span class="label">Yhteys</span></a>
+</aside>
+
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow">Päivystys avoinna · 24 / 7 pääkaupunkiseudulla</div>
+      <h1>Putkimies <i>kotiisi</i> tunnissa, ilman <i>yllätyslaskuja</i>.</h1>
+      <p>LVI Aurora on Vantaalla toimiva LVI yritys, joka korjaa, asentaa ja remontoi. Soitat, kerromme hinnan etukäteen, ja korjaaja saapuu paikalle yhden tunnin sisällä.</p>
+      <div class="hero-cta">
+        <a href="tel:+358101231230" class="btn btn-orange">Soita 010 123 1230</a>
+        <a href="#yhteys" class="btn btn-ghost">Pyydä arvio verkossa</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="num">52 min</div><div class="lab">Keskimääräinen tuloaika</div></div>
+        <div class="stat"><div class="num">4,9 / 5</div><div class="lab">Asiakasarvosana</div></div>
+        <div class="stat"><div class="num">14 v.</div><div class="lab">Toiminnassa</div></div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=900&q=80&auto=format" alt="Putkimies korjaa keittiön vesivuotoa" loading="lazy" />
+      <div class="badge">
+        <div class="badge-circle">A</div>
+        <div class="badge-text">
+          <div class="ttl">Päivystys käynnissä</div>
+          <div class="sub">3 asentajaa liikkeellä juuri nyt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="emergency" id="paivystys">
+  <div class="em-grid">
+    <div class="em-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+    </div>
+    <div class="em-text">
+      <div class="lbl">Akuutti vesivuoto tai viemäritukos?</div>
+      <h3>Päivystämme ympäri vuorokauden, joka päivä.</h3>
+    </div>
+    <a href="tel:+358101231230" class="em-phone">010 123 1230</a>
+  </div>
+</section>
+
+<section class="services" id="palvelut">
+  <div class="serv-head">
+    <div class="lab">Mitä teemme</div>
+    <h2>Neljä asiaa, joista pidämme <i>huolta</i>.</h2>
+  </div>
+  <div class="serv-grid">
+
+    <div class="serv-card">
+      <div class="num">01 / Päivystys</div>
+      <h3>Vesivuodot ja viemärit</h3>
+      <p>Tukokset, vuodot ja katkenneet liitokset. Saamme veden takaisin kiertämään, useimmiten samalla käynnillä.</p>
+      <ul>
+        <li>Painepesu ja kuvaus</li>
+        <li>Saumakorjaukset</li>
+        <li>Hanat ja venttiilit</li>
+        <li>Akuutti tukos avataan tunnissa</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="num">02 / Lämmitys</div>
+      <h3>Lämmitysjärjestelmät</h3>
+      <p>Vesikiertoiset patterit, lattialämmitys ja maalämpöpumput. Suunnittelemme, asennamme ja huollamme kerralla.</p>
+      <ul>
+        <li>Patteriverkoston tasapainotus</li>
+        <li>Lämmönvaihtimien huolto</li>
+        <li>Maalämmön asennus</li>
+        <li>Energiakatselmukset</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="num">03 / Käyttövesi</div>
+      <h3>Putkistot ja sukitukset</h3>
+      <p>Vanhojen kupariputkien uusiminen ja muoviputkitukset. Sukitukset ilman seinien repimistä.</p>
+      <ul>
+        <li>Käyttövesiputkien uusinta</li>
+        <li>Viemärien sukitus</li>
+        <li>Kuntotutkimukset</li>
+        <li>Taloyhtiöprojektit</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="num">04 / Remontti</div>
+      <h3>Kylpyhuoneremontit</h3>
+      <p>Alusta loppuun avaimet käteen periaatteella. Vesieristys, laatoitus, laitteet ja kalusteet, yksi kumppani.</p>
+      <ul>
+        <li>Purku ja vesieristys</li>
+        <li>Laatoitus ja saumat</li>
+        <li>Suihku ja allas asennus</li>
+        <li>Takuu 5 vuotta</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="pricing" id="hinnoittelu">
+  <div class="container">
+    <div class="pr-head">
+      <div class="lab">Hinnoittelu</div>
+      <h2>Kiinteät hinnat. <i>Sanottu hinta pitää.</i></h2>
+      <p>Jokaiseen työhön annetaan kiinteä urakkahinta tai tuntiveloitus etukäteen. Lisätyöt vain sopimuksesta. Veloitamme matkasta ainoastaan pääkaupunkiseudun ulkopuolella.</p>
+    </div>
+
+    <div class="pr-grid">
+
+      <div class="pr-card">
+        <div class="ttl">Pikahuolto</div>
+        <div class="price">79 €</div>
+        <div class="from">aloitusmaksu, sis. ensimmäisen 30 min</div>
+        <ul>
+          <li>Hanan vaihto</li>
+          <li>Vessan tukoksen avaus</li>
+          <li>Pieni vuodon paikkaus</li>
+          <li>Lisätunnit 79 €/h</li>
+        </ul>
+      </div>
+
+      <div class="pr-card featured">
+        <div class="pr-tag">Suosituin</div>
+        <div class="ttl">Päivystys 24/7</div>
+        <div class="price">129 €</div>
+        <div class="from">aloitusmaksu, vasteaika 60 min</div>
+        <ul>
+          <li>Vesivuodot ja viemärit</li>
+          <li>Lämmityskatkot</li>
+          <li>Iltaisin ja viikonloppuisin</li>
+          <li>Saapuminen tunnissa, taattu</li>
+        </ul>
+      </div>
+
+      <div class="pr-card">
+        <div class="ttl">Kylpyhuoneremontti</div>
+        <div class="price">12 900 €</div>
+        <div class="from">alkaen, 5 m² avaimet käteen</div>
+        <ul>
+          <li>Purku ja vesieristys</li>
+          <li>Laatat ja saumaus</li>
+          <li>Hanat ja kalusteet</li>
+          <li>Takuu 5 vuotta</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="kokemukset">
+  <div class="ts-head">
+    <div class="lab">Kokemukset</div>
+    <h2>Yli 1 200 tyytyväistä asiakasta vuodesta 2012.</h2>
+  </div>
+  <div class="ts-grid">
+
+    <article class="ts-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>Vesi oli päässyt makuuhuoneen lattialle keskellä yötä. Soitin Auroralle, asentaja oli paikalla 45 minuutissa ja koko sotku kuivunut aamulla.</blockquote>
+      <div class="ts-author">
+        <div class="ts-avatar">M</div>
+        <div>
+          <div class="ts-name">Marjo Koskinen</div>
+          <div class="ts-loc">Vantaa, taloyhtiön asukas</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ts-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>Saimme tarjouksen kylpyhuoneremontista samana päivänä. Hinta piti senttilleen ja työ valmistui sovitussa ajassa. Suositan kavereille.</blockquote>
+      <div class="ts-author">
+        <div class="ts-avatar">A</div>
+        <div>
+          <div class="ts-name">Antti Mäkinen</div>
+          <div class="ts-loc">Espoo, omakotitalo</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ts-card">
+      <div class="stars">★★★★★</div>
+      <blockquote>Hoitavat taloyhtiömme putkistot ja huollot luotettavasti vuodesta 2019. Aina tavoitettavissa, raportointi selkeää, hinnat reilut.</blockquote>
+      <div class="ts-author">
+        <div class="ts-avatar">P</div>
+        <div>
+          <div class="ts-name">Petri Lahtinen</div>
+          <div class="ts-loc">Helsinki, isännöitsijä</div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="contact" id="yhteys">
+  <div class="ct-grid">
+    <div class="ct-text">
+      <div class="lab">Pyydä arvio</div>
+      <h2>Kerro työstä, vastaamme <i>tunnissa</i>.</h2>
+      <p>Lähetä lyhyt kuvaus, niin annamme arvion samana päivänä. Kiireellisissä tapauksissa soita suoraan numeroon 010 123 1230.</p>
+      <div class="ct-info">
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          <span class="mono">010 123 1230</span>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1 0 2 1 2 2v12c0 1-1 2-2 2H4c-1 0-2-1-2-2V6c0-1 1-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          <span>asiakaspalvelu@lviaurora.fi</span>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Toimimme Helsinki, Espoo, Vantaa, Kerava, Järvenpää</span>
+        </div>
+      </div>
+    </div>
+
+    <form class="ct-form" onsubmit="event.preventDefault(); alert('Kiitos. Otamme yhteyttä tunnin sisällä.');">
+      <div>
+        <label for="nm">Nimi</label>
+        <input id="nm" type="text" placeholder="Etu ja sukunimi" required>
+      </div>
+      <div>
+        <label for="ph">Puhelin</label>
+        <input id="ph" type="tel" placeholder="040 123 4567" required>
+      </div>
+      <div>
+        <label for="ty">Työn tyyppi</label>
+        <select id="ty" required>
+          <option value="">Valitse...</option>
+          <option>Vesivuoto, päivystys</option>
+          <option>Viemäri tai tukos</option>
+          <option>Lämmityshuolto</option>
+          <option>Kylpyhuoneremontti</option>
+          <option>Muu, kerro alla</option>
+        </select>
+      </div>
+      <div>
+        <label for="ms">Kuvaus</label>
+        <textarea id="ms" placeholder="Kerro lyhyesti, mistä on kyse"></textarea>
+      </div>
+      <button type="submit">Lähetä pyyntö</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <div class="brand-big"><span class="mark">A</span> LVI Aurora</div>
+      <p class="tag">Vantaalla toimiva LVI urakointi. Vesivuoto, lämmitys, viemärit ja kylpyhuoneremontit pääkaupunkiseudulla.</p>
+    </div>
+    <div>
+      <h4>Palvelut</h4>
+      <a href="#">Päivystys 24/7</a>
+      <a href="#">Lämmityshuolto</a>
+      <a href="#">Kylpyhuoneremontit</a>
+      <a href="#">Taloyhtiöt</a>
+    </div>
+    <div>
+      <h4>Yhteys</h4>
+      <a href="tel:+358101231230" class="mono">010 123 1230</a>
+      <a href="mailto:asiakaspalvelu@lviaurora.fi">asiakaspalvelu@lviaurora.fi</a>
+      <p>Tikkurilantie 60, Vantaa</p>
+    </div>
+    <div>
+      <h4>Toiminta-alue</h4>
+      <p>Helsinki</p>
+      <p>Espoo</p>
+      <p>Vantaa</p>
+      <p>Kerava, Järvenpää</p>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div>© 2026 LVI Aurora Oy</div>
+    <div>Y-tunnus 2654331-7 · KVV ja IV oikeudet</div>
+  </div>
+</footer>
+
+<script>
+  // Sticky side-nav active state on scroll
+  const sections = ['hero', 'paivystys', 'palvelut', 'hinnoittelu', 'kokemukset', 'yhteys'];
+  const links = document.querySelectorAll('.side-nav a');
+  function updateNav() {
+    let current = 'hero';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) current = id;
+    });
+    links.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+</script>
+
+</body>
+</html>

@@ -238,6 +238,172 @@
     </div>
   </section>
 
+  <section class="section-alt" id="esimerkkitoita">
+    <style>
+      .stories-wrap { padding: 0 2rem; }
+      .stories-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
+      .stories-head .section-label { display: inline-block; }
+      .stories-rail {
+        display: flex; gap: 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding: 1rem 0 2rem;
+        margin: 0 -2rem;
+        padding-left: max(2rem, calc((100vw - 1160px) / 2));
+        padding-right: max(2rem, calc((100vw - 1160px) / 2));
+      }
+      .stories-rail::-webkit-scrollbar { display: none; }
+      .stories-rail { scrollbar-width: none; -ms-overflow-style: none; }
+      .story-card {
+        flex: 0 0 200px;
+        height: 320px;
+        position: relative;
+        border-radius: 18px;
+        overflow: hidden;
+        scroll-snap-align: start;
+        cursor: pointer;
+        text-decoration: none;
+        background: #0f172a;
+        box-shadow: 0 12px 32px rgba(15,23,42,0.12);
+        transition: transform 0.35s ease, box-shadow 0.35s ease;
+        isolation: isolate;
+      }
+      .story-card:hover { transform: scale(1.02); box-shadow: 0 18px 44px rgba(15,23,42,0.22); }
+      .story-bg {
+        position: absolute; inset: 0;
+        background-size: cover; background-position: center;
+        transition: opacity 0.35s ease, filter 0.35s ease;
+      }
+      .story-card:hover .story-bg { filter: brightness(0.78); }
+      .story-card::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.78) 100%);
+        z-index: 1;
+      }
+      .story-top {
+        position: absolute; top: 0.85rem; left: 0.85rem; right: 0.85rem; z-index: 2;
+        display: flex; align-items: center; gap: 0.55rem;
+      }
+      .story-avatar {
+        width: 28px; height: 28px; border-radius: 50%;
+        background: linear-gradient(135deg, #60A5FA, #1D4ED8);
+        border: 2px solid #fff;
+        display: grid; place-items: center;
+        color: #fff; font-size: 0.72rem; font-weight: 600;
+      }
+      .story-client {
+        color: #fff; font-size: 0.78rem; font-weight: 500;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+      }
+      .story-bottom {
+        position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2;
+        color: #fff;
+      }
+      .story-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+      .story-meta { font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.04em; }
+      .story-cta {
+        margin-top: 0.7rem;
+        font-size: 0.78rem; color: #fff;
+        opacity: 0; transform: translateY(6px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        font-weight: 500;
+      }
+      .story-card:hover .story-cta { opacity: 1; transform: translateY(0); }
+      .stories-hint {
+        text-align: center; font-size: 0.78rem; color: #64748b;
+        margin-top: 0.5rem; letter-spacing: 0.04em;
+      }
+      @media (max-width: 720px) {
+        .stories-rail { padding-left: 1.25rem; padding-right: 1.25rem; }
+      }
+    </style>
+
+    <div class="container">
+      <div class="stories-head reveal">
+        <div class="section-label" data-i18n="Esimerkkitöitä">Esimerkkitöitä</div>
+        <h2 class="section-heading" data-i18n="Sivut, joita olemme rakentaneet.">Sivut, joita olemme <span class="accent" data-i18n="rakentaneet">rakentaneet</span>.</h2>
+      </div>
+    </div>
+
+    <div class="stories-rail reveal" id="storiesRail">
+      <a class="story-card" href="portfolio/ravintola-luna.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">L</div>
+          <div class="story-client">Ravintola Luna</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">Ravintola Luna</div>
+          <div class="story-meta">Kausiravintola · Helsinki</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" href="portfolio/saehkoe-pro.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">S</div>
+          <div class="story-client">Sähkö Pro</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">Sähkö Pro</div>
+          <div class="story-meta">Sähköurakointi · Espoo</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" href="portfolio/parturi-nordic.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">N</div>
+          <div class="story-client">Parturi Nordic</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">Parturi Nordic</div>
+          <div class="story-meta">Parturi · Tampere</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" href="portfolio/pizzeria-volcano.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">V</div>
+          <div class="story-client">Pizzeria Volcano</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">Pizzeria Volcano</div>
+          <div class="story-meta" data-i18n="Pizzeria · Turku">Pizzeria · Turku</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" href="portfolio/hammashoito-kruunu.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">K</div>
+          <div class="story-client">Hammashoito Kruunu</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">Hammashoito Kruunu</div>
+          <div class="story-meta" data-i18n="Hammasklinikka · Helsinki">Hammasklinikka · Helsinki</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" href="portfolio/lvi-aurora.html" target="_blank" rel="noopener">
+        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80&auto=format');"></div>
+        <div class="story-top">
+          <div class="story-avatar">A</div>
+          <div class="story-client">LVI Aurora</div>
+        </div>
+        <div class="story-bottom">
+          <div class="story-title">LVI Aurora</div>
+          <div class="story-meta" data-i18n="LVI urakointi · Vantaa">LVI urakointi · Vantaa</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <section class="section">
     <div class="container">
       <div class="reveal">
@@ -388,135 +554,6 @@
     </div>
   </section>
 
-  <section class="section-alt" id="esimerkkitoita">
-    <style>
-      .stories-wrap { padding: 0 2rem; }
-      .stories-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
-      .stories-head .section-label { display: inline-block; }
-      .stories-rail {
-        display: flex; gap: 1rem;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        padding: 1rem 0 2rem;
-        margin: 0 -2rem;
-        padding-left: max(2rem, calc((100vw - 1160px) / 2));
-        padding-right: max(2rem, calc((100vw - 1160px) / 2));
-      }
-      .stories-rail::-webkit-scrollbar { display: none; }
-      .stories-rail { scrollbar-width: none; -ms-overflow-style: none; }
-      .story-card {
-        flex: 0 0 200px;
-        height: 320px;
-        position: relative;
-        border-radius: 18px;
-        overflow: hidden;
-        scroll-snap-align: start;
-        cursor: pointer;
-        text-decoration: none;
-        background: #0f172a;
-        box-shadow: 0 12px 32px rgba(15,23,42,0.12);
-        transition: transform 0.35s ease, box-shadow 0.35s ease;
-        isolation: isolate;
-      }
-      .story-card:hover { transform: scale(1.02); box-shadow: 0 18px 44px rgba(15,23,42,0.22); }
-      .story-bg {
-        position: absolute; inset: 0;
-        background-size: cover; background-position: center;
-        transition: opacity 0.35s ease, filter 0.35s ease;
-      }
-      .story-card:hover .story-bg { filter: brightness(0.78); }
-      .story-card::after {
-        content: '';
-        position: absolute; inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.78) 100%);
-        z-index: 1;
-      }
-      .story-top {
-        position: absolute; top: 0.85rem; left: 0.85rem; right: 0.85rem; z-index: 2;
-        display: flex; align-items: center; gap: 0.55rem;
-      }
-      .story-avatar {
-        width: 28px; height: 28px; border-radius: 50%;
-        background: linear-gradient(135deg, #60A5FA, #1D4ED8);
-        border: 2px solid #fff;
-        display: grid; place-items: center;
-        color: #fff; font-size: 0.72rem; font-weight: 600;
-      }
-      .story-client {
-        color: #fff; font-size: 0.78rem; font-weight: 500;
-        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      }
-      .story-bottom {
-        position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2;
-        color: #fff;
-      }
-      .story-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
-      .story-meta { font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.04em; }
-      .story-cta {
-        margin-top: 0.7rem;
-        font-size: 0.78rem; color: #fff;
-        opacity: 0; transform: translateY(6px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        font-weight: 500;
-      }
-      .story-card:hover .story-cta { opacity: 1; transform: translateY(0); }
-      .stories-hint {
-        text-align: center; font-size: 0.78rem; color: #64748b;
-        margin-top: 0.5rem; letter-spacing: 0.04em;
-      }
-      @media (max-width: 720px) {
-        .stories-rail { padding-left: 1.25rem; padding-right: 1.25rem; }
-      }
-    </style>
-
-    <div class="container">
-      <div class="stories-head reveal">
-        <div class="section-label" data-i18n="Esimerkkitöitä">Esimerkkitöitä</div>
-        <h2 class="section-heading" data-i18n="Sivut, joita olemme rakentaneet.">Sivut, joita olemme <span class="accent" data-i18n="rakentaneet">rakentaneet</span>.</h2>
-      </div>
-    </div>
-
-    <div class="stories-rail reveal" id="storiesRail">
-      <a class="story-card" href="portfolio/ravintola-luna.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">L</div>
-          <div class="story-client">Ravintola Luna</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Ravintola Luna</div>
-          <div class="story-meta">Kausiravintola · Helsinki</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" href="portfolio/saehkoe-pro.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">S</div>
-          <div class="story-client">Sähkö Pro</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Sähkö Pro</div>
-          <div class="story-meta">Sähköurakointi · Espoo</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" href="portfolio/parturi-nordic.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">N</div>
-          <div class="story-client">Parturi Nordic</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Parturi Nordic</div>
-          <div class="story-meta">Parturi · Tampere</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-    </div>
-  </section>
 
   <footer>
     <div class="footer-inner">

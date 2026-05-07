@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hammashoito Kruunu · Yksityinen hammasklinikka Helsingissä</title>
+<meta name="description" content="Hammashoito Kruunu tarjoaa rauhallista ja ammattitaitoista hammashoitoa Helsingin Etu-Töölössä. Varaa aika verkossa tai puhelimitse." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Caveat:wght@400&display=swap" rel="stylesheet">
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --white: #ffffff;
+    --mint: #e8f4ee;
+    --mint-soft: #f3f9f5;
+    --teal: #0e4f3f;
+    --teal-light: #1a6b56;
+    --rose: #e8a4a4;
+    --ink: #0c1e1a;
+    --muted: #5b6e69;
+    --line: rgba(12,30,26,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: 'Lora', Georgia, serif; }
+  .hand { font-family: 'Caveat', cursive; }
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 1.8rem; }
+
+  /* Top */
+  header.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    padding: 1.4rem 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-family: 'Lora', serif;
+    font-size: 1.45rem; font-weight: 500; letter-spacing: 0.02em;
+    color: var(--teal);
+  }
+  .brand em { font-style: italic; color: var(--ink); font-weight: 400; }
+  nav.tn { display: flex; gap: 2.2rem; }
+  nav.tn a {
+    color: var(--ink); text-decoration: none;
+    font-size: 0.86rem; letter-spacing: 0.02em;
+    opacity: 0.7; transition: opacity 0.2s, color 0.2s;
+  }
+  nav.tn a:hover { opacity: 1; color: var(--teal); }
+  .nav-btn {
+    padding: 0.55rem 1.1rem;
+    background: var(--teal); color: #fff !important;
+    border-radius: 999px; font-weight: 500;
+    opacity: 1 !important;
+  }
+  .nav-btn:hover { background: var(--ink); }
+  @media (max-width: 880px) { nav.tn a:not(.nav-btn) { display: none; } }
+
+  /* Hero - asymmetric split */
+  .hero {
+    padding: 8rem 1.8rem 5rem;
+    max-width: 1320px; margin: 0 auto;
+  }
+  .split {
+    display: grid; grid-template-columns: 1.4fr 1fr;
+    gap: 3rem; align-items: stretch;
+  }
+  @media (max-width: 940px) { .split { grid-template-columns: 1fr; } }
+  .split-text { display: flex; flex-direction: column; justify-content: center; padding: 2rem 0; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 2rem;
+  }
+  .eyebrow::before {
+    content: ''; width: 28px; height: 1px; background: var(--teal); display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+  .hero .lead {
+    margin-top: 1.8rem;
+    font-size: 1.15rem; color: var(--muted);
+    max-width: 540px; line-height: 1.65;
+  }
+  .hero-cta { margin-top: 2.6rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    padding: 0.95rem 1.7rem;
+    border-radius: 999px;
+    font-weight: 500; font-size: 0.94rem;
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
+  }
+  .btn-prim { background: var(--teal); color: #fff; }
+  .btn-prim:hover { background: var(--ink); transform: translateY(-1px); }
+  .btn-line { color: var(--ink); border: 1px solid var(--line); }
+  .btn-line:hover { background: var(--mint); border-color: var(--teal); }
+
+  .split-img {
+    border-radius: 24px; overflow: hidden;
+    background: var(--mint);
+    min-height: 540px;
+    position: relative;
+  }
+  .split-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .split-img .stamp {
+    position: absolute; bottom: 1.4rem; left: 1.4rem;
+    background: rgba(255,255,255,0.95);
+    padding: 0.7rem 1.1rem; border-radius: 999px;
+    font-size: 0.82rem; color: var(--ink);
+    display: flex; align-items: center; gap: 0.55rem;
+  }
+  .split-img .stamp::before {
+    content: ''; width: 8px; height: 8px;
+    background: #22c55e; border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
+  }
+
+  .hero-trust {
+    margin-top: 4rem;
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    padding-top: 3rem; border-top: 1px solid var(--line);
+  }
+  .trust-item .num {
+    font-family: 'Lora', serif;
+    font-size: 2.4rem; color: var(--teal);
+  }
+  .trust-item .lab { font-size: 0.86rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* Palvelut */
+  .services { padding: 6rem 1.8rem; }
+  .services-head { max-width: 720px; margin-bottom: 3.5rem; }
+  .lab {
+    font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--teal); font-weight: 500; margin-bottom: 1.2rem;
+  }
+  .services-head h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+    font-weight: 400; line-height: 1.1; letter-spacing: -0.015em;
+  }
+  .services-head h2 em { font-style: italic; color: var(--teal); }
+  .service-list { display: flex; flex-direction: column; }
+  .service-row {
+    display: grid; grid-template-columns: 60px 1.2fr 2fr 100px;
+    gap: 2rem; align-items: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    transition: padding 0.3s;
+  }
+  .service-row:last-child { border-bottom: 1px solid var(--line); }
+  .service-row:hover { padding-left: 1.2rem; }
+  .icon {
+    width: 44px; height: 44px;
+    border-radius: 12px; background: var(--mint);
+    display: grid; place-items: center;
+    color: var(--teal);
+  }
+  .icon svg { width: 22px; height: 22px; }
+  .service-row h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem; font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .service-row p { color: var(--muted); font-size: 0.96rem; max-width: 540px; }
+  .service-row .arrow {
+    text-align: right; color: var(--teal); font-size: 0.86rem;
+    text-decoration: none; font-weight: 500;
+  }
+  .service-row .arrow:hover { color: var(--ink); }
+  @media (max-width: 760px) {
+    .service-row { grid-template-columns: 44px 1fr; }
+    .service-row p, .service-row .arrow { grid-column: 2; }
+  }
+
+  /* Tiimi */
+  .team {
+    background: var(--mint-soft);
+    padding: 6rem 1.8rem;
+  }
+  .team-head { max-width: 720px; margin-bottom: 3.5rem; }
+  .team-head h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+    font-weight: 400; letter-spacing: -0.015em;
+  }
+  .team-head h2 em { font-style: italic; color: var(--teal); }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  @media (max-width: 880px) { .team-grid { grid-template-columns: 1fr; } }
+  .team-card { background: var(--white); border-radius: 22px; overflow: hidden; }
+  .team-card img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
+  .team-meta { padding: 1.6rem 1.6rem 1.8rem; }
+  .team-meta h3 { font-family: 'Lora', serif; font-weight: 500; font-size: 1.4rem; }
+  .team-meta .role { color: var(--teal); font-size: 0.9rem; margin: 0.3rem 0 1rem; }
+  .team-meta .badge {
+    display: inline-block; padding: 0.32rem 0.8rem;
+    background: var(--mint); color: var(--teal);
+    font-size: 0.78rem; border-radius: 999px;
+  }
+
+  /* Hinnasto */
+  .pricing { padding: 6rem 1.8rem; }
+  .price-head { max-width: 720px; margin-bottom: 3rem; }
+  .price-head h2 { font-family: 'Lora', serif; font-size: clamp(2.2rem, 4.4vw, 3.4rem); font-weight: 400; letter-spacing: -0.015em; }
+  .price-head h2 em { font-style: italic; color: var(--teal); }
+  .price-head p { color: var(--muted); margin-top: 1rem; max-width: 580px; }
+  .price-table { width: 100%; border-collapse: collapse; }
+  .price-table tr { border-bottom: 1px solid var(--line); }
+  .price-table tr:first-child { border-top: 2px solid var(--ink); }
+  .price-table th {
+    text-align: left; padding: 1.2rem 1rem;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-weight: 500; color: var(--muted);
+  }
+  .price-table td {
+    padding: 1.3rem 1rem; font-size: 1rem;
+  }
+  .price-table .treat { font-family: 'Lora', serif; font-size: 1.1rem; font-weight: 500; }
+  .price-table .num { color: var(--teal); font-weight: 500; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+  .price-table .kela { color: var(--muted); font-size: 0.86rem; }
+  @media (max-width: 720px) {
+    .price-table th:nth-child(3), .price-table td:nth-child(3) { display: none; }
+  }
+
+  /* Varaa aika */
+  .booking {
+    background: var(--mint);
+    padding: 6rem 1.8rem;
+  }
+  .booking-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3rem; align-items: stretch;
+    max-width: 1180px; margin: 0 auto;
+  }
+  @media (max-width: 940px) { .booking-grid { grid-template-columns: 1fr; } }
+  .booking-text h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+    font-weight: 400; letter-spacing: -0.015em;
+  }
+  .booking-text h2 em { font-style: italic; color: var(--teal); }
+  .booking-text p { color: var(--muted); margin-top: 1.2rem; max-width: 460px; }
+  .booking-phone {
+    margin-top: 2.2rem;
+    padding: 1.4rem 1.6rem;
+    background: var(--white); border-radius: 18px;
+  }
+  .booking-phone .lbl { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.16em; text-transform: uppercase; }
+  .booking-phone .num { font-family: 'Lora', serif; font-size: 1.8rem; color: var(--teal); margin-top: 0.4rem; }
+  .booking-phone .num a { color: inherit; text-decoration: none; }
+
+  .booking-cal {
+    background: var(--white); border-radius: 22px; padding: 2rem;
+  }
+  .booking-cal h4 { font-family: 'Lora', serif; font-size: 1.2rem; font-weight: 500; margin-bottom: 1.4rem; }
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 6px; margin-bottom: 1.5rem;
+  }
+  .cal-day {
+    aspect-ratio: 1; display: grid; place-items: center;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    background: var(--mint-soft);
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .cal-day.head { background: transparent; color: var(--muted); font-size: 0.74rem; }
+  .cal-day.empty { background: transparent; }
+  .cal-day.busy { background: var(--mint-soft); color: rgba(12,30,26,0.32); cursor: not-allowed; }
+  .cal-day.free:hover { background: var(--teal); color: #fff; }
+  .cal-day.selected { background: var(--teal); color: #fff; }
+  .slots { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .slot {
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: var(--mint-soft);
+    font-size: 0.84rem;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  .slot:hover { background: var(--teal); color: #fff; }
+  .slot.taken { color: rgba(12,30,26,0.3); cursor: not-allowed; text-decoration: line-through; background: transparent; }
+
+  /* Footer */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.7);
+    padding: 4rem 1.8rem 2rem;
+  }
+  .ft { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
+  @media (max-width: 760px) { .ft { grid-template-columns: 1fr; gap: 2rem; } }
+  .ft .brand-big { font-family: 'Lora', serif; color: #fff; font-size: 1.7rem; font-weight: 500; }
+  .ft .brand-big em { font-style: italic; color: var(--rose); }
+  .ft .tag { margin-top: 0.7rem; font-size: 0.94rem; max-width: 320px; }
+  .ft h4 { color: #fff; font-size: 0.86rem; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1rem; font-weight: 500; }
+  .ft a { color: rgba(255,255,255,0.7); text-decoration: none; display: block; padding: 0.25rem 0; font-size: 0.92rem; }
+  .ft a:hover { color: #fff; }
+  .ft p { font-size: 0.92rem; padding: 0.25rem 0; }
+  .ft-bottom {
+    max-width: 1180px; margin: 3rem auto 0; padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    font-size: 0.78rem; opacity: 0.55;
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">Hammashoito <em>Kruunu</em></div>
+  <nav class="tn">
+    <a href="#palvelut">Palvelut</a>
+    <a href="#tiimi">Tiimi</a>
+    <a href="#hinnasto">Hinnasto</a>
+    <a href="#varaa" class="nav-btn">Varaa aika</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="split">
+    <div class="split-text">
+      <div class="eyebrow">Yksityinen hammasklinikka, Helsinki</div>
+      <h1>Rauhallista hammashoitoa, johon on <em>helppo tulla</em>.</h1>
+      <p class="lead">Etu-Töölössä toimiva pieni klinikka, joka panostaa kiireettömään vastaanottoon, modernin kuvantamisen tarkkuuteen ja siihen, että lähdet ovesta hymyssä suin.</p>
+      <div class="hero-cta">
+        <a href="#varaa" class="btn btn-prim">Varaa aika</a>
+        <a href="#palvelut" class="btn btn-line">Tutustu palveluihin</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="num">12 v.</div><div class="lab">Klinikan toiminnassa</div></div>
+        <div class="trust-item"><div class="num">4,9 / 5</div><div class="lab">Asiakasarvio</div></div>
+        <div class="trust-item"><div class="num">Kela</div><div class="lab">Sopimuskumppani</div></div>
+      </div>
+    </div>
+    <div class="split-img">
+      <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=1000&q=80&auto=format" alt="Moderni hammashoitolan vastaanottohuone" loading="lazy" />
+      <div class="stamp">Vastaanotamme uusia potilaita</div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="palvelut">
+  <div class="container">
+    <div class="services-head">
+      <div class="lab">Palvelut</div>
+      <h2>Kaikki tarvittava saman <em>katon alla</em>.</h2>
+    </div>
+
+    <div class="service-list">
+
+      <div class="service-row">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2c-3 0-5 1-7 3 0 4 2 8 4 12 1 2 2 3 3 3s2-1 3-3c2-4 4-8 4-12-2-2-4-3-7-3z"/></svg>
+        </div>
+        <h3>Tarkastus ja ennaltaehkäisy</h3>
+        <p>Vuosittainen tarkastus, hammaskivenpoisto ja ohjaus omahoitoon. 45 minuutin rauhallinen vastaanotto.</p>
+        <a class="arrow" href="#">lue lisää →</a>
+      </div>
+
+      <div class="service-row">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+        </div>
+        <h3>Paikkaushoidot</h3>
+        <p>Hammasystävälliset valkoiset komposiittipaikat. Diagnoosi tehdään 3D kuvauksella, ei arvauksilla.</p>
+        <a class="arrow" href="#">lue lisää →</a>
+      </div>
+
+      <div class="service-row">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8l7-5 7 5v8l-7 5-7-5z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Implantit ja kruunut</h3>
+        <p>Yksittäiset implantit ja sillat suomalaisilta laboratorioilta. Suunnittelu kerralla, hoito kahdella käynnillä.</p>
+        <a class="arrow" href="#">lue lisää →</a>
+      </div>
+
+      <div class="service-row">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12s4-7 9-7 9 7 9 7-4 7-9 7-9-7-9-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3>Valkaisu ja estetiikka</h3>
+        <p>Hellävarainen kotivalkaisu omilla muoteilla tai vastaanottovalkaisu. Tulokset näkyvät yhdessä iltapäivässä.</p>
+        <a class="arrow" href="#">lue lisää →</a>
+      </div>
+
+      <div class="service-row">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        </div>
+        <h3>Oikomishoito Invisalign</h3>
+        <p>Läpinäkyvät kalvot aikuisille ja nuorille. Suunnitelma 3D mallilla heti ensimmäisellä käynnillä.</p>
+        <a class="arrow" href="#">lue lisää →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="team" id="tiimi">
+  <div class="container">
+    <div class="team-head">
+      <div class="lab">Tiimi</div>
+      <h2>Tutut ihmiset joka <em>käynnillä</em>.</h2>
+    </div>
+    <div class="team-grid">
+      <article class="team-card">
+        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80&auto=format" alt="Hammaslääkäri Anna Lindholm" loading="lazy" />
+        <div class="team-meta">
+          <h3>Anna Lindholm</h3>
+          <div class="role">Klinikan vastaava, EHL</div>
+          <span class="badge">Hammaslääkäri</span>
+        </div>
+      </article>
+      <article class="team-card">
+        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80&auto=format" alt="Hammaslääkäri Mikko Heinonen" loading="lazy" />
+        <div class="team-meta">
+          <h3>Mikko Heinonen</h3>
+          <div class="role">Implantologi, Hammaslääkäri</div>
+          <span class="badge">Hammaslääkäri</span>
+        </div>
+      </article>
+      <article class="team-card">
+        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80&auto=format" alt="Suuhygienisti Riikka Salo" loading="lazy" />
+        <div class="team-meta">
+          <h3>Riikka Salo</h3>
+          <div class="role">Suuhygienisti</div>
+          <span class="badge">Suuhygienisti</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" id="hinnasto">
+  <div class="container">
+    <div class="price-head">
+      <div class="lab">Hinnasto</div>
+      <h2>Selkeät hinnat, ei <em>yllätyslaskuja</em>.</h2>
+      <p>Kaikkiin hintoihin sisältyy yksilöllinen hoitosuunnitelma. Kelan korvaus huomioidaan automaattisesti laskussa.</p>
+    </div>
+    <table class="price-table">
+      <tr>
+        <th>Toimenpide</th>
+        <th>Hinta</th>
+        <th>Kela korvaa</th>
+      </tr>
+      <tr>
+        <td class="treat">Suun tarkastus, 30 min</td>
+        <td class="num">59 €</td>
+        <td class="kela">15,50 €</td>
+      </tr>
+      <tr>
+        <td class="treat">Hammaskivenpoisto</td>
+        <td class="num">89 €</td>
+        <td class="kela">10,30 €</td>
+      </tr>
+      <tr>
+        <td class="treat">Valkoinen paikka, 1 pinta</td>
+        <td class="num">110 €</td>
+        <td class="kela">17,00 €</td>
+      </tr>
+      <tr>
+        <td class="treat">Juurihoito, etuhammas</td>
+        <td class="num">350 €</td>
+        <td class="kela">47,00 €</td>
+      </tr>
+      <tr>
+        <td class="treat">Posliinikruunu</td>
+        <td class="num">880 €</td>
+        <td class="kela">86,00 €</td>
+      </tr>
+      <tr>
+        <td class="treat">Hammasimplantti, kokonaisuus</td>
+        <td class="num">2 950 €</td>
+        <td class="kela">ei korvausta</td>
+      </tr>
+      <tr>
+        <td class="treat">Kotivalkaisu omilla muoteilla</td>
+        <td class="num">320 €</td>
+        <td class="kela">ei korvausta</td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<section class="booking" id="varaa">
+  <div class="booking-grid">
+    <div class="booking-text">
+      <div class="lab">Varaa aika</div>
+      <h2>Helpoiten verkossa, mutta puhelu <em>aina käy</em>.</h2>
+      <p>Verkossa näet vapaat ajat heti. Jos et löydä sopivaa aikaa tai tarvitset päivystystä, soita meille suoraan.</p>
+      <div class="booking-phone">
+        <div class="lbl">Soita arkisin 8 - 17</div>
+        <div class="num"><a href="tel:+358912345678">09 1234 5678</a></div>
+      </div>
+    </div>
+
+    <div class="booking-cal">
+      <h4>Tarkastus, torstai 14. toukokuuta</h4>
+      <div class="cal-grid">
+        <div class="cal-day head">Ma</div>
+        <div class="cal-day head">Ti</div>
+        <div class="cal-day head">Ke</div>
+        <div class="cal-day head">To</div>
+        <div class="cal-day head">Pe</div>
+        <div class="cal-day head">La</div>
+        <div class="cal-day head">Su</div>
+
+        <div class="cal-day busy">5</div>
+        <div class="cal-day free">6</div>
+        <div class="cal-day busy">7</div>
+        <div class="cal-day free">8</div>
+        <div class="cal-day free">9</div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+
+        <div class="cal-day free">12</div>
+        <div class="cal-day free">13</div>
+        <div class="cal-day busy">14</div>
+        <div class="cal-day selected">15</div>
+        <div class="cal-day free">16</div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+
+        <div class="cal-day busy">19</div>
+        <div class="cal-day free">20</div>
+        <div class="cal-day free">21</div>
+        <div class="cal-day free">22</div>
+        <div class="cal-day busy">23</div>
+        <div class="cal-day empty"></div>
+        <div class="cal-day empty"></div>
+      </div>
+      <div class="lbl" style="font-size: 0.78rem; color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.6rem;">Vapaat ajat</div>
+      <div class="slots">
+        <div class="slot taken">8.30</div>
+        <div class="slot">9.45</div>
+        <div class="slot">11.15</div>
+        <div class="slot taken">13.00</div>
+        <div class="slot">14.30</div>
+        <div class="slot">16.00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div>
+      <div class="brand-big">Hammashoito <em>Kruunu</em></div>
+      <p class="tag">Yksityinen hammasklinikka Etu-Töölössä, Helsingissä. Avattu vuonna 2014.</p>
+    </div>
+    <div>
+      <h4>Vieraile</h4>
+      <p>Töölönkatu 28<br>00260 Helsinki</p>
+      <a href="tel:+358912345678">09 1234 5678</a>
+    </div>
+    <div>
+      <h4>Aukioloajat</h4>
+      <p>Ma - To 8 - 17</p>
+      <p>Pe 8 - 15</p>
+      <p>La sopimuksesta</p>
+    </div>
+    <div>
+      <h4>Tärkeää</h4>
+      <a href="#">Kela sopimus</a>
+      <a href="#">Tietosuojaseloste</a>
+      <a href="#">Päivystys</a>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <div>© 2026 Hammashoito Kruunu Oy</div>
+    <div>Y-tunnus 2987645-1 · Valviran luvalla</div>
+  </div>
+</footer>
+
+</body>
+</html>
