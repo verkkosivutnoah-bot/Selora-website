@@ -685,13 +685,11 @@
     .foot-bot { flex-direction: column; gap: 0.8rem; text-align: center; }
   }
 
-  /* ── Reveal ──────────────────────────────────────────── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity 1.1s ease, transform 1.1s ease;
-  }
-  .reveal.in { opacity: 1; transform: translateY(0); }
+  /* ── Reveal (progressive enhancement: visible by default,
+       JS adds .js-anim to opt-in to fade-up) ─────────────── */
+  .reveal { opacity: 1; transform: none; transition: opacity 1.1s ease, transform 1.1s ease; }
+  html.js-anim .reveal { opacity: 0; transform: translateY(22px); }
+  html.js-anim .reveal.in { opacity: 1; transform: translateY(0); }
 
 </style>
 </head>
@@ -987,11 +985,14 @@
   toggle.addEventListener('click', () => nav.classList.toggle('open'));
   nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
-  // Reveal on scroll
-  const obs = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.14 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Reveal on scroll (skip if reduced-motion preferred)
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-anim');
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  }
 </script>
 
 </body>
