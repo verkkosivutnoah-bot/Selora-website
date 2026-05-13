@@ -2833,6 +2833,7 @@
     'Pizzeria · Turku': 'Pizzeria · Turku',
     'Hammasklinikka · Helsinki': 'Dental clinic · Helsinki',
     'LVI urakointi · Vantaa': 'Plumbing · Vantaa',
+    'Kuntoutus · Hämeenlinna': 'Recovery clinic · Hämeenlinna',
 
     // ---------- portfolio carousel meta + disclaimer ----------
     'Kausiravintola · Helsinki': 'Seasonal restaurant · Helsinki',
