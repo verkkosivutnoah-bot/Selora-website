@@ -989,6 +989,7 @@
 
     // ---------- index.html / hero / sections ----------
     'Älä enää missaa': 'Never miss',
+    'yhtään puhelua.': 'a single call.',
     'Seloran tekoälyvastaanottaja vastaa kaikkiin puheluihisi 24/7, varaa tapaamisia ja tunnistaa potentiaaliset asiakkaat. Täysin automaattisesti, ilman lisähenkilöstöä.':
       'Selora\'s AI receptionist answers every one of your calls 24/7, books meetings and qualifies leads. Fully automatic, with no extra staff.',
     'Seloran tekoälyvastaanottaja vastaa puheluihisi 24/7, varaa ajat kalenteriisi ja tunnistaa potentiaaliset asiakkaat, täysin automaattisesti. Ilmainen demo, käyttöönotto 48 tunnissa.':
