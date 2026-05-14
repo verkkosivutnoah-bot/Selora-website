@@ -90,6 +90,13 @@
     /* WIDGET CARD */
     .widget-card { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem; padding: 1.75rem; box-shadow: 0 2px 20px rgba(15,23,42,0.08); overflow: hidden; }
     #tab-booking { margin: 0 -1.75rem -1.75rem; border-radius: 0 0 1.5rem 1.5rem; overflow: hidden; }
+    /* CAL.COM EMBED */
+    #cal-inline { width: 100%; min-height: 720px; max-height: 84vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #fff; border-radius: 0 0 1.5rem 1.5rem; }
+    #cal-inline iframe { width: 100% !important; min-height: 720px !important; border: 0 !important; display: block; }
+    #cal-inline::-webkit-scrollbar { width: 8px; }
+    #cal-inline::-webkit-scrollbar-track { background: transparent; }
+    #cal-inline::-webkit-scrollbar-thumb { background: rgba(15,23,42,0.18); border-radius: 8px; }
+    #cal-inline::-webkit-scrollbar-thumb:hover { background: rgba(15,23,42,0.32); }
 
     /* TABS */
     .widget-tabs { display: flex; background: #f1f5f9; border-radius: 0.7rem; padding: 0.22rem; margin-bottom: 1.5rem; }
@@ -209,14 +216,16 @@
       .contact-heading { font-size: clamp(1.75rem, 6vw, 2.5rem); }
       .widget-card { padding: 1.25rem; }
       .widget-tabs { margin-bottom: 1rem; }
-      #cal-inline { height: 580px !important; }
+      #cal-inline { min-height: 620px; max-height: 78vh; }
+      #cal-inline iframe { min-height: 620px !important; }
       .page-hero { height: 280px; }
       .expect-list { gap: 1rem; }
       .phone-banner { padding: 0.75rem 1rem; }
     }
     @media(max-width:480px) {
       .section { padding: 3rem 0; }
-      #cal-inline { height: 520px !important; }
+      #cal-inline { min-height: 560px; max-height: 76vh; }
+      #cal-inline iframe { min-height: 560px !important; }
       .form-row { grid-template-columns: 1fr; }
       .contact-form { gap: 0.6rem; }
     }
@@ -347,16 +356,31 @@
 
           <!-- ======== BOOKING TAB ======== -->
           <div class="tab-panel" id="tab-booking">
-            <div id="cal-inline" style="min-width:280px;height:700px;"></div>
+            <div id="cal-inline" aria-label="Varaa esittelypuhelu"></div>
             <script type="text/javascript">
               (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
               Cal("init", "esittelypuhelu", {origin:"https://app.cal.com"});
               Cal.ns.esittelypuhelu("inline", {
-                elementOrSelector:"#cal-inline",
-                config: {"layout":"month_view"},
+                elementOrSelector: "#cal-inline",
+                config: { "layout": "month_view", "theme": "light" },
                 calLink: "noah-yxf8kg/esittelypuhelu",
               });
-              Cal.ns.esittelypuhelu("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+              Cal.ns.esittelypuhelu("ui", {
+                "theme": "light",
+                "cssVarsPerTheme": {
+                  "light": {
+                    "cal-brand": "#1D4ED8",
+                    "cal-text": "#0f172a",
+                    "cal-text-emphasis": "#0f172a",
+                    "cal-bg": "#ffffff",
+                    "cal-bg-emphasis": "#f1f5f9",
+                    "cal-border": "rgba(15,23,42,0.10)",
+                    "cal-border-subtle": "rgba(15,23,42,0.06)"
+                  }
+                },
+                "hideEventTypeDetails": false,
+                "layout": "month_view"
+              });
             </script>
           </div>
 
