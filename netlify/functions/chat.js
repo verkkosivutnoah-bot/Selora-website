@@ -28,7 +28,7 @@ USEIN KYSYTYT KYSYMYKSET:
 - **Mitä tapahtuu jos tekoäly ei osaa vastata?** → Puhelu siirretään henkilöstölle tai asiakkaalle jätetään viesti.
 - **Tarvitsenko teknisiä taitoja?** → Ei. Selora hoitaa kaiken käyttöönoton ja ylläpidon.
 - **Onko sopimuksessa sitoutumisaika?** → Kuukausisopimus on joustava. Vuosisopimuksella saat paremman hinnan.
-- **Miten varaan esittelyn?** → [Varaa 30 min puhelu](https://calendly.com/noah-tuokkola08/30min)
+- **Miten varaan esittelyn?** → [Varaa 30 min puhelu](https://cal.com/noah-yxf8kg/esittelypuhelu)
 - **Millä toimialoilla Selora toimii?** → Kampaamot, autokorjaamot, ravintolat, LVI-yritykset, kiinteistövälittäjät.
 
 TILASTOJA:

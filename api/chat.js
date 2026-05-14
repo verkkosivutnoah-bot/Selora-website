@@ -29,7 +29,7 @@ USEIN KYSYTYT KYSYMYKSET:
 - **Mitä tapahtuu jos tekoäly ei osaa vastata?** → Puhelu siirretään henkilöstölle tai asiakkaalle jätetään viesti.
 - **Tarvitsenko teknisiä taitoja?** → Ei. Selora hoitaa kaiken käyttöönoton ja ylläpidon.
 - **Onko sopimuksessa sitoutumisaika?** → Kuukausisopimus on joustava. Vuosisopimuksella saat paremman hinnan.
-- **Miten varaan esittelyn?** → [Varaa 30 min puhelu](https://calendly.com/noah-tuokkola08/30min) tai käy [yhteystiedot-sivulla](/yhteystiedot.html).
+- **Miten varaan esittelyn?** → [Varaa 30 min puhelu](https://cal.com/noah-yxf8kg/esittelypuhelu) tai käy [yhteystiedot-sivulla](/yhteystiedot.html).
 - **Toimiiko se kaikkina vuorokauden aikoina?** → Kyllä, 24/7 ilman taukoja.
 - **Voiko se ottaa varauksia?** → Kyllä, tekoälyvastaanottaja voi integroitua varausjärjestelmiin.
 - **Millä toimialoilla Selora toimii?** → Kampaamot, autokorjaamot, ravintolat, LVI-yritykset, kiinteistövälittäjät ja muut palveluyritykset.
