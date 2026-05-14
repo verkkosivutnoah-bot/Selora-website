@@ -143,7 +143,7 @@
     'Älä enää missaa yhtään puhelua': 'Never miss another call',
     'Tekoälyvastaanottajamme hoitaa puhelut, ajanvaraukset ja raportoinnin. Sinä keskityt muuhun.': 'Our AI receptionist handles calls, appointment booking and reporting. You focus on the rest.',
     'Suomenkielinen tekoälyvastaanottaja, joka vastaa puheluihin 24/7, varaa ajat kalenteriisi ja lähettää vahvistusviestit.':
-      'A Finnish-speaking AI receptionist that answers calls 24/7, books appointments to your calendar and sends confirmation messages.',
+      'Our Finnish-speaking AI receptionist answers calls 24/7, books appointments straight into your calendar, and sends confirmation messages.',
     'Alkaen 212 €/kk, ei sitoutumista. Käyttöönotto 48 tunnissa. Ei luottokorttia demoon.':
       'From 212 €/mo, no commitment. Live in 48 hours. No credit card for the demo.',
     'Tekoälymme vastaa puheluihin, tunnistaa potentiaaliset asiakkaat ja varaa tapaamiset suoraan kalenteriisi. Se toimii 24 tuntia vuorokaudessa, 7 päivää viikossa, ilman lomia tai taukoja.': 'Our AI answers calls, identifies prospects and books appointments straight into your calendar. It works 24 hours a day, 7 days a week, with no holidays or breaks.',
