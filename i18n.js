@@ -2828,6 +2828,7 @@
     // ---------- portfolio / stories carousel (verkkosivusuunnittelu.html) ----------
     'Esimerkkitöitä': 'Recent work',
     'Sivut, joita olemme rakentaneet.': "Sites we've built.",
+    'Sivut, joita olemme': "Sites we've",
     'rakentaneet': 'built',
     'Katso sivusto →': 'View site →',
     'Pizzeria · Turku': 'Pizzeria · Turku',
