@@ -75,7 +75,10 @@
     .pricing-card.featured::before { content: 'Suosituin'; position: absolute; top: -0.6rem; left: 50%; transform: translateX(-50%); background: var(--brown); color: #fff; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
     .plan-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
     .pricing-card.featured .plan-label { color: #1D4ED8; }
-    .plan-price { font-size: 2.75rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem; }
+    .plan-price { font-size: 2.75rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem; display: flex; align-items: baseline; gap: 0.55rem; }
+    .plan-old-price { font-size: 1.35rem; color: #94a3b8; text-decoration: line-through; text-decoration-thickness: 1.5px; font-weight: 400; letter-spacing: -0.01em; }
+    .plan-discount { display: inline-block; margin-left: 0.55rem; padding: 0.18rem 0.55rem; border-radius: 9999px; background: linear-gradient(135deg, rgba(220,38,38,0.12) 0%, rgba(239,68,68,0.18) 100%); color: #dc2626; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: middle; border: 1px solid rgba(220,38,38,0.18); }
+    .pricing-card.featured .plan-discount { background: linear-gradient(135deg, rgba(29,78,216,0.12) 0%, rgba(59,130,246,0.2) 100%); color: #1D4ED8; border-color: rgba(29,78,216,0.22); }
     .plan-billing { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.35rem; }
     .plan-vat { font-size: 0.68rem; color: #64748b; margin-bottom: 1.35rem; }
     .plan-divider { height: 1px; background: rgba(15,23,42,0.1); margin-bottom: 1.5rem; }
@@ -418,13 +421,13 @@
     <div class="pricing-grid website-pricing-grid">
       <!-- Perussivu -->
       <div class="pricing-card reveal">
-        <div class="plan-label">Perussivu</div>
-        <div class="plan-price"><span>790 €</span></div>
+        <div class="plan-label">Perussivu <span class="plan-discount">-34 % alennus</span></div>
+        <div class="plan-price"><span class="plan-old-price">590 €</span><span>390 €</span></div>
         <div class="plan-billing"><span>kertamaksu</span></div>
         <div class="plan-vat">+ alv. 25,5%</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>4, 7 sivua, mobiilioptimoitu</li>
+          <li>1, 4 sivua, mobiilioptimoitu</li>
           <li>Räätälöity ulkoasu yrityksesi brändiin</li>
           <li>Yhteydenottolomake ja Google Maps</li>
           <li>SEO-perusteet ja nopea latausaika</li>
@@ -436,13 +439,13 @@
 
       <!-- Täysi sivusto -->
       <div class="pricing-card featured reveal reveal-delay-1">
-        <div class="plan-label">Täysi sivusto</div>
-        <div class="plan-price"><span>1 390 €</span></div>
+        <div class="plan-label">Täysi sivusto <span class="plan-discount">-20 % alennus</span></div>
+        <div class="plan-price"><span class="plan-old-price">990 €</span><span>790 €</span></div>
         <div class="plan-billing"><span>kertamaksu</span></div>
         <div class="plan-vat">+ alv. 25,5%</div>
         <div class="plan-divider"></div>
         <ul class="plan-features">
-          <li>8+ sivua, täysin räätälöity design</li>
+          <li>4+ sivua, täysin räätälöity design</li>
           <li>Avainsanatutkimus ja syväluotaava SEO-optimointi</li>
           <li>Lomakkeet, automaatiot ja CRM-integraatio</li>
           <li>Verkkokauppa valinnainen lisä</li>
