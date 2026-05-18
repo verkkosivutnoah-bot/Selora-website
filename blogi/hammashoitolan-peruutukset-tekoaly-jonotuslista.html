@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hammashoitolan puhelin ja peruutukset: miksi joka viides aika jää tyhjäksi vaikka jonossa on potilaita - Selora Blogi</title>
+  <meta name="description" content="Miksi hammashoitoloissa peruuntuneet ajat jäävät tyhjiksi, paljonko se maksaa kuukaudessa ja miten tekoälyvastaanottaja täyttää vapautuneet ajat jonotuslistalta." />
+  <link rel="icon" type="image/jpeg" href="../selora-logo.jpeg" />
+  <meta property="og:title" content="Hammashoitolan puhelin ja peruutukset: miksi joka viides aika jää tyhjäksi vaikka jonossa on potilaita" />
+  <meta property="og:description" content="Miksi hammashoitoloissa peruuntuneet ajat jäävät tyhjiksi, paljonko se maksaa kuukaudessa ja miten tekoälyvastaanottaja täyttää vapautuneet ajat jonotuslistalta." />
+  <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
+  <meta property="og:url" content="https://www.selora.fi/blogi/hammashoitolan-peruutukset-tekoaly-jonotuslista.html" />
+  <meta property="og:type" content="article" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <style>
+    :root { --blue:#1D4ED8; --blue-light:#60A5FA; --text-muted:#64748b; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
+    body { font-family: 'Inter', sans-serif; font-weight: 300; color: #0f172a; background: #f8fafc; overflow-x: hidden; max-width: 100%; line-height: 1.7; }
+    .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic;  padding-left: 0.06em;}
+    img { max-width: 100%; height: auto; }
+    a { color: inherit; }
+
+    /* NAV */
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 0.9rem 2rem; transition: background 0.3s, box-shadow 0.3s; }
+    .site-header.scrolled { background: rgba(6,12,24,0.95); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(255,255,255,0.06); }
+    .nav-bar { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+    .logo { display: flex; align-items: center; gap: 0.55rem; color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.18em; font-family: 'Inter', sans-serif; flex-shrink: 0; }
+    .desktop-nav { display: flex; align-items: center; gap: 2rem; }
+    .desktop-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.8rem; font-weight: 400; letter-spacing: 0.01em; transition: color 0.2s; }
+    .desktop-nav a:hover, .desktop-nav a.active { color: #fff; }
+    .nav-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.65rem 1.5rem; border-radius: 9999px; font-size: 0.82rem; font-weight: 500; font-family: 'Inter', sans-serif; text-decoration: none; cursor: pointer; border: none; transition: all 0.2s ease; }
+    .btn-light { background: #fff; color: #0f172a; }
+    .btn-light:hover { background: #f0f6ff; transform: translateY(-1px); }
+    .hamburger { display: none; background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; width: 40px; height: 40px; cursor: pointer; color: rgba(255,255,255,0.85); align-items: center; justify-content: center; flex-shrink: 0; padding: 0; }
+    .hamburger:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+    .menu-icon { width: 20px; height: 20px; display: block; transition: transform 300ms ease; }
+    .menu-path-main { stroke-dasharray: 12 63; stroke-dashoffset: 0; transition: stroke-dasharray 300ms ease, stroke-dashoffset 300ms ease; }
+    .hamburger.open .menu-icon { transform: rotate(-45deg); }
+    .hamburger.open .menu-path-main { stroke-dasharray: 20 300; stroke-dashoffset: -32.42px; }
+
+    /* ARTICLE HERO */
+    .article-hero { background: #060c18; padding: 9rem 2rem 5rem; position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(29,78,216,0.18) 0%, transparent 70%); pointer-events: none; }
+    .article-hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .article-meta-top { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+    .cat-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.28rem 0.8rem; border-radius: 9999px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cat-toimiala { background: rgba(29,78,216,0.55); color: #bfdbfe; border: 1px solid rgba(96,165,250,0.35); }
+    .article-date { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+    .article-readtime { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+    .article-hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 300; color: #fff; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 1.25rem; }
+    .article-hero-lead { font-size: 1.05rem; color: rgba(255,255,255,0.65); line-height: 1.75; max-width: 680px; font-weight: 300; }
+    .article-author { display: flex; align-items: center; gap: 0.75rem; margin-top: 2.25rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.08); }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1D4ED8, #60A5FA); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; color: #fff; flex-shrink: 0; }
+    .author-info { font-size: 0.75rem; }
+    .author-name { color: rgba(255,255,255,0.9); font-weight: 500; }
+    .author-role { color: rgba(255,255,255,0.45); margin-top: 0.1rem; }
+
+    /* FEATURED IMAGE */
+    .article-featured-img { max-width: 900px; margin: 0 auto; padding: 0 2rem; margin-top: -2rem; position: relative; z-index: 2; }
+    .article-featured-img img { width: 100%; border-radius: 1.25rem; box-shadow: 0 32px 80px rgba(6,12,24,0.35); display: block; aspect-ratio: 16/7; object-fit: cover; }
+
+    /* ARTICLE BODY */
+    .article-body-wrap { max-width: 720px; margin: 4rem auto; padding: 0 2rem; }
+    .article-body h2 { font-size: 1.55rem; font-weight: 400; color: #0f172a; letter-spacing: -0.025em; margin: 2.75rem 0 1rem; line-height: 1.3; }
+    .article-body h3 { font-size: 1.1rem; font-weight: 500; color: #0f172a; margin: 2rem 0 0.75rem; letter-spacing: -0.01em; }
+    .article-body p { font-size: 1rem; color: #334155; line-height: 1.85; margin-bottom: 1.35rem; font-weight: 300; }
+    .article-body strong { font-weight: 600; color: #0f172a; }
+    .article-body ul { margin: 0 0 1.5rem 1.25rem; padding-left: 0.5rem; }
+    .article-body ul li { font-size: 1rem; color: #334155; line-height: 1.8; margin-bottom: 0.5rem; font-weight: 300; }
+
+    /* Pull quote */
+    .pull-quote { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #1D4ED8; border-radius: 0 1rem 1rem 0; padding: 1.5rem 1.75rem; margin: 2.5rem 0; }
+    .pull-quote p { font-size: 1.1rem; font-weight: 400; color: #1e3a8a; line-height: 1.65; margin: 0; font-style: italic; }
+    .pull-quote cite { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.75rem; font-style: normal; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Calculation box */
+    .calc-box { background: #060c18; border-radius: 1.25rem; padding: 2rem 2.25rem; margin: 2.5rem 0; }
+    .calc-box h3 { color: rgba(255,255,255,0.9); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .calc-row { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .calc-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .calc-row.total { border-top: 1px solid rgba(255,255,255,0.15); margin-top: 0.5rem; padding-top: 1rem; }
+    .calc-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .calc-value { font-size: 1rem; font-weight: 500; color: #fff; }
+    .calc-row.total .calc-label { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .calc-row.total .calc-value { font-size: 1.5rem; font-weight: 300; letter-spacing: -0.02em; color: #fbbf24; }
+
+    /* Stat highlight */
+    .stat-highlight { background: linear-gradient(135deg, #1e3a8a 0%, #1D4ED8 100%); border-radius: 1.25rem; padding: 2rem 2.25rem; margin: 2.5rem 0; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .stat-num { font-size: 3rem; font-weight: 300; color: #fff; letter-spacing: -0.04em; line-height: 1; flex-shrink: 0; }
+    .stat-num span { font-size: 1.5rem; }
+    .stat-desc { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.65; }
+    .stat-desc strong { color: #fff; font-weight: 500; }
+
+    /* ROI card */
+    .roi-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 1.25rem; padding: 2rem; margin: 2.5rem 0; }
+    .roi-card h3 { color: #065f46; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .roi-row { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(5,150,105,0.1); font-size: 0.9rem; }
+    .roi-row:last-of-type { border-bottom: none; }
+    .roi-row .label { color: #374151; }
+    .roi-row .value { font-weight: 500; color: #065f46; }
+    .roi-row.highlight .value { font-size: 1.2rem; font-weight: 600; color: #16a34a; }
+
+    /* ARTICLE CTA */
+    .article-cta { background: linear-gradient(135deg, #1e3a8a 0%, #1D4ED8 100%); border-radius: 1.5rem; padding: 3rem; text-align: center; margin: 4rem 0; }
+    .article-cta h3 { font-size: 1.75rem; font-weight: 300; color: #fff; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
+    .article-cta p { color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 1.75rem; }
+
+    /* BACK TO BLOG */
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; font-weight: 400; }
+    .back-link:hover { color: var(--blue); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    /* FOOTER */
+    footer { background: #060c18; color: rgba(255,255,255,0.6); padding: 4rem 2rem 2rem; margin-top: 6rem; }
+    .footer-inner { max-width: 1160px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .footer-brand p { font-size: 0.8rem; line-height: 1.7; margin-top: 1rem; max-width: 22rem; }
+    .logo-text { display: flex; align-items: center; gap: 0.55rem; color: #fff; text-decoration: none; font-size: 0.95rem; font-weight: 700; letter-spacing: 0.18em; font-family: 'Inter', sans-serif; }
+    .footer-links { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+    .footer-col h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.25rem; }
+    .footer-col a { display: block; font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: none; margin-bottom: 0.65rem; transition: color 0.2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 1.75rem; flex-wrap: wrap; gap: 1rem; }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.3); }
+    .trust-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .trust-badge { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4); }
+
+    /* MOBILE MENU */
+    .mobile-menu { position: fixed; inset: 0; background: #050C1A; z-index: 999; display: flex; flex-direction: column; padding: 1.5rem 2rem 2.5rem; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
+    .mobile-menu-close { background: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+    .mobile-menu-close:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    .mobile-menu-nav { display: flex; flex-direction: column; flex: 1; }
+    .mobile-menu-nav a { font-size: 2rem; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; letter-spacing: -0.03em; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; line-height: 1.1; }
+    .mobile-menu-nav a:hover, .mobile-menu-nav a.active { color: #fff; }
+    .mobile-menu-cta { margin-top: 2rem; }
+    .mobile-menu-cta a { display: block; text-align: center; background: #1D4ED8; color: #fff; font-size: 0.9rem; font-weight: 500; padding: 1rem; border-radius: 9999px; text-decoration: none; }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .desktop-nav { display: none; }
+      .hamburger { display: flex; }
+      .btn-nav-cta { display: none !important; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-links { grid-template-columns: repeat(2,1fr); }
+    }
+    @media(max-width:480px) {
+      .article-hero { padding: 8rem 1.5rem 4rem; }
+      .article-body-wrap { padding: 0 1.25rem; }
+      .article-featured-img { padding: 0 1.25rem; }
+      .stat-highlight { flex-direction: column; gap: 0.75rem; }
+      .footer-links { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
+<script src="/i18n.js" defer></script>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="site-header" id="site-header">
+  <div class="nav-bar">
+    <a href="../index.html" class="logo">
+      <img src="../selora-logo.jpeg" width="30" height="30" alt="Selora" style="flex-shrink:0;border-radius:25%;display:block;" loading="lazy">
+      SELORA
+    </a>
+    <nav class="desktop-nav">
+      <a href="../index.html">Etusivu</a>
+      <a href="../palvelut.html">Palvelut</a>
+      <a href="../hinnoittelu.html">Hinnoittelu</a>
+      <a href="../blogi.html" class="active">Blogi</a>
+      <a href="../yhteystiedot.html">Yhteystiedot</a>
+    </nav>
+    <div class="nav-right">
+      <a href="../yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
+      <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" onclick="toggleMobileMenu()">
+        <svg class="menu-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path class="menu-path-main" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
+          <path d="M7 16 27 16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ARTICLE HERO -->
+<section class="article-hero">
+  <div class="article-hero-inner">
+    <div class="article-meta-top">
+      <span class="cat-badge cat-toimiala">Toimialaopas</span>
+      <span class="article-date">18. toukokuuta 2026</span>
+      <span class="article-readtime">· 7 min lukuaika</span>
+    </div>
+    <h1>Hammashoitolan puhelin ja peruutukset: miksi joka viides aika jää tyhjäksi vaikka jonossa on potilaita</h1>
+    <p class="article-hero-lead">Suomalaisten hammashoitoloiden suurin näkymätön vuoto ei ole vastaamattomat puhelut. Se on peruuntuneet ajat, joita ei ehditä täyttää uudelleen. Katsotaan miksi, paljonko tyhjä tuoli maksaa kuukaudessa ja miten tekoälyvastaanottaja saa jonossa olevat potilaat hammaslääkärin tuoliin samana päivänä.</p>
+    <div class="article-author">
+      <div class="author-avatar">NT</div>
+      <div class="author-info">
+        <div class="author-name">Noah Tuokkola</div>
+        <div class="author-role">Perustaja, Selora</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED IMAGE -->
+<div class="article-featured-img">
+  <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=900&q=85&auto=format&fit=crop" alt="Hammaslääkärin tuoli ja hoitolaite hammashoitolassa" loading="eager" />
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body-wrap">
+  <a href="../blogi.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Takaisin blogiin
+  </a>
+
+  <div class="article-body reveal">
+    <h2>Hammashoitolan ongelma ei ole liian vähän potilaita</h2>
+
+    <p>Useimmissa Suomen kaupungeissa hammashoitoloiden jonot ovat pitkiä. Helsingissä, Espoossa, Tampereella ja Oulussa moneen klinikkaan ei pääse alle kolmessa viikossa, ja kontrollit on varattu kuukausia eteenpäin. Tästä huolimatta hammaslääkärin tuoli on tyhjä useita tunteja viikossa, ja toiminta on alikäytöllä.</p>
+
+    <p>Syy on yksinkertainen, mutta harva mittaa sitä. Peruutuksia tulee jatkuvasti, ja niitä ei ehditä täyttää uudelleen. Aika vapautuu kello 11:45 samana päivänä, eikä vastaanottaja ehdi soittaa jonossa olevia potilaita. Aika menee ohi, ja tunti hammaslääkärin tuolissa muuttuu nollaksi euroksi.</p>
+
+    <h2>Joka viides aika peruuntuu, harva niistä täyttyy</h2>
+
+    <p>Olen jutellut tämän vuoden aikana hammashoitoloiden omistajien kanssa pääkaupunkiseudulta ja Pirkanmaalta. Lukemat toistuvat: peruutuksia tulee 15-25 % varatuista ajoista kuukaudessa, ja näistä noin 60 % tulee alle 24 tuntia ennen aikaa. Myöhäiset peruutukset eivät ehdi täyttymään, koska potilaat eivät vastaa puhelimeen kesken työpäivän, ja vastaanottaja ei kerkeä soittamaan jonotuslistaa läpi peruutusten välissä.</p>
+
+    <div class="stat-highlight">
+      <div class="stat-num">22<span>%</span></div>
+      <div class="stat-desc">varatuista hammashoitoajoista peruuntuu, mutta vain noin 35 % niistä <strong>täyttyy uudelleen samana päivänä</strong>. Loput menevät ohi ilman korvaavaa potilasta.</div>
+    </div>
+
+    <h2>Tyhjä tuoli maksaa enemmän kuin hammaslääkäri saa palkkaa</h2>
+
+    <p>Hammaslääkärin tuolin todellinen tuntikustannus on usein 180-280 € yksityishammashoitolassa, kun lasketaan hammaslääkärin palkka, hoitaja, tilavuokra, laitteet ja oheiskulut. Sama tuoli tuottaa keskimäärin 220-340 € tunnissa liikevaihtoa, kun se on käytössä. Kun tuoli on tyhjä, kustannukset jatkuvat mutta tuotto on nolla.</p>
+
+    <div class="calc-box">
+      <h3>Esimerkkilaskelma: 3 hammaslääkärin yksityishammashoitola</h3>
+      <div class="calc-row">
+        <span class="calc-label">Aikoja / hammaslääkäri / päivä</span>
+        <span class="calc-value">8</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Hammaslääkäreitä klinikassa</span>
+        <span class="calc-value">3</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Peruutuksia yhteensä / päivä (~15 %)</span>
+        <span class="calc-value">4</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Joista täyttyy uudelleen samana päivänä (~35 %)</span>
+        <span class="calc-value">1</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Menetettyjä aikoja / päivä</span>
+        <span class="calc-value">3</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Keskimääräinen hoitoarvo</span>
+        <span class="calc-value">240 €</span>
+      </div><div class="calc-row">
+        <span class="calc-label">Menetys / arkipäivä</span>
+        <span class="calc-value">~720 €</span>
+      </div><div class="calc-row total">
+        <span class="calc-label">Menetys / vuosi (220 työpäivää)</span>
+        <span class="calc-value">~158 000 €</span>
+      </div>
+    </div>
+
+    <p>Luvut tuntuvat järjettömiltä, mutta tämä on operaattorin raporteista, ajanvarausjärjestelmän peruutushistoriasta ja klinikan omasta laskennasta yhdistetty arvio. Kun klinikan johto laskee tätä ensimmäistä kertaa läpi, useimpien reaktio on sama: emme tienneet, että vuoto on näin suuri.</p>
+
+    <div class="pull-quote">
+      <p>"Me kuviteltiin että 20 % peruutusprosentti on normaali. Sitten katsoin että puolessa niistä aika menee suoraan tyhjään koska kukaan ei ehdi soittaa potilaita. Kun laskin sen tunneiksi, hammaslääkärit olivat olleet käytännössä ilmaiseksi paikalla 3 päivää kuussa."</p>
+      <cite>Hammashoitolan omistaja, Tampere</cite>
+    </div>
+
+    <h2>Miksi takaisinsoitot eivät toimi</h2>
+
+    <p>Selkein ratkaisu olisi: kun aika peruuntuu, vastaanottaja soittaa jonotuslistan päältä ja täyttää ajan. Käytännössä tämä epäonnistuu kolmesta syystä.</p>
+
+    <p><strong>Ensinnäkin:</strong> vastaanottaja on kesken vuoron. Tiskillä on potilas, sähköposteja odottaa, lounasvaraus puhelimessa ja toinen linja soi. Soittokierroksen aloittamiseen ei ole tyhjää aikaa.</p>
+
+    <p><strong>Toiseksi:</strong> jonossa olevat potilaat eivät vastaa kesken työpäivän. Numeroita on kuusi peruutusta kohti, joista vastaa keskimäärin yksi tai kaksi. Loput ovat töissä tai eivät vastaa tuntemattomaan numeroon.</p>
+
+    <p><strong>Kolmanneksi:</strong> hammashoitoaika ei ole akuutti. Iso osa jonossa olevista on rutiininomaisia tarkastuksia tai paikkauksia, jotka voivat odottaa. Kun heille soitetaan kesken päivän, vastaus on usein "en pääse nyt".</p>
+
+    <h2>Mitä tekoälyvastaanottaja tekee toisin</h2>
+
+    <p>Tekoälyvastaanottaja vastaa puhelimeen kolmannella soitolla, joka päivä, joka tunti. Hammashoitolaympäristössä se tekee viisi asiaa, joista jokainen tuo tunteja suoraan takaisin tuoliin:</p>
+
+    <ul>
+      <li><strong>Ottaa peruutukset välittömästi vastaan ympäri vuorokauden.</strong> Agentti kysyy peruutuksen syyn, vahvistaa peruutuksen ajanvarausjärjestelmään ja vapauttaa ajan saman tien.</li>
+      <li><strong>Soittaa jonotuslistan potilaita automaattisesti.</strong> Heti kun aika vapautuu, agentti soittaa jonotuslistan järjestyksessä, kertoo vapautuneesta ajasta ja varaa sen ensimmäiselle, joka pääsee.</li>
+      <li><strong>Tarjoaa vapautuneen ajan tekstiviestillä jonotuslistalle.</strong> Jos kukaan ei vastaa, agentti lähettää koko jonotuslistalle viestin: "Vapautui aika klo 14:30, vastaa KYLLÄ varataksesi." Suurin osa täyttyy 15 minuutissa.</li>
+      <li><strong>Antaa hinta-arvion yleisistä hoidoista.</strong> Hammastarkastus, paikkaus, hammashygienistin käynti, juurihoidon karkea arvio. Agentti tietää klinikan hinnastot ja Kela-korvauksen suuruuden, ja osaa sanoa "tarkastus on noin 90 €, Kela-korvaus noin 18 €, omavastuu 72 €".</li>
+      <li><strong>Vahvistaa ja muistuttaa ajoista tekstiviestillä.</strong> Heti varauksen jälkeen vahvistus, edellisenä päivänä muistutus. Tämä yksinään pudottaa peruutusten määrää 15-30 %.</li>
+    </ul>
+
+    <h3>Käytännön esimerkki torstai-iltapäivästä</h3>
+
+    <p>Torstai 11:55. Potilas soittaa ja peruu kello 13:00 ajan, koska tuli äkillinen kokous. Agentti vastaa, vahvistaa peruutuksen ja vapauttaa ajan. Samassa hetkessä agentti soittaa jonotuslistan ensimmäiselle potilaalle, joka odottaa paikkausaikaa. Ensimmäinen ei vastaa. Toinen on töissä eikä pääse. Kolmas vastaa, on lähellä klinikkaa lounaalla ja varaa ajan suoraan puhelussa. Vahvistus tekstiviestillä klo 12:01.</p>
+
+    <p>Vastaanottaja ei tehnyt yhtään puhelua. Hammaslääkäri ei tiedä peruutuksesta, koska aika täyttyi automaattisesti. Yksi tunti tuolissa pelastettu, 240 € liikevaihtoa takaisin.</p>
+
+    <h2>Mitä tämä maksaa verrattuna menetettyyn</h2>
+
+    <div class="roi-card">
+      <h3>ROI: kaksi pelastettua aikaa viikossa riittää</h3>
+      <div class="roi-row">
+        <span class="label">Seloran kuukausihinta (Aloitus)</span>
+        <span class="value">212 €/kk</span>
+      </div><div class="roi-row">
+        <span class="label">Yksi keskimääräinen hammashoitoaika</span>
+        <span class="value">~240 €</span>
+      </div><div class="roi-row">
+        <span class="label">Yksi pelastettu paikkaustyö</span>
+        <span class="value">350-650 €</span>
+      </div><div class="roi-row highlight">
+        <span class="label">ROI, jos pelastaa 8 aikaa/kk</span>
+        <span class="value">+806 %</span>
+      </div>
+    </div>
+
+    <p>Käytännössä tekoälyvastaanottaja maksaa itsensä takaisin ensimmäisellä viikolla, kun se täyttää kaksi peruuntunutta aikaa. Sen jälkeen kaikki muu, eli vähentyneet no-showt, illalla ja viikonloppuna tehdyt uudet varaukset ja Kela-tiedustelut, on bonusta.</p>
+
+    <h2>Mitä käyttöönotto hammashoitolassa oikeasti vaatii</h2>
+
+    <p>Tämä on se kohta jossa moni hammashoitolan johtaja epäilee: "meidän ajanvarausjärjestelmä on niin spesifi, ei sinne saa kytkettyä mitään". Reilu vastaus: käyttöönotto vie noin <strong>90 minuuttia</strong> johdolta itseltään.</p>
+
+    <p>Käytännössä tarvitaan neljä asiaa:</p>
+
+    <ul>
+      <li>Hinnasto yleisistä hoidoista (tarkastus, paikkaus, juurihoidon arvio, hammashygienistin käynti) ja Kela-korvauksen suuruus</li>
+      <li>Ajanvarausjärjestelmä johon agentti saa kirjoittaa (Acute, Romexis, Plandent, Dentinet, Assisdent tai vastaava). Useimpiin on rajapinta tai kalenteri-integraatio.</li>
+      <li>Jonotuslista nimineen ja puhelinnumeroineen, järjestyksessä jossa potilaita halutaan soittaa</li>
+      <li>Päivystysohjeet: mitkä tilanteet ovat akuutteja (lohjennut hammas, voimakas kipu, leukamurtuma) ja kenelle ne ohjataan suoraan</li>
+    </ul>
+
+    <p>Sen jälkeen agentti koulutetaan klinikan tyylin mukaiseksi, numero ohjataan päälle ja vahvistusviestit kytketään päälle. Homma on käynnissä saman viikon aikana. Ei uutta järjestelmää vastaanottohenkilökunnalle, ei sovellusta johon hammaslääkäreiden pitää kirjautua.</p>
+
+    <h2>Milloin tämä kannattaa hammashoitolalle</h2>
+
+    <p>Tekoälyvastaanottaja ei ole jokaiselle hammashoitolalle välttämätön. Yhden hammaslääkärin pienessä klinikassa, jossa vastaanottaja ehtii hoitaa puhelimen kaikessa rauhassa, tätä ei välttämättä tarvita. Mutta kun yksikin seuraavista pätee, laskenta muuttuu nopeasti:</p>
+
+    <ul>
+      <li>Klinikassa on 2 tai useampaa hammaslääkäriä, ja peruutuksia tulee 4 tai useampi päivässä</li>
+      <li>Jonotuslista on pitkä, mutta vastaanottaja ei kerkeä soittamaan peruuntuneita aikoja täyteen</li>
+      <li>Vastaanottohenkilökunta tekee jatkuvasti ylitöitä, koska puhelin ei ehdy</li>
+      <li>Iltaisin ja viikonloppuisin tulee säännöllisesti varauspuheluita, joihin kukaan ei vastaa</li>
+      <li>Et tiedä paljonko menetätte peruutuksiin, mutta arvaatte että lukemat ovat isompia kuin kestäisi katsoa</li>
+    </ul>
+
+    <p>Hammashoitoala on viime vuosina muuttunut siten, että potilaat odottavat samanlaista palvelukokemusta kuin verkkokaupasta: vahvistus tekstiviestillä, peruutus puhelimella ja vapautunut aika tarjolla ilman jonotusta. Tekoälyvastaanottaja antaa pienelle ja keskikokoiselle hammashoitolalle saman tason palvelun kuin isoilla ketjuilla, ilman että vastaanottohenkilökunta uupuu.</p>
+  </div>
+
+  <div class="article-cta reveal">
+    <h3>Katso mitä Selora vastaisi sinun hammashoitolasi puhelimeen</h3>
+    <p>30 minuutin demossa näet oikean peruutus- ja jonotuslistapuhelun alusta loppuun, hammashoitolan skenaariolla. Ei PowerPointia, ei sitoumuksia.</p>
+    <a href="../yhteystiedot.html" class="btn btn-light" style="font-size:0.9rem;padding:0.85rem 2rem;">Varaa maksuton demo →</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo-text">
+          <img src="../selora-logo.jpeg" width="30" height="30" alt="Selora" style="flex-shrink:0;border-radius:25%;display:block;" loading="lazy">
+          SELORA
+        </a>
+        <p>Tekoälyvastaanottaja ja verkkosivusuunnittelu suomalaisille yrityksille. Käyttöönotto alle 48 tunnissa.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Palvelut</h4>
+          <a href="../tekoalyvastaanottajat.html">Tekoälyvastaanottaja</a>
+          <a href="../verkkosivusuunnittelu.html">Verkkosivusuunnittelu</a>
+          <a href="../palvelut.html">Tekoälychatbot</a>
+        </div>
+        <div class="footer-col">
+          <h4>Yritys</h4>
+          <a href="../hinnoittelu.html">Hinnoittelu</a>
+          <a href="../blogi.html">Blogi</a>
+          <a href="../yhteystiedot.html">Yhteystiedot</a>
+          <a href="../tietosuojaseloste.html">Tietosuojaseloste</a>
+        </div>
+        <div class="footer-col">
+          <h4>Toimialat</h4>
+          <a href="../palvelut.html">Terveydenhuolto</a>
+          <a href="../palvelut.html">Kiinteistövälitys</a>
+          <a href="../palvelut.html">Kauneushoitolat</a>
+          <a href="../palvelut.html">Ravintolat</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Selora Oy · Y-tunnus: 3535677-9 · Kaikki oikeudet pidätetään.</span>
+      <div class="trust-badges">
+        <span class="trust-badge">GDPR</span>
+        <span class="trust-badge">EU AI Act</span>
+        <span class="trust-badge">99.9% uptime</span>
+        <span class="trust-badge">EU-palvelimet</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-top">
+    <a href="../index.html" class="logo" style="display:flex;align-items:center;gap:0.55rem;color:#fff;text-decoration:none;font-size:0.95rem;font-weight:700;letter-spacing:0.18em;font-family:'Inter',sans-serif;">
+      <img src="../selora-logo.jpeg" width="30" height="30" alt="Selora" style="flex-shrink:0;border-radius:25%;display:block;" loading="lazy">
+      SELORA
+    </a>
+    <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu-nav">
+    <a href="../index.html">Etusivu</a>
+    <a href="../palvelut.html">Palvelut</a>
+    <a href="../hinnoittelu.html">Hinnoittelu</a>
+    <a href="../blogi.html" class="active">Blogi</a>
+    <a href="../yhteystiedot.html">Yhteystiedot</a>
+  </nav>
+  <div class="mobile-menu-cta"><a href="../yhteystiedot.html">Varaa demo →</a></div>
+</div>
+
+
+<script>
+(function(){
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY > 30); }, {passive: true});
+})();
+function toggleMobileMenu(){
+  var menu = document.getElementById('mobileMenu');
+  var btn = document.getElementById('menuBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+(function(){
+  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in-view'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script src="/chatbot.js" defer></script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

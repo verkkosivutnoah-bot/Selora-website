@@ -2860,6 +2860,160 @@
     // ---------- portfolio demo banner ----------
     'Tämä on esimerkkisivu, ei oikea asiakasprojekti.': 'This is an example site, not a real client project.',
     'Tilaa oma sivustosi Seloralta →': 'Order your own site from Selora →',
+
+    // -------- blog: hammashoitolan-peruutukset-tekoaly-jonotuslista --------
+    'Hammashoitolan puhelin ja peruutukset: miksi joka viides aika jää tyhjäksi vaikka jonossa on potilaita - Selora Blogi':
+      'A dental clinic\'s phone and cancellations: why one in five slots stays empty even with a waitlist - Selora Blog',
+    'Hammashoitolan puhelin ja peruutukset: miksi joka viides aika jää tyhjäksi vaikka jonossa on potilaita':
+      'A dental clinic\'s phone and cancellations: why one in five slots stays empty even with a waitlist',
+    'Hammashoitola ja peruutukset: miksi joka viides aika jää tyhjäksi':
+      'A dental clinic and cancellations: why one in five slots stays empty',
+    'Miksi hammashoitoloissa peruuntuneet ajat jäävät tyhjiksi, paljonko se maksaa kuukaudessa ja miten tekoälyvastaanottaja täyttää vapautuneet ajat jonotuslistalta.':
+      'Why cancelled slots in dental clinics stay empty, what it costs per month, and how an AI receptionist fills the freed slots from the waitlist.',
+    'Peruutuksia tulee 22 %, ja vain kolmasosa täyttyy uudelleen. Näin tekoäly täyttää vapautuneet ajat jonotuslistalta.':
+      'Cancellations run at 22%, and only a third refill. Here\'s how AI fills the freed slots from the waitlist.',
+    'Hammashoitola ja peruutukset': 'A dental clinic and cancellations',
+    'Hammaslääkärin tuoli ja hoitolaite hammashoitolassa':
+      'A dental chair and treatment unit in a dental clinic',
+    '18. toukokuuta 2026': '18 May 2026',
+
+    'Suomalaisten hammashoitoloiden suurin näkymätön vuoto ei ole vastaamattomat puhelut. Se on peruuntuneet ajat, joita ei ehditä täyttää uudelleen. Katsotaan miksi, paljonko tyhjä tuoli maksaa kuukaudessa ja miten tekoälyvastaanottaja saa jonossa olevat potilaat hammaslääkärin tuoliin samana päivänä.':
+      'The biggest invisible leak in Finnish dental clinics isn\'t unanswered calls. It\'s cancelled slots that can\'t be refilled in time. Let\'s look at why, what an empty chair costs per month, and how an AI receptionist gets waitlisted patients into the dentist\'s chair on the same day.',
+
+    'Hammashoitolan ongelma ei ole liian vähän potilaita':
+      'A dental clinic\'s problem isn\'t too few patients',
+    'Useimmissa Suomen kaupungeissa hammashoitoloiden jonot ovat pitkiä. Helsingissä, Espoossa, Tampereella ja Oulussa moneen klinikkaan ei pääse alle kolmessa viikossa, ja kontrollit on varattu kuukausia eteenpäin. Tästä huolimatta hammaslääkärin tuoli on tyhjä useita tunteja viikossa, ja toiminta on alikäytöllä.':
+      'In most Finnish cities the waiting lists at dental clinics are long. In Helsinki, Espoo, Tampere and Oulu you usually can\'t get into many clinics in under three weeks, and check-ups are booked months ahead. Despite that, the dentist\'s chair sits empty for several hours a week, and capacity is underused.',
+    'Syy on yksinkertainen, mutta harva mittaa sitä. Peruutuksia tulee jatkuvasti, ja niitä ei ehditä täyttää uudelleen. Aika vapautuu kello 11:45 samana päivänä, eikä vastaanottaja ehdi soittaa jonossa olevia potilaita. Aika menee ohi, ja tunti hammaslääkärin tuolissa muuttuu nollaksi euroksi.':
+      'The reason is simple, but few people measure it. Cancellations come in constantly, and there\'s no time to refill them. A slot opens at 11:45 the same day, and reception doesn\'t have time to call waitlisted patients. The slot passes, and an hour in the dentist\'s chair turns into zero euros.',
+
+    'Joka viides aika peruuntuu, harva niistä täyttyy':
+      'One in five slots cancels, few of them refill',
+    'Olen jutellut tämän vuoden aikana hammashoitoloiden omistajien kanssa pääkaupunkiseudulta ja Pirkanmaalta. Lukemat toistuvat: peruutuksia tulee 15-25 % varatuista ajoista kuukaudessa, ja näistä noin 60 % tulee alle 24 tuntia ennen aikaa. Myöhäiset peruutukset eivät ehdi täyttymään, koska potilaat eivät vastaa puhelimeen kesken työpäivän, ja vastaanottaja ei kerkeä soittamaan jonotuslistaa läpi peruutusten välissä.':
+      'Over this year I\'ve spoken with dental clinic owners in the Helsinki region and Pirkanmaa. The numbers repeat: cancellations run at 15-25% of booked slots per month, and around 60% of them come in less than 24 hours before the appointment. Late cancellations don\'t refill, because patients don\'t pick up the phone in the middle of the workday, and reception doesn\'t have time to work through the waitlist between cancellations.',
+
+    'varatuista hammashoitoajoista peruuntuu, mutta vain noin 35 % niistä':
+      'of booked dental slots get cancelled, but only about 35% of them',
+    'täyttyy uudelleen samana päivänä': 'refill on the same day',
+    '. Loput menevät ohi ilman korvaavaa potilasta.':
+      '. The rest go by without a replacement patient.',
+
+    'Tyhjä tuoli maksaa enemmän kuin hammaslääkäri saa palkkaa':
+      'An empty chair costs more than the dentist earns in salary',
+    'Hammaslääkärin tuolin todellinen tuntikustannus on usein 180-280 € yksityishammashoitolassa, kun lasketaan hammaslääkärin palkka, hoitaja, tilavuokra, laitteet ja oheiskulut. Sama tuoli tuottaa keskimäärin 220-340 € tunnissa liikevaihtoa, kun se on käytössä. Kun tuoli on tyhjä, kustannukset jatkuvat mutta tuotto on nolla.':
+      'The actual hourly cost of a dentist\'s chair often runs 180-280 € in a private clinic, once you count the dentist\'s salary, the assistant, rent, equipment and overhead. The same chair brings in 220-340 € per hour on average when it\'s in use. When the chair is empty, the costs keep running but revenue is zero.',
+
+    'Esimerkkilaskelma: 3 hammaslääkärin yksityishammashoitola':
+      'Sample calculation: a private dental clinic with 3 dentists',
+    'Aikoja / hammaslääkäri / päivä': 'Slots / dentist / day',
+    'Hammaslääkäreitä klinikassa': 'Dentists at the clinic',
+    'Peruutuksia yhteensä / päivä (~15 %)': 'Total cancellations / day (~15%)',
+    'Joista täyttyy uudelleen samana päivänä (~35 %)':
+      'Of which refill on the same day (~35%)',
+    'Menetettyjä aikoja / päivä': 'Lost slots / day',
+    'Keskimääräinen hoitoarvo': 'Average treatment value',
+    'Menetys / arkipäivä': 'Loss / weekday',
+    'Menetys / vuosi (220 työpäivää)': 'Loss / year (220 working days)',
+
+    'Luvut tuntuvat järjettömiltä, mutta tämä on operaattorin raporteista, ajanvarausjärjestelmän peruutushistoriasta ja klinikan omasta laskennasta yhdistetty arvio. Kun klinikan johto laskee tätä ensimmäistä kertaa läpi, useimpien reaktio on sama: emme tienneet, että vuoto on näin suuri.':
+      'The numbers feel absurd, but this is a combined estimate from carrier reports, the booking system\'s cancellation history, and the clinic\'s own bookkeeping. When clinic management runs this through for the first time, most react the same way: we didn\'t realise the leak was this big.',
+
+    '"Me kuviteltiin että 20 % peruutusprosentti on normaali. Sitten katsoin että puolessa niistä aika menee suoraan tyhjään koska kukaan ei ehdi soittaa potilaita. Kun laskin sen tunneiksi, hammaslääkärit olivat olleet käytännössä ilmaiseksi paikalla 3 päivää kuussa."':
+      '"We assumed a 20% cancellation rate was normal. Then I noticed half of them went straight to an empty slot because nobody had time to call patients. When I converted it into hours, the dentists had basically been at the clinic for free three days a month."',
+    'Hammashoitolan omistaja, Tampere': 'Dental clinic owner, Tampere',
+
+    'Miksi takaisinsoitot eivät toimi': 'Why callback rounds don\'t work',
+    'Selkein ratkaisu olisi: kun aika peruuntuu, vastaanottaja soittaa jonotuslistan päältä ja täyttää ajan. Käytännössä tämä epäonnistuu kolmesta syystä.':
+      'The obvious fix would be: when a slot cancels, reception calls the top of the waitlist and refills it. In practice this fails for three reasons.',
+    'vastaanottaja on kesken vuoron. Tiskillä on potilas, sähköposteja odottaa, lounasvaraus puhelimessa ja toinen linja soi. Soittokierroksen aloittamiseen ei ole tyhjää aikaa.':
+      'reception is mid-shift. There\'s a patient at the counter, emails waiting, a lunch booking on the phone and another line ringing. There\'s no empty pocket of time to start a callback round.',
+    'jonossa olevat potilaat eivät vastaa kesken työpäivän. Numeroita on kuusi peruutusta kohti, joista vastaa keskimäärin yksi tai kaksi. Loput ovat töissä tai eivät vastaa tuntemattomaan numeroon.':
+      'waitlisted patients don\'t pick up during the workday. There are six numbers per cancellation, of which on average one or two answer. The rest are at work or don\'t answer an unknown number.',
+    'Kolmanneksi:': 'Third:',
+    'hammashoitoaika ei ole akuutti. Iso osa jonossa olevista on rutiininomaisia tarkastuksia tai paikkauksia, jotka voivat odottaa. Kun heille soitetaan kesken päivän, vastaus on usein "en pääse nyt".':
+      'a dental appointment isn\'t acute. A large share of the waitlist is routine check-ups or fillings that can wait. When you call them mid-day, the answer is often "I can\'t make it now".',
+
+    'Tekoälyvastaanottaja vastaa puhelimeen kolmannella soitolla, joka päivä, joka tunti. Hammashoitolaympäristössä se tekee viisi asiaa, joista jokainen tuo tunteja suoraan takaisin tuoliin:':
+      'An AI receptionist answers the phone on the third ring, every day, every hour. In a dental clinic context it does five things, each of which brings hours straight back into the chair:',
+
+    'Ottaa peruutukset välittömästi vastaan ympäri vuorokauden.':
+      'Takes cancellations instantly, around the clock.',
+    'Agentti kysyy peruutuksen syyn, vahvistaa peruutuksen ajanvarausjärjestelmään ja vapauttaa ajan saman tien.':
+      'The agent asks the reason for the cancellation, confirms it in the booking system and frees up the slot right away.',
+    'Soittaa jonotuslistan potilaita automaattisesti.':
+      'Calls waitlisted patients automatically.',
+    'Heti kun aika vapautuu, agentti soittaa jonotuslistan järjestyksessä, kertoo vapautuneesta ajasta ja varaa sen ensimmäiselle, joka pääsee.':
+      'As soon as a slot opens, the agent calls down the waitlist in order, mentions the opening and books it for the first one who can make it.',
+    'Tarjoaa vapautuneen ajan tekstiviestillä jonotuslistalle.':
+      'Offers the freed slot to the waitlist by text message.',
+    'Jos kukaan ei vastaa, agentti lähettää koko jonotuslistalle viestin: "Vapautui aika klo 14:30, vastaa KYLLÄ varataksesi." Suurin osa täyttyy 15 minuutissa.':
+      'If nobody answers, the agent sends a message to the entire waitlist: "A 14:30 slot has opened, reply YES to book." Most of them refill within 15 minutes.',
+    'Antaa hinta-arvion yleisistä hoidoista.':
+      'Gives a rough estimate for common treatments.',
+    'Hammastarkastus, paikkaus, hammashygienistin käynti, juurihoidon karkea arvio. Agentti tietää klinikan hinnastot ja Kela-korvauksen suuruuden, ja osaa sanoa "tarkastus on noin 90 €, Kela-korvaus noin 18 €, omavastuu 72 €".':
+      'Check-ups, fillings, hygienist visits, a rough estimate for root canal work. The agent knows the clinic\'s price brackets and the Kela reimbursement amount, and can say "a check-up runs about 90 €, Kela covers around 18 €, your share is 72 €".',
+    'Vahvistaa ja muistuttaa ajoista tekstiviestillä.':
+      'Confirms and reminds about appointments by text.',
+    'Heti varauksen jälkeen vahvistus, edellisenä päivänä muistutus. Tämä yksinään pudottaa peruutusten määrää 15-30 %.':
+      'A confirmation right after booking, a reminder the day before. This alone cuts cancellations by 15-30%.',
+
+    'Käytännön esimerkki torstai-iltapäivästä':
+      'A practical example from a Thursday afternoon',
+    'Torstai 11:55. Potilas soittaa ja peruu kello 13:00 ajan, koska tuli äkillinen kokous. Agentti vastaa, vahvistaa peruutuksen ja vapauttaa ajan. Samassa hetkessä agentti soittaa jonotuslistan ensimmäiselle potilaalle, joka odottaa paikkausaikaa. Ensimmäinen ei vastaa. Toinen on töissä eikä pääse. Kolmas vastaa, on lähellä klinikkaa lounaalla ja varaa ajan suoraan puhelussa. Vahvistus tekstiviestillä klo 12:01.':
+      'Thursday 11:55. A patient calls and cancels their 13:00 appointment because a meeting came up. The agent answers, confirms the cancellation and frees the slot. At the same moment the agent calls the first patient on the waitlist who is waiting for a filling appointment. The first one doesn\'t answer. The second is at work and can\'t make it. The third answers, is nearby on a lunch break and books the slot right in the call. Confirmation by text at 12:01.',
+    'Vastaanottaja ei tehnyt yhtään puhelua. Hammaslääkäri ei tiedä peruutuksesta, koska aika täyttyi automaattisesti. Yksi tunti tuolissa pelastettu, 240 € liikevaihtoa takaisin.':
+      'Reception didn\'t make a single call. The dentist doesn\'t even know about the cancellation, because the slot refilled automatically. One hour in the chair saved, 240 € of revenue back.',
+
+    'ROI: kaksi pelastettua aikaa viikossa riittää':
+      'ROI: two recovered slots a week is enough',
+    'Yksi keskimääräinen hammashoitoaika': 'One average dental appointment',
+    'Yksi pelastettu paikkaustyö': 'One recovered filling job',
+    'ROI, jos pelastaa 8 aikaa/kk': 'ROI if you recover 8 slots/mo',
+
+    'Käytännössä tekoälyvastaanottaja maksaa itsensä takaisin ensimmäisellä viikolla, kun se täyttää kaksi peruuntunutta aikaa. Sen jälkeen kaikki muu, eli vähentyneet no-showt, illalla ja viikonloppuna tehdyt uudet varaukset ja Kela-tiedustelut, on bonusta.':
+      'In practice the AI receptionist pays for itself in the first week, once it fills two cancelled slots. After that everything else, the reduced no-shows, the new bookings made evenings and weekends, and the Kela inquiries, is a bonus.',
+
+    'Mitä käyttöönotto hammashoitolassa oikeasti vaatii':
+      'What rolling this out actually takes for a dental clinic',
+    'Tämä on se kohta jossa moni hammashoitolan johtaja epäilee: "meidän ajanvarausjärjestelmä on niin spesifi, ei sinne saa kytkettyä mitään". Reilu vastaus: käyttöönotto vie noin':
+      'This is the point where many clinic managers get sceptical: "our booking system is so specific, you can\'t plug anything into it". Honest answer: rollout takes about',
+    'johdolta itseltään.': 'from the manager.',
+
+    'Hinnasto yleisistä hoidoista (tarkastus, paikkaus, juurihoidon arvio, hammashygienistin käynti) ja Kela-korvauksen suuruus':
+      'A price list for common treatments (check-up, filling, rough root canal estimate, hygienist visit) and the Kela reimbursement amount',
+    'Ajanvarausjärjestelmä johon agentti saa kirjoittaa (Acute, Romexis, Plandent, Dentinet, Assisdent tai vastaava). Useimpiin on rajapinta tai kalenteri-integraatio.':
+      'A booking system the agent can write into (Acute, Romexis, Plandent, Dentinet, Assisdent or similar). Most of them have an API or a calendar integration.',
+    'Jonotuslista nimineen ja puhelinnumeroineen, järjestyksessä jossa potilaita halutaan soittaa':
+      'A waitlist with names and phone numbers, in the order patients should be called',
+    'Päivystysohjeet: mitkä tilanteet ovat akuutteja (lohjennut hammas, voimakas kipu, leukamurtuma) ja kenelle ne ohjataan suoraan':
+      'On-call instructions: which situations are acute (chipped tooth, severe pain, jaw fracture) and who they get routed to directly',
+
+    'Sen jälkeen agentti koulutetaan klinikan tyylin mukaiseksi, numero ohjataan päälle ja vahvistusviestit kytketään päälle. Homma on käynnissä saman viikon aikana. Ei uutta järjestelmää vastaanottohenkilökunnalle, ei sovellusta johon hammaslääkäreiden pitää kirjautua.':
+      'After that the agent is trained in the clinic\'s own style, the number is forwarded and confirmation messages are switched on. The whole thing is running within the same week. No new system for the reception staff, no app the dentists need to log into.',
+
+    'Milloin tämä kannattaa hammashoitolalle':
+      'When this is worth it for a dental clinic',
+    'Tekoälyvastaanottaja ei ole jokaiselle hammashoitolalle välttämätön. Yhden hammaslääkärin pienessä klinikassa, jossa vastaanottaja ehtii hoitaa puhelimen kaikessa rauhassa, tätä ei välttämättä tarvita. Mutta kun yksikin seuraavista pätee, laskenta muuttuu nopeasti:':
+      'An AI receptionist isn\'t mandatory for every dental clinic. In a small one-dentist clinic where reception can handle the phone calmly, this isn\'t needed. But when any one of the following is true, the math shifts fast:',
+
+    'Klinikassa on 2 tai useampaa hammaslääkäriä, ja peruutuksia tulee 4 tai useampi päivässä':
+      'The clinic has 2 or more dentists and 4 or more cancellations come in per day',
+    'Jonotuslista on pitkä, mutta vastaanottaja ei kerkeä soittamaan peruuntuneita aikoja täyteen':
+      'The waitlist is long, but reception doesn\'t have time to refill cancelled slots',
+    'Vastaanottohenkilökunta tekee jatkuvasti ylitöitä, koska puhelin ei ehdy':
+      'Reception staff regularly works overtime because the phone never lets up',
+    'Iltaisin ja viikonloppuisin tulee säännöllisesti varauspuheluita, joihin kukaan ei vastaa':
+      'Booking calls regularly come in evenings and weekends with nobody to answer',
+    'Et tiedä paljonko menetätte peruutuksiin, mutta arvaatte että lukemat ovat isompia kuin kestäisi katsoa':
+      'You don\'t know how much you\'re losing to cancellations, but you suspect the numbers would be hard to look at',
+
+    'Hammashoitoala on viime vuosina muuttunut siten, että potilaat odottavat samanlaista palvelukokemusta kuin verkkokaupasta: vahvistus tekstiviestillä, peruutus puhelimella ja vapautunut aika tarjolla ilman jonotusta. Tekoälyvastaanottaja antaa pienelle ja keskikokoiselle hammashoitolalle saman tason palvelun kuin isoilla ketjuilla, ilman että vastaanottohenkilökunta uupuu.':
+      'Dental care has shifted in recent years so that patients expect the same service experience as from an online store: confirmation by text, cancellation by phone, and a freed slot available without queuing. An AI receptionist gives a small or mid-sized dental clinic the same service level as the big chains, without burning out the reception staff.',
+
+    'Katso mitä Selora vastaisi sinun hammashoitolasi puhelimeen':
+      'See what Selora would say to your dental clinic\'s phone',
+    '30 minuutin demossa näet oikean peruutus- ja jonotuslistapuhelun alusta loppuun, hammashoitolan skenaariolla. Ei PowerPointia, ei sitoumuksia.':
+      'In a 30-minute demo you see a real cancellation and waitlist call from start to finish, with a dental clinic scenario. No PowerPoint, no commitments.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
