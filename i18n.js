@@ -283,7 +283,7 @@
     'Aloituspaketti': 'Starter',
     'Aloituspaketti: suomi': 'Starter: Finnish',
     'Kasvupaketti': 'Growth',
-    'Kasvupaketti: suomi, ruotsi ja englanti': 'Growth: Finnish, Swedish and English',
+    'Kasvupaketti: suomi ja englanti': 'Growth: Finnish and English',
     'Yrityspaketti': 'Enterprise',
     'Säästä 15 %': 'Save 15%',
     'Kuukausi': 'Monthly',
@@ -303,8 +303,8 @@
     'Kun asia vaatii ihmistä, tekoäly tunnistaa tilanteen automaattisesti ja siirtää puhelun oikealle henkilölle, myyntiin, asiakaspalveluun tai johtoon. Taustatiedot kulkevat mukana.':
       'When something needs a human, the AI detects it automatically and transfers the call to the right person — sales, support or management. Context is passed along.',
     'Tukeeko se useita kieliä?': 'Does it support multiple languages?',
-    'Kyllä. Tekoälyvastaanottajamme palvelee asiakkaita suomeksi, ruotsiksi ja englanniksi. Monikielinen vastaanotto sisältyy Kasvu- ja Yrityspakettiin.':
-      'Yes. Our AI receptionist serves customers in Finnish, Swedish and English. Multilingual reception is included in the Growth and Enterprise plans.',
+    'Kyllä. Tekoälyvastaanottajamme palvelee asiakkaita suomeksi ja englanniksi. Monikielinen vastaanotto sisältyy Kasvu- ja Yrityspakettiin.':
+      'Yes. Our AI receptionist serves customers in Finnish and English. Multilingual reception is included in the Growth and Enterprise plans.',
     'Voinko pitää nykyisen puhelinnumeroni?': 'Can I keep my current phone number?',
     'Kyllä. Voit joko siirtää olemassa olevan numerosi meille tai ottaa uuden numeron. Molemmat vaihtoehdot onnistuvat helposti ja nopeasti.':
       'Yes. You can either port your existing number to us or take a new one. Both options are quick and easy.',
@@ -452,8 +452,8 @@
       'The AI identifies robocalls, sales calls and nuisance callers and filters them out. Your team only hears real customers.',
     'Tekoäly tunnistaa puhelun aiheen ja ohjaa sen oikeaan paikkaan: varauksiin, myyntiin tai asiakaspalveluun.':
       'The AI recognises the topic and routes the call to the right place — bookings, sales or support.',
-    'Tekoäly tunnistaa soittajan kielen automaattisesti ja vaihtaa kielelle saumattomasti. Suomi sisältyy Aloituspakettiin. Monikielinen vastaanotto (suomi, ruotsi ja englanti) on saatavilla Kasvupaketissa.':
-      'The AI auto-detects the caller\'s language and switches seamlessly. Finnish is included in Starter. Multilingual reception (Finnish, Swedish and English) is available in Growth.',
+    'Tekoäly tunnistaa soittajan kielen automaattisesti ja vaihtaa kielelle saumattomasti. Suomi sisältyy Aloituspakettiin. Monikielinen vastaanotto (suomi ja englanti) on saatavilla Kasvupaketissa.':
+      'The AI auto-detects the caller\'s language and switches seamlessly. Finnish is included in Starter. Multilingual reception (Finnish and English) is available in Growth.',
     'Tekoäly varaa tapaamisia suoraan Google Calendar tai Outlook -kalenteriisi ilman välikäsiä.': 'The AI books meetings directly into your Google Calendar or Outlook.',
     'Tekoäly vastaa jokaiseen puheluun, myös ruuhkapiikkien aikana ja yöllä. Yhdenkään asiakkaan ei tarvitse odottaa.':
       'The AI answers every call, even at peak times and at night. No customer has to wait.',
@@ -885,7 +885,7 @@
       'In Growth, every call, lead and booking is logged automatically to your CRM — HubSpot, Pipedrive and others.',
     'Kasvupaketissa jokainen puhelu, liidi ja varaus synkronoituu automaattisesti CRM-järjestelmääsi reaaliajassa. Ei manuaalista tietojen syöttöä, ei inhimillisiä virheitä, ei viiveitä.':
       'In Growth, every call, lead and booking syncs to your CRM in real time. No manual data entry, no human error, no delays.',
-    'Kasvupaketissa suomi, ruotsi ja englanti – asiakkaasi saavat palvelua omalla kielellään.': 'In Growth: Finnish, Swedish and English — your customers are served in their own language.',
+    'Kasvupaketissa suomi ja englanti, asiakkaasi saavat palvelua omalla kielellään.': 'In Growth: Finnish and English — your customers are served in their own language.',
     'Kasvupaketissa: synkronoi automaattisesti HubSpotiin, Pipedriveeen tai muuhun CRM-järjestelmääsi.': 'In Growth: auto-syncs to HubSpot, Pipedrive or your other CRM.',
     'Kerro': 'Tell',
     'Kerro yrityksestäsi': 'Tell us about your business',
@@ -948,7 +948,7 @@
     'Mukautettu ääni ja vastausskripti': 'Custom voice and response script',
     'Aina tavoitettavissa': 'Always reachable',
     'Aloituspaketti: suomi': 'Starter: Finnish',
-    'Kasvupaketti: suomi, ruotsi ja englanti': 'Growth: Finnish, Swedish and English',
+    'Kasvupaketti: suomi ja englanti': 'Growth: Finnish and English',
     'Tekoälyvastaanottaja': 'AI receptionist',
     'Verkkosivusto + tekoälychatbot': 'Website + AI chatbot',
     'Säästetyt henkilöstötunnit': 'Staff hours saved',
@@ -1066,7 +1066,7 @@
     'Valitse omasi.': 'Pick yours.',
     ' ·  0,25 € sen jälkeen': ' ·  €0.25 thereafter',
     'Varaa ajat ja palvelut suoraan kalenteriisi puhelun aikana': 'Books appointments and services straight into your calendar during the call',
-    'Monikielinen vastaanotto: suomi, ruotsi ja englanti': 'Multilingual reception: Finnish, Swedish and English',
+    'Monikielinen vastaanotto: suomi ja englanti': 'Multilingual reception: Finnish and English',
     'Oma yhteyshenkilö ja prioriteettituki': 'Dedicated contact and priority support',
     'Uusi verkkosivusto toteutetaan käyttöönoton yhteydessä': 'A new website is delivered as part of onboarding',
     'ja sivusto pysyy sinulla': 'and the site stays yours',
@@ -1098,12 +1098,12 @@
     'Seloran tekoälyvastaanottaja vastaa puheluihin 24/7, varaa ajat kalenteriisi ja lähettää SMS-vahvistuksen automaattisesti. Ei henkilöstöä, ei jonotusaikaa. Kokeile ilmaiseksi.':
       'Selora\'s AI receptionist answers calls 24/7, books appointments and sends SMS confirmations automatically. No staff, no queues. Try it free.',
     'Takaisin palveluihin': 'Back to services',
-    'Seloran tekoälyvastaanottaja vastaa jokaiseen puheluun, kvalifioi liidit, varaa tapaamisia suoraan kalenteriisi ja lähettää automaattiset seurantaviestit. Toimii suomeksi, ruotsiksi ja englanniksi, täysin sinun brändisi äänensävyllä.':
-      'Selora\'s AI receptionist answers every call, qualifies leads, books meetings straight into your calendar and sends automatic follow-ups. Works in Finnish, Swedish and English — entirely in your brand voice.',
+    'Seloran tekoälyvastaanottaja vastaa jokaiseen puheluun, kvalifioi liidit, varaa tapaamisia suoraan kalenteriisi ja lähettää automaattiset seurantaviestit. Toimii suomeksi ja englanniksi, täysin sinun brändisi äänensävyllä.':
+      'Selora\'s AI receptionist answers every call, qualifies leads, books meetings straight into your calendar and sends automatic follow-ups. Works in Finnish and English — entirely in your brand voice.',
     'Peruutukset ja uudelleenvaraukset hoidettu': 'Cancellations and rebookings handled',
     'Pisteytys ja priorisointi automaattisesti': 'Scoring and prioritisation, automated',
-    'Vastaanottaja tunnistaa automaattisesti soittajan kielen ja vaihtaa suomeen, ruotsiin tai englantiin.':
-      'The receptionist detects the caller\'s language automatically and switches to Finnish, Swedish or English.',
+    'Vastaanottaja tunnistaa automaattisesti soittajan kielen ja vaihtaa suomeen tai englantiin.':
+      'The receptionist detects the caller\'s language automatically and switches to Finnish or English.',
     'Täysi tuki kolmelle kielelle': 'Full support for three languages',
     'Reaaliaikainen tietojen synkronointi': 'Real-time data sync',
     'GDPR-yhteensopiva tietojen käsittely': 'GDPR-compliant data processing',
@@ -1407,7 +1407,7 @@
     'Mikä on peruutuskäytäntönne?': 'What\'s your cancellation policy?',
     'Onko teillä parkkipaikkoja?': 'Do you have parking?',
     'Hyväksyttekö käteistä / korttia / MobilePay:ta?': 'Do you accept cash / card / MobilePay?',
-    'Puhuuko henkilökuntanne englantia / ruotsia?': 'Does your staff speak English / Swedish?',
+    'Puhuuko henkilökuntanne englantia?': 'Does your staff speak English?',
     'Ma-Pe: 09:00-18:00, La: 10:00-15:00, Su: suljettu': 'Mon–Fri: 09:00–18:00, Sat: 10:00–15:00, Sun: closed',
     'PERUUTUSKÄYTÄNTÖ:\n': 'CANCELLATION POLICY:\n',
     'HENKILÖKUNTA:\n': 'STAFF:\n',
@@ -1861,12 +1861,9 @@
     'Kieli': 'Language',
     'Suomi': 'Finnish',
     'Suomi + Englanti': 'Finnish + English',
-    'Suomi + Ruotsi': 'Finnish + Swedish',
-    'Suomi + Ruotsi + Englanti': 'Finnish + Swedish + English',
-    'Suomi · Ruotsi · Englanti': 'Finnish · Swedish · English',
+    'Suomi · Englanti': 'Finnish · English',
     '🇫🇮 Suomi': '🇫🇮 Finnish',
     '🇬🇧 Englanti': '🇬🇧 English',
-    '🇸🇪 Ruotsi': '🇸🇪 Swedish',
     'Vain suomi': 'Finnish only',
     'FI · SV · EN': 'EN · SV · FI',
     'Agentin asetukset': 'Agent settings',
