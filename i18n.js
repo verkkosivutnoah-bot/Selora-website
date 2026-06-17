@@ -1641,7 +1641,6 @@
     'GDPR': 'GDPR',
     'GDPR-yhteensopiva': 'GDPR-compliant',
     'EU AI Act': 'EU AI Act',
-    '99.9% uptime': '99.9% uptime',
     'EU-palvelimet': 'EU servers',
     'Skaalautuu tarpeidesi mukaan': 'Scales with your needs',
     'Tuottolaskin': 'ROI calculator',
