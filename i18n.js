@@ -114,8 +114,11 @@
     '+ Lisää henkilö': '+ Add person',
     '+ Lisää kysymys': '+ Add question',
     '+ Lisää palvelu': '+ Add service',
+    'Lisää henkilökunnan jäsenet ja heidän erikoisosaamisensa, voit ohittaa tämän vaiheen.': 'Add staff members and their specialities — you can skip this step.',
     'Lisää henkilökunnan jäsenet ja heidän erikoisosaamisensa — voit ohittaa tämän vaiheen.': 'Add staff members and their specialities — you can skip this step.',
+    'Lisää palvelusi taulukkoon, agentti osaa kertoa hinnat ja kestot automaattisesti.': 'Add your services to the table — the agent will quote prices and durations automatically.',
     'Lisää palvelusi taulukkoon — agentti osaa kertoa hinnat ja kestot automaattisesti.': 'Add your services to the table — the agent will quote prices and durations automatically.',
+    'Lisää yleisimmät kysymykset ja vastaukset, agentti käyttää näitä suoraan.': 'Add the most common questions and answers — the agent will use them directly.',
     'Lisää yleisimmät kysymykset ja vastaukset — agentti käyttää näitä suoraan.': 'Add the most common questions and answers — the agent will use them directly.',
     'Lue': 'Read',
     'Kuukausi': 'Monthly',
@@ -137,6 +140,7 @@
     'Päivitetty viimeksi': 'Last updated',
 
     // ---------- hero / index ----------
+    'Selora, Älä enää missaa yhtään puhelua': 'Selora — Never miss another call',
     'Selora — Älä enää missaa yhtään puhelua': 'Selora — Never miss another call',
     'Tekoäly vastaa jokaiseen puheluun, ei enää vastaamattomuutta': 'AI answers every call — never miss one again',
     'Tekoäly vastaa jokaiseen puheluun — ei enää vastaamattomuutta': 'AI answers every call — never miss one again',
@@ -175,6 +179,7 @@
     // ---------- services teaser ----------
     'Tekoälyvastaanottaja': 'AI receptionist',
     'Tekoälyvastaanottajat': 'AI receptionists',
+    'Tekoälyvastaanottajat, Selora': 'AI receptionists — Selora',
     'Tekoälyvastaanottajat — Selora': 'AI receptionists — Selora',
     'Tekoälyvastaanottajapalvelu': 'AI receptionist service',
     'Tekoälychatbot': 'AI chatbot',
@@ -186,12 +191,14 @@
     'Mitä sisältyy': 'What\'s included',
     'Räätälöity sinulle': 'Tailored for you',
     'Tekoäly luo personoidun vastaanottajan juuri sinun yritykseesi.': 'AI builds a personalised receptionist for exactly your business.',
+    'Sinulle tehtäisiin sama, omalla nimellä, omilla palveluilla.': 'Yours would be built the same way — with your name, your services.',
     'Sinulle tehtäisiin sama — omalla nimellä, omilla palveluilla.': 'Yours would be built the same way — with your name, your services.',
     'Selkeät ja nopeat verkkosivustot, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.': 'Clean, fast websites designed to turn visitors into customers.',
     'Selkeät ja nopeat verkkosivustot, jotka edustavat brändiäsi ja muuttavat vierailijat asiakkaiksi. Rakennamme kaiken aloitussivuista monisivuisiin brändi-sivustoihin. Kaikki on moderni, mobiilioptimoitu ja hakukoneystävällinen.': 'Clean, fast websites that represent your brand and turn visitors into customers. We build everything from landing pages to multi-page brand sites. All modern, mobile-first and SEO-ready.',
     'Rakennamme nopeita, konvertoivia verkkosivustoja, jotka edustavat brändiäsi ja muuttavat vierailijat maksaviksi asiakkaiksi. Jokainen sivu on räätälöity toimialallesi ja kohderyhmällesi, alusta loppuun, ilman valmiita teemoja.': 'We build fast, high-converting websites that represent your brand and turn visitors into paying customers. Every page is tailored to your industry and audience, from start to finish — no off-the-shelf themes.',
 
     // ---------- process / prosessi ----------
+    'Prosessi, Selora': 'Process — Selora',
     'Prosessi — Selora': 'Process — Selora',
     'Prosessimme': 'Our process',
     'Neljä askelta': 'Four steps',
@@ -201,6 +208,7 @@
     'Kolme vaihetta konseptista verkkoon.': 'Three steps from concept to live site.',
     'Kolme vaihetta älykkäästä vastaanottajasta tuottavaan järjestelmään.': 'Three steps from smart receptionist to a system that pays for itself.',
     'Kerro yrityksestäsi': 'Tell us about your business',
+    'Kerro yrityksestäsi, toimiala, palvelut, aukioloajat': 'Tell us about your business — industry, services, opening hours',
     'Kerro yrityksestäsi — toimiala, palvelut, aukioloajat': 'Tell us about your business — industry, services, opening hours',
     'Täytä lyhyt kysely. Aukioloajat, palvelut, äänensävy.': 'Fill in a short questionnaire. Hours, services, tone of voice.',
     'Käymme läpi yrityksesi tarpeet ja räätälöimme tekoälyn persoonan, skriptit ja toimintalogiikan juuri sinulle.': 'We walk through your needs and tailor the AI\'s persona, scripts and logic specifically for you.',
@@ -231,6 +239,7 @@
     'Seloran kanssa': 'with Selora',
     'Kaksi lukua riittää. Siirrä liukuja ja näe heti, paljonko yrityksesi menettää vastaamattomista puheluista.': 'Two numbers are enough. Move the sliders and see instantly how much your business loses to missed calls.',
     'Näe sekunnissa, paljonko vastaamattomat puhelut maksavat yrityksellesi.': 'See in seconds how much missed calls cost your business.',
+    'Harva yrittäjä laskee tätä lukua. Lasketaan se nyt yhdessä, tulokset voivat yllättää.': 'Few entrepreneurs ever calculate this number. Let\'s do it together — the result may surprise you.',
     'Harva yrittäjä laskee tätä lukua. Lasketaan se nyt yhdessä — tulokset voivat yllättää.': 'Few entrepreneurs ever calculate this number. Let\'s do it together — the result may surprise you.',
     'Kuinka paljon rahaa jää': 'How much money is left',
     'Kuinka paljon yrityksesi häviää menetetyistä puheluista vuodessa?': 'How much does your business lose to missed calls per year?',
@@ -271,6 +280,7 @@
     'Asiakaspalveluhistoria': 'Customer service history',
     'Kampaamoyrittäjä, Tampere': 'Salon owner, Tampere',
     'Kiinteistövälittäjä, Helsinki': 'Real estate agent, Helsinki',
+    'Kaikenlaisista yrityksistä, tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.': 'From every kind of business — here\'s what our customers experience after switching to AI.',
     'Kaikenlaisista yrityksistä — tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.': 'From every kind of business — here\'s what our customers experience after switching to AI.',
     '"Ennen Seloraa minulla meni joka päivä useita puheluita vastaajaksi kesken asiakastyön. Nyt ne kaikki hoidetaan automaattisesti. Ensimmäisen kuukauden aikana varaukset kasvoivat reippaasti ja minulla on vihdoin aikaa keskittyä itse tekemiseen."':
       '"Before Selora, multiple calls went to voicemail every day while I was with a client. Now they\'re all handled automatically. Bookings jumped in the first month and I finally have time to focus on the actual work."',
@@ -321,6 +331,7 @@
     'Kyllä. Voit päivittää tai alentaa pakettia milloin tahansa. Muutos astuu voimaan seuraavan laskutusjakson alussa. Ylennys onnistuu myös kesken kauden.':
       'Yes. You can upgrade or downgrade anytime. Changes take effect at the start of the next billing cycle. Upgrades can also kick in mid-period.',
     'Kuinka nopeasti voin aloittaa?': 'How quickly can I get started?',
+    'Useimmat asiakkaat ovat live-tilassa 24,48 tunnin sisällä sopimuksen allekirjoittamisesta. Konfigurointi on yksinkertaista: tarvitsemme vain perustiedot yrityksestäsi ja palveluistasi.': 
     'Useimmat asiakkaat ovat live-tilassa 24–48 tunnin sisällä sopimuksen allekirjoittamisesta. Konfigurointi on yksinkertaista: tarvitsemme vain perustiedot yrityksestäsi ja palveluistasi.':
       'Most customers go live within 24–48 hours of signing. Setup is simple — we just need the basics about your business and services.',
     'Miten irtisanominen toimii?': 'How does cancellation work?',
@@ -330,6 +341,7 @@
     'Ylittävät minuutit laskutetaan 0,25 € / minuutti. Saat ilmoituksen kun 80 % minuuteista on käytetty.':
       'Overage minutes are billed at €0.25/minute. You\'ll get a notification when you\'ve used 80% of your allowance.',
     'Voiko agentin tietoja muokata jälkeen päin?': 'Can the agent\'s info be edited afterwards?',
+    'Kyllä. Dashboardissasi voit milloin tahansa päivittää palvelut, aukioloajat, aloitusviestin ja äänensävyn, muutokset astuvat voimaan välittömästi.': 
     'Kyllä. Dashboardissasi voit milloin tahansa päivittää palvelut, aukioloajat, aloitusviestin ja äänensävyn — muutokset astuvat voimaan välittömästi.':
       'Yes. From your dashboard you can update services, hours, greeting and tone of voice at any time — changes take effect instantly.',
     'Mitkä ovat maksuehdot ja laskutusväli?': 'What are the payment terms and billing cycle?',
@@ -340,6 +352,7 @@
     'Millä kielillä agentti palvelee, ja mitä muuta sen tulisi tietää?': 'What languages should the agent speak, and what else should it know?',
 
     // ---------- pricing page ----------
+    'Hinnoittelu, Selora': 'Pricing — Selora',
     'Hinnoittelu — Selora': 'Pricing — Selora',
     'Säästä 15 %': 'Save 15%',
     'Kuukausittain': 'Monthly',
@@ -352,6 +365,7 @@
       'Yes, you can cancel anytime with no cancellation fees. The current billing period runs to the end after cancellation.',
 
     // ---------- contact page ----------
+    'Yhteystiedot, Selora': 'Contact — Selora',
     'Yhteystiedot — Selora': 'Contact — Selora',
     'Varaa maksuton 30 minuutin demo. Näytämme miten tekoälyvastaanottaja toimisi juuri sinun yrityksessäsi. Ei paineita, ei sitoumuksia.':
       'Book a free 30-minute demo. We\'ll show you exactly how the AI receptionist would work for your business. No pressure, no commitments.',
@@ -376,6 +390,7 @@
     'Lähetä viesti →': 'Send message →',
 
     // ---------- blog ----------
+    'Blogi, Selora | Tekoäly, automaatio ja pienyrityksen kasvu': 'Blog — Selora | AI, automation and small-business growth',
     'Blogi — Selora | Tekoäly, automaatio ja pienyrityksen kasvu': 'Blog — Selora | AI, automation and small-business growth',
     'Oppaat, vertailut ja strategiat suomalaiselle yrittäjälle.': 'Guides, comparisons and strategies for Finnish entrepreneurs.',
     'Sisältökategoriat': 'Categories',
@@ -399,12 +414,14 @@
     'Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu?': 'Getting started with an AI receptionist — what actually happens?',
     'GDPR ja tekoälyvastaanottaja: mitä suomalaisen pk‑yrityksen on tiedettävä': 'GDPR and the AI receptionist: what Finnish SMBs need to know',
     'Opas GDPR‑vaatimusten täyttämiseen tekoälyvastaanottajan kanssa pk‑yritykselle': 'A guide to meeting GDPR with an AI receptionist for SMBs',
+    'Miksi LVI‑yrityksen illat ja viikonloput karkaavat kilpailijalle, ja mitä sille voi tehdä.': 'Why HVAC companies lose evenings and weekends to competitors — and what to do about it.',
     'Miksi LVI‑yrityksen illat ja viikonloput karkaavat kilpailijalle — ja mitä sille voi tehdä.': 'Why HVAC companies lose evenings and weekends to competitors — and what to do about it.',
     'LVI‑yritys ja hätäpuhelut: mitä tapahtuu, kun asiakas soittaa kello 22': 'HVAC and emergency calls: what happens when the customer rings at 10pm',
     'Kustannukset, hyödyt ja rajoitukset rinnakkain.': 'Costs, benefits and limits side by side.',
     'suoraan sähköpostiisi': 'straight to your inbox',
 
     // ---------- service detail pages ----------
+    'Palvelut, Selora': 'Services — Selora',
     'Palvelut — Selora': 'Services — Selora',
     'Palvelut & ': 'Services & ',
     'Palvelut ja hinnat': 'Services and pricing',
@@ -469,6 +486,7 @@
       'Every call is handled consistently in your brand voice. The system speaks natural Finnish and adapts its persona specifically to your business.',
     'Jokaisen puhelun jälkeen asiakas saa automaattisen yhteenvedon, vahvistuksen tai lisätietoja tekstiviestinä.':
       'After every call the customer receives an automatic summary, confirmation or follow-up info by SMS.',
+    'Jokaisen puhelun jälkeen tekoäly tuottaa automaattisen yhteenvedon: asiakastiedot, asian syy ja sovitut toimenpiteet. Puheluja ei tallenneta, ainoastaan oleellinen tieto kirjataan.': 
     'Jokaisen puhelun jälkeen tekoäly tuottaa automaattisen yhteenvedon: asiakastiedot, asian syy ja sovitut toimenpiteet. Puheluja ei tallenneta – ainoastaan oleellinen tieto kirjataan.':
       'After every call the AI produces an automatic summary: customer details, reason for calling and agreed next steps. Calls aren\'t recorded — only the essentials are logged.',
     'Jokaisen puhelun jälkeen tekoäly tuottaa automaattisen yhteenvedon: soittajan tiedot, asian syy, sovitut toimenpiteet ja mahdollinen ajanvaraus. Puheluja ei tallenneta, ainoastaan oleellinen tieto kirjataan.':
@@ -485,6 +503,7 @@
       'Your AI receptionist is at work even when you can\'t answer — no lost customers, no unanswered calls. Flat monthly fee, no hidden costs.',
 
     // ---------- ROI / banner ----------
+    'Hinnoittelu, Selora': 'Pricing — Selora',
     'Hinnoittelu — Selora': 'Pricing — Selora',
     'Tekoälyn nimi, äänensävy, persoonallisuus ja puhetyyli räätälöidään täsmälleen vastaamaan brändisi identiteettiä. Asiakas ei tiedä puhuvansa tekoälyn kanssa, ellei halua kertoa.':
       'The AI\'s name, tone, personality and speaking style are tailored to match your brand identity exactly. Customers won\'t know it\'s an AI unless you choose to tell them.',
@@ -504,7 +523,9 @@
     'IP-osoite (anonymisoitu), evästetiedot, sivuston käyttäytymisdata': 'IP address (anonymised), cookie data, site behaviour data',
 
     // ---------- 404 ----------
+    'Sivua ei löydy, Selora': 'Page not found – Selora',
     'Sivua ei löydy – Selora': 'Page not found – Selora',
+    'Etsimäsi sivu on poistettu, siirretty tai osoite on kirjoitettu väärin. Ei hätää, pääset takaisin oikeille raiteille alla olevista linkeistä.': 
     'Etsimäsi sivu on poistettu, siirretty tai osoite on kirjoitettu väärin. Ei hätää — pääset takaisin oikeille raiteille alla olevista linkeistä.':
       'The page you\'re looking for has been removed, moved or mistyped. No worries — the links below will get you back on track.',
     'Etusivulle': 'Back to home',
@@ -518,6 +539,7 @@
     '© 2025 Selora Oy · Y-tunnus: 3535677-9 · Kaikki oikeudet pidätetään.': '© 2025 Selora Oy · Business ID: 3535677-9 · All rights reserved.',
     '© 2025 Selora. Kaikki oikeudet pidätetään.': '© 2025 Selora. All rights reserved.',
     '© 2025 Selora. Kaikki oikeudet pidätetään.  ·  ': '© 2025 Selora. All rights reserved.  ·  ',
+    'Tietosuojaseloste, Selora': 'Privacy Policy — Selora',
     'Tietosuojaseloste — Selora': 'Privacy Policy — Selora',
     'Tietosuojaselosteen päivittäminen': 'Updates to this policy',
     'Henkilötietojesi rekisterinpitäjä on:': 'The controller of your personal data is:',
@@ -604,6 +626,7 @@
     'Evästeiden käyttö': 'Cookie usage',
 
     // ---------- auth ----------
+    'Kirjaudu sisään, Selora': 'Sign in — Selora',
     'Kirjaudu sisään — Selora': 'Sign in — Selora',
     'Pääset hallinnoimaan tekoälyvastaanottajaasi ja tarkastelemaan tilastoja.': 'Manage your AI receptionist and review your stats.',
     'Vain valtuutetuille käyttäjille.': 'For authorised users only.',
@@ -611,19 +634,24 @@
       'Click the link in the email to activate your account and create your demo receptionist.',
     'Linkki ei ole enää voimassa tai se on jo käytetty.': 'The link is no longer valid or has already been used.',
     'Syötä sähköpostiosoitteesi, niin lähetämme palautuslinkin.': 'Enter your email and we\'ll send you a reset link.',
+    'Rekisteröidy ja saat heti oman demo-tekoälyvastaanottajan, konfiguroitu sinun yrityksellesi.': 'Sign up and get your own demo AI receptionist instantly — configured for your business.',
     'Rekisteröidy ja saat heti oman demo-tekoälyvastaanottajan — konfiguroitu sinun yrityksellesi.': 'Sign up and get your own demo AI receptionist instantly — configured for your business.',
     'Rekisteröidy sekunnissa. Ei luottokorttia, ei sitoutumista.': 'Sign up in seconds. No credit card, no commitment.',
 
     // ---------- onboarding ----------
     'Luodaan sinulle personoitu tekoälypuhelinvastaaja. Vastaa muutamaan kysymykseen yrityksestäsi ja agenttisi on valmis minuuteissa.':
       'We\'re building your personalised AI phone receptionist. Answer a few questions about your business and your agent will be ready in minutes.',
+    'Sinut ohjataan suoraan lyhyeen kyselyyn, aukioloajat, palvelut, äänensävy, tervehdysviesti. Kestää alle 5 minuuttia.': 
     'Sinut ohjataan suoraan lyhyeen kyselyyn — aukioloajat, palvelut, äänensävy, tervehdysviesti. Kestää alle 5 minuuttia.':
       'You\'ll be taken straight to a short questionnaire — hours, services, tone, greeting. Takes under 5 minutes.',
+    'Vastauksistasi rakennetaan automaattisesti täysin personoitu tuotantoagentti, juuri sinun yrityksesi äänellä ja tiedoilla.': 
     'Vastauksistasi rakennetaan automaattisesti täysin personoitu tuotantoagentti — juuri sinun yrityksesi äänellä ja tiedoilla.':
       'Your answers are turned into a fully personalised production agent automatically — with your business\'s voice and data.',
     'Agenttisi on valmis vastaamaan oikeisiin puheluihin. Saat ilmoituksen jokaisesta puhelusta ja näet kaikki tiedot dashboardissasi.':
       'Your agent is ready to take real calls. You get a notification for every call and see everything in your dashboard.',
+    'Tämä kestää noin 10,20 sekuntia': 'This takes about 10–20 seconds',
     'Tämä kestää noin 10–20 sekuntia': 'This takes about 10–20 seconds',
+    'Viimeistellään, kohta valmis!': 'Finishing up — almost done!',
     'Viimeistellään — kohta valmis!': 'Finishing up — almost done!',
     'Agentin tehtävät *': 'Agent tasks *',
     'Agentin äänensävy': 'Agent tone of voice',
@@ -638,8 +666,11 @@
     'Ei mallipohjia. Ei kompromisseja. Rakennettu juuri sinulle.': 'No templates. No compromises. Built specifically for you.',
     'Kuvaus (excerpt)': 'Description (excerpt)',
     'Henkilöstömäärä': 'Team size',
+    '1,9 henkilöä': '1–9 people',
     '1–9 henkilöä': '1–9 people',
+    '10,49 henkilöä': '10–49 people',
     '10–49 henkilöä': '10–49 people',
+    '50,199 henkilöä': '50–199 people',
     '50–199 henkilöä': '50–199 people',
     '200+ henkilöä': '200+ people',
     'Henkilökunta': 'Staff',
@@ -658,6 +689,7 @@
     'Tekoäly rakentaa agentin automaattisesti': 'AI builds the agent automatically',
 
     // ---------- dashboard ----------
+    'Demo-tila ,': 'Demo mode —',
     'Demo-tila —': 'Demo mode —',
     'Demo-käyttäjät': 'Demo users',
     'Demo-puhelut': 'Demo calls',
@@ -702,12 +734,16 @@
     'Maksu vahvistetaan': 'Payment confirmed',
     'Maksut käsittelee': 'Payments processed by',
     'Siirrytään maksusivulle...': 'Redirecting to checkout…',
+    'Saat vahvistussähköpostin heti oston jälkeen. Tekoälyvastaanottajasi on käytössä 24 tunnin sisällä, tiimimme ottaa sinuun yhteyttä puhelinnumeron asennuksen sopimiseksi.': 
     'Saat vahvistussähköpostin heti oston jälkeen. Tekoälyvastaanottajasi on käytössä 24 tunnin sisällä — tiimimme ottaa sinuun yhteyttä puhelinnumeron asennuksen sopimiseksi.':
       'You\'ll get a confirmation email right after purchase. Your AI receptionist will be live within 24 hours — our team will reach out to set up your phone number.',
+    'Oston jälkeen käyt läpi lyhyen kyselyn, tekoälysi rakennetaan juuri sinun yrityksellesi, automaattisesti.': 
     'Oston jälkeen käyt läpi lyhyen kyselyn — tekoälysi rakennetaan juuri sinun yrityksellesi, automaattisesti.':
       'After purchase you\'ll go through a short questionnaire — your AI is built for your business automatically.',
+    'Oston jälkeen käyt läpi lyhyen personointikyselyn, AI rakentaa agentin automaattisesti vastaustesi pohjalta. Ei odottelua, ei manuaalista konfigurointia.': 
     'Oston jälkeen käyt läpi lyhyen personointikyselyn — AI rakentaa agentin automaattisesti vastaustesi pohjalta. Ei odottelua, ei manuaalista konfigurointia.':
       'After purchase you\'ll go through a short personalisation questionnaire — the AI builds your agent automatically from your answers. No waiting, no manual configuration.',
+    'Oston jälkeen sinut ohjataan automaattisesti personointikyselyyn, ei odottelua, ei sähköposteja, ei asennuksia. Agenttisi on käytössä saman istunnon aikana.': 
     'Oston jälkeen sinut ohjataan automaattisesti personointikyselyyn — ei odottelua, ei sähköposteja, ei asennuksia. Agenttisi on käytössä saman istunnon aikana.':
       'After purchase you\'re redirected straight to the personalisation questionnaire — no waiting, no emails, no installs. Your agent is live in the same session.',
     'täydelliseen agenttiin': 'to a complete agent',
@@ -740,6 +776,7 @@
     'Julkaisu & ylläpito': 'Launch & maintenance',
     'Julkaisemme sivuston, varmistamme nopeus ja SEO-optimoinnin. Tarjoamme jatkuvan ylläpidon.':
       'We publish the site, lock down speed and SEO, and provide ongoing maintenance.',
+    'Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja integraatiot, sinun ei tarvitse koskea koodiin. Saat selkeän kuvan kaikesta käynnissä olevasta.': 
     'Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja integraatiot — sinun ei tarvitse koskea koodiin. Saat selkeän kuvan kaikesta käynnissä olevasta.':
       'We launch together with thorough testing and onboarding. We handle every technical install and integration — you don\'t touch any code. You get a clear view of everything running.',
     'Rakennamme sivuston alusta asti: ulkoasu, teksti, kuvat, lomakkeet. Iteroimme yhdessä kunnes olet tyytyväinen.':
@@ -754,6 +791,7 @@
     'Ylläpitosopimus pitää sivustosi ajan tasalla ja toimintakuntoisessa.': 'A maintenance contract keeps your site current and in working order.',
     'Kerro meille tarpeistasi, saat tarjouksen 24 tunnin sisällä. Ei sitoumuksia, ei piilokuluja, ei yllätyksiä.':
       'Tell us your needs and get a quote within 24 hours. No commitments, no hidden fees, no surprises.',
+    'Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia, ja sen jälkeen tiedät tarkalleen mitä saisit.': 
     'Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia — ja sen jälkeen tiedät tarkalleen mitä saisit.':
       'Let\'s start with a discovery call. It\'s free and non-committal — and afterwards you\'ll know exactly what you\'d get.',
     'Kolme sivustotyyppiä, jotka toimivat sinun liiketoiminnassasi.': 'Three site types that fit your business.',
@@ -848,6 +886,7 @@
     'Rutiinikyselyihin vastaaminen (ALV-päivät, deadlinet)': 'Answering routine questions (VAT dates, deadlines)',
     'Yleisten kysymysten käsittely': 'Handling general questions',
     'Yhteystiedot': 'Contact details',
+    'Yhteystiedot, Selora': 'Contact — Selora',
     'Yhteystiedot — Selora': 'Contact — Selora',
     'Sähköpostiosoite, tilaajan nimi': 'Email address, subscriber name',
     'Markkinointiviestintä tilaajille': 'Marketing communications to subscribers',
@@ -923,6 +962,7 @@
     'tänään': 'today',
     'käytetty': 'used',
     'löydy': 'found',
+    'Selora, Älä enää missaa yhtään puhelua': 'Selora — Never miss another call',
     'Selora — Älä enää missaa yhtään puhelua': 'Selora — Never miss another call',
     'Ehdottomasti. Kaikki data säilytetään EU:n palvelimilla. Olemme täysin GDPR- ja EU AI Act -yhteensopivia. Emme koskaan myy tai jaa tietojasi kolmansille osapuolille.':
       'Absolutely. All data is stored on EU servers. We\'re fully GDPR and EU AI Act compliant. We never sell or share your data with third parties.',
@@ -952,6 +992,7 @@
     'Tekoälyvastaanottaja': 'AI receptionist',
     'Verkkosivusto + tekoälychatbot': 'Website + AI chatbot',
     'Säästetyt henkilöstötunnit': 'Staff hours saved',
+    'Kerro yrityksestäsi, toimiala, palvelut, aukioloajat': 'Tell us about your business — industry, services, hours',
     'Kerro yrityksestäsi — toimiala, palvelut, aukioloajat': 'Tell us about your business — industry, services, hours',
     'Asiakas': 'Customer',
     'Kuvavalinnat ja visuaalinen hierarkia': 'Image choices and visual hierarchy',
@@ -960,6 +1001,7 @@
     'Kuvaus (excerpt)': 'Description (excerpt)',
     'Kalenteriintegraatio (Google / Outlook)': 'Calendar integration (Google / Outlook)',
     'Kalenterivaraus (Calendly tai vastaava)': 'Calendar booking (Calendly or similar)',
+    'Yhteystiedot, Selora': 'Contact — Selora',
     'Yhteystiedot — Selora': 'Contact — Selora',
     'Tervetuloa': 'Welcome',
     'Selkeä ehdotus': 'Clear proposal',
@@ -968,6 +1010,7 @@
     'Verkkosivustomme käyttää evästeitä (cookies) palvelun toiminnan varmistamiseksi ja käyttökokemuksen parantamiseksi. Eväste on pieni tekstitiedosto, joka tallennetaan laitteellesi vieraillessasi verkkosivustollamme.':
       'Our website uses cookies to ensure the service works and to improve your experience. A cookie is a small text file stored on your device when you visit us.',
     'Asiakastuki': 'Customer support',
+    'Demo-tila ,': 'Demo mode —',
     'Demo-tila —': 'Demo mode —',
     'Linkki varauslomakkeeseen tai verkkosivuille': 'Link to your booking form or website',
     'Käymme läpi yrityksesi tarpeet ja räätälöimme tekoälyn persoonan, skriptit ja toimintalogiikan juuri sinulle.':
@@ -1061,6 +1104,7 @@
     'Mekaanikko töissä': 'Mechanic at work',
 
     // ---------- hinnoittelu.html ----------
+    'Tekoälyvastaanottaja 249 €/kk tai 499 €/kk. Verkkosivusto 790,1 390 € kertamaksuna. Kiinteä hinta, ei piilomaksuja. Irtisano milloin tahansa 30 päivän varoitusajalla.': 
     'Tekoälyvastaanottaja 249 €/kk tai 499 €/kk. Verkkosivusto 790–1 390 € kertamaksuna. Kiinteä hinta, ei piilomaksuja. Irtisano milloin tahansa 30 päivän varoitusajalla.':
       'AI receptionist €249/mo or €499/mo. Website €790–€1,390 one-off. Flat price, no hidden fees. Cancel anytime with 30 days\' notice.',
     'Valitse omasi.': 'Pick yours.',
@@ -1114,8 +1158,10 @@
       'New-customer pre-qualification and consultation booking that follows your defined process.',
 
     // ---------- verkkosivusuunnittelu.html ----------
+    'Selora suunnittelee selkeät, nopeat verkkosivustot suomalaisille yrityksille. Tekoälychatbot sisältyy molempiin paketteihin. Kertamaksu 790,1 390 €, ei kuukausimaksuja.': 
     'Selora suunnittelee selkeät, nopeat verkkosivustot suomalaisille yrityksille. Tekoälychatbot sisältyy molempiin paketteihin. Kertamaksu 790–1 390 €, ei kuukausimaksuja.':
       'Selora designs clean, fast websites for Finnish businesses. AI chatbot included in both packages. One-off €790–€1,390 — no monthly fees.',
+    'Verkkosivusuunnittelu, Selora': 'Web design — Selora',
     'Verkkosivusuunnittelu — Selora': 'Web design — Selora',
     'Sivusto joka': 'A site that',
     'Mobiilioptimoitu joka laitteella': 'Mobile-optimised on every device',
@@ -1132,10 +1178,12 @@
     'Sivukartta ja robots.txt': 'Sitemap and robots.txt',
 
     // ---------- agency-website.html ----------
+    'Apex AI, Intelligent Growth for Modern Businesses': 'Apex AI — Intelligent Growth for Modern Businesses',
     'Apex AI — Intelligent Growth for Modern Businesses': 'Apex AI — Intelligent Growth for Modern Businesses',
 
     // ---------- prosessi.html ----------
     'ei kuukausissa.': 'not months.',
+    'Kesto: 3,7 arkipäivää': 'Duration: 3–7 working days',
     'Kesto: 3–7 arkipäivää': 'Duration: 3–7 working days',
     'Julkaisu ja luovutus': 'Launch and handover',
     'Kesto: 1 arkipäivä': 'Duration: 1 working day',
@@ -1147,6 +1195,7 @@
       '"I was sceptical about AI, but they made it simple. Now I never lose a lead, even when I\'m on a job site. Hands down the best investment this year."',
 
     // ---------- yhteystiedot.html ----------
+    'Uusi yhteydenotto, Selora': 'New enquiry — Selora',
     'Uusi yhteydenotto — Selora': 'New enquiry — Selora',
     'Ota yhteyttä Seloraan. Varaa maksuton 30 minuutin demo tai lähetä viesti. Vastaamme 4 tunnin sisällä arkipäivisin.':
       'Get in touch with Selora. Book a free 30-minute demo or send a message. We reply within 4 working hours.',
@@ -1236,6 +1285,7 @@
     'Takaisin etusivulle →': 'Back to home →',
 
     // ---------- unsubscribe.html ----------
+    'Peruuta tilaus, Selora': 'Unsubscribe — Selora',
     'Peruuta tilaus — Selora': 'Unsubscribe — Selora',
     'Takaisin blogiin': 'Back to blog',
     'Peruutetaan tilausta...': 'Unsubscribing…',
@@ -1264,6 +1314,7 @@
     'Palautuslinkki lähetetty! Tarkista sähköpostisi.': 'Reset link sent. Check your email.',
 
     // ---------- rekisteroidy.html ----------
+    'Luo tili, Selora': 'Create account — Selora',
     'Luo tili — Selora': 'Create account — Selora',
     'Luo ilmainen Selora-asiakastili ja kokeile tekoälyvastaanottajaa.': 'Create a free Selora account and try the AI receptionist.',
     'Luo tili ja aloita →': 'Create account and start →',
@@ -1279,6 +1330,7 @@
     'Täytä vähintään nimi, yritys ja sähköposti': 'Please fill in at least name, company and email',
 
     // ---------- reset-salasana.html ----------
+    'Palauta salasana, Selora': 'Reset password — Selora',
     'Palauta salasana — Selora': 'Reset password — Selora',
     'Palauta Selora-tilisi salasana.': 'Reset your Selora account password.',
     '← Takaisin kirjautumiseen': '← Back to sign in',
@@ -1288,6 +1340,7 @@
     'Tallenna uusi salasana →': 'Save new password →',
 
     // ---------- dashboard.html ----------
+    'Dashboard, Selora': 'Dashboard — Selora',
     'Dashboard — Selora': 'Dashboard — Selora',
     'Päivitä tilaus': 'Upgrade subscription',
     'Ei agenttia': 'No agent',
@@ -1323,6 +1376,7 @@
     'Yhdistetään...': 'Connecting…',
     'Luodaan yhteyttä...': 'Connecting…',
     'Tekoäly puhuu...': 'AI is speaking…',
+    'Puhelu päättyi, kiitos!': 'Call ended — thank you!',
     'Puhelu päättyi — kiitos!': 'Call ended — thank you!',
     'Puheluloki': 'Call log',
     'Demo-puhelut käytetty': 'Demo calls used',
@@ -1331,10 +1385,13 @@
     'Päivitys epäonnistui': 'Update failed',
     'Päivitä täysversioon jatkaaksesi.': 'Upgrade to the full version to continue.',
     'Salli mikrofonin käyttö selaimessa ja yritä uudelleen.': 'Allow microphone access in your browser and try again.',
+    'Yhteys epäonnistui, yritä uudelleen.': 'Connection failed — please try again.',
     'Yhteys epäonnistui — yritä uudelleen.': 'Connection failed — please try again.',
+    'Ei istuntoa, kirjaudu uudelleen.': 'No session — please sign in again.',
     'Ei istuntoa — kirjaudu uudelleen.': 'No session — please sign in again.',
     'Agentti ei vielä luotu': 'Agent not yet created',
     'Agenttia ei löydy. Suorita onboarding ensin.': 'Agent not found. Please complete onboarding first.',
+    'LLM-id puuttuu, ota yhteyttä tukeen.': 'LLM ID is missing — please contact support.',
     'LLM-id puuttuu — ota yhteyttä tukeen.': 'LLM ID is missing — please contact support.',
     'Asiakas poistettu': 'Customer deleted',
     'Asiakasta ei löydy': 'Customer not found',
@@ -1356,6 +1413,7 @@
     'suljettu': 'closed',
 
     // ---------- onboarding.html ----------
+    'Personoi agenttisi, Selora': 'Personalise your agent — Selora',
     'Personoi agenttisi — Selora': 'Personalise your agent — Selora',
     'Yrityksen nimi *': 'Business name *',
     'Yrityksen puh. (valinnainen)': 'Business phone (optional)',
@@ -1371,6 +1429,7 @@
       'E.g. Prices include VAT 24%. Bleach times may vary by hair length. Gift cards available.',
     'esim. Peruutus viimeistään 24h ennen, muuten 50% hinta':
       'e.g. Cancel at least 24h in advance, otherwise 50% fee',
+    'Esim. Meillä on kampaus, joka ei vaadi ajanvarausta ma,ke klo 9,11. Lemmikkystävällinen liike. Ilmainen pysäköinti talon takana...': 
     'Esim. Meillä on kampaus, joka ei vaadi ajanvarausta ma–ke klo 9–11. Lemmikkystävällinen liike. Ilmainen pysäköinti talon takana...':
       'E.g. We do walk-in styling Mon–Wed 9–11. Pet-friendly. Free parking behind the building…',
     'Erikoisosaaminen (esim. Värikäsittelyt)': 'Speciality (e.g. colour treatments)',
@@ -1413,13 +1472,16 @@
     'HENKILÖKUNTA:\n': 'STAFF:\n',
 
     // ---------- admin.html ----------
+    'Admin, Selora': 'Admin — Selora',
     'Admin — Selora': 'Admin — Selora',
     'maksava asiakas': 'paying customer',
     'Rekisteröity': 'Registered',
     '+ Luo uusi asiakas': '+ Create new customer',
     'Olemassa oleva Retell Agent ID': 'Existing Retell Agent ID',
+    '(valinnainen, jätä tyhjäksi luodaksesi uuden)': '(optional — leave blank to create a new one)',
     '(valinnainen — jätä tyhjäksi luodaksesi uuden)': '(optional — leave blank to create a new one)',
     'Rekisteröintiloki': 'Signup log',
+    'Uutiskirje, Uusi artikkeli': 'Newsletter — New article',
     'Uutiskirje — Uusi artikkeli': 'Newsletter — New article',
     'Lähetä kaikille tilaajille →': 'Send to all subscribers →',
     'Esim. Näin tekoäly muuttaa pienyritysten asiakaspalvelua': 'E.g. How AI is changing small-business customer service',
@@ -1437,6 +1499,7 @@
     'Täytä kaikki pakolliset kentät (otsikko, kuvaus, URL).': 'Please fill in every required field (title, description, URL).',
 
     // ---------- checkout.html ----------
+    'Valitse paketti, Selora': 'Choose plan — Selora',
     'Valitse paketti — Selora': 'Choose plan — Selora',
     'Valitse Seloran tekoälyvastaanottajapalvelu yrityksellesi.': 'Choose the Selora AI receptionist plan for your business.',
     'Takaisin dashboardiin': 'Back to dashboard',
@@ -1560,6 +1623,7 @@
     'Verkkosivusuunnittelu': 'Web design',
     'Tekoälyvastaanottaja': 'AI receptionist',
     'Tekoälyvastaanottajat': 'AI receptionists',
+    'Tekoälyvastaanottajat, Selora': 'AI receptionists — Selora',
     'Tekoälyvastaanottajat — Selora': 'AI receptionists — Selora',
     'Toimialat': 'Industries',
     'Toimialat:': 'Industries:',
@@ -1685,6 +1749,7 @@
     'Vastausaika': 'Response time',
     'Vasteaika': 'Response time',
     'Kesto: 45, 60 min': 'Duration: 45 to 60 min',
+    'Kesto: 45,60 min': 'Duration: 45 to 60 min',
     'Kesto: 45–60 min': 'Duration: 45 to 60 min',
     'Kesto: alle 24 h': 'Duration: under 24 hrs',
     'Kesto (min)': 'Duration (min)',
@@ -1721,6 +1786,7 @@
     'Seloraan': 'into Selora',
     'AI rakentaa agenttisi': 'AI builds your agent',
     'AI rakentaa agentin': 'AI builds the agent',
+    'Agentti live, heti': 'Agent live — instantly',
     'Agentti live — heti': 'Agent live — instantly',
     'agentin.': 'the agent.',
     'agentti.': 'the agent.',
@@ -1799,12 +1865,14 @@
     'Kertamaksu.': 'One-time fee.',
     'kertamaksu': 'one-time fee',
     'Perussivu': 'Single page',
+    '4,7 sivua, mobiilioptimoitu': '4–7 pages, mobile-optimised',
     '4–7 sivua, mobiilioptimoitu': '4–7 pages, mobile-optimised',
     'Kirjautumissivu': 'Login page',
     'Voiko tilauksen peruuttaa?': 'Can I cancel my subscription?',
     'Onko ilmainen kokeilu saatavilla?': 'Is a free trial available?',
     'Onko tietoni turvassa? GDPR?': 'Is my data safe? GDPR?',
     'Stripe': 'Stripe',
+    ', 256-bit SSL-salaus': '— 256-bit SSL encryption',
     '— 256-bit SSL-salaus': '— 256-bit SSL encryption',
 
     // -------- demo / hero / index extras --------
@@ -1855,6 +1923,7 @@
     'Koko nimi': 'Full name',
     'Asiakkaan nimi': 'Customer name',
     'Otsikko': 'Title',
+    'Otsikko (esim. Leikkaus, Matti)': 'Title (e.g. Haircut — Matti)',
     'Otsikko (esim. Leikkaus — Matti)': 'Title (e.g. Haircut — Matti)',
     'Palvelu': 'Service',
     'Kaupunki': 'City',
@@ -1953,10 +2022,12 @@
     'Erikoistarjoukset, erityisohjeet...': 'Special offers, special instructions…',
     'Miesten leikkaus 25€, naisten leikkaus 35€...': 'Men\'s cut €25, women\'s cut €35…',
     'agent_xxxxxxxxxxxxxxxxxxxxxxxx': 'agent_xxxxxxxxxxxxxxxxxxxxxxxx',
+    'Lyhyt 1,2 lauseen esittely artikkelista…': 'Short 1–2 sentence intro for the article…',
     'Lyhyt 1–2 lauseen esittely artikkelista…': 'Short 1–2 sentence intro for the article…',
     'https://selora.fi/blogi/artikkeli-slug': 'https://selora.fi/blog/article-slug',
     'https://… .jpg tai .png': 'https://… .jpg or .png',
     'esim. Ohjaa soittamaan suoraan numeroon +358 40 123 4567': 'e.g. Direct calls to +358 40 123 4567',
+    'Ma,Pe 9,17': 'Mon–Fri 9–17',
     'Ma–Pe 9–17': 'Mon–Fri 9–17',
     'sinun@yritys.fi': 'you@yourbusiness.com',
     'Nimi': 'Name',
@@ -1984,16 +2055,21 @@
     'EU:n yleinen tietosuoja-asetus (GDPR) 2016/679': 'EU General Data Protection Regulation (GDPR) 2016/679',
 
     // -------- blog post titles --------
+    'GDPR ja tekoälyvastaanottaja: mitä suomalaisen pk‑yrityksen on tiedettävä, Selora Blogi': 
     'GDPR ja tekoälyvastaanottaja: mitä suomalaisen pk‑yrityksen on tiedettävä – Selora Blogi':
       'GDPR and AI receptionists: what every Finnish SMB needs to know – Selora Blog',
+    'Kuinka paljon yritys häviää menetetyistä puheluista?, Selora Blogi': 
     'Kuinka paljon yritys häviää menetetyistä puheluista? – Selora Blogi':
       'How much do businesses lose from missed calls? – Selora Blog',
     'LVI-yritys ja hätäpuhelut: mitä tapahtuu, kun asiakas soittaa kello 22 ja putki vuotaa - Selora Blogi':
       'HVAC companies and emergency calls: what happens when a customer calls at 10pm with a burst pipe - Selora Blog',
+    'Tekoäly kasvattaa parturi-kampaamon asiakaskuntaa käytännössä, Selora Blogi': 
     'Tekoäly kasvattaa parturi-kampaamon asiakaskuntaa käytännössä – Selora Blogi':
       'How AI grows a barbershop\'s customer base in practice – Selora Blog',
+    'Tekoäly vai ihmisvastaanottaja? Rehellinen vertailu, Selora Blogi': 
     'Tekoäly vai ihmisvastaanottaja? Rehellinen vertailu – Selora Blogi':
       'AI or human receptionist? An honest comparison – Selora Blog',
+    'Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu?, Selora Blogi': 
     'Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu? – Selora Blogi':
       'Onboarding an AI receptionist: what really happens? – Selora Blog',
     'Kumpi kannattaa valita: tekoälyvastaanottaja vai perinteinen ihmisvastaanottaja? Rehellinen kustannusvertailu suomalaiselle yrittäjälle.':
@@ -2039,6 +2115,7 @@
     'Mitä ihmisvastaanottaja oikeasti maksaa?': 'What does a human receptionist really cost?',
     'Päivittäisessä kiireessä verkkomarkkinoinnin ja ajanvarauksen hallinta vie aikaa, jota olisi helpommin käytettävissä leikkaus- ja värjäyspäiviin. Tekoäly automatisoi toistuvat tehtävät, analysoi dataa ja ehdottaa seuraavia askeleita, jolloin voit keskittyä asiakaskokemukseen.':
       'In the daily rush, managing online marketing and bookings eats time that could be spent on cuts and colours. AI automates the repetitive tasks, analyses data and suggests next steps, so you can focus on the customer experience.',
+    'Tekoälyvastaanottajan keräämät tiedot sisältävät usein puhelinnumeroita, nimiä ja aikaleimoja, eli henkilötietoja. GDPR:n 5 periaatetta (laki, tarkoitus, minimointi, oikeellisuus, säilytysaika) koskevat näitä tietoja yhtä tiukasti kuin perinteisiä asiakasrekistereitä.': 
     'Tekoälyvastaanottajan keräämät tiedot sisältävät usein puhelinnumeroita, nimiä ja aikaleimoja – eli henkilötietoja. GDPR:n 5 periaatetta (laki, tarkoitus, minimointi, oikeellisuus, säilytysaika) koskevat näitä tietoja yhtä tiukasti kuin perinteisiä asiakasrekistereitä.':
       'The data an AI receptionist collects often includes phone numbers, names and timestamps — that is, personal data. GDPR\'s five principles (lawfulness, purpose, minimisation, accuracy, retention) apply to this data just as strictly as to traditional customer records.',
     'Mitä tutkimukset sanovat?': 'What does the research say?',
@@ -2046,6 +2123,7 @@
     'Kampaamoon soitetaan, kun halutaan varata aikaa ensi viikolle. Ravintolaan soitetaan, kun halutaan pöytä illaksi. LVI-yritykseen soitetaan kun':
       'People call a hairdresser to book an appointment for next week. They call a restaurant to reserve a table for the evening. They call an HVAC company when',
     'Seloran GDPR‑yhteensopivuus': 'Selora\'s GDPR compliance',
+    'Suomessa toimistotyöntekijän tai vastaanottovirkailijan bruttopalkka liikkuu tyypillisesti välillä 2 400,3 200 euroa kuukaudessa. Kun tähän lisätään työnantajan sivukulut, jotka ovat noin 25,30 prosenttia, todellinen kuukausikustannus yritykselle on helposti 3 000,4 200 euroa. Vuodessa se on 36 000,50 000 euroa pelkästä puheluihin vastaamisesta.': 
     'Suomessa toimistotyöntekijän tai vastaanottovirkailijan bruttopalkka liikkuu tyypillisesti välillä 2 400–3 200 euroa kuukaudessa. Kun tähän lisätään työnantajan sivukulut, jotka ovat noin 25–30 prosenttia, todellinen kuukausikustannus yritykselle on helposti 3 000–4 200 euroa. Vuodessa se on 36 000–50 000 euroa pelkästä puheluihin vastaamisesta.':
       'In Finland, the gross monthly salary for an office worker or receptionist typically runs between €2,400 and €3,200. Add the employer\'s side costs of 25–30%, and the real monthly cost to the business is easily €3,000–€4,200. That\'s €36,000–€50,000 per year just for answering the phone.',
     'vettä tulee olohuoneen lattialle juuri nyt': 'water is pouring onto the living-room floor right now',
@@ -2070,6 +2148,7 @@
     'Toinen relevantti luku: vastaamatta jääneet puhelut sijoittuvat tyypillisimmin lounasaikaan, iltapäiväruuhkaan ja aukioloaikojen ulkopuolelle. Juuri silloin, kun potentiaaliset asiakkaat ovat vapaana soittamaan.':
       'Another relevant number: missed calls typically cluster at lunch time, the afternoon rush and outside opening hours. Exactly when potential customers are free to call.',
     'Puhelut tulevat silloin kun niitä ei voi ottaa': 'Calls come exactly when you can\'t take them',
+    'Älykäs ajanvaraus, varmistettu täydennys': 'Smart appointment booking — a verified add-on',
     'Älykäs ajanvaraus – varmistettu täydennys': 'Smart appointment booking — a verified add-on',
     ', jos he eivät tavoita yritystä ensimmäisellä soittokertaa. Lähde: HubSpot Customer Service Report 2024.':
       ', if they don\'t reach the business on the first call. Source: HubSpot Customer Service Report 2024.',
@@ -2139,8 +2218,10 @@
     'Esimerkkilaskelma: säästöt tietoturvavaihdoissa': 'Example calculation: savings on security swaps',
     'Eivät soita takaisin (78%)': 'Don\'t call back (78%)',
     'Konsultointi- ja auditointikulut (arvio)': 'Consulting & audit costs (estimate)',
+    'Live, ja jatkuva parantaminen': 'Live — and continuous improvement',
     'Live — ja jatkuva parantaminen': 'Live — and continuous improvement',
     'Näistä hätä- tai keikkapuheluita (~60 %)': 'Of those, emergency or job calls (~60%)',
+    'Tekoäly analysoi asiakkaiden käyntihistoriaa ja luo kohdennettuja kampanjoita, esimerkiksi “Tule tänä viikonloppuna, saat 20 % alennuksen värjäyspalvelusta”. Näin viestit ovat relevantteja ja reaktioprosentit nousevat.': 
     'Tekoäly analysoi asiakkaiden käyntihistoriaa ja luo kohdennettuja kampanjoita – esimerkiksi “Tule tänä viikonloppuna, saat 20 % alennuksen värjäyspalvelusta”. Näin viestit ovat relevantteja ja reaktioprosentit nousevat.':
       'The AI analyses customer visit history and builds targeted campaigns — for example, "Come this weekend and get 20% off colour services." That way the messages stay relevant and response rates climb.',
     '2,2 kpl/päivä': '2.2/day',
@@ -2164,6 +2245,7 @@
     'Käyttöönottoprosessi ja aikataulu': 'Onboarding process and timeline',
     'Arvioitu häviö vuodessa': 'Estimated annual loss',
     'Hyödyllisiä tietoja etukäteen': 'Useful information to gather in advance',
+    'ROI, investoinnin takaisinmaksu': 'ROI — return on investment',
     'ROI – investoinnin takaisinmaksu': 'ROI — return on investment',
     'Selora otetaan käyttöön alle 48 tunnissa. Tämä tarkoittaa, että pienyrityksen ei tarvitse odottaa pitkää aikaa ennen kuin se voi hyödyntää tekoälyä ja samalla täyttää GDPR‑vaatimukset.':
       'Selora is up and running in under 48 hours. That means a small business doesn\'t have to wait long before it can leverage AI and stay GDPR-compliant at the same time.',
@@ -2179,10 +2261,12 @@
     'Visuaalinen suunnittelu': 'Visual design',
     'Miksi perinteinen puhelinvastaaja ei riitä': 'Why a traditional voicemail isn\'t enough',
     'Missä tekoäly loistaa ja missä ihminen voittaa?': 'Where AI shines and where humans win',
+    '5,10 yleisintä kysymystä, joita asiakkaat soittavat kysymään': 'The 5–10 most common questions customers call to ask',
     '5–10 yleisintä kysymystä, joita asiakkaat soittavat kysymään': 'The 5–10 most common questions customers call to ask',
     'Dynaaminen ohjauslogiikka': 'Dynamic routing logic',
     'Selkein ratkaisu olisi tietysti ostaa perinteinen puhelinvastaaja tai päivystyspalvelu. Ongelma on kaksiosainen.':
       'The most obvious solution would be to buy a traditional voicemail or on-call answering service. The problem is twofold.',
+    'Tekoäly on ylivoimainen kaikessa toistuvassa ja ennustettavassa. Ajanvaraukset, aukioloaikatiedustelut, hintatiedustelut, ohjeet perille pääsemiseksi, peruutusten vastaanottaminen. Nämä muodostavat helposti 70,80 prosenttia kaikista sisääntulevista puheluista lähes kaikilla toimialoilla. Näissä tekoäly on nopeampi, virheettömämpi ja saatavilla silloinkin kun toimisto on kiinni.': 
     'Tekoäly on ylivoimainen kaikessa toistuvassa ja ennustettavassa. Ajanvaraukset, aukioloaikatiedustelut, hintatiedustelut, ohjeet perille pääsemiseksi, peruutusten vastaanottaminen. Nämä muodostavat helposti 70–80 prosenttia kaikista sisääntulevista puheluista lähes kaikilla toimialoilla. Näissä tekoäly on nopeampi, virheettömämpi ja saatavilla silloinkin kun toimisto on kiinni.':
       'AI is unbeatable at anything repetitive and predictable. Bookings, opening-hours questions, price questions, directions, taking cancellations. These easily make up 70–80% of all incoming calls in almost any industry. Here AI is faster, more accurate and available even when the office is closed.',
     'Kokeile tekoälyä omassa kampaamossasi': 'Try AI in your own salon',
@@ -2190,6 +2274,7 @@
     'Ensinnäkin:': 'First:',
     'Ihminen on korvaamaton silloin, kun asiakas on hädissään, tilanne on monimutkainen tai asiayhteys vaatii soveltavaa harkintaa. Lääkäriaseman kiirevastaanotto, juridiset neuvottelut tai reklamaatioiden käsittely ovat esimerkkejä siitä, missä ihmisaivo on edelleen ylivoimainen.':
       'A human is irreplaceable when the customer is in distress, the situation is complex, or the context requires applied judgement. A medical urgent-care line, legal negotiations or handling of complaints are examples of where the human brain is still unbeatable.',
+    'Varaa maksuton demo nyt ja näe tulokset heti, varaa puhelu tai aloita ilmaisella kokeilujaksolla.': 
     'Varaa maksuton demo nyt ja näe tulokset heti – varaa puhelu tai aloita ilmaisella kokeilujaksolla.':
       'Book a free demo now and see the results immediately — book a call or start with a free trial.',
     'asiakkaat eivät jätä viestejä. Ne 62 % jotka eivät jätä viestiä eivät jätä viestiä tekoälyllekään, mutta niistä 38 % jotka jättävät viestin, kukaan ei kuule ääntä ennen aamua.':
@@ -2284,6 +2369,7 @@
       'For most Finnish SMBs — barbershops, restaurants, real-estate agents and auto repair shops — an AI receptionist is the most effective first step toward better customer service without massive salary costs.',
     'Arv. palautetut puhelut (78% Selora-tehokkuus)': 'Est. recovered calls (78% Selora effectiveness)',
     'Seloran kuukausihinta (Aloitus)': 'Selora\'s monthly price (Starter)',
+    '+2,4 uutta asiakasta/vko': '+2–4 new customers/week',
     '+2–4 uutta asiakasta/vko': '+2–4 new customers/week',
     'Haluatko nähdä miten se toimisi': 'Want to see how it would work',
     'Näin nopeasti tekoälyvastaanottaja on toiminnassa': 'This is how fast the AI receptionist is up and running',
@@ -2387,10 +2473,13 @@
     '+ Lisää henkilö': '+ Add person',
     '+ Lisää kysymys': '+ Add question',
     '+ Lisää palvelu': '+ Add service',
+    'Lisää henkilökunnan jäsenet ja heidän erikoisosaamisensa, voit ohittaa tämän vaiheen.': 
     'Lisää henkilökunnan jäsenet ja heidän erikoisosaamisensa — voit ohittaa tämän vaiheen.':
       'Add staff members and their specialities — you can skip this step.',
+    'Lisää palvelusi taulukkoon, agentti osaa kertoa hinnat ja kestot automaattisesti.': 
     'Lisää palvelusi taulukkoon — agentti osaa kertoa hinnat ja kestot automaattisesti.':
       'Add your services to the table — the agent will quote prices and durations automatically.',
+    'Lisää yleisimmät kysymykset ja vastaukset, agentti käyttää näitä suoraan.': 
     'Lisää yleisimmät kysymykset ja vastaukset — agentti käyttää näitä suoraan.':
       'Add the most common questions and answers — the agent will use them directly.',
 
@@ -2448,6 +2537,7 @@
     'Linkitetään…': 'Linking…',
     'Lähetetään…': 'Sending…',
     'Lähetys epäonnistui:': 'Send failed:',
+    'Verkkovirhe, tarkista yhteys ja yritä uudelleen.': 
     'Verkkovirhe — tarkista yhteys ja yritä uudelleen.':
       'Network error — check your connection and try again.',
     'Yritä uudelleen': 'Try again',
@@ -2461,6 +2551,7 @@
     'Google Calendar API-virhe': 'Google Calendar API error',
     'Google-virhe:': 'Google error:',
     'Ladataan...': 'Loading…',
+    '⏳ Tämä voi kestää 15,30 sekuntia…': '⏳ This may take 15–30 seconds…',
     '⏳ Tämä voi kestää 15–30 sekuntia…': '⏳ This may take 15–30 seconds…',
     '📅 Uusi varaus lisätty kalenteriin': '📅 New booking added to calendar',
     '📞 Uusi puhelu vastaanotettu': '📞 New call received',
@@ -2526,6 +2617,127 @@
     'Puheluyhteenveto lähetetty': 'Call summary sent',
     'Ei rekisteröitymistä': 'No sign-up',
     'Automatisoitu · Reaaliaikainen · Suomenkielinen': 'Automated · Real-time · Finnish-language',
+
+
+    // ---------- audit sweep: missing high-value FI strings ----------
+    'Sivumäärä': 'Page count',
+    'Syväluotaava': 'In-depth',
+    'Sähköpostitse': 'By email',
+    'Käyttöönottotuki': 'Onboarding support',
+    'Toimitus ja tuki': 'Delivery and support',
+    'Markkinointi ja SEO': 'Marketing and SEO',
+    'Lomakkeet ja sähköpostiautomaatiot': 'Forms and email automations',
+    'Analytiikkakojelauta (kävijät, liidit, konversiot)': 'Analytics dashboard (visitors, leads, conversions)',
+    'Kertamaksu, ei piilokustannuksia. Tekoälychatbot kuuluu molempiin paketteihin.':
+      'One-time payment, no hidden costs. The AI chatbot is included in both packages.',
+    'Mitä verkkosivupaketti': 'What the website package',
+    'Irtisanottavissa milloin tahansa 30 päivän varoitusajalla':
+      'Cancellable anytime with 30 days notice',
+    'Tekoälyvastaanottaja alkaen 212 €/kk (vuosisopimus) tai 249 €/kk (kuukausisopimus). Verkkosivusto alkaen 590 €. Kiinteä hinta, ei piilomaksuja. Irtisano milloin tahansa 30 päivän varoitusajalla.':
+      'AI receptionist from €212/mo (annual) or €249/mo (monthly). Website from €590. Fixed pricing, no hidden fees. Cancel anytime with 30 days notice.',
+    'Selkeä hinnoittelu ilman yllätyksiä. Aloitus-, Kasvu- ja Yrityspaketti tekoälyvastaanottajalle. 500, 5 000 min puheluaikaa kuukaudessa. Kiinteä hinta, ei piilomaksuja.':
+      'Clear pricing without surprises. Starter, Growth and Enterprise plans for the AI receptionist. 500 to 5,000 min of call time per month. Fixed price, no hidden fees.',
+    '4+ sivua, täysin räätälöity design': '4+ pages, fully custom design',
+    '✓ Täysin räätälöity': '✓ Fully custom',
+
+    // menu items on verkkosivusuunnittelu Foozu mock
+    'Itämeren lohi, dilliaioli, salaatti': 'Baltic salmon, dill aioli, salad',
+    'Kanafilettä, parmesaani, krutonki': 'Chicken breast, parmesan, croutons',
+    'Mascarpone, espresso, kaakao': 'Mascarpone, espresso, cocoa',
+
+    // yhteystiedot staff-size options
+    '1, 9 henkilöä': '1 to 9 people',
+    '10, 49 henkilöä': '10 to 49 people',
+    '50, 199 henkilöä': '50 to 199 people',
+    'Pidätkö enemmän soittamisesta?': 'Prefer to call?',
+
+    // prosessi
+    'Kesto: 3, 7 arkipäivää': 'Duration: 3 to 7 business days',
+    'Kesto: 45, 60 min': 'Duration: 45 to 60 min',
+    'Aloitetaan kartoituspuhelulla. Se on maksuton, ilman sitoumuksia, ja sen jälkeen tiedät tarkalleen mitä saisit.':
+      'We start with a discovery call. It is free, with no obligations, and after it you know exactly what you would be getting.',
+    'Julkaisemme yhdessä täydellisellä testauksella ja perusteellisella perehdytyksellä. Hoidamme kaikki tekniset asennukset ja koulutuksen.':
+      'We launch together with full testing and a thorough onboarding. We handle every technical install and the training.',
+    'Kaikenlaisista yrityksistä, tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.':
+      'From businesses of every kind, here is what our customers experience after rolling out our AI systems.',
+    'Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: kartoitus, persoonallisuuden rakentaminen, integraatio ja jatkuva optimointi. Käyttöönotto alle 48 tunnissa.':
+      'The Selora AI receptionist rollout in four stages: discovery, persona build, integration and ongoing optimization. Live in under 48 hours.',
+    'Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: alle 48 tunnissa puhelut hoituvat itsestään.':
+      'The Selora AI receptionist rollout in four stages: within 48 hours calls handle themselves.',
+
+    // hero description on index (comma variant of an entry that was em-dashed)
+    'Selora Oy on suomalainen tekoälyvastaanottaja kaiken kokoisille pk-yrityksille toimialasta riippumatta. Vastaa puheluihin 24/7, varaa ajat suoraan kalenteriisi ja lähettää vahvistusviestit. Suomeksi.':
+      'Selora is a Finnish AI receptionist for small and mid-size businesses of every industry. Answers calls 24/7, books appointments straight to your calendar and sends confirmation messages. In Finnish.',
+    'Selora Oy on suomalainen tekoälyvastaanottaja-palvelu pk-yrityksille. Vastaa puheluihin 24/7, varaa ajat, tunnistaa potentiaaliset asiakkaat. Ilmainen demo, käyttöönotto 48 tunnissa, alkaen 212 €/kk.':
+      'Selora is a Finnish AI receptionist service for small and mid-size businesses. Answers calls 24/7, books appointments and qualifies prospects. Free demo, live in 48 hours, from €212/mo.',
+    'Sinulle tehtäisiin sama, omalla nimellä, omilla palveluilla.':
+      'Yours would be built the same way — with your own name and your own services.',
+    'Useimmat asiakkaat ovat live-tilassa 24, 48 tunnin sisällä sopimuksen allekirjoittamisesta. Konfigurointi on yksinkertaista, tarvitsemme vain perustiedot yrityksestäsi ja palveluistasi.':
+      'Most customers are live within 24 to 48 hours of signing. Configuration is simple: we only need the basics about your business and services.',
+
+    // page titles + meta descriptions (SEO relevant, EN mirrors help canonical alt-lang)
+    'Selora Oy, Tekoälyvastaanottaja suomalaisille pk-yrityksille': 'Selora, AI receptionist for Finnish SMBs',
+    'Selora Oy, Tekoälyvastaanottaja suomalaisille pk-yrityksille | selora.fi':
+      'Selora, AI receptionist for Finnish SMBs | selora.fi',
+    'Tekoälyvastaanottajat, Selora': 'AI receptionists, Selora',
+    'Hinnoittelu, Selora': 'Pricing, Selora',
+    'Blogi, Selora | Tekoäly, automaatio ja pienyrityksen kasvu':
+      'Blog, Selora | AI, automation and SMB growth',
+    'Sivua ei löydy, Selora': 'Page not found, Selora',
+    'Etsimääsi sivua ei löytynyt. Palaa Seloran etusivulle tai siirry palveluihin.':
+      'The page you were looking for could not be found. Head back to the Selora homepage or the services page.',
+    'Etsimäsi sivu on poistettu, siirretty tai osoite on kirjoitettu väärin. Ei hätää, pääset takaisin oikeille raiteille alla olevista linkeistä.':
+      'The page has been removed, moved or the address was typed wrong. No worries, you can get back on track through the links below.',
+    'Peruuta Seloran uutiskirjeen tilaus yhdellä klikkauksella.':
+      'Unsubscribe from the Selora newsletter with one click.',
+    'Seloran tietosuojaseloste, miten keräämme, käytämme ja suojaamme henkilötietojasi.':
+      'The Selora privacy policy: how we collect, use and protect your personal data.',
+    'Ota yhteyttä tai varaa ilmainen 30 minuutin demo. Olemme yhteydessä saman päivän aikana.':
+      'Get in touch or book a free 30-minute demo. We will be in touch the same day.',
+    'Selkeät, nopeat verkkosivustot jotka on suunniteltu muuttamaan vierailijat asiakkaiksi. Kertamaksu, ei kuukausimaksuja.':
+      'Clear, fast websites designed to turn visitors into customers. One-time payment, no monthly fees.',
+    'Selora suunnittelee selkeät, nopeat verkkosivustot suomalaisille yrityksille. Tekoälychatbot sisältyy molempiin paketteihin.':
+      'Selora designs clear, fast websites for Finnish businesses. The AI chatbot is included in both packages.',
+    'Seloran tekoälyvastaanottaja vastaa puheluihin, varaa tapaamisia ja tunnistaa potentiaaliset asiakkaat automaattisesti,':
+      'The Selora AI receptionist answers calls, books meetings and identifies prospects automatically,',
+    'Jokaisen puhelun jälkeen tekoäly tuottaa automaattisen yhteenvedon: asiakastiedot, asian syy ja sovitut toimenpiteet. Puheluyhteenveto tulee sähköpostiisi tai suoraan CRM-järjestelmääsi.':
+      'After every call the AI produces an automatic summary: customer info, reason for the call and agreed next steps. The summary lands in your inbox or straight into your CRM.',
+    'Tekoälyvastaanottaja hoitaa puhelut 24/7 ja verkkosivusuunnittelu muuttaa vierailijat asiakkaiksi. Selkeä hinnoittelu, nopea käyttöönotto.':
+      'The AI receptionist handles calls 24/7 and the web design turns visitors into customers. Clear pricing, fast onboarding.',
+    'Sähkö Pro': 'Sähkö Pro',
+    'Tilaamalla hyväksyt, että Selora käyttää sähköpostiosoitettasi uutiskirjeen lähettämiseen. Voit perua tilauksen milloin tahansa jokaisen viestin alalaidan linkistä. Lue tietosuojaseloste.':
+      'By subscribing you agree that Selora uses your email address to send the newsletter. You can unsubscribe any time via the link at the bottom of each email. Read the privacy policy.',
+    'Artikkeleita tekoälystä, yrityskasvusta ja digitalisaatiosta suomalaisille yrittäjille.':
+      'Articles on AI, business growth and digitalization for Finnish entrepreneurs.',
+    'Harva yrittäjä laskee tätä lukua. Lasketaan se nyt yhdessä, tulokset voivat yllättää.':
+      'Few founders count this number. Let us count it together now — the results may surprise you.',
+    'Miksi LVI‑yrityksen illat ja viikonloput karkaavat kilpailijalle, ja mitä sille voi tehdä.':
+      'Why an HVAC company\'s evenings and weekends drift to competitors, and what you can do about it.',
+
+    // Blog post title/desc variants (dashless)
+    'Kuinka paljon yritys häviää menetetyistä puheluista?': 'How much revenue does a business lose to missed calls?',
+    'Kuinka paljon yritys häviää menetetyistä puheluista?, Selora Blogi':
+      'How much revenue does a business lose to missed calls?, Selora Blog',
+    'Harva yritys laskee tätä. Lasketaan se yhdessä.': 'Few companies count this. Let us count it together.',
+    'GDPR ja tekoälyvastaanottaja: mitä suomalaisen pk‑yrityksen on tiedettävä, Selora Blogi':
+      'GDPR and the AI receptionist: what a Finnish SMB needs to know, Selora Blog',
+    'Tekoäly vai ihmisvastaanottaja? Rehellinen vertailu': 'AI or human receptionist? An honest comparison',
+    'Tekoäly vai ihmisvastaanottaja? Rehellinen vertailu, Selora Blogi':
+      'AI or human receptionist? An honest comparison, Selora Blog',
+    'Kustannukset, hyödyt ja rajoitukset. Selviämme mikä sopii suomalaiselle pk-yritykselle.':
+      'Costs, benefits and limits. We work out what fits a Finnish SMB.',
+    'Tekoälyvastaanottajan käyttöönotto: mitä oikeasti tapahtuu?, Selora Blogi':
+      'Rolling out an AI receptionist: what actually happens?, Selora Blog',
+    'Käytännön opas ilman IT-jargonia. Käyttöönotto alle 48 tunnissa.':
+      'A practical guide without IT jargon. Live in under 48 hours.',
+    'Tekoäly kasvattaa parturi-kampaamon asiakaskuntaa käytännössä, Selora Blogi':
+      'AI grows a barbershop / hair salon customer base in practice, Selora Blog',
+    'Varaa maksuton demo nyt ja näe tulokset heti, varaa puhelu tai aloita ilmaisella kokeilujaksolla.':
+      'Book a free demo now and see the results right away — book a call or start a free trial.',
+    'Älykäs ajanvaraus, varmistettu täydennys': 'Smart scheduling, guaranteed fill-ins',
+
+    // Duplicates on hinnoittelu already handled above; also the "0,25 € sen jälkeen" cell
+    ' · 0,25 € sen jälkeen': ' · €0.25 after',
 
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
