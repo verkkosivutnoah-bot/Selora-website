@@ -2282,6 +2282,13 @@
   }
 
   window._demoToggle = async function () {
+    // Block Retell call while site is in English mode — the agent only speaks Finnish for now.
+    var _lang;
+    try { _lang = (localStorage.getItem('seloraLang') || document.documentElement.lang || 'fi').slice(0,2); } catch(_) { _lang = 'fi'; }
+    if (_lang === 'en') {
+      if (status) status.textContent = 'English demo coming soon. Try the Finnish version by switching to FI in the top nav.';
+      return;
+    }
     if (state === 'idle' || state === 'ended') {
       setState('connecting');
       if (status) status.textContent = 'Ladataan...';

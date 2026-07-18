@@ -217,7 +217,7 @@
     'hyvältä': 'great',
     'Soita agentillesi suoraan selaimesta. Täysin ilmaiseksi.': 'Call your agent straight from your browser. Completely free.',
     'Ilmainen · Ei rekisteröitymistä · Käyttää selaimen mikrofonia': 'Free · No signup · Uses your browser microphone',
-    'Aloita demo-puhelu': 'Start demo call',
+    'Aloita demo-puhelu': 'English version coming soon',
     'Aloita testipuhelu': 'Start test call',
     'Rakennetaan ääniyhteys': 'Connecting audio',
     'Puhelu käynnissä': 'Call in progress',
@@ -2465,27 +2465,66 @@
     '📞 Uusi puhelu vastaanotettu': '📞 New call received',
 
     // -------- demo conversation script (index.html) --------
-    'Hei! Kyllä, olemme auki lauantaisin klo 9–15. Haluaisitko varata ajan?':
-      'Hi! Yes, we\'re open Saturdays 9–15. Would you like to book an appointment?',
-    'Hei! Perusvärjäys on meillä 65 € ja raidat alkaen 85 € — sisältää pesun ja föönauksen. Varaanko samalla ajan?':
-      'Hi! Our basic colour is €65 and highlights start at €85 — includes wash and blow-dry. Shall I book a time at the same time?',
+    'Hei! Kyllä, olemme auki lauantaisin klo 9, 15. Haluaisitko varata ajan?':
+      'Hi! Yes, we\'re open Saturdays 9 to 15. Would you like to book an appointment?',
+    'Hei! Perusvärjäys on meillä 65 € ja raidat alkaen 85 €, sisältää pesun ja föönauksen. Varaanko samalla ajan?':
+      'Hi! Our basic colour is €65 and highlights start at €85 — includes wash and blow-dry. Shall I book a time as well?',
     'Hei, mitä värjäys maksaa teillä?': 'Hi, how much does colour cost at your salon?',
-    'Hei, täällä Kampaamo Katariina! Tietysti. Meillä on vapaa aika tiistaina 15.4. klo 14:00 — sopiiko se?':
-      'Hi, this is Hair Salon Katariina! Of course. We have an open slot on Tuesday 15 April at 14:00 — does that work?',
+    'Hei, täällä Kampaamo Katariina! Tietysti. Meillä on vapaa aika tiistaina 15.4. klo 14:00, sopiiko se?':
+      'Hi, this is Hair Salon Katariina! Of course. We have an open slot on Tuesday 15 April at 14:00, does that work?',
     'Kyllä, ensi viikolla jos on tilaa.': 'Yes, next week if there\'s an opening.',
     'Loistava, kiitos!': 'Wonderful, thank you!',
     'Sopii, olen Liisa Mäkinen.': 'Sounds good, I\'m Liisa Mäkinen.',
     'Torstai 17.4. klo 11:00 sopii väri + föönaus. Kuulostaako hyvältä?':
       'Thursday 17 April at 11:00 works for colour + blow-dry. Sound good?',
-    'Puhelu päättyi — kiitos! Varaa aika alta.': 'Call ended — thanks! Book your appointment below.',
-    'SDK ei latautunut — päivitä sivu ja yritä uudelleen.':
-      'SDK failed to load — refresh the page and try again.',
+    'Puhelu päättyi, kiitos! Varaa aika alta.': 'Call ended. Thanks! Book your appointment below.',
+    'SDK ei latautunut, päivitä sivu ja yritä uudelleen.':
+      'SDK failed to load, refresh the page and try again.',
     '✓ Aika varattuna Matille, ti 15.4. klo 14:00. Vahvistus lähtee tekstiviestillä!':
       '✓ Appointment booked for Matti, Tue 15 April at 14:00. Confirmation will be sent by text!',
     '✓ Värjäys varattuna to 17.4. klo 11:00. Nähdään pian!':
       '✓ Colour booked for Thu 17 April at 11:00. See you soon!',
     'Palvelu maksaa itsensä takaisin jo päivänä':
       'The service pays for itself by day',
+
+
+    // ---------- demo section: missing entries added for full EN coverage ----------
+    'Demo: Kampaamo Katariina, esimerkki puhelusta': 'Demo: Hair Salon Katariina, example call',
+    'Kampaamo Katariina, esimerkki puhelusta': 'Hair Salon Katariina, example call',
+    'Kampaamo Katariina': 'Hair Salon Katariina',
+
+    // script 1
+    'Hei, haluaisin varata ajan naisten leikkaukseen.': 'Hi, I\'d like to book a women\'s haircut.',
+    'Mahtavaa! Voinko saada nimesi vahvistusta varten?': 'Great! Can I get your name for the confirmation?',
+    'Matti Korhonen.': 'Matti Korhonen.',
+
+    // script 3
+    'Oletteko auki lauantaisin?': 'Are you open on Saturdays?',
+    'Joo, parturileikkaus lauantaille.': 'Yes, a barber cut for Saturday.',
+    'Lauantai 19.4. klo 10:00 on vapaa. Sopiko se?': 'Saturday 19 April at 10:00 is free. Does that work?',
+    '✓ Parturileikkaus varattuna Liisalle, la 19.4. klo 10:00!': '✓ Barber cut booked for Liisa, Sat 19 April at 10:00!',
+
+    // summary labels + values used in dcs-rows
+    'Soittaja': 'Caller',
+    'Palvelu': 'Service',
+    'Varattu aika': 'Booked slot',
+    'Vahvistus': 'Confirmation',
+    'Kesto': 'Duration',
+    'SMS lähetetty': 'SMS sent',
+    'Naisten leikkaus': 'Women\'s haircut',
+    'Ti 15.4. klo 14:00': 'Tue 15 April at 14:00',
+    '1 min 12 s': '1 min 12 s',
+    'Tuntematon': 'Unknown',
+    'Perusvärjäys': 'Basic colour',
+    'To 17.4. klo 11:00': 'Thu 17 April at 11:00',
+    'Hinta': 'Price',
+    '58 s': '58 s',
+    'Parturileikkaus': 'Barber cut',
+    'La 19.4. klo 10:00': 'Sat 19 April at 10:00',
+    '1 min 4 s': '1 min 4 s',
+    'Puheluyhteenveto lähetetty': 'Call summary sent',
+    'Ei rekisteröitymistä': 'No sign-up',
+    'Automatisoitu · Reaaliaikainen · Suomenkielinen': 'Automated · Real-time · Finnish-language',
 
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
