@@ -3685,6 +3685,7 @@
     'Kolme vaihetta,': 'Three steps,',
     'Noin 45 min': 'About 45 min',
     'Toimii puhelimella': 'Works on mobile',
+    'Markkinointitoimisto · Brändi': 'Marketing agency · Brand',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

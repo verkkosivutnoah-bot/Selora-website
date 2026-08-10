@@ -422,14 +422,35 @@
         gap: 0;
         width: max-content;
         will-change: transform;
-        animation: storiesScroll var(--stories-dur, 46s) linear infinite;
+        /* position is driven from JS so the arrows can nudge the same value
+           the auto-scroll animates */
       }
-      /* travels left to right: starts shifted back by one full set */
-      @keyframes storiesScroll {
-        from { transform: translate3d(-50%, 0, 0); }
-        to   { transform: translate3d(0, 0, 0); }
+
+      /* ---- arrows ---- */
+      .stories-nav {
+        position: absolute; top: 50%; z-index: 3;
+        width: 3rem; height: 3rem; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid rgba(15,23,42,0.1);
+        background: rgba(255,255,255,0.92);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 24px rgba(15,23,42,0.14);
+        color: #0f172a; cursor: pointer;
+        transform: translateY(-50%);
+        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.25s ease, box-shadow 0.35s ease;
       }
-      .stories-marquee:hover .stories-track { animation-play-state: paused; }
+      .stories-nav svg { width: 1.05rem; height: 1.05rem; display: block; }
+      .stories-nav-prev { left: 0.75rem; }
+      .stories-nav-next { right: 0.75rem; }
+      .stories-nav:hover { background: #fff; box-shadow: 0 12px 30px rgba(15,23,42,0.22); }
+      .stories-nav-prev:hover { transform: translateY(-50%) translateX(-3px); }
+      .stories-nav-next:hover { transform: translateY(-50%) translateX(3px); }
+      .stories-nav:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+      @media (max-width: 560px) {
+        .stories-nav { width: 2.75rem; height: 2.75rem; }   /* stay on the 44px floor */
+        .stories-nav-prev { left: 0.35rem; }
+        .stories-nav-next { right: 0.35rem; }
+      }
 
       .story-card {
         position: relative;
@@ -470,7 +491,8 @@
         .story-card { width: 82vw; }
       }
       @media (prefers-reduced-motion: reduce) {
-        .stories-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: 1.15rem 0; }
+        .stories-track { flex-wrap: wrap; width: auto; justify-content: center; gap: 1.15rem 0; transform: none !important; }
+        .stories-nav { display: none; }
         .stories-marquee { -webkit-mask-image: none; mask-image: none; }
         .story-card, .story-frame { transition: none !important; }
         .story-card:hover { transform: none; }
@@ -510,12 +532,26 @@
 
     <div class="container">
       <div class="stories-marquee" id="storiesMarquee">
+        <button class="stories-nav stories-nav-prev" id="storiesPrev" type="button" aria-label="Edellinen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="stories-nav stories-nav-next" id="storiesNext" type="button" aria-label="Seuraava">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
         <div class="stories-track" id="storiesTrack">
       <a class="story-card" data-sl-pop href="portfolio/vantage-site.html" target="_blank" rel="noopener">
         <div class="story-frame" data-src="portfolio/vantage-site.html" aria-hidden="true"></div>
         <div class="story-bottom">
           <div class="story-title">Vantage</div>
           <div class="story-meta" data-i18n="Interaktiivinen konsepti · Scroll">Interaktiivinen konsepti · Scroll</div>
+          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
+        </div>
+      </a>
+      <a class="story-card" data-sl-pop href="portfolio/plume.html" target="_blank" rel="noopener">
+        <div class="story-frame" data-src="portfolio/plume.html" aria-hidden="true"></div>
+        <div class="story-bottom">
+          <div class="story-title">Plume</div>
+          <div class="story-meta" data-i18n="Markkinointitoimisto · Brändi">Markkinointitoimisto · Brändi</div>
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
@@ -1007,26 +1043,33 @@
 <script>
 /* Portfolio marquee.
 
-   The track is cloned once so the loop is seamless: the animation runs from
-   -50% to 0, and at -50% the clone sits exactly where the original started.
-   Duration scales with card count, so adding sites keeps a constant speed
-   rather than making the strip whip around faster.
+   The track is cloned once and driven from JS rather than a CSS keyframe:
+   the arrows need to nudge the same value the auto-scroll animates, and you
+   cannot layer a second transform on a property an animation owns.
 
-   Each card's preview is the real page in a scaled, inert iframe. Frames are
-   mounted when the card scrolls near the viewport and torn down once it is
-   well clear, so however many sites end up in the strip only the handful on
-   screen are ever live. */
+   Position is one number, x, in pixels. One full set of cards is `half`
+   pixels wide, so x wraps within [-half, 0) and the strip never shows a seam.
+   Auto-scroll walks x forward; an arrow sets a target and the loop eases into
+   it. Adding more cards changes nothing here: speed is per-card, so the strip
+   travels at a constant rate however long it gets.
+
+   Each card's preview is the real page in a scaled, inert iframe, mounted when
+   the card nears the viewport and torn down once it is clear, so only the
+   handful on screen are ever live. */
 (function () {
   var track = document.getElementById('storiesTrack');
-  if (!track) return;
+  var marquee = document.getElementById('storiesMarquee');
+  if (!track || !marquee) return;
 
   var BASE_W = 1440, BASE_H = 900;
-  var SECONDS_PER_CARD = 9;  // constant travel speed as cards are added
+  var SECONDS_PER_CARD = 9;   // constant travel speed as cards are added
 
   var originals = Array.prototype.slice.call(track.children);
   if (!originals.length) return;
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- previews ---------- */
 
   function fit(frame, iframe) {
     var scale = frame.offsetWidth / BASE_W;
@@ -1058,26 +1101,112 @@
     if (iframe) iframe.remove();
   }
 
-  // duplicate the set so the strip never shows a gap
-  if (!reduced) {
-    originals.forEach(function (card) {
-      var clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.setAttribute('tabindex', '-1');
-      track.appendChild(clone);
-    });
-    track.style.setProperty('--stories-dur', (originals.length * SECONDS_PER_CARD) + 's');
+  /* ---------- the strip ---------- */
+
+  if (reduced) {
+    // static, wrapped grid: no clones, no motion, arrows hidden by CSS
+    watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
+    return;
   }
 
-  var frames = Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]'));
-  if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
-  var obs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) mount(e.target);
-      else unmount(e.target);
-    });
-  }, { rootMargin: '300px' });
-  frames.forEach(function (f) { obs.observe(f); });
+  originals.forEach(function (card) {
+    var clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.setAttribute('tabindex', '-1');
+    track.appendChild(clone);
+  });
+
+  var half = 0, step = 0, x = 0, target = null, paused = false, started = false;
+
+  function measure() {
+    // scrollWidth is 0 until the cards have laid out, so this is retried from
+    // the loop until it returns something real
+    half = track.scrollWidth / 2;
+    if (!half) return false;
+    step = half / originals.length;          // one card, including its margin
+    if (!started) { x = -half; started = true; }   // start on the clone set
+    // paint straight away: rAF does not run while the tab is hidden, and
+    // without this the strip would sit at 0 and jump on first display
+    paint();
+    return true;
+  }
+
+  function paint() {
+    track.style.transform = 'translate3d(' + x + 'px,0,0)';
+  }
+
+  function wrap() {
+    if (!half) return;
+    while (x >= 0) x -= half;
+    while (x < -half) x += half;
+  }
+
+  var last = null;
+  function frame(now) {
+    var dt = last === null ? 0 : Math.min((now - last) / 1000, 0.05);
+    last = now;
+
+    if (!half && !measure()) { requestAnimationFrame(frame); return; }
+
+    if (target !== null) {
+      // ease toward the arrow's destination, then hand back to auto-scroll
+      var d = target - x;
+      x += d * (1 - Math.exp(-9 * dt));
+      if (Math.abs(target - x) < 0.5) { x = target; target = null; }
+    } else if (!paused) {
+      x += (step / SECONDS_PER_CARD) * dt;   // travels left to right
+    }
+
+    wrap();
+    if (target !== null) target = null_or_wrapped(target);
+    paint();
+    requestAnimationFrame(frame);
+  }
+
+  // keep a pending target in the same wrapped space as x, so a nudge taken
+  // near the seam does not send the strip the long way round
+  function null_or_wrapped(t) {
+    if (t === null) return null;
+    while (t - x > half) t -= half;
+    while (t - x < -half) t += half;
+    return t;
+  }
+
+  function nudge(dir) {
+    var base = target === null ? x : target;
+    target = base + dir * step;
+  }
+
+  document.getElementById('storiesPrev').addEventListener('click', function () { nudge(1); });
+  document.getElementById('storiesNext').addEventListener('click', function () { nudge(-1); });
+
+  marquee.addEventListener('mouseenter', function () { paused = true; });
+  marquee.addEventListener('mouseleave', function () { paused = false; });
+  marquee.addEventListener('focusin', function () { paused = true; });
+  marquee.addEventListener('focusout', function () { paused = false; });
+
+  measure();
+  window.addEventListener('resize', function () {
+    var before = half;
+    half = 0;
+    if (measure() && before) x = x / before * half;   // hold position across a resize
+    wrap();
+  }, { passive: true });
+
+  watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
+  requestAnimationFrame(frame);
+
+  function watchFrames(frames) {
+    if (!frames.length) return;
+    if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) mount(e.target);
+        else unmount(e.target);
+      });
+    }, { rootMargin: '300px' });
+    frames.forEach(function (f) { obs.observe(f); });
+  }
 })();
 </script>
 </body>
