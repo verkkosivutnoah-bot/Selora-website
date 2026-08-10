@@ -227,16 +227,24 @@
       -webkit-mask-image: radial-gradient(ellipse 74% 62% at 50% 42%, #000 0%, transparent 78%);
       mask-image: radial-gradient(ellipse 74% 62% at 50% 42%, #000 0%, transparent 78%); }
     .rev-inner { position: relative; z-index: 1; }
-    .rev-head { max-width: 42rem; margin-bottom: 3.5rem; }
+    .rev-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,0.95fr); gap: 3rem; align-items: end; margin-bottom: 3.25rem; }
+    .rev-head .section-sub { margin: 0; }
     .rev-section .section-label { color: #60A5FA; }
     .rev-section .section-heading { color: #fff; }
     .rev-section .section-sub { color: rgba(255,255,255,0.6); }
 
-    .rev-flow { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
-    @media (min-width: 940px) { .rev-flow { grid-template-columns: 1fr 1fr; gap: 4.5rem; } }
+    /* steps run across the top so the funnel visual gets the full width */
+    .rev-flow { display: flex; flex-direction: column; gap: 3.5rem; }
 
     /* steps */
-    .rev-steps { display: flex; flex-direction: column; gap: 1.75rem; }
+    .rev-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.15rem; }
+    .rev-steps .rev-step {
+      padding: 1.6rem 1.65rem; border-radius: 1.25rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
+    }
+    .rev-steps .rev-step:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.3); }
+    .rev-visual { max-width: 46rem; margin: 0 auto; width: 100%; }
     .rev-step { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
     .rev-step-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: #60A5FA;
       background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.24);
@@ -298,7 +306,8 @@
 
     @media (max-width: 939px) {
       .rev-section { padding: 4.5rem 0; }
-      .rev-head { margin-bottom: 2.5rem; }
+      .rev-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; margin-bottom: 2.5rem; }
+      .rev-steps { grid-template-columns: 1fr; }
       .rev-visual { margin-top: 0.5rem; }
     }
     @media (max-width: 480px) {
@@ -321,95 +330,84 @@
     .teaser-arrow { display: inline-flex; margin-top: 1.1rem; font-size: 0.72rem; font-weight: 500; color: var(--blue-light); letter-spacing: 0.04em; }
 
     /* HOW IT WORKS */
-    /* ── PROCESS TIMELINE ─────────────────────────────────────────── */
-    .process-section { position: relative; background: #050C1A; padding: 7rem 0; overflow: hidden; }
-    .process-section .section-label { color: rgba(96,165,250,0.75); }
-    .process-section .section-heading { color: #fff; }
-    .process-section .section-sub { color: rgba(255,255,255,0.5); }
-    .proc-aurora {
-      position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    /* ── PROCESS ──────────────────────────────────────────────────── */
+    .process-section { position: relative; background: #050C1A; padding: 6.5rem 0; overflow: hidden; }
+    .proc-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+    /* holds contrast for the copy without flattening the shader */
+    .proc-veil {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
       background:
-        radial-gradient(ellipse 55% 45% at 12% 8%, rgba(29,78,216,0.3), transparent 62%),
-        radial-gradient(ellipse 45% 55% at 92% 72%, rgba(59,130,246,0.16), transparent 66%);
+        linear-gradient(180deg, rgba(5,12,26,0.86) 0%, rgba(5,12,26,0.5) 34%, rgba(5,12,26,0.58) 72%, rgba(5,12,26,0.92) 100%);
     }
-    .proc-shell { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr); gap: 4rem; align-items: start; }
+    .process-section .section-label { color: rgba(147,197,253,0.85); }
+    .process-section .section-heading { color: #fff; }
+    .process-section .section-sub { color: rgba(255,255,255,0.62); margin: 0; }
+    .proc-shell { position: relative; z-index: 2; }
 
-    /* left column tracks progress and stays put while the steps scroll */
-    .proc-aside { position: sticky; top: 7rem; }
-    .proc-meter { display: flex; align-items: center; gap: 1rem; margin-top: 2.5rem; }
-    .proc-meter-track { position: relative; flex: 1; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+    /* header runs full width so the steps get the room instead of a tall rail */
+    .proc-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 3rem; align-items: end; margin-bottom: 3.25rem; }
+    .proc-head-side { display: flex; flex-direction: column; gap: 1.5rem; }
+    .proc-meter { display: flex; align-items: center; gap: 1rem; }
+    .proc-meter-track { position: relative; flex: 1; height: 2px; background: rgba(255,255,255,0.14); border-radius: 2px; overflow: hidden; }
     .proc-meter-fill { position: absolute; inset: 0 auto 0 0; width: 25%; border-radius: 2px;
       background: linear-gradient(90deg, #1D4ED8, #60A5FA);
       box-shadow: 0 0 16px rgba(96,165,250,0.55);
       transition: width 0.6s cubic-bezier(0.16,1,0.3,1); }
-    .proc-meter-count { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); font-variant-numeric: tabular-nums; }
+    .proc-meter-count { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums; }
     .proc-meter-count b { color: #60A5FA; font-weight: 600; }
     .proc-meter-count i { font-style: normal; margin-left: 0.3rem; }
 
-    .proc-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1.25rem; }
-    .proc-step { display: grid; grid-template-columns: 3.25rem 1fr; gap: 0; }
-    .proc-rail { position: relative; display: flex; justify-content: center; }
-    /* connector down to the next dot */
-    .proc-rail::after {
-      content: ''; position: absolute; top: 2.6rem; bottom: -1.25rem; left: 50%; width: 1px;
-      transform: translateX(-50%);
-      background: linear-gradient(to bottom, rgba(96,165,250,0.35), rgba(96,165,250,0.05));
-    }
-    .proc-rail-last::after { display: none; }
-    .proc-dot {
-      position: relative; z-index: 1; width: 2.4rem; height: 2.4rem; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-      font-size: 0.66rem; font-weight: 600; letter-spacing: 0.05em;
-      color: rgba(255,255,255,0.45);
-      background: #0a1428; border: 1px solid rgba(255,255,255,0.12);
-      transition: color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease;
-    }
-    .proc-step.is-active .proc-dot {
-      color: #fff; background: linear-gradient(150deg, #1D4ED8, #2563EB);
-      border-color: rgba(96,165,250,0.6); box-shadow: 0 0 0 5px rgba(37,99,235,0.14), 0 8px 22px -6px rgba(37,99,235,0.8);
-    }
-
+    .proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
+    .proc-step { display: block; }
     .proc-card {
-      position: relative; overflow: hidden; margin-left: 0.5rem;
-      padding: 1.75rem 1.9rem;
-      background: linear-gradient(158deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018));
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 1.35rem;
-      backdrop-filter: blur(10px);
+      position: relative; overflow: hidden; height: 100%;
+      padding: 1.85rem 1.9rem;
+      background: linear-gradient(158deg, rgba(255,255,255,0.07), rgba(255,255,255,0.022));
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 1.35rem;
+      backdrop-filter: blur(12px);
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease, box-shadow 0.5s ease;
     }
-    /* accent edge lights up with the active step */
     .proc-card-edge {
       position: absolute; left: 0; top: 1.35rem; bottom: 1.35rem; width: 2px; border-radius: 2px;
       background: linear-gradient(to bottom, #1D4ED8, #60A5FA);
       opacity: 0; transform: scaleY(0.35); transform-origin: top;
       transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .proc-step.is-active .proc-card { border-color: rgba(96,165,250,0.28); box-shadow: 0 26px 60px -30px rgba(6,12,24,0.95); }
+    .proc-step.is-active .proc-card { border-color: rgba(96,165,250,0.34); box-shadow: 0 26px 60px -30px rgba(2,6,18,0.95); }
     .proc-step.is-active .proc-card-edge { opacity: 1; transform: scaleY(1); }
-    .proc-card:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.32); }
+    .proc-card:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.36); }
 
-    .proc-card-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.85rem; }
-    .proc-icon {
-      width: 2.35rem; height: 2.35rem; border-radius: 0.8rem; flex-shrink: 0;
+    .proc-card-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem; }
+    .proc-dot {
+      order: -1; width: 2rem; height: 2rem; border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(37,99,235,0.14); border: 1px solid rgba(96,165,250,0.22); color: #60A5FA;
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.5);
+      background: rgba(5,12,26,0.75); border: 1px solid rgba(255,255,255,0.14);
+      transition: color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease;
+    }
+    .proc-step.is-active .proc-dot {
+      color: #fff; background: linear-gradient(150deg, #1D4ED8, #2563EB);
+      border-color: rgba(96,165,250,0.6); box-shadow: 0 0 0 4px rgba(37,99,235,0.16);
+    }
+    .proc-icon {
+      width: 2rem; height: 2rem; border-radius: 0.7rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(37,99,235,0.16); border: 1px solid rgba(96,165,250,0.24); color: #93c5fd;
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.4s ease;
     }
-    .proc-icon svg { width: 1.1rem; height: 1.1rem; }
-    .proc-step.is-active .proc-icon { background: rgba(37,99,235,0.26); transform: scale(1.06); }
-    .proc-card h3 { font-size: 1.15rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; }
-    .proc-card p { font-size: 0.85rem; color: rgba(255,255,255,0.52); line-height: 1.8; }
-    .step-tag { display: inline-flex; margin-top: 1.1rem; font-size: 0.68rem; font-weight: 500; color: rgba(96,165,250,0.7); letter-spacing: 0.06em; text-transform: uppercase; }
+    .proc-icon svg { width: 1rem; height: 1rem; }
+    .proc-step.is-active .proc-icon { background: rgba(37,99,235,0.3); transform: scale(1.06); }
+    .proc-card h3 { font-size: 1.05rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; }
+    .proc-card p { font-size: 0.83rem; color: rgba(255,255,255,0.58); line-height: 1.78; }
+    .step-tag { display: inline-flex; margin-top: 1.1rem; font-size: 0.68rem; font-weight: 500; color: rgba(147,197,253,0.75); letter-spacing: 0.06em; text-transform: uppercase; }
 
-    @media(max-width:1024px){
-      .proc-shell { grid-template-columns: 1fr; gap: 3rem; }
-      .proc-aside { position: static; }
+    @media(max-width:900px){
+      .proc-head { grid-template-columns: 1fr; gap: 1.75rem; align-items: start; margin-bottom: 2.5rem; }
+      .proc-steps { grid-template-columns: 1fr; }
     }
     @media(max-width:640px){
-      .proc-step { grid-template-columns: 2.6rem 1fr; }
-      .proc-card { margin-left: 0.35rem; padding: 1.4rem 1.35rem; }
-      .proc-dot { width: 2rem; height: 2rem; font-size: 0.6rem; }
-      .proc-rail::after { top: 2.2rem; }
+      .proc-card { padding: 1.45rem 1.4rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       .proc-card, .proc-dot, .proc-icon, .proc-card-edge, .proc-meter-fill { transition: none !important; }
@@ -417,13 +415,44 @@
     }
 
     /* FEATURES GRID */
-    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 3rem; }
-    .feat-card { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.08); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(15,23,42,0.05); transition: all 0.25s; }
-    .feat-card:hover { border-color: rgba(29,78,216,0.2); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(15,23,42,0.08); }
-    .feat-icon { font-size: 1.4rem; margin-bottom: 0.85rem; display: block; }
-    .feat-icon svg { width: 1.4rem; height: 1.4rem; display: block; }
-    .feat-card h3 { font-size: 0.85rem; font-weight: 500; color: #0f172a; margin-bottom: 0.4rem; }
-    .feat-card p { font-size: 0.76rem; color: var(--text-muted); line-height: 1.7; }
+    /* ── FEATURE SPEC LIST ────────────────────────────────────────── */
+    .spec-section { background: #eef2f7; }
+    .spec-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,0.9fr); gap: 3rem; align-items: end; margin-bottom: 3rem; }
+    .spec-head .section-sub { margin: 0; }
+    .spec-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 3.5rem; }
+    .spec-row {
+      position: relative; display: grid; grid-template-columns: auto auto 1fr; align-items: start;
+      gap: 1.1rem; padding: 1.6rem 0.25rem 1.6rem 0;
+      border-bottom: 1px solid rgba(15,23,42,0.1);
+    }
+    .spec-idx { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.12em; color: rgba(29,78,216,0.5); padding-top: 0.42rem; font-variant-numeric: tabular-nums; }
+    .spec-icon {
+      width: 2.35rem; height: 2.35rem; border-radius: 0.75rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff; border: 1px solid rgba(15,23,42,0.08); color: var(--blue);
+      box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+    }
+    .spec-icon svg { width: 1.15rem; height: 1.15rem; display: block; }
+    .spec-body h3 { font-size: 0.95rem; font-weight: 500; color: #0f172a; margin-bottom: 0.3rem; letter-spacing: -0.015em; }
+    .spec-body p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.75; }
+    /* accent wipes in along the divider on hover */
+    .spec-bar {
+      position: absolute; left: 0; bottom: -1px; height: 1px; width: 100%;
+      background: linear-gradient(90deg, var(--blue), rgba(96,165,250,0));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1);
+    }
+    .spec-row:hover .spec-bar { transform: scaleX(1); }
+    .spec-row:hover .spec-icon { transform: translateY(-2px); background: var(--blue); color: #fff; border-color: var(--blue); }
+    @media(max-width:900px){
+      .spec-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; }
+      .spec-list { grid-template-columns: 1fr; column-gap: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .spec-bar, .spec-icon { transition: none !important; }
+      .spec-row:hover .spec-icon { transform: none; }
+    }
 
     /* INTEGRATIONS */
     .integration-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 0.75rem; margin-top: 2.5rem; }
@@ -432,12 +461,45 @@
     .integration-note { margin-top: 1.5rem; font-size: 0.78rem; color: var(--text-muted); }
 
     /* BENEFITS */
-    .benefits-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
-    .benefit-item { padding: 1.75rem; border-radius: 1rem; background: #F8FAFF; border: 1px solid rgba(15,23,42,0.08); box-shadow: 0 1px 3px rgba(15,23,42,0.05); }
-    .benefit-item .bi { font-size: 1.5rem; margin-bottom: 0.85rem; display: block; }
-    .benefit-item .bi svg { width: 1.5rem; height: 1.5rem; display: block; }
-    .benefit-item h3 { font-size: 0.9rem; font-weight: 500; color: #0f172a; margin-bottom: 0.45rem; }
-    .benefit-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.75; }
+    /* ── WHY SELORA ───────────────────────────────────────────────── */
+    .why-shell { display: grid; grid-template-columns: minmax(0,0.8fr) minmax(0,1.2fr); gap: 4.5rem; align-items: start; }
+    .why-aside { position: sticky; top: 6.5rem; }
+    .why-aside .section-sub { margin-bottom: 2rem; }
+    .why-cta { display: inline-flex; }
+    .why-list { list-style: none; margin: 0; padding: 0; counter-reset: why; }
+    .why-item {
+      position: relative; display: grid; grid-template-columns: auto 1fr; gap: 1.5rem;
+      padding: 1.75rem 0; border-top: 1px solid rgba(15,23,42,0.1);
+      transition: padding-left 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    .why-item:last-child { border-bottom: 1px solid rgba(15,23,42,0.1); }
+    .why-num {
+      font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
+      font-size: 1.75rem; line-height: 1; color: rgba(29,78,216,0.28);
+      padding-top: 0.2rem; transition: color 0.4s ease;
+    }
+    .why-title { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.45rem; }
+    .why-icon {
+      width: 1.9rem; height: 1.9rem; border-radius: 0.6rem; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(37,99,235,0.09); color: var(--blue);
+      transition: background 0.35s ease, color 0.35s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+    }
+    .why-icon svg { width: 1rem; height: 1rem; display: block; }
+    .why-body h3 { font-size: 1.02rem; font-weight: 500; color: #0f172a; letter-spacing: -0.02em; }
+    .why-body p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.8; }
+    .why-item:hover { padding-left: 0.9rem; }
+    .why-item:hover .why-num { color: var(--blue); }
+    .why-item:hover .why-icon { background: var(--blue); color: #fff; transform: scale(1.06); }
+    @media(max-width:900px){
+      .why-shell { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-aside { position: static; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .why-item, .why-icon, .why-num { transition: none !important; }
+      .why-item:hover { padding-left: 0; }
+      .why-item:hover .why-icon { transform: none; }
+    }
 
     /* TESTIMONIALS */
     .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
@@ -686,9 +748,9 @@
     .cta-phone a { color: var(--blue); text-decoration: none; font-weight: 500; }
 
     /* RESPONSIVE */
-    @media(max-width:1100px){ .integration-grid{grid-template-columns:repeat(4,1fr);} .grid-4{grid-template-columns:repeat(2,1fr);} }
-    @media(max-width:900px){ .grid-3{grid-template-columns:1fr 1fr;} .benefits-grid{grid-template-columns:1fr 1fr;} .testimonials-grid{grid-template-columns:1fr 1fr;} .pricing-teaser-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:640px){ .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} .grid-4{grid-template-columns:1fr 1fr;} .integration-grid{grid-template-columns:repeat(3,1fr);} .benefits-grid{grid-template-columns:1fr;} .testimonials-grid{grid-template-columns:1fr;} .pricing-teaser-grid{grid-template-columns:1fr;} .stats-inner{gap:1.5rem;} .stat-divider{display:none;} .cta-block{padding:2rem 1.5rem;} .footer-top{flex-direction:column;} .footer-links{gap:1.5rem;} }
+    @media(max-width:1100px){ .integration-grid{grid-template-columns:repeat(4,1fr);} }
+    @media(max-width:900px){ .grid-3{grid-template-columns:1fr 1fr;} .testimonials-grid{grid-template-columns:1fr 1fr;} .pricing-teaser-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:640px){ .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} .integration-grid{grid-template-columns:repeat(3,1fr);} .testimonials-grid{grid-template-columns:1fr;} .pricing-teaser-grid{grid-template-columns:1fr;} .stats-inner{gap:1.5rem;} .stat-divider{display:none;} .cta-block{padding:2rem 1.5rem;} .footer-top{flex-direction:column;} .footer-links{gap:1.5rem;} }
 
     /* ═══════════════════════════════════════════════════════
        LIVE DEMO SECTION, unique dark section
@@ -961,7 +1023,6 @@
       .stats-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
       .stat-divider { display: none; }
       .integration-grid { grid-template-columns: repeat(3,1fr) !important; }
-      .grid-4 { grid-template-columns: 1fr 1fr !important; }
       /* ROI stats bar: 2+1 layout on tiny screens */
       .roi-stats-bar { grid-template-columns: 1fr 1fr; }
       .roi-stat-cell:last-child { grid-column: 1 / -1; border-right: none; border-top: 1px solid rgba(255,255,255,0.06); }
@@ -1505,26 +1566,31 @@
 
 <!-- How it works -->
 <div class="process-section" id="prosessi">
-  <div class="proc-aurora" aria-hidden="true"></div>
+  <canvas class="proc-canvas" data-selora-flowfield aria-hidden="true"></canvas>
+  <div class="proc-veil" aria-hidden="true"></div>
   <div class="container proc-shell">
 
-    <aside class="proc-aside">
-      <p class="section-label" data-sl-reveal>Miten se toimii</p>
-      <h2 class="section-heading" data-sl-split>Käytössä <span class="accent">48 tunnissa.</span></h2>
-      <p class="section-sub" data-sl-reveal>Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.</p>
-      <div class="proc-meter" aria-hidden="true">
-        <div class="proc-meter-track"><span class="proc-meter-fill"></span></div>
-        <div class="proc-meter-count"><b>01</b><i>/ 04</i></div>
+    <div class="proc-head">
+      <div class="proc-head-main">
+        <p class="section-label" data-sl-reveal>Miten se toimii</p>
+        <h2 class="section-heading" data-sl-split>Käytössä <span class="accent">48 tunnissa.</span></h2>
       </div>
-    </aside>
+      <div class="proc-head-side">
+        <p class="section-sub" data-sl-reveal>Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.</p>
+        <div class="proc-meter" aria-hidden="true">
+          <div class="proc-meter-track"><span class="proc-meter-fill"></span></div>
+          <div class="proc-meter-count"><b>01</b><i>/ 04</i></div>
+        </div>
+      </div>
+    </div>
 
     <ol class="proc-steps">
 
-      <li class="proc-step is-active" data-sl-reveal>
-        <div class="proc-rail" aria-hidden="true"><span class="proc-dot">01</span></div>
+      <li class="proc-step" data-sl-reveal>
         <div class="proc-card">
           <span class="proc-card-edge" aria-hidden="true"></span>
           <div class="proc-card-head">
+            <span class="proc-dot" aria-hidden="true">01</span>
             <span class="proc-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </span>
@@ -1536,10 +1602,10 @@
       </li>
 
       <li class="proc-step" data-sl-reveal>
-        <div class="proc-rail" aria-hidden="true"><span class="proc-dot">02</span></div>
         <div class="proc-card">
           <span class="proc-card-edge" aria-hidden="true"></span>
           <div class="proc-card-head">
+            <span class="proc-dot" aria-hidden="true">02</span>
             <span class="proc-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
             </span>
@@ -1551,10 +1617,10 @@
       </li>
 
       <li class="proc-step" data-sl-reveal>
-        <div class="proc-rail" aria-hidden="true"><span class="proc-dot">03</span></div>
         <div class="proc-card">
           <span class="proc-card-edge" aria-hidden="true"></span>
           <div class="proc-card-head">
+            <span class="proc-dot" aria-hidden="true">03</span>
             <span class="proc-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             </span>
@@ -1566,10 +1632,10 @@
       </li>
 
       <li class="proc-step" data-sl-reveal>
-        <div class="proc-rail proc-rail-last" aria-hidden="true"><span class="proc-dot">04</span></div>
         <div class="proc-card">
           <span class="proc-card-edge" aria-hidden="true"></span>
           <div class="proc-card-head">
+            <span class="proc-dot" aria-hidden="true">04</span>
             <span class="proc-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
             </span>
@@ -1584,54 +1650,90 @@
   </div>
 </div>
 
-<!-- Feature grid -->
-<div class="section">
+<!-- Feature list -->
+<div class="section spec-section">
   <div class="container">
-    <p class="section-label">Ominaisuudet</p>
-    <h2 class="section-heading">Kaikki mitä tarvitset.<br><span class="accent">Ei turhaa.</span></h2>
-    <p class="section-sub">Sivusto, joka latautuu nopeasti, näkyy Googlessa ja toimii jokaisella laitteella. Sinä keskityt työhösi.</p>
-    <div class="grid-4">
-      <div class="feat-card reveal">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span>
-        <h3>Nopeat latausajat</h3>
-        <p>Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Kävijä ei ehdi turhautua.</p>
+    <div class="spec-head">
+      <div>
+        <p class="section-label" data-sl-reveal>Ominaisuudet</p>
+        <h2 class="section-heading" data-sl-split>Kaikki mitä tarvitset.<br><span class="accent">Ei turhaa.</span></h2>
       </div>
-      <div class="feat-card reveal reveal-delay-1">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
-        <h3>Mobiilioptimointi</h3>
-        <p>Yli puolet kävijöistä tulee puhelimella. Sivusto suunnitellaan ensin mobiilille.</p>
-      </div>
-      <div class="feat-card reveal reveal-delay-2">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-        <h3>Yhteydenottolomakkeet</h3>
-        <p>Selkeät lomakkeet, jotka ohjaavat kävijän yhteydenottoon. Viestit suoraan sähköpostiisi.</p>
-      </div>
-      <div class="feat-card reveal reveal-delay-3">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="m21 3-9 9"/><path d="M21 21h-5v-5"/><path d="m21 21-9-9"/><path d="M3 6h4.5"/><path d="M3 18h4.5"/><path d="M7.5 6C11 6 13 9 13 12s2 6 5.5 6"/></svg></span>
-        <h3>Hakukoneoptimointi</h3>
-        <p>Otsikkorakenne, metatiedot ja sivukartta kuntoon, jotta asiakkaat löytävät sinut Googlesta.</p>
-      </div>
-      <div class="feat-card reveal">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <h3>Kaksikielinen sivusto</h3>
-        <p>Suomi ja englanti samalla sivustolla. Kävijä vaihtaa kieltä yhdellä klikkauksella.</p>
-      </div>
-      <div class="feat-card reveal reveal-delay-1">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>
-        <h3>Google-arvostelujen automaatio</h3>
-        <p>Automaattinen viesti pyytää arvostelun. Tyytyväiset ohjataan Googleen, kritiikki suoraan sinulle.</p>
-      </div>
-      <div class="feat-card reveal reveal-delay-2">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></span>
-        <h3>Kävijäanalytiikka</h3>
-        <p>Näet mistä kävijät tulevat, mitä sivuja he katsovat ja kuinka moni ottaa yhteyttä.</p>
-      </div>
-      <div class="feat-card reveal reveal-delay-3">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-        <h3>Tekoälychatbot</h3>
-        <p>Vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottolomakkeelle.</p>
-      </div>
+      <p class="section-sub" data-sl-reveal>Sivusto, joka latautuu nopeasti, näkyy Googlessa ja toimii jokaisella laitteella. Sinä keskityt työhösi.</p>
     </div>
+    <ol class="spec-list">
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">01</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span>
+        <div class="spec-body">
+          <h3>Nopeat latausajat</h3>
+          <p>Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Kävijä ei ehdi turhautua.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">02</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></span>
+        <div class="spec-body">
+          <h3>Mobiilioptimointi</h3>
+          <p>Yli puolet kävijöistä tulee puhelimella. Sivusto suunnitellaan ensin mobiilille.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">03</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+        <div class="spec-body">
+          <h3>Yhteydenottolomakkeet</h3>
+          <p>Selkeät lomakkeet, jotka ohjaavat kävijän yhteydenottoon. Viestit suoraan sähköpostiisi.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">04</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="m21 3-9 9"/><path d="M21 21h-5v-5"/><path d="m21 21-9-9"/><path d="M3 6h4.5"/><path d="M3 18h4.5"/><path d="M7.5 6C11 6 13 9 13 12s2 6 5.5 6"/></svg></span>
+        <div class="spec-body">
+          <h3>Hakukoneoptimointi</h3>
+          <p>Otsikkorakenne, metatiedot ja sivukartta kuntoon, jotta asiakkaat löytävät sinut Googlesta.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">05</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
+        <div class="spec-body">
+          <h3>Kaksikielinen sivusto</h3>
+          <p>Suomi ja englanti samalla sivustolla. Kävijä vaihtaa kieltä yhdellä klikkauksella.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">06</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>
+        <div class="spec-body">
+          <h3>Google-arvostelujen automaatio</h3>
+          <p>Automaattinen viesti pyytää arvostelun. Tyytyväiset ohjataan Googleen, kritiikki suoraan sinulle.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">07</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></span>
+        <div class="spec-body">
+          <h3>Kävijäanalytiikka</h3>
+          <p>Näet mistä kävijät tulevat, mitä sivuja he katsovat ja kuinka moni ottaa yhteyttä.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+      <li class="spec-row" data-sl-reveal>
+        <span class="spec-idx" aria-hidden="true">08</span>
+        <span class="spec-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
+        <div class="spec-body">
+          <h3>Tekoälychatbot</h3>
+          <p>Vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottolomakkeelle.</p>
+        </div>
+        <span class="spec-bar" aria-hidden="true"></span>
+      </li>
+    </ol>
   </div>
 </div>
 
@@ -1640,30 +1742,32 @@
   <div class="rev-mesh" aria-hidden="true"></div>
   <div class="rev-grid-bg" aria-hidden="true"></div>
   <div class="container rev-inner">
-    <div class="rev-head reveal">
-      <p class="section-label">Google-arvostelut</p>
-      <h2 class="section-heading">Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
-      <p class="section-sub">Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
+    <div class="rev-head">
+      <div>
+        <p class="section-label" data-sl-reveal>Google-arvostelut</p>
+        <h2 class="section-heading" data-sl-split>Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
+      </div>
+      <p class="section-sub" data-sl-reveal>Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
     </div>
 
     <div class="rev-flow">
 
-      <div class="rev-steps reveal">
-        <div class="rev-step">
+      <div class="rev-steps" data-sl-stagger="110">
+        <div class="rev-step" data-sl-reveal>
           <div class="rev-step-num">01</div>
           <div class="rev-step-body">
             <h3>Asiakas ostaa tai käy</h3>
             <p>Kun tilaus valmistuu tai käynti on ohi, järjestelmä poimii asiakkaan yhteystiedot automaattisesti.</p>
           </div>
         </div>
-        <div class="rev-step">
+        <div class="rev-step" data-sl-reveal>
           <div class="rev-step-num">02</div>
           <div class="rev-step-body">
             <h3>Automaattinen viesti lähtee</h3>
             <p>Asiakas saa ystävällisen sähköpostin, jossa pyydetään lyhyt arvio kokemuksesta. Ajoituksen ja sanamuodon säädämme toimialaasi sopivaksi.</p>
           </div>
         </div>
-        <div class="rev-step">
+        <div class="rev-step" data-sl-reveal>
           <div class="rev-step-num">03</div>
           <div class="rev-step-body">
             <h3>Palaute ohjautuu oikeaan paikkaan</h3>
@@ -1672,7 +1776,7 @@
         </div>
       </div>
 
-      <div class="rev-visual reveal reveal-delay-1" aria-hidden="true">
+      <div class="rev-visual" data-sl-reveal="scale" aria-hidden="true">
 
         <div class="rev-card rev-card-mail">
           <div class="rev-mail-top">
@@ -1729,44 +1833,77 @@
   </div>
 </div>
 
-<!-- Benefits -->
-<div class="section">
-  <div class="container">
-    <p class="section-label">Miksi Selora</p>
-    <h2 class="section-heading">Enemmän asiakkaita.<br><span class="accent">Vähemmän työtä.</span></h2>
-    <p class="section-sub">Verkkosivusto ei ole pelkkä kuluerä. Hyvin rakennettu sivusto tuo yhteydenottoja vuosia eteenpäin.</p>
-    <div class="benefits-grid">
-      <div class="benefit-item reveal">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-        <h3>Säästä aikaa</h3>
-        <p>Asiakkaat löytävät palvelut, hinnat ja aukioloajat itse. Vähemmän samoja kysymyksiä puhelimessa.</p>
-      </div>
-      <div class="benefit-item reveal reveal-delay-1">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="1" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <h3>Kertamaksu, ei kuukausimaksuja</h3>
-        <p>Maksat sivustosta kerran ja se on sinun. Ei kuukausimaksuja, ei yllätyslaskuja.</p>
-      </div>
-      <div class="benefit-item reveal reveal-delay-2">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span>
-        <h3>Myy myös yöllä</h3>
-        <p>Sivusto esittelee palvelusi ja ottaa yhteydenottoja vastaan silloinkin kun olet töissä tai nukut.</p>
-      </div>
-      <div class="benefit-item reveal">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-        <h3>Näyttää ammattimaiselta</h3>
-        <p>Ulkoasu rakennetaan brändiisi sopivaksi. Asiakas näkee heti, että yritys on luotettava ja ajan tasalla.</p>
-      </div>
-      <div class="benefit-item reveal reveal-delay-1">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-        <h3>Kasvaa mukanasi</h3>
-        <p>Sivustoa on helppo laajentaa uusilla sivuilla ja palveluilla, kun yritys kasvaa.</p>
-      </div>
-      <div class="benefit-item reveal reveal-delay-2">
-        <span class="bi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-        <h3>GDPR-yhteensopiva</h3>
-        <p>Sivustot ja lomaketiedot sijaitsevat EU:n palvelimilla. Toteutus on GDPR-yhteensopiva.</p>
-      </div>
-    </div>
+<!-- Why Selora -->
+<div class="section why-section">
+  <div class="container why-shell">
+    <aside class="why-aside">
+      <p class="section-label" data-sl-reveal>Miksi Selora</p>
+      <h2 class="section-heading" data-sl-split>Enemmän asiakkaita.<br><span class="accent">Vähemmän työtä.</span></h2>
+      <p class="section-sub" data-sl-reveal>Verkkosivusto ei ole pelkkä kuluerä. Hyvin rakennettu sivusto tuo yhteydenottoja vuosia eteenpäin.</p>
+      <a href="yhteystiedot.html" class="btn btn-blue why-cta" data-sl-reveal>Varaa maksuton kartoitus →</a>
+    </aside>
+    <ol class="why-list">
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">01</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <h3>Säästä aikaa</h3>
+            </div>
+            <p>Asiakkaat löytävät palvelut, hinnat ja aukioloajat itse. Vähemmän samoja kysymyksiä puhelimessa.</p>
+          </div>
+        </li>
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">02</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="1" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+              <h3>Kertamaksu, ei kuukausimaksuja</h3>
+            </div>
+            <p>Maksat sivustosta kerran ja se on sinun. Ei kuukausimaksuja, ei yllätyslaskuja.</p>
+          </div>
+        </li>
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">03</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg></span>
+              <h3>Myy myös yöllä</h3>
+            </div>
+            <p>Sivusto esittelee palvelusi ja ottaa yhteydenottoja vastaan silloinkin kun olet töissä tai nukut.</p>
+          </div>
+        </li>
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">04</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+              <h3>Näyttää ammattimaiselta</h3>
+            </div>
+            <p>Ulkoasu rakennetaan brändiisi sopivaksi. Asiakas näkee heti, että yritys on luotettava ja ajan tasalla.</p>
+          </div>
+        </li>
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">05</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+              <h3>Kasvaa mukanasi</h3>
+            </div>
+            <p>Sivustoa on helppo laajentaa uusilla sivuilla ja palveluilla, kun yritys kasvaa.</p>
+          </div>
+        </li>
+        <li class="why-item" data-sl-reveal>
+          <span class="why-num" aria-hidden="true">06</span>
+          <div class="why-body">
+            <div class="why-title">
+              <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+              <h3>GDPR-yhteensopiva</h3>
+            </div>
+            <p>Sivustot ja lomaketiedot sijaitsevat EU:n palvelimilla. Toteutus on GDPR-yhteensopiva.</p>
+          </div>
+        </li>
+    </ol>
   </div>
 </div>
 
@@ -1937,6 +2074,7 @@
 </footer>
 
 <script src="/assets/selora-nebula.js" defer></script>
+<script src="/assets/selora-flowfield.js" defer></script>
 
 <script>
 (function () {
