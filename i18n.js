@@ -2877,6 +2877,59 @@
     'Kirjoitamme parhaillaan uusia oppaita verkkosivuista, hakukoneoptimoinnista ja siitä, miten sivusto tuo lisää asiakkaita. Tilaa uutiskirje niin saat ne ensimmäisenä.':
       'We are writing new guides on websites, SEO and how a site brings in more customers. Subscribe to the newsletter to get them first.',
 
+
+    // ---------- REBRAND: hinnoittelu + palvelut ----------
+    'Verkkosivut kertamaksulla. Perussivu 590 euroa, täysi sivusto 990 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
+      'Websites for a one-time fee. Basic site 590 euros, full site 990 euros. Fixed price, no monthly fees, no hidden costs.',
+    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja.':
+      'Clear pricing without surprises. Basic site 590 euros and full site 990 euros, both one-time. No monthly fees.',
+    'Ei. Sovittu kertamaksu kattaa suunnittelun, toteutuksen ja julkaisun. Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.':
+      'No. The agreed one-time fee covers design, build and launch. If you later want more pages or features, we always agree the price in advance.',
+    'Voinko laajentaa sivustoa myöhemmin?': 'Can I expand the site later?',
+    'Kyllä. Sivustoa on helppo laajentaa uusilla sivuilla, kielillä tai toiminnoilla. Sovimme laajennuksen hinnan erikseen, eikä se vaadi sivuston rakentamista uudelleen.':
+      'Yes. The site is easy to extend with new pages, languages or features. We agree the price separately and it never requires rebuilding the site.',
+    'Mitkä ovat maksuehdot?': 'What are the payment terms?',
+    'Laskutamme puolet projektin alussa ja puolet julkaisun yhteydessä. Hyväksymme kortit, laskun ja verkkopankin.':
+      'We invoice half at the start of the project and half on launch. We accept cards, invoice and online banking.',
+    'Kuuluuko hintaan ylläpito?': 'Is maintenance included?',
+    'Kertamaksu kattaa valmiin sivuston. Ylläpito ja jatkopäivitykset ovat vapaaehtoisia ja sovitaan erikseen. Emme lukitse sinua kuukausimaksuun.':
+      'The one-time fee covers the finished site. Maintenance and further updates are optional and agreed separately. We do not lock you into a monthly fee.',
+    'Saanko nähdä esimerkkejä ennen tilausta?': 'Can I see examples before ordering?',
+    'Kyllä. Verkkosivusuunnittelu-sivulta löydät esimerkkisivustot eri toimialoille. Kartoituspuhelussa käymme läpi millainen sivusto sinun yrityksellesi sopisi.':
+      'Yes. The web design page has example sites for different industries. On the discovery call we go through what kind of site would suit your business.',
+    'Epävarma kumpi paketti': 'Not sure which package',
+    'Varaa maksuton kartoituspuhelu. Kerromme rehellisesti kumpi paketti sopii yrityksesi tilanteeseen. Jos aika ei ole oikea, sanomme sen suoraan.':
+      'Book a free discovery call. We will tell you honestly which package fits your situation. If the timing is not right, we will say so.',
+
+    // palvelut
+    'Seloran palvelut suomalaisille yrityksille: räätälöity verkkosivusuunnittelu, hakukoneoptimointi, tekoälychatbot ja sähköpostiautomaatiot. Selkeä hinnoittelu, kertamaksu.':
+      'Selora services for Finnish businesses: custom web design, SEO, an AI chatbot and email automations. Clear pricing, one-time fee.',
+    'Räätälöity verkkosivusuunnittelu, hakukoneoptimointi ja tekoälychatbot. Selkeä hinnoittelu, kertamaksu.':
+      'Custom web design, SEO and an AI chatbot. Clear pricing, one-time fee.',
+    'Rakennamme verkkosivut, jotka näyttävät hyvältä, latautuvat nopeasti ja tuovat yhteydenottoja. Suunnittelusta julkaisuun.':
+      'We build websites that look sharp, load fast and bring in enquiries. From design to launch.',
+    'Jokainen sivusto sisältää kaiken olennaisen: ei lisäosia, ei yllätyksiä. Tässä täydellinen ominaisuusluettelo.':
+      'Every site includes everything essential: no add-ons, no surprises. Here is the full feature list.',
+    'Olemme rakentaneet sivustoja näille toimialoille. Tunnemme mitä asiakkaasi etsivät ja mikä saa heidät ottamaan yhteyttä.':
+      'We have built sites for these industries. We know what your customers look for and what makes them get in touch.',
+    'Verkkosivujen suunnittelu': 'Web design',
+    'Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia, vaan sivusto joka näyttää sinun yritykseltäsi.':
+      'We design the site to match your brand and build it from scratch. No off-the-shelf themes or templates, just a site that looks like your business.',
+    'Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti. Kävijä löytää etsimänsä ja tietää heti mitä tehdä seuraavaksi.':
+      'Every page is designed mobile first and built to load fast. Visitors find what they came for and know what to do next.',
+    'Räätälöity ulkoasu': 'Custom design',
+    'Nopeat latausajat': 'Fast load times',
+    'Suunnittelu': 'Design',
+    'Tekniikka': 'Technology',
+    'Näkyvyys': 'Visibility',
+    'Lisäpalvelut': 'Add-on services',
+    'Selkeä rakenne': 'Clear structure',
+    'Ylläpidettävyys': 'Easy to maintain',
+    'Avainsanatutkimus': 'Keyword research',
+    'Kaksikielisyys': 'Bilingual site',
+    'Analytiikka': 'Analytics',
+    'Sähköpostiautomaatiot': 'Email automations',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
