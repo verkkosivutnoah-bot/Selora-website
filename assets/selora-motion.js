@@ -88,27 +88,77 @@
     });
   }
 
-  function initSplit() {
-    var heads = document.querySelectorAll('[data-sl-split]');
-    if (!heads.length) return;
-    heads.forEach(function (h) {
-      if (h.dataset.slSplitDone) return;
-      h.dataset.slSplitDone = '1';
-      splitNode(h, { i: 0 });
-    });
+  function revealChars(h) {
+    h.querySelectorAll('.sl-char').forEach(function (c) { c.classList.add('is-in'); });
+  }
 
+  function splitOne(h) {
+    // Keep the pre-split markup so we can restore it before re-translating.
+    if (!h.dataset.slOriginal) h.dataset.slOriginal = h.innerHTML;
+    splitNode(h, { i: 0 });
+  }
+
+  var splitObserver = null;
+
+  function observeSplit(heads) {
     if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.sl-char').forEach(function (c) { c.classList.add('is-in'); });
+      heads.forEach(revealChars);
       return;
     }
-    var obs = new IntersectionObserver(function (entries) {
+    if (splitObserver) splitObserver.disconnect();
+    splitObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
-        e.target.querySelectorAll('.sl-char').forEach(function (c) { c.classList.add('is-in'); });
-        obs.unobserve(e.target);
+        revealChars(e.target);
+        splitObserver.unobserve(e.target);
       });
     }, { threshold: 0.2 });
-    heads.forEach(function (h) { obs.observe(h); });
+    heads.forEach(function (h) { splitObserver.observe(h); });
+  }
+
+  function doSplit() {
+    var heads = Array.prototype.slice.call(document.querySelectorAll('[data-sl-split]'));
+    if (!heads.length) return;
+    heads.forEach(splitOne);
+    observeSplit(heads);
+  }
+
+  /* Splitting wraps every character in its own <span>, which destroys the
+     text nodes the i18n overlay looks up. So: translate first, split after,
+     and rebuild on every language change. */
+  function initSplit() {
+    var hasI18n = !!window.selora_i18n || !!document.querySelector('script[src*="i18n"]');
+
+    if (!hasI18n) { doSplit(); return; }
+
+    var done = false;
+    function once() {
+      if (done) return;
+      done = true;
+      doSplit();
+    }
+    // i18n dispatches this at the end of its first setLang() pass.
+    window.addEventListener('selora:langchange', once, { once: true });
+    // Fallback in case i18n never loads.
+    setTimeout(once, 2000);
+
+    // On later language switches, restore the original markup so the overlay
+    // can translate real text nodes, then split the new text.
+    window.addEventListener('selora:langchange', function () {
+      if (!done) return;
+      var heads = Array.prototype.slice.call(document.querySelectorAll('[data-sl-split]'));
+      heads.forEach(function (h) {
+        if (h.dataset.slOriginal) h.innerHTML = h.dataset.slOriginal;
+      });
+      // Let the overlay walk the restored nodes before we re-split them.
+      setTimeout(function () {
+        heads.forEach(function (h) {
+          h.dataset.slOriginal = h.innerHTML; // now holds translated markup
+          splitNode(h, { i: 0 });
+        });
+        heads.forEach(revealChars); // already in view, show immediately
+      }, 60);
+    });
   }
 
   /* ---------- 4. Scroll parallax ---------- */

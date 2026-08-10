@@ -34,8 +34,11 @@
     .btn-ghost:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.45); }
     .btn-blue { background: var(--blue); color: #fff; border: none; padding: 0.7rem 1.75rem; }
     .btn-blue:hover { background: #1e40af; }
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    /* progressive enhancement: visible by default, hidden only once the
+       motion script confirms it is running (html.sl-motion) */
+    .reveal { transition: opacity 0.65s ease, transform 0.65s ease; }
+    html.sl-motion .reveal { opacity: 0; transform: translateY(18px); }
+    html.sl-motion .reveal.in-view { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
@@ -49,9 +52,9 @@
     .footer-nav a:hover { color: #334155; }
 
     /* PAGE HERO */
-    .page-hero { position: relative; height: 380px; overflow: hidden; display: flex; flex-direction: column; }
+    .page-hero { position: relative; min-height: 68vh; overflow: hidden; display: flex; flex-direction: column; }
     #pageCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.55) 100%); z-index: 1; pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 45%, transparent 55%, rgba(0,0,0,0.35) 100%); z-index: 1; pointer-events: none; }
     /* FLOATING NAV */
     .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; height: 3.5rem; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; border: 1px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -62,9 +65,13 @@
     .desktop-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem; font-weight: 400; padding: 0.5rem 0.85rem; border-radius: 9999px; transition: all 0.2s; }
     .desktop-nav a:hover, .desktop-nav a.active { color: #fff; background: rgba(255,255,255,0.1); }
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .page-title-block { position: absolute; bottom: 2.5rem; left: 2rem; z-index: 10; }
+    .page-title-block { position: relative; margin-top: auto; padding: 0 2rem 3.5rem; z-index: 10; }
     .page-title-block .page-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(96,165,250,0.8); margin-bottom: 0.6rem; }
     .page-title-block h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
+    .page-hero-sub { margin-top: 1rem; max-width: 34rem; font-size: 1.02rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.62); }
+    .page-hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .phc { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.5rem 0.9rem; border-radius: 999px; font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+    .phc b { font-weight: 500; color: #fff; }
     .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
 
     /* SECTIONS */
@@ -200,7 +207,7 @@
       .section { padding: 4rem 0; }
       .section-alt { padding: 4rem 0; overflow: hidden; }
       .container { padding: 0 1.25rem; }
-      .page-hero { height: auto; min-height: 280px; }
+      .page-hero { height: auto; min-height: 60vh; }
       .page-title-block { padding: 1.25rem 1.25rem 2rem; right: 1.25rem; left: 1.25rem; }
       .service-card { padding: 1.75rem; gap: 1.25rem; }
       .service-body h3 { font-size: 1.1rem; }
@@ -227,6 +234,9 @@
   <meta name="twitter:description" content="Räätälöity verkkosivusuunnittelu, hakukoneoptimointi ja tekoälychatbot. Selkeä hinnoittelu, kertamaksu." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
+<link rel="stylesheet" href="/assets/selora-ds.css" />
+<script src="/assets/selora-motion.js" defer></script>
+<script src="/assets/selora-nebula.js" defer></script>
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 </head>
@@ -259,55 +269,83 @@
   </header>
   <div class="page-title-block">
     <p class="page-label">Palvelumme</p>
-    <h1>Tekoäly, joka tekee töitä<br><span class="accent">puolestasi.</span></h1>
+    <h1>Verkkosivut, jotka<br><span class="accent">tekevät kauppaa.</span></h1>
+    <p class="page-hero-sub">Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ei kuukausilaskuja.</p>
+    <div class="page-hero-chips">
+      <span class="phc"><b>0,6 s</b> latausaika</span>
+      <span class="phc"><b>100 %</b> mobiilioptimoitu</span>
+      <span class="phc"><b>590 €</b> alkaen, kertamaksu</span>
+    </div>
   </div>
 </div>
 
 <!-- Core services -->
 <div class="section">
   <div class="container">
-    <p class="section-label">Mitä rakennamme</p>
-    <h2 class="section-heading">Yksi palvelu. <span class="accent">Tehtynä kunnolla.</span></h2>
-    <p class="section-sub">Rakennamme verkkosivut, jotka näyttävät hyvältä, latautuvat nopeasti ja tuovat yhteydenottoja. Suunnittelusta julkaisuun.</p>
+    <p class="section-label" data-sl-reveal>Mitä rakennamme</p>
+    <h2 class="section-heading" data-sl-split>Yksi palvelu. <span class="accent">Tehtynä kunnolla.</span></h2>
+    <p class="section-sub" data-sl-reveal>Rakennamme verkkosivut, jotka näyttävät hyvältä, latautuvat nopeasti ja tuovat yhteydenottoja. Suunnittelusta julkaisuun.</p>
 
-    <div class="services-grid">
-      <div class="service-card reveal">
-        <div class="service-icon-wrap">
-          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-          <span class="service-number">01</span>
-        </div>
-        <div class="service-body">
-          <h3>Verkkosivujen suunnittelu</h3>
-          <p>Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia, vaan sivusto joka näyttää sinun yritykseltäsi.</p>
-          <p>Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti. Kävijä löytää etsimänsä ja tietää heti mitä tehdä seuraavaksi.</p>
-          <div class="service-tags">
-            <span class="service-tag">Räätälöity ulkoasu</span>
-            <span class="service-tag">Mobiilioptimointi</span>
-            <span class="service-tag">Nopeat latausajat</span>
-            <span class="service-tag">Yhteydenottolomakkeet</span>
-            <span class="service-tag">Suomi · Englanti</span>
-          </div>
-        </div>
-      </div>
+    <div class="svc-bento">
 
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon-wrap">
-          <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
-          <span class="service-number">02</span>
-        </div>
-        <div class="service-body">
-          <h3>Verkkosivusuunnittelu</h3>
-          <p>Selkeät ja nopeat verkkosivustot, jotka edustavat brändiäsi ja muuttavat vierailijat asiakkaiksi. Rakennamme kaiken aloitussivuista monisivuisiin brändi-sivustoihin. Kaikki on moderni, mobiilioptimoitu ja hakukoneystävällinen.</p>
-          <p>Jokainen sivusto on räätälöity toimialallesi ja kohderyhmällesi. Emme käytä valmiita malleja. Kaikki rakennetaan alusta asti sinulle.</p>
-          <div class="service-tags">
-            <span class="service-tag">Ulkoasu &amp; kehitys</span>
-            <span class="service-tag">SEO-optimointi</span>
-            <span class="service-tag">Konversio-optimointi</span>
-            <span class="service-tag">Mobiilioptimointi</span>
+      <a href="verkkosivusuunnittelu.html" class="svc-tile svc-tile-hero reveal">
+        <div class="svc-hero-mesh" aria-hidden="true"></div>
+        <div class="svc-hero-photo" aria-hidden="true"></div>
+        <div class="svc-hero-grid" aria-hidden="true"></div>
+        <div class="svc-hero-inner">
+          <div class="svc-tile-top">
+            <span class="svc-badge">Ydinpalvelu</span>
+            <span class="svc-num">01</span>
           </div>
-          <a href="verkkosivusuunnittelu.html" class="service-link">Lue lisää →</a>
+          <div class="svc-hero-body">
+            <h3>Verkkosivusuunnittelu</h3>
+            <p>Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia. Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti.</p>
+            <div class="svc-chips">
+              <span class="svc-chip">Räätälöity ulkoasu</span>
+              <span class="svc-chip">Mobiilioptimointi</span>
+              <span class="svc-chip">Nopeat latausajat</span>
+              <span class="svc-chip">Konversio-optimointi</span>
+            </div>
+          </div>
+          <span class="svc-cta">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
         </div>
-      </div>
+      </a>
+
+      <a href="#seo" class="svc-tile reveal reveal-delay-1">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h4>Hakukoneoptimointi</h4>
+        <p>Otsikot, metatiedot ja nopeus kuntoon, jotta asiakkaat löytävät sinut Googlesta.</p>
+              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a href="#chatbot" class="svc-tile reveal reveal-delay-2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h4>Tekoälychatbot</h4>
+        <p>Vastaa kävijöiden kysymyksiin ja ohjaa heidät yhteydenottoon. Sisältyy hintaan.</p>
+              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a href="#sahkopostiautomaatiot" class="svc-tile reveal reveal-delay-1">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <h4>Sähköpostiautomaatiot</h4>
+        <p>Automaattiset vahvistus- ja ilmoitusviestit hoitavat yhteydenotot puolestasi.</p>
+              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a href="index.html#arvostelut" class="svc-tile svc-tile-accent reveal reveal-delay-2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+        </div>
+        <h4>Google-arvostelut</h4>
+        <p>Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa näkyvyyttäsi.</p>
+        <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+      </a>
 
     </div>
   </div>
@@ -316,11 +354,11 @@
 <!-- Website Template Carousel -->
 <div class="section" id="verkkosivut-naytteet">
   <div class="container">
-    <p class="section-label">Verkkosivumallit</p>
-    <h2 class="section-heading">Sivustot räätälöitynä<br><span class="accent">toimialallesi.</span></h2>
-    <p class="section-sub">Jokaiselle toimialalle oma visuaalinen identiteetti. Valmiit mallit, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.</p>
+    <p class="section-label" data-sl-reveal>Verkkosivumallit</p>
+    <h2 class="section-heading" data-sl-split>Sivustot räätälöitynä<br><span class="accent">toimialallesi.</span></h2>
+    <p class="section-sub" data-sl-reveal>Jokaiselle toimialalle oma visuaalinen identiteetti. Valmiit mallit, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.</p>
 
-    <div class="carousel-wrap reveal">
+    <div class="carousel-wrap" data-sl-reveal="scale">
 
       <!-- Browser chrome -->
       <div class="browser-chrome">
@@ -406,12 +444,12 @@
 </div>
 
 <!-- All features -->
-<div class="section-alt">
+<div class="section-alt" id="ominaisuudet">
   <div class="container">
-    <p class="section-label">Ominaisuudet</p>
-    <h2 class="section-heading">Kaikki mitä tarvitset,<br><span class="accent">valmiina käyttöön.</span></h2>
-    <p class="section-sub">Jokainen sivusto sisältää kaiken olennaisen: ei lisäosia, ei yllätyksiä. Tässä täydellinen ominaisuusluettelo.</p>
-    <div class="feat-accordion reveal">
+    <p class="section-label" data-sl-reveal>Ominaisuudet</p>
+    <h2 class="section-heading" data-sl-split>Kaikki mitä tarvitset,<br><span class="accent">valmiina käyttöön.</span></h2>
+    <p class="section-sub" data-sl-reveal>Jokainen sivusto sisältää kaiken olennaisen: ei lisäosia, ei yllätyksiä. Tässä täydellinen ominaisuusluettelo.</p>
+    <div class="feat-accordion" data-sl-stagger="110">
 
       <!-- Column 1 -->
       <div>
@@ -512,7 +550,7 @@
       <div>
         <div class="feat-group">
           <div class="feat-group-label">Näkyvyys</div>
-          <details class="feat-item" open>
+          <details class="feat-item" id="seo" open>
             <summary class="feat-item-head">
               <span class="feat-item-title">Hakukoneoptimointi</span>
               <span class="feat-item-chevron">▾</span>
@@ -558,7 +596,7 @@
 
         <div class="feat-group">
           <div class="feat-group-label">Lisäpalvelut</div>
-          <details class="feat-item">
+          <details class="feat-item" id="chatbot">
             <summary class="feat-item-head">
               <span class="feat-item-title">Tekoälychatbot</span>
               <span class="feat-item-chevron">▾</span>
@@ -572,7 +610,7 @@
               </ul>
             </div>
           </details>
-          <details class="feat-item">
+          <details class="feat-item" id="sahkopostiautomaatiot">
             <summary class="feat-item-head">
               <span class="feat-item-title">Sähköpostiautomaatiot</span>
               <span class="feat-item-chevron">▾</span>
@@ -610,11 +648,11 @@
 <!-- Industries -->
 <div class="section">
   <div class="container">
-    <p class="section-label">Toimialat</p>
-    <h2 class="section-heading">Sopii juuri sinun<br><span class="accent">toimialallesi.</span></h2>
-    <p class="section-sub">Olemme rakentaneet sivustoja näille toimialoille. Tunnemme mitä asiakkaasi etsivät ja mikä saa heidät ottamaan yhteyttä.</p>
+    <p class="section-label" data-sl-reveal>Toimialat</p>
+    <h2 class="section-heading" data-sl-split>Sopii juuri sinun<br><span class="accent">toimialallesi.</span></h2>
+    <p class="section-sub" data-sl-reveal>Olemme rakentaneet sivustoja näille toimialoille. Tunnemme mitä asiakkaasi etsivät ja mikä saa heidät ottamaan yhteyttä.</p>
 
-    <div class="feat-accordion">
+    <div class="feat-accordion" data-sl-stagger="110">
 
       <!-- Column 1 -->
       <div>
@@ -796,11 +834,11 @@
 <!-- Integrations -->
 <div class="section-alt">
   <div class="container">
-    <p class="section-label">Integraatiot</p>
-    <h2 class="section-heading">Toimii työkalujesi <span class="accent">kanssa.</span></h2>
-    <p class="section-sub">Yli 500 integraatiota Zapierin kautta tai natiivi yhteys suosituimpiin järjestelmiin. Ei koodia, ei IT-tiimiä tarvita.</p>
+    <p class="section-label" data-sl-reveal>Integraatiot</p>
+    <h2 class="section-heading" data-sl-split>Toimii työkalujesi <span class="accent">kanssa.</span></h2>
+    <p class="section-sub" data-sl-reveal>Yli 500 integraatiota Zapierin kautta tai natiivi yhteys suosituimpiin järjestelmiin. Ei koodia, ei IT-tiimiä tarvita.</p>
   </div>
-  <div class="logo-cloud">
+  <div class="logo-cloud" data-sl-reveal="blur">
     <div class="logo-track">
       <div class="logo-item"><img class="logo-icon" src="https://cdn.simpleicons.org/slack" alt="" onerror="this.style.display='none'" loading="lazy"><span class="logo-name">Slack</span></div>
       <div class="logo-item"><img class="logo-icon" src="https://cdn.simpleicons.org/hubspot" alt="" onerror="this.style.display='none'" loading="lazy"><span class="logo-name">HubSpot</span></div>
@@ -850,7 +888,7 @@
 <!-- CTA -->
 <div class="section">
   <div class="container">
-    <div class="cta-block reveal">
+    <div class="cta-block" data-sl-reveal="scale">
       <h2>Valmis <span class="accent">kokeilemaan</span>?</h2>
       <p>Varaa maksuton 30 minuutin kartoituspuhelu. Käymme läpi mitä sivustosi tarvitsee ja saat kiinteän hinnan. Ei paineita, ei sitoumuksia, ei jargonia.</p>
       <div class="cta-btns">
@@ -875,50 +913,6 @@
 </footer>
 
 <script>
-(function () {
-  const canvas = document.getElementById('pageCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  function resize() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || 380; }
-  resize(); window.addEventListener('resize', resize);
-  const blobs = [
-    { ox:0.52, oy:0.48, vx:0.00031, vy:0.00024, r:0.70, rgb:[37,99,235],  a:0.50 },
-    { ox:0.22, oy:0.35, vx:-0.00019,vy:0.00028,  r:0.55, rgb:[29,78,216],  a:0.45 },
-    { ox:0.78, oy:0.72, vx:0.00022, vy:-0.00017, r:0.50, rgb:[15,23,42],   a:0.40 },
-    { ox:0.35, oy:0.80, vx:-0.00025,vy:-0.00020, r:0.45, rgb:[67,56,202],  a:0.35 },
-    { ox:0.65, oy:0.20, vx:0.00015, vy:0.00032,  r:0.40, rgb:[99,102,241], a:0.25 },
-  ];
-  blobs.forEach(b => { b.x = b.ox; b.y = b.oy; });
-  let t = 0;
-  function draw() {
-    t += 0.25;
-    const w = canvas.width, h = canvas.height;
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
-    ctx.globalCompositeOperation = 'screen';
-    blobs.forEach(b => {
-      b.x = b.ox + 0.22*Math.sin(t*b.vx*600+b.oy*10);
-      b.y = b.oy + 0.18*Math.cos(t*b.vy*600+b.ox*10);
-      const gx=b.x*w, gy=b.y*h, gr=b.r*Math.max(w,h);
-      const g = ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
-      const [r,gv,bv]=b.rgb;
-      g.addColorStop(0,`rgba(${r},${gv},${bv},${b.a})`);
-      g.addColorStop(0.4,`rgba(${r},${gv},${bv},${b.a*0.3})`);
-      g.addColorStop(1,`rgba(${r},${gv},${bv},0)`);
-      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    });
-    ctx.globalCompositeOperation='source-over';
-    ctx.strokeStyle='rgba(255,255,255,0.025)'; ctx.lineWidth=0.6;
-    for(let i=0;i<6;i++){
-      const phase=(t*0.004)+(i*Math.PI*2/6);
-      const cx=w*(0.5+0.18*Math.cos(phase*0.7)), cy=h*(0.5+0.14*Math.sin(phase*0.5));
-      const rx=w*(0.28+0.04*Math.sin(phase)), ry=h*(0.22+0.04*Math.cos(phase));
-      ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,phase*0.1,0,Math.PI*2); ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
 (function(){
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}});
@@ -1144,5 +1138,19 @@
   <script src="/chatbot.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script>
+/* deep link from the services bento: open and scroll to the matching feature */
+(function () {
+  function openFromHash() {
+    var el = document.getElementById(location.hash.slice(1));
+    if (!el || el.tagName !== 'DETAILS') return;
+    el.open = true;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  window.addEventListener('hashchange', openFromHash);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', openFromHash);
+  else openFromHash();
+})();
+</script>
 </body>
 </html>

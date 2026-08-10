@@ -3654,6 +3654,12 @@
       'See what Selora would say to your dental clinic\'s phone',
     '30 minuutin demossa näet oikean peruutus- ja jonotuslistapuhelun alusta loppuun, hammashoitolan skenaariolla. Ei PowerPointia, ei sitoumuksia.':
       'In a 30-minute demo you see a real cancellation and waitlist call from start to finish, with a dental clinic scenario. No PowerPoint, no commitments.',
+    'Verkkosivut, jotka': 'Websites that',
+    'tekevät kauppaa.': 'win you business.',
+    'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ei kuukausilaskuja.': 'Design, content, search engine optimisation and launch. One flat fee, no monthly bills.',
+    'alkaen, kertamaksu': 'from, one-time fee',
+    'Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa näkyvyyttäsi.': 'An automated system collects reviews from your customers and grows your visibility.',
+    'Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia. Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti.': 'We design the look of your site to match your brand and build it from scratch. No off-the-shelf themes, no templates. Every page is designed mobile first and built to load fast.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
