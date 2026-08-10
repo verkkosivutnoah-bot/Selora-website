@@ -3686,6 +3686,9 @@
     'Noin 45 min': 'About 45 min',
     'Toimii puhelimella': 'Works on mobile',
     'Markkinointitoimisto · Brändi': 'Marketing agency · Brand',
+    'Kertamaksu, ei piilokustannuksia.': 'One-time payment, no hidden costs.',
+    'Prioriteettituki käyttöönotossa': 'Priority support at launch',
+    'Verkkosivusto on kertaluontoinen projekti. Maksat kerran, sivusto on sinun.': 'A website is a one-off project. You pay once and the site is yours.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

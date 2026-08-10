@@ -293,3 +293,33 @@ supabase functions deploy generate-demo-agent
 supabase functions deploy create-web-call
 supabase secrets set ANTHROPIC_API_KEY=sk-ant-... RETELL_API_KEY=key_...
 ```
+
+---
+
+## Archived features and how to restore them
+
+Removed features are archived, never deleted. Each one has a git tag holding the
+last state where it was live, so restoring is a diff against that tag rather
+than a rewrite.
+
+| Feature | Removed | Tag | Files parked in |
+|---|---|---|---|
+| AI receptionist | earlier rebrand | `ai-receptionist-full-v1` (branch `ai-receptionist-archive`) | `blogi/_archive/` |
+| AI chatbot | 2026-08-10, "bring it back when I say so" | `chatbot-v1` | `_archive/chatbot.js` |
+
+To bring the chatbot back:
+
+```bash
+git diff chatbot-v1 HEAD -- index.html palvelut.html hinnoittelu.html
+git mv _archive/chatbot.js chatbot.js
+```
+
+Then re-add `<script src="/chatbot.js" defer></script>` before `</body>` on the
+public pages, and restore the service tile, the palvelut accordion entry with
+`id="chatbot"`, the pricing bullets and comparison row, the footer links, and
+the privacy policy paragraph. The Finnish and English strings are still in
+`i18n.js` — they were left in place so nothing needs retranslating.
+
+Note the services bento: with the chatbot tile gone the accent tile carries
+`.svc-tile-wide` so it spans two columns and closes the 4-column grid. Drop that
+class when the fourth small tile comes back.
