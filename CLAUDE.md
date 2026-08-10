@@ -306,7 +306,7 @@ than a rewrite.
 |---|---|---|---|
 | AI receptionist | earlier rebrand | `ai-receptionist-full-v1` (branch `ai-receptionist-archive`) | `_archive/blogi-posts/` |
 | AI chatbot | 2026-08-10, "bring it back when I say so" | `chatbot-v1` | `_archive/chatbot.js` |
-| Blog | 2026-08-10, "comes back later" | `blog-v1` | `_archive/blogi.html`, `_archive/blogi-posts/` |
+| Blog | 2026-08-10, "comes back later" | `blog-v1` (this session's git credential couldn't push the tag itself, HTTP 403 — the state it points at is commit `93c7cc0`, which is on origin/main as the parent of the archive commit, so it's not lost; push the tag by hand with `git tag blog-v1 93c7cc0 && git push origin blog-v1` when a credential that allows tag refs is available) | `_archive/blogi.html`, `_archive/blogi-posts/` |
 
 To bring the chatbot back:
 
