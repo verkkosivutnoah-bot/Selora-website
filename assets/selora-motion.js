@@ -37,7 +37,9 @@
 
   /* ---------- 1. Reveal on scroll ---------- */
   function initReveal() {
-    var els = document.querySelectorAll('[data-sl-reveal]');
+    // [data-sl-pop] is the springy variant: it hides the same way, so it has
+    // to be observed here too or it never gets .is-in and stays invisible.
+    var els = document.querySelectorAll('[data-sl-reveal], [data-sl-pop]');
     if (!els.length) return;
     if (!('IntersectionObserver' in window)) {
       els.forEach(function (el) { el.classList.add('is-in'); });
@@ -51,6 +53,15 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (el) { obs.observe(el); });
+
+    /* Failsafe: these elements are hidden until the observer reveals them, so
+       anything that stops it firing (a zero-sized viewport, an embed, a
+       browser quirk) would leave the page blank. If nothing has been revealed
+       anything still hidden a few seconds after load is shown regardless:
+       a missed animation is better than invisible content. */
+    setTimeout(function () {
+      els.forEach(function (el) { el.classList.add('is-in'); });
+    }, 2500);
   }
 
   /* ---------- 2. Stagger children ---------- */
@@ -58,7 +69,7 @@
     document.querySelectorAll('[data-sl-stagger]').forEach(function (parent) {
       var step = parseInt(parent.getAttribute('data-sl-stagger'), 10) || 90;
       Array.prototype.forEach.call(parent.children, function (child, i) {
-        if (!child.hasAttribute('data-sl-reveal')) child.setAttribute('data-sl-reveal', '');
+        if (!child.hasAttribute('data-sl-reveal') && !child.hasAttribute('data-sl-pop')) child.setAttribute('data-sl-reveal', '');
         child.style.setProperty('--sl-delay', (i * step) + 'ms');
       });
     });

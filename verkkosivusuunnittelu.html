@@ -403,27 +403,50 @@
       .stories-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
       .stories-head .section-label { display: inline-block; }
       /* grid, not a scroll rail: everything is visible without dragging */
-      .stories-rail {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
-        padding: 0.5rem 0 1rem;
+      /* Marquee: one track that scrolls right, cloned once so the loop is
+         seamless. Every card is the same size, so adding more later is just
+         another story-card anchor in the track. */
+      .stories-marquee {
+        position: relative;
+        overflow: hidden;
+        padding: 0.5rem 0 1.5rem;
+        /* fade the ends instead of cutting cards off hard */
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
       }
+      .stories-track {
+        display: flex;
+        /* spacing lives on the cards, not as flex gap: with gap, half the
+           track width is not exactly one card set and the loop jumps */
+        gap: 0;
+        width: max-content;
+        will-change: transform;
+        animation: storiesScroll var(--stories-dur, 46s) linear infinite;
+      }
+      /* travels left to right: starts shifted back by one full set */
+      @keyframes storiesScroll {
+        from { transform: translate3d(-50%, 0, 0); }
+        to   { transform: translate3d(0, 0, 0); }
+      }
+      .stories-marquee:hover .stories-track { animation-play-state: paused; }
+
       .story-card {
         position: relative;
-        height: 300px;
+        flex: 0 0 auto;
+        width: clamp(300px, 34vw, 460px);
+        aspect-ratio: 16 / 10;
         border-radius: 20px;
         overflow: hidden;
         cursor: pointer;
         text-decoration: none;
-        background: #0f172a;
-        box-shadow: 0 12px 32px rgba(15,23,42,0.12);
+        background: #0b1220;
+        box-shadow: 0 12px 32px rgba(15,23,42,0.14);
         transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s ease;
         isolation: isolate;
+        margin-right: 1.15rem;
       }
-      /* first one leads the grid */
-      .story-card:first-child { grid-column: span 2; grid-row: span 2; height: auto; min-height: 300px; }
-      .story-card:hover { transform: translateY(-6px); box-shadow: 0 26px 56px rgba(15,23,42,0.28); }
+      .story-card:hover { transform: translateY(-6px); box-shadow: 0 26px 56px rgba(15,23,42,0.3); }
+
       /* live hero preview: the real page, scaled down and inert */
       .story-frame {
         position: absolute; inset: 0; overflow: hidden;
@@ -441,42 +464,19 @@
       }
       .story-frame iframe.is-ready { opacity: 1; }
       .story-card:hover .story-frame { transform: scale(1.04); filter: brightness(0.85); }
-      @media (max-width: 900px) {
-        .stories-rail { grid-template-columns: repeat(2, 1fr); }
-        .story-card:first-child { grid-column: span 2; grid-row: auto; }
-      }
+
       @media (max-width: 560px) {
-        .stories-rail { grid-template-columns: 1fr; }
-        .story-card:first-child { grid-column: auto; }
+        .story-card { width: 82vw; }
       }
       @media (prefers-reduced-motion: reduce) {
+        .stories-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; gap: 1.15rem 0; }
+        .stories-marquee { -webkit-mask-image: none; mask-image: none; }
         .story-card, .story-frame { transition: none !important; }
         .story-card:hover { transform: none; }
         .story-card:hover .story-frame { transform: none; }
       }
-      .story-card::after {
-        content: '';
-        position: absolute; inset: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, transparent 30%, transparent 55%, rgba(0,0,0,0.78) 100%);
-        z-index: 1;
-      }
       .story-bottom { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
       .story-card:hover .story-bottom { transform: translateY(-4px); }
-      .story-top {
-        position: absolute; top: 0.85rem; left: 0.85rem; right: 0.85rem; z-index: 2;
-        display: flex; align-items: center; gap: 0.55rem;
-      }
-      .story-avatar {
-        width: 28px; height: 28px; border-radius: 50%;
-        background: linear-gradient(135deg, #60A5FA, #1D4ED8);
-        border: 2px solid #fff;
-        display: grid; place-items: center;
-        color: #fff; font-size: 0.72rem; font-weight: 600;
-      }
-      .story-client {
-        color: #fff; font-size: 0.78rem; font-weight: 500;
-        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      }
       .story-bottom {
         position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2;
         color: #fff;
@@ -496,7 +496,6 @@
         margin-top: 0.5rem; letter-spacing: 0.04em;
       }
       @media (max-width: 720px) {
-        .stories-rail { padding-left: 1.25rem; padding-right: 1.25rem; }
       }
     </style>
 
@@ -509,13 +508,10 @@
     </div>
 
     <div class="container">
-      <div class="stories-rail" id="storiesRail" data-sl-stagger="80">
+      <div class="stories-marquee" id="storiesMarquee">
+        <div class="stories-track" id="storiesTrack">
       <a class="story-card" data-sl-pop href="portfolio/vantage-site.html" target="_blank" rel="noopener">
         <div class="story-frame" data-src="portfolio/vantage-site.html" aria-hidden="true"></div>
-        <div class="story-top">
-          <div class="story-avatar">V</div>
-          <div class="story-client">Vantage</div>
-        </div>
         <div class="story-bottom">
           <div class="story-title">Vantage</div>
           <div class="story-meta" data-i18n="Interaktiivinen konsepti · Scroll">Interaktiivinen konsepti · Scroll</div>
@@ -524,10 +520,6 @@
       </a>
       <a class="story-card" data-sl-pop href="portfolio/nocturne.html" target="_blank" rel="noopener">
         <div class="story-frame" data-src="portfolio/nocturne.html" aria-hidden="true"></div>
-        <div class="story-top">
-          <div class="story-avatar">N</div>
-          <div class="story-client">Nocturne</div>
-        </div>
         <div class="story-bottom">
           <div class="story-title">Nocturne</div>
           <div class="story-meta" data-i18n="Muotibrändi · Verkkokauppa">Muotibrändi · Verkkokauppa</div>
@@ -536,17 +528,14 @@
       </a>
       <a class="story-card" data-sl-pop href="portfolio/green-electrician.html" target="_blank" rel="noopener">
         <div class="story-frame" data-src="portfolio/green-electrician.html" aria-hidden="true"></div>
-        <div class="story-top">
-          <div class="story-avatar">G</div>
-          <div class="story-client">The Green Electrician</div>
-        </div>
         <div class="story-bottom">
           <div class="story-title">The Green Electrician</div>
           <div class="story-meta" data-i18n="Sähköurakointi · Toronto">Sähköurakointi · Toronto</div>
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
-                                                </div>
+                                                  </div>
+      </div>
     </div>
   </section>
 
@@ -1015,19 +1004,31 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script>
-/* Portfolio hero previews: mount each example site in a scaled, inert iframe
-   only once its card is near the viewport, so the grid costs nothing on load.
-   The iframe is sized to a desktop viewport and scaled to the card, which is
-   why the preview shows the hero as it looks on a real screen. */
+/* Portfolio marquee.
+
+   The track is cloned once so the loop is seamless: the animation runs from
+   -50% to 0, and at -50% the clone sits exactly where the original started.
+   Duration scales with card count, so adding sites keeps a constant speed
+   rather than making the strip whip around faster.
+
+   Each card's preview is the real page in a scaled, inert iframe. Frames are
+   mounted when the card scrolls near the viewport and torn down once it is
+   well clear, so however many sites end up in the strip only the handful on
+   screen are ever live. */
 (function () {
-  var frames = Array.prototype.slice.call(document.querySelectorAll('.story-frame[data-src]'));
-  if (!frames.length) return;
+  var track = document.getElementById('storiesTrack');
+  if (!track) return;
 
   var BASE_W = 1440, BASE_H = 900;
+  var SECONDS_PER_CARD = 9;  // constant travel speed as cards are added
+
+  var originals = Array.prototype.slice.call(track.children);
+  if (!originals.length) return;
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function fit(frame, iframe) {
     var scale = frame.offsetWidth / BASE_W;
-    // cover the card: never leave a gap at the bottom of a tall tile
     var need = frame.offsetHeight / BASE_H;
     if (need > scale) scale = need;
     iframe.style.transform = 'scale(' + scale + ')';
@@ -1049,12 +1050,30 @@
     else window.addEventListener('resize', function () { fit(frame, iframe); }, { passive: true });
   }
 
+  function unmount(frame) {
+    if (!frame.dataset.mounted) return;
+    delete frame.dataset.mounted;
+    var iframe = frame.querySelector('iframe');
+    if (iframe) iframe.remove();
+  }
+
+  // duplicate the set so the strip never shows a gap
+  if (!reduced) {
+    originals.forEach(function (card) {
+      var clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('tabindex', '-1');
+      track.appendChild(clone);
+    });
+    track.style.setProperty('--stories-dur', (originals.length * SECONDS_PER_CARD) + 's');
+  }
+
+  var frames = Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]'));
   if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      mount(e.target);
-      obs.unobserve(e.target);
+      if (e.isIntersecting) mount(e.target);
+      else unmount(e.target);
     });
   }, { rootMargin: '300px' });
   frames.forEach(function (f) { obs.observe(f); });
