@@ -346,16 +346,10 @@
 
     /* header runs full width so the steps get the room instead of a tall rail */
     .proc-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 3rem; align-items: end; margin-bottom: 3.25rem; }
-    .proc-head-side { display: flex; flex-direction: column; gap: 1.5rem; }
-    .proc-meter { display: flex; align-items: center; gap: 1rem; }
-    .proc-meter-track { position: relative; flex: 1; height: 2px; background: rgba(255,255,255,0.14); border-radius: 2px; overflow: hidden; }
-    .proc-meter-fill { position: absolute; inset: 0 auto 0 0; width: 25%; border-radius: 2px;
+    .proc-head-side { display: flex; flex-direction: column; justify-content: flex-end; }
       background: linear-gradient(90deg, #1D4ED8, #60A5FA);
       box-shadow: 0 0 16px rgba(96,165,250,0.55);
       transition: width 0.6s cubic-bezier(0.16,1,0.3,1); }
-    .proc-meter-count { font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums; }
-    .proc-meter-count b { color: #60A5FA; font-weight: 600; }
-    .proc-meter-count i { font-style: normal; margin-left: 0.3rem; }
 
     .proc-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
     .proc-step { display: block; }
@@ -373,9 +367,8 @@
       opacity: 0; transform: scaleY(0.35); transform-origin: top;
       transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .proc-step.is-active .proc-card { border-color: rgba(96,165,250,0.34); box-shadow: 0 26px 60px -30px rgba(2,6,18,0.95); }
-    .proc-step.is-active .proc-card-edge { opacity: 1; transform: scaleY(1); }
-    .proc-card:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.36); }
+    .proc-card:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.38); box-shadow: 0 26px 60px -30px rgba(2,6,18,0.95); }
+    .proc-card:hover .proc-card-edge { opacity: 1; transform: scaleY(1); }
 
     .proc-card-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.9rem; }
     .proc-dot {
@@ -386,7 +379,7 @@
       background: rgba(5,12,26,0.75); border: 1px solid rgba(255,255,255,0.14);
       transition: color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease, background 0.45s ease;
     }
-    .proc-step.is-active .proc-dot {
+    .proc-card:hover .proc-dot {
       color: #fff; background: linear-gradient(150deg, #1D4ED8, #2563EB);
       border-color: rgba(96,165,250,0.6); box-shadow: 0 0 0 4px rgba(37,99,235,0.16);
     }
@@ -397,7 +390,7 @@
       transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.4s ease;
     }
     .proc-icon svg { width: 1rem; height: 1rem; }
-    .proc-step.is-active .proc-icon { background: rgba(37,99,235,0.3); transform: scale(1.06); }
+    .proc-card:hover .proc-icon { background: rgba(37,99,235,0.3); transform: scale(1.06); }
     .proc-card h3 { font-size: 1.05rem; font-weight: 500; color: #fff; letter-spacing: -0.02em; }
     .proc-card p { font-size: 0.83rem; color: rgba(255,255,255,0.58); line-height: 1.78; }
     .step-tag { display: inline-flex; margin-top: 1.1rem; font-size: 0.68rem; font-weight: 500; color: rgba(147,197,253,0.75); letter-spacing: 0.06em; text-transform: uppercase; }
@@ -410,7 +403,7 @@
       .proc-card { padding: 1.45rem 1.4rem; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .proc-card, .proc-dot, .proc-icon, .proc-card-edge, .proc-meter-fill { transition: none !important; }
+      .proc-card, .proc-dot, .proc-icon, .proc-card-edge { transition: none !important; }
       .proc-card:hover { transform: none; }
     }
 
@@ -1577,10 +1570,6 @@
       </div>
       <div class="proc-head-side">
         <p class="section-sub" data-sl-reveal>Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.</p>
-        <div class="proc-meter" aria-hidden="true">
-          <div class="proc-meter-track"><span class="proc-meter-fill"></span></div>
-          <div class="proc-meter-count"><b>01</b><i>/ 04</i></div>
-        </div>
       </div>
     </div>
 
@@ -2261,41 +2250,5 @@
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
-<script>
-/* process timeline: mark the step nearest the middle of the viewport as active
-   and move the progress meter with it */
-(function () {
-  var steps = Array.prototype.slice.call(document.querySelectorAll('.proc-step'));
-  if (!steps.length) return;
-  var fill  = document.querySelector('.proc-meter-fill');
-  var count = document.querySelector('.proc-meter-count b');
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  var current = -1, ticking = false;
-
-  function update() {
-    ticking = false;
-    var mid = window.innerHeight * 0.45, best = 0, bestDist = Infinity;
-    steps.forEach(function (el, i) {
-      var r = el.getBoundingClientRect();
-      var d = Math.abs(r.top + r.height / 2 - mid);
-      if (d < bestDist) { bestDist = d; best = i; }
-    });
-    if (best === current) return;
-    current = best;
-    steps.forEach(function (el, i) { el.classList.toggle('is-active', i === best); });
-    if (fill)  fill.style.width = ((best + 1) / steps.length * 100) + '%';
-    if (count) count.textContent = '0' + (best + 1);
-  }
-
-  window.addEventListener('scroll', function () {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-  window.addEventListener('resize', update, { passive: true });
-  update();
-})();
-</script>
 </body>
 </html>
