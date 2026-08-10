@@ -2647,11 +2647,6 @@
     '4+ sivua, täysin räätälöity design': '4+ pages, fully custom design',
     '✓ Täysin räätälöity': '✓ Fully custom',
 
-    // menu items on verkkosivusuunnittelu Foozu mock
-    'Itämeren lohi, dilliaioli, salaatti': 'Baltic salmon, dill aioli, salad',
-    'Kanafilettä, parmesaani, krutonki': 'Chicken breast, parmesan, croutons',
-    'Mascarpone, espresso, kaakao': 'Mascarpone, espresso, cocoa',
-
     // yhteystiedot staff-size options
     '1, 9 henkilöä': '1 to 9 people',
     '10, 49 henkilöä': '10 to 49 people',
@@ -3487,15 +3482,6 @@
     'Parturi · Tampere': 'Barbershop · Tampere',
     'Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.':
       'The sites below are example projects we designed to show what kind of website we can build for your industry. They are not real client projects.',
-
-    // ---------- ravintolaratkaisu (Foozu partnership) ----------
-    'Ravintolaratkaisu': 'Restaurant solution',
-    'Tilausjärjestelmä ravintolallesi,': 'An ordering system for your restaurant,',
-    'kumppanimme Foozun avulla.': 'with our partner Foozu.',
-    'Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.':
-      'We build custom websites for Finnish restaurants with an integrated ordering and reservation system. The ordering system is delivered by our partner Foozu, who specialises in restaurant technology. Read more on Foozu\'s site.',
-    'Tutustu Foozuun →': 'Visit Foozu →',
-    'Varaa ravintolademo': 'Book a restaurant demo',
 
     // ---------- portfolio demo banner ----------
     'Tämä on esimerkkisivu, ei oikea asiakasprojekti.': 'This is an example site, not a real client project.',

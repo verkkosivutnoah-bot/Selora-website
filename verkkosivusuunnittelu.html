@@ -359,23 +359,23 @@
       <div class="vs-head">
         <div>
           <p class="section-label" data-sl-reveal>Mitä saat</p>
-          <h2 class="section-heading" data-sl-split>Sivusto, joka tekee<br><span class="accent">työn puolestasi.</span></h2>
+          <h2 class="section-heading sl-swipe-host" data-sl-split>Sivusto, joka tekee<br><span class="accent">työn puolestasi.</span></h2>
         </div>
         <p class="section-sub" data-sl-words data-sl-reveal>Rakennamme sivuston alusta asti sinun yrityksellesi. Ei valmiita mallipohjia. Maksat kerran, ja sivusto on sinun.</p>
       </div>
 
       <div class="vs-cards" data-sl-stagger="110">
-        <div class="vs-card">
+        <div class="vs-card" data-sl-pop>
           <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></span>
           <h3>Asiakkaat löytävät sinut</h3>
           <p>Sivusto näkyy Googlessa silloin, kun joku etsii sinun palveluitasi omalta alueeltasi.</p>
         </div>
-        <div class="vs-card">
+        <div class="vs-card" data-sl-pop>
           <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span>
           <h3>Sivusto aukeaa heti</h3>
           <p>Alle sekunnissa myös puhelimella. Kukaan ei ehdi turhautua ja poistua kilpailijalle.</p>
         </div>
-        <div class="vs-card">
+        <div class="vs-card" data-sl-pop>
           <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
           <h3>Yhteydenotot tulevat sinulle</h3>
           <p>Selkeä lomake ohjaa asiakkaan ottamaan yhteyttä. Viesti tulee suoraan sähköpostiisi.</p>
@@ -395,37 +395,7 @@
     </div>
   </section>
 
-  <section class="section-alt">
-    <div class="container">
-      <div class="vs-head">
-        <div>
-          <p class="section-label" data-sl-reveal>Vaihtoehdot</p>
-          <h2 class="section-heading" data-sl-split>Kolme tapaa <span class="accent">aloittaa.</span></h2>
-        </div>
-        <p class="section-sub" data-sl-reveal>Valitse se, joka sopii yrityksesi kokoon. Kerromme kartoituspuhelussa kumpi kannattaa.</p>
-      </div>
-      <div class="vs-types" data-sl-stagger="110">
-        <div class="vs-type">
-          <span class="vs-type-num" aria-hidden="true">01</span>
-          <h3>Yksi sivu</h3>
-          <p>Yksi selkeä sivu, jolla kerrot mitä teet ja miten sinuun saa yhteyden. Nopein tapa päästä verkkoon.</p>
-          <span class="vs-type-for">Sopii: uusi yritys, yksi palvelu</span>
-        </div>
-        <div class="vs-type">
-          <span class="vs-type-num" aria-hidden="true">02</span>
-          <h3>Kokonainen sivusto</h3>
-          <p>Etusivu, palvelut, tietoa meistä ja yhteystiedot. Kertoo yrityksesi tarinan ja rakentaa luottamusta.</p>
-          <span class="vs-type-for">Sopii: vakiintunut yritys</span>
-        </div>
-        <div class="vs-type">
-          <span class="vs-type-num" aria-hidden="true">03</span>
-          <h3>Oman alan ratkaisu</h3>
-          <p>Sivusto, jossa on juuri sinun alasi tarpeet: ruokalista, ajanvaraus, hinnasto tai galleria.</p>
-          <span class="vs-type-for">Sopii: ravintola, kampaamo, korjaamo</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
 <section class="section-alt" id="esimerkkitoita">
     <style>
@@ -454,13 +424,23 @@
       /* first one leads the grid */
       .story-card:first-child { grid-column: span 2; grid-row: span 2; height: auto; min-height: 300px; }
       .story-card:hover { transform: translateY(-6px); box-shadow: 0 26px 56px rgba(15,23,42,0.28); }
-      .story-bg {
-        position: absolute; inset: 0;
-        background-size: cover; background-position: center;
-        transform: scale(1.02);
+      /* live hero preview: the real page, scaled down and inert */
+      .story-frame {
+        position: absolute; inset: 0; overflow: hidden;
+        background: #0b1220;
         transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
       }
-      .story-card:hover .story-bg { transform: scale(1.09); filter: brightness(0.82); }
+      .story-frame iframe {
+        position: absolute; top: 0; left: 0;
+        width: 1440px; height: 900px;
+        transform-origin: 0 0;
+        border: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.7s ease;
+      }
+      .story-frame iframe.is-ready { opacity: 1; }
+      .story-card:hover .story-frame { transform: scale(1.04); filter: brightness(0.85); }
       @media (max-width: 900px) {
         .stories-rail { grid-template-columns: repeat(2, 1fr); }
         .story-card:first-child { grid-column: span 2; grid-row: auto; }
@@ -470,9 +450,9 @@
         .story-card:first-child { grid-column: auto; }
       }
       @media (prefers-reduced-motion: reduce) {
-        .story-card, .story-bg { transition: none !important; }
+        .story-card, .story-frame { transition: none !important; }
         .story-card:hover { transform: none; }
-        .story-card:hover .story-bg { transform: scale(1.02); }
+        .story-card:hover .story-frame { transform: none; }
       }
       .story-card::after {
         content: '';
@@ -530,8 +510,8 @@
 
     <div class="container">
       <div class="stories-rail" id="storiesRail" data-sl-stagger="80">
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/vantage-site.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80&auto=format');"></div>
+      <a class="story-card" data-sl-pop href="portfolio/vantage-site.html" target="_blank" rel="noopener">
+        <div class="story-frame" data-src="portfolio/vantage-site.html" aria-hidden="true"></div>
         <div class="story-top">
           <div class="story-avatar">V</div>
           <div class="story-client">Vantage</div>
@@ -542,8 +522,8 @@
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/nocturne.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80&auto=format');"></div>
+      <a class="story-card" data-sl-pop href="portfolio/nocturne.html" target="_blank" rel="noopener">
+        <div class="story-frame" data-src="portfolio/nocturne.html" aria-hidden="true"></div>
         <div class="story-top">
           <div class="story-avatar">N</div>
           <div class="story-client">Nocturne</div>
@@ -554,8 +534,8 @@
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/green-electrician.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format');"></div>
+      <a class="story-card" data-sl-pop href="portfolio/green-electrician.html" target="_blank" rel="noopener">
+        <div class="story-frame" data-src="portfolio/green-electrician.html" aria-hidden="true"></div>
         <div class="story-top">
           <div class="story-avatar">G</div>
           <div class="story-client">The Green Electrician</div>
@@ -566,91 +546,7 @@
           <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
         </div>
       </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/ravintola-luna.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">L</div>
-          <div class="story-client">Ravintola Luna</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Ravintola Luna</div>
-          <div class="story-meta" data-i18n="Kausiravintola · Helsinki">Kausiravintola · Helsinki</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/saehkoe-pro.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">S</div>
-          <div class="story-client">Sähkö Pro</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Sähkö Pro</div>
-          <div class="story-meta" data-i18n="Sähköurakointi · Espoo">Sähköurakointi · Espoo</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/parturi-nordic.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">N</div>
-          <div class="story-client">Parturi Nordic</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Parturi Nordic</div>
-          <div class="story-meta" data-i18n="Parturi · Tampere">Parturi · Tampere</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/pizzeria-volcano.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">V</div>
-          <div class="story-client">Pizzeria Volcano</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Pizzeria Volcano</div>
-          <div class="story-meta" data-i18n="Pizzeria · Turku">Pizzeria · Turku</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/hammashoito-kruunu.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">K</div>
-          <div class="story-client">Hammashoito Kruunu</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Hammashoito Kruunu</div>
-          <div class="story-meta" data-i18n="Hammasklinikka · Helsinki">Hammasklinikka · Helsinki</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/lvi-aurora.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">A</div>
-          <div class="story-client">LVI Aurora</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">LVI Aurora</div>
-          <div class="story-meta" data-i18n="LVI urakointi · Vantaa">LVI urakointi · Vantaa</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-reveal="scale" href="portfolio/lehtola-toipuminen.html" target="_blank" rel="noopener">
-        <div class="story-bg" style="background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80&auto=format');"></div>
-        <div class="story-top">
-          <div class="story-avatar">L</div>
-          <div class="story-client">Lehtola</div>
-        </div>
-        <div class="story-bottom">
-          <div class="story-title">Lehtola</div>
-          <div class="story-meta" data-i18n="Kuntoutus · Hämeenlinna">Kuntoutus · Hämeenlinna</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      </div>
+                                                </div>
     </div>
   </section>
 
@@ -659,7 +555,7 @@
       <div class="vs-head">
         <div>
           <p class="section-label" data-sl-reveal>Näin se etenee</p>
-          <h2 class="section-heading" data-sl-split>Kolme vaihetta, <span class="accent">ei enempää.</span></h2>
+          <h2 class="section-heading sl-swipe-host" data-sl-split>Kolme vaihetta, <span class="accent">ei enempää.</span></h2>
         </div>
         <p class="section-sub" data-sl-words data-sl-reveal>Sinä kerrot mitä tarvitset. Me hoidamme loput. Tiedät koko ajan missä mennään.</p>
       </div>
@@ -822,7 +718,7 @@
       <div class="rev-head">
         <div>
           <p class="section-label" data-sl-reveal>Google-arvostelut</p>
-          <h2 class="section-heading" data-sl-split>Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
+          <h2 class="section-heading sl-swipe-host" data-sl-split>Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
         </div>
         <p class="section-sub" data-sl-reveal>Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
       </div>
@@ -911,138 +807,7 @@
   </div>
 
 
-<section class="section" id="ravintolaratkaisu">
-    <div class="container">
-      <div class="foozu-card reveal">
-        <div class="foozu-left">
-          <div class="section-label" data-i18n="Ravintolaratkaisu">Ravintolaratkaisu</div>
-          <h2 class="section-heading">Tilausjärjestelmä ravintolallesi, <span class="accent">kumppanimme Foozun avulla.</span></h2>
-          <p class="section-sub" data-i18n="Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.">Rakennamme suomalaisille ravintoloille räätälöityjä verkkosivuja, joissa on integroitu tilaus- ja varausjärjestelmä. Tilausjärjestelmän toteuttaa kumppanimme Foozu, joka on erikoistunut ravintolateknologiaan. Lue lisää ratkaisusta Foozun sivuilta.</p>
-          <div class="foozu-cta-row">
-            <a href="https://foozu.fi" target="_blank" rel="noopener" class="btn btn-light">
-              <span data-i18n="Tutustu Foozuun →">Tutustu Foozuun →</span>
-            </a>
-            <a href="yhteystiedot.html" class="btn btn-ghost">
-              <span data-i18n="Varaa ravintolademo">Varaa ravintolademo</span>
-            </a>
-          </div>
-        </div>
-        <div class="foozu-right" aria-hidden="true">
-          <div class="foozu-mock">
-            <div class="foozu-mock-header">
-              <div class="foozu-mock-resto">Ravintola Luna</div>
-              <div class="foozu-mock-bar"><span></span><span></span><span></span></div>
-            </div>
-            <div class="foozu-mock-cat">Suosituimmat</div>
 
-            <div class="foozu-mock-row">
-              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&h=160&fit=crop&q=80&auto=format" alt="Pizza Margherita" loading="lazy">
-              <div class="foozu-mock-text">
-                <div class="foozu-mock-name">Pizza Margherita</div>
-                <div class="foozu-mock-desc">Tomaatti, mozzarella, tuore basilika</div>
-              </div>
-              <div class="foozu-mock-price">14,50 €</div>
-            </div>
-
-            <div class="foozu-mock-row">
-              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=160&h=160&fit=crop&q=80&auto=format" alt="Lohiburgeri" loading="lazy">
-              <div class="foozu-mock-text">
-                <div class="foozu-mock-name">Lohiburgeri</div>
-                <div class="foozu-mock-desc">Itämeren lohi, dilliaioli, salaatti</div>
-              </div>
-              <div class="foozu-mock-price">17,90 €</div>
-            </div>
-
-            <div class="foozu-mock-row">
-              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=160&h=160&fit=crop&q=80&auto=format" alt="Caesar-salaatti" loading="lazy">
-              <div class="foozu-mock-text">
-                <div class="foozu-mock-name">Caesar-salaatti</div>
-                <div class="foozu-mock-desc">Kanafilettä, parmesaani, krutonki</div>
-              </div>
-              <div class="foozu-mock-price">12,50 €</div>
-            </div>
-
-            <div class="foozu-mock-row">
-              <img class="foozu-mock-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=160&h=160&fit=crop&q=80&auto=format" alt="Tiramisu" loading="lazy">
-              <div class="foozu-mock-text">
-                <div class="foozu-mock-name">Tiramisu</div>
-                <div class="foozu-mock-desc">Mascarpone, espresso, kaakao</div>
-              </div>
-              <div class="foozu-mock-price">8,50 €</div>
-            </div>
-
-            <div class="foozu-mock-total">
-              <span>Yhteensä</span>
-              <span class="foozu-mock-total-price">53,40 €</span>
-            </div>
-            <div class="foozu-mock-cta">Tilaa kotiin →</div>
-            <div class="foozu-badge">Foozu</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <style>
-      #ravintolaratkaisu .foozu-card {
-        background: linear-gradient(140deg, #0a1428 0%, #060c18 100%);
-        border-radius: 24px;
-        padding: 3.5rem 3rem;
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 3rem;
-        align-items: center;
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 30px 80px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
-      }
-      #ravintolaratkaisu .foozu-card::before {
-        content: ''; position: absolute; inset: 0; pointer-events: none;
-        background:
-          radial-gradient(ellipse 600px 400px at 85% 10%, rgba(29,78,216,0.32), transparent 60%),
-          radial-gradient(ellipse 500px 350px at 10% 95%, rgba(96,165,250,0.18), transparent 60%);
-      }
-      #ravintolaratkaisu .foozu-left { position: relative; z-index: 1; }
-      #ravintolaratkaisu .foozu-left .section-label { color: #60a5fa; }
-      #ravintolaratkaisu .foozu-left h2 { color: #fff; }
-      #ravintolaratkaisu .foozu-left .accent { color: #93c5fd; font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
-      #ravintolaratkaisu .foozu-left .section-sub { color: rgba(255,255,255,0.72); margin-bottom: 1.75rem; }
-      #ravintolaratkaisu .foozu-cta-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
-      #ravintolaratkaisu .foozu-cta-row .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.22); }
-      #ravintolaratkaisu .foozu-cta-row .btn-ghost:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.4); }
-
-      #ravintolaratkaisu .foozu-right { position: relative; z-index: 1; }
-      #ravintolaratkaisu .foozu-mock {
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 18px;
-        padding: 1.25rem;
-        position: relative;
-        backdrop-filter: blur(12px);
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
-      }
-      #ravintolaratkaisu .foozu-mock-header { display: flex; align-items: center; justify-content: space-between; padding: 0.25rem 0.25rem 0.85rem; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 0.85rem; }
-      #ravintolaratkaisu .foozu-mock-resto { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; color: #fff; letter-spacing: -0.01em; }
-      #ravintolaratkaisu .foozu-mock-bar { display: flex; gap: 5px; }
-      #ravintolaratkaisu .foozu-mock-bar span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.18); }
-      #ravintolaratkaisu .foozu-mock-cat { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #60a5fa; padding: 0 0.25rem 0.6rem; }
-      #ravintolaratkaisu .foozu-mock-row { display: grid; grid-template-columns: 44px 1fr auto; gap: 0.7rem; align-items: center; padding: 0.6rem 0.25rem; transition: background 0.25s; }
-      #ravintolaratkaisu .foozu-mock-row + .foozu-mock-row { border-top: 1px solid rgba(255,255,255,0.05); }
-      #ravintolaratkaisu .foozu-mock-img { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); display: block; }
-      #ravintolaratkaisu .foozu-mock-text { display: flex; flex-direction: column; gap: 0.18rem; min-width: 0; }
-      #ravintolaratkaisu .foozu-mock-name { font-size: 0.84rem; font-weight: 600; color: #fff; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      #ravintolaratkaisu .foozu-mock-desc { font-size: 0.7rem; color: rgba(255,255,255,0.55); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      #ravintolaratkaisu .foozu-mock-price { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 600; color: #93c5fd; letter-spacing: 0.01em; }
-      #ravintolaratkaisu .foozu-mock-total { display: flex; align-items: center; justify-content: space-between; margin-top: 0.85rem; padding: 0.7rem 0.25rem 0; border-top: 1px solid rgba(255,255,255,0.08); font-size: 0.78rem; color: rgba(255,255,255,0.62); }
-      #ravintolaratkaisu .foozu-mock-total-price { color: #fff; font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; }
-      #ravintolaratkaisu .foozu-mock-cta { margin-top: 0.85rem; background: linear-gradient(180deg, #fff 0%, #f1f5f9 100%); color: #0f172a; text-align: center; padding: 0.75rem; border-radius: 10px; font-size: 0.84rem; font-weight: 600; box-shadow: 0 6px 14px rgba(0,0,0,0.3); }
-      #ravintolaratkaisu .foozu-badge { position: absolute; top: -10px; right: 18px; background: linear-gradient(135deg, #1D4ED8, #3b82f6); color: #fff; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; padding: 0.32rem 0.7rem; border-radius: 9999px; box-shadow: 0 6px 14px rgba(29,78,216,0.5); text-transform: uppercase; }
-
-      @media (max-width: 880px) {
-        #ravintolaratkaisu .foozu-card { grid-template-columns: 1fr; padding: 2.25rem 1.5rem; gap: 2rem; }
-        #ravintolaratkaisu .foozu-cta-row .btn { width: 100%; justify-content: center; }
-      }
-    </style>
-  </section>
 
 <section class="section">
     <div class="container">
@@ -1249,5 +1014,51 @@
   <script src="/chatbot.js" defer></script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script>
+/* Portfolio hero previews: mount each example site in a scaled, inert iframe
+   only once its card is near the viewport, so the grid costs nothing on load.
+   The iframe is sized to a desktop viewport and scaled to the card, which is
+   why the preview shows the hero as it looks on a real screen. */
+(function () {
+  var frames = Array.prototype.slice.call(document.querySelectorAll('.story-frame[data-src]'));
+  if (!frames.length) return;
+
+  var BASE_W = 1440, BASE_H = 900;
+
+  function fit(frame, iframe) {
+    var scale = frame.offsetWidth / BASE_W;
+    // cover the card: never leave a gap at the bottom of a tall tile
+    var need = frame.offsetHeight / BASE_H;
+    if (need > scale) scale = need;
+    iframe.style.transform = 'scale(' + scale + ')';
+  }
+
+  function mount(frame) {
+    if (frame.dataset.mounted) return;
+    frame.dataset.mounted = '1';
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.setAttribute('tabindex', '-1');
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.setAttribute('scrolling', 'no');
+    iframe.src = frame.getAttribute('data-src');
+    iframe.addEventListener('load', function () { iframe.classList.add('is-ready'); });
+    frame.appendChild(iframe);
+    fit(frame, iframe);
+    if ('ResizeObserver' in window) new ResizeObserver(function () { fit(frame, iframe); }).observe(frame);
+    else window.addEventListener('resize', function () { fit(frame, iframe); }, { passive: true });
+  }
+
+  if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      mount(e.target);
+      obs.unobserve(e.target);
+    });
+  }, { rootMargin: '300px' });
+  frames.forEach(function (f) { obs.observe(f); });
+})();
+</script>
 </body>
 </html>

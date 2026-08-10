@@ -572,10 +572,104 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
   .sl-has-cursor, .sl-has-cursor a, .sl-has-cursor button { cursor: none; }
 }
 
-.sl-word {
-  color: rgba(15,23,42,0.22);
-  transition: color 0.45s ease;
+/* Scrubbed reveal, painted with a clipped gradient so no text node is
+   rewritten. --sl-lit is the scroll progress the motion script sets. */
+.sl-words {
+  --sl-lit: 0%;
+  background-image: linear-gradient(90deg, currentColor 0%, currentColor var(--sl-lit), rgba(15,23,42,0.2) var(--sl-lit), rgba(15,23,42,0.2) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: none;
 }
-.sl-word.is-lit { color: inherit; }
-/* dark sections start their words much dimmer than the body colour */
-.sl-dark .sl-word, .process-section .sl-word, .rev-section .sl-word { color: rgba(255,255,255,0.16); }
+/* the gradient needs the real ink colour to sample, so restate it per context */
+.sl-words { color: var(--text-muted); }
+.process-section .sl-words, .rev-section .sl-words, .sl-dark .sl-words {
+  color: rgba(255,255,255,0.62);
+  background-image: linear-gradient(90deg, currentColor 0%, currentColor var(--sl-lit), rgba(255,255,255,0.15) var(--sl-lit), rgba(255,255,255,0.15) 100%);
+}
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+  .sl-words { color: var(--text-muted); -webkit-text-fill-color: currentColor; background-image: none; }
+}
+
+/* ============================================================
+   PLAYFUL LAYER
+   Small, cheap flourishes: floating accents, a springy pop on
+   reveal, underline swipes and tilting tiles. Everything is
+   transform/opacity only and every animation stops under
+   prefers-reduced-motion.
+   ============================================================ */
+
+/* springy entrance for anything opting in */
+html.sl-motion [data-sl-pop] { opacity: 0; transform: translateY(22px) scale(0.97); }
+html.sl-motion [data-sl-pop].is-in {
+  opacity: 1; transform: none;
+  transition: opacity 0.5s ease, transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: var(--sl-delay, 0ms);
+}
+
+/* slow drift for decorative blobs and badges */
+@keyframes slFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -9px, 0); }
+}
+.sl-float { animation: slFloat 6s ease-in-out infinite; }
+.sl-float-slow { animation: slFloat 9s ease-in-out infinite; }
+.sl-float-delay { animation-delay: -3s; }
+
+/* heading accent gets a hand-drawn style swipe once it is in view */
+.sl-swipe { position: relative; display: inline-block; }
+.sl-swipe::after {
+  content: ''; position: absolute; left: -0.06em; right: -0.06em; bottom: 0.02em; height: 0.34em;
+  background: linear-gradient(90deg, rgba(96,165,250,0.45), rgba(29,78,216,0.28));
+  border-radius: 0.2em; z-index: -1;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.75s cubic-bezier(0.16,1,0.3,1) 0.15s;
+}
+.sl-swipe.is-in::after, .is-in .sl-swipe::after { transform: scaleX(1); }
+/* headings marked by the motion script swipe their accent word */
+.sl-swipe-host .accent { position: relative; display: inline-block; }
+.sl-swipe-host .accent::after {
+  content: ''; position: absolute; left: -0.06em; right: -0.06em; bottom: 0.04em; height: 0.3em;
+  background: linear-gradient(90deg, rgba(96,165,250,0.42), rgba(29,78,216,0.22));
+  border-radius: 0.2em; z-index: -1;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.8s cubic-bezier(0.16,1,0.3,1) 0.25s;
+}
+.sl-swipe-host.is-swiped .accent::after { transform: scaleX(1); }
+
+/* icon wiggle on card hover */
+@keyframes slWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-7deg); }
+  75%      { transform: rotate(7deg); }
+}
+.vs-card:hover .vs-icon,
+.spec-row:hover .spec-icon,
+.flow-card:hover .flow-step { animation: slWiggle 0.5s ease-in-out; }
+
+/* number badges pop when their row is hovered */
+.why-item:hover .why-num, .vs-type:hover .vs-type-num {
+  animation: slPopNum 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes slPopNum {
+  0%   { transform: scale(1) rotate(0deg); }
+  45%  { transform: scale(1.18) rotate(-5deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+/* portfolio tiles lean toward the cursor side */
+.story-card { will-change: transform; }
+.story-card:nth-child(2) { --sl-tilt: 0.6deg; }
+.story-card:nth-child(3) { --sl-tilt: -0.5deg; }
+.story-card:nth-child(2), .story-card:nth-child(3) { transform: rotate(var(--sl-tilt)); }
+.story-card:nth-child(2):hover, .story-card:nth-child(3):hover { transform: rotate(0deg) translateY(-6px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-float, .sl-float-slow,
+  .vs-card:hover .vs-icon, .spec-row:hover .spec-icon, .flow-card:hover .flow-step,
+  .why-item:hover .why-num, .vs-type:hover .vs-type-num { animation: none !important; }
+  .sl-swipe::after, .sl-swipe-host .accent::after { transition: none !important; transform: scaleX(1); }
+  .story-card:nth-child(2), .story-card:nth-child(3) { transform: none; }
+}

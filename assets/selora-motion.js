@@ -332,52 +332,16 @@
     document.addEventListener('mouseenter', function () { ring.classList.remove('is-hidden'); dot.classList.remove('is-hidden'); });
   }
 
-  /* ---------- 10. Scroll-scrubbed word reveal ----------
-     [data-sl-words] dims its words and lights them as the block crosses the
-     viewport, the vanilla equivalent of Vantage's scrubbed .w timeline. */
-  function wrapWords(b) {
-    if (b.dataset.slWordsOriginal === undefined) b.dataset.slWordsOriginal = b.textContent;
-    var words = b.textContent.trim().split(/\s+/);
-    b.textContent = '';
-    words.forEach(function (w, i) {
-      var span = document.createElement('span');
-      span.className = 'sl-word';
-      span.textContent = w;
-      b.appendChild(span);
-      if (i < words.length - 1) b.appendChild(document.createTextNode(' '));
-    });
-  }
-
+  /* ---------- 10. Scroll-scrubbed text reveal ----------
+     Vantage scrubs a per-word timeline. Wrapping words in spans would destroy
+     the text nodes the i18n overlay owns, which leaves the page half English
+     after a language switch, so this paints the same effect with a clipped
+     gradient instead and never touches the DOM. */
   function initWords() {
     var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-sl-words]'));
     if (!blocks.length) return;
 
-    /* Same hazard as the character split: wrapping words destroys the text
-       nodes the i18n overlay looks up. Translate first, wrap after, and
-       rebuild whenever the language changes. */
-    var hasI18n = !!window.selora_i18n || !!document.querySelector('script[src*="i18n"]');
-    var wrapped = false;
-    function wrapAll() {
-      if (wrapped) return;
-      wrapped = true;
-      blocks.forEach(wrapWords);
-      update();
-    }
-    if (hasI18n) {
-      window.addEventListener('selora:langchange', wrapAll, { once: true });
-      setTimeout(wrapAll, 2000);
-      window.addEventListener('selora:langchange', function () {
-        if (!wrapped) return;
-        blocks.forEach(function (b) { b.textContent = b.dataset.slWordsOriginal || b.textContent; });
-        setTimeout(function () {
-          blocks.forEach(function (b) { b.dataset.slWordsOriginal = b.textContent; wrapWords(b); });
-          update();
-        }, 60);
-      });
-    } else {
-      blocks.forEach(wrapWords);
-      wrapped = true;
-    }
+    blocks.forEach(function (b) { b.classList.add('sl-words'); });
 
     var ticking = false;
     function update() {
@@ -385,15 +349,11 @@
       var vh = window.innerHeight;
       blocks.forEach(function (b) {
         var r = b.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > vh) return;
-        // 0 when the block enters the lower third, 1 once it clears the middle
+        if (r.bottom < -100 || r.top > vh + 100) return;
+        // 0 as the block enters the lower third, 1 once it clears the middle
         var p = (vh * 0.82 - r.top) / (r.height + vh * 0.24);
         p = Math.max(0, Math.min(1, p));
-        var spans = b.querySelectorAll('.sl-word');
-        var lit = p * spans.length;
-        for (var i = 0; i < spans.length; i++) {
-          spans[i].classList.toggle('is-lit', i < lit);
-        }
+        b.style.setProperty('--sl-lit', (p * 100).toFixed(2) + '%');
       });
     }
     window.addEventListener('scroll', function () {
@@ -402,6 +362,25 @@
     }, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     update();
+  }
+
+
+  /* ---------- 11. Heading accent swipe ---------- */
+  function initSwipe() {
+    var hosts = document.querySelectorAll('.sl-swipe-host');
+    if (!hosts.length) return;
+    if (!('IntersectionObserver' in window)) {
+      Array.prototype.forEach.call(hosts, function (h) { h.classList.add('is-swiped'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-swiped');
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.3 });
+    Array.prototype.forEach.call(hosts, function (h) { obs.observe(h); });
   }
 
   ready(function () {
@@ -415,6 +394,7 @@
     initProgress();
     initCursor();
     initWords();
+    initSwipe();
   });
 
   window.seloraMotion = { reveal: initReveal, split: initSplit, counters: initCounters, words: initWords };
