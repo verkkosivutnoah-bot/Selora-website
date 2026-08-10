@@ -373,26 +373,35 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
 /* product photo: rounded to nest inside the card, scrim held to the text column */
 .svc-hero-photo {
   position: absolute; z-index: 0; pointer-events: none;
-  right: 4%; bottom: 15%; width: 60%; aspect-ratio: 3 / 2;
+  right: 2%; bottom: 10%; width: 74%; aspect-ratio: 3 / 2;
   background: url('/assets/img/verkkosivusuunnittelu-mockup.jpg') no-repeat center / cover;
   border-radius: 1rem;
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: 0 22px 50px -18px rgba(6,12,24,0.9);
-  opacity: 0.92;
-  filter: saturate(0.9) contrast(1.02);
+  opacity: 1;
+  filter: saturate(0.95) contrast(1.03);
   transform: translate3d(0,0,0) scale(1);
   transition: transform 1s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
 }
-.svc-tile-hero:hover .svc-hero-photo { transform: translate3d(0,-6px,0) scale(1.04); opacity: 1; }
+.svc-tile-hero:hover .svc-hero-photo { transform: translate3d(0,-6px,0) scale(1.03); }
 /* scrim over the photo, under the text */
 .svc-tile-hero .svc-hero-inner { position: relative; z-index: 2; }
+/* the photo is bright, so the white copy needs its own contrast floor */
+.svc-tile-hero h3, .svc-tile-hero p, .svc-tile-hero .svc-cta {
+  text-shadow: 0 1px 2px rgba(6,12,24,0.85), 0 2px 18px rgba(6,12,24,0.7);
+}
+.svc-tile-hero .svc-chip {
+  background: rgba(6,12,24,0.72); border-color: rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.86); backdrop-filter: blur(6px);
+}
+.svc-tile-hero .svc-badge { background: rgba(6,12,24,0.66); backdrop-filter: blur(6px); }
 .svc-tile-hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(96deg, #060c18 0%, rgba(6,12,24,0.9) 26%, rgba(6,12,24,0.4) 42%, transparent 56%);
+  background: linear-gradient(96deg, #060c18 0%, #060c18 30%, rgba(6,12,24,0.88) 45%, rgba(6,12,24,0.34) 62%, transparent 78%);
 }
 @media (max-width: 900px) {
-  .svc-hero-photo { width: 86%; right: 3%; bottom: 6%; opacity: 0.85; }
-  .svc-tile-hero::before { background: linear-gradient(172deg, #060c18 26%, rgba(6,12,24,0.72) 52%, rgba(6,12,24,0.3) 100%); }
+  .svc-hero-photo { width: 94%; right: 2%; bottom: 5%; opacity: 0.95; }
+  .svc-tile-hero::before { background: linear-gradient(172deg, #060c18 30%, rgba(6,12,24,0.8) 54%, rgba(6,12,24,0.34) 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .svc-hero-photo, .svc-tile-hero:hover .svc-hero-photo { transition: none !important; transform: none !important; }
