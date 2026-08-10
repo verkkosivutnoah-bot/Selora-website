@@ -2930,6 +2930,27 @@
     'Analytiikka': 'Analytics',
     'Sähköpostiautomaatiot': 'Email automations',
 
+
+    // ---------- REBRAND: services bento (index + palvelut) ----------
+    'Yksi palvelu.': 'One service.',
+    'Tehtynä kunnolla.': 'Done properly.',
+    'Rakennamme verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja tuovat yhteydenottoja. Kaikki tarvittava sisältyy hintaan.':
+      'We build websites that load fast, rank on Google and bring in enquiries. Everything you need is included in the price.',
+    'Ydinpalvelu': 'Core service',
+    'Räätälöity ulkoasu, nopea toteutus ja mobiilioptimointi. Suunnittelemme sivuston brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja.':
+      'Custom design, fast delivery and mobile optimization. We design the site to match your brand and build it from scratch. No off-the-shelf themes.',
+    'Tutustu palveluun': 'Explore the service',
+    'Otsikot, metatiedot ja nopeus kuntoon, jotta asiakkaat löytävät sinut Googlesta.':
+      'Headings, meta tags and speed done right so customers find you on Google.',
+    'Vastaa kävijöiden kysymyksiin ja ohjaa heidät yhteydenottoon. Sisältyy hintaan.':
+      'Answers visitor questions and guides them to get in touch. Included in the price.',
+    'Automaattiset vahvistus- ja ilmoitusviestit hoitavat yhteydenotot puolestasi.':
+      'Automatic confirmation and notification emails handle enquiries for you.',
+    'Kertamaksu alkaen': 'One-time fee from',
+    'Ei kuukausimaksuja. Maksat kerran ja sivusto on sinun.':
+      'No monthly fees. You pay once and the site is yours.',
+    'Katso hinnat': 'See pricing',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
