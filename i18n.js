@@ -2746,6 +2746,137 @@
     // Duplicates on hinnoittelu already handled above; also the "0,25 € sen jälkeen" cell
     ' · 0,25 € sen jälkeen': ' · €0.25 after',
 
+
+    // ---------- REBRAND: web design studio (index.html) ----------
+    'Selora, Verkkosivut suomalaisille yrityksille | selora.fi': 'Selora, Websites for Finnish businesses | selora.fi',
+    'Selora, Verkkosivut suomalaisille yrityksille': 'Selora, Websites for Finnish businesses',
+    'Selora suunnittelee ja rakentaa nopeat, konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, hakukoneoptimointi ja tekoälychatbot. Kertamaksu alkaen 590 euroa.':
+      'Selora designs and builds fast, high-converting websites for Finnish businesses. Custom design, SEO and an AI chatbot. One-time payment from 590 euros.',
+    'Selora rakentaa nopeat ja konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, SEO ja tekoälychatbot. Kertamaksu alkaen 590 euroa.':
+      'Selora builds fast, high-converting websites for Finnish businesses. Custom design, SEO and an AI chatbot. One-time payment from 590 euros.',
+    'Selora rakentaa nopeat ja konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, SEO ja tekoälychatbot.':
+      'Selora builds fast, high-converting websites for Finnish businesses. Custom design, SEO and an AI chatbot.',
+
+    // hero
+    'yhtään asiakasta.': 'a single customer.',
+    'Suunnittelemme ja rakennamme nopeat verkkosivut, jotka näyttävät hyvältä ja muuttavat kävijät asiakkaiksi.':
+      'We design and build fast websites that look sharp and turn visitors into customers.',
+    'Kertamaksu alkaen 590 €. Sivusto on sinun. Ensimmäinen kartoituspuhelu on maksuton.':
+      'One-time payment from 590 €. The site is yours. The first discovery call is free.',
+    'Katso esimerkkisivustot, jotka olemme rakentaneet': 'See example sites we have built',
+
+    // services teaser
+    'Rakennamme verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja tuovat yhteydenottoja.':
+      'We build websites that load fast, rank on Google and bring in enquiries.',
+    'Räätälöity ulkoasu, nopea toteutus ja mobiilioptimointi. Kertamaksu, sivusto on sinun.':
+      'Custom design, fast delivery and mobile optimization. One-time payment, the site is yours.',
+
+    // process
+    'Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.':
+      'A clear process that respects your time. You always know where things stand and what happens next.',
+    'Käymme läpi yrityksesi, asiakkaasi ja tavoitteesi. Sovimme sivumäärän, sisällöt ja aikataulun. Puhelun jälkeen saat kiinteän hinnan ja tiedät tarkalleen mitä rakennetaan.':
+      'We go through your business, your customers and your goals. We agree on the page count, content and schedule. After the call you get a fixed price and know exactly what will be built.',
+    'Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja, ei kompromisseja. Saat juuri sen sivuston, jonka yrityksesi tarvitsee.':
+      'We design the site to match your brand and build it from scratch. No off-the-shelf themes, no compromises. You get exactly the site your business needs.',
+    'Käymme sivuston läpi yhdessä, testaamme lomakkeet ja mobiilinäkymän ja julkaisemme sivuston. Sinun ei tarvitse koskea koodiin, hoidamme kaiken teknisen puolen.':
+      'We review the site together, test the forms and the mobile view, and publish. You never touch code, we handle all the technical work.',
+    'Seuraamme kävijämääriä ja yhteydenottoja. Teemme tarvittavat päivitykset ja hienosäädöt, jotta sivusto tuottaa enemmän kuukausi kuukaudelta.':
+      'We track visitors and enquiries, then make the updates and tweaks needed so the site performs better month after month.',
+    'Sivusto, joka latautuu nopeasti, näkyy Googlessa ja toimii jokaisella laitteella. Sinä keskityt työhösi.':
+      'A site that loads fast, ranks on Google and works on every device. You focus on your work.',
+
+    // feature grid
+    'Nopeat latausajat': 'Fast load times',
+    'Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Kävijä ei ehdi turhautua.':
+      'The site loads in under a second, even on mobile data. Visitors never get a chance to bounce.',
+    'Mobiilioptimointi': 'Mobile optimization',
+    'Yli puolet kävijöistä tulee puhelimella. Sivusto suunnitellaan ensin mobiilille.':
+      'More than half of visitors arrive on a phone, so the site is designed mobile first.',
+    'Yhteydenottolomakkeet': 'Contact forms',
+    'Selkeät lomakkeet, jotka ohjaavat kävijän yhteydenottoon. Viestit suoraan sähköpostiisi.':
+      'Clear forms that guide visitors to get in touch. Messages land straight in your inbox.',
+    'Hakukoneoptimointi': 'Search engine optimization',
+    'Otsikkorakenne, metatiedot ja sivukartta kuntoon, jotta asiakkaat löytävät sinut Googlesta.':
+      'Heading structure, meta tags and sitemap done right so customers find you on Google.',
+
+    // benefits
+    'Verkkosivusto ei ole pelkkä kuluerä. Hyvin rakennettu sivusto tuo yhteydenottoja vuosia eteenpäin.':
+      'A website is not just a cost. A well built site brings in enquiries for years.',
+    'Asiakkaat löytävät palvelut, hinnat ja aukioloajat itse. Vähemmän samoja kysymyksiä puhelimessa.':
+      'Customers find your services, prices and opening hours themselves. Fewer repeat questions on the phone.',
+    'Kertamaksu, ei kuukausimaksuja': 'One-time payment, no monthly fees',
+    'Maksat sivustosta kerran ja se on sinun. Ei kuukausimaksuja, ei yllätyslaskuja.':
+      'You pay once and the site is yours. No monthly fees, no surprise invoices.',
+    'Myy myös yöllä': 'Sells at night too',
+    'Sivusto esittelee palvelusi ja ottaa yhteydenottoja vastaan silloinkin kun olet töissä tai nukut.':
+      'The site presents your services and takes enquiries even while you are working or asleep.',
+    'Näyttää ammattimaiselta': 'Looks professional',
+    'Ulkoasu rakennetaan brändiisi sopivaksi. Asiakas näkee heti, että yritys on luotettava ja ajan tasalla.':
+      'The design is built around your brand. Customers see straight away that the business is credible and current.',
+    'Kasvaa mukanasi': 'Grows with you',
+    'Sivustoa on helppo laajentaa uusilla sivuilla ja palveluilla, kun yritys kasvaa.':
+      'The site is easy to extend with new pages and services as the business grows.',
+    'Sivustot ja lomaketiedot sijaitsevat EU:n palvelimilla. Toteutus on GDPR-yhteensopiva.':
+      'Sites and form data are hosted on EU servers. The build is GDPR compliant.',
+
+    // testimonials
+    '+34% enemmän yhteydenottoja': '+34% more enquiries',
+    'Sivusto latautuu alle sekunnissa': 'Site loads in under a second',
+    '"Vanhat sivumme olivat hitaat eivätkä toimineet puhelimella. Selora rakensi uudet ja ero näkyi heti. Yhteydenotot kasvoivat ensimmäisen kuukauden aikana reippaasti ja asiakkaat löytävät nyt hinnaston ilman että pitää soittaa."':
+      '"Our old site was slow and did not work on phones. Selora built a new one and the difference showed immediately. Enquiries jumped in the first month and customers now find the price list without having to call."',
+    '"Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu. En joutunut koskemaan mihinkään tekniseen."':
+      '"I expected this to be a complicated project. It was not. One discovery call and a few weeks later the new site was live. I never had to touch anything technical."',
+    '"Olen paljon kentällä, joten sivujen pitää hoitaa myynti puolestani. Nyt asiakas näkee palvelut ja hinnat suoraan puhelimesta ja jättää yhteydenottopyynnön. Soitan takaisin silloin kun on sopiva hetki."':
+      '"I am out in the field a lot, so the site has to do the selling for me. Now customers see the services and prices straight from their phone and leave an enquiry. I call back when it suits."',
+
+    // FAQ
+    'Perussivu valmistuu tyypillisesti 1, 2 viikossa ja laajempi sivusto 3, 4 viikossa. Aikataulu riippuu lähinnä siitä, kuinka nopeasti saamme sinulta tekstit ja kuvat.':
+      'A basic site is typically ready in 1 to 2 weeks and a larger site in 3 to 4 weeks. The schedule mostly depends on how quickly we get your texts and images.',
+    'Voinko pitää nykyisen verkkotunnukseni?': 'Can I keep my current domain?',
+    'Kyllä. Voit pitää nykyisen verkkotunnuksesi tai rekisteröidä uuden. Hoidamme siirron ja tekniset asetukset puolestasi, eikä sivustosi ole missään vaiheessa pois käytöstä.':
+      'Yes. You can keep your current domain or register a new one. We handle the transfer and technical setup, and your site is never offline during the move.',
+    'Voinko päivittää sivuston sisältöä itse?': 'Can I update the content myself?',
+    'Kyllä. Rakennamme sivuston niin, että tekstit, kuvat ja hinnat on helppo päivittää ilman koodia. Näytämme käyttöönoton yhteydessä miten se tehdään, ja autamme aina tarvittaessa.':
+      'Yes. We build the site so texts, images and prices are easy to update without code. We show you how at handover and help whenever you need it.',
+    'Näkyykö sivusto Googlessa?': 'Will the site show up on Google?',
+    'Kyllä. Jokainen sivusto rakennetaan hakukoneoptimoituna: otsikkorakenne, metatiedot, sivukartta ja nopeat latausajat kuntoon heti alusta. Täysi sivusto sisältää lisäksi avainsanatutkimuksen omalle toimialallesi.':
+      'Yes. Every site is built search-optimized from the start: heading structure, meta tags, sitemap and fast load times. The full site also includes keyword research for your industry.',
+    'Mitä sivusto maksaa?': 'What does a site cost?',
+    'Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
+      'A basic site is 590 euros and a full site 990 euros, both one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
+    'Saanko sivuston myös englanniksi?': 'Can I get the site in English too?',
+    'Kyllä. Rakennamme sivuston suomeksi ja englanniksi, jolloin kävijä voi vaihtaa kieltä yhdellä klikkauksella. Molemmat kieliversiot optimoidaan hakukoneille erikseen.':
+      'Yes. We build the site in Finnish and English so visitors can switch language with one click. Both versions are search-optimized separately.',
+    'Kyllä. Sivustot ja lomaketiedot sijaitsevat EU:n palvelimilla ja toteutus on GDPR-yhteensopiva. Emme koskaan myy tai jaa tietojasi kolmansille osapuolille.':
+      'Yes. Sites and form data are hosted on EU servers and the build is GDPR compliant. We never sell or share your data with third parties.',
+    'Mitä sivuston julkaisun jälkeen tapahtuu?': 'What happens after the site launches?',
+    'Sivusto on sinun. Voimme jatkaa ylläpitoa ja päivityksiä erillisellä sopimuksella tai voit hoitaa sivuston itse. Emme lukitse sinua kuukausimaksuun.':
+      'The site is yours. We can continue with maintenance and updates under a separate agreement, or you can run it yourself. We do not lock you into a monthly fee.',
+
+    // CTA + footer
+    'Varaa maksuton 30 minuutin kartoituspuhelu. Käymme läpi mitä sivustosi tarvitsee ja saat kiinteän hinnan. Ei paineita, ei sitoumuksia.':
+      'Book a free 30-minute discovery call. We go through what your site needs and you get a fixed price. No pressure, no commitments.',
+    'Varaa maksuton kartoitus →': 'Book a free consultation →',
+    'Varaa kartoitus': 'Book a consultation',
+    'Verkkosivusuunnittelu suomalaisille yrityksille. Nopeat, konvertoivat sivustot kertamaksulla.':
+      'Web design for Finnish businesses. Fast, high-converting sites for a one-time fee.',
+
+
+    // ---------- REBRAND: blogi + yhteystiedot ----------
+    'Seloran blogi: käytännön oppaat verkkosivuista, hakukoneoptimoinnista ja siitä, miten suomalaiset pienyritykset saavat lisää asiakkaita verkosta.':
+      'The Selora blog: practical guides on websites, SEO and how Finnish small businesses win more customers online.',
+    'Käytännönläheiset artikkelit verkkosivuista, hakukoneoptimoinnista ja siitä, miten suomalaiset pienyritykset saavat lisää asiakkaita verkosta.':
+      'Practical articles on websites, SEO and how Finnish small businesses win more customers online.',
+    'Käymme läpi mitä sivustosi tarvitsee ja saat kiinteän hinnan. 30 minuuttia, ilman sitoumuksia.':
+      'We go through what your site needs and you get a fixed price. 30 minutes, no commitments.',
+    'Julkaisemme kerran kuussa käytännöllisen oppaan verkkosivuista ja siitä, miten saat niistä enemmän asiakkaita. Ei spämmejä.':
+      'Once a month we publish a practical guide on websites and how to get more customers from them. No spam.',
+    'Käymme läpi mitä sivustosi tarvitsee ja miltä se voisi näyttää':
+      'We go through what your site needs and how it could look',
+    'Uudet artikkelit tulossa': 'New articles coming soon',
+    'Kirjoitamme parhaillaan uusia oppaita verkkosivuista, hakukoneoptimoinnista ja siitä, miten sivusto tuo lisää asiakkaita. Tilaa uutiskirje niin saat ne ensimmäisenä.':
+      'We are writing new guides on websites, SEO and how a site brings in more customers. Subscribe to the newsletter to get them first.',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
