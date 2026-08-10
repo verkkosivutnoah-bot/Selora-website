@@ -87,6 +87,12 @@
           if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); return; }
           var s = document.createElement('span');
           s.className = 'sl-char';
+          /* One character per span means the i18n overlay would otherwise see
+             single-character text nodes and match short dictionary keys inside
+             a word: "hours" became "hrsours" via the 'h' entry. The overlay
+             skips anything marked here, and the pre-split markup it does
+             translate is restored on every language change. */
+          s.setAttribute('data-i18n-skip', '');
           s.textContent = ch;
           s.style.transitionDelay = (state.i * 26) + 'ms';
           state.i++;
@@ -137,39 +143,64 @@
   /* Splitting wraps every character in its own <span>, which destroys the
      text nodes the i18n overlay looks up. So: translate first, split after,
      and rebuild on every language change. */
-  function initSplit() {
-    var hasI18n = !!window.selora_i18n || !!document.querySelector('script[src*="i18n"]');
+  /* Splitting owns these headings end to end.
 
-    if (!hasI18n) { doSplit(); return; }
+     The overlay cannot help here: one character per span means it would see
+     single-character text nodes and match short dictionary keys inside a word
+     ("hours" became "hrsours" through the 'h' entry), so the spans are marked
+     data-i18n-skip. That also means the overlay can no longer restore Finnish
+     inside them, so the split re-renders each heading itself: rebuild from the
+     authored source, translate through the overlay's own t(), then re-split.
+     Same dictionary, same result, no per-character matching. */
+  var splitSource = null;
 
-    var done = false;
-    function once() {
-      if (done) return;
-      done = true;
-      doSplit();
-    }
-    // i18n dispatches this at the end of its first setLang() pass.
-    window.addEventListener('selora:langchange', once, { once: true });
-    // Fallback in case i18n never loads.
-    setTimeout(once, 2000);
-
-    // On later language switches, restore the original markup so the overlay
-    // can translate real text nodes, then split the new text.
-    window.addEventListener('selora:langchange', function () {
-      if (!done) return;
-      var heads = Array.prototype.slice.call(document.querySelectorAll('[data-sl-split]'));
-      heads.forEach(function (h) {
-        if (h.dataset.slOriginal) h.innerHTML = h.dataset.slOriginal;
-      });
-      // Let the overlay walk the restored nodes before we re-split them.
-      setTimeout(function () {
-        heads.forEach(function (h) {
-          h.dataset.slOriginal = h.innerHTML; // now holds translated markup
-          splitNode(h, { i: 0 });
-        });
-        heads.forEach(revealChars); // already in view, show immediately
-      }, 60);
+  function captureSplitSource() {
+    // Runs while the markup is still the authored Finnish: this script is
+    // deferred, and the overlay defers its first pass to idle.
+    if (splitSource) return splitSource;
+    splitSource = Array.prototype.slice.call(document.querySelectorAll('[data-sl-split]'));
+    splitSource.forEach(function (h) {
+      if (h.dataset.slSource === undefined) h.dataset.slSource = h.innerHTML;
     });
+    return splitSource;
+  }
+
+  function translateSubtree(root) {
+    var api = window.selora_i18n;
+    if (!api || typeof api.t !== 'function') return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+    var nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) { node.nodeValue = api.t(node.nodeValue); });
+  }
+
+  function renderSplit(reveal) {
+    captureSplitSource().forEach(function (h) {
+      h.innerHTML = h.dataset.slSource;
+      translateSubtree(h);
+      splitNode(h, { i: 0 });
+    });
+    if (reveal) splitSource.forEach(revealChars);
+    else observeSplit(splitSource);
+  }
+
+  function initSplit() {
+    if (!captureSplitSource().length) return;
+
+    var hasI18n = !!window.selora_i18n || !!document.querySelector('script[src*="i18n"]');
+    if (!hasI18n) { renderSplit(false); return; }
+
+    var first = true;
+    function onLang() {
+      // first pass observes for the scroll reveal; later switches are already
+      // on screen, so show them straight away
+      renderSplit(!first);
+      first = false;
+    }
+    // i18n dispatches this at the end of every setLang(), including its first.
+    window.addEventListener('selora:langchange', onLang);
+    // Fallback in case i18n never loads.
+    setTimeout(function () { if (first) onLang(); }, 2000);
   }
 
   /* ---------- 4. Scroll parallax ---------- */
@@ -393,6 +424,8 @@
     }, { threshold: 0.3 });
     Array.prototype.forEach.call(hosts, function (h) { obs.observe(h); });
   }
+
+  captureSplitSource();
 
   ready(function () {
     initStagger();   // must run before initReveal so injected attrs are observed

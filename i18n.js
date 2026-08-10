@@ -91,7 +91,7 @@
     'Vahvista': 'Confirm',
     'Hyväksy kaikki': 'Accept all',
     'Hylkää': 'Decline',
-    'Käytössä': 'Enabled',
+    'Käytössä': 'Live',
     'Lue lisää →': 'Read more →',
     'Lue lisää ▾': 'Read more ▾',
     'Lue prosessista': 'Read about our process',
@@ -1762,7 +1762,7 @@
     'Kesto: 45, 60 min': 'Duration: 45 to 60 min',
     'Kesto: 45,60 min': 'Duration: 45 to 60 min',
     'Kesto: 45–60 min': 'Duration: 45 to 60 min',
-    'Kesto: alle 24 h': 'Duration: under 24 hrs',
+    'Kesto: alle 24 h': 'Duration: under 24 h',
     'Kesto (min)': 'Duration (min)',
     'Kesto': 'Duration',
     'Numero': 'Number',
@@ -2663,7 +2663,7 @@
     'Kaikenlaisista yrityksistä, tässä mitä asiakkaamme kokevat tekoälyjärjestelmien käyttöönoton jälkeen.':
       'From businesses of every kind, here is what our customers experience after rolling out our AI systems.',
     'Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: kartoitus, persoonallisuuden rakentaminen, integraatio ja jatkuva optimointi. Käyttöönotto alle 48 tunnissa.':
-      'The Selora AI receptionist rollout in four stages: discovery, persona build, integration and ongoing optimization. Live in under 48 hours.',
+      'The Selora AI receptionist rollout in four stages: discovery, persona build, integration and ongoing optimisation. Live in under 48 hours.',
     'Selora-tekoälyvastaanottajan käyttöönotto neljässä vaiheessa: alle 48 tunnissa puhelut hoituvat itsestään.':
       'The Selora AI receptionist rollout in four stages: within 48 hours calls handle themselves.',
 
@@ -2764,7 +2764,7 @@
     'Rakennamme verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja tuovat yhteydenottoja.':
       'We build websites that load fast, rank on Google and bring in enquiries.',
     'Räätälöity ulkoasu, nopea toteutus ja mobiilioptimointi. Kertamaksu, sivusto on sinun.':
-      'Custom design, fast delivery and mobile optimization. One-time payment, the site is yours.',
+      'Custom design, fast delivery and mobile optimisation. One-time payment, the site is yours.',
 
     // process
     'Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.':
@@ -2784,13 +2784,13 @@
     'Nopeat latausajat': 'Fast load times',
     'Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Kävijä ei ehdi turhautua.':
       'The site loads in under a second, even on mobile data. Visitors never get a chance to bounce.',
-    'Mobiilioptimointi': 'Mobile optimization',
+    'Mobiilioptimointi': 'Mobile optimisation',
     'Yli puolet kävijöistä tulee puhelimella. Sivusto suunnitellaan ensin mobiilille.':
       'More than half of visitors arrive on a phone, so the site is designed mobile first.',
     'Yhteydenottolomakkeet': 'Contact forms',
     'Selkeät lomakkeet, jotka ohjaavat kävijän yhteydenottoon. Viestit suoraan sähköpostiisi.':
       'Clear forms that guide visitors to get in touch. Messages land straight in your inbox.',
-    'Hakukoneoptimointi': 'Search engine optimization',
+    'Hakukoneoptimointi': 'Search engine optimisation',
     'Otsikkorakenne, metatiedot ja sivukartta kuntoon, jotta asiakkaat löytävät sinut Googlesta.':
       'Heading structure, meta tags and sitemap done right so customers find you on Google.',
 
@@ -2835,13 +2835,13 @@
       'Yes. We build the site so texts, images and prices are easy to update without code. We show you how at handover and help whenever you need it.',
     'Näkyykö sivusto Googlessa?': 'Will the site show up on Google?',
     'Kyllä. Jokainen sivusto rakennetaan hakukoneoptimoituna: otsikkorakenne, metatiedot, sivukartta ja nopeat latausajat kuntoon heti alusta. Täysi sivusto sisältää lisäksi avainsanatutkimuksen omalle toimialallesi.':
-      'Yes. Every site is built search-optimized from the start: heading structure, meta tags, sitemap and fast load times. The full site also includes keyword research for your industry.',
+      'Yes. Every site is built search-optimised from the start: heading structure, meta tags, sitemap and fast load times. The full site also includes keyword research for your industry.',
     'Mitä sivusto maksaa?': 'What does a site cost?',
     'Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
       'A basic site is 590 euros and a full site 990 euros, both one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
     'Saanko sivuston myös englanniksi?': 'Can I get the site in English too?',
     'Kyllä. Rakennamme sivuston suomeksi ja englanniksi, jolloin kävijä voi vaihtaa kieltä yhdellä klikkauksella. Molemmat kieliversiot optimoidaan hakukoneille erikseen.':
-      'Yes. We build the site in Finnish and English so visitors can switch language with one click. Both versions are search-optimized separately.',
+      'Yes. We build the site in Finnish and English so visitors can switch language with one click. Both versions are search-optimised separately.',
     'Kyllä. Sivustot ja lomaketiedot sijaitsevat EU:n palvelimilla ja toteutus on GDPR-yhteensopiva. Emme koskaan myy tai jaa tietojasi kolmansille osapuolille.':
       'Yes. Sites and form data are hosted on EU servers and the build is GDPR compliant. We never sell or share your data with third parties.',
     'Mitä sivuston julkaisun jälkeen tapahtuu?': 'What happens after the site launches?',
@@ -2933,7 +2933,7 @@
       'We build websites that load fast, rank on Google and bring in enquiries. Everything you need is included in the price.',
     'Ydinpalvelu': 'Core service',
     'Räätälöity ulkoasu, nopea toteutus ja mobiilioptimointi. Suunnittelemme sivuston brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja.':
-      'Custom design, fast delivery and mobile optimization. We design the site to match your brand and build it from scratch. No off-the-shelf themes.',
+      'Custom design, fast delivery and mobile optimisation. We design the site to match your brand and build it from scratch. No off-the-shelf themes.',
     'Tutustu palveluun': 'Explore the service',
     'Otsikot, metatiedot ja nopeus kuntoon, jotta asiakkaat löytävät sinut Googlesta.':
       'Headings, meta tags and speed done right so customers find you on Google.',
@@ -3038,7 +3038,7 @@
 
     // palvelut: technology group
     'Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Optimoimme kuvat, koodin ja fontit jo rakennusvaiheessa.':
-      'The site loads in under a second, even on mobile data. We optimize images, code and fonts during the build.',
+      'The site loads in under a second, even on mobile data. We optimise images, code and fonts during the build.',
     'Kuvien pakkaus ja oikeat kuvaformaatit': 'Image compression and the right formats',
     'Kevyt koodi ilman turhia kirjastoja': 'Lightweight code with no unnecessary libraries',
     'Nopea palvelin ja välimuisti kuntoon': 'Fast hosting and caching set up properly',
@@ -3055,7 +3055,7 @@
 
     // palvelut: visibility group
     'Jokainen sivusto rakennetaan hakukoneoptimoituna. Otsikkorakenne, metatiedot ja sivukartta ovat kunnossa heti julkaisusta alkaen.':
-      'Every site is built search-optimized. Heading structure, meta tags and sitemap are in place from launch.',
+      'Every site is built search-optimised. Heading structure, meta tags and sitemap are in place from launch.',
     'Otsikkorakenne ja metatiedot kuntoon': 'Heading structure and meta tags done right',
     'Sivukartta ja robots.txt': 'Sitemap and robots.txt',
     'Nopeus ja mobiilikäytettävyys osana SEO:ta': 'Speed and mobile usability as part of SEO',
@@ -3065,10 +3065,10 @@
     'Sisältö rakennettu hakusanojen ympärille': 'Content built around search terms',
     'Paikallinen näkyvyys omalla alueellasi': 'Local visibility in your area',
     'Rakennamme sivuston suomeksi ja englanniksi, jolloin kävijä vaihtaa kieltä yhdellä klikkauksella. Molemmat kieliversiot optimoidaan erikseen.':
-      'We build the site in Finnish and English so visitors switch language with one click. Both versions are optimized separately.',
+      'We build the site in Finnish and English so visitors switch language with one click. Both versions are optimised separately.',
     'Suomi ja englanti samalla sivustolla': 'Finnish and English on one site',
     'Kielivalitsin navigaatiossa': 'Language switcher in the navigation',
-    'Molemmat versiot hakukoneoptimoituna': 'Both versions search-optimized',
+    'Molemmat versiot hakukoneoptimoituna': 'Both versions search-optimised',
 
     // palvelut: add-ons group
     'Sivustolle asennettava chatbot vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottoon. Sisältyy molempiin paketteihin.':
