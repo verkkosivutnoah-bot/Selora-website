@@ -460,3 +460,122 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
   .svc-tile:hover .svc-icon { transform: none; }
   .svc-tile:hover .svc-hero-mesh { transform: none; }
 }
+
+/* ============================================================
+   ARROW FLOW  (shared: index.html, verkkosivusuunnittelu.html)
+   Steps in a row with arrows drawn between them. On narrow
+   screens the track stacks and the arrows rotate to point down.
+   ============================================================ */
+.flow-track {
+  display: flex; align-items: stretch; gap: 0;
+  margin-top: 3rem;
+}
+.flow-node { flex: 1 1 0; min-width: 0; display: flex; }
+.flow-arrow {
+  flex: 0 0 clamp(2.5rem, 5vw, 5rem);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(29,78,216,0.45);
+  padding: 0 0.25rem;
+}
+.flow-arrow svg { width: 100%; height: 34px; overflow: visible; display: block; }
+/* the dash crawls toward the next step */
+.flow-arrow .fa-line {
+  stroke: currentColor; stroke-width: 1.6; fill: none; stroke-linecap: round;
+  stroke-dasharray: 5 7;
+  animation: flowDash 1.4s linear infinite;
+}
+.flow-arrow .fa-head { fill: currentColor; transform-origin: center; animation: flowNudge 1.4s ease-in-out infinite; }
+@keyframes flowDash { to { stroke-dashoffset: -12; } }
+@keyframes flowNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
+
+/* card sits inside a node; the playful tilt straightens on hover */
+.flow-card {
+  position: relative; width: 100%; display: flex; flex-direction: column;
+  padding: 1.85rem 1.75rem; border-radius: 1.35rem;
+  background: #fff; border: 1px solid rgba(15,23,42,0.09);
+  box-shadow: 0 2px 6px rgba(15,23,42,0.05);
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease, border-color 0.35s ease;
+}
+.flow-node:nth-child(1) .flow-card { transform: rotate(-0.8deg); }
+.flow-node:nth-child(5) .flow-card { transform: rotate(0.7deg); }
+.flow-node:nth-child(9) .flow-card { transform: rotate(-0.5deg); }
+.flow-card:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 22px 48px -22px rgba(15,23,42,0.35);
+  border-color: rgba(29,78,216,0.3);
+}
+.flow-step {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.4rem; height: 2.4rem; border-radius: 50%;
+  background: linear-gradient(150deg, #1D4ED8, #2563EB); color: #fff;
+  font-size: 0.78rem; font-weight: 600; margin-bottom: 1.1rem;
+  box-shadow: 0 8px 20px -8px rgba(37,99,235,0.8);
+}
+.flow-card h3 { font-size: 1.05rem; font-weight: 500; color: #0f172a; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+.flow-card p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.8; }
+.flow-tag {
+  display: inline-flex; margin-top: 1.1rem; font-size: 0.66rem; font-weight: 500;
+  color: var(--blue); letter-spacing: 0.08em; text-transform: uppercase;
+}
+
+/* dark sections invert the card */
+.flow-dark .flow-card { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); box-shadow: none; backdrop-filter: blur(12px); }
+.flow-dark .flow-card h3 { color: #fff; }
+.flow-dark .flow-card p { color: rgba(255,255,255,0.58); }
+.flow-dark .flow-arrow { color: rgba(147,197,253,0.55); }
+.flow-dark .flow-tag { color: rgba(147,197,253,0.8); }
+.flow-dark .flow-card:hover { border-color: rgba(96,165,250,0.4); box-shadow: 0 26px 60px -30px rgba(2,6,18,0.95); }
+
+@media (max-width: 900px) {
+  .flow-track { flex-direction: column; align-items: stretch; }
+  .flow-arrow { flex: 0 0 auto; height: 3rem; transform: rotate(90deg); }
+  .flow-arrow svg { width: 4rem; }
+  .flow-node .flow-card { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow-arrow .fa-line, .flow-arrow .fa-head { animation: none !important; }
+  .flow-card { transition: none !important; }
+  .flow-card:hover { transform: none; }
+}
+
+/* ============================================================
+   INTERACTIVE LAYER
+   Scroll progress, custom cursor and scrubbed word reveal.
+   All three are injected by selora-motion.js, which bails out
+   entirely on prefers-reduced-motion, so nothing here needs a
+   reduced-motion escape hatch beyond hiding the cursor.
+   ============================================================ */
+.sl-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 9999;
+  transform: scaleX(0); transform-origin: 0 50%;
+  background: linear-gradient(90deg, #1D4ED8, #60A5FA);
+  box-shadow: 0 0 12px rgba(96,165,250,0.6);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sl-cursor, .sl-cursor-dot {
+  position: fixed; top: 0; left: 0; z-index: 10000; pointer-events: none;
+  border-radius: 50%; will-change: transform;
+}
+.sl-cursor {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(96,165,250,0.65);
+  transition: width 0.28s cubic-bezier(0.16,1,0.3,1), height 0.28s cubic-bezier(0.16,1,0.3,1),
+              background 0.28s ease, border-color 0.28s ease, opacity 0.25s ease;
+}
+.sl-cursor.is-active { width: 56px; height: 56px; background: rgba(37,99,235,0.12); border-color: rgba(96,165,250,0.9); }
+.sl-cursor-dot { width: 5px; height: 5px; background: #60A5FA; transition: opacity 0.25s ease; }
+.sl-cursor.is-hidden, .sl-cursor-dot.is-hidden { opacity: 0; }
+/* the ring replaces the pointer only where it would otherwise be an arrow */
+@media (hover: hover) and (pointer: fine) {
+  .sl-has-cursor, .sl-has-cursor a, .sl-has-cursor button { cursor: none; }
+}
+
+.sl-word {
+  color: rgba(15,23,42,0.22);
+  transition: color 0.45s ease;
+}
+.sl-word.is-lit { color: inherit; }
+/* dark sections start their words much dimmer than the body colour */
+.sl-dark .sl-word, .process-section .sl-word, .rev-section .sl-word { color: rgba(255,255,255,0.16); }

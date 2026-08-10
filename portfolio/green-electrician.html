@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Green Electrician — Licensed Electrical Contractor, Etobicoke &amp; GTA</title>
+<meta name="description" content="The Green Electrician — maintenance, repair and new installation for homes and small businesses in Toronto, Mississauga, Etobicoke, Oakville, Brampton and the GTA. Text or call 416.578.9258." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050d09;
+  --bg-2:#08150f;
+  --panel:#0b1c14;
+  --ink:#eaf3ed;
+  --ink-dim:#8ba295;
+  --yellow:#F1C40F;
+  --orange:#E67E22;
+  --green:#3fd486;
+  --line:rgba(234,243,237,.12);
+  --display:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--body);overflow-x:clip;scroll-behavior:auto}
+body{-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--yellow);color:#06120c}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:2px}
+
+.wrap{width:min(1280px,92vw);margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.66rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--yellow);margin-bottom:1.3rem;font-weight:500}
+.eyebrow::before{content:'';width:22px;height:1px;background:var(--yellow)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.04}
+.h2{font-size:clamp(1.9rem,4.6vw,3.5rem)}
+.lead{color:var(--ink-dim);font-size:clamp(.95rem,1.5vw,1.08rem);line-height:1.8;max-width:56ch}
+
+/* ---------- progress ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:9999;transform:scaleX(0);
+  transform-origin:0 50%;background:linear-gradient(90deg,var(--yellow),var(--orange));will-change:transform}
+
+/* ---------- preloader ---------- */
+.loader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:grid;place-items:center;will-change:transform}
+.loader svg{width:clamp(64px,12vw,110px);height:auto}
+.loader__t{margin-top:1.4rem;text-align:center;font-size:.64rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--ink-dim)}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;width:100%;z-index:900;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;padding:.85rem clamp(1rem,4vw,2.4rem);
+  background:rgba(5,13,9,.72);backdrop-filter:blur(12px);border-bottom:1px solid transparent;
+  transition:border-color .3s,background .3s}
+.nav.is-stuck{border-bottom-color:var(--line)}
+.nav__brand{display:flex;align-items:center;gap:.7rem;font-family:var(--display);font-weight:700;
+  font-size:1rem;letter-spacing:-.01em;white-space:nowrap}
+.nav__brand svg{width:22px;height:30px;flex:0 0 auto}
+.nav__brand i{font-style:normal;color:var(--green)}
+.nav__links{display:flex;gap:1.6rem;font-size:.8rem;color:var(--ink-dim);margin-left:auto}
+.nav__links a:hover{color:var(--ink)}
+.nav__call{display:inline-flex;align-items:center;gap:.55rem;padding:.62rem 1.1rem;border-radius:100px;
+  background:var(--yellow);color:#06120c;font-weight:600;font-size:.82rem;white-space:nowrap;
+  transition:transform .25s,box-shadow .25s}
+.nav__call:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(241,196,15,.3)}
+@media(max-width:900px){.nav__links{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:grid;align-items:center;overflow:hidden;
+  padding:clamp(6rem,14vh,9rem) 0 clamp(3rem,8vh,5rem)}
+.hero__circuit{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.55}
+.hero__circuit svg{width:100%;height:100%}
+.hero__glow{position:absolute;z-index:0;pointer-events:none;width:min(70vw,720px);aspect-ratio:1;
+  right:-12%;top:6%;background:radial-gradient(circle,rgba(241,196,15,.13),transparent 62%);filter:blur(4px)}
+.hero__grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);
+  align-items:center}
+@media(max-width:900px){.hero__grid{grid-template-columns:1fr}.hero__bolt{display:none}}
+.hero h1{font-size:clamp(2.3rem,6.4vw,5rem)}
+.hero h1 span{color:var(--green);display:inline-block}
+.hero h1 .w{display:inline-block;will-change:transform,opacity}
+.hero__sub{margin-top:1.6rem;max-width:50ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.4rem}
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:1rem 1.6rem;border-radius:100px;
+  font-weight:600;font-size:.9rem;transition:transform .25s,box-shadow .25s,background .25s,color .25s}
+.btn--p{background:var(--yellow);color:#06120c}
+.btn--p:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(241,196,15,.28)}
+.btn--s{border:1px solid var(--line);color:var(--ink)}
+.btn--s:hover{border-color:var(--green);color:var(--green)}
+.hero__meta{margin-top:2.6rem;display:flex;flex-wrap:wrap;gap:1.6rem 2.4rem;font-size:.8rem;color:var(--ink-dim)}
+.hero__meta div{display:flex;align-items:center;gap:.55rem}
+.hero__meta b{color:var(--ink);font-weight:600}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex:0 0 auto;
+  box-shadow:0 0 0 4px rgba(63,212,134,.14)}
+.hero__bolt{position:relative;display:grid;place-items:center}
+.hero__bolt svg{width:min(74%,320px);height:auto;filter:drop-shadow(0 0 34px rgba(241,196,15,.32))}
+
+/* ---------- trust strip ---------- */
+.strip{border-block:1px solid var(--line);background:var(--bg-2)}
+.strip__in{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.strip__c{background:var(--bg-2);padding:1.5rem clamp(1rem,2vw,1.6rem)}
+.strip__c b{display:block;font-family:var(--display);font-size:1.02rem;margin-bottom:.35rem}
+.strip__c span{font-size:.79rem;color:var(--ink-dim);line-height:1.6;display:block}
+@media(max-width:860px){.strip__in{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.strip__in{grid-template-columns:1fr}}
+
+/* ---------- sections ---------- */
+.sec{padding:clamp(4.5rem,11vh,8rem) 0}
+.sec__head{max-width:62ch;margin-bottom:clamp(2.4rem,5vw,3.6rem)}
+.sec__head p{margin-top:1.2rem}
+
+/* ---------- services ---------- */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media(max-width:960px){.svc{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.svc{grid-template-columns:1fr}}
+.svc__c{background:var(--panel);padding:clamp(1.5rem,2.6vw,2.1rem);position:relative;
+  transition:background .3s;min-height:200px;display:flex;flex-direction:column}
+.svc__c:hover{background:#0e2419}
+.svc__ico{width:44px;height:44px;margin-bottom:1.2rem}
+.svc__c h3{font-size:1.12rem;margin-bottom:.6rem}
+.svc__c p{font-size:.86rem;color:var(--ink-dim);line-height:1.75}
+.svc__c::after{content:'';position:absolute;left:0;top:0;width:100%;height:2px;
+  background:linear-gradient(90deg,var(--yellow),var(--orange));transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.svc__c:hover::after{transform:scaleX(1)}
+
+/* ---------- circuit path (the chain) ---------- */
+.chain{background:var(--bg-2);border-block:1px solid var(--line)}
+.chain__track{position:relative;margin-top:3rem}
+.chain__svg{width:100%;height:120px}
+.chain__nodes{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:-.5rem}
+.chain__n{text-align:center;padding:0 .4rem;opacity:.35;transition:opacity .4s}
+.chain__n.on{opacity:1}
+.chain__n b{display:block;font-family:var(--display);font-size:.95rem;margin-bottom:.35rem}
+.chain__n span{font-size:.74rem;color:var(--ink-dim);line-height:1.6}
+@media(max-width:820px){.chain__nodes{grid-template-columns:repeat(2,1fr);gap:1.6rem;margin-top:1.4rem}
+  .chain__svg{height:70px}}
+
+/* ---------- ethos ---------- */
+.ethos{position:relative;overflow:hidden}
+.ethos__q{font-family:var(--display);font-size:clamp(1.6rem,4.4vw,3.2rem);line-height:1.2;max-width:20ch}
+.ethos__q .w{display:inline-block;opacity:.16;will-change:opacity}
+.ethos__q em{font-style:normal;color:var(--yellow)}
+.ethos__list{margin-top:3rem;display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+.ethos__list li{list-style:none;padding-top:1.1rem;border-top:1px solid var(--line);font-size:.85rem;
+  color:var(--ink-dim);line-height:1.75}
+.ethos__list b{display:block;color:var(--ink);font-family:var(--display);font-size:.95rem;margin-bottom:.4rem}
+@media(max-width:860px){.ethos__list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.ethos__list{grid-template-columns:1fr}}
+
+/* ---------- energy tips ---------- */
+.tips{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media(max-width:760px){.tips{grid-template-columns:1fr}}
+.tip{background:var(--panel);padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;
+  transition:background .3s}
+.tip:hover{background:#0e2419}
+.tip__k{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid rgba(241,196,15,.35);color:var(--yellow);font-size:.7rem;font-weight:600}
+.tip b{display:block;font-family:var(--display);font-size:.95rem;margin-bottom:.28rem}
+.tip span{font-size:.82rem;color:var(--ink-dim);line-height:1.7}
+
+/* ---------- reviews ---------- */
+.rev{background:var(--bg-2);border-block:1px solid var(--line)}
+.rev__grid{columns:3;column-gap:1.2rem}
+@media(max-width:1000px){.rev__grid{columns:2}}
+@media(max-width:660px){.rev__grid{columns:1}}
+.rev__c{break-inside:avoid;-webkit-column-break-inside:avoid;background:var(--panel);
+  border:1px solid var(--line);border-radius:4px;padding:1.5rem;margin-bottom:1.2rem;
+  transition:border-color .35s,transform .35s}
+.rev__c:hover{border-color:rgba(241,196,15,.45);transform:translateY(-3px)}
+.rev__q{font-size:.9rem;line-height:1.8;color:var(--ink);margin-bottom:1.2rem}
+.rev__q::before{content:'“';font-family:var(--display);color:var(--yellow);font-size:2.4rem;
+  line-height:0;vertical-align:-.35em;margin-right:.25rem}
+.rev__by{display:flex;align-items:center;gap:.7rem;padding-top:1rem;border-top:1px solid var(--line)}
+.rev__av{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(241,196,15,.12);color:var(--yellow);font-family:var(--display);font-size:.82rem}
+.rev__by b{display:block;font-size:.85rem;font-weight:600}
+.rev__by span{display:block;font-size:.72rem;color:var(--ink-dim);margin-top:.15rem}
+.rev__note{margin-top:1.6rem;font-size:.75rem;color:var(--ink-dim);line-height:1.7}
+
+/* ---------- area ---------- */
+.area__list{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2rem}
+.area__list li{list-style:none}
+.area__list span{display:inline-block;padding:.7rem 1.25rem;border:1px solid var(--line);border-radius:100px;
+  font-size:.88rem;transition:border-color .3s,color .3s,transform .3s}
+.area__list li:hover span{border-color:var(--yellow);color:var(--yellow);transform:translateY(-2px)}
+
+/* ---------- contact ---------- */
+.contact{background:var(--bg-2);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact__grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:start}
+@media(max-width:900px){.contact__grid{grid-template-columns:1fr}}
+.contact__big{font-family:var(--display);font-size:clamp(2rem,5.6vw,4rem);line-height:1.05}
+.contact__rows{margin-top:2.4rem;display:grid;gap:1px;background:var(--line);border:1px solid var(--line);
+  border-radius:4px;overflow:hidden}
+.crow{background:var(--panel);padding:1.3rem 1.5rem;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap;transition:background .3s}
+a.crow:hover{background:#0e2419}
+.crow small{display:block;font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--ink-dim);margin-bottom:.45rem}
+.crow b{font-family:var(--display);font-size:clamp(1.1rem,2.4vw,1.5rem);font-weight:700}
+.crow .go{color:var(--yellow);font-size:.8rem;font-weight:600;white-space:nowrap}
+.note{margin-top:1.6rem;padding:1.1rem 1.3rem;border:1px dashed rgba(234,243,237,.2);border-radius:4px;
+  font-size:.8rem;color:var(--ink-dim);line-height:1.8}
+.note b{color:var(--ink)}
+
+/* ---------- footer ---------- */
+.foot{padding:3rem 0 2.4rem;border-top:1px solid var(--line)}
+.foot__in{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
+  font-size:.76rem;color:var(--ink-dim)}
+.foot__in a:hover{color:var(--yellow)}
+
+/* Declared last: the .hero__bolt base rule appears after the hero media query,
+   so an earlier display:none would lose on source order. */
+@media(max-width:900px){
+  .hero__grid{grid-template-columns:1fr}
+  .hero__bolt{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="loader" id="loader">
+  <div>
+    <svg viewBox="0 0 200 220" fill="none" aria-hidden="true">
+      <path id="loaderBolt" d="M100,0 L75,75 L125,75 L50,200 L100,100 L50,100 L100,0"
+            stroke="#F1C40F" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" fill="none"/>
+    </svg>
+    <div class="loader__t">The Green Electrician</div>
+  </div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <svg viewBox="0 0 200 220" fill="none" aria-hidden="true" data-trace data-trace-w="5" data-trace-dur="2.4">
+      <path d="M100,0 L75,75 L125,75 L50,200 L100,100 L50,100 L100,0"/>
+    </svg>
+    The Green <i>Electrician</i>
+  </a>
+  <div class="nav__links">
+    <a href="#services">Services</a>
+    <a href="#chain">What we work on</a>
+    <a href="#energy">Save energy</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#area">Service area</a>
+  </div>
+  <a class="nav__call" href="tel:+14165789258">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>
+    </svg>
+    416.578.9258
+  </a>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero__glow"></div>
+  <div class="hero__circuit" id="circuit" aria-hidden="true"></div>
+  <div class="wrap hero__grid">
+    <div>
+      <p class="eyebrow">Licensed electrical contractor · Etobicoke, Ontario</p>
+      <h1 data-split-hero>Power that works. <span>Waste that doesn't.</span></h1>
+      <p class="lead hero__sub">
+        Maintenance, repair and new installation for homes and small businesses — from the hydro
+        service entrance at the street all the way to the last switch on the wall.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--p" href="tel:+14165789258">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/>
+          </svg>
+          Call or text 416.578.9258
+        </a>
+        <a class="btn btn--s" href="#services">See what we do</a>
+      </div>
+      <div class="hero__meta">
+        <div><i class="dot"></i><span><b>Kaz Dziak, M.E.</b> — Master Electrician</span></div>
+        <div><i class="dot"></i><span>Small jobs &amp; <b>drop-in appointments</b></span></div>
+        <div><i class="dot"></i><span>Toronto · Mississauga · Etobicoke · Oakville · Brampton</span></div>
+      </div>
+    </div>
+    <div class="hero__bolt">
+      <svg viewBox="0 0 200 220" fill="none" data-trace data-trace-w="7" data-trace-dur="2.8" data-trace-dash=".26">
+        <path d="M100,0 L75,75 L125,75 L50,200 L100,100 L50,100 L100,0"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- ================= TRUST STRIP ================= -->
+<section class="strip">
+  <div class="wrap"><div class="strip__in">
+    <div class="strip__c"><b>Homes &amp; small business</b><span>Residential and light commercial electrical work.</span></div>
+    <div class="strip__c"><b>Text for a drop-in</b><span>Small jobs handled when the electrician is already in your area.</span></div>
+    <div class="strip__c"><b>Doing more with less</b><span>Small efficient vehicles, small smart tools, recyclable waste separated.</span></div>
+    <div class="strip__c"><b>Based in Etobicoke</b><span>Serving energy-conscious households across the GTA.</span></div>
+  </div></div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">What we do</p>
+      <h2 class="h2">Nine things we get called for most</h2>
+      <p class="lead">Every job starts the same way — a look at what's actually there, then the smallest
+        change that fixes it properly.</p>
+    </div>
+    <div class="svc" id="svcGrid">
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3">
+          <path d="M24 4 L16 26 L24 26 L18 44 L34 22 L26 22 L32 4 Z"/></svg>
+        <h3>Energy savings</h3>
+        <p>Practical advice and work that cuts kilowatt-hours — starting with the loads that actually
+          dominate your bill.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.4">
+          <path d="M6 14 H20 M28 14 H42 M6 24 H42 M6 34 H20 M28 34 H42 M24 8 V40"/></svg>
+        <h3>Knob &amp; tube / aluminum</h3>
+        <p>Rewiring outdated knob-and-tube and aluminum branch circuits over to copper.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.2">
+          <path d="M8 32 V18 a4 4 0 0 1 4-4 h14 a4 4 0 0 1 4 4 v14 M8 32 h22 M12 38 h4 M22 38 h4 M34 20 h4 a3 3 0 0 1 3 3 v9 a3 3 0 0 0 3 3"/></svg>
+        <h3>EV charger (EVSE)</h3>
+        <p>Class 2 electric car charger installation, sized and fed correctly from the panel.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.6">
+          <path d="M10 34 V20 a6 6 0 0 1 6-6 h16 a6 6 0 0 1 6 6 v14 M10 34 h28 M16 40 v-6 M32 40 v-6 M24 8 v6"/></svg>
+        <h3>Emergency backup power</h3>
+        <p>Standby generator installation so the essentials keep running when the grid stops.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="2.8">
+          <path d="M8 16 h32 v8 h-32 z M12 24 v8 M20 24 v8 M28 24 v8 M36 24 v8 M8 38 h32"/></svg>
+        <h3>LED cupboard lighting</h3>
+        <p>Under-cabinet and kitchen cupboard LED lighting, wired in and switched properly.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.1">
+          <path d="M24 10 a8 8 0 0 1 8 8 a8 8 0 0 1-8 8 a8 8 0 0 1-8-8 a8 8 0 0 1 8-8 z M14 34 l-4 6 M34 34 l4 6 M24 34 v8"/></svg>
+        <h3>Pot &amp; down lights</h3>
+        <p>LED potlight and downlight layouts installed cleanly, with minimal ceiling damage.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.3">
+          <path d="M6 24 h6 v-6 h6 v6 h6 v-6 h6 v6 h6 v-6 h6 M6 32 h36"/></svg>
+        <h3>LED strip &amp; tape</h3>
+        <p>Indoor LED strip and tape lighting — coves, shelves, stairs and feature walls.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="3.5">
+          <path d="M24 6 v8 M24 22 a4 4 0 0 1 4-4 a4 4 0 0 1-4 4 z M24 22 a4 4 0 0 0-4-4 a4 4 0 0 0 4 4 z M24 22 a4 4 0 0 1 4 4 a4 4 0 0 1-4-4 z M24 22 a4 4 0 0 0-4 4 a4 4 0 0 0 4-4 z M24 30 v10"/></svg>
+        <h3>Fans, dimmers &amp; sensors</h3>
+        <p>Ceiling fans, dimmers, timers and motion detectors — supplied, mounted and set up.</p>
+      </article>
+      <article class="svc__c">
+        <svg class="svc__ico" viewBox="0 0 48 48" data-trace data-trace-w="2.4" data-trace-dur="2.9">
+          <path d="M24 6 L40 13 v11 c0 10-7 15-16 18 c-9-3-16-8-16-18 V13 Z M18 24 l4 5 l9-10"/></svg>
+        <h3>Whole-house surge protection</h3>
+        <p>Surge protection installed at the panel, guarding everything downstream of it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE CHAIN ================= -->
+<section class="sec chain" id="chain">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">Scope</p>
+      <h2 class="h2">From the street to the last outlet</h2>
+      <p class="lead">The whole electrical supply of your home or small business, plus every branch
+        circuit that comes off it. Nothing in this chain is out of scope.</p>
+    </div>
+    <div class="chain__track">
+      <svg class="chain__svg" id="chainSvg" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <div class="chain__nodes" id="chainNodes">
+        <div class="chain__n"><b>Service entrance</b><span>The hydro supply coming in from the street</span></div>
+        <div class="chain__n"><b>Mast &amp; meter</b><span>Service mast, meter base and connections</span></div>
+        <div class="chain__n"><b>Panel</b><span>Electrical panels, breakers or fuses</span></div>
+        <div class="chain__n"><b>Conductors</b><span>Conductors of all sizes and colours</span></div>
+        <div class="chain__n"><b>Devices</b><span>Switches, receptacles, devices and fixtures</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="sec rev" id="reviews">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">Reviews</p>
+      <h2 class="h2">What customers actually wrote</h2>
+      <p class="lead">Good service deserves a good review. These are reviews our customers left in
+        the trade directories we're listed in.</p>
+    </div>
+    <div class="rev__grid">
+
+      <article class="rev__c">
+        <p class="rev__q">Very pleased. Kaz will be my new stand-by electrician. Initial contact was
+          responsive and punctual. It was clear from his assessment that he is knowledgeable and
+          experienced. He gave several options and explained them… His quote was very competitive.
+          He put in an unexpectedly long work day… Still, no surprise costs. True to his name, he is
+          environmentally low-impact, driving a very fuel efficient vehicle and minimizing waste.
+          No green-washing or guilt-premium here — he walks the walk and doesn't charge extra for it.</p>
+        <div class="rev__by"><i class="rev__av">R</i>
+          <div><b>Raj — Seaton Village</b><span>240 volt dryer circuit, new panel</span></div></div>
+      </article>
+
+      <article class="rev__c">
+        <p class="rev__q">We had the pleasure and opportunity to ask Kaz for his services for a couple
+          of projects. He worked on electrical in our bathroom and kitchen… Our house was a true
+          nightmare for any electrician. Not for Kaz. He managed to bring everything to code. Took the
+          time to explain things, was very professional and pleasant… Once he was finished I fell in
+          love with the house all over again.</p>
+        <div class="rev__by"><i class="rev__av">R</i>
+          <div><b>Rodney — Mississauga</b><span>Kitchen &amp; bathroom electrical</span></div></div>
+      </article>
+
+      <article class="rev__c">
+        <p class="rev__q">Did a great job installing my J1772 plug for my electric car.</p>
+        <div class="rev__by"><i class="rev__av">G</i>
+          <div><b>Gilles — North York</b><span>EVSE installation</span></div></div>
+      </article>
+
+      <article class="rev__c">
+        <p class="rev__q">I am extremely satisfied with the service provided by Kaz. We had a number
+          of electrical issues in the home: a tripped fuse (that required rewiring some outlets), a
+          damaged receptacle, and faulty lighting among others. He came promptly and provided
+          courteous and thorough service while explaining what he was doing at each step. I would
+          highly recommend Kaz… to anyone looking for a professional and experienced electrician who
+          cares about quality and honesty at a very reasonable price!</p>
+        <div class="rev__by"><i class="rev__av">D</i>
+          <div><b>David K. — East York</b><span>Electrical troubleshooting</span></div></div>
+      </article>
+
+      <article class="rev__c">
+        <p class="rev__q">We have been using this company to assist us in our small
+          renovation/electrical projects for the past five years, and have always been completely
+          satisfied. They do an excellent job, are always punctual, and offer the most competitive
+          rates in town. We have also recommended them to our family and friends without any
+          hesitations, for all electrical related jobs.</p>
+        <div class="rev__by"><i class="rev__av">A</i>
+          <div><b>Agatha — Toronto</b><span>Outside lights installation</span></div></div>
+      </article>
+
+      <article class="rev__c">
+        <p class="rev__q">We were very happy with Kazik's work ethic and professionalism. The work
+          that we had done is excellent. Kazik's guarantee on his work goes above and beyond what we
+          expected! We would not hesitate to recommend Kazik for any future electrical project.</p>
+        <div class="rev__by"><i class="rev__av">B</i>
+          <div><b>Bill — Mississauga</b><span>Pot-light installation</span></div></div>
+      </article>
+
+    </div>
+    <p class="rev__note">Reviews as published by our customers in trade directories. Longer reviews
+      are shortened where marked with “…”; wording is otherwise unchanged.</p>
+  </div>
+</section>
+
+<!-- ================= ETHOS ================= -->
+<section class="sec ethos">
+  <div class="wrap">
+    <p class="eyebrow">Why "green"</p>
+    <h2 class="ethos__q" data-split>Doing more with less is the <em>main engine</em> of our operation.</h2>
+    <ul class="ethos__list">
+      <li><b>Small vehicles</b>Our vehicles are small and energy efficient — and easy to notice on the street.</li>
+      <li><b>Smart tools</b>Tools kept as small and as smart as possible, so less gets hauled and less gets used.</li>
+      <li><b>Waste separated</b>All recyclable waste is separately disposed of.</li>
+      <li><b>No paper ads</b>We do not force anyone to cut trees — we rely on the internet and word of mouth.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ENERGY ================= -->
+<section class="sec" id="energy">
+  <div class="wrap">
+    <div class="sec__head">
+      <p class="eyebrow">Save kilowatt-hours</p>
+      <h2 class="h2">Where the savings actually are</h2>
+      <p class="lead">In 2015 Canada was the fifth-largest consumer of electricity per capita at 15,542 kWh
+        a year — against a world average near 2,700. These are the changes that move the needle most.</p>
+    </div>
+    <div class="tips">
+      <div class="tip"><i class="tip__k">01</i><div><b>Electric stove</b><span>Switch to a gas stove and use gas sparingly.</span></div></div>
+      <div class="tip"><i class="tip__k">02</i><div><b>Water heater</b><span>Switch to tankless gas or solar, and use it sparingly.</span></div></div>
+      <div class="tip"><i class="tip__k">03</i><div><b>Home heating</b><span>Switch to gas, set the programmable thermostat low, add ceiling fans — and insulate.</span></div></div>
+      <div class="tip"><i class="tip__k">04</i><div><b>Clothes dryer</b><span>Switch to gas or solar drying, used sparingly.</span></div></div>
+      <div class="tip"><i class="tip__k">05</i><div><b>Large appliances</b><span>Energy Star fridge, freezer, dishwasher and microwave.</span></div></div>
+      <div class="tip"><i class="tip__k">06</i><div><b>Small appliances</b><span>Energy Star hair dryer, toaster, flat iron — and use them sparingly.</span></div></div>
+      <div class="tip"><i class="tip__k">07</i><div><b>TVs &amp; screens</b><span>A moderate size set using LED only. LCD and plasma are the blast from the past.</span></div></div>
+      <div class="tip"><i class="tip__k">08</i><div><b>Lighting</b><span>LED bulbs and fixtures use about an eighth of the energy of incandescent.</span></div></div>
+      <div class="tip"><i class="tip__k">09</i><div><b>Air conditioning</b><span>Add ceiling fans to support the AC, set the thermostat high, run it sparingly.</span></div></div>
+      <div class="tip"><i class="tip__k">10</i><div><b>Small electrical jobs</b><span>Text for a drop-in appointment when the electrician is already in your area.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AREA ================= -->
+<section class="sec" id="area">
+  <div class="wrap">
+    <p class="eyebrow">Service area</p>
+    <h2 class="h2">Etobicoke, and out across the GTA</h2>
+    <ul class="area__list">
+      <li><span>Toronto</span></li><li><span>Mississauga</span></li><li><span>Etobicoke</span></li>
+      <li><span>Oakville</span></li><li><span>Brampton</span></li><li><span>Greater Toronto Area</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="sec contact" id="contact">
+  <div class="wrap contact__grid">
+    <div>
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="contact__big">Text or call.<br>We'll tell you<br>what it needs.</h2>
+      <div class="note">
+        <b>A note on phone calls.</b> To minimize nuisance calls from North American telemarketers, we
+        answer calls originating in area codes 226 / 289 / 365 / 416 / 437 / 519 / 548 / 647 / 705 / 905
+        only, and we do not answer "unidentified" or 1-800 callers.
+      </div>
+    </div>
+    <div>
+      <div class="contact__rows">
+        <a class="crow" href="tel:+14165789258">
+          <div><small>Call or text</small><b>416.578.9258</b></div><span class="go">Tap to call →</span>
+        </a>
+        <a class="crow" href="mailto:feed@thegreenelectrician.ca">
+          <div><small>Email</small><b>feed@thegreenelectrician.ca</b></div><span class="go">Send a note →</span>
+        </a>
+        <div class="crow">
+          <div><small>Based in</small><b>Etobicoke, Ontario</b></div><span class="go">Serving the GTA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>© 2026 The Green Electrician — Kaz (Kazimierz) Dziak, M.E.</span>
+    <span><a href="tel:+14165789258">416.578.9258</a> · <a href="mailto:feed@thegreenelectrician.ca">feed@thegreenelectrician.ca</a></span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+/* =====================================================================
+   GRADIENT TRACING
+   A pulse of light travelling along an SVG path. The base path stays
+   faint; a short dash stroked with the yellow->orange gradient runs the
+   length of it. Dash offset is the only animated property, so every
+   trace stays on the compositor-friendly side of the renderer.
+   ===================================================================== */
+const TRACE_COLORS = ['#F1C40F', '#F1C40F', '#E67E22'];
+let traceUID = 0;
+
+function gradientTracing(svg, opts = {}) {
+  const path = svg.querySelector('path');
+  if (!path) return null;
+
+  const width   = +(opts.width  ?? 2);
+  const dashPct = +(opts.dash   ?? 0.18);          // pulse length as a fraction of the path
+  const dur     = +(opts.dur    ?? 3);
+  const delay   = +(opts.delay  ?? 0);
+  const colors  = opts.colors ?? TRACE_COLORS;
+
+  const NS = 'http://www.w3.org/2000/svg';
+  const id = `trace-${++traceUID}`;
+  const box = path.getBBox();
+
+  const defs = document.createElementNS(NS, 'defs');
+  const grad = document.createElementNS(NS, 'linearGradient');
+  grad.setAttribute('id', id);
+  grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+  grad.setAttribute('x1', box.x); grad.setAttribute('y1', box.y);
+  grad.setAttribute('x2', box.x + box.width); grad.setAttribute('y2', box.y + box.height);
+  colors.forEach((c, i) => {
+    const s = document.createElementNS(NS, 'stop');
+    s.setAttribute('offset', `${(i / (colors.length - 1)) * 100}%`);
+    s.setAttribute('stop-color', c);
+    grad.appendChild(s);
+  });
+  defs.appendChild(grad);
+  svg.insertBefore(defs, svg.firstChild);
+
+  // faint base
+  path.setAttribute('stroke', 'rgba(234,243,237,.16)');
+  path.setAttribute('stroke-width', width);
+  path.setAttribute('fill', 'none');
+  path.setAttribute('stroke-linecap', 'round');
+  path.setAttribute('stroke-linejoin', 'round');
+
+  // travelling pulse
+  const pulse = path.cloneNode();
+  pulse.removeAttribute('id');
+  pulse.setAttribute('stroke', `url(#${id})`);
+  pulse.setAttribute('stroke-width', width);
+  svg.appendChild(pulse);
+
+  const len = path.getTotalLength();
+  const dash = Math.max(8, len * dashPct);
+  pulse.style.strokeDasharray = `${dash} ${len}`;
+  pulse.style.strokeDashoffset = len + dash;
+
+  const tween = gsap.to(pulse, {
+    strokeDashoffset: -len, duration: dur, delay, ease: 'none',
+    repeat: -1, repeatDelay: 0.25, paused: true
+  });
+  return { tween, svg };
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.config({ force3D: true, nullTargetWarn: false });
+  ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
+
+  let lenis = null;
+  if (!reduced && window.Lenis) {
+    lenis = new Lenis({ lerp: .1, wheelMultiplier: 1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* ---------- hero circuit board ---------- */
+  const circuit = document.getElementById('circuit');
+  if (circuit) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 1200 800');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    // hand-laid traces so the board reads like a real circuit, not noise
+    const routes = [
+      'M0,140 H320 L380,200 H720 L780,140 H1200',
+      'M0,300 H180 L240,360 H520 L580,300 H900 L960,360 H1200',
+      'M0,520 H260 L320,460 H640 L700,520 H1050 L1100,470 H1200',
+      'M0,660 H420 L480,600 H820 L880,660 H1200',
+      'M150,0 V120 L210,180 V420 L150,480 V800',
+      'M1020,0 V180 L960,240 V560 L1020,620 V800'
+    ];
+    routes.forEach(d => {
+      const g = document.createElementNS(NS, 'g');
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', d);
+      g.appendChild(p);
+      svg.appendChild(g);
+    });
+    circuit.appendChild(svg);
+    // solder pads, placed once the paths are measurable
+    svg.querySelectorAll('g > path').forEach(p => {
+      const L = p.getTotalLength();
+      [0.28, 0.62, 0.88].forEach(t => {
+        const pt = p.getPointAtLength(L * t);
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); c.setAttribute('r', 3.4);
+        c.setAttribute('fill', 'rgba(241,196,15,.26)');
+        svg.appendChild(c);
+      });
+    });
+  }
+
+  /* ---------- wire up every [data-trace] ---------- */
+  const traces = [];
+  const traceEls = [...document.querySelectorAll('[data-trace]')];
+  traceEls.forEach(svg => {
+    const t = gradientTracing(svg, {
+      width: +(svg.dataset.traceW || 2),
+      dur:   +(svg.dataset.traceDur || 3),
+      dash:  +(svg.dataset.traceDash || 0.18)
+    });
+    if (t) traces.push({ ...t, host: svg.closest('section, header, nav') || svg });
+  });
+
+  // hero circuit uses <g> wrappers, handled separately below
+  const circuitSvg = circuit && circuit.querySelector('svg');
+  const circuitTraces = [];
+  if (circuitSvg) {
+    circuitSvg.querySelectorAll('g').forEach((g, i) => {
+      const p = g.querySelector('path');
+      if (!p) return;
+      const len = p.getTotalLength();
+      p.setAttribute('fill', 'none');
+      p.setAttribute('stroke', 'rgba(63,212,134,.16)');
+      p.setAttribute('stroke-width', '1.4');
+      const pulse = p.cloneNode();
+      pulse.setAttribute('stroke', i % 2 ? '#E67E22' : '#F1C40F');
+      pulse.setAttribute('stroke-width', '2');
+      pulse.style.filter = 'drop-shadow(0 0 6px rgba(241,196,15,.55))';
+      const dash = len * 0.08;
+      pulse.style.strokeDasharray = `${dash} ${len}`;
+      pulse.style.strokeDashoffset = len + dash;
+      g.appendChild(pulse);
+      circuitTraces.push(gsap.to(pulse, {
+        strokeDashoffset: -len, duration: 7 + i * 1.3, delay: i * 0.6,
+        ease: 'none', repeat: -1, paused: true
+      }));
+    });
+  }
+
+  /* Only run traces whose section is on screen. A dozen dash tweens that
+     nobody can see is pure waste. */
+  const playSet = (arr, on) => arr.forEach(t => on ? t.play() : t.pause());
+  if (!reduced) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const list = traces.filter(t => t.host === e.target).map(t => t.tween);
+        playSet(list, e.isIntersecting);
+        if (e.target.tagName === 'HEADER') playSet(circuitTraces, e.isIntersecting);
+      });
+    }, { rootMargin: '15% 0px' });
+    [...new Set(traces.map(t => t.host))].forEach(h => io.observe(h));
+    document.addEventListener('visibilitychange', () => {
+      const on = !document.hidden;
+      playSet(traces.map(t => t.tween).concat(circuitTraces), on);
+    });
+  }
+
+  /* ---------- preloader: the bolt draws itself ---------- */
+  const bolt = document.getElementById('loaderBolt');
+  const bl = bolt.getTotalLength();
+  gsap.set(bolt, { strokeDasharray: bl, strokeDashoffset: bl });
+  lenis && lenis.stop();
+  gsap.timeline()
+    .to(bolt, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' })
+    .to('.loader__t', { opacity: 0, duration: .3 }, '-=.2')
+    .to('#loader', { yPercent: -100, duration: .8, ease: 'expo.inOut',
+      onComplete: () => { document.getElementById('loader').style.display = 'none';
+                          lenis && lenis.start(); ScrollTrigger.refresh(); } })
+    .from('.nav', { yPercent: -110, opacity: 0, duration: .6, ease: 'power3.out' }, '-=.35')
+    .from('.hero .eyebrow', { y: 14, opacity: 0, duration: .5 }, '-=.3')
+    .from('[data-split-hero] .w', { yPercent: 110, opacity: 0, stagger: .035,
+      duration: .8, ease: 'expo.out' }, '-=.25')
+    .from('.hero__sub, .hero__cta, .hero__meta', { y: 18, opacity: 0, stagger: .1,
+      duration: .6, ease: 'power3.out' }, '-=.5')
+    .from('.hero__bolt svg', { scale: .82, opacity: 0, duration: .9, ease: 'expo.out' }, '-=.8');
+
+  /* ---------- word splitting ---------- */
+  const splitWords = el => {
+    el.innerHTML = el.innerHTML.split(/(<[^>]+>)/g).map(c =>
+      c.startsWith('<') ? c : c.split(/(\s+)/).map(w => w.trim() ? `<span class="w">${w}</span>` : w).join('')
+    ).join('');
+  };
+  document.querySelectorAll('[data-split-hero]').forEach(splitWords);
+  document.querySelectorAll('[data-split]').forEach(el => {
+    splitWords(el);
+    gsap.to(el.querySelectorAll('.w'), { opacity: 1, stagger: .06, ease: 'none',
+      scrollTrigger: { trigger: el, start: 'top 84%', end: 'bottom 62%', scrub: .5 } });
+  });
+
+  /* ---------- progress + sticky nav ---------- */
+  gsap.to('#progress', { scaleX: 1, ease: 'none',
+    scrollTrigger: { start: 0, end: () => document.body.scrollHeight - innerHeight, scrub: .25 } });
+  ScrollTrigger.create({ start: 60,
+    onToggle: s => document.getElementById('nav').classList.toggle('is-stuck', s.isActive) });
+
+  /* ---------- hero parallax ---------- */
+  gsap.to('#circuit', { yPercent: 16, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  gsap.to('.hero__bolt svg', { yPercent: -14, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  /* ---------- reveals ---------- */
+  gsap.utils.toArray('.sec__head, .strip__c, .area__list li, .ethos__list li').forEach((el, i) => {
+    gsap.from(el, { y: 22, opacity: 0, duration: .7, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true }, delay: (i % 4) * .06 });
+  });
+  gsap.from('.svc__c', { y: 28, opacity: 0, duration: .65, stagger: .07, ease: 'power3.out',
+    scrollTrigger: { trigger: '#svcGrid', start: 'top 80%', once: true } });
+  gsap.from('.rev__c', { y: 24, opacity: 0, duration: .6, stagger: .07, ease: 'power3.out',
+    scrollTrigger: { trigger: '.rev__grid', start: 'top 82%', once: true } });
+  gsap.from('.tip', { y: 20, opacity: 0, duration: .55, stagger: .04, ease: 'power3.out',
+    scrollTrigger: { trigger: '.tips', start: 'top 82%', once: true } });
+  gsap.from('.crow', { x: 26, opacity: 0, duration: .6, stagger: .1, ease: 'power3.out',
+    scrollTrigger: { trigger: '.contact__rows', start: 'top 85%', once: true } });
+
+  /* ---------- the chain: current flows as you scroll ---------- */
+  const chainSvg = document.getElementById('chainSvg');
+  if (chainSvg) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const d = 'M20,60 H140 L180,30 H300 L340,90 H460 L500,60 H640 L680,30 H800 L840,90 H980';
+    const base = document.createElementNS(NS, 'path');
+    base.setAttribute('d', d); base.setAttribute('fill', 'none');
+    base.setAttribute('stroke', 'rgba(234,243,237,.15)'); base.setAttribute('stroke-width', '2.5');
+    base.setAttribute('stroke-linecap', 'round'); base.setAttribute('stroke-linejoin', 'round');
+    chainSvg.appendChild(base);
+
+    const grad = document.createElementNS(NS, 'linearGradient');
+    grad.setAttribute('id', 'chainGrad'); grad.setAttribute('gradientUnits', 'userSpaceOnUse');
+    grad.setAttribute('x1', '0'); grad.setAttribute('y1', '0');
+    grad.setAttribute('x2', '1000'); grad.setAttribute('y2', '0');
+    TRACE_COLORS.forEach((c, i) => {
+      const s = document.createElementNS(NS, 'stop');
+      s.setAttribute('offset', `${(i / (TRACE_COLORS.length - 1)) * 100}%`);
+      s.setAttribute('stop-color', c); grad.appendChild(s);
+    });
+    const defs = document.createElementNS(NS, 'defs'); defs.appendChild(grad);
+    chainSvg.insertBefore(defs, chainSvg.firstChild);
+
+    const live = base.cloneNode();
+    live.setAttribute('stroke', 'url(#chainGrad)');
+    live.setAttribute('stroke-width', '3.4');
+    live.style.filter = 'drop-shadow(0 0 7px rgba(241,196,15,.5))';
+    chainSvg.appendChild(live);
+
+    const L = base.getTotalLength();
+    live.style.strokeDasharray = L;
+    live.style.strokeDashoffset = L;
+
+    // nodes sit on the path itself
+    const nodes = [...document.querySelectorAll('.chain__n')];
+    nodes.forEach((_, i) => {
+      const pt = base.getPointAtLength(L * (i / (nodes.length - 1)) * 0.99);
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); c.setAttribute('r', 6);
+      c.setAttribute('fill', '#050d09'); c.setAttribute('stroke', 'rgba(234,243,237,.3)');
+      c.setAttribute('stroke-width', '2'); c.dataset.node = i;
+      chainSvg.appendChild(c);
+    });
+    const dots = [...chainSvg.querySelectorAll('circle')];
+
+    ScrollTrigger.create({
+      trigger: '.chain__track', start: 'top 78%', end: 'bottom 62%', scrub: .6,
+      onUpdate: s => {
+        live.style.strokeDashoffset = L * (1 - s.progress);
+        const reached = Math.round(s.progress * (nodes.length - 1) + 0.001);
+        nodes.forEach((n, i) => n.classList.toggle('on', i <= reached && s.progress > 0.02));
+        dots.forEach((c, i) => {
+          const on = i <= reached && s.progress > 0.02;
+          c.setAttribute('fill', on ? '#F1C40F' : '#050d09');
+          c.setAttribute('stroke', on ? '#F1C40F' : 'rgba(234,243,237,.3)');
+        });
+      }
+    });
+  }
+
+  /* ---------- anchors ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (!t) return;
+      e.preventDefault();
+      lenis ? lenis.scrollTo(t, { offset: -70, duration: 1.2 }) : t.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+});
+</script>
+</body>
+</html>

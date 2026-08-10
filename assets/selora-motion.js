@@ -264,6 +264,146 @@
     els.forEach(function (el) { obs.observe(el); });
   }
 
+
+  /* ---------- 8. Scroll progress bar ----------
+     Vantage drives this with GSAP ScrollTrigger; a scroll listener plus a
+     scaleX transform is the same effect without the 70KB. */
+  function initProgress() {
+    var bar = document.createElement('div');
+    bar.className = 'sl-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(window.scrollY / max, 1) : 0) + ')';
+    }
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true; raf(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
+  /* ---------- 9. Custom cursor ----------
+     Ring lerps behind a dot that tracks exactly, and the ring grows over
+     anything clickable. Pointer devices only. */
+  function initCursor() {
+    if (coarse) return;
+    var ring = document.createElement('div'); ring.className = 'sl-cursor';
+    var dot  = document.createElement('div'); dot.className = 'sl-cursor-dot';
+    ring.setAttribute('aria-hidden', 'true');
+    dot.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(ring);
+    document.body.appendChild(dot);
+    document.documentElement.classList.add('sl-has-cursor');
+
+    var tx = -100, ty = -100, cx = -100, cy = -100, running = false;
+
+    function loop() {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      ring.style.transform = 'translate3d(' + cx + 'px,' + cy + 'px,0) translate(-50%,-50%)';
+      if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) raf(loop);
+      else running = false;
+    }
+
+    window.addEventListener('mousemove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      dot.style.transform = 'translate3d(' + tx + 'px,' + ty + 'px,0) translate(-50%,-50%)';
+      if (!running) { running = true; raf(loop); }
+    }, { passive: true });
+
+    document.addEventListener('mouseover', function (e) {
+      var t = e.target;
+      if (t && t.closest && t.closest('a, button, summary, input, textarea, select, [role="button"]')) {
+        ring.classList.add('is-active');
+      }
+    });
+    document.addEventListener('mouseout', function (e) {
+      var t = e.target;
+      if (t && t.closest && t.closest('a, button, summary, input, textarea, select, [role="button"]')) {
+        ring.classList.remove('is-active');
+      }
+    });
+    document.addEventListener('mouseleave', function () { ring.classList.add('is-hidden'); dot.classList.add('is-hidden'); });
+    document.addEventListener('mouseenter', function () { ring.classList.remove('is-hidden'); dot.classList.remove('is-hidden'); });
+  }
+
+  /* ---------- 10. Scroll-scrubbed word reveal ----------
+     [data-sl-words] dims its words and lights them as the block crosses the
+     viewport, the vanilla equivalent of Vantage's scrubbed .w timeline. */
+  function wrapWords(b) {
+    if (b.dataset.slWordsOriginal === undefined) b.dataset.slWordsOriginal = b.textContent;
+    var words = b.textContent.trim().split(/\s+/);
+    b.textContent = '';
+    words.forEach(function (w, i) {
+      var span = document.createElement('span');
+      span.className = 'sl-word';
+      span.textContent = w;
+      b.appendChild(span);
+      if (i < words.length - 1) b.appendChild(document.createTextNode(' '));
+    });
+  }
+
+  function initWords() {
+    var blocks = Array.prototype.slice.call(document.querySelectorAll('[data-sl-words]'));
+    if (!blocks.length) return;
+
+    /* Same hazard as the character split: wrapping words destroys the text
+       nodes the i18n overlay looks up. Translate first, wrap after, and
+       rebuild whenever the language changes. */
+    var hasI18n = !!window.selora_i18n || !!document.querySelector('script[src*="i18n"]');
+    var wrapped = false;
+    function wrapAll() {
+      if (wrapped) return;
+      wrapped = true;
+      blocks.forEach(wrapWords);
+      update();
+    }
+    if (hasI18n) {
+      window.addEventListener('selora:langchange', wrapAll, { once: true });
+      setTimeout(wrapAll, 2000);
+      window.addEventListener('selora:langchange', function () {
+        if (!wrapped) return;
+        blocks.forEach(function (b) { b.textContent = b.dataset.slWordsOriginal || b.textContent; });
+        setTimeout(function () {
+          blocks.forEach(function (b) { b.dataset.slWordsOriginal = b.textContent; wrapWords(b); });
+          update();
+        }, 60);
+      });
+    } else {
+      blocks.forEach(wrapWords);
+      wrapped = true;
+    }
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight;
+      blocks.forEach(function (b) {
+        var r = b.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        // 0 when the block enters the lower third, 1 once it clears the middle
+        var p = (vh * 0.82 - r.top) / (r.height + vh * 0.24);
+        p = Math.max(0, Math.min(1, p));
+        var spans = b.querySelectorAll('.sl-word');
+        var lit = p * spans.length;
+        for (var i = 0; i < spans.length; i++) {
+          spans[i].classList.toggle('is-lit', i < lit);
+        }
+      });
+    }
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true; raf(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  }
+
   ready(function () {
     initStagger();   // must run before initReveal so injected attrs are observed
     initReveal();
@@ -272,7 +412,10 @@
     initTilt();
     initMagnetic();
     initCounters();
+    initProgress();
+    initCursor();
+    initWords();
   });
 
-  window.seloraMotion = { reveal: initReveal, split: initSplit, counters: initCounters };
+  window.seloraMotion = { reveal: initReveal, split: initSplit, counters: initCounters, words: initWords };
 })();
