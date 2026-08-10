@@ -124,6 +124,74 @@
 
     /* SERVICE TEASERS */
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
+    /* ── HERO FLOATING STAGE ────────────────────────────────────────── */
+    .hero-stage {
+      position: absolute; right: 4vw; top: 50%; transform: translateY(-50%);
+      width: 430px; height: 400px; z-index: 4; pointer-events: none;
+    }
+    .hs-glow { position: absolute; inset: -18%; border-radius: 50%;
+      background: radial-gradient(circle at 50% 45%, rgba(29,78,216,0.35), transparent 66%); filter: blur(28px); }
+    .hs-card, .hs-chip { position: absolute; will-change: transform; }
+
+    .hs-card-main {
+      width: 330px; top: 22px; left: 8px; border-radius: 0.9rem; overflow: hidden;
+      background: linear-gradient(155deg, rgba(20,32,62,0.96), rgba(8,14,28,0.96));
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow: 0 34px 70px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.12);
+      animation: hsFloat 9s ease-in-out infinite;
+    }
+    .hs-bar { display: flex; align-items: center; gap: 0.3rem; padding: 0.55rem 0.75rem;
+      background: rgba(255,255,255,0.045); border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .hs-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .hs-url { margin-left: 0.5rem; font-size: 0.58rem; color: rgba(255,255,255,0.42);
+      background: rgba(255,255,255,0.05); padding: 0.15rem 0.5rem; border-radius: 9999px; }
+    .hs-body { padding: 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; }
+    .hs-hero-block { height: 74px; border-radius: 0.55rem;
+      background: linear-gradient(120deg, rgba(29,78,216,0.5), rgba(96,165,250,0.22)); }
+    .hs-hero-block.sm { height: 52px; }
+    .hs-line { height: 7px; border-radius: 4px; background: rgba(255,255,255,0.13); }
+    .hs-line.w70 { width: 70%; } .hs-line.w45 { width: 45%; }
+    .hs-line.w80 { width: 80%; } .hs-line.w55 { width: 55%; }
+    .hs-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.4rem; margin-top: 0.15rem; }
+    .hs-tile { height: 34px; border-radius: 0.4rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.05); }
+    .hs-btn { height: 20px; width: 84px; border-radius: 9999px; margin-top: 0.25rem;
+      background: linear-gradient(180deg,#fff,#e2e8f0); }
+    .hs-btn.sm { width: 64px; height: 17px; }
+
+    .hs-card-mobile {
+      width: 126px; bottom: 6px; left: 232px; border-radius: 1.1rem; overflow: hidden;
+      background: linear-gradient(160deg, rgba(22,36,68,0.97), rgba(8,14,28,0.97));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 26px 54px -16px rgba(0,0,0,0.82), inset 0 1px 0 rgba(255,255,255,0.14);
+      animation: hsFloat 7.5s ease-in-out infinite reverse;
+    }
+    .hs-notch { width: 42px; height: 4px; border-radius: 9999px; background: rgba(255,255,255,0.2); margin: 0.5rem auto 0.15rem; }
+    .hs-body-sm { padding: 0.6rem; gap: 0.4rem; }
+
+    .hs-chip {
+      display: flex; align-items: center; gap: 0.55rem; padding: 0.6rem 0.8rem; border-radius: 0.85rem;
+      background: linear-gradient(150deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 20px 42px -14px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .hs-chip-txt { display: flex; flex-direction: column; line-height: 1.25; font-size: 0.56rem; color: rgba(255,255,255,0.55); }
+    .hs-chip-txt strong { font-size: 0.76rem; font-weight: 600; color: #fff; }
+    .hs-chip-ico { width: 1.5rem; height: 1.5rem; border-radius: 0.45rem; display: flex; align-items: center; justify-content: center;
+      background: rgba(96,165,250,0.2); color: #93c5fd; }
+    .hs-chip-ico svg { width: 0.8rem; height: 0.8rem; }
+    .hs-chip-speed { top: -4px; right: 6px; animation: hsFloat 8.5s ease-in-out infinite 0.4s; }
+    .hs-chip-rev { bottom: 78px; right: -6px; animation: hsFloat 10s ease-in-out infinite 0.9s; }
+    .hs-stars { font-size: 0.62rem; color: #fbbf24; letter-spacing: 0.04em; }
+
+    @keyframes hsFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+
+    @media (max-width: 1180px) { .hero-stage { right: 2vw; width: 380px; transform: translateY(-50%) scale(0.88); } }
+    @media (max-width: 1000px) { .hero-stage { display: none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .hs-card-main, .hs-card-mobile, .hs-chip { animation: none !important; }
+    }
+
     /* ── GOOGLE REVIEW AUTOMATION ───────────────────────────────────── */
     .rev-section { position: relative; overflow: hidden; background: #060c18; color: #fff; padding: 7rem 0; }
     .rev-mesh { position: absolute; inset: 0; z-index: 0; pointer-events: none;
@@ -1325,6 +1393,8 @@
   </script>
 
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
+<link rel="stylesheet" href="/assets/selora-ds.css" />
+<script src="/assets/selora-motion.js" defer></script>
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 </head>
@@ -1349,7 +1419,7 @@
       </nav>
       <div class="nav-right">
         <!-- HIDDEN: client portal disabled, <a href="kirjaudu.html" class="btn btn-nav-cta" style="padding:0.45rem 1rem;font-size:0.75rem;color:rgba(255,255,255,0.75);text-decoration:none;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.75)'">Kirjaudu</a> -->
-        <a href="yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
+        <a href="yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa kartoitus →</a>
         <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" onclick="toggleMobileMenu()">
           <svg class="menu-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path class="menu-path-main" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
@@ -1362,24 +1432,64 @@
 
   <div class="hero-body">
     <div class="hero-content">
-      <h1 class="hero-title">
+      <h1 class="hero-title" data-sl-split>
         Älä enää missaa<br>
         <span class="accent">yhtään asiakasta.</span>
       </h1>
-      <p class="hero-desc">
+      <p class="hero-desc" data-sl-reveal style="--sl-delay:520ms">
         Suunnittelemme ja rakennamme nopeat verkkosivut, jotka näyttävät hyvältä ja muuttavat kävijät asiakkaiksi.
       </p>
-      <div class="hero-btns">
-        <a href="yhteystiedot.html" class="btn btn-light">Varaa maksuton kartoitus →</a>
+      <div class="hero-btns" data-sl-reveal style="--sl-delay:640ms">
+        <a href="yhteystiedot.html" class="btn btn-light sl-magnetic">Varaa maksuton kartoitus →</a>
         <a href="#prosessi" class="btn btn-ghost">Katso miten toimii</a>
       </div>
-      <p class="hero-demo-note">Alkaen 212 €/kk, ei sitoutumista. Käyttöönotto 48 tunnissa. Ei luottokorttia demoon.</p>
-      <div class="hero-trust-bar" aria-label="Luottamus">
+      <p class="hero-demo-note" data-sl-reveal style="--sl-delay:760ms">Kertamaksu alkaen 590 €. Sivusto on sinun. Ensimmäinen kartoituspuhelu on maksuton.</p>
+      <div class="hero-trust-bar" aria-label="Luottamus" data-sl-reveal style="--sl-delay:860ms">
         <span class="hero-trust-item">GDPR</span>
         <span class="hero-trust-dot">·</span>
-        <span class="hero-trust-item">EU AI Act</span>
-        <span class="hero-trust-dot">·</span>
         <span class="hero-trust-item">EU-palvelimet</span>
+      </div>
+    </div>
+
+    <div class="hero-stage" data-sl-tilt aria-hidden="true">
+      <div class="hs-glow"></div>
+
+      <div class="hs-card hs-card-main" data-sl-depth="0.55">
+        <div class="hs-bar">
+          <span class="hs-dot"></span><span class="hs-dot"></span><span class="hs-dot"></span>
+          <span class="hs-url">yrityksesi.fi</span>
+        </div>
+        <div class="hs-body">
+          <div class="hs-hero-block"></div>
+          <div class="hs-line w70"></div>
+          <div class="hs-line w45"></div>
+          <div class="hs-row">
+            <div class="hs-tile"></div><div class="hs-tile"></div><div class="hs-tile"></div>
+          </div>
+          <div class="hs-btn"></div>
+        </div>
+      </div>
+
+      <div class="hs-card hs-card-mobile" data-sl-depth="1">
+        <div class="hs-notch"></div>
+        <div class="hs-body hs-body-sm">
+          <div class="hs-hero-block sm"></div>
+          <div class="hs-line w80"></div>
+          <div class="hs-line w55"></div>
+          <div class="hs-btn sm"></div>
+        </div>
+      </div>
+
+      <div class="hs-chip hs-chip-speed" data-sl-depth="1.35">
+        <span class="hs-chip-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
+        </span>
+        <span class="hs-chip-txt"><strong>0,6 s</strong>Latausaika</span>
+      </div>
+
+      <div class="hs-chip hs-chip-rev" data-sl-depth="1.6">
+        <span class="hs-stars">★★★★★</span>
+        <span class="hs-chip-txt"><strong>Uusi arvostelu</strong>Google</span>
       </div>
     </div>
 
