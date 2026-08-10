@@ -3004,6 +3004,11 @@
     'Vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottolomakkeelle.':
       'Answers visitors\' most common questions and guides them to the contact form.',
 
+
+    // ---------- hero motto v2 ----------
+    'Ensivaikutelma': 'First impressions',
+    'ratkaisee kaiken.': 'decide everything.',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
