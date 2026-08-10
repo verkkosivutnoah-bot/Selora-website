@@ -1298,6 +1298,7 @@
     'Peruuta tilaus, Selora': 'Unsubscribe — Selora',
     'Peruuta tilaus — Selora': 'Unsubscribe — Selora',
     'Takaisin blogiin': 'Back to blog',
+    'Et enää saa Seloran uutiskirjettä sähköpostiisi.': 'You will no longer receive Selora’s newsletter by email.',
     'Peruutetaan tilausta...': 'Unsubscribing…',
     'peruttu': 'cancelled',
     'Tilaus': 'Subscription',

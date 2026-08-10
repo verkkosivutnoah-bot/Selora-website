@@ -304,8 +304,9 @@ than a rewrite.
 
 | Feature | Removed | Tag | Files parked in |
 |---|---|---|---|
-| AI receptionist | earlier rebrand | `ai-receptionist-full-v1` (branch `ai-receptionist-archive`) | `blogi/_archive/` |
+| AI receptionist | earlier rebrand | `ai-receptionist-full-v1` (branch `ai-receptionist-archive`) | `_archive/blogi-posts/` |
 | AI chatbot | 2026-08-10, "bring it back when I say so" | `chatbot-v1` | `_archive/chatbot.js` |
+| Blog | 2026-08-10, "comes back later" | `blog-v1` | `_archive/blogi.html`, `_archive/blogi-posts/` |
 
 To bring the chatbot back:
 
@@ -323,3 +324,19 @@ the privacy policy paragraph. The Finnish and English strings are still in
 Note the services bento: with the chatbot tile gone the accent tile carries
 `.svc-tile-wide` so it spans two columns and closes the 4-column grid. Drop that
 class when the fourth small tile comes back.
+
+To bring the blog back:
+
+```bash
+git diff blog-v1 HEAD -- index.html palvelut.html hinnoittelu.html verkkosivusuunnittelu.html kirjaudu.html rekisteroidy.html tietosuojaseloste.html 404.html sitemap.xml scripts/i18n-audit.py scripts/lang_audit.py
+git mv _archive/blogi.html blogi.html
+git mv _archive/blogi-posts blogi/_archive
+```
+
+Then re-add the `<a href="blogi.html">Blogi</a>` link to the nav, footer and
+mobile menu on every public page, add the `blogi.html` entry back to
+`sitemap.xml` and to the `PUBLIC` lists in `scripts/i18n-audit.py` and
+`scripts/lang_audit.py`. The `unsubscribe.html` "takaisin blogiin" links were
+repointed at `/` when the blog was archived; point them back at `/blogi.html`
+if wanted. The Finnish and English strings are still in `i18n.js` — they were
+left in place so nothing needs retranslating.

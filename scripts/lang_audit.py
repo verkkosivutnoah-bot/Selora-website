@@ -25,7 +25,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(ROOT)
 
 PUBLIC = [
-    'index.html', 'palvelut.html', 'hinnoittelu.html', 'blogi.html',
+    'index.html', 'palvelut.html', 'hinnoittelu.html',
     'yhteystiedot.html', 'verkkosivusuunnittelu.html',
     'tietosuojaseloste.html', '404.html', 'unsubscribe.html',
 ]
