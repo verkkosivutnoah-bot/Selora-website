@@ -3644,6 +3644,7 @@
     'tekevät kauppaa.': 'win you business.',
     'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ei kuukausilaskuja.': 'Design, content, search engine optimisation and launch. One flat fee, no monthly bills.',
     'alkaen, kertamaksu': 'from, one-time fee',
+    'Selkeät, nopeat verkkosivustot, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.': 'Clean, fast websites designed to turn visitors into customers.',
     'Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa näkyvyyttäsi.': 'An automated system collects reviews from your customers and grows your visibility.',
     'Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia. Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti.': 'We design the look of your site to match your brand and build it from scratch. No off-the-shelf themes, no templates. Every page is designed mobile first and built to load fast.',
     'Mitä saat': 'What you get',

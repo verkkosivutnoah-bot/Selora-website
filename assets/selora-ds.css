@@ -676,3 +676,121 @@ html.sl-motion [data-sl-pop].is-in {
   .sl-swipe::after, .sl-swipe-host .accent::after { transition: none !important; transform: scaleX(1); }
   .story-card:nth-child(2), .story-card:nth-child(3) { transform: none; }
 }
+
+/* ============================================================
+   STORIES MARQUEE  (shared: verkkosivusuunnittelu.html, palvelut.html)
+   One track that auto-scrolls right, cloned once so the loop is
+   seamless. Behaviour lives in assets/selora-marquee.js, which
+   targets #storiesMarquee / #storiesTrack and mounts each card's
+   live preview in a scaled, inert iframe as it nears the viewport.
+   ============================================================ */
+.stories-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
+.stories-head .section-label { display: inline-block; }
+
+.stories-marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0 1.5rem;
+  /* fade the ends instead of cutting cards off hard */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+.stories-track {
+  display: flex;
+  /* spacing lives on the cards, not as flex gap: with gap, half the
+     track width is not exactly one card set and the loop jumps */
+  gap: 0;
+  width: max-content;
+  will-change: transform;
+  /* position is driven from JS so the arrows can nudge the same value
+     the auto-scroll animates */
+}
+
+/* ---- arrows ---- */
+.stories-nav {
+  position: absolute; top: 50%; z-index: 3;
+  width: 3rem; height: 3rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(15,23,42,0.1);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(15,23,42,0.14);
+  color: #0f172a; cursor: pointer;
+  transform: translateY(-50%);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.25s ease, box-shadow 0.35s ease;
+}
+.stories-nav svg { width: 1.05rem; height: 1.05rem; display: block; }
+.stories-nav-prev { left: 0.75rem; }
+.stories-nav-next { right: 0.75rem; }
+.stories-nav:hover { background: #fff; box-shadow: 0 12px 30px rgba(15,23,42,0.22); }
+.stories-nav-prev:hover { transform: translateY(-50%) translateX(-3px); }
+.stories-nav-next:hover { transform: translateY(-50%) translateX(3px); }
+.stories-nav:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+@media (max-width: 560px) {
+  .stories-nav { width: 2.75rem; height: 2.75rem; }   /* stay on the 44px floor */
+  .stories-nav-prev { left: 0.35rem; }
+  .stories-nav-next { right: 0.35rem; }
+}
+
+.story-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(300px, 34vw, 460px);
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  background: #0b1220;
+  box-shadow: 0 12px 32px rgba(15,23,42,0.14);
+  transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s ease;
+  isolation: isolate;
+  margin-right: 1.15rem;
+}
+.story-card:hover { transform: translateY(-6px); box-shadow: 0 26px 56px rgba(15,23,42,0.3); }
+
+/* live hero preview: the real page, scaled down and inert */
+.story-frame {
+  position: absolute; inset: 0; overflow: hidden;
+  background: #0b1220;
+  transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+}
+.story-frame iframe {
+  position: absolute; top: 0; left: 0;
+  width: 1440px; height: 900px;
+  transform-origin: 0 0;
+  border: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.story-frame iframe.is-ready { opacity: 1; }
+.story-card:hover .story-frame { transform: scale(1.04); filter: brightness(0.85); }
+
+@media (max-width: 560px) {
+  .story-card { width: 82vw; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stories-track { flex-wrap: wrap; width: auto; justify-content: center; gap: 1.15rem 0; transform: none !important; }
+  .stories-nav { display: none; }
+  .stories-marquee { -webkit-mask-image: none; mask-image: none; }
+  .story-card, .story-frame { transition: none !important; }
+  .story-card:hover { transform: none; }
+  .story-card:hover .story-frame { transform: none; }
+}
+.story-bottom { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+.story-card:hover .story-bottom { transform: translateY(-4px); }
+.story-bottom {
+  position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2;
+  color: #fff;
+}
+.story-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
+.story-meta { font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.04em; }
+.story-cta {
+  margin-top: 0.7rem;
+  font-size: 0.78rem; color: #fff;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  font-weight: 500;
+}
+.story-card:hover .story-cta { opacity: 1; transform: translateY(0); }

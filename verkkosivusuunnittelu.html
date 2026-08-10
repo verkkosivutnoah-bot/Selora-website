@@ -41,7 +41,7 @@
     .footer-nav { display: flex; gap: 0.25rem; }
     .footer-nav a { font-size: 0.72rem; color: #64748b; text-decoration: none; padding: 0.25rem 0.6rem; border-radius: 9999px; transition: color 0.2s; }
     .footer-nav a:hover { color: #334155; }
-    .page-hero { position: relative; height: 380px; overflow: hidden; display: flex; flex-direction: column; }
+    .page-hero { position: relative; min-height: 68vh; overflow: hidden; display: flex; flex-direction: column; }
     #pageCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
     .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.55) 100%); z-index: 1; pointer-events: none; }
     /* FLOATING NAV */
@@ -54,9 +54,13 @@
     .desktop-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem; font-weight: 400; padding: 0.5rem 0.85rem; border-radius: 9999px; transition: all 0.2s; }
     .desktop-nav a:hover, .desktop-nav a.active { color: #fff; background: rgba(255,255,255,0.1); }
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .page-title-block { position: absolute; bottom: 2.5rem; left: 2rem; z-index: 10; }
+    .page-title-block { position: relative; margin-top: auto; padding: 0 2rem 3.5rem; z-index: 10; }
     .page-title-block .page-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(96,165,250,0.8); margin-bottom: 0.6rem; }
     .page-title-block h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
+    .page-hero-sub { margin-top: 1rem; max-width: 34rem; font-size: 1.02rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.62); }
+    .page-hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .phc { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.5rem 0.9rem; border-radius: 999px; font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+    .phc b { font-weight: 500; color: #fff; }
     .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
     .section { padding: 6rem 0; }
     .section-alt { background: #eef2f7; border-top: 1px solid rgba(15,23,42,0.07); border-bottom: 1px solid rgba(15,23,42,0.07); padding: 6rem 0; }
@@ -127,8 +131,8 @@
       .section { padding: 4rem 0; }
       .section-alt { padding: 4rem 0; }
       .container { padding: 0 1.25rem; }
-      .page-hero { height: auto; min-height: 280px; }
-      .page-title-block { padding: 1.25rem 1.25rem 2rem; right: 1.25rem; left: 1.25rem; }
+      .page-hero { height: auto; min-height: 60vh; }
+      .page-title-block { padding: 1.25rem 1.25rem 2rem; }
       .page-title-block h1 { font-size: clamp(1.75rem, 7vw, 2.5rem); }
       .cta-block { padding: 2rem 1.25rem; }
     }
@@ -136,7 +140,6 @@
       .section { padding: 3rem 0; }
       .section-alt { padding: 3rem 0; }
       .page-title-block h1 { font-size: 1.75rem; }
-      .page-hero { min-height: 260px; }
     }
   
     /* ── PAGE SECTIONS (rebuilt) ──────────────────────────────────── */
@@ -312,6 +315,7 @@
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 <link rel="stylesheet" href="/assets/selora-ds.css" />
 <script src="/assets/selora-motion.js" defer></script>
+<script src="/assets/selora-nebula.js" defer></script>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
 </head>
 <body>
@@ -341,8 +345,14 @@
       </div>
     </header>
     <div class="page-title-block">
-      <div class="page-label">Verkkosivusuunnittelu</div>
-      <h1>Sivusto joka <span class="accent">myy puolestasi.</span></h1>
+      <p class="page-label" data-sl-reveal>Verkkosivusuunnittelu</p>
+      <h1 data-sl-split>Sivusto joka <span class="accent">myy puolestasi.</span></h1>
+      <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Selkeät, nopeat verkkosivustot, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.</p>
+      <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
+        <span class="phc"><b>0,6 s</b> latausaika</span>
+        <span class="phc"><b>100 %</b> mobiilioptimoitu</span>
+        <span class="phc"><b>590 €</b> alkaen, kertamaksu</span>
+      </div>
     </div>
   </div>
 
@@ -399,129 +409,6 @@
   
 
 <section class="section-alt" id="esimerkkitoita">
-    <style>
-      .stories-wrap { padding: 0 2rem; }
-      .stories-head { text-align: center; max-width: 720px; margin: 0 auto 3rem; }
-      .stories-head .section-label { display: inline-block; }
-      /* grid, not a scroll rail: everything is visible without dragging */
-      /* Marquee: one track that scrolls right, cloned once so the loop is
-         seamless. Every card is the same size, so adding more later is just
-         another story-card anchor in the track. */
-      .stories-marquee {
-        position: relative;
-        overflow: hidden;
-        padding: 0.5rem 0 1.5rem;
-        /* fade the ends instead of cutting cards off hard */
-        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
-        mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
-      }
-      .stories-track {
-        display: flex;
-        /* spacing lives on the cards, not as flex gap: with gap, half the
-           track width is not exactly one card set and the loop jumps */
-        gap: 0;
-        width: max-content;
-        will-change: transform;
-        /* position is driven from JS so the arrows can nudge the same value
-           the auto-scroll animates */
-      }
-
-      /* ---- arrows ---- */
-      .stories-nav {
-        position: absolute; top: 50%; z-index: 3;
-        width: 3rem; height: 3rem; border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        border: 1px solid rgba(15,23,42,0.1);
-        background: rgba(255,255,255,0.92);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 8px 24px rgba(15,23,42,0.14);
-        color: #0f172a; cursor: pointer;
-        transform: translateY(-50%);
-        transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.25s ease, box-shadow 0.35s ease;
-      }
-      .stories-nav svg { width: 1.05rem; height: 1.05rem; display: block; }
-      .stories-nav-prev { left: 0.75rem; }
-      .stories-nav-next { right: 0.75rem; }
-      .stories-nav:hover { background: #fff; box-shadow: 0 12px 30px rgba(15,23,42,0.22); }
-      .stories-nav-prev:hover { transform: translateY(-50%) translateX(-3px); }
-      .stories-nav-next:hover { transform: translateY(-50%) translateX(3px); }
-      .stories-nav:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-      @media (max-width: 560px) {
-        .stories-nav { width: 2.75rem; height: 2.75rem; }   /* stay on the 44px floor */
-        .stories-nav-prev { left: 0.35rem; }
-        .stories-nav-next { right: 0.35rem; }
-      }
-
-      .story-card {
-        position: relative;
-        flex: 0 0 auto;
-        width: clamp(300px, 34vw, 460px);
-        aspect-ratio: 16 / 10;
-        border-radius: 20px;
-        overflow: hidden;
-        cursor: pointer;
-        text-decoration: none;
-        background: #0b1220;
-        box-shadow: 0 12px 32px rgba(15,23,42,0.14);
-        transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), box-shadow 0.55s ease;
-        isolation: isolate;
-        margin-right: 1.15rem;
-      }
-      .story-card:hover { transform: translateY(-6px); box-shadow: 0 26px 56px rgba(15,23,42,0.3); }
-
-      /* live hero preview: the real page, scaled down and inert */
-      .story-frame {
-        position: absolute; inset: 0; overflow: hidden;
-        background: #0b1220;
-        transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
-      }
-      .story-frame iframe {
-        position: absolute; top: 0; left: 0;
-        width: 1440px; height: 900px;
-        transform-origin: 0 0;
-        border: 0;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity 0.7s ease;
-      }
-      .story-frame iframe.is-ready { opacity: 1; }
-      .story-card:hover .story-frame { transform: scale(1.04); filter: brightness(0.85); }
-
-      @media (max-width: 560px) {
-        .story-card { width: 82vw; }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .stories-track { flex-wrap: wrap; width: auto; justify-content: center; gap: 1.15rem 0; transform: none !important; }
-        .stories-nav { display: none; }
-        .stories-marquee { -webkit-mask-image: none; mask-image: none; }
-        .story-card, .story-frame { transition: none !important; }
-        .story-card:hover { transform: none; }
-        .story-card:hover .story-frame { transform: none; }
-      }
-      .story-bottom { transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
-      .story-card:hover .story-bottom { transform: translateY(-4px); }
-      .story-bottom {
-        position: absolute; bottom: 1rem; left: 1rem; right: 1rem; z-index: 2;
-        color: #fff;
-      }
-      .story-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.3rem; text-shadow: 0 1px 6px rgba(0,0,0,0.7); }
-      .story-meta { font-size: 0.7rem; color: rgba(255,255,255,0.78); letter-spacing: 0.04em; }
-      .story-cta {
-        margin-top: 0.7rem;
-        font-size: 0.78rem; color: #fff;
-        opacity: 0; transform: translateY(6px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        font-weight: 500;
-      }
-      .story-card:hover .story-cta { opacity: 1; transform: translateY(0); }
-      .stories-hint {
-        text-align: center; font-size: 0.78rem; color: #64748b;
-        margin-top: 0.5rem; letter-spacing: 0.04em;
-      }
-      @media (max-width: 720px) {
-      }
-    </style>
-
     <div class="container">
       <div class="stories-head reveal">
         <div class="section-label" data-i18n="Esimerkkitöitä">Esimerkkitöitä</div>
@@ -863,43 +750,6 @@
   </footer>
 
   <script>
-    (function () {
-      const canvas = document.getElementById('pageCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      function resize() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || 380; }
-      resize(); window.addEventListener('resize', resize);
-      const blobs = [
-        { ox:0.52, oy:0.48, vx:0.00031, vy:0.00024, r:0.70, rgb:[37,99,235],  a:0.50 },
-        { ox:0.22, oy:0.35, vx:-0.00019,vy:0.00028,  r:0.55, rgb:[29,78,216],   a:0.45 },
-        { ox:0.78, oy:0.72, vx:0.00022, vy:-0.00017, r:0.50, rgb:[15,23,42],   a:0.40 },
-        { ox:0.35, oy:0.80, vx:-0.00025,vy:-0.00020, r:0.45, rgb:[67,56,202], a:0.35 },
-        { ox:0.65, oy:0.20, vx:0.00015, vy:0.00032,  r:0.40, rgb:[99,102,241], a:0.25 },
-      ];
-      blobs.forEach(b => { b.x = b.ox; b.y = b.oy; });
-      let t = 0;
-      function draw() {
-        t += 0.25;
-        const w = canvas.width, h = canvas.height;
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
-        ctx.globalCompositeOperation = 'screen';
-        blobs.forEach(b => {
-          b.x = b.ox + 0.22*Math.sin(t*b.vx*600+b.oy*10);
-          b.y = b.oy + 0.18*Math.cos(t*b.vy*600+b.ox*10);
-          const gx=b.x*w, gy=b.y*h, gr=b.r*Math.max(w,h);
-          const g = ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
-          const [r,gv,bv]=b.rgb;
-          g.addColorStop(0,`rgba(${r},${gv},${bv},${b.a})`);
-          g.addColorStop(0.4,`rgba(${r},${gv},${bv},${b.a*0.3})`);
-          g.addColorStop(1,`rgba(${r},${gv},${bv},0)`);
-          ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-        });
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
-
     (function(){
       const obs=new IntersectionObserver(entries=>{
         entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}});
@@ -1039,174 +889,6 @@
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
-<script>
-/* Portfolio marquee.
-
-   The track is cloned once and driven from JS rather than a CSS keyframe:
-   the arrows need to nudge the same value the auto-scroll animates, and you
-   cannot layer a second transform on a property an animation owns.
-
-   Position is one number, x, in pixels. One full set of cards is `half`
-   pixels wide, so x wraps within [-half, 0) and the strip never shows a seam.
-   Auto-scroll walks x forward; an arrow sets a target and the loop eases into
-   it. Adding more cards changes nothing here: speed is per-card, so the strip
-   travels at a constant rate however long it gets.
-
-   Each card's preview is the real page in a scaled, inert iframe, mounted when
-   the card nears the viewport and torn down once it is clear, so only the
-   handful on screen are ever live. */
-(function () {
-  var track = document.getElementById('storiesTrack');
-  var marquee = document.getElementById('storiesMarquee');
-  if (!track || !marquee) return;
-
-  var BASE_W = 1440, BASE_H = 900;
-  var SECONDS_PER_CARD = 9;   // constant travel speed as cards are added
-
-  var originals = Array.prototype.slice.call(track.children);
-  if (!originals.length) return;
-
-  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- previews ---------- */
-
-  function fit(frame, iframe) {
-    var scale = frame.offsetWidth / BASE_W;
-    var need = frame.offsetHeight / BASE_H;
-    if (need > scale) scale = need;
-    iframe.style.transform = 'scale(' + scale + ')';
-  }
-
-  function mount(frame) {
-    if (frame.dataset.mounted) return;
-    frame.dataset.mounted = '1';
-    var iframe = document.createElement('iframe');
-    iframe.setAttribute('loading', 'lazy');
-    iframe.setAttribute('tabindex', '-1');
-    iframe.setAttribute('aria-hidden', 'true');
-    iframe.setAttribute('scrolling', 'no');
-    iframe.src = frame.getAttribute('data-src');
-    iframe.addEventListener('load', function () { iframe.classList.add('is-ready'); });
-    frame.appendChild(iframe);
-    fit(frame, iframe);
-    if ('ResizeObserver' in window) new ResizeObserver(function () { fit(frame, iframe); }).observe(frame);
-    else window.addEventListener('resize', function () { fit(frame, iframe); }, { passive: true });
-  }
-
-  function unmount(frame) {
-    if (!frame.dataset.mounted) return;
-    delete frame.dataset.mounted;
-    var iframe = frame.querySelector('iframe');
-    if (iframe) iframe.remove();
-  }
-
-  /* ---------- the strip ---------- */
-
-  if (reduced) {
-    // static, wrapped grid: no clones, no motion, arrows hidden by CSS
-    watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
-    return;
-  }
-
-  originals.forEach(function (card) {
-    var clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    clone.setAttribute('tabindex', '-1');
-    track.appendChild(clone);
-  });
-
-  var half = 0, step = 0, x = 0, target = null, paused = false, started = false;
-
-  function measure() {
-    // scrollWidth is 0 until the cards have laid out, so this is retried from
-    // the loop until it returns something real
-    half = track.scrollWidth / 2;
-    if (!half) return false;
-    step = half / originals.length;          // one card, including its margin
-    if (!started) { x = -half; started = true; }   // start on the clone set
-    // paint straight away: rAF does not run while the tab is hidden, and
-    // without this the strip would sit at 0 and jump on first display
-    paint();
-    return true;
-  }
-
-  function paint() {
-    track.style.transform = 'translate3d(' + x + 'px,0,0)';
-  }
-
-  function wrap() {
-    if (!half) return;
-    while (x >= 0) x -= half;
-    while (x < -half) x += half;
-  }
-
-  var last = null;
-  function frame(now) {
-    var dt = last === null ? 0 : Math.min((now - last) / 1000, 0.05);
-    last = now;
-
-    if (!half && !measure()) { requestAnimationFrame(frame); return; }
-
-    if (target !== null) {
-      // ease toward the arrow's destination, then hand back to auto-scroll
-      var d = target - x;
-      x += d * (1 - Math.exp(-9 * dt));
-      if (Math.abs(target - x) < 0.5) { x = target; target = null; }
-    } else if (!paused) {
-      x += (step / SECONDS_PER_CARD) * dt;   // travels left to right
-    }
-
-    wrap();
-    if (target !== null) target = null_or_wrapped(target);
-    paint();
-    requestAnimationFrame(frame);
-  }
-
-  // keep a pending target in the same wrapped space as x, so a nudge taken
-  // near the seam does not send the strip the long way round
-  function null_or_wrapped(t) {
-    if (t === null) return null;
-    while (t - x > half) t -= half;
-    while (t - x < -half) t += half;
-    return t;
-  }
-
-  function nudge(dir) {
-    var base = target === null ? x : target;
-    target = base + dir * step;
-  }
-
-  document.getElementById('storiesPrev').addEventListener('click', function () { nudge(1); });
-  document.getElementById('storiesNext').addEventListener('click', function () { nudge(-1); });
-
-  marquee.addEventListener('mouseenter', function () { paused = true; });
-  marquee.addEventListener('mouseleave', function () { paused = false; });
-  marquee.addEventListener('focusin', function () { paused = true; });
-  marquee.addEventListener('focusout', function () { paused = false; });
-
-  measure();
-  window.addEventListener('resize', function () {
-    var before = half;
-    half = 0;
-    if (measure() && before) x = x / before * half;   // hold position across a resize
-    wrap();
-  }, { passive: true });
-
-  watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
-  requestAnimationFrame(frame);
-
-  function watchFrames(frames) {
-    if (!frames.length) return;
-    if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) mount(e.target);
-        else unmount(e.target);
-      });
-    }, { rootMargin: '300px' });
-    frames.forEach(function (f) { obs.observe(f); });
-  }
-})();
-</script>
+<script src="/assets/selora-marquee.js" defer></script>
 </body>
 </html>
