@@ -1875,7 +1875,7 @@
     '2 800 €': '€2,800',
     'Kertamaksu.': 'One-time fee.',
     'kertamaksu': 'one-time fee',
-    'Perussivu': 'Single page',
+    'Perussivu': 'Basic site',
     '4,7 sivua, mobiilioptimoitu': '4–7 pages, mobile-optimised',
     '4–7 sivua, mobiilioptimoitu': '4–7 pages, mobile-optimised',
     'Kirjautumissivu': 'Login page',
@@ -2742,6 +2742,9 @@
     ' · 0,25 € sen jälkeen': ' · €0.25 after',
 
 
+    'Räätälöidyt verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja muuttavat kävijät asiakkaiksi. Sisältää hakukoneoptimoinnin ja Google-arvostelujen automaation. Kertamaksu alkaen 500 euroa.':
+      'Custom websites that load fast, rank on Google and turn visitors into customers. Includes SEO and Google review automation. One-time fee from 500 euros.',
+
     // ---------- REBRAND: web design studio (index.html) ----------
     'Selora, Verkkosivut suomalaisille yrityksille | selora.fi': 'Selora, Websites for Finnish businesses | selora.fi',
     'Selora, Verkkosivut suomalaisille yrityksille': 'Selora, Websites for Finnish businesses',
@@ -2837,8 +2840,8 @@
     'Kyllä. Jokainen sivusto rakennetaan hakukoneoptimoituna: otsikkorakenne, metatiedot, sivukartta ja nopeat latausajat kuntoon heti alusta. Täysi sivusto sisältää lisäksi avainsanatutkimuksen omalle toimialallesi.':
       'Yes. Every site is built search-optimised from the start: heading structure, meta tags, sitemap and fast load times. The full site also includes keyword research for your industry.',
     'Mitä sivusto maksaa?': 'What does a site cost?',
-    'Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
-      'A basic site is 590 euros and a full site 990 euros, both one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
+    'Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
+      'A basic site is 500 euros and a full site 800 euros, both one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
     'Saanko sivuston myös englanniksi?': 'Can I get the site in English too?',
     'Kyllä. Rakennamme sivuston suomeksi ja englanniksi, jolloin kävijä voi vaihtaa kieltä yhdellä klikkauksella. Molemmat kieliversiot optimoidaan hakukoneille erikseen.':
       'Yes. We build the site in Finnish and English so visitors can switch language with one click. Both versions are search-optimised separately.',
@@ -2873,11 +2876,110 @@
       'We are writing new guides on websites, SEO and how a site brings in more customers. Subscribe to the newsletter to get them first.',
 
 
+    // ---------- hinnoittelu.html rebuild (kertamaksu 500 / 800) ----------
+    '1, 4 sivua riittää': 'Around 1 to 4 pages',
+    '1, 4 sivua, mobiilioptimoitu': '1 to 4 pages, mobile optimised',
+    '50 % etukäteen': '50% up front',
+    '50 % julkaisussa': '50% on launch',
+    'Ei automaattisesti. Kertamaksu kattaa valmiin sivuston. Ylläpito on valinnainen lisäpalvelu, jonka voi lopettaa milloin tahansa.':
+      'Not automatically. The one-time fee covers the finished site. Maintenance is an optional add-on you can cancel any time.',
+    'Ei kuukausilaskuja eikä pitkiä sopimuksia. Tässä mitä kertamaksu tarkoittaa käytännössä.':
+      'No monthly bills and no long contracts. Here is what a one-time fee means in practice.',
+    'Ei piilokuluja': 'No hidden costs',
+    'Ei. Sovittu hinta kattaa suunnittelun, rakennuksen ja julkaisun. Jos haluat myöhemmin lisää, sovimme hinnan aina ensin.':
+      'No. The agreed price covers design, build and launch. If you want more later, we always agree the price first.',
+    'Emme lukitse sinua palveluumme. Sivusto pysyy sinun omistuksessasi kertamaksun jälkeen.':
+      'We do not lock you into our service. The site stays yours after the one-time payment.',
+    'En, yhteydenottolomake riittää': 'No, a contact form is enough',
+    'Enemmän kuin 4 sivua': 'More than 4 pages',
+    'Ennakko ja rakennus': 'Deposit and build',
+    'Epävarma kumpi': 'Not sure which',
+    'Et maksa koko summaa kerralla. Loppuerä laskutetaan vasta kun sivusto on valmis.':
+      'You do not pay the full amount at once. The final instalment is invoiced only once the site is finished.',
+    'Et tiedä kumman': 'Can\'t decide which one',
+    'Google Maps -upotus': 'Google Maps embed',
+    'Hakukoneoptimoinnin perusteet': 'SEO basics',
+    'Haluan syväluotaavan SEO:n': 'I want in-depth SEO',
+    'Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.':
+      'If you want more pages or features later, we always agree the price in advance.',
+    'Julkaisu ja loppuerä': 'Launch and final payment',
+    'Kaksi pakettia.': 'Two packages.',
+    'Kartoituspuhelun jälkeen tiedät tarkalleen mitä maksat. Hinta ei muutu kesken projektin.':
+      'After the discovery call you know exactly what you will pay. The price does not change mid-project.',
+    'Katso Perussivu ↓': 'See Basic site ↓',
+    'Katso Täysi sivusto ↓': 'See Full site ↓',
+    'Kiinteä hinta sovitaan etukäteen': 'A fixed price agreed in advance',
+    'Kiinteä tarjous': 'A fixed quote',
+    'Kuinka monta sivua tarvitset?': 'How many pages do you need?',
+    'Kuinka tärkeä hakukoneoptimointi on sinulle?': 'How important is SEO to you?',
+    'Kumpi sopii sinulle': 'Which one fits you',
+    'Kuuluuko ylläpito hintaan?': 'Is maintenance included in the price?',
+    'Kyllä, tarvitsen niitä': 'Yes, I need those',
+    'Kyllä. Uudet sivut, kielet ja toiminnot on helppo lisätä. Hinnasta sovimme aina etukäteen.':
+      'Yes. New pages, languages and features are easy to add. We always agree the price in advance.',
+    'Käymme läpi tarpeesi ja sovimme sivumäärän. Puhelu on maksuton eikä sido sinua mihinkään.':
+      'We go through your needs and agree on the number of pages. The call is free and does not commit you to anything.',
+    'Maksat kerran': 'Pay once',
+    'Maksat kerran. Sivusto on sinun, heti ja vuosia eteenpäin. Ei kuukausilaskuja, ei piilokuluja.':
+      'Pay once. The site is yours, right away and for years to come. No monthly bills, no hidden costs.',
+    'Maksat loput sivuston valmistuttua. Sivusto julkaistaan ja se on kokonaan sinun.':
+      'You pay the rest once the site is finished. The site is launched and it is entirely yours.',
+    'Maksat puolet hinnasta etukäteen. Aloitamme sivuston suunnittelun ja rakennuksen heti.':
+      'You pay half the price up front. We start designing and building the site right away.',
+    'Maksat puolet projektin alussa ja puolet julkaisussa. Hyväksymme kortin, laskun ja verkkopankin.':
+      'You pay half at the start of the project and half on launch. We accept card, invoice and online banking.',
+    'Miten maksu jakautuu?': 'How is the payment split?',
+    'Mitä eroa paketeilla oikeasti on?': 'What is the real difference between the packages?',
+    'Mitä paketti': 'What the package',
+    'Molemmat sisältävät suunnittelun, rakennuksen ja julkaisun. Ero on laajuudessa, ei laadussa.':
+      'Both include design, build and launch. The difference is in scope, not quality.',
+    'Neljä vaihetta.': 'Four steps.',
+    'Nopea latausaika': 'Fast load time',
+    'Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto.':
+      'Rule of thumb: if you need at most four pages and no forms, automations or in-depth SEO, Basic site is enough. If you need more pages or those features, choose Full site.',
+    'Näin hinta toimii.': 'How the price works.',
+    'Onko hinnassa piilokuluja?': 'Are there any hidden costs?',
+    'Perusteet': 'Basics',
+    'Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia.':
+      'Basic site suits a simple presentation. Full site suits you if you need more pages, forms, automations or deeper SEO.',
+    'Perusteet riittävät': 'The basics are enough',
+    'Prioriteettituki': 'Priority support',
+    'Puolet etukäteen, puolet julkaisussa': 'Half up front, half on launch',
+    'Saat kiinteän hinnan kirjallisena. Sama hinta pysyy koko projektin ajan.':
+      'You get a fixed price in writing. The same price holds for the whole project.',
+    'Sama rakenne, eri laajuus. Vertaile rinnakkain.': 'Same structure, different scope. Compare them side by side.',
+    'Sinun eduksesi.': 'In your favour.',
+    'Sivusto on aina sinun': 'The site is always yours',
+    'Tarvitsetko lomakkeita, automaatioita tai CRM-integraation?': 'Do you need forms, automations or a CRM integration?',
+    'Tiedät koko ajan mitä maksat ja milloin. Ei arvailua, ei yllätyksiä.':
+      'You always know what you pay and when. No guessing, no surprises.',
+    'Toiminnot': 'Features',
+    'Varaa maksuton kartoituspuhelu. Kerromme suoraan kumpi paketti sopii tilanteeseesi.':
+      'Book a free discovery call. We will tell you straight which package fits your situation.',
+    'Vastaa kolmeen kysymykseen. Näytämme suosituksemme heti.': 'Answer three questions. We will show our recommendation right away.',
+    'Vastaustesi perusteella Perussivu kattaa tarpeesi. Voit vaihtaa vastauksia milloin tahansa.':
+      'Based on your answers, Basic site covers your needs. You can change your answers any time.',
+    'Vastaustesi perusteella Täysi sivusto sopii sinulle paremmin. Voit vaihtaa vastauksia milloin tahansa.':
+      'Based on your answers, Full site suits you better. You can change your answers any time.',
+    'Verkkokauppa valinnaisena lisänä': 'E-commerce as an optional add-on',
+    'Voit hoitaa sivuston itse tai jatkaa ylläpitosopimuksella, joka on irtisanottavissa milloin tahansa.':
+      'You can run the site yourself or continue with a maintenance agreement you can cancel any time.',
+    'Voit laajentaa sivustoa myöhemmin ilman että se pitää rakentaa kokonaan uudelleen.':
+      'You can expand the site later without having to rebuild it from scratch.',
+    'Yksi hinta.': 'One price.',
+    'Yksinyrittäjille ja pienille yrityksille, jotka tarvitsevat selkeän esittelysivun.':
+      'For sole traders and small businesses that need a clear presentation site.',
+    'Ylläpito on valinnainen': 'Maintenance is optional',
+    'Yrityksille, jotka tarvitsevat enemmän sivuja, automaatioita ja syvempää näkyvyyttä.':
+      'For businesses that need more pages, automations and deeper visibility.',
+    'käyttöönotto': 'onboarding',
+
+
     // ---------- REBRAND: hinnoittelu + palvelut ----------
-    'Verkkosivut kertamaksulla. Perussivu 590 euroa, täysi sivusto 990 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
-      'Websites for a one-time fee. Basic site 590 euros, full site 990 euros. Fixed price, no monthly fees, no hidden costs.',
-    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja.':
-      'Clear pricing without surprises. Basic site 590 euros and full site 990 euros, both one-time. No monthly fees.',
+    'Verkkosivut kertamaksulla. Perussivu 500 euroa, täysi sivusto 800 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
+      'Websites for a one-time fee. Basic site 500 euros, full site 800 euros. Fixed price, no monthly fees, no hidden costs.',
+    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja.':
+      'Clear pricing without surprises. Basic site 500 euros and full site 800 euros, both one-time. No monthly fees.',
     'Ei. Sovittu kertamaksu kattaa suunnittelun, toteutuksen ja julkaisun. Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.':
       'No. The agreed one-time fee covers design, build and launch. If you later want more pages or features, we always agree the price in advance.',
     'Voinko laajentaa sivustoa myöhemmin?': 'Can I expand the site later?',

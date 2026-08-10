@@ -9,36 +9,40 @@
   <meta name="format-detection" content="telephone=no, address=no, email=no, date=no" />
   <title>Hinnoittelu, Selora</title>
   <link rel="canonical" href="https://selora.fi/hinnoittelu.html" />
-  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 590 euroa, täysi sivusto 990 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja." />
+  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 500 euroa, täysi sivusto 800 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --brown: #1D4ED8; --brown-light: #60A5FA;
+      --blue: #1D4ED8; --blue-light: #60A5FA;
       --glass-bg: rgba(248,250,255,0.94); --glass-border: rgba(15,23,42,0.1);
       --text-muted: #64748b;
     }
     html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
     body { background: #F8FAFF; color: #0f172a; font-family: 'Inter', -apple-system, sans-serif; font-weight: 300; overflow-x: hidden; max-width: 100%; -webkit-font-smoothing: antialiased; }
     .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1D4ED8; margin-bottom: 1rem; }
+    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
     .section-heading { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.15; color: #0f172a; margin-bottom: 1rem; }
-    .section-heading .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
+    .section-heading .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; padding-left: 0.06em; }
     .section-sub { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; max-width: 38rem; }
-    .btn { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 400; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 400; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; border: none; }
     .btn-light { background: #F8FAFF; color: #000; border: none; padding: 0.7rem 1.75rem; }
     .btn-light:hover { background: rgba(255,255,255,0.88); }
     .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 0.7rem 1.75rem; }
     .btn-ghost:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.45); }
-    .btn-brown { background: rgba(37,99,235,0.9); color: #fff; border: 1px solid rgba(96,165,250,0.4); padding: 0.7rem 1.75rem; }
-    .btn-brown:hover { background: rgba(37,99,235,0.9); }
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .btn-blue { background: var(--blue); color: #fff; border: none; padding: 0.7rem 1.75rem; }
+    .btn-blue:hover { background: #1e40af; }
+    .reveal { transition: opacity 0.65s ease, transform 0.65s ease; }
+    html.sl-motion .reveal { opacity: 0; transform: translateY(18px); }
+    html.sl-motion .reveal.in-view { opacity: 1; transform: translateY(0); }
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
-    footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; background: #F8FAFF; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-copy { font-size: 0.72rem; color: #64748b; }
     .footer-nav { display: flex; gap: 0.25rem; }
@@ -46,9 +50,9 @@
     .footer-nav a:hover { color: #334155; }
 
     /* PAGE HERO */
-    .page-hero { position: relative; height: 380px; overflow: hidden; display: flex; flex-direction: column; }
+    .page-hero { position: relative; min-height: 62vh; overflow: hidden; display: flex; flex-direction: column; }
     #pageCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.55) 100%); z-index: 1; pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 45%, transparent 55%, rgba(0,0,0,0.35) 100%); z-index: 1; pointer-events: none; }
     /* FLOATING NAV */
     .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; height: 3.5rem; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; border: 1px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -59,58 +63,85 @@
     .desktop-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem; font-weight: 400; padding: 0.5rem 0.85rem; border-radius: 9999px; transition: all 0.2s; }
     .desktop-nav a:hover, .desktop-nav a.active { color: #fff; background: rgba(255,255,255,0.1); }
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .page-title-block { position: absolute; bottom: 2.5rem; left: 2rem; z-index: 10; }
+    .page-title-block { position: relative; margin-top: auto; padding: 0 2rem 3.5rem; z-index: 10; }
     .page-title-block .page-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(96,165,250,0.8); margin-bottom: 0.6rem; }
     .page-title-block h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
-    .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
+    .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; padding-left: 0.06em; }
+    .page-hero-sub { margin-top: 1rem; max-width: 34rem; font-size: 1.02rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.62); }
+    .page-hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .phc { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.5rem 0.9rem; border-radius: 999px; font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+    .phc b { font-weight: 500; color: #fff; }
 
     /* SECTIONS */
     .section { padding: 6rem 0; }
     .section-alt { background: #eef2f7; border-top: 1px solid rgba(15,23,42,0.07); border-bottom: 1px solid rgba(15,23,42,0.07); padding: 6rem 0; }
+    .section .btn-ghost, .section-alt .btn-ghost, .cta-block .btn-ghost { color: #1e293b; border-color: rgba(15,23,42,0.22); }
+    .section .btn-ghost:hover, .section-alt .btn-ghost:hover, .cta-block .btn-ghost:hover { background: rgba(15,23,42,0.05); border-color: rgba(15,23,42,0.4); }
+    .section .btn-light, .section-alt .btn-light, .cta-block .btn-light { background: #0f172a; color: #fff; }
+    .section .btn-light:hover, .section-alt .btn-light:hover, .cta-block .btn-light:hover { background: #1e293b; }
 
-    /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
-    .pricing-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1.25rem; padding: 2rem; display: flex; flex-direction: column; position: relative; }
-    .pricing-card.featured { background: rgba(37,99,235,0.08); border-color: rgba(37,99,235,0.35); }
-    .pricing-card.featured::before { content: 'Suosituin'; position: absolute; top: -0.6rem; left: 50%; transform: translateX(-50%); background: var(--brown); color: #fff; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.2rem 0.85rem; border-radius: 9999px; white-space: nowrap; }
-    .plan-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
-    .pricing-card.featured .plan-label { color: #1D4ED8; }
-    .plan-price { font-size: 2.75rem; font-weight: 300; letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.35rem; }    .pricing-card.featured    .plan-billing { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.35rem; }    .plan-divider { height: 1px; background: rgba(15,23,42,0.1); margin-bottom: 1.5rem; }
-    .pricing-card.featured .plan-divider { background: rgba(37,99,235,0.25); }
-    .plan-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
-    .plan-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.8rem; color: #475569; line-height: 1.5; }
-    .plan-features li::before { content: '✓'; color: var(--brown-light); font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+    /* ── PACKAGES ─────────────────────────────────────────────── */
+    .pkg-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; }
+    @media (min-width: 800px) { .pkg-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
+    .pkg-card {
+      position: relative; background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem;
+      padding: 2.5rem; display: flex; flex-direction: column;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .pkg-card:hover { transform: translateY(-4px); box-shadow: 0 20px 44px -18px rgba(15,23,42,0.18); }
+    .pkg-card.is-featured { background: linear-gradient(160deg, rgba(29,78,216,0.055), rgba(96,165,250,0.02)); border-color: rgba(29,78,216,0.28); }
+    .pkg-badge { position: absolute; top: -0.7rem; left: 2.5rem; background: var(--blue); color: #fff; font-size: 0.64rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 0.9rem; border-radius: 9999px; }
+    .pkg-icon { width: 2.75rem; height: 2.75rem; border-radius: 0.85rem; display: flex; align-items: center; justify-content: center; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.18); color: var(--blue); margin-bottom: 1.5rem; }
+    .pkg-icon svg { width: 1.3rem; height: 1.3rem; display: block; }
+    .pkg-name { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 0.4rem; }
+    .pkg-for { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.5rem; }
+    .pkg-price-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .pkg-price { font-size: 3rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; font-variant-numeric: tabular-nums; }
+    .pkg-price-note { font-size: 0.78rem; color: var(--text-muted); }
+    .pkg-divider { height: 1px; background: rgba(15,23,42,0.1); margin: 1.5rem 0; }
+    .pkg-card.is-featured .pkg-divider { background: rgba(29,78,216,0.22); }
+    .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; flex: 1; }
+    .pkg-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.83rem; color: #475569; line-height: 1.55; }
+    .pkg-features li::before { content: '✓'; color: var(--blue-light); font-weight: 700; font-size: 0.72rem; margin-top: 0.15rem; flex-shrink: 0; }
+    .pkg-cta { width: 100%; justify-content: center; text-align: center; }
+    @media (prefers-reduced-motion: reduce) { .pkg-card { transition: none !important; } .pkg-card:hover { transform: none; } }
 
-    /* GUARANTEE */
-    .guarantee-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
-    .guarantee-item { text-align: center; padding: 1.75rem; }
-    .guarantee-icon { font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-    .guarantee-icon svg { width: 1.5rem; height: 1.5rem; display: block; margin: 0 auto; }
-    .guarantee-item h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; }
-    .guarantee-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+    /* ── PAYMENT FLOW (dark) ──────────────────────────────────── */
+    .pay-section { position: relative; background: #050C1A; padding: 7rem 0; overflow: hidden; }
+    .pay-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+    .pay-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,12,26,0.86) 0%, rgba(5,12,26,0.5) 34%, rgba(5,12,26,0.58) 72%, rgba(5,12,26,0.92) 100%); }
+    .pay-section .section-label { color: rgba(96,165,250,0.75); }
+    .pay-section .section-heading { color: #fff; }
+    .pay-section .section-sub { color: rgba(255,255,255,0.5); }
+    .pay-shell { position: relative; z-index: 2; }
+    .pay-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 3rem; align-items: end; margin-bottom: 1rem; }
+    @media (max-width: 900px) { .pay-head { grid-template-columns: 1fr; gap: 1.25rem; } }
 
-    /* CTA */
-    .cta-block { background: rgba(37,99,235,0.07); border: 1px solid rgba(37,99,235,0.2); border-radius: 1.5rem; padding: 3rem; text-align: center; }
-    .cta-block h2 { font-size: clamp(1.75rem,3vw,2.25rem); font-weight: 300; letter-spacing: -0.025em; margin-bottom: 0.75rem; }
-    .cta-block h2 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic;  padding-left: 0.06em;}
-    .cta-block p { font-size: 0.85rem; color: var(--text-muted); max-width: 32rem; margin: 0 auto 2rem; line-height: 1.75; }
-    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap; }
+    /* ── CHOOSER ──────────────────────────────────────────────── */
+    .choose-shell { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; }
+    @media (min-width: 860px) { .choose-shell { grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: start; } }
+    .choose-form { display: flex; flex-direction: column; gap: 1.25rem; border: none; padding: 0; margin: 0; }
+    .choose-q { border: 1px solid rgba(15,23,42,0.09); border-radius: 1.1rem; padding: 1.4rem 1.5rem; background: #fff; box-shadow: 0 1px 4px rgba(15,23,42,0.05); margin: 0; }
+    .choose-q legend { font-size: 0.88rem; font-weight: 500; color: #0f172a; padding: 0 0 0.9rem; float: left; width: 100%; }
+    .choose-opts { display: flex; flex-direction: column; gap: 0.55rem; clear: both; }
+    .choose-opt { display: flex; align-items: center; gap: 0.7rem; font-size: 0.83rem; color: #334155; cursor: pointer; padding: 0.6rem 0.8rem; border-radius: 0.7rem; border: 1px solid rgba(15,23,42,0.08); transition: background 0.2s, border-color 0.2s; min-height: 44px; }
+    .choose-opt:hover { background: rgba(37,99,235,0.04); }
+    .choose-opt input { accent-color: var(--blue); width: 1.05rem; height: 1.05rem; flex-shrink: 0; }
+    .choose-opt:has(input:checked) { border-color: rgba(29,78,216,0.4); background: rgba(37,99,235,0.06); }
+    .choose-noscript { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.1rem; padding: 1.25rem 1.5rem; }
+    .choose-result { position: sticky; top: 6.5rem; background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem; padding: 2.25rem; box-shadow: 0 1px 4px rgba(15,23,42,0.06); }
+    .choose-result-label { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.75rem; }
+    .choose-result-name { font-size: 1.55rem; font-weight: 500; color: #0f172a; letter-spacing: -0.02em; margin-bottom: 0.6rem; min-height: 1.9rem; }
+    .choose-result-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.6rem; min-height: 3.4rem; }
+    .choose-progress { display: flex; gap: 0.4rem; margin-top: 1.75rem; }
+    .choose-dot { flex: 1; height: 4px; border-radius: 9999px; background: rgba(15,23,42,0.1); transition: background 0.3s ease; }
+    .choose-dot.is-done { background: var(--blue); }
+    @media (max-width: 640px) { .choose-result { position: static; } }
+    @media (prefers-reduced-motion: reduce) { .choose-dot { transition: none !important; } }
 
-    /* INDIVIDUAL SERVICES */
-    .services-ala-carte { margin-top: 3rem; }
-    .services-ala-carte-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 1.5rem; }
-    .service-item-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 1rem; padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
-    .service-item-icon { font-size: 1.3rem; margin-bottom: 0.25rem; }
-    .service-item-icon svg { width: 1.3rem; height: 1.3rem; display: block; }
-    .service-item-name { font-size: 0.8rem; font-weight: 600; color: #0f172a; letter-spacing: 0.02em; }
-    .service-item-setup { font-size: 0.72rem; color: var(--text-muted); }
-    .service-item-price { font-size: 1.35rem; font-weight: 300; letter-spacing: -0.03em; margin-top: auto; padding-top: 0.75rem; margin-bottom: 0.2rem; }
-    .service-item-price span { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; }
-    .service-item-vat { font-size: 0.65rem; color: #64748b; }
-
-    @media(max-width:1000px){ .services-ala-carte-grid{grid-template-columns:1fr 1fr;} }
-    /* COMPARISON TABLE */
-    .compare-wrap { margin-top: 4rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    /* ── COMPARISON TABLE ─────────────────────────────────────── */
+    .compare-wrap { margin-top: 3rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .compare-table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.82rem; }
     .compare-table th, .compare-table td { padding: 0.85rem 1.1rem; text-align: left; border-bottom: 1px solid rgba(15,23,42,0.07); }
     .compare-table thead th { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); background: #f1f5f9; }
@@ -121,82 +152,59 @@
     .compare-table .col-feature { font-weight: 400; color: #334155; }
     .compare-table .col-check { text-align: center; font-size: 0.9rem; }
     .check-yes { color: #16a34a; }
-    .check-no { color: #64748b; }
+    .check-no { color: #cbd5e1; }
     .check-partial { color: #d97706; font-size: 0.72rem; }
     .compare-table .col-featured { background: rgba(29,78,216,0.04); }
     .compare-section-row td { background: #F8FAFF; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; padding: 0.6rem 1.1rem; }
-
-    /* BILLING FAQ */
-    .billing-faq { margin-top: 3rem; max-width: 52rem; }
-    .billing-faq details { border-bottom: 1px solid rgba(15,23,42,0.08); }
-    .billing-faq details:first-of-type { border-top: 1px solid rgba(15,23,42,0.08); }
-    .billing-faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 0; cursor: pointer; font-size: 0.88rem; color: #0f172a; list-style: none; user-select: none; }
-    .billing-faq summary::marker, .billing-faq summary::-webkit-details-marker { display: none; }
-    .billing-faq summary::after { content: '▼'; font-size: 0.65rem; color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; }
-    .billing-faq details[open] summary::after { transform: rotate(180deg); }
-    .billing-faq .faq-body { font-size: 0.82rem; color: var(--text-muted); line-height: 1.8; padding-bottom: 1.1rem; }
-
-    /* YLLÄPITO DROPDOWN */
-    .yllapito-details { display: inline-block; text-align: left; }
-    .yllapito-summary { display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.82rem; font-weight: 600; color: #1D4ED8; letter-spacing: 0.03em; border: 1px solid rgba(29,78,216,0.25); border-radius: 9999px; padding: 0.55rem 1.4rem; background: rgba(29,78,216,0.05); transition: background 0.2s, border-color 0.2s; list-style: none; user-select: none; }
-    .yllapito-summary::-webkit-details-marker, .yllapito-summary::marker { display: none; }
-    .yllapito-summary:hover { background: rgba(29,78,216,0.1); border-color: rgba(29,78,216,0.4); }
-    .yllapito-details[open] .yllapito-summary { border-radius: 1rem 1rem 0 0; border-bottom-color: transparent; }
-    .yllapito-body { background: var(--glass-bg); border: 1px solid rgba(29,78,216,0.18); border-radius: 0 1rem 1rem 1rem; padding: 1.75rem 2rem; max-width: 440px; margin: 0 auto; text-align: left; }
-    .yllapito-price { font-size: 2rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; margin-bottom: 0.5rem; }
-    .yllapito-price span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
-    .yllapito-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
-    .yllapito-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
-    .yllapito-list li { font-size: 0.8rem; color: #475569; display: flex; align-items: flex-start; gap: 0.55rem; line-height: 1.5; }
-    .yllapito-list li::before { content: '✓'; color: var(--brown-light); font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
-
-    /* BILLING TOGGLE */
-    .billing-toggle { display: flex; align-items: center; justify-content: center; gap: 0.85rem; margin-top: 2.25rem; }
-    .toggle-label { font-size: 0.82rem; color: var(--text-muted); transition: color 0.2s, opacity 0.2s; }
-    .toggle-label.active { color: #0f172a; font-weight: 500; }
-    .toggle-badge { display: inline-block; background: rgba(22,163,74,0.12); color: #16a34a; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.15rem 0.55rem; border-radius: 9999px; margin-left: 0.4rem; vertical-align: middle; }
-    .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; cursor: pointer; }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
-    .toggle-track { position: absolute; inset: 0; background: #cbd5e1; border-radius: 9999px; transition: background 0.25s; }
-    .toggle-switch input:checked + .toggle-track { background: #1D4ED8; }
-    .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: #F8FAFF; border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.18); transition: transform 0.25s; }
-    .toggle-switch input:checked + .toggle-track .toggle-thumb { transform: translateX(20px); }
-    /* hide monthly prices by default (yearly is shown first) */
-    .price-m, .billing-m { display: none; }
-
-    @media(max-width:900px){ .pricing-grid{grid-template-columns:1fr 1fr;} .guarantee-grid{grid-template-columns:1fr 1fr 1fr;} }
-    @media(max-width:640px){ .pricing-grid{grid-template-columns:1fr;} .guarantee-grid{grid-template-columns:1fr;} .services-ala-carte-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:400px){ .services-ala-carte-grid{grid-template-columns:1fr;} }
-
-    /* === LIGHT THEME OVERRIDES === */
-    /* Hero titles stay white over the dark canvas */
-    .page-title-block h1 { color: #fff; }
-    /* Stats bar text stays light (it sits on the dark canvas) */
-    .stats-bar .stat-value { color: rgba(255,255,255,0.9); }
-    .stats-bar .stat-label { color: rgba(255,255,255,0.5) !important; }
-    /* Card depth on the white background */
-    .pricing-card, .teaser-card, .service-item-card {
-      box-shadow: 0 1px 4px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04);
+    @media (max-width: 600px) {
+      .compare-wrap { overflow-x: visible; }
+      .compare-table, .compare-table tbody { display: block; }
+      .compare-table thead { display: none; }
+      .compare-table tbody tr.compare-section-row { display: block; }
+      .compare-table tbody tr.compare-section-row td { display: block; }
+      .compare-table tbody tr:not(.compare-section-row) { display: grid; grid-template-columns: 1fr 5rem 5rem; align-items: center; border-bottom: 1px solid rgba(15,23,42,0.07); }
+      .compare-table tbody tr:not(.compare-section-row) td { border-bottom: none; padding: 0.6rem 0.5rem; }
+      .compare-table .col-check { text-align: center; font-size: 0.65rem; word-break: break-word; white-space: normal; }
+      .compare-table tbody tr:not(.compare-section-row) td:nth-child(2)::before { content: 'Perussivu'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 2px; }
+      .compare-table tbody tr:not(.compare-section-row) td:nth-child(3)::before { content: 'Täysi sivusto'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 2px; }
     }
-    .pricing-card.featured { box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
-    /* Ghost buttons in content areas → dark outline on light bg */
-    .section .btn-ghost, .section-alt .btn-ghost,
-    .cta-block .btn-ghost, .contact-section .btn-ghost {
-      color: #1e293b; border-color: rgba(15,23,42,0.22);
-    }
-    .section .btn-ghost:hover, .section-alt .btn-ghost:hover,
-    .cta-block .btn-ghost:hover, .contact-section .btn-ghost:hover {
-      background: rgba(15,23,42,0.05); border-color: rgba(15,23,42,0.4);
-    }
-    /* "Light" (white) buttons in content areas → dark fill so they're visible */
-    .section .btn-light, .section-alt .btn-light,
-    .cta-block .btn-light, .contact-section .btn-light {
-      background: #0f172a; color: #fff;
-    }
-    .section .btn-light:hover, .section-alt .btn-light:hover,
-    .cta-block .btn-light:hover, .contact-section .btn-light:hover {
-      background: #1e293b;
-    }
+
+    /* ── MONEY / STICKY ASIDE LIST ────────────────────────────── */
+    .money-shell { display: grid; grid-template-columns: minmax(0,0.8fr) minmax(0,1.2fr); gap: 4.5rem; align-items: start; }
+    .money-aside { position: sticky; top: 6.5rem; }
+    .money-aside .section-sub { margin-bottom: 2rem; }
+    .money-cta { display: inline-flex; }
+    .money-list { list-style: none; margin: 0; padding: 0; counter-reset: money; }
+    .money-item { position: relative; display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(15,23,42,0.1); transition: padding 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .money-item:last-child { border-bottom: 1px solid rgba(15,23,42,0.1); }
+    .money-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(29,78,216,0.45); padding-top: 0.2rem; font-variant-numeric: tabular-nums; transition: color 0.3s ease; }
+    .money-title { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.45rem; }
+    .money-icon { width: 2rem; height: 2rem; border-radius: 0.6rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: #F8FAFF; border: 1px solid rgba(15,23,42,0.08); color: var(--blue); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.35s ease, color 0.35s ease; }
+    .money-icon svg { width: 1rem; height: 1rem; display: block; }
+    .money-body h3 { font-size: 1.02rem; font-weight: 500; color: #0f172a; letter-spacing: -0.02em; }
+    .money-body p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.8; }
+    .money-item:hover { padding-left: 0.9rem; }
+    .money-item:hover .money-num { color: var(--blue); }
+    .money-item:hover .money-icon { background: var(--blue); color: #fff; transform: scale(1.06); }
+    @media (max-width: 900px) { .money-shell { grid-template-columns: 1fr; gap: 2.5rem; } .money-aside { position: static; } }
+    @media (prefers-reduced-motion: reduce) { .money-item, .money-icon, .money-num { transition: none !important; } .money-item:hover { padding-left: 0; } .money-item:hover .money-icon { transform: none; } }
+
+    /* ── FAQ ──────────────────────────────────────────────────── */
+    .faq-list { margin-top: 3rem; max-width: 52rem; }
+    .faq-item { border-bottom: 1px solid rgba(15,23,42,0.08); }
+    .faq-item:first-child { border-top: 1px solid rgba(15,23,42,0.08); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 0; cursor: pointer; font-size: 0.88rem; font-weight: 400; color: #0f172a; list-style: none; user-select: none; }
+    .faq-q::marker, .faq-q::-webkit-details-marker { display: none; }
+    .faq-chevron { font-size: 0.7rem; color: var(--text-muted); transition: transform 0.25s; flex-shrink: 0; }
+    details[open] .faq-chevron { transform: rotate(180deg); }
+    .faq-a { font-size: 0.82rem; color: var(--text-muted); line-height: 1.8; padding-bottom: 1.25rem; }
+
+    /* CTA */
+    .cta-block { background: rgba(29,78,216,0.06); border: 1px solid rgba(29,78,216,0.18); border-radius: 1.5rem; padding: 3.5rem 3rem; text-align: center; }
+    .cta-block h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 300; letter-spacing: -0.025em; margin-bottom: 0.75rem; color: #0f172a; }
+    .cta-block h2 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; padding-left: 0.06em; }
+    .cta-block p { font-size: 0.85rem; color: var(--text-muted); max-width: 32rem; margin: 0 auto 2rem; line-height: 1.75; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap; }
 
     /* HAMBURGER + MOBILE MENU */
     .hamburger { display: none; background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; width: 40px; height: 40px; cursor: pointer; color: rgba(255,255,255,0.85); align-items: center; justify-content: center; flex-shrink: 0; padding: 0; }
@@ -219,61 +227,49 @@
     .mobile-menu-cta a:hover { background: #1e40af; }
     @media (max-width: 768px) { .desktop-nav { display: none; } .hamburger { display: flex; } .btn-nav-cta { display: none !important; } }
 
-    .website-pricing-grid { margin-top: 2rem; max-width: 960px; margin-left: auto; margin-right: auto; grid-template-columns: repeat(2, 1fr); }
-
-    /* ── MOBILE FIXES ─────────────────────────────────────────────────── */
     @media(max-width:768px) {
+      html, body { overflow-x: hidden; max-width: 100vw; }
       .section { padding: 4rem 0; }
-      .section-alt { padding: 4rem 0; }
+      .section-alt { padding: 4rem 0; overflow: hidden; }
       .container { padding: 0 1.25rem; }
-      .cta-block { padding: 2rem 1.25rem; }
-      .pricing-grid { grid-template-columns: 1fr !important; }
-      .website-pricing-grid { grid-template-columns: 1fr !important; }
-      .guarantee-grid { grid-template-columns: 1fr !important; }
-      .services-ala-carte-grid { grid-template-columns: 1fr 1fr; }
-      .billing-toggle { flex-wrap: wrap; justify-content: center; }
-      .compare-table { font-size: 0.75rem; min-width: 0; }
-      .compare-table th, .compare-table td { padding: 0.65rem 0.75rem; }
-      .yllapito-body { padding: 1.25rem; }
-      .plan-price { font-size: 2.25rem; }
+      .page-hero { min-height: 56vh; }
+      .page-title-block { padding: 1.25rem 1.25rem 2rem; }
+      .pay-section { padding: 4rem 0; }
+      .cta-block { padding: 2.5rem 1.5rem; }
+      .pkg-card { padding: 1.9rem; }
     }
     @media(max-width:480px) {
-      .services-ala-carte-grid { grid-template-columns: 1fr; }
       .section { padding: 3rem 0; }
       .section-alt { padding: 3rem 0; }
+      .pkg-price { font-size: 2.4rem; }
     }
-    @media(max-width:600px) {
-      .compare-wrap { overflow-x: visible; }
-      .compare-table, .compare-table tbody { display: block; }
-      .compare-table thead { display: none; }
-      .compare-table tbody tr.compare-section-row { display: block; }
-      .compare-table tbody tr.compare-section-row td { display: block; }
-      .compare-table tbody tr:not(.compare-section-row) {
-        display: grid;
-        grid-template-columns: 1fr 5rem 5rem;
-        align-items: center;
-        border-bottom: 1px solid rgba(15,23,42,0.07);
+    /* legibility floor: micro labels below 12px get lifted, matching
+       the convention in assets/selora-mobile.css for shared components */
+    @media (max-width: 640px) {
+      .pkg-badge, .money-num, .choose-result-label,
+      .compare-table thead th, .compare-section-row td, .check-partial,
+      .compare-table tbody tr:not(.compare-section-row) td:nth-child(2)::before,
+      .compare-table tbody tr:not(.compare-section-row) td:nth-child(3)::before {
+        font-size: 0.6875rem;
       }
-      .compare-table tbody tr:not(.compare-section-row) td { border-bottom: none; padding: 0.6rem 0.5rem; }
-      .compare-table .col-check { text-align: center; font-size: 0.65rem; word-break: break-word; white-space: normal; }
-      .compare-table tbody tr:not(.compare-section-row) td:nth-child(2)::before { content: 'Aloitus'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 2px; }
-      .compare-table tbody tr:not(.compare-section-row) td:nth-child(3)::before { content: 'Kasvu'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 2px; }
-      .compare-table tbody tr:not(.compare-section-row) td:nth-child(4)::before { content: 'Yritys'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #1D4ED8; margin-bottom: 2px; }
-      .compare-table .col-featured { background: rgba(29,78,216,0.04); }
     }
   </style>
   <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/hinnoittelu.html" />
   <meta property="og:title" content="Hinnoittelu, Selora" />
-  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
+  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hinnoittelu, Selora" />
-  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 590 euroa ja täysi sivusto 990 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
+  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
+<link rel="stylesheet" href="/assets/selora-ds.css" />
+<script src="/assets/selora-motion.js" defer></script>
+<script src="/assets/selora-nebula.js" defer></script>
+<script src="/assets/selora-flowfield.js" defer></script>
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
@@ -306,94 +302,206 @@
     </div>
   </header>
   <div class="page-title-block">
-    <p class="page-label">Investointi</p>
-    <h1>Selkeä, <span class="accent">läpinäkyvä</span><br>hinnoittelu.</h1>
+    <p class="page-label" data-sl-reveal>Investointi</p>
+    <h1 data-sl-split>Kertamaksu.<br><span class="accent">Ei yllätyksiä.</span></h1>
+    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat kerran. Sivusto on sinun, heti ja vuosia eteenpäin. Ei kuukausilaskuja, ei piilokuluja.</p>
+    <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
+      <span class="phc"><b>500 €</b> alkaen, kertamaksu</span>
+      <span class="phc"><b>48 h</b> käyttöönotto</span>
+      <span class="phc"><b>0 €</b> kuukausimaksuja</span>
+    </div>
   </div>
 </div>
 
-<!-- Pricing: Website -->
-<div class="section-alt">
-  <div class="container">
-    <p class="section-label" style="text-align:center;">Verkkosivusuunnittelu</p>
-    <h2 class="section-heading" style="text-align:center;">Kertamaksu.<br><span class="accent">Pysyvä tulos.</span></h2>
-    <p class="section-sub" style="text-align:center; margin:0 auto;">Verkkosivusto on kertaluontoinen projekti. Maksat kerran, sivusto on sinun.</p>
+<main id="main">
 
-    <div class="pricing-grid website-pricing-grid">
-      <!-- Perussivu -->
-      <div class="pricing-card reveal">
-        <div class="plan-label">Perussivu</div>
-        <div class="plan-price"><span>590 €</span></div>
-        <div class="plan-billing"><span>kertamaksu</span></div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li>1-4 sivua, mobiilioptimoitu</li>
+<!-- Packages -->
+<div class="section">
+  <div class="container">
+    <p class="section-label" data-sl-reveal>Paketit</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Kaksi pakettia.<br><span class="accent">Valitse tarpeesi mukaan.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Molemmat sisältävät suunnittelun, rakennuksen ja julkaisun. Ero on laajuudessa, ei laadussa.</p>
+
+    <div class="pkg-grid">
+      <div class="pkg-card reveal" id="pkg-perussivu">
+        <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
+        <h3 class="pkg-name">Perussivu</h3>
+        <p class="pkg-for">Yksinyrittäjille ja pienille yrityksille, jotka tarvitsevat selkeän esittelysivun.</p>
+        <div class="pkg-price-row"><span class="pkg-price">500 €</span></div>
+        <p class="pkg-price-note">kertamaksu</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>1, 4 sivua, mobiilioptimoitu</li>
           <li>Räätälöity ulkoasu yrityksesi brändiin</li>
           <li>Yhteydenottolomake ja Google Maps</li>
-          <li>SEO-perusteet ja nopea latausaika</li>
-          <li>Sosiaalisen median linkit ja pikselit</li>
+          <li>Hakukoneoptimoinnin perusteet</li>
+          <li>Nopea latausaika</li>
         </ul>
-        <a href="yhteystiedot.html" class="btn btn-ghost" style="text-align:center;justify-content:center;width:100%;">Pyydä tarjous →</a>
+        <a href="yhteystiedot.html" class="btn btn-ghost pkg-cta">Pyydä tarjous →</a>
       </div>
 
-      <!-- Täysi sivusto -->
-      <div class="pricing-card featured reveal reveal-delay-1">
-        <div class="plan-label">Täysi sivusto</div>
-        <div class="plan-price"><span>990 €</span></div>
-        <div class="plan-billing"><span>kertamaksu</span></div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
+      <div class="pkg-card is-featured reveal reveal-delay-1" id="pkg-taysisivusto">
+        <span class="pkg-badge">Suosituin</span>
+        <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5-10-5 10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div>
+        <h3 class="pkg-name">Täysi sivusto</h3>
+        <p class="pkg-for">Yrityksille, jotka tarvitsevat enemmän sivuja, automaatioita ja syvempää näkyvyyttä.</p>
+        <div class="pkg-price-row"><span class="pkg-price">800 €</span></div>
+        <p class="pkg-price-note">kertamaksu</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
           <li>4+ sivua, täysin räätälöity design</li>
           <li>Avainsanatutkimus ja syväluotaava SEO-optimointi</li>
           <li>Lomakkeet, automaatiot ja CRM-integraatio</li>
-          <li>Verkkokauppa valinnainen lisä</li>
-          <li>Sosiaalisen median integraatiot ja seuranta</li>
-          <li>Prioriteettituki käyttöönotossa</li>
+          <li>Google-arvostelujen automaatio</li>
+          <li>Verkkokauppa valinnaisena lisänä</li>
           <li>Analytiikkakojelauta: kävijät, liidit ja konversiot</li>
         </ul>
-        <a href="yhteystiedot.html" class="btn btn-brown" style="text-align:center;justify-content:center;width:100%;">Pyydä tarjous →</a>
+        <a href="yhteystiedot.html" class="btn btn-blue pkg-cta">Pyydä tarjous →</a>
       </div>
-    </div>
-
-    <div style="text-align:center; margin-top:2rem;">
-      <details class="yllapito-details">
-        <summary class="yllapito-summary">Lue ylläpidosta ▼</summary>
-        <div class="yllapito-body">
-          <p class="yllapito-price">20 €<span>/kk</span></p>
-          <p class="yllapito-desc">Ylläpitosopimus pitää sivustosi ajan tasalla ja toimintakuntoisessa.</p>
-          <ul class="yllapito-list">
-            <li>Sisällön ja kuvien päivitykset</li>
-            <li>Automaattiset varmuuskopiot</li>
-            <li>Tekninen tuki ja ongelmanratkaisu</li>
-            <li>Tietoturva- ja suorituskykypäivitykset</li>
-            <li>Hakukoneoptimoinnin seuranta</li>
-          </ul>
-          <p style="font-size:0.72rem;color:#64748b;margin-top:1rem;">Irtisanottavissa milloin tahansa 30 päivän varoitusajalla</p>
-        </div>
-      </details>
     </div>
   </div>
 </div>
 
-<!-- Comparison table: Website packages -->
+<!-- Payment flow -->
+<div class="pay-section">
+  <canvas class="pay-canvas" data-selora-flowfield aria-hidden="true"></canvas>
+  <div class="pay-veil" aria-hidden="true"></div>
+  <div class="container pay-shell">
+    <div class="pay-head">
+      <div>
+        <p class="section-label" data-sl-reveal>Maksuprosessi</p>
+        <h2 class="section-heading sl-swipe-host" data-sl-split>Neljä vaihetta.<br><span class="accent">Yksi hinta.</span></h2>
+      </div>
+      <p class="section-sub" data-sl-words data-sl-reveal>Tiedät koko ajan mitä maksat ja milloin. Ei arvailua, ei yllätyksiä.</p>
+    </div>
+
+    <div class="flow-track flow-dark">
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">1</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <h3>Kartoituspuhelu</h3>
+          <p>Käymme läpi tarpeesi ja sovimme sivumäärän. Puhelu on maksuton eikä sido sinua mihinkään.</p>
+          <span class="flow-tag">Kesto: 30 min</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">2</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span>
+          <h3>Kiinteä tarjous</h3>
+          <p>Saat kiinteän hinnan kirjallisena. Sama hinta pysyy koko projektin ajan.</p>
+          <span class="flow-tag">Ei piilokuluja</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">3</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>
+          <h3>Ennakko ja rakennus</h3>
+          <p>Maksat puolet hinnasta etukäteen. Aloitamme sivuston suunnittelun ja rakennuksen heti.</p>
+          <span class="flow-tag">50 % etukäteen</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">4</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <h3>Julkaisu ja loppuerä</h3>
+          <p>Maksat loput sivuston valmistuttua. Sivusto julkaistaan ja se on kokonaan sinun.</p>
+          <span class="flow-tag">50 % julkaisussa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chooser -->
 <div class="section">
   <div class="container">
-    <p class="section-label">Vertailu</p>
-    <h2 class="section-heading">Mitä verkkosivupaketti <span class="accent">sisältää.</span></h2>
-    <p class="section-sub">Kertamaksu, ei piilokustannuksia.</p>
+    <p class="section-label" data-sl-reveal>Kumpi sopii sinulle</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Et tiedä kumman <span class="accent">valita?</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Vastaa kolmeen kysymykseen. Näytämme suosituksemme heti.</p>
+
+    <div class="choose-shell">
+      <form class="choose-form" id="chooseForm">
+        <fieldset class="choose-q reveal">
+          <legend>Kuinka monta sivua tarvitset?</legend>
+          <div class="choose-opts">
+            <label class="choose-opt"><input type="radio" name="q1" value="0" checked> 1, 4 sivua riittää</label>
+            <label class="choose-opt"><input type="radio" name="q1" value="1"> Enemmän kuin 4 sivua</label>
+          </div>
+        </fieldset>
+        <fieldset class="choose-q reveal reveal-delay-1">
+          <legend>Tarvitsetko lomakkeita, automaatioita tai CRM-integraation?</legend>
+          <div class="choose-opts">
+            <label class="choose-opt"><input type="radio" name="q2" value="0" checked> En, yhteydenottolomake riittää</label>
+            <label class="choose-opt"><input type="radio" name="q2" value="1"> Kyllä, tarvitsen niitä</label>
+          </div>
+        </fieldset>
+        <fieldset class="choose-q reveal reveal-delay-2">
+          <legend>Kuinka tärkeä hakukoneoptimointi on sinulle?</legend>
+          <div class="choose-opts">
+            <label class="choose-opt"><input type="radio" name="q3" value="0" checked> Perusteet riittävät</label>
+            <label class="choose-opt"><input type="radio" name="q3" value="1"> Haluan syväluotaavan SEO:n</label>
+          </div>
+        </fieldset>
+        <noscript>
+          <p class="choose-noscript">Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto.</p>
+        </noscript>
+      </form>
+
+      <div class="choose-result reveal reveal-delay-1" id="chooseResult" aria-live="polite">
+        <p class="choose-result-label">Suosituksemme</p>
+        <p class="choose-result-name" id="chooseName">Perussivu</p>
+        <p class="choose-result-desc" id="chooseDesc">Vastaustesi perusteella Perussivu kattaa tarpeesi. Voit vaihtaa vastauksia milloin tahansa.</p>
+        <a href="#pkg-perussivu" class="btn btn-blue" id="chooseCta">Katso Perussivu ↓</a>
+        <div class="choose-progress" aria-hidden="true">
+          <span class="choose-dot" data-dot="1"></span><span class="choose-dot" data-dot="2"></span><span class="choose-dot" data-dot="3"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison table -->
+<div class="section-alt">
+  <div class="container">
+    <p class="section-label" data-sl-reveal>Vertailu</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Mitä paketti <span class="accent">sisältää.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Sama rakenne, eri laajuus. Vertaile rinnakkain.</p>
     <div class="compare-wrap reveal">
       <table class="compare-table">
         <thead>
           <tr>
             <th style="width:46%">Ominaisuus</th>
-            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">590 €</span></th>
-            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">990 €</span></th>
+            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">500 €</span></th>
+            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">800 €</span></th>
           </tr>
         </thead>
         <tbody>
           <tr class="compare-section-row"><td colspan="3">Sivusto</td></tr>
           <tr>
             <td class="col-feature">Sivumäärä</td>
-            <td class="col-check"><span class="check-partial">1-4 sivua</span></td>
+            <td class="col-check"><span class="check-partial">1, 4 sivua</span></td>
             <td class="col-check col-featured"><span class="check-yes">4+ sivua</span></td>
           </tr>
           <tr>
@@ -425,39 +533,39 @@
           </tr>
           <tr>
             <td class="col-feature">Lomakkeet ja sähköpostiautomaatiot</td>
-            <td class="col-check"><span class="check-no">,</span></td>
+            <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">CRM-integraatio</td>
-            <td class="col-check"><span class="check-no">,</span></td>
+            <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Verkkokauppa valinnainen lisä</td>
-            <td class="col-check"><span class="check-no">,</span></td>
+            <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
 
           <tr class="compare-section-row"><td colspan="3">Markkinointi ja SEO</td></tr>
           <tr>
-            <td class="col-feature">SEO-optimointi</td>
+            <td class="col-feature">Hakukoneoptimointi</td>
             <td class="col-check"><span class="check-partial">Perusteet</span></td>
             <td class="col-check col-featured"><span class="check-yes">Syväluotaava</span></td>
           </tr>
           <tr>
             <td class="col-feature">Avainsanatutkimus</td>
-            <td class="col-check"><span class="check-no">,</span></td>
+            <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
-            <td class="col-feature">Sosiaalisen median linkit ja pikselit</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓ + seuranta</span></td>
+            <td class="col-feature">Google-arvostelujen automaatio</td>
+            <td class="col-check"><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Analytiikkakojelauta (kävijät, liidit, konversiot)</td>
-            <td class="col-check"><span class="check-no">,</span></td>
+            <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
           </tr>
 
@@ -473,68 +581,116 @@
   </div>
 </div>
 
-<!-- Guarantees -->
-<div class="section-alt">
-  <div class="container">
-    <p class="section-label">Lupauksemme</p>
-    <h2 class="section-heading">Sinun <span class="accent">etusi</span> ensin.</h2>
-    <p class="section-sub">Emme usko pitkiin sopimuksiin tai epäselviin ehtoihin. Tässä mitä voit odottaa.</p>
-    <div class="guarantee-grid">
-      <div class="guarantee-item reveal">
-        <span class="guarantee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-        <h3>Ei pitkiä sitoutumisia</h3>
-        <p>Kuukausittaiset sopimukset. Voit irtisanoa milloin tahansa 30 päivän varoitusajalla, ilman sakkoja.</p>
-      </div>
-      <div class="guarantee-item reveal reveal-delay-1">
-        <span class="guarantee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-        <h3>Nopea käynnistys</h3>
-        <p>Useimmat järjestelmät ovat toiminnassa 48 tunnin sisällä sopimuksen allekirjoittamisesta. Ei odottelua.</p>
-      </div>
-      <div class="guarantee-item reveal reveal-delay-2">
-        <span class="guarantee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></span>
-        <h3>Läpinäkyvät tulokset</h3>
-        <p>Saat kuukausittaiset raportit, joista näet tarkalleen mitä tekoälyjärjestelmäsi tekee ja minkälaisia tuloksia se tuottaa.</p>
-      </div>
-    </div>
+<!-- Money reasons / sticky aside -->
+<div class="section">
+  <div class="container money-shell">
+    <aside class="money-aside">
+      <p class="section-label" data-sl-reveal>Maksat kerran</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Näin hinta toimii.<br><span class="accent">Sinun eduksesi.</span></h2>
+      <p class="section-sub" data-sl-reveal>Ei kuukausilaskuja eikä pitkiä sopimuksia. Tässä mitä kertamaksu tarkoittaa käytännössä.</p>
+      <a href="yhteystiedot.html" class="btn btn-blue money-cta" data-sl-reveal>Varaa maksuton kartoitus →</a>
+    </aside>
+    <ol class="money-list">
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">01</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2v10l7-4"/></svg></span>
+            <h3>Kiinteä hinta sovitaan etukäteen</h3>
+          </div>
+          <p>Kartoituspuhelun jälkeen tiedät tarkalleen mitä maksat. Hinta ei muutu kesken projektin.</p>
+        </div>
+      </li>
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">02</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>
+            <h3>Puolet etukäteen, puolet julkaisussa</h3>
+          </div>
+          <p>Et maksa koko summaa kerralla. Loppuerä laskutetaan vasta kun sivusto on valmis.</p>
+        </div>
+      </li>
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">03</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></span>
+            <h3>Ei piilokuluja</h3>
+          </div>
+          <p>Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.</p>
+        </div>
+      </li>
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">04</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+            <h3>Ylläpito on valinnainen</h3>
+          </div>
+          <p>Voit hoitaa sivuston itse tai jatkaa ylläpitosopimuksella, joka on irtisanottavissa milloin tahansa.</p>
+        </div>
+      </li>
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">05</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+            <h3>Sivusto on aina sinun</h3>
+          </div>
+          <p>Emme lukitse sinua palveluumme. Sivusto pysyy sinun omistuksessasi kertamaksun jälkeen.</p>
+        </div>
+      </li>
+      <li class="money-item" data-sl-pop>
+        <span class="money-num" aria-hidden="true">06</span>
+        <div class="money-body">
+          <div class="money-title">
+            <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+            <h3>Kasvaa mukanasi</h3>
+          </div>
+          <p>Voit laajentaa sivustoa myöhemmin ilman että se pitää rakentaa kokonaan uudelleen.</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </div>
 
-<!-- Billing FAQ -->
-<div class="section">
+<!-- FAQ -->
+<div class="section-alt">
   <div class="container">
-    <p class="section-label">Hinnoittelukysymykset</p>
-    <h2 class="section-heading">Usein kysyttyä <span class="accent">hinnoittelusta.</span></h2>
-    <div class="billing-faq reveal">
-      <details>
-        <summary>Onko piilomaksuja tai ylimääräisiä kuluja?</summary>
-        <p class="faq-body">Ei. Sovittu kertamaksu kattaa suunnittelun, toteutuksen ja julkaisun. Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.</p>
+    <p class="section-label" data-sl-reveal>Kysyttyä</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Usein kysyttyä <span class="accent">hinnoittelusta.</span></h2>
+    <div class="faq-list reveal">
+      <details class="faq-item">
+        <summary class="faq-q">Onko hinnassa piilokuluja? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Ei. Sovittu hinta kattaa suunnittelun, rakennuksen ja julkaisun. Jos haluat myöhemmin lisää, sovimme hinnan aina ensin.</p>
       </details>
-      <details>
-        <summary>Voinko laajentaa sivustoa myöhemmin?</summary>
-        <p class="faq-body">Kyllä. Sivustoa on helppo laajentaa uusilla sivuilla, kielillä tai toiminnoilla. Sovimme laajennuksen hinnan erikseen, eikä se vaadi sivuston rakentamista uudelleen.</p>
+      <details class="faq-item">
+        <summary class="faq-q">Miten maksu jakautuu? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Maksat puolet projektin alussa ja puolet julkaisussa. Hyväksymme kortin, laskun ja verkkopankin.</p>
       </details>
-      <details>
-        <summary>Mitkä ovat maksuehdot?</summary>
-        <p class="faq-body">Laskutamme puolet projektin alussa ja puolet julkaisun yhteydessä. Hyväksymme kortit, laskun ja verkkopankin.</p>
+      <details class="faq-item">
+        <summary class="faq-q">Kuuluuko ylläpito hintaan? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Ei automaattisesti. Kertamaksu kattaa valmiin sivuston. Ylläpito on valinnainen lisäpalvelu, jonka voi lopettaa milloin tahansa.</p>
       </details>
-      <details>
-        <summary>Kuuluuko hintaan ylläpito?</summary>
-        <p class="faq-body">Kertamaksu kattaa valmiin sivuston. Ylläpito ja jatkopäivitykset ovat vapaaehtoisia ja sovitaan erikseen. Emme lukitse sinua kuukausimaksuun.</p>
+      <details class="faq-item">
+        <summary class="faq-q">Voinko laajentaa sivustoa myöhemmin? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Kyllä. Uudet sivut, kielet ja toiminnot on helppo lisätä. Hinnasta sovimme aina etukäteen.</p>
       </details>
-      <details>
-        <summary>Saanko nähdä esimerkkejä ennen tilausta?</summary>
-        <p class="faq-body">Kyllä. Verkkosivusuunnittelu-sivulta löydät esimerkkisivustot eri toimialoille. Kartoituspuhelussa käymme läpi millainen sivusto sinun yrityksellesi sopisi.</p>
+      <details class="faq-item">
+        <summary class="faq-q">Mitä eroa paketeilla oikeasti on? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia.</p>
       </details>
     </div>
   </div>
 </div>
 
 <!-- CTA -->
-<div class="section-alt">
+<div class="section">
   <div class="container">
     <div class="cta-block reveal">
-      <h2>Epävarma kumpi paketti <span class="accent">sopii</span>?</h2>
-      <p>Varaa maksuton kartoituspuhelu. Kerromme rehellisesti kumpi paketti sopii yrityksesi tilanteeseen. Jos aika ei ole oikea, sanomme sen suoraan.</p>
+      <h2>Epävarma kumpi <span class="accent">sopii</span>?</h2>
+      <p>Varaa maksuton kartoituspuhelu. Kerromme suoraan kumpi paketti sopii tilanteeseesi.</p>
       <div class="cta-btns">
         <a href="index.html#prosessi" class="btn btn-ghost">Lue prosessista</a>
         <a href="yhteystiedot.html" class="btn btn-light">Varaa demo →</a>
@@ -543,13 +699,15 @@
   </div>
 </div>
 
+</main>
+
 <footer>
   <div class="footer-inner">
     <span class="footer-copy">© 2025 Selora Oy · Y-tunnus: 3535677-9 · Kaikki oikeudet pidätetään.</span>
     <div class="footer-nav">
       <a href="palvelut.html">Palvelut</a>
-<a href="hinnoittelu.html">Hinnoittelu</a>
-          <a href="blogi.html">Blogi</a>
+      <a href="hinnoittelu.html">Hinnoittelu</a>
+      <a href="blogi.html">Blogi</a>
       <a href="yhteystiedot.html">Yhteystiedot</a>
       <a href="tietosuojaseloste.html">Tietosuojaseloste</a>
     </div>
@@ -557,68 +715,50 @@
 </footer>
 
 <script>
-(function () {
-  const canvas = document.getElementById('pageCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  function resize() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || 380; }
-  resize(); window.addEventListener('resize', resize);
-  const blobs = [
-    { ox:0.52, oy:0.48, vx:0.00031, vy:0.00024, r:0.70, rgb:[37,99,235],  a:0.50 },
-    { ox:0.22, oy:0.35, vx:-0.00019,vy:0.00028,  r:0.55, rgb:[29,78,216],   a:0.45 },
-    { ox:0.78, oy:0.72, vx:0.00022, vy:-0.00017, r:0.50, rgb:[15,23,42],   a:0.40 },
-    { ox:0.35, oy:0.80, vx:-0.00025,vy:-0.00020, r:0.45, rgb:[67,56,202], a:0.35 },
-    { ox:0.65, oy:0.20, vx:0.00015, vy:0.00032,  r:0.40, rgb:[99,102,241], a:0.25 },
-  ];
-  blobs.forEach(b => { b.x = b.ox; b.y = b.oy; });
-  let t = 0;
-  function draw() {
-    t += 0.25;
-    const w = canvas.width, h = canvas.height;
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
-    ctx.globalCompositeOperation = 'screen';
-    blobs.forEach(b => {
-      b.x = b.ox + 0.22*Math.sin(t*b.vx*600+b.oy*10);
-      b.y = b.oy + 0.18*Math.cos(t*b.vy*600+b.ox*10);
-      const gx=b.x*w, gy=b.y*h, gr=b.r*Math.max(w,h);
-      const g = ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
-      const [r,gv,bv]=b.rgb;
-      g.addColorStop(0,`rgba(${r},${gv},${bv},${b.a})`);
-      g.addColorStop(0.4,`rgba(${r},${gv},${bv},${b.a*0.3})`);
-      g.addColorStop(1,`rgba(${r},${gv},${bv},0)`);
-      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    });
-    ctx.globalCompositeOperation='source-over';
-    ctx.strokeStyle='rgba(255,255,255,0.025)'; ctx.lineWidth=0.6;
-    for(let i=0;i<6;i++){
-      const phase=(t*0.004)+(i*Math.PI*2/6);
-      const cx=w*(0.5+0.18*Math.cos(phase*0.7)), cy=h*(0.5+0.14*Math.sin(phase*0.5));
-      const rx=w*(0.28+0.04*Math.sin(phase)), ry=h*(0.22+0.04*Math.cos(phase));
-      ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,phase*0.1,0,Math.PI*2); ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
 (function(){
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}});
-  },{threshold:0.1});
+  },{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 (function(){
-  const sw = document.getElementById('billingSwitch');
-  const lblM = document.getElementById('labelMonthly');
-  const lblY = document.getElementById('labelYearly');
-  if (!sw) return;
-  sw.addEventListener('change', function() {
-    const yearly = this.checked;
-    document.querySelectorAll('.price-m, .billing-m').forEach(el => el.style.display = yearly ? 'none' : 'inline');
-    document.querySelectorAll('.price-y, .billing-y').forEach(el => el.style.display = yearly ? 'inline' : 'none');
-    if (lblM) lblM.classList.toggle('active', !yearly);
-    if (lblY) lblY.classList.toggle('active', yearly);
-  });
+  const form = document.getElementById('chooseForm');
+  if (!form) return;
+  const nameEl = document.getElementById('chooseName');
+  const descEl = document.getElementById('chooseDesc');
+  const ctaEl = document.getElementById('chooseCta');
+  const dots = document.querySelectorAll('.choose-dot');
+  const results = {
+    perussivu: {
+      name: 'Perussivu',
+      desc: 'Vastaustesi perusteella Perussivu kattaa tarpeesi. Voit vaihtaa vastauksia milloin tahansa.',
+      href: '#pkg-perussivu',
+      cta: 'Katso Perussivu ↓'
+    },
+    taysisivusto: {
+      name: 'Täysi sivusto',
+      desc: 'Vastaustesi perusteella Täysi sivusto sopii sinulle paremmin. Voit vaihtaa vastauksia milloin tahansa.',
+      href: '#pkg-taysisivusto',
+      cta: 'Katso Täysi sivusto ↓'
+    }
+  };
+  function update() {
+    const data = new FormData(form);
+    let score = 0;
+    let answered = 0;
+    ['q1', 'q2', 'q3'].forEach(function (name) {
+      const v = data.get(name);
+      if (v !== null) { answered++; score += parseInt(v, 10) || 0; }
+    });
+    dots.forEach(function (dot, i) { dot.classList.toggle('is-done', i < answered); });
+    const pick = score >= 2 ? results.taysisivusto : results.perussivu;
+    nameEl.textContent = pick.name;
+    descEl.textContent = pick.desc;
+    ctaEl.setAttribute('href', pick.href);
+    ctaEl.textContent = pick.cta;
+  }
+  form.addEventListener('change', update);
+  update();
 })();
 </script>
 
