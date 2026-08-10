@@ -3009,6 +3009,128 @@
     'Ensivaikutelma': 'First impressions',
     'ratkaisee kaiken.': 'decide everything.',
 
+
+    // ---------- hero stage + nav CTA ----------
+    'Uusi arvostelu': 'New review',
+    'Varaa kartoitus →': 'Book a consultation →',
+    'Latausaika': 'Load time',
+    'yrityksesi.fi': 'yourbusiness.com',
+
+
+    // ---------- audit sweep: palvelut accordion, privacy 03, misc ----------
+    'Sivusto': 'Website',
+    'Varaa esittelypuhelu': 'Book an intro call',
+    'Pidätkö enemmän soittamisesta?&nbsp;': 'Prefer to call?&nbsp;',
+    'Tilaamalla hyväksyt, että Selora käyttää sähköpostiosoitettasi uutiskirjeen lähettämiseen. Voit perua tilauksen milloin tahansa jokaisen viestin alalaidan linkistä. Lue':
+      'By subscribing you agree that Selora uses your email address to send the newsletter. You can unsubscribe any time via the link at the bottom of each email. Read the',
+
+    // palvelut: design group
+    'Suunnittelemme sivuston juuri sinun brändillesi. Värit, typografia ja kuvamaailma valitaan yrityksesi mukaan, ei valmiista mallipohjasta.':
+      'We design the site specifically for your brand. Colours, typography and imagery are chosen to match your business, not pulled from a template.',
+    'Brändin mukainen värimaailma ja typografia': 'Colours and typography matched to your brand',
+    'Ei valmiita teemoja eikä mallipohjia': 'No off-the-shelf themes or templates',
+    'Suunnitteluluonnokset hyväksyttäväksi ennen toteutusta': 'Design drafts for your approval before the build',
+    'Yli puolet kävijöistä saapuu puhelimella. Suunnittelemme sivuston ensin mobiilille ja varmistamme että se toimii jokaisella näytöllä.':
+      'More than half of visitors arrive on a phone. We design mobile first and make sure it works on every screen.',
+    'Suunnittelu mobiili edellä': 'Mobile-first design',
+    'Testattu puhelimella, tabletilla ja työpöydällä': 'Tested on phone, tablet and desktop',
+    'Kosketuskohteet riittävän suuria myös pienellä näytöllä': 'Tap targets large enough on small screens',
+    'Kävijä löytää etsimänsä muutamassa sekunnissa. Rakennamme navigaation ja sisältöjärjestyksen niin, että tärkein näkyy ensimmäisenä.':
+      'Visitors find what they need in seconds. We structure the navigation and content so the most important things come first.',
+    'Looginen sivurakenne ja navigaatio': 'Logical page structure and navigation',
+    'Tärkein sisältö heti näkyvissä': 'Key content visible immediately',
+    'Selkeät toimintakehotteet jokaisella sivulla': 'Clear calls to action on every page',
+
+    // palvelut: technology group
+    'Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Optimoimme kuvat, koodin ja fontit jo rakennusvaiheessa.':
+      'The site loads in under a second, even on mobile data. We optimize images, code and fonts during the build.',
+    'Kuvien pakkaus ja oikeat kuvaformaatit': 'Image compression and the right formats',
+    'Kevyt koodi ilman turhia kirjastoja': 'Lightweight code with no unnecessary libraries',
+    'Nopea palvelin ja välimuisti kuntoon': 'Fast hosting and caching set up properly',
+    'Selkeät lomakkeet ohjaavat kävijän ottamaan yhteyttä. Viestit tulevat suoraan sähköpostiisi ilman erillistä järjestelmää.':
+      'Clear forms guide visitors to get in touch. Messages arrive straight in your inbox with no separate system.',
+    'Viestit suoraan sähköpostiin': 'Messages straight to your inbox',
+    'Roskapostisuodatus mukana': 'Spam filtering included',
+    'Kiitos-sivu ja automaattinen vahvistusviesti': 'Thank-you page and automatic confirmation email',
+    'Rakennamme sivuston niin, että tekstit, kuvat ja hinnat on helppo päivittää ilman koodia. Näytämme käyttöönotossa miten se tehdään.':
+      'We build the site so texts, images and prices are easy to update without code. We show you how at handover.',
+    'Sisällön päivitys ilman koodia': 'Update content without code',
+    'Käyttöönottokoulutus mukana': 'Handover training included',
+    'Tuki saatavilla myös julkaisun jälkeen': 'Support available after launch too',
+
+    // palvelut: visibility group
+    'Jokainen sivusto rakennetaan hakukoneoptimoituna. Otsikkorakenne, metatiedot ja sivukartta ovat kunnossa heti julkaisusta alkaen.':
+      'Every site is built search-optimized. Heading structure, meta tags and sitemap are in place from launch.',
+    'Otsikkorakenne ja metatiedot kuntoon': 'Heading structure and meta tags done right',
+    'Sivukartta ja robots.txt': 'Sitemap and robots.txt',
+    'Nopeus ja mobiilikäytettävyys osana SEO:ta': 'Speed and mobile usability as part of SEO',
+    'Selvitämme millä hakusanoilla asiakkaasi etsivät palveluitasi ja rakennamme sisällön niiden ympärille. Sisältyy täyteen sivustoon.':
+      'We find the search terms your customers use and build the content around them. Included in the full site.',
+    'Toimialakohtainen avainsanakartoitus': 'Industry-specific keyword mapping',
+    'Sisältö rakennettu hakusanojen ympärille': 'Content built around search terms',
+    'Paikallinen näkyvyys omalla alueellasi': 'Local visibility in your area',
+    'Rakennamme sivuston suomeksi ja englanniksi, jolloin kävijä vaihtaa kieltä yhdellä klikkauksella. Molemmat kieliversiot optimoidaan erikseen.':
+      'We build the site in Finnish and English so visitors switch language with one click. Both versions are optimized separately.',
+    'Suomi ja englanti samalla sivustolla': 'Finnish and English on one site',
+    'Kielivalitsin navigaatiossa': 'Language switcher in the navigation',
+    'Molemmat versiot hakukoneoptimoituna': 'Both versions search-optimized',
+
+    // palvelut: add-ons group
+    'Sivustolle asennettava chatbot vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottoon. Sisältyy molempiin paketteihin.':
+      'A chatbot installed on the site answers visitors\' most common questions and guides them to get in touch. Included in both packages.',
+    'Vastaa yleisimpiin kysymyksiin automaattisesti': 'Answers common questions automatically',
+    'Ohjaa kävijän yhteydenottolomakkeelle': 'Guides visitors to the contact form',
+    'Koulutettu oman yrityksesi tiedoilla': 'Trained on your own business information',
+    'Automaattiset viestit hoitavat yhteydenotot puolestasi. Kävijä saa vahvistuksen heti ja sinä saat tiedon uudesta liidistä.':
+      'Automatic emails handle enquiries for you. The visitor gets an instant confirmation and you get notified of the new lead.',
+    'Automaattinen vahvistusviesti kävijälle': 'Automatic confirmation email to the visitor',
+    'Ilmoitus uudesta yhteydenotosta sinulle': 'Notification of each new enquiry',
+    'Uutiskirjeen tilauslomake halutessasi': 'Newsletter signup form if you want one',
+    'Näet mistä kävijät tulevat, mitä sivuja he katsovat ja kuinka moni ottaa yhteyttä. Ilman evästebannerin vaativaa seurantaa.':
+      'See where visitors come from, which pages they view and how many get in touch. Without tracking that needs a cookie banner.',
+    'Kävijämäärät ja suosituimmat sivut': 'Visitor numbers and top pages',
+    'Yhteydenottojen seuranta': 'Enquiry tracking',
+    'Yksityisyyden säilyttävä analytiikka': 'Privacy-preserving analytics',
+
+    // palvelut: industries + CTA
+    'Selkeä sivusto, jolta potilas löytää hoidot, hinnat ja ajanvarauksen. GDPR-yhteensopiva toteutus.':
+      'A clear site where patients find treatments, prices and booking. GDPR-compliant build.',
+    'Hinnasto, palvelut ja ajanvaraus näkyvissä heti puhelimesta, jotta asiakas ei joudu soittamaan kysyäkseen.':
+      'Prices, services and booking visible straight from a phone, so customers do not have to call to ask.',
+    'Kohde-esittelyt, yhteydenottolomakkeet ja referenssit yhdellä sivustolla, joka toimii myös puhelimella.':
+      'Listings, contact forms and references on one site that works on mobile too.',
+    'LVI-, sähkö- ja siivousyritykset: palvelut, toiminta-alue ja tarjouspyyntölomake selkeästi esillä.':
+      'HVAC, electrical and cleaning companies: services, service area and quote form clearly presented.',
+    'Referenssikuvat, toteutetut kohteet ja tarjouspyyntölomake yhdellä sivustolla, joka vakuuttaa asiakkaan.':
+      'Reference photos, completed projects and a quote form on one site that convinces the customer.',
+    'Varaa maksuton 30 minuutin kartoituspuhelu. Käymme läpi mitä sivustosi tarvitsee ja saat kiinteän hinnan. Ei paineita, ei sitoumuksia, ei jargonia.':
+      'Book a free 30-minute discovery call. We go through what your site needs and you get a fixed price. No pressure, no commitments, no jargon.',
+
+    // tietosuojaseloste section 03
+    '03. Verkkosivustojen ja lomakkeiden käsittely': '03. Website and form data processing',
+    'Miten käsittelemme verkkosivustojen kautta kerättyjä tietoja': 'How we process data collected through websites',
+    'Selora suunnittelee ja toteuttaa verkkosivustoja asiakasyrityksilleen. Kun täytät yhteydenottolomakkeen Seloran tai asiakkaamme sivustolla, tapahtuu seuraavaa:':
+      'Selora designs and builds websites for its client businesses. When you fill in a contact form on Selora\'s site or a client\'s site, the following happens:',
+    'Lomakkeelle antamasi tiedot välitetään suojatulla yhteydellä vastaanottajalle':
+      'The details you enter are transmitted to the recipient over a secure connection',
+    'Tiedot toimitetaan yrityksen sähköpostiin yhteydenottoa varten':
+      'The details are delivered to the business inbox so they can respond',
+    'Saat halutessasi automaattisen vahvistusviestin lomakkeen lähettämisestä':
+      'If you wish, you receive an automatic confirmation that the form was sent',
+    'Tietoja käytetään ainoastaan yhteydenottopyyntöösi vastaamiseen':
+      'The data is used solely to respond to your enquiry',
+    'Tekoälychatbot:': 'AI chatbot:',
+    'Osalla sivustoista on käytössä chatbot, joka vastaa yleisimpiin kysymyksiin. Keskustelun sisältöä käytetään vain vastauksen muodostamiseen. Emme käytä keskusteluja profilointiin emmekä markkinointiin.':
+      'Some sites use a chatbot that answers common questions. Conversation content is used only to form a reply. We do not use conversations for profiling or marketing.',
+    'Emme käytä automaattista päätöksentekoa, jolla olisi merkittäviä oikeudellisia vaikutuksia rekisteröityyn (GDPR 22 artikla).':
+      'We do not use automated decision-making that would have significant legal effects on the data subject (GDPR Article 22).',
+    'Lomaketiedot ja sivustojen data käsitellään EU:n alueella sijaitsevilla palvelimilla. Tietoja ei siirretä EU:n tai ETA-alueen ulkopuolelle ilman asianmukaisia suojatoimia.':
+      'Form data and site data are processed on servers located in the EU. Data is not transferred outside the EU or EEA without appropriate safeguards.',
+    'Sivustojen suunnittelu, toteutus ja ylläpito sekä lomakkeiden välitys':
+      'Website design, build and maintenance, and form delivery',
+    'Yhteydenottojen käsittely ja asiakassuhteen hoito':
+      'Handling enquiries and managing the customer relationship',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',
