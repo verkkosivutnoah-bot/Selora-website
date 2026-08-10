@@ -373,7 +373,7 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
 /* product photo: rounded to nest inside the card, scrim held to the text column */
 .svc-hero-photo {
   position: absolute; z-index: 0; pointer-events: none;
-  right: 2%; bottom: 10%; width: 74%; aspect-ratio: 3 / 2;
+  right: 2%; top: 4%; width: 78%; height: 50%;
   background: url('/assets/img/verkkosivusuunnittelu-mockup.jpg') no-repeat center / cover;
   border-radius: 1rem;
   border: 1px solid rgba(255,255,255,0.1);
@@ -397,11 +397,11 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
 .svc-tile-hero .svc-badge { background: rgba(6,12,24,0.66); backdrop-filter: blur(6px); }
 .svc-tile-hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(96deg, #060c18 0%, #060c18 30%, rgba(6,12,24,0.88) 45%, rgba(6,12,24,0.34) 62%, transparent 78%);
+  background: linear-gradient(to top, #060c18 0%, #060c18 34%, rgba(6,12,24,0.92) 44%, rgba(6,12,24,0.45) 56%, transparent 68%);
 }
 @media (max-width: 900px) {
-  .svc-hero-photo { width: 94%; right: 2%; bottom: 5%; opacity: 0.95; }
-  .svc-tile-hero::before { background: linear-gradient(172deg, #060c18 30%, rgba(6,12,24,0.8) 54%, rgba(6,12,24,0.34) 100%); }
+  .svc-hero-photo { width: 96%; right: 2%; top: 3%; height: 34%; opacity: 0.95; }
+  .svc-tile-hero::before { background: linear-gradient(to top, #060c18 0%, #060c18 34%, rgba(6,12,24,0.9) 48%, rgba(6,12,24,0.3) 72%, transparent 92%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .svc-hero-photo, .svc-tile-hero:hover .svc-hero-photo { transition: none !important; transform: none !important; }
@@ -427,6 +427,7 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
 .svc-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: #60A5FA; box-shadow: 0 0 8px #60A5FA; }
 .svc-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: rgba(255,255,255,0.28); font-variant-numeric: tabular-nums; }
 .svc-hero-body { margin-top: 2.5rem; }
+.svc-tile-hero .svc-hero-body { margin-top: auto; padding-top: 1.25rem; }
 .svc-tile-hero h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight: 300; letter-spacing: -0.03em; color: #fff; margin-bottom: 0.7rem; line-height: 1.15; }
 .svc-tile-hero p { font-size: 0.84rem; color: rgba(255,255,255,0.6); line-height: 1.78; margin-bottom: 1.25rem; max-width: 30rem; }
 .svc-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
