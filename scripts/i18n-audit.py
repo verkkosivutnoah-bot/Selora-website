@@ -22,15 +22,11 @@ PUBLIC = [
     'tietosuojaseloste.html', '404.html', 'unsubscribe.html',
 ]
 
-FI_CHARS = 'äöÄÖ'
-FI_WORDS = {
-    'ja', 'on', 'ei', 'joka', 'jotka', 'sinun', 'sinulle', 'sinä', 'me', 'meidän',
-    'asiakas', 'asiakkaita', 'asiakkaat', 'sivusto', 'sivut', 'verkkosivut',
-    'kertamaksu', 'arvostelu', 'arvostelut', 'nopeat', 'hinnat', 'hinta',
-    'katso', 'lue', 'lisää', 'varaa', 'ratkaisee', 'tuovat', 'palvelu', 'palvelut',
-    'yritys', 'yrityksesi', 'kaikki', 'mitä', 'miten', 'kuinka', 'sekä', 'tai',
-}
-
+# The Finnish detector lives in lang_audit so both audits agree on what
+# counts as Finnish. The weaker local heuristic used to miss strings with no
+# a-umlaut and no common function word, e.g. "Latausnopeuden optimointi".
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lang_audit import classify, is_proper_name  # noqa: E402
 
 def load_keys():
     js = open('i18n.js', encoding='utf-8').read()
@@ -44,10 +40,7 @@ def load_keys():
 
 
 def is_finnish(t):
-    if any(c in t for c in FI_CHARS):
-        return True
-    words = set(re.findall(r'[a-zA-ZäöåÄÖÅ]+', t.lower()))
-    return bool(words & FI_WORDS)
+    return classify(t) == 'fi' and not is_proper_name(t)
 
 
 def strings_in(path):

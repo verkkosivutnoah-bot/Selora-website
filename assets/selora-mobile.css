@@ -1,0 +1,104 @@
+/* ============================================================
+   SELORA MOBILE
+   Touch and legibility corrections for narrow screens, kept in
+   one file so every page gets the same treatment. Nothing here
+   changes desktop: every rule sits inside a max-width query.
+
+   Loaded on all public pages. Deliberately holds no layout or
+   colour decisions, only the accessibility floor:
+     - 44px minimum tap target
+     - 11px minimum type
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  /* ---- tap targets ---------------------------------------- */
+
+  /* Footer links rendered 127x15: too small to hit reliably. */
+  footer .footer-nav a,
+  footer .footer-links a,
+  footer .footer-col a,
+  .footer-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Buttons sat at 37-39px tall. */
+  .btn {
+    min-height: 44px;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+  }
+
+  /* Logo and hamburger came in at 30px and 40px tall. */
+  .logo,
+  .logo-text {
+    min-height: 44px;
+  }
+  .hamburger {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Cookie banner and menu close: these carry inline styles, so the
+     override has to win the cascade explicitly. */
+  #cookie-banner button {
+    min-height: 44px !important;
+  }
+  /* except the inline "read more" toggle, which sits mid-sentence */
+  #cookie-banner #cookie-details-btn {
+    min-height: 0 !important;
+    padding: 0.4rem 0 !important;
+  }
+  .mobile-menu-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .selora-skip,
+  .back-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Inline text links inside body copy are exempt: padding them
+     out would break the line box. Only standalone links here. */
+  .nav-right > a,
+  .mobile-menu-nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* ---- legibility ----------------------------------------- */
+
+  /* Micro labels bottomed out at 9.6px. These are uppercase and
+     letter-spaced, which costs more legibility than plain text,
+     so they get lifted to 11px rather than left at the design
+     size. */
+  .section-label,
+  .page-label,
+  .hero-trust-item,
+  .svc-badge,
+  .svc-chip,
+  .flow-tag,
+  .step-tag,
+  .story-meta,
+  .vs-type-for,
+  .spec-idx,
+  .phc,
+  .proc-meter-count {
+    font-size: 0.6875rem;   /* 11px */
+  }
+
+  /* Body copy floor. */
+  .section-sub,
+  .flow-card p,
+  .vs-card p,
+  .spec-body p,
+  .why-body p,
+  .story-title {
+    font-size: 0.8125rem;   /* 13px */
+  }
+}

@@ -3681,6 +3681,10 @@
     'Muotibrändi · Verkkokauppa': 'Fashion brand · Online store',
     'Sähköurakointi · Toronto': 'Electrical contracting · Toronto',
     'Interaktiivinen konsepti · Scroll': 'Interactive concept · Scroll',
+    'Latausnopeuden optimointi': 'Load speed optimisation',
+    'Kolme vaihetta,': 'Three steps,',
+    'Noin 45 min': 'About 45 min',
+    'Toimii puhelimella': 'Works on mobile',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
@@ -3833,7 +3837,9 @@
       '.selora-lang-toggle.is-light button{color:#475569;}',
       '.selora-lang-toggle.is-light button:hover{color:#0f172a;}',
       '.selora-lang-toggle.is-light button.is-active{background:#0f172a;color:#fff;}',
-      '@media (max-width:640px){.selora-lang-toggle{font-size:0.62rem;}.selora-lang-toggle button{padding:0.28rem 0.5rem;}}'
+      // On mobile the toggle used to shrink to a 25x19 hit area. The nav is
+      // 56px tall, so a 44px control fits without crowding it.
+      '@media (max-width:640px){.selora-lang-toggle{font-size:0.68rem;}.selora-lang-toggle button{padding:0;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;}}'
     ].join('');
     document.head.appendChild(style);
   }
