@@ -2951,6 +2951,59 @@
       'No monthly fees. You pay once and the site is yours.',
     'Katso hinnat': 'See pricing',
 
+
+    // ---------- Google review automation + repositioning ----------
+    'Selora, Verkkosivut jotka tuovat asiakkaita | selora.fi': 'Selora, Websites that bring you customers | selora.fi',
+    'Selora, Verkkosivut jotka tuovat asiakkaita': 'Selora, Websites that bring you customers',
+    'Räätälöidyt verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja muuttavat kävijät asiakkaiksi. Sisältää hakukoneoptimoinnin, tekoälychatbotin ja Google-arvostelujen automaation. Kertamaksu alkaen 590 euroa.':
+      'Custom websites that load fast, rank on Google and turn visitors into customers. Includes SEO, an AI chatbot and Google review automation. One-time fee from 590 euros.',
+    'Räätälöidyt verkkosivut, jotka latautuvat nopeasti ja muuttavat kävijät asiakkaiksi. SEO, tekoälychatbot ja Google-arvostelujen automaatio mukana. Kertamaksu alkaen 590 euroa.':
+      'Custom websites that load fast and turn visitors into customers. SEO, an AI chatbot and Google review automation included. One-time fee from 590 euros.',
+    'Räätälöidyt verkkosivut, jotka latautuvat nopeasti ja muuttavat kävijät asiakkaiksi. SEO, tekoälychatbot ja Google-arvostelut mukana.':
+      'Custom websites that load fast and turn visitors into customers. SEO, an AI chatbot and Google reviews included.',
+    'Räätälöidyt verkkosivut, jotka tuovat asiakkaita. Nopeat ja konvertoivat sivustot kertamaksulla.':
+      'Custom websites that bring you customers. Fast, high-converting sites for a one-time fee.',
+    'Arvostelut': 'Reviews',
+    'Google-arvostelut': 'Google reviews',
+    'Enemmän arvosteluja.': 'More reviews.',
+    'Automaattisesti.': 'Automatically.',
+    'Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.':
+      'Google reviews decide who the customer picks. We build a system into your site that asks every customer for a review, so you never have to remember to ask.',
+    'Asiakas ostaa tai käy': 'A customer buys or visits',
+    'Kun tilaus valmistuu tai käynti on ohi, järjestelmä poimii asiakkaan yhteystiedot automaattisesti.':
+      'When an order completes or a visit ends, the system picks up the customer details automatically.',
+    'Automaattinen viesti lähtee': 'An automatic message goes out',
+    'Asiakas saa ystävällisen sähköpostin, jossa pyydetään lyhyt arvio kokemuksesta. Ajoituksen ja sanamuodon säädämme toimialaasi sopivaksi.':
+      'The customer gets a friendly email asking for a short review of their experience. We tune the timing and wording to your industry.',
+    'Palaute ohjautuu oikeaan paikkaan': 'Feedback goes where it belongs',
+    'Tyytyväinen asiakas ohjataan suoraan Google-arvosteluun ja arvio näkyy myös sivustollasi. Jos kokemus jäi vajaaksi, palaute tulee ensin sinulle, jotta ehdit korjata tilanteen.':
+      'Happy customers are pointed straight to a Google review, and it also appears on your site. If the experience fell short, the feedback reaches you first so you can put it right.',
+    'Miten palvelumme sujui?': 'How did we do?',
+    'Kiitos käynnistäsi. Kerrotko lyhyesti miten meni?': 'Thanks for visiting. Would you tell us briefly how it went?',
+    'Sähköposti': 'Email',
+    '4, 5 tähteä': '4 to 5 stars',
+    '1, 3 tähteä': '1 to 3 stars',
+    'Google-arvostelu': 'Google review',
+    'Julkaistaan myös sivustollasi': 'Also published on your site',
+    'Suoraan sinulle': 'Straight to you',
+    'Ehdit korjata tilanteen ajoissa': 'You can fix it in time',
+    'Toteutus noudattaa Googlen arvostelukäytäntöjä. Jokainen asiakas voi halutessaan jättää arvostelun Googleen, emmekä estä ketään. Sivustollasi näytämme julkaistavaksi hyväksytyt arviot.':
+      'The setup follows Google review policies. Any customer can leave a Google review if they want to and we never block anyone. On your site we display the reviews approved for publication.',
+    'Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa Google-näkyvyyttäsi.':
+      'An automated system collects reviews from your customers and grows your visibility on Google.',
+    'Lue lisää': 'Read more',
+    'Google-arvostelujen automaatio': 'Google review automation',
+    'Automaattinen viesti pyytää arvostelun. Tyytyväiset ohjataan Googleen, kritiikki suoraan sinulle.':
+      'An automatic message asks for a review. Happy customers go to Google, criticism comes straight to you.',
+    'Kaksikielinen sivusto': 'Bilingual site',
+    'Suomi ja englanti samalla sivustolla. Kävijä vaihtaa kieltä yhdellä klikkauksella.':
+      'Finnish and English on the same site. Visitors switch language with one click.',
+    'Kävijäanalytiikka': 'Visitor analytics',
+    'Näet mistä kävijät tulevat, mitä sivuja he katsovat ja kuinka moni ottaa yhteyttä.':
+      'See where visitors come from, which pages they view and how many get in touch.',
+    'Vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottolomakkeelle.':
+      'Answers visitors\' most common questions and guides them to the contact form.',
+
     // -------- admin dialogs --------
     'Lähetetäänkö uutiskirje kaikille aktiivisille tilaajille?\n\n':
       'Send the newsletter to all active subscribers?\n\n',

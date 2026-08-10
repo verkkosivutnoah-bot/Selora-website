@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no, address=no, email=no, date=no" />
   <meta name="x-apple-disable-message-reformatting" />
-  <title>Selora, Verkkosivut suomalaisille yrityksille | selora.fi</title>
+  <title>Selora, Verkkosivut jotka tuovat asiakkaita | selora.fi</title>
   <link rel="canonical" href="https://selora.fi/" />
-  <meta name="description" content="Selora suunnittelee ja rakentaa nopeat, konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, hakukoneoptimointi ja tekoälychatbot. Kertamaksu alkaen 590 euroa." />
+  <meta name="description" content="Räätälöidyt verkkosivut, jotka latautuvat nopeasti, näkyvät Googlessa ja muuttavat kävijät asiakkaiksi. Sisältää hakukoneoptimoinnin, tekoälychatbotin ja Google-arvostelujen automaation. Kertamaksu alkaen 590 euroa." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -124,6 +124,100 @@
 
     /* SERVICE TEASERS */
     .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
+    /* ── GOOGLE REVIEW AUTOMATION ───────────────────────────────────── */
+    .rev-section { position: relative; overflow: hidden; background: #060c18; color: #fff; padding: 7rem 0; }
+    .rev-mesh { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 56% 44% at 14% 8%, rgba(29,78,216,0.5), transparent 62%),
+        radial-gradient(ellipse 48% 38% at 88% 24%, rgba(59,130,246,0.3), transparent 62%),
+        radial-gradient(ellipse 62% 50% at 62% 98%, rgba(37,99,235,0.26), transparent 66%); }
+    .rev-grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.55;
+      background-size: 58px 58px;
+      background-image: linear-gradient(rgba(96,165,250,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.06) 1px, transparent 1px);
+      -webkit-mask-image: radial-gradient(ellipse 74% 62% at 50% 42%, #000 0%, transparent 78%);
+      mask-image: radial-gradient(ellipse 74% 62% at 50% 42%, #000 0%, transparent 78%); }
+    .rev-inner { position: relative; z-index: 1; }
+    .rev-head { max-width: 42rem; margin-bottom: 3.5rem; }
+    .rev-section .section-label { color: #60A5FA; }
+    .rev-section .section-heading { color: #fff; }
+    .rev-section .section-sub { color: rgba(255,255,255,0.6); }
+
+    .rev-flow { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+    @media (min-width: 940px) { .rev-flow { grid-template-columns: 1fr 1fr; gap: 4.5rem; } }
+
+    /* steps */
+    .rev-steps { display: flex; flex-direction: column; gap: 1.75rem; }
+    .rev-step { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
+    .rev-step-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: #60A5FA;
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.24);
+      width: 2.4rem; height: 2.4rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+      font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .rev-step-body h3 { font-size: 1rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem; letter-spacing: -0.015em; }
+    .rev-step-body p { font-size: 0.82rem; color: rgba(255,255,255,0.58); line-height: 1.75; }
+
+    /* visual */
+    .rev-visual { display: flex; flex-direction: column; align-items: center; }
+    .rev-card-mail { width: 100%; max-width: 22rem; border-radius: 1.2rem; padding: 1.4rem;
+      background: linear-gradient(150deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 26px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.14);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .rev-mail-top { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 1rem; }
+    .rev-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .rev-mail-label { margin-left: auto; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .rev-mail-subject { font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.35rem; }
+    .rev-mail-text { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1rem; }
+    .rev-stars { display: flex; gap: 0.3rem; }
+    .rev-star { font-size: 1.15rem; color: rgba(255,255,255,0.16); }
+    .rev-star.is-on { color: #fbbf24; text-shadow: 0 0 14px rgba(251,191,36,0.5); animation: revStar 3.6s ease-in-out infinite; }
+    .rev-star.is-on:nth-child(2) { animation-delay: 0.12s; }
+    .rev-star.is-on:nth-child(3) { animation-delay: 0.24s; }
+    .rev-star.is-on:nth-child(4) { animation-delay: 0.36s; }
+    .rev-star.is-on:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes revStar { 0%,72%,100% { transform: scale(1); } 80% { transform: scale(1.22); } }
+
+    .rev-branch { width: 100%; max-width: 22rem; height: 60px; }
+    .rev-branch-svg { width: 100%; height: 100%; }
+
+    .rev-outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%; max-width: 25rem; }
+    .rev-out { border-radius: 1rem; padding: 1rem; border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(150deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: 0 16px 36px -18px rgba(0,0,0,0.7); }
+    .rev-out-good { border-color: rgba(16,185,129,0.3); }
+    .rev-out-soft { border-color: rgba(251,191,36,0.28); }
+    .rev-out-top { margin-bottom: 0.7rem; }
+    .rev-out-pill { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.55rem; border-radius: 9999px; display: inline-block; }
+    .rev-pill-good { background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .rev-pill-soft { background: rgba(251,191,36,0.14); color: #fcd34d; border: 1px solid rgba(251,191,36,0.28); }
+    .rev-out-body { display: flex; gap: 0.6rem; align-items: flex-start; }
+    .rev-out-icon { flex-shrink: 0; width: 1.6rem; height: 1.6rem; border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.07); }
+    .rev-out-icon svg { width: 0.85rem; height: 0.85rem; }
+    .rev-out-good .rev-out-icon { color: #6ee7b7; }
+    .rev-out-soft .rev-out-icon { color: #fcd34d; }
+    .rev-out-body p { font-size: 0.72rem; color: rgba(255,255,255,0.52); line-height: 1.5; }
+    .rev-out-body strong { display: block; font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.15rem; }
+
+    .rev-note { display: flex; gap: 0.85rem; align-items: flex-start; margin-top: 3.5rem;
+      max-width: 46rem; padding: 1.1rem 1.3rem; border-radius: 1rem;
+      background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); }
+    .rev-note-icon { flex-shrink: 0; color: #60A5FA; }
+    .rev-note-icon svg { width: 1.1rem; height: 1.1rem; }
+    .rev-note p { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    @media (max-width: 939px) {
+      .rev-section { padding: 4.5rem 0; }
+      .rev-head { margin-bottom: 2.5rem; }
+      .rev-visual { margin-top: 0.5rem; }
+    }
+    @media (max-width: 480px) {
+      .rev-outcomes { grid-template-columns: 1fr; }
+      .rev-branch { height: 40px; }
+      .rev-branch-svg { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .rev-star.is-on { animation: none !important; } }
+
     /* ── SERVICES BENTO ─────────────────────────────────────────────── */
     .svc-bento { display: grid; grid-template-columns: 1fr; gap: 0.9rem; margin-top: 3rem; }
     @media (min-width: 720px) { .svc-bento { grid-template-columns: repeat(2, 1fr); gap: 1rem; } }
@@ -216,9 +310,6 @@
 
     /* Price tile */
     .svc-tile-accent { background: linear-gradient(150deg, rgba(29,78,216,0.07), rgba(96,165,250,0.03)); border-color: rgba(29,78,216,0.18); }
-    .svc-price-top { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 0.7rem; }
-    .svc-price-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: #1D4ED8; }
-    .svc-price { font-size: 2rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; line-height: 1; }
 
     @media (max-width: 719px) {
       .svc-tile { padding: 1.4rem; border-radius: 1.15rem; }
@@ -1150,14 +1241,14 @@
   <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/" />
-  <meta property="og:title" content="Selora, Verkkosivut suomalaisille yrityksille" />
-  <meta property="og:description" content="Selora rakentaa nopeat ja konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, SEO ja tekoälychatbot. Kertamaksu alkaen 590 euroa." />
+  <meta property="og:title" content="Selora, Verkkosivut jotka tuovat asiakkaita" />
+  <meta property="og:description" content="Räätälöidyt verkkosivut, jotka latautuvat nopeasti ja muuttavat kävijät asiakkaiksi. SEO, tekoälychatbot ja Google-arvostelujen automaatio mukana. Kertamaksu alkaen 590 euroa." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
   <meta property="og:site_name" content="Selora Oy" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Selora, Verkkosivut suomalaisille yrityksille" />
-  <meta name="twitter:description" content="Selora rakentaa nopeat ja konvertoivat verkkosivut suomalaisille yrityksille. Räätälöity ulkoasu, SEO ja tekoälychatbot." />
+  <meta name="twitter:title" content="Selora, Verkkosivut jotka tuovat asiakkaita" />
+  <meta name="twitter:description" content="Räätälöidyt verkkosivut, jotka latautuvat nopeasti ja muuttavat kävijät asiakkaiksi. SEO, tekoälychatbot ja Google-arvostelut mukana." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
 
   <!-- Structured data: Organization + Person + WebSite for AI/LLM discoverability -->
@@ -1189,7 +1280,7 @@
           "name": "Finland"
         },
         "knowsLanguage": ["fi", "en"],
-        "slogan": "Verkkosivut, jotka myyvät puolestasi",
+        "slogan": "Verkkosivut, jotka tuovat asiakkaita",
         "sameAs": [
           "https://www.selora.fi/"
         ]
@@ -1252,6 +1343,7 @@
         <a href="index.html" class="active">Etusivu</a>
         <a href="palvelut.html">Palvelut</a>
         <a href="hinnoittelu.html">Hinnoittelu</a>
+        <a href="#arvostelut">Arvostelut</a>
         <a href="blogi.html">Blogi</a>
         <a href="yhteystiedot.html">Yhteystiedot</a>
       </nav>
@@ -1363,13 +1455,13 @@
         <p>Automaattiset vahvistus- ja ilmoitusviestit hoitavat yhteydenotot puolestasi.</p>
       </a>
 
-      <a href="hinnoittelu.html" class="svc-tile svc-tile-accent reveal reveal-delay-2">
-        <div class="svc-price-top">
-          <span class="svc-price-label">Kertamaksu alkaen</span>
-          <span class="svc-price">590 €</span>
+      <a href="palvelut.html" class="svc-tile svc-tile-accent reveal reveal-delay-2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
         </div>
-        <p>Ei kuukausimaksuja. Maksat kerran ja sivusto on sinun.</p>
-        <span class="svc-cta svc-cta-sm">Katso hinnat <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+        <h4>Google-arvostelut</h4>
+        <p>Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa Google-näkyvyyttäsi.</p>
+        <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
       </a>
 
     </div>
@@ -1445,7 +1537,7 @@
     <p class="section-sub">Sivusto, joka latautuu nopeasti, näkyy Googlessa ja toimii jokaisella laitteella. Sinä keskityt työhösi.</p>
     <div class="grid-4">
       <div class="feat-card reveal">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span>
         <h3>Nopeat latausajat</h3>
         <p>Sivusto latautuu alle sekunnissa myös mobiiliverkossa. Kävijä ei ehdi turhautua.</p>
       </div>
@@ -1466,24 +1558,118 @@
       </div>
       <div class="feat-card reveal">
         <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
-        <h3>Monikielinen tuki</h3>
-        <p>Kasvupaketissa suomi ja englanti, asiakkaasi saavat palvelua omalla kielellään.</p>
+        <h3>Kaksikielinen sivusto</h3>
+        <p>Suomi ja englanti samalla sivustolla. Kävijä vaihtaa kieltä yhdellä klikkauksella.</p>
       </div>
       <div class="feat-card reveal reveal-delay-1">
-        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg></span>
-        <h3>SMS-viestit puhelun aikana</h3>
-        <p>Lähetä yhteystiedot, vahvistukset ja linkit tekstiviestillä heti puhelun aikana.</p>
+        <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></span>
+        <h3>Google-arvostelujen automaatio</h3>
+        <p>Automaattinen viesti pyytää arvostelun. Tyytyväiset ohjataan Googleen, kritiikki suoraan sinulle.</p>
       </div>
       <div class="feat-card reveal reveal-delay-2">
         <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></span>
-        <h3>Analytiikka ja raportit</h3>
-        <p>Kuukausiraportit: puhelumäärät, automaatioaste, liidit ja konversiot yhdessä näkymässä.</p>
+        <h3>Kävijäanalytiikka</h3>
+        <p>Näet mistä kävijät tulevat, mitä sivuja he katsovat ja kuinka moni ottaa yhteyttä.</p>
       </div>
       <div class="feat-card reveal reveal-delay-3">
         <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-        <h3>CRM-integraatio</h3>
-        <p>Kasvupaketissa: synkronoi automaattisesti HubSpotiin, Pipedriveeen tai muuhun CRM-järjestelmääsi.</p>
+        <h3>Tekoälychatbot</h3>
+        <p>Vastaa kävijöiden yleisimpiin kysymyksiin ja ohjaa heidät yhteydenottolomakkeelle.</p>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- Google review automation -->
+<div class="rev-section" id="arvostelut">
+  <div class="rev-mesh" aria-hidden="true"></div>
+  <div class="rev-grid-bg" aria-hidden="true"></div>
+  <div class="container rev-inner">
+    <div class="rev-head reveal">
+      <p class="section-label">Google-arvostelut</p>
+      <h2 class="section-heading">Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
+      <p class="section-sub">Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
+    </div>
+
+    <div class="rev-flow">
+
+      <div class="rev-steps reveal">
+        <div class="rev-step">
+          <div class="rev-step-num">01</div>
+          <div class="rev-step-body">
+            <h3>Asiakas ostaa tai käy</h3>
+            <p>Kun tilaus valmistuu tai käynti on ohi, järjestelmä poimii asiakkaan yhteystiedot automaattisesti.</p>
+          </div>
+        </div>
+        <div class="rev-step">
+          <div class="rev-step-num">02</div>
+          <div class="rev-step-body">
+            <h3>Automaattinen viesti lähtee</h3>
+            <p>Asiakas saa ystävällisen sähköpostin, jossa pyydetään lyhyt arvio kokemuksesta. Ajoituksen ja sanamuodon säädämme toimialaasi sopivaksi.</p>
+          </div>
+        </div>
+        <div class="rev-step">
+          <div class="rev-step-num">03</div>
+          <div class="rev-step-body">
+            <h3>Palaute ohjautuu oikeaan paikkaan</h3>
+            <p>Tyytyväinen asiakas ohjataan suoraan Google-arvosteluun ja arvio näkyy myös sivustollasi. Jos kokemus jäi vajaaksi, palaute tulee ensin sinulle, jotta ehdit korjata tilanteen.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rev-visual reveal reveal-delay-1" aria-hidden="true">
+
+        <div class="rev-card rev-card-mail">
+          <div class="rev-mail-top">
+            <span class="rev-dot"></span><span class="rev-dot"></span><span class="rev-dot"></span>
+            <span class="rev-mail-label">Sähköposti</span>
+          </div>
+          <p class="rev-mail-subject">Miten palvelumme sujui?</p>
+          <p class="rev-mail-text">Kiitos käynnistäsi. Kerrotko lyhyesti miten meni?</p>
+          <div class="rev-stars">
+            <span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span>
+          </div>
+        </div>
+
+        <div class="rev-branch">
+          <svg class="rev-branch-svg" viewBox="0 0 240 60" preserveAspectRatio="none">
+            <path d="M120 0 V22 M120 22 H34 V58 M120 22 H206 V58" fill="none" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <div class="rev-outcomes">
+          <div class="rev-out rev-out-good">
+            <div class="rev-out-top">
+              <span class="rev-out-pill rev-pill-good">4, 5 tähteä</span>
+            </div>
+            <div class="rev-out-body">
+              <span class="rev-out-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </span>
+              <p><strong>Google-arvostelu</strong>Julkaistaan myös sivustollasi</p>
+            </div>
+          </div>
+          <div class="rev-out rev-out-soft">
+            <div class="rev-out-top">
+              <span class="rev-out-pill rev-pill-soft">1, 3 tähteä</span>
+            </div>
+            <div class="rev-out-body">
+              <span class="rev-out-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              </span>
+              <p><strong>Suoraan sinulle</strong>Ehdit korjata tilanteen ajoissa</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="rev-note reveal">
+      <span class="rev-note-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      <p>Toteutus noudattaa Googlen arvostelukäytäntöjä. Jokainen asiakas voi halutessaan jättää arvostelun Googleen, emmekä estä ketään. Sivustollasi näytämme julkaistavaksi hyväksytyt arviot.</p>
     </div>
   </div>
 </div>
@@ -1660,7 +1846,7 @@
           <img src="/assets/img/fe3ad5275db6.jpg" width="30" height="30" alt="Selora" style="flex-shrink:0;border-radius:25%;display:block;" loading="lazy">
           SELORA
         </a>
-        <p>Verkkosivusuunnittelu suomalaisille yrityksille. Nopeat, konvertoivat sivustot kertamaksulla.</p>
+        <p>Räätälöidyt verkkosivut, jotka tuovat asiakkaita. Nopeat ja konvertoivat sivustot kertamaksulla.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
