@@ -370,33 +370,34 @@ html.sl-motion .sl-char.is-in { opacity: 1; transform: none; }
 }
 .svc-tile-hero:hover .svc-hero-mesh { transform: scale(1.09); }
 
-/* product photo sits bottom-right; a navy scrim keeps the white copy legible */
+/* product photo: rounded to nest inside the card, scrim held to the text column */
 .svc-hero-photo {
   position: absolute; z-index: 0; pointer-events: none;
-  right: -6%; bottom: -8%; width: 78%; aspect-ratio: 3 / 2;
-  background: url('/assets/img/verkkosivusuunnittelu-mockup.jpg') no-repeat center / contain;
-  opacity: 0.5;
-  filter: saturate(0.55) contrast(1.05);
-  mix-blend-mode: luminosity;
+  right: 4%; bottom: 15%; width: 60%; aspect-ratio: 3 / 2;
+  background: url('/assets/img/verkkosivusuunnittelu-mockup.jpg') no-repeat center / cover;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 22px 50px -18px rgba(6,12,24,0.9);
+  opacity: 0.92;
+  filter: saturate(0.9) contrast(1.02);
   transform: translate3d(0,0,0) scale(1);
   transition: transform 1s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
-  mask-image: radial-gradient(ellipse 78% 78% at 68% 60%, #000 42%, transparent 78%);
-  -webkit-mask-image: radial-gradient(ellipse 78% 78% at 68% 60%, #000 42%, transparent 78%);
 }
-.svc-tile-hero:hover .svc-hero-photo { transform: translate3d(0,-6px,0) scale(1.05); opacity: 0.62; }
+.svc-tile-hero:hover .svc-hero-photo { transform: translate3d(0,-6px,0) scale(1.04); opacity: 1; }
 /* scrim over the photo, under the text */
 .svc-tile-hero .svc-hero-inner { position: relative; z-index: 2; }
 .svc-tile-hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(100deg, #060c18 18%, rgba(6,12,24,0.82) 42%, rgba(6,12,24,0.28) 72%, transparent 100%);
+  background: linear-gradient(96deg, #060c18 0%, rgba(6,12,24,0.9) 26%, rgba(6,12,24,0.4) 42%, transparent 56%);
 }
 @media (max-width: 900px) {
-  .svc-hero-photo { width: 92%; right: -10%; bottom: -12%; opacity: 0.34; }
-  .svc-tile-hero::before { background: linear-gradient(170deg, #060c18 34%, rgba(6,12,24,0.72) 68%, rgba(6,12,24,0.4) 100%); }
+  .svc-hero-photo { width: 86%; right: 3%; bottom: 6%; opacity: 0.85; }
+  .svc-tile-hero::before { background: linear-gradient(172deg, #060c18 26%, rgba(6,12,24,0.72) 52%, rgba(6,12,24,0.3) 100%); }
 }
 @media (prefers-reduced-motion: reduce) {
   .svc-hero-photo, .svc-tile-hero:hover .svc-hero-photo { transition: none !important; transform: none !important; }
 }
+
 .svc-hero-grid {
   position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
   background-size: 54px 54px;
