@@ -1215,6 +1215,49 @@
     'Valitse…': 'Choose…',
     'Yritys Oy': 'Acme Ltd',
     'Kerro yrityksestäsi ja suurimmasta kasvuhaasteestasi…': 'Tell us about your business and your biggest growth challenge…',
+    'Kaksi tapaa': 'Two ways',
+    'Kerro meille,': 'Tell us,',
+    'mitä tarvitset.': 'what you need.',
+    'Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.':
+      'We reply to your message within 4 working hours. No sales pitch, just a clear proposal for how we can help.',
+    'Varaa aika, tai': 'Book a time, or',
+    'kirjoita meille.': 'write to us.',
+    'Kumpi vain sopii. Käymme läpi tilanteesi ja kerromme suoraan, kannattaako edetä.':
+      'Whichever suits you. We go through your situation and tell you honestly whether it makes sense to move forward.',
+    'Varaa maksuton 30 minuutin demo suoraan kalenteristamme, tai kerro tilanteestasi lomakkeella niin palaamme asiaan.':
+      'Book a free 30-minute demo straight from our calendar, or tell us about your situation in the form and we will get back to you.',
+    'Ei pitkiä sopimuksia, kertamaksu tai irtisanottavissa milloin tahansa': 'No long contracts, a one-time payment or cancel any time',
+    'Vastaus henkilökohtaisesti, ei automaattivastauksia': 'A personal reply, no automated responses',
+    'Mitä tapahtuu seuraavaksi': 'What happens next',
+    'Näin homma': 'Here is how it',
+    'Tiedät koko ajan mitä tapahtuu seuraavaksi. Ei odottelua, ei epäselvyyttä.':
+      'You always know what happens next. No waiting around, no uncertainty.',
+    'Lähetät viestin tai varaat ajan': 'You send a message or book a time',
+    'Valitse kumpi sopii: kirjoita meille lomakkeella tai varaa suoraan 30 minuutin puhelu kalenteristamme.':
+      'Choose whichever suits you: write to us using the form or book a 30-minute call straight from our calendar.',
+    '4 h sisällä': 'Within 4 hours',
+    'Vastaamme henkilökohtaisesti': 'We reply personally',
+    'Ei automaattivastauksia. Luemme viestisi ja vastaamme 4 tunnin sisällä arkipäivisin.':
+      'No automated replies. We read your message and respond within 4 working hours.',
+    'Käymme läpi tilanteesi ja tavoitteesi. Puhelu on maksuton eikä sido sinua mihinkään.':
+      'We go through your situation and goals. The call is free and does not commit you to anything.',
+    'Saat konkreettisen suunnitelman, hinnan ja aikataulun kirjallisena. Ei yllätyksiä.':
+      'You get a concrete plan, price and schedule in writing. No surprises.',
+    'Ei sitoumuksia': 'No commitments',
+    'Tavoita meidät': 'Reach us',
+    'Jos lomake tai kalenteri ei ole sinun juttusi, tässä muut tavat olla yhteydessä.':
+      'If the form or calendar is not your thing, here are other ways to reach us.',
+    'Kirjoita suoraan, niin vastaamme henkilökohtaisesti 4 tunnin sisällä arkipäivisin.':
+      'Write to us directly and we will reply personally within 4 working hours.',
+    'Kiireellinen asia? Soita suoraan, niin jutellaan heti kun ehdimme vastata.':
+      'Urgent matter? Call us directly and we will talk as soon as we can pick up.',
+    'Ohita jonottelun ja varaa suoraan 30 minuutin maksuton kartoituspuhelu kalenteristamme.':
+      'Skip the queue and book a free 30-minute consultation call straight from our calendar.',
+    'Varaa aika ↑': 'Book a time ↑',
+    'Vielä': 'Still',
+    'mietityttää?': 'have questions?',
+    'Ei ongelmaa. Lähetä meille lyhyt viesti tai soita suoraan, niin kerromme rehellisesti, kannattaako edetä.':
+      'No problem. Send us a short message or call directly and we will tell you honestly whether it makes sense to move forward.',
 
     // ---------- blogi.html ----------
     'Seloran blogi: käytännön oppaat tekoälyvastaanottajista, automaatiosta ja siitä, miten suomalaiset pienyritykset kasvattavat myyntiään älykkäillä ratkaisuilla.':

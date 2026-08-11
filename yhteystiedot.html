@@ -16,23 +16,39 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --brown: #1D4ED8; --brown-light: #60A5FA;
+      --blue: #1D4ED8; --blue-light: #60A5FA;
       --glass-bg: rgba(248,250,255,0.94); --glass-border: rgba(15,23,42,0.1);
       --text-muted: #64748b;
     }
     html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
     body { background: #F8FAFF; color: #0f172a; font-family: 'Inter', -apple-system, sans-serif; font-weight: 300; overflow-x: hidden; max-width: 100%; -webkit-font-smoothing: antialiased; }
     .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; }
-    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #1D4ED8; margin-bottom: 1rem; }
-    .btn { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 400; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; }
+    .section-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; }
+    .section-heading { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.15; color: #0f172a; margin-bottom: 1rem; }
+    .section-heading .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; padding-left: 0.06em; }
+    .section-sub { font-size: 0.85rem; color: var(--text-muted); line-height: 1.75; max-width: 38rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.4rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 400; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.2s ease; text-decoration: none; white-space: nowrap; border: none; }
     .btn-light { background: #F8FAFF; color: #000; border: none; padding: 0.7rem 1.75rem; }
     .btn-light:hover { background: rgba(255,255,255,0.88); }
     .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 0.7rem 1.75rem; }
     .btn-ghost:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.45); }
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.65s ease, transform 0.65s ease; }
-    .reveal.in-view { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.12s; }
-    footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; }
+    .btn-blue { background: var(--blue); color: #fff; border: none; padding: 0.7rem 1.75rem; }
+    .btn-blue:hover { background: #1e40af; }
+    .reveal { transition: opacity 0.65s ease, transform 0.65s ease; }
+    html.sl-motion .reveal { opacity: 0; transform: translateY(18px); }
+    html.sl-motion .reveal.in-view { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* visible focus state, everywhere on the page */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+    textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+      outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 4px;
+    }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(15,23,42,0.08); padding: 2rem; background: #F8FAFF; }
     .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-copy { font-size: 0.72rem; color: #64748b; }
     .footer-nav { display: flex; gap: 0.25rem; }
@@ -40,9 +56,9 @@
     .footer-nav a:hover { color: #334155; }
 
     /* PAGE HERO */
-    .page-hero { position: relative; height: 380px; overflow: hidden; display: flex; flex-direction: column; }
+    .page-hero { position: relative; min-height: 58vh; overflow: hidden; display: flex; flex-direction: column; }
     #pageCanvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, transparent 40%, rgba(0,0,0,0.55) 100%); z-index: 1; pointer-events: none; }
+    .page-hero::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 45%, transparent 55%, rgba(0,0,0,0.35) 100%); z-index: 1; pointer-events: none; }
     /* FLOATING NAV */
     .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; }
     .nav-bar { display: flex; align-items: center; justify-content: space-between; height: 3.5rem; max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; border: 1px solid transparent; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -53,44 +69,46 @@
     .desktop-nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.78rem; font-weight: 400; padding: 0.5rem 0.85rem; border-radius: 9999px; transition: all 0.2s; }
     .desktop-nav a:hover, .desktop-nav a.active { color: #fff; background: rgba(255,255,255,0.1); }
     .nav-right { display: flex; align-items: center; gap: 0.75rem; }
-    .page-title-block { position: absolute; bottom: 2.5rem; left: 2rem; z-index: 10; }
+    .page-title-block { position: relative; margin-top: auto; padding: 0 2rem 3.5rem; z-index: 10; }
     .page-title-block .page-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(96,165,250,0.8); margin-bottom: 0.6rem; }
     .page-title-block h1 { font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 300; letter-spacing: -0.03em; line-height: 1.1; color: #fff; }
-    .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
+    .page-title-block h1 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; padding-left: 0.06em; }
+    .page-hero-sub { margin-top: 1rem; max-width: 34rem; font-size: 1.02rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.62); }
+    .page-hero-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
+    .phc { display: inline-flex; align-items: baseline; gap: 0.4rem; padding: 0.5rem 0.9rem; border-radius: 999px; font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.6); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(8px); }
+    .phc b { font-weight: 500; color: #fff; }
 
-    /* CONTACT SECTION */
-    .contact-section { padding: 6rem 0; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.45fr; gap: 5rem; align-items: start; }
+    /* SECTIONS */
+    .section { padding: 6rem 0; }
+    .section-alt { background: #eef2f7; border-top: 1px solid rgba(15,23,42,0.07); border-bottom: 1px solid rgba(15,23,42,0.07); padding: 6rem 0; }
+    .section .btn-ghost, .section-alt .btn-ghost, .cta-block .btn-ghost { color: #1e293b; border-color: rgba(15,23,42,0.22); }
+    .section .btn-ghost:hover, .section-alt .btn-ghost:hover, .cta-block .btn-ghost:hover { background: rgba(15,23,42,0.05); border-color: rgba(15,23,42,0.4); }
+    .section .btn-light, .section-alt .btn-light, .cta-block .btn-light { background: #0f172a; color: #fff; }
+    .section .btn-light:hover, .section-alt .btn-light:hover, .cta-block .btn-light:hover { background: #1e293b; }
 
-    /* LEFT PANEL */
-    .contact-heading { font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 300; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 1rem; }
-    .contact-heading .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400;  padding-left: 0.06em;}
-    .contact-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
-    .expect-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-    .expect-item { display: flex; align-items: flex-start; gap: 0.85rem; }
-    .expect-icon { width: 2.1rem; height: 2.1rem; border-radius: 0.5rem; background: rgba(37,99,235,0.09); border: 1px solid rgba(37,99,235,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .expect-icon svg { width: 0.9rem; height: 0.9rem; stroke: #1D4ED8; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .expect-title { font-size: 0.8rem; font-weight: 500; color: #0f172a; margin-bottom: 0.1rem; }
-    .expect-desc { font-size: 0.74rem; color: var(--text-muted); line-height: 1.55; }
-    .contact-details { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem; }
+    /* ── CONTACT GRID ─────────────────────────────────────────── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .contact-panel-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem; }
+    .trust-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
+    .trust-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+    .trust-item::before { content: '✓'; color: var(--blue); font-size: 0.68rem; font-weight: 700; flex-shrink: 0; margin-top: 0.2rem; }
+    .contact-details { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.5rem; }
     .contact-detail { display: flex; align-items: center; gap: 0.8rem; }
     .detail-icon { width: 2.1rem; height: 2.1rem; border-radius: 0.5rem; background: rgba(37,99,235,0.09); border: 1px solid rgba(37,99,235,0.18); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .detail-icon svg { width: 0.9rem; height: 0.9rem; stroke: #1D4ED8; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .detail-icon svg { width: 0.9rem; height: 0.9rem; stroke: var(--blue); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
     .detail-label { font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.1rem; }
     .detail-value { font-size: 0.8rem; color: #0f172a; font-weight: 400; }
-    .trust-list { display: flex; flex-direction: column; gap: 0.5rem; }
-    .trust-item { display: flex; align-items: center; gap: 0.6rem; font-size: 0.76rem; color: var(--text-muted); }
-    .trust-item::before { content: '✓'; color: #60A5FA; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
-    .phone-banner { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.5rem; background: #f0f6ff; border: 1px solid rgba(29,78,216,0.18); border-radius: 0.875rem; padding: 0.9rem 1.15rem; }
-    .phone-banner svg { width: 1rem; height: 1rem; stroke: #1D4ED8; flex-shrink: 0; }
+    .detail-value a { color: #0f172a; text-decoration: none; }
+    .detail-value a:hover { color: var(--blue); }
+    .phone-banner { display: flex; align-items: center; gap: 0.75rem; background: #f0f6ff; border: 1px solid rgba(29,78,216,0.18); border-radius: 0.875rem; padding: 0.9rem 1.15rem; }
+    .phone-banner svg { width: 1rem; height: 1rem; stroke: var(--blue); flex-shrink: 0; }
     .phone-banner span { font-size: 0.82rem; color: #475569; line-height: 1.5; }
-    .phone-banner a { color: #1D4ED8; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .phone-banner a { color: var(--blue); font-weight: 600; text-decoration: none; white-space: nowrap; }
     .phone-banner a:hover { text-decoration: underline; }
 
     /* WIDGET CARD */
     .widget-card { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem; padding: 1.75rem; box-shadow: 0 2px 20px rgba(15,23,42,0.08); overflow: hidden; }
     #tab-booking { margin: 0 -1.75rem -1.75rem; border-radius: 0 0 1.5rem 1.5rem; overflow: hidden; }
-    /* CAL.COM EMBED */
     #cal-inline { width: 100%; min-height: 720px; max-height: 84vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #fff; border-radius: 0 0 1.5rem 1.5rem; }
     #cal-inline iframe { width: 100% !important; min-height: 720px !important; border: 0 !important; display: block; }
     #cal-inline::-webkit-scrollbar { width: 8px; }
@@ -100,93 +118,80 @@
 
     /* TABS */
     .widget-tabs { display: flex; background: #f1f5f9; border-radius: 0.7rem; padding: 0.22rem; margin-bottom: 1.5rem; }
-    .widget-tab { flex: 1; padding: 0.55rem 0.75rem; border-radius: 0.5rem; font-size: 0.77rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.18s; font-family: 'Inter', sans-serif; }
+    .widget-tab { flex: 1; min-height: 44px; padding: 0.55rem 0.75rem; border-radius: 0.5rem; font-size: 0.8rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.18s; font-family: 'Inter', sans-serif; }
     .widget-tab.active { background: #F8FAFF; color: #0f172a; box-shadow: 0 1px 4px rgba(15,23,42,0.09); }
     .tab-panel.hidden { display: none; }
 
-    /* STEP INDICATOR */
-    .step-indicator { display: flex; align-items: center; margin-bottom: 1.5rem; }
-    .step-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
-    .step-dot { width: 1.65rem; height: 1.65rem; border-radius: 50%; border: 1.5px solid rgba(15,23,42,0.18); display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 600; color: #64748b; transition: all 0.22s; flex-shrink: 0; }
-    .step-dot.active { border-color: #1D4ED8; background: #1D4ED8; color: #fff; }
-    .step-dot.done { border-color: #1D4ED8; background: rgba(29,78,216,0.1); color: #1D4ED8; }
-    .step-line { flex: 1; height: 1px; background: rgba(15,23,42,0.1); transition: background 0.22s; margin: 0 0.25rem; }
-    .step-line.done { background: #1D4ED8; }
-    .booking-step.hidden { display: none; }
-
-    /* CALENDAR */
-    .cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.9rem; }
-    .cal-month { font-size: 0.87rem; font-weight: 600; color: #0f172a; letter-spacing: -0.01em; }
-    .cal-nav { display: flex; gap: 0.35rem; }
-    .cal-nav-btn { width: 1.8rem; height: 1.8rem; border-radius: 0.4rem; border: 1px solid rgba(15,23,42,0.12); background: #F8FAFF; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #475569; transition: all 0.13s; }
-    .cal-nav-btn:hover:not([disabled]) { background: #e2e8f0; }
-    .cal-nav-btn[disabled] { opacity: 0.28; cursor: not-allowed; }
-    .cal-nav-btn svg { width: 0.75rem; height: 0.75rem; }
-    .cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); margin-bottom: 0.25rem; }
-    .cal-wd { font-size: 0.57rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; text-align: center; padding: 0.3rem 0; }
-    .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 0.12rem; margin-bottom: 0.5rem; }
-    .cal-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: 0.38rem; font-size: 0.77rem; }
-    .cal-day.past, .cal-day.weekend { color: #cbd5e1; }
-    .cal-day.available { color: #0f172a; cursor: pointer; font-weight: 500; transition: background 0.12s, color 0.12s; }
-    .cal-day.available:hover { background: rgba(29,78,216,0.1); color: #1D4ED8; }
-    .cal-day.selected { background: #1D4ED8 !important; color: #fff !important; font-weight: 600; }
-
-    /* TIME SLOTS */
-    .time-back { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.72rem; color: #64748b; cursor: pointer; border: none; background: none; padding: 0; margin-bottom: 0.85rem; font-family: 'Inter', sans-serif; transition: color 0.13s; }
-    .time-back:hover { color: #1D4ED8; }
-    .time-back svg { width: 0.7rem; height: 0.7rem; }
-    .time-date-label { font-size: 0.82rem; font-weight: 600; color: #0f172a; margin-bottom: 0.75rem; }
-    .time-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.4rem; margin-bottom: 0.5rem; }
-    .time-slot { padding: 0.55rem 0.25rem; border-radius: 0.42rem; border: 1px solid rgba(15,23,42,0.12); background: #F8FAFF; font-size: 0.74rem; font-weight: 500; color: #334155; cursor: pointer; text-align: center; transition: all 0.12s; font-family: 'Inter', sans-serif; }
-    .time-slot:hover:not(.booked) { border-color: rgba(29,78,216,0.4); color: #1D4ED8; background: rgba(29,78,216,0.05); }
-    .time-slot.selected { border-color: #1D4ED8; background: #1D4ED8; color: #fff; }
-    .time-slot.booked { color: #d1d5db; cursor: not-allowed; background: #F8FAFF; font-size: 0.68rem; text-decoration: line-through; }
-
-    /* BOOKING FORM */
-    .booking-summary-bar { display: flex; align-items: center; gap: 0.6rem; background: rgba(29,78,216,0.07); border: 1px solid rgba(29,78,216,0.18); border-radius: 0.6rem; padding: 0.65rem 0.9rem; margin-bottom: 1.1rem; }
-    .booking-summary-bar svg { width: 0.85rem; height: 0.85rem; stroke: #1D4ED8; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
-    .booking-summary-text { font-size: 0.78rem; font-weight: 500; color: #1D4ED8; flex: 1; }
-    .booking-summary-change { font-size: 0.68rem; color: #64748b; cursor: pointer; border: none; background: none; font-family: 'Inter', sans-serif; transition: color 0.13s; }
-    .booking-summary-change:hover { color: #1D4ED8; }
-
     /* FORM */
-    .contact-form { display: flex; flex-direction: column; gap: 0.7rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
-    .form-label { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; }
-    .form-control { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.12); border-radius: 0.5rem; padding: 0.68rem 0.85rem; color: #0f172a; font-size: 0.81rem; font-family: 'Inter', sans-serif; font-weight: 300; outline: none; transition: border-color 0.18s, background 0.18s; width: 100%; }
-    .form-control::placeholder { color: #64748b; }
-    .form-control:focus { border-color: rgba(37,99,235,0.45); background: #F8FAFF; }
-    textarea.form-control { resize: vertical; min-height: 90px; }
-    select.form-control option { background: #F8FAFF; color: #0f172a; }
-    .form-submit { background: #0f172a; color: #fff; border: none; padding: 0.82rem 1.75rem; border-radius: 9999px; font-size: 0.81rem; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.18s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.25rem; }
-    .form-submit:hover { background: #1e293b; }
-    .form-submit.blue { background: #1D4ED8; }
-    .form-submit.blue:hover { background: #1e40af; }
-    .form-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-summary { display: none; font-size: 0.8rem; font-weight: 500; color: #b91c1c; background: rgba(220,38,38,0.07); border: 1px solid rgba(220,38,38,0.25); border-radius: 0.6rem; padding: 0.75rem 0.95rem; line-height: 1.5; }
+    .form-summary.visible { display: block; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; color: #334155; }
+    .form-label .opt { font-weight: 400; color: var(--text-muted); text-transform: none; letter-spacing: normal; }
+    .form-control { background: #fff; border: 1.5px solid rgba(15,23,42,0.14); border-radius: 0.6rem; padding: 0.8rem 0.9rem; min-height: 44px; color: #0f172a; font-size: 0.85rem; font-family: 'Inter', sans-serif; font-weight: 300; transition: border-color 0.18s, background 0.18s, box-shadow 0.18s; width: 100%; }
+    .form-control::placeholder { color: #94a3b8; }
+    .form-control:hover { border-color: rgba(15,23,42,0.25); }
+    .form-control:focus-visible { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(29,78,216,0.14); }
+    .form-control.invalid { border-color: #dc2626; background: rgba(220,38,38,0.03); }
+    .form-control.invalid:focus-visible { box-shadow: 0 0 0 3px rgba(220,38,38,0.14); }
+    textarea.form-control { resize: vertical; min-height: 96px; }
+    select.form-control { cursor: pointer; }
+    select.form-control option { background: #fff; color: #0f172a; }
+    .form-error { font-size: 0.73rem; color: #dc2626; line-height: 1.5; display: none; min-height: 0; }
+    .form-error.visible { display: block; }
+    .form-error::before { content: '⚠ '; }
+    .form-check { display: flex; align-items: flex-start; gap: 0.65rem; padding: 0.15rem 0; }
+    .form-check input { margin-top: 0.2rem; flex-shrink: 0; accent-color: var(--blue); width: 1.1rem; height: 1.1rem; }
+    .form-check label { font-size: 0.74rem; color: #64748b; line-height: 1.65; cursor: pointer; }
+    .form-check label a { color: var(--blue); text-decoration: none; }
+    .form-check label a:hover { text-decoration: underline; }
+    .form-submit { background: #0f172a; color: #fff; border: none; padding: 0.9rem 1.75rem; min-height: 48px; border-radius: 9999px; font-size: 0.84rem; font-weight: 500; font-family: 'Inter', sans-serif; cursor: pointer; transition: all 0.18s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-top: 0.25rem; }
+    .form-submit:hover { background: var(--blue); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
     /* SUCCESS STATE */
-    .success-state { text-align: center; padding: 2.25rem 1rem; }
+    .success-state { text-align: center; padding: 2.5rem 1rem; }
     .success-state.hidden { display: none; }
-    .success-icon-wrap { width: 3.25rem; height: 3.25rem; border-radius: 50%; background: rgba(29,78,216,0.1); border: 1.5px solid rgba(29,78,216,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.1rem; }
-    .success-icon-wrap svg { width: 1.35rem; height: 1.35rem; stroke: #1D4ED8; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .success-title { font-size: 1.05rem; font-weight: 500; color: #0f172a; margin-bottom: 0.45rem; letter-spacing: -0.01em; }
-    .success-sub { font-size: 0.79rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.1rem; }
-    .success-badge { display: inline-block; font-size: 0.76rem; font-weight: 500; color: #1D4ED8; background: rgba(29,78,216,0.08); border: 1px solid rgba(29,78,216,0.18); border-radius: 0.5rem; padding: 0.55rem 1rem; }
+    .success-icon-wrap { width: 3.5rem; height: 3.5rem; border-radius: 50%; background: rgba(29,78,216,0.1); border: 1.5px solid rgba(29,78,216,0.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.1rem; }
+    .success-icon-wrap svg { width: 1.45rem; height: 1.45rem; stroke: var(--blue); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .success-title { font-size: 1.1rem; font-weight: 500; color: #0f172a; margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+    .success-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.25rem; max-width: 26rem; margin-left: auto; margin-right: auto; }
+    .success-badge { display: inline-block; font-size: 0.76rem; font-weight: 500; color: var(--blue); background: rgba(29,78,216,0.08); border: 1px solid rgba(29,78,216,0.18); border-radius: 0.5rem; padding: 0.55rem 1rem; }
 
-    @media(max-width:900px){ .contact-grid{grid-template-columns:1fr;gap:3rem;} }
-    @media(max-width:640px){ .form-row{grid-template-columns:1fr;} .time-grid{grid-template-columns:repeat(3,1fr);} }
+    @media(max-width:900px){ .contact-grid{grid-template-columns:1fr;gap:2.75rem;} }
+    @media(max-width:640px){ .form-row{grid-template-columns:1fr;} }
 
-    /* === LIGHT THEME OVERRIDES === */
-    .page-title-block h1 { color: #fff; }
-    .stats-bar .stat-value { color: rgba(255,255,255,0.9); }
-    .stats-bar .stat-label { color: rgba(255,255,255,0.5) !important; }
-    .pricing-card, .teaser-card, .service-item-card { box-shadow: 0 1px 4px rgba(15,23,42,0.08), 0 1px 2px rgba(15,23,42,0.04); }
-    .pricing-card.featured { box-shadow: 0 4px 16px rgba(37,99,235,0.12); }
-    .section .btn-ghost, .section-alt .btn-ghost, .cta-block .btn-ghost, .contact-section .btn-ghost { color: #1e293b; border-color: rgba(15,23,42,0.22); }
-    .section .btn-ghost:hover, .section-alt .btn-ghost:hover, .cta-block .btn-ghost:hover, .contact-section .btn-ghost:hover { background: rgba(15,23,42,0.05); border-color: rgba(15,23,42,0.4); }
-    .section .btn-light, .section-alt .btn-light, .cta-block .btn-light, .contact-section .btn-light { background: #0f172a; color: #fff; }
-    .section .btn-light:hover, .section-alt .btn-light:hover, .cta-block .btn-light:hover, .contact-section .btn-light:hover { background: #1e293b; }
+    /* ── FLOW / "NÄIN HOMMA ETENEE" (dark) ───────────────────── */
+    .steps-section { position: relative; background: #050C1A; padding: 7rem 0; overflow: hidden; }
+    .steps-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
+    .steps-veil { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,12,26,0.86) 0%, rgba(5,12,26,0.5) 34%, rgba(5,12,26,0.58) 72%, rgba(5,12,26,0.92) 100%); }
+    .steps-section .section-label { color: rgba(96,165,250,0.75); }
+    .steps-section .section-heading { color: #fff; }
+    .steps-section .section-sub { color: rgba(255,255,255,0.5); }
+    .steps-shell { position: relative; z-index: 2; }
+    .steps-head { margin-bottom: 1rem; }
+
+    /* ── "MUUT TAVAT TAVOITTAA" REACH CARDS ──────────────────── */
+    .reach-grid { display: grid; grid-template-columns: 1fr; gap: 1.1rem; margin-top: 3rem; }
+    @media (min-width: 720px) { .reach-grid { grid-template-columns: repeat(3, 1fr); } }
+    .reach-card { background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.2rem; padding: 1.75rem; box-shadow: 0 1px 4px rgba(15,23,42,0.06); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease; }
+    .reach-card:hover { transform: translateY(-3px); box-shadow: 0 20px 44px -20px rgba(15,23,42,0.2); }
+    .reach-icon { width: 2.6rem; height: 2.6rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.18); color: var(--blue); margin-bottom: 1.25rem; }
+    .reach-icon svg { width: 1.2rem; height: 1.2rem; display: block; }
+    .reach-card h3 { font-size: 1rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; margin-bottom: 0.5rem; }
+    .reach-card p { font-size: 0.81rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.9rem; }
+    .reach-card a.reach-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.81rem; font-weight: 500; color: var(--blue); text-decoration: none; }
+    .reach-card a.reach-link:hover { text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) { .reach-card { transition: none !important; } .reach-card:hover { transform: none; } }
+
+    /* CTA */
+    .cta-block { background: rgba(29,78,216,0.06); border: 1px solid rgba(29,78,216,0.18); border-radius: 1.5rem; padding: 3.5rem 3rem; text-align: center; }
+    .cta-block h2 { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 300; letter-spacing: -0.025em; margin-bottom: 0.75rem; color: #0f172a; }
+    .cta-block h2 .accent { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; padding-left: 0.06em; }
+    .cta-block p { font-size: 0.85rem; color: var(--text-muted); max-width: 32rem; margin: 0 auto 2rem; line-height: 1.75; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 0.85rem; flex-wrap: wrap; }
 
     /* HAMBURGER + MOBILE MENU */
     .hamburger { display: none; background: none; border: 1px solid rgba(255,255,255,0.2); border-radius: 0.5rem; width: 40px; height: 40px; cursor: pointer; color: rgba(255,255,255,0.85); align-items: center; justify-content: center; flex-shrink: 0; padding: 0; }
@@ -209,25 +214,31 @@
     .mobile-menu-cta a:hover { background: #1e40af; }
     @media (max-width: 768px) { .desktop-nav { display: none; } .hamburger { display: flex; } .btn-nav-cta { display: none !important; } }
 
-    /* ── MOBILE FIXES ─────────────────────────────────────────────────── */
     @media(max-width:768px) {
+      html, body { overflow-x: hidden; max-width: 100vw; }
+      .section { padding: 4rem 0; }
+      .section-alt { padding: 4rem 0; overflow: hidden; }
       .container { padding: 0 1.25rem; }
-      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .contact-heading { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+      .page-hero { min-height: 54vh; }
+      .page-title-block { padding: 1.25rem 1.25rem 2rem; }
+      .steps-section { padding: 4rem 0; }
+      .cta-block { padding: 2.5rem 1.5rem; }
       .widget-card { padding: 1.25rem; }
-      .widget-tabs { margin-bottom: 1rem; }
+      #tab-booking { margin: 0 -1.25rem -1.25rem; }
       #cal-inline { min-height: 620px; max-height: 78vh; }
       #cal-inline iframe { min-height: 620px !important; }
-      .page-hero { height: 280px; }
-      .expect-list { gap: 1rem; }
-      .phone-banner { padding: 0.75rem 1rem; }
     }
     @media(max-width:480px) {
       .section { padding: 3rem 0; }
+      .section-alt { padding: 3rem 0; }
       #cal-inline { min-height: 560px; max-height: 76vh; }
       #cal-inline iframe { min-height: 560px !important; }
-      .form-row { grid-template-columns: 1fr; }
-      .contact-form { gap: 0.6rem; }
+    }
+    /* legibility floor: micro labels below 12px get lifted, matching
+       the convention in assets/selora-mobile.css for shared components */
+    @media (max-width: 640px) {
+      .form-label, .detail-label, .form-error { font-size: 0.6875rem; }
+      .detail-value a { display: inline-flex; align-items: center; min-height: 44px; }
     }
   </style>
   <!-- Open Graph / Social sharing -->
@@ -242,6 +253,10 @@
   <meta name="twitter:description" content="Ota yhteyttä tai varaa ilmainen 30 minuutin demo. Olemme yhteydessä saman päivän aikana." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
+<link rel="stylesheet" href="/assets/selora-ds.css" />
+<script src="/assets/selora-motion.js" defer></script>
+<script src="/assets/selora-nebula.js" defer></script>
+<script src="/assets/selora-flowfield.js" defer></script>
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
@@ -257,13 +272,12 @@
       <nav class="desktop-nav">
         <a href="index.html">Etusivu</a>
         <a href="palvelut.html">Palvelut</a>
-<a href="hinnoittelu.html">Hinnoittelu</a>
-        <a href="blogi.html">Blogi</a>
+        <a href="hinnoittelu.html">Hinnoittelu</a>
         <a href="yhteystiedot.html" class="active">Yhteystiedot</a>
       </nav>
       <div class="nav-right">
         <!-- HIDDEN: client portal disabled, <a href="kirjaudu.html" class="btn btn-nav-cta" style="padding:0.45rem 1rem;font-size:0.75rem;color:rgba(255,255,255,0.75);text-decoration:none;font-weight:400;transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.75)'">Kirjaudu</a> -->
-        <a href="yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
+        <a href="#ajanvaraus" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
         <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" onclick="toggleMobileMenu()">
           <svg class="menu-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path class="menu-path-main" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
@@ -274,57 +288,48 @@
     </div>
   </header>
   <div class="page-title-block">
-    <p class="page-label">Ota yhteyttä</p>
-    <h1>Valmis kasvamaan<br><span class="accent">tekoälyn avulla?</span></h1>
+    <p class="page-label" data-sl-reveal>Ota yhteyttä</p>
+    <h1 data-sl-split>Kerro meille,<br><span class="accent">mitä tarvitset.</span></h1>
+    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.</p>
+    <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
+      <span class="phc"><b>4 h</b> vasteaika</span>
+      <span class="phc"><b>30 min</b> maksuton kartoitus</span>
+      <span class="phc"><b>0 €</b> sitoumuksia</span>
+    </div>
   </div>
 </div>
 
+<main id="main">
+
 <!-- Contact -->
-<div class="contact-section">
+<div class="section" id="ajanvaraus">
   <div class="container">
+    <p class="section-label" data-sl-reveal>Kaksi tapaa</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Varaa aika, tai <span class="accent">kirjoita meille.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Kumpi vain sopii. Käymme läpi tilanteesi ja kerromme suoraan, kannattaako edetä.</p>
+
     <div class="contact-grid">
 
       <!-- Left info panel -->
       <div class="reveal">
-        <p class="section-label">Varaa aika</p>
-        <h2 class="contact-heading">30 minuuttia.<br><span class="accent">Muuttaa kaiken.</span></h2>
-        <p class="contact-desc">Varaa maksuton 30 minuutin demo suoraan kalenteristani. Käymme läpi yrityksesi tilanteen ja näytämme tarkalleen miten tekoäly voi toimia juuri sinulle. Ei paineita, ei jargonia, ei sitoumuksia.</p>
+        <p class="contact-panel-desc">Varaa maksuton 30 minuutin demo suoraan kalenteristamme, tai kerro tilanteestasi lomakkeella niin palaamme asiaan.</p>
 
-        <div class="expect-list">
-          <div class="expect-item">
-            <div class="expect-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-            <div>
-              <div class="expect-title">Kartoitus</div>
-              <div class="expect-desc">Käymme läpi yrityksesi nykyiset haasteet ja tavoitteet</div>
-            </div>
-          </div>
-          <div class="expect-item">
-            <div class="expect-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <div>
-              <div class="expect-title">Live-demo</div>
-              <div class="expect-desc">Käymme läpi mitä sivustosi tarvitsee ja miltä se voisi näyttää</div>
-            </div>
-          </div>
-          <div class="expect-item">
-            <div class="expect-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-            <div>
-              <div class="expect-title">Selkeä ehdotus</div>
-              <div class="expect-desc">Saat konkreettisen suunnitelman ja hinnan, ilman yllätyksiä</div>
-            </div>
-          </div>
+        <div class="trust-list">
+          <div class="trust-item">Ensimmäinen tapaaminen on maksuton ja sitoumukseton</div>
+          <div class="trust-item">Ei pitkiä sopimuksia, kertamaksu tai irtisanottavissa milloin tahansa</div>
+          <div class="trust-item">Vastaus henkilökohtaisesti, ei automaattivastauksia</div>
         </div>
 
         <div class="contact-details">
-
           <div class="contact-detail">
-            <div class="detail-icon"><svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+            <div class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
             <div>
               <div class="detail-label">Sähköposti</div>
-              <div class="detail-value"><a href="mailto:selora.tuki@gmail.com" style="color:#0f172a;text-decoration:none;">selora.tuki@gmail.com</a></div>
+              <div class="detail-value"><a href="mailto:selora.tuki@gmail.com">selora.tuki@gmail.com</a></div>
             </div>
           </div>
           <div class="contact-detail">
-            <div class="detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div class="detail-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
             <div>
               <div class="detail-label">Vasteaika</div>
               <div class="detail-value">4 tunnin sisällä arkipäivisin</div>
@@ -332,15 +337,8 @@
           </div>
         </div>
 
-        <div class="trust-list">
-          <div class="trust-item">Ensimmäinen tapaaminen on maksuton ja sitoumukseton</div>
-          <div class="trust-item">Ei pitkiä sopimuksia, voit irtisanoa milloin tahansa</div>
-          <div class="trust-item">Useimmat järjestelmät käynnissä 48 tunnin sisällä</div>
-          <div class="trust-item">Täysi tekninen tuki koko matkan ajan</div>
-        </div>
-
         <div class="phone-banner">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>Pidätkö enemmän soittamisesta?&nbsp; <a href="tel:+358408151122">040 815 1122</a></span>
         </div>
       </div>
@@ -350,13 +348,13 @@
         <div class="widget-card">
 
           <!-- Tab switcher -->
-          <div class="widget-tabs">
-            <button class="widget-tab active" onclick="switchTab('booking',this)">Varaa 30 min demo</button>
-            <button class="widget-tab" onclick="switchTab('contact',this)">Lähetä viesti</button>
+          <div class="widget-tabs" role="tablist" aria-label="Valitse yhteydenottotapa">
+            <button class="widget-tab active" role="tab" id="tabbtn-booking" aria-selected="true" aria-controls="tab-booking" onclick="switchTab('booking',this)">Varaa 30 min demo</button>
+            <button class="widget-tab" role="tab" id="tabbtn-contact" aria-selected="false" aria-controls="tab-contact" tabindex="-1" onclick="switchTab('contact',this)">Lähetä viesti</button>
           </div>
 
           <!-- ======== BOOKING TAB ======== -->
-          <div class="tab-panel" id="tab-booking">
+          <div class="tab-panel" id="tab-booking" role="tabpanel" aria-labelledby="tabbtn-booking">
             <div id="cal-inline" aria-label="Varaa esittelypuhelu"></div>
             <script type="text/javascript">
               (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -386,36 +384,42 @@
           </div>
 
           <!-- ======== CONTACT TAB ======== -->
-          <div class="tab-panel hidden" id="tab-contact">
-            <form class="contact-form" id="contactForm" onsubmit="laheta(event)">
+          <div class="tab-panel hidden" id="tab-contact" role="tabpanel" aria-labelledby="tabbtn-contact" hidden>
+            <form class="contact-form" id="contactForm" novalidate>
               <input type="hidden" name="_subject" value="Uusi yhteydenotto, Selora" />
+              <p class="form-summary" id="formSummary" role="alert" tabindex="-1"></p>
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label">Etunimi</label>
-                  <input type="text" name="etunimi" class="form-control" placeholder="Matti" required />
+                  <label class="form-label" for="f-etunimi">Etunimi</label>
+                  <input type="text" id="f-etunimi" name="etunimi" class="form-control" placeholder="Matti" autocomplete="given-name" required aria-describedby="err-etunimi" />
+                  <p class="form-error" id="err-etunimi" role="alert"></p>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Sukunimi</label>
-                  <input type="text" name="sukunimi" class="form-control" placeholder="Virtanen" required />
+                  <label class="form-label" for="f-sukunimi">Sukunimi</label>
+                  <input type="text" id="f-sukunimi" name="sukunimi" class="form-control" placeholder="Virtanen" autocomplete="family-name" required aria-describedby="err-sukunimi" />
+                  <p class="form-error" id="err-sukunimi" role="alert"></p>
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Sähköpostiosoite</label>
-                <input type="email" name="sahkoposti" class="form-control" placeholder="matti@yrityksesi.fi" required />
+                <label class="form-label" for="f-sahkoposti">Sähköpostiosoite</label>
+                <input type="email" id="f-sahkoposti" name="sahkoposti" class="form-control" placeholder="matti@yrityksesi.fi" autocomplete="email" required aria-describedby="err-sahkoposti" />
+                <p class="form-error" id="err-sahkoposti" role="alert"></p>
               </div>
               <div class="form-group">
-                <label class="form-label">Puhelinnumero</label>
-                <input type="tel" name="puhelinnumero" class="form-control" placeholder="+358 04X XXX XXXX" />
+                <label class="form-label" for="f-puhelin">Puhelinnumero <span class="opt">(valinnainen)</span></label>
+                <input type="tel" id="f-puhelin" name="puhelinnumero" class="form-control" placeholder="+358 04X XXX XXXX" autocomplete="tel" aria-describedby="err-puhelin" />
+                <p class="form-error" id="err-puhelin" role="alert"></p>
               </div>
               <div class="form-group">
-                <label class="form-label">Yrityksen nimi</label>
-                <input type="text" name="yritys" class="form-control" placeholder="Yritys Oy" required />
+                <label class="form-label" for="f-yritys">Yrityksen nimi</label>
+                <input type="text" id="f-yritys" name="yritys" class="form-control" placeholder="Yritys Oy" autocomplete="organization" required aria-describedby="err-yritys" />
+                <p class="form-error" id="err-yritys" role="alert"></p>
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label">Toimiala</label>
-                  <select name="toimiala" class="form-control">
-                    <option value="" disabled selected>Valitse…</option>
+                  <label class="form-label" for="f-toimiala">Toimiala <span class="opt">(valinnainen)</span></label>
+                  <select id="f-toimiala" name="toimiala" class="form-control">
+                    <option value="" selected>Valitse…</option>
                     <option>Terveydenhuolto / Hammashoito</option>
                     <option>Kauneusala / Kampaamo</option>
                     <option>Kiinteistöala</option>
@@ -430,9 +434,9 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Henkilöstömäärä</label>
-                  <select name="henkilosto" class="form-control">
-                    <option value="" disabled selected>Valitse…</option>
+                  <label class="form-label" for="f-henkilosto">Henkilöstömäärä <span class="opt">(valinnainen)</span></label>
+                  <select id="f-henkilosto" name="henkilosto" class="form-control">
+                    <option value="" selected>Valitse…</option>
                     <option>1, 9 henkilöä</option>
                     <option>10, 49 henkilöä</option>
                     <option>50, 199 henkilöä</option>
@@ -441,17 +445,18 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Viesti</label>
-                <textarea name="viesti" class="form-control" placeholder="Kerro yrityksestäsi ja suurimmasta kasvuhaasteestasi…"></textarea>
+                <label class="form-label" for="f-viesti">Viesti <span class="opt">(valinnainen)</span></label>
+                <textarea id="f-viesti" name="viesti" class="form-control" placeholder="Kerro yrityksestäsi ja suurimmasta kasvuhaasteestasi…"></textarea>
               </div>
-              <div class="form-group" style="display:flex;align-items:flex-start;gap:0.6rem;">
-                <input type="checkbox" id="gdprConsent" required style="margin-top:0.15rem;flex-shrink:0;accent-color:#1D4ED8;width:0.95rem;height:0.95rem;" />
-                <label for="gdprConsent" style="font-size:0.71rem;color:#64748b;line-height:1.6;cursor:pointer;">Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten <a href="tietosuojaseloste.html" style="color:#1D4ED8;text-decoration:none;">tietosuojaselosteen</a> mukaisesti. (GDPR)</label>
+              <div class="form-check">
+                <input type="checkbox" id="gdprConsent" required aria-describedby="err-gdpr" />
+                <label for="gdprConsent">Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti.</label>
               </div>
+              <p class="form-error" id="err-gdpr" role="alert"></p>
               <button type="submit" class="form-submit" id="lahetaBtn">Lähetä viesti →</button>
             </form>
-            <div class="success-state hidden" id="successMsg">
-              <div class="success-icon-wrap">
+            <div class="success-state hidden" id="successMsg" role="status" aria-live="polite">
+              <div class="success-icon-wrap" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div class="success-title">Viesti lähetetty!</div>
@@ -466,13 +471,128 @@
   </div>
 </div>
 
+<!-- Näin homma etenee -->
+<div class="steps-section">
+  <canvas class="steps-canvas" data-selora-flowfield aria-hidden="true"></canvas>
+  <div class="steps-veil" aria-hidden="true"></div>
+  <div class="container steps-shell">
+    <div class="steps-head">
+      <p class="section-label" data-sl-reveal>Mitä tapahtuu seuraavaksi</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Näin homma <span class="accent">etenee.</span></h2>
+      <p class="section-sub" data-sl-words data-sl-reveal>Tiedät koko ajan mitä tapahtuu seuraavaksi. Ei odottelua, ei epäselvyyttä.</p>
+    </div>
+
+    <div class="flow-track flow-dark">
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">1</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="m3 8 9 6 9-6"/><rect width="18" height="14" x="3" y="5" rx="2"/></svg></span>
+          <h3>Lähetät viestin tai varaat ajan</h3>
+          <p>Valitse kumpi sopii: kirjoita meille lomakkeella tai varaa suoraan 30 minuutin puhelu kalenteristamme.</p>
+          <span class="flow-tag">Kesto: 2 min</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">2</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <h3>Vastaamme henkilökohtaisesti</h3>
+          <p>Ei automaattivastauksia. Luemme viestisi ja vastaamme 4 tunnin sisällä arkipäivisin.</p>
+          <span class="flow-tag">4 h sisällä</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">3</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          <h3>Maksuton kartoituspuhelu</h3>
+          <p>Käymme läpi tilanteesi ja tavoitteesi. Puhelu on maksuton eikä sido sinua mihinkään.</p>
+          <span class="flow-tag">Kesto: 30 min</span>
+        </div>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">
+        <svg viewBox="0 0 80 34" preserveAspectRatio="none">
+          <path class="fa-line" d="M2 17 H66"/>
+          <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
+        </svg>
+      </div>
+      <div class="flow-node" data-sl-pop>
+        <div class="flow-card">
+          <span class="flow-step">4</span>
+          <span class="proc-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <h3>Selkeä ehdotus</h3>
+          <p>Saat konkreettisen suunnitelman, hinnan ja aikataulun kirjallisena. Ei yllätyksiä.</p>
+          <span class="flow-tag">Ei sitoumuksia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Muut tavat tavoittaa -->
+<div class="section-alt">
+  <div class="container">
+    <p class="section-label" data-sl-reveal>Muut tavat</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Tavoita meidät <span class="accent">suoraan.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Jos lomake tai kalenteri ei ole sinun juttusi, tässä muut tavat olla yhteydessä.</p>
+
+    <div class="reach-grid">
+      <div class="reach-card reveal">
+        <div class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+        <h3>Sähköposti</h3>
+        <p>Kirjoita suoraan, niin vastaamme henkilökohtaisesti 4 tunnin sisällä arkipäivisin.</p>
+        <a class="reach-link" href="mailto:selora.tuki@gmail.com">selora.tuki@gmail.com →</a>
+      </div>
+      <div class="reach-card reveal reveal-delay-1">
+        <div class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>Puhelin</h3>
+        <p>Kiireellinen asia? Soita suoraan, niin jutellaan heti kun ehdimme vastata.</p>
+        <a class="reach-link" href="tel:+358408151122">040 815 1122 →</a>
+      </div>
+      <div class="reach-card reveal reveal-delay-2">
+        <div class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h3>Ajanvaraus</h3>
+        <p>Ohita jonottelun ja varaa suoraan 30 minuutin maksuton kartoituspuhelu kalenteristamme.</p>
+        <a class="reach-link" href="#ajanvaraus">Varaa aika ↑</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="section">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Vielä <span class="accent">mietityttää?</span></h2>
+      <p>Ei ongelmaa. Lähetä meille lyhyt viesti tai soita suoraan, niin kerromme rehellisesti, kannattaako edetä.</p>
+      <div class="cta-btns">
+        <a href="tel:+358408151122" class="btn btn-ghost">Soita: 040 815 1122</a>
+        <a href="#ajanvaraus" class="btn btn-light">Varaa maksuton demo →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
 <footer>
   <div class="footer-inner">
     <span class="footer-copy">© 2025 Selora Oy · Y-tunnus: 3535677-9 · Kaikki oikeudet pidätetään.</span>
     <div class="footer-nav">
       <a href="palvelut.html">Palvelut</a>
       <a href="hinnoittelu.html">Hinnoittelu</a>
-          <a href="blogi.html">Blogi</a>
       <a href="yhteystiedot.html">Yhteystiedot</a>
       <a href="tietosuojaseloste.html">Tietosuojaseloste</a>
     </div>
@@ -480,96 +600,127 @@
 </footer>
 
 <script>
-(function () {
-  const canvas = document.getElementById('pageCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  function resize() { canvas.width = canvas.offsetWidth || window.innerWidth; canvas.height = canvas.offsetHeight || 380; }
-  resize(); window.addEventListener('resize', resize);
-  const blobs = [
-    { ox:0.52, oy:0.48, vx:0.00031, vy:0.00024, r:0.70, rgb:[37,99,235],  a:0.50 },
-    { ox:0.22, oy:0.35, vx:-0.00019,vy:0.00028,  r:0.55, rgb:[29,78,216],   a:0.45 },
-    { ox:0.78, oy:0.72, vx:0.00022, vy:-0.00017, r:0.50, rgb:[15,23,42],   a:0.40 },
-    { ox:0.35, oy:0.80, vx:-0.00025,vy:-0.00020, r:0.45, rgb:[67,56,202], a:0.35 },
-    { ox:0.65, oy:0.20, vx:0.00015, vy:0.00032,  r:0.40, rgb:[99,102,241], a:0.25 },
-  ];
-  blobs.forEach(b => { b.x = b.ox; b.y = b.oy; });
-  let t = 0;
-  function draw() {
-    t += 0.25;
-    const w = canvas.width, h = canvas.height;
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = '#000'; ctx.fillRect(0,0,w,h);
-    ctx.globalCompositeOperation = 'screen';
-    blobs.forEach(b => {
-      b.x = b.ox + 0.22*Math.sin(t*b.vx*600+b.oy*10);
-      b.y = b.oy + 0.18*Math.cos(t*b.vy*600+b.ox*10);
-      const gx=b.x*w, gy=b.y*h, gr=b.r*Math.max(w,h);
-      const g = ctx.createRadialGradient(gx,gy,0,gx,gy,gr);
-      const [r,gv,bv]=b.rgb;
-      g.addColorStop(0,`rgba(${r},${gv},${bv},${b.a})`);
-      g.addColorStop(0.4,`rgba(${r},${gv},${bv},${b.a*0.3})`);
-      g.addColorStop(1,`rgba(${r},${gv},${bv},0)`);
-      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
-    });
-    ctx.globalCompositeOperation='source-over';
-    ctx.strokeStyle='rgba(255,255,255,0.025)'; ctx.lineWidth=0.6;
-    for(let i=0;i<6;i++){
-      const phase=(t*0.004)+(i*Math.PI*2/6);
-      const cx=w*(0.5+0.18*Math.cos(phase*0.7)), cy=h*(0.5+0.14*Math.sin(phase*0.5));
-      const rx=w*(0.28+0.04*Math.sin(phase)), ry=h*(0.22+0.04*Math.cos(phase));
-      ctx.beginPath(); ctx.ellipse(cx,cy,rx,ry,phase*0.1,0,Math.PI*2); ctx.stroke();
-    }
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-
-window.switchTab = (tab, el) => {
-  document.querySelectorAll('.widget-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-  document.getElementById(`tab-${tab}`).classList.remove('hidden');
-};
-
-async function laheta(e) {
-  e.preventDefault();
-  const form = document.getElementById('contactForm');
-  const btn  = document.getElementById('lahetaBtn');
-  const msg  = document.getElementById('successMsg');
-
-  btn.textContent = 'Lähetetään…';
-  btn.disabled = true;
-
-  try {
-    const res = await fetch('https://formspree.io/f/mwvwrdne', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
-    });
-
-    if (res.ok) {
-      form.style.display = 'none';
-      msg.classList.remove('hidden');
-    } else {
-      const data = await res.json();
-      const virhe = data.errors ? data.errors.map(x => x.message).join(', ') : 'Tuntematon virhe';
-      btn.textContent = 'Yritä uudelleen';
-      btn.disabled = false;
-      alert('Lähetys epäonnistui: ' + virhe);
-    }
-  } catch (err) {
-    btn.textContent = 'Yritä uudelleen';
-    btn.disabled = false;
-    alert('Verkkovirhe, tarkista yhteys ja yritä uudelleen.');
-  }
-}
-
 (function(){
   const obs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');obs.unobserve(e.target);}});
-  },{threshold:0.1});
+  },{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+
+window.switchTab = function (tab, el) {
+  document.querySelectorAll('.widget-tab').forEach(function (t) {
+    const selected = t === el;
+    t.classList.toggle('active', selected);
+    t.setAttribute('aria-selected', selected ? 'true' : 'false');
+    t.tabIndex = selected ? 0 : -1;
+  });
+  document.querySelectorAll('.tab-panel').forEach(function (p) {
+    const show = p.id === 'tab-' + tab;
+    p.classList.toggle('hidden', !show);
+    if (show) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+  });
+};
+
+(function () {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const btn = document.getElementById('lahetaBtn');
+  const msg = document.getElementById('successMsg');
+  const summary = document.getElementById('formSummary');
+
+  const MESSAGES = {
+    valueMissing: 'Tämä kenttä on pakollinen.',
+    typeMismatch_email: 'Tarkista sähköpostiosoitteen muoto, esim. matti@yritys.fi.',
+    patternMismatch_tel: 'Tarkista puhelinnumeron muoto.',
+    valueMissing_checkbox: 'Hyväksyntä vaaditaan yhteydenottoa varten.'
+  };
+
+  function fieldMessage(input) {
+    if (input.validity.valueMissing) {
+      return input.type === 'checkbox' ? MESSAGES.valueMissing_checkbox : MESSAGES.valueMissing;
+    }
+    if (input.validity.typeMismatch && input.type === 'email') return MESSAGES.typeMismatch_email;
+    if (input.validity.patternMismatch && input.type === 'tel') return MESSAGES.patternMismatch_tel;
+    return '';
+  }
+
+  function validateField(input) {
+    const errorId = input.id === 'gdprConsent' ? 'err-gdpr' : 'err-' + input.id.replace(/^f-/, '');
+    const errorEl = document.getElementById(errorId);
+    const message = fieldMessage(input);
+    input.classList.toggle('invalid', !!message);
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.classList.toggle('visible', !!message);
+    }
+    return !message;
+  }
+
+  const fields = Array.prototype.slice.call(
+    form.querySelectorAll('input[required], input[type=email], input[type=tel], #gdprConsent')
+  );
+  fields.forEach(function (input) {
+    const evt = input.type === 'checkbox' ? 'change' : 'blur';
+    input.addEventListener(evt, function () { validateField(input); });
+    input.addEventListener('input', function () {
+      if (input.classList.contains('invalid')) validateField(input);
+    });
+  });
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    let firstInvalid = null;
+    let invalidCount = 0;
+    fields.forEach(function (input) {
+      const ok = validateField(input);
+      if (!ok) {
+        invalidCount++;
+        if (!firstInvalid) firstInvalid = input;
+      }
+    });
+
+    if (invalidCount > 0) {
+      summary.textContent = invalidCount === 1
+        ? 'Tarkista yksi kenttä lomakkeessa ennen lähettämistä.'
+        : 'Tarkista ' + invalidCount + ' kenttää lomakkeessa ennen lähettämistä.';
+      summary.classList.add('visible');
+      summary.focus();
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    summary.classList.remove('visible');
+    summary.textContent = '';
+    btn.textContent = 'Lähetetään…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mwvwrdne', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        msg.classList.remove('hidden');
+      } else {
+        const data = await res.json();
+        const virhe = data.errors ? data.errors.map(function (x) { return x.message; }).join(', ') : 'Tuntematon virhe';
+        summary.textContent = 'Lähetys epäonnistui: ' + virhe;
+        summary.classList.add('visible');
+        btn.textContent = 'Yritä uudelleen';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      summary.textContent = 'Verkkovirhe, tarkista yhteytesi ja yritä uudelleen.';
+      summary.classList.add('visible');
+      btn.textContent = 'Yritä uudelleen';
+      btn.disabled = false;
+    }
+  });
 })();
 </script>
 
@@ -584,11 +735,10 @@ async function laheta(e) {
       <a href="index.html">Etusivu</a>
       <a href="palvelut.html">Palvelut</a>
       <a href="hinnoittelu.html">Hinnoittelu</a>
-      <a href="blogi.html">Blogi</a>
       <a href="yhteystiedot.html" class="active">Yhteystiedot</a>
     </nav>
     <div class="mobile-menu-cta">
-      <a href="yhteystiedot.html">Varaa ilmainen demo →</a>
+      <a href="#ajanvaraus">Varaa ilmainen demo →</a>
     </div>
   </div>
   <script>
