@@ -42,3 +42,7 @@ npm-debug.log*
 
 # Per-tool data
 linkedin-posts-*.csv
+
+# Python
+__pycache__/
+*.pyc

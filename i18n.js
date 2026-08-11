@@ -2805,6 +2805,7 @@
       'We design and build fast websites that look sharp and turn visitors into customers.',
     'Kertamaksu alkaen 590 €. Sivusto on sinun. Ensimmäinen kartoituspuhelu on maksuton.':
       'One-time payment from 590 €. The site is yours. The first discovery call is free.',
+    'Ensimmäinen kartoituspuhelu on maksuton.': 'The first discovery call is free.',
     'Katso esimerkkisivustot, jotka olemme rakentaneet': 'See example sites we have built',
 
     // services teaser

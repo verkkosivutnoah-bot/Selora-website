@@ -43,18 +43,83 @@
     .menu-path-main { stroke-dasharray: 12 63; stroke-dashoffset: 0; transition: stroke-dasharray 300ms ease, stroke-dashoffset 300ms ease; }
     .hamburger.open .menu-icon { transform: rotate(-45deg); }
     .hamburger.open .menu-path-main { stroke-dasharray: 20 300; stroke-dashoffset: -32.42px; }
-    .mobile-menu { position: fixed; inset: 0; background: #050C1A; z-index: 999; display: flex; flex-direction: column; padding: 1.5rem 2rem 2.5rem; transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
-    .mobile-menu.open { transform: translateX(0); }
-    .mobile-menu-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; }
-    .mobile-menu-close { background: none; border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 38px; height: 38px; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-    .mobile-menu-close:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+    /* The panel sits in the DOM on every page. translateX alone leaves its
+       links in the tab order on desktop, so it is hidden outright until open. */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 999;
+      display: flex; flex-direction: column;
+      padding: 1.5rem 1.75rem calc(2rem + env(safe-area-inset-bottom, 0px));
+      background: #050C1A; color: #fff;
+      overflow-y: auto; overscroll-behavior: contain;
+      visibility: hidden; transform: translateX(100%);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), visibility 0s linear 0.45s;
+    }
+    .mobile-menu.open { visibility: visible; transform: translateX(0); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), visibility 0s; }
+    /* the same brand mesh the dark sections use, so it is not a flat slab */
+    .mobile-menu::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 74% 46% at 88% 6%, rgba(29,78,216,0.40), transparent 62%),
+        radial-gradient(ellipse 64% 42% at 6% 94%, rgba(37,99,235,0.24), transparent 64%);
+    }
+    .mobile-menu > * { position: relative; z-index: 1; }
+    .mobile-menu-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; }
+    .mobile-menu-close { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: color 0.2s, background 0.2s, border-color 0.2s, transform 0.4s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu-close:hover { color: #fff; background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); transform: rotate(90deg); }
     .mobile-menu-close svg { display: block; }
-    .mobile-menu-nav { display: flex; flex-direction: column; flex: 1; }
-    .mobile-menu-nav a { font-size: 2rem; font-weight: 300; color: rgba(255,255,255,0.55); text-decoration: none; letter-spacing: -0.03em; padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.2s; line-height: 1.1; }
-    .mobile-menu-nav a:hover, .mobile-menu-nav a.active { color: #fff; }
-    .mobile-menu-cta { margin-top: 2rem; }
-    .mobile-menu-cta a { display: block; text-align: center; background: #1D4ED8; color: #fff; font-size: 0.9rem; font-weight: 500; font-family: 'Inter', sans-serif; padding: 1rem; border-radius: 9999px; text-decoration: none; transition: background 0.2s; }
-    .mobile-menu-cta a:hover { background: #1e40af; }
+    .mobile-menu-nav { display: flex; flex-direction: column; flex: 1; counter-reset: mm-item; }
+    .mobile-menu-nav a {
+      position: relative; display: flex; align-items: baseline; gap: 0.85rem;
+      font-size: clamp(1.65rem, 7.5vw, 2.15rem); font-weight: 300; line-height: 1.15;
+      letter-spacing: -0.03em; color: rgba(255,255,255,0.58); text-decoration: none;
+      padding: 0.8rem 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1), color 0.25s ease, padding-left 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    /* leading index, the same tabular blue the spec list uses */
+    .mobile-menu-nav a::before {
+      counter-increment: mm-item; content: counter(mm-item, decimal-leading-zero);
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.12em;
+      font-variant-numeric: tabular-nums; color: rgba(96,165,250,0.45);
+      transition: color 0.25s ease;
+    }
+    .mobile-menu-nav a::after {
+      content: '\2192'; margin-left: auto; font-size: 0.95rem; color: #60A5FA;
+      opacity: 0; transform: translateX(-10px);
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .mobile-menu-nav a:hover, .mobile-menu-nav a.active { color: #fff; padding-left: 0.45rem; }
+    .mobile-menu-nav a:hover::before, .mobile-menu-nav a.active::before { color: #60A5FA; }
+    .mobile-menu-nav a:hover::after, .mobile-menu-nav a.active::after { opacity: 1; transform: translateX(0); }
+    .mobile-menu-nav a:focus-visible { outline: 2px solid #60A5FA; outline-offset: 3px; }
+    /* rows rise in one after another once the panel is open */
+    .mobile-menu-nav a:nth-child(1) { --mm-d: 0.10s; }
+    .mobile-menu-nav a:nth-child(2) { --mm-d: 0.16s; }
+    .mobile-menu-nav a:nth-child(3) { --mm-d: 0.22s; }
+    .mobile-menu-nav a:nth-child(4) { --mm-d: 0.28s; }
+    .mobile-menu-nav a:nth-child(5) { --mm-d: 0.34s; }
+    .mobile-menu-foot { margin-top: 2rem; }
+    .mobile-menu-foot > * { opacity: 0; transform: translateY(16px); transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu-foot > *:nth-child(1) { --mm-d: 0.40s; }
+    .mobile-menu-foot > *:nth-child(2) { --mm-d: 0.46s; }
+    .mobile-menu-foot > *:nth-child(3) { --mm-d: 0.52s; }
+    .mobile-menu.open .mobile-menu-nav a { opacity: 1; transform: none; transition-delay: var(--mm-d, 0s), var(--mm-d, 0s), 0s, 0s; }
+    .mobile-menu.open .mobile-menu-foot > * { opacity: 1; transform: none; transition-delay: var(--mm-d, 0s), var(--mm-d, 0s); }
+    .mobile-menu-cta { margin-bottom: 1.1rem; }
+    .mobile-menu-cta a { display: block; text-align: center; background: #1D4ED8; color: #fff; font-size: 0.9rem; font-weight: 500; font-family: 'Inter', sans-serif; padding: 1rem; border-radius: 9999px; text-decoration: none; box-shadow: 0 14px 30px -12px rgba(29,78,216,0.9); transition: background 0.2s, transform 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .mobile-menu-cta a:hover { background: #1e40af; transform: translateY(-2px); }
+    .mobile-menu-contact { display: flex; flex-wrap: wrap; align-items: center; gap: 0.2rem 0.7rem; }
+    .mobile-menu-contact a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.82rem; color: rgba(255,255,255,0.72); text-decoration: none; transition: color 0.2s; }
+    .mobile-menu-contact a:hover { color: #fff; }
+    .mobile-menu-contact .mm-dot { color: rgba(255,255,255,0.25); }
+    .mobile-menu-note { font-size: 0.78rem; line-height: 1.6; color: rgba(255,255,255,0.45); }
+    @media (prefers-reduced-motion: reduce) {
+      .mobile-menu, .mobile-menu-nav a, .mobile-menu-close, .mobile-menu-cta a,
+      .mobile-menu-nav a::before, .mobile-menu-nav a::after, .mobile-menu-foot > * { transition: none !important; }
+      .mobile-menu-nav a, .mobile-menu-foot > * { opacity: 1; transform: none; }
+      .mobile-menu-close:hover, .mobile-menu-cta a:hover { transform: none; }
+      .mobile-menu-nav a:hover, .mobile-menu-nav a.active { padding-left: 0; }
+    }
     @media (max-width: 768px) { .desktop-nav { display: none; } .hamburger { display: flex; } .btn-nav-cta { display: none !important; } }
     /* AUTH PAGE */
     #pageCanvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -136,7 +201,7 @@
       </nav>
       <div class="nav-right">
         <a href="yhteystiedot.html" class="btn btn-light btn-nav-cta" style="padding:0.45rem 1.2rem;font-size:0.75rem;">Varaa demo →</a>
-        <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" onclick="toggleMobileMenu()">
+        <button class="hamburger" id="menuBtn" aria-label="Avaa valikko" aria-expanded="false" aria-controls="mobileMenu" onclick="toggleMobileMenu()">
           <svg class="menu-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path class="menu-path-main" d="M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22"/>
             <path d="M7 16 27 16"/>
@@ -255,8 +320,16 @@
       <a href="hinnoittelu.html" class="active">Hinnoittelu</a>
       <a href="yhteystiedot.html">Yhteystiedot</a>
     </nav>
-    <div class="mobile-menu-cta">
-      <a href="yhteystiedot.html">Varaa ilmainen demo →</a>
+    <div class="mobile-menu-foot">
+      <div class="mobile-menu-cta">
+        <a href="yhteystiedot.html">Varaa ilmainen demo →</a>
+      </div>
+      <div class="mobile-menu-contact">
+        <a href="tel:+358408151122">040 815 1122</a>
+        <span class="mm-dot" aria-hidden="true">·</span>
+        <a href="mailto:selora.tuki@gmail.com">selora.tuki@gmail.com</a>
+      </div>
+      <p class="mobile-menu-note">Ensimmäinen kartoituspuhelu on maksuton.</p>
     </div>
   </div>
 
@@ -332,6 +405,7 @@
     var btn = document.getElementById('menuBtn');
     var isOpen = menu.classList.toggle('open');
     btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
     document.body.style.overflow = isOpen ? 'hidden' : '';
   }
   document.addEventListener('keydown', function(e) {
