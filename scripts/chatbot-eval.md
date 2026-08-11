@@ -25,8 +25,8 @@ re-check this file — coverage is only as good as the last build.
 | 2 | EN: *What does Selora do?* | Selora is a Finnish web design studio that builds fast, clear websites for Finnish businesses, paid as a one-time fee. | ✅ same section, English side of the DICT |
 | 3 | FI: *Mitkä ovat kolme pakettia ja paljonko ne maksavat?* | Perussivu 298 €, Täysi sivusto 498 €, Elämyssivusto 898 €. Kaikki kertamaksuja, ei kuukausimaksuja. | ✅ pricing-card extraction now names the package once per card: `Perussivu (298 €, kertamaksu) — ...` etc. |
 | 4 | EN: *What's included in the "Full site" package?* | 4+ pages, fully custom design, keyword research + deep SEO, forms/automations/CRM integration, Google review automation, optional e-commerce, analytics dashboard. | ✅ `Full site (498 €, one-time fee) — ... Includes: ...` |
-| 5 | FI: *Kuinka nopeasti sivusto valmistuu?* | **Content is internally inconsistent — see note below.** The hinnoittelu/index "Miten se toimii" section headlines "Käytössä 48 tunnissa" (build <24h + testing/launch <24h after the discovery call). The index.html FAQ instead says "Perussivu valmistuu tyypillisesti 1–2 viikossa ja laajempi sivusto 3–4 viikossa." | ⚠️ both facts are present and correctly extracted, but they contradict each other — see "Content issue found" below |
-| 6 | EN: *How fast will my site be ready?* | Same contradiction, translated. | ⚠️ same |
+| 5 | FI: *Kuinka nopeasti sivusto valmistuu?* | Itse rakennus vie 48 tuntia siitä kun sisällöt ovat kasassa. Kokonaisaikataulu on tyypillisesti 1, 2 viikkoa perussivulle ja 3, 4 viikkoa laajemmalle sivustolle, koska se riippuu lähinnä siitä kuinka nopeasti asiakas toimittaa tekstit ja kuvat. | ✅ "Rakennettu 48 tunnissa" section + index.html FAQ, which now state build time and calendar time as two distinct numbers |
+| 6 | EN: *How fast will my site be ready?* | The build itself takes 48 hours once content is ready; the overall schedule is typically 1–2 weeks (basic) or 3–4 weeks (larger), depending on how fast the customer sends texts and images. | ✅ same, English side |
 | 7 | FI: *Voinko pitää nykyisen verkkotunnukseni?* | Kyllä. Voit pitää nykyisen verkkotunnuksesi tai rekisteröidä uuden; Selora hoitaa siirron ja tekniset asetukset, sivusto ei ole pois käytöstä siirron aikana. | ✅ index.html FAQ, now paired as one `Kysymys:/Vastaus:` statement |
 | 8 | EN: *Does the site work well on mobile phones?* | Yes — every package is mobile-optimised (explicit package feature), plus a dedicated "responsive mobile design" item: mobile-first approach, tested on major browsers, fast load on mobile networks. | ✅ pkg-card feature list + `feat-item` accordion on verkkosivusuunnittelu.html |
 | 9 | FI: *Näkyykö sivusto Googlessa, teettekö hakukoneoptimointia?* | Kyllä. Jokainen sivusto rakennetaan hakukoneoptimoituna (otsikkorakenne, metatiedot, sivukartta, nopeat latausajat). Täysi sivusto ja Elämyssivusto sisältävät lisäksi avainsanatutkimuksen ja syväluotaavan SEO:n, Perussivu vain SEO:n perusteet. | ✅ index.html FAQ + compare-table row `Markkinointi ja SEO – Hakukoneoptimointi — Perussivu: Perusteet, Täysi sivusto: Syväluotaava, ...` |
@@ -56,24 +56,35 @@ answer.
 | R7 | FI: *Missä teidän blogi on, löydän sen linkin sivustolta?* | Blog was archived (`blog-v1` tag); no `blogi.html` and no "Blogi" nav/footer link anywhere in the current 6 pages. | ✅ confirmed absent |
 | R8 | EN: *Do you offer a free trial period before I have to pay anything?* | Only a free discovery call is offered (30 min, non-committal); nothing describes a free trial of the finished product. Must not conflate the two. | ✅ confirmed — "maksuton kartoituspuhelu" ≠ free trial, no free-trial language anywhere |
 
-## Content issue found (not a chatbot bug)
+## Content issue found and resolved
 
-Questions 5 and 6 above exposed a real contradiction in the **site copy
+Questions 5 and 6 originally exposed a real contradiction in the **site copy
 itself**, not in extraction or in the chatbot's rules:
 
-- `hinnoittelu.html` and `index.html` both headline the "Miten se toimii"
-  section as **"Käytössä 48 tunnissa"** ("Live in 48 hours"), broken down as
-  discovery call → build (<24h) → test & launch (<24h).
-- `index.html`'s own FAQ says **"Perussivu valmistuu tyypillisesti 1–2
-  viikossa ja laajempi sivusto 3–4 viikossa"** ("typically ready in 1–2
-  weeks / 3–4 weeks").
+- `hinnoittelu.html` and `index.html` both headlined the "Miten se toimii"
+  section as **"Käytössä 48 tunnissa"** ("Live in 48 hours").
+- `index.html`'s own FAQ said **"Perussivu valmistuu tyypillisesti 1–2
+  viikossa ja laajempi sivusto 3–4 viikossa"** ("typically ready in 1–2 /
+  3–4 weeks").
 
-Both statements are extracted correctly and both are visible to the model
-in the same prompt, so the chatbot's answer to "how fast will my site be
-ready" is currently a coin flip between two contradictory numbers the site
-itself states. This is a copy inconsistency to resolve on the pages (pick
-one timeline, or clarify that 48h covers the build/launch steps only, after
-content is ready) — not something to patch by hand-editing
-`api/site-knowledge.js` or `api/chat.js`, per the "no hand-written facts"
-rule this chatbot is built on. Left as-is, flagged here for a human
-decision.
+Both were extracted correctly and both reached the model in the same
+prompt, so "how fast will my site be ready" was a coin flip between two
+numbers the site itself stated.
+
+Fixed in the page copy rather than in the knowledge base, per the
+"no hand-written facts" rule this chatbot is built on. The FAQ already
+contained the reconciliation — *"Aikataulu riippuu lähinnä siitä, kuinka
+nopeasti saamme sinulta tekstit ja kuvat"* — so 48h is Selora's own
+production time and the weeks are calendar time spent waiting on customer
+content. The copy now says exactly that:
+
+- Headline is **"Rakennettu 48 tunnissa"** ("Built in 48 hours"), matching
+  what the process steps actually sum to (build <24h + test/launch <24h).
+- The hero chip reads **"48 h rakennusaika"** ("48 h build time"), not
+  "48 h käyttöönotto".
+- The section sub and the FAQ now state both numbers together, so they read
+  as two different measurements rather than as rival claims.
+
+This also brought the customer testimonial ("muutama viikko myöhemmin uudet
+sivut olivat julkaistu") into line, which previously undercut the 48h
+launch claim.

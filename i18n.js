@@ -2815,8 +2815,9 @@
       'Custom design, fast delivery and mobile optimisation. One-time payment, the site is yours.',
 
     // process
-    'Selkeä prosessi, joka kunnioittaa aikaasi. Tiedät koko ajan missä mennään ja mitä seuraavaksi tapahtuu.':
-      'A clear process that respects your time. You always know where things stand and what happens next.',
+    'Rakennettu': 'Built',
+    'Selkeä prosessi, joka kunnioittaa aikaasi. Rakennusaika on 48 tuntia siitä kun sisällöt ovat kasassa, ja tiedät koko ajan missä mennään.':
+      'A clear process that respects your time. The build takes 48 hours once your content is ready, and you always know where things stand.',
     'Käymme läpi yrityksesi, asiakkaasi ja tavoitteesi. Sovimme sivumäärän, sisällöt ja aikataulun. Puhelun jälkeen saat kiinteän hinnan ja tiedät tarkalleen mitä rakennetaan.':
       'We go through your business, your customers and your goals. We agree on the page count, content and schedule. After the call you get a fixed price and know exactly what will be built.',
     'Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja, ei kompromisseja. Saat juuri sen sivuston, jonka yrityksesi tarvitsee.':
@@ -2873,8 +2874,8 @@
       '"I am out in the field a lot, so the site has to do the selling for me. Now customers see the services and prices straight from their phone and leave an enquiry. I call back when it suits."',
 
     // FAQ
-    'Perussivu valmistuu tyypillisesti 1, 2 viikossa ja laajempi sivusto 3, 4 viikossa. Aikataulu riippuu lähinnä siitä, kuinka nopeasti saamme sinulta tekstit ja kuvat.':
-      'A basic site is typically ready in 1 to 2 weeks and a larger site in 3 to 4 weeks. The schedule mostly depends on how quickly we get your texts and images.',
+    'Itse rakennus vie 48 tuntia. Kokonaisaikataulu on tyypillisesti 1, 2 viikkoa perussivulle ja 3, 4 viikkoa laajemmalle sivustolle, sillä se riippuu lähinnä siitä, kuinka nopeasti saamme sinulta tekstit ja kuvat.':
+      'The build itself takes 48 hours. The overall schedule is typically 1 to 2 weeks for a basic site and 3 to 4 weeks for a larger one, since it mostly depends on how quickly we get your texts and images.',
     'Voinko pitää nykyisen verkkotunnukseni?': 'Can I keep my current domain?',
     'Kyllä. Voit pitää nykyisen verkkotunnuksesi tai rekisteröidä uuden. Hoidamme siirron ja tekniset asetukset puolestasi, eikä sivustosi ole missään vaiheessa pois käytöstä.':
       'Yes. You can keep your current domain or register a new one. We handle the transfer and technical setup, and your site is never offline during the move.',
@@ -3018,6 +3019,7 @@
     'Yrityksille, jotka tarvitsevat enemmän sivuja, automaatioita ja syvempää näkyvyyttä.':
       'For businesses that need more pages, automations and deeper visibility.',
     'käyttöönotto': 'onboarding',
+    'rakennusaika': 'build time',
 
 
     // ---------- REBRAND: hinnoittelu + palvelut ----------
