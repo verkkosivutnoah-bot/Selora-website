@@ -3848,6 +3848,10 @@
     'Kertamaksu, ei piilokustannuksia.': 'One-time payment, no hidden costs.',
     'Prioriteettituki käyttöönotossa': 'Priority support at launch',
     'Verkkosivusto on kertaluontoinen projekti. Maksat kerran, sivusto on sinun.': 'A website is a one-off project. You pay once and the site is yours.',
+    'Kalenteri näyttää vapaat ajat reaaliajassa. Jos mikään niistä ei sovi, kirjoita lomakkeella ja ehdotamme sinulle aikaa.': 'The calendar shows free slots in real time. If none of them suit you, write via the form and we will suggest a time.',
+    'Kirjoita suoraan, niin saat vastauksen 4 tunnin sisällä arkipäivisin.': 'Write to us directly and you get an answer within 4 hours on weekdays.',
+    'Kiireellinen asia? Soita, niin jutellaan saman tien.': 'Something urgent? Call and we will talk it through right away.',
+    'Kerro lyhyesti mitä olet suunnittelemassa, niin ehdotamme sopivaa ratkaisua.': 'Tell us briefly what you are planning and we will suggest a fitting solution.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
