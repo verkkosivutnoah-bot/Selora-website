@@ -36,6 +36,9 @@ PUBLIC = [
 BRANDS = {'the green electrician', 'vantage', 'nocturne'}
 
 NEUTRAL = {
+    # 'hosting' is spelled the same in Finnish copy, and its -ing ending was
+    # scoring as English hard enough to cancel out a real Finnish signal.
+    'hosting',
     'selora', 'google', 'gdpr', 'seo', 'wordpress', 'analytics', 'zapier',
     'hubspot', 'stripe', 'notion', 'slack', 'outlook', 'teams', 'zendesk',
     'salesforce', 'pipedrive', 'make', 'zoho', 'freshdesk', 'vantage',
@@ -46,7 +49,7 @@ FI_WORDS = {
     'ja', 'on', 'ei', 'se', 'että', 'joka', 'jotka', 'kun', 'niin', 'myös',
     'vain', 'tai', 'mutta', 'kuin', 'sinä', 'sinun', 'sinulle', 'sinut',
     'me', 'meidän', 'he', 'ne', 'oma', 'omat', 'mitä', 'miten', 'kuinka',
-    'miksi', 'missä', 'kaikki', 'jokainen', 'yksi', 'kaksi', 'kolme',
+    'miksi', 'missä', 'milloin', 'kaikki', 'jokainen', 'yksi', 'kaksi', 'kolme',
     'sivusto', 'sivustot', 'sivu', 'sivut', 'verkkosivut', 'verkkosivu',
     'asiakas', 'asiakkaat', 'asiakkaita', 'asiakkaan', 'yritys', 'yrityksesi',
     'palvelu', 'palvelut', 'hinta', 'hinnat', 'lisää', 'katso', 'lue',
