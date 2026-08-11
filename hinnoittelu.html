@@ -9,7 +9,7 @@
   <meta name="format-detection" content="telephone=no, address=no, email=no, date=no" />
   <title>Hinnoittelu, Selora</title>
   <link rel="canonical" href="https://selora.fi/hinnoittelu.html" />
-  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 500 euroa, täysi sivusto 800 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja." />
+  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto 898 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -83,6 +83,7 @@
     /* ── PACKAGES ─────────────────────────────────────────────── */
     .pkg-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; }
     @media (min-width: 800px) { .pkg-grid { grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
+    @media (min-width: 1080px) { .pkg-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
     .pkg-card {
       position: relative; background: #fff; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem;
       padding: 2.5rem; display: flex; flex-direction: column;
@@ -99,6 +100,21 @@
     .pkg-price-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem; }
     .pkg-price { font-size: 3rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; font-variant-numeric: tabular-nums; }
     .pkg-price-note { font-size: 0.78rem; color: var(--text-muted); }
+    .pkg-actions { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: auto; }
+    .pkg-actions .pkg-cta { width: 100%; justify-content: center; }
+    /* secondary route: see the work before asking for a quote */
+    .pkg-example { font-size: 0.78rem; font-weight: 500; color: var(--blue); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; transition: color 0.2s ease, transform 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .pkg-example:hover { color: #1e40af; transform: translateX(3px); }
+    /* the premium tier reads as the visual one, so its card carries the depth */
+    .pkg-card.is-premium { background: linear-gradient(158deg, #0d1a3a 0%, #060c18 100%); border-color: rgba(96,165,250,0.28); box-shadow: 0 28px 64px -30px rgba(6,12,24,0.9); }
+    .pkg-card.is-premium .pkg-name, .pkg-card.is-premium .pkg-price { color: #fff; }
+    .pkg-card.is-premium .pkg-for, .pkg-card.is-premium .pkg-price-note { color: rgba(255,255,255,0.6); }
+    .pkg-card.is-premium .pkg-features li { color: rgba(255,255,255,0.72); }
+    .pkg-card.is-premium .pkg-divider { background: rgba(255,255,255,0.12); }
+    .pkg-card.is-premium .pkg-icon { background: rgba(96,165,250,0.16); border-color: rgba(96,165,250,0.3); color: #93c5fd; }
+    .pkg-card.is-premium .pkg-example { color: #93c5fd; }
+    .pkg-badge-premium { background: linear-gradient(90deg, #1D4ED8, #60A5FA); color: #fff; }
+    @media (prefers-reduced-motion: reduce) { .pkg-example { transition: none !important; } .pkg-example:hover { transform: none; } }
     .pkg-divider { height: 1px; background: rgba(15,23,42,0.1); margin: 1.5rem 0; }
     .pkg-card.is-featured .pkg-divider { background: rgba(29,78,216,0.22); }
     .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; flex: 1; }
@@ -335,12 +351,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/hinnoittelu.html" />
   <meta property="og:title" content="Hinnoittelu, Selora" />
-  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
+  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hinnoittelu, Selora" />
-  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja." />
+  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
 <link rel="stylesheet" href="/assets/selora-ds.css" />
@@ -382,7 +398,7 @@
     <h1 data-sl-split>Kertamaksu.<br><span class="accent">Ei yllätyksiä.</span></h1>
     <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat kerran. Sivusto on sinun, heti ja vuosia eteenpäin. Ei kuukausilaskuja, ei piilokuluja.</p>
     <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
-      <span class="phc"><b>500 €</b> alkaen, kertamaksu</span>
+      <span class="phc"><b>298 €</b> alkaen, kertamaksu</span>
       <span class="phc"><b>48 h</b> käyttöönotto</span>
       <span class="phc"><b>0 €</b> kuukausimaksuja</span>
     </div>
@@ -395,7 +411,7 @@
 <div class="section">
   <div class="container">
     <p class="section-label" data-sl-reveal>Paketit</p>
-    <h2 class="section-heading sl-swipe-host" data-sl-split>Kaksi pakettia.<br><span class="accent">Valitse tarpeesi mukaan.</span></h2>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Kolme pakettia.<br><span class="accent">Valitse tarpeesi mukaan.</span></h2>
     <p class="section-sub" data-sl-words data-sl-reveal>Molemmat sisältävät suunnittelun, rakennuksen ja julkaisun. Ero on laajuudessa, ei laadussa.</p>
 
     <div class="pkg-grid">
@@ -403,7 +419,7 @@
         <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
         <h3 class="pkg-name">Perussivu</h3>
         <p class="pkg-for">Yksinyrittäjille ja pienille yrityksille, jotka tarvitsevat selkeän esittelysivun.</p>
-        <div class="pkg-price-row"><span class="pkg-price">500 €</span></div>
+        <div class="pkg-price-row"><span class="pkg-price">298 €</span></div>
         <p class="pkg-price-note">kertamaksu</p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
@@ -413,7 +429,10 @@
           <li>Hakukoneoptimoinnin perusteet</li>
           <li>Nopea latausaika</li>
         </ul>
-        <a href="yhteystiedot.html" class="btn btn-ghost pkg-cta">Pyydä tarjous →</a>
+        <div class="pkg-actions">
+          <a href="yhteystiedot.html" class="btn btn-ghost pkg-cta">Pyydä tarjous →</a>
+          <a href="verkkosivusuunnittelu.html#esimerkkitoita" class="pkg-example">Katso esimerkki →</a>
+        </div>
       </div>
 
       <div class="pkg-card is-featured reveal reveal-delay-1" id="pkg-taysisivusto">
@@ -421,7 +440,7 @@
         <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5-10-5 10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div>
         <h3 class="pkg-name">Täysi sivusto</h3>
         <p class="pkg-for">Yrityksille, jotka tarvitsevat enemmän sivuja, automaatioita ja syvempää näkyvyyttä.</p>
-        <div class="pkg-price-row"><span class="pkg-price">800 €</span></div>
+        <div class="pkg-price-row"><span class="pkg-price">498 €</span></div>
         <p class="pkg-price-note">kertamaksu</p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
@@ -432,7 +451,32 @@
           <li>Verkkokauppa valinnaisena lisänä</li>
           <li>Analytiikkakojelauta: kävijät, liidit ja konversiot</li>
         </ul>
-        <a href="yhteystiedot.html" class="btn btn-blue pkg-cta">Pyydä tarjous →</a>
+        <div class="pkg-actions">
+          <a href="yhteystiedot.html" class="btn btn-blue pkg-cta">Pyydä tarjous →</a>
+          <a href="verkkosivusuunnittelu.html#esimerkkitoita" class="pkg-example">Katso esimerkki →</a>
+        </div>
+      </div>
+
+      <div class="pkg-card is-premium reveal reveal-delay-2" id="pkg-elamyssivusto">
+        <span class="pkg-badge pkg-badge-premium">Näyttävin</span>
+        <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.4 5.6 5.6 2.4-5.6 2.4L12 21l-2.4-5.6L4 13l5.6-2.4z"/></svg></div>
+        <h3 class="pkg-name">Elämyssivusto</h3>
+        <p class="pkg-for">Brändeille, jotka haluavat sivuston jonka muistaa. Kerronnallinen, liikkuva ja silti nopea.</p>
+        <div class="pkg-price-row"><span class="pkg-price">898 €</span></div>
+        <p class="pkg-price-note">kertamaksu</p>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Kaikki mitä Täysi sivusto sisältää</li>
+          <li>Kerronnallinen vieritys ja parallax-syvyys</li>
+          <li>Näyttävät liikkeet ja taustagrafiikat</li>
+          <li>Kuvitus ja visuaalinen suunta omalle brändillesi</li>
+          <li>Suorituskykybudjetti: näyttävyys ei hidasta sivustoa</li>
+          <li>Toimii myös kevennettynä, jos kävijä on rajoittanut liikettä</li>
+        </ul>
+        <div class="pkg-actions">
+          <a href="yhteystiedot.html" class="btn btn-blue pkg-cta">Pyydä tarjous →</a>
+          <a href="verkkosivusuunnittelu.html#esimerkkitoita" class="pkg-example">Katso esimerkki →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -540,8 +584,15 @@
             <label class="choose-opt"><input type="radio" name="q3" value="1"> Haluan syväluotaavan SEO:n</label>
           </div>
         </fieldset>
+        <fieldset class="choose-q reveal reveal-delay-3">
+          <legend>Kuinka näyttävä sivuston pitää olla?</legend>
+          <div class="choose-opts">
+            <label class="choose-opt"><input type="radio" name="q4" value="0" checked> Selkeä ja asiallinen riittää</label>
+            <label class="choose-opt"><input type="radio" name="q4" value="2"> Haluan sivuston joka jää mieleen</label>
+          </div>
+        </fieldset>
         <noscript>
-          <p class="choose-noscript">Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto.</p>
+          <p class="choose-noscript">Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto. Jos haluat lisäksi kerronnallisen ja näyttävän sivuston, valitse Elämyssivusto.</p>
         </noscript>
       </form>
 
@@ -551,7 +602,7 @@
         <p class="choose-result-desc" id="chooseDesc">Vastaustesi perusteella Perussivu kattaa tarpeesi. Voit vaihtaa vastauksia milloin tahansa.</p>
         <a href="#pkg-perussivu" class="btn btn-blue" id="chooseCta">Katso Perussivu ↓</a>
         <div class="choose-progress" aria-hidden="true">
-          <span class="choose-dot" data-dot="1"></span><span class="choose-dot" data-dot="2"></span><span class="choose-dot" data-dot="3"></span>
+          <span class="choose-dot" data-dot="1"></span><span class="choose-dot" data-dot="2"></span><span class="choose-dot" data-dot="3"></span><span class="choose-dot" data-dot="4"></span>
         </div>
       </div>
     </div>
@@ -568,88 +619,138 @@
       <table class="compare-table">
         <thead>
           <tr>
-            <th style="width:46%">Ominaisuus</th>
-            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">500 €</span></th>
-            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">800 €</span></th>
+            <th style="width:37%">Ominaisuus</th>
+            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">298 €</span></th>
+            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">498 €</span></th>
+            <th class="col-premium">Elämyssivusto<br><span style="font-weight:400;font-size:0.8rem;">898 €</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr class="compare-section-row"><td colspan="3">Sivusto</td></tr>
+          <tr class="compare-section-row"><td colspan="4">Sivusto</td></tr>
           <tr>
             <td class="col-feature">Sivumäärä</td>
             <td class="col-check"><span class="check-partial">1, 4 sivua</span></td>
             <td class="col-check col-featured"><span class="check-yes">4+ sivua</span></td>
+          
+            <td class="col-check col-premium"><span class="check-partial">4+ sivua</span></td>
           </tr>
           <tr>
             <td class="col-feature">Räätälöity ulkoasu yrityksesi brändiin</td>
             <td class="col-check"><span class="check-yes">✓</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓ Täysin räätälöity</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓ Täysin räätälöity</span></td>
           </tr>
           <tr>
             <td class="col-feature">Mobiilioptimointi</td>
             <td class="col-check"><span class="check-yes">✓</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Latausnopeuden optimointi</td>
             <td class="col-check"><span class="check-yes">✓</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓ Suorituskykybudjetti</span></td>
           </tr>
 
-          <tr class="compare-section-row"><td colspan="3">Toiminnot</td></tr>
+          <tr class="compare-section-row"><td colspan="4">Toiminnot</td></tr>
           <tr>
             <td class="col-feature">Yhteydenottolomake</td>
             <td class="col-check"><span class="check-yes">✓</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Google Maps -upotus</td>
             <td class="col-check"><span class="check-yes">✓</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Lomakkeet ja sähköpostiautomaatiot</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">CRM-integraatio</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Verkkokauppa valinnainen lisä</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
 
-          <tr class="compare-section-row"><td colspan="3">Markkinointi ja SEO</td></tr>
+          <tr class="compare-section-row"><td colspan="4">Markkinointi ja SEO</td></tr>
           <tr>
             <td class="col-feature">Hakukoneoptimointi</td>
             <td class="col-check"><span class="check-partial">Perusteet</span></td>
             <td class="col-check col-featured"><span class="check-yes">Syväluotaava</span></td>
+          
+            <td class="col-check col-premium"><span class="check-partial">Syväluotaava</span></td>
           </tr>
           <tr>
             <td class="col-feature">Avainsanatutkimus</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Google-arvostelujen automaatio</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Analytiikkakojelauta (kävijät, liidit, konversiot)</td>
             <td class="col-check"><span class="check-no">✕</span></td>
             <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+          
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
           </tr>
 
-          <tr class="compare-section-row"><td colspan="3">Toimitus ja tuki</td></tr>
+
+          <tr class="compare-section-row"><td colspan="4">Visuaalinen kerronta</td></tr>
+          <tr>
+            <td class="col-feature">Kerronnallinen vieritys ja parallax</td>
+            <td class="col-check"><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="check-no">✕</span></td>
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Näyttävät liikkeet ja taustagrafiikat</td>
+            <td class="col-check"><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="check-partial">Kevyet</span></td>
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Kuvitus ja visuaalinen suunta</td>
+            <td class="col-check"><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="check-no">✕</span></td>
+            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+          </tr>
+
+          <tr class="compare-section-row"><td colspan="4">Toimitus ja tuki</td></tr>
           <tr>
             <td class="col-feature">Käyttöönottotuki</td>
             <td class="col-check"><span class="check-partial">Sähköpostitse</span></td>
             <td class="col-check col-featured"><span class="check-yes">Prioriteettituki</span></td>
+          
+            <td class="col-check col-premium"><span class="check-partial">Prioriteettituki</span></td>
           </tr>
         </tbody>
       </table>
@@ -755,7 +856,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q">Mitä eroa paketeilla oikeasti on? <span class="faq-chevron">▼</span></summary>
-        <p class="faq-a">Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia.</p>
+        <p class="faq-a">Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia. Elämyssivusto on näistä näyttävin: kerronnallinen vieritys ja liike, ilman että sivusto hidastuu.</p>
       </details>
     </div>
   </div>
@@ -815,18 +916,32 @@
       desc: 'Vastaustesi perusteella Täysi sivusto sopii sinulle paremmin. Voit vaihtaa vastauksia milloin tahansa.',
       href: '#pkg-taysisivusto',
       cta: 'Katso Täysi sivusto ↓'
+    },
+    elamyssivusto: {
+      name: 'Elämyssivusto',
+      desc: 'Vastaustesi perusteella Elämyssivusto sopii sinulle. Voit vaihtaa vastauksia milloin tahansa.',
+      href: '#pkg-elamyssivusto',
+      cta: 'Katso Elämyssivusto ↓'
     }
   };
   function update() {
     const data = new FormData(form);
     let score = 0;
     let answered = 0;
-    ['q1', 'q2', 'q3'].forEach(function (name) {
+    ['q1', 'q2', 'q3', 'q4'].forEach(function (name) {
       const v = data.get(name);
       if (v !== null) { answered++; score += parseInt(v, 10) || 0; }
     });
     dots.forEach(function (dot, i) { dot.classList.toggle('is-done', i < answered); });
-    const pick = score >= 2 ? results.taysisivusto : results.perussivu;
+    // the visual question alone decides the premium tier, so the answer stays
+    // predictable rather than emerging from a total
+    const wantsShowpiece = data.get('q4') === '2';
+    const needsMore = (parseInt(data.get('q1'), 10) || 0)
+                    + (parseInt(data.get('q2'), 10) || 0)
+                    + (parseInt(data.get('q3'), 10) || 0) >= 2;
+    const pick = wantsShowpiece ? results.elamyssivusto
+               : needsMore ? results.taysisivusto
+               : results.perussivu;
     nameEl.textContent = pick.name;
     descEl.textContent = pick.desc;
     ctaEl.setAttribute('href', pick.href);
