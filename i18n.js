@@ -380,7 +380,7 @@
     'Pidätkö enemmän soittamisesta? ': 'Prefer to call? ',
     'Kiitos yhteydenotostasi. Palaamme sinulle 4 tunnin sisällä arkipäivisin ja sovimme maksuttoman kartoituspuhelun.':
       'Thanks for getting in touch. We\'ll be back to you within 4 working hours to set up your free discovery call.',
-    'Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten': 'I agree to Selora Oy processing my personal data for contact purposes',
+    'Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten': 'I agree to Selora Oy processing my personal data for contact purposes, in accordance with our',
     'Olen lukenut ja hyväksyn': 'I have read and accept',
     'ja hyväksyn henkilötietojeni käsittelyn.': 'and consent to processing of my personal data.',
     'Ensimmäinen tapaaminen on maksuton ja sitoumukseton': 'The first meeting is free and non-committal',
@@ -3059,10 +3059,10 @@
 
 
     // ---------- REBRAND: hinnoittelu + palvelut ----------
-    'Verkkosivut kertamaksulla. Perussivu 500 euroa, täysi sivusto 800 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
-      'Websites for a one-time fee. Basic site 500 euros, full site 800 euros. Fixed price, no monthly fees, no hidden costs.',
-    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 500 euroa ja täysi sivusto 800 euroa, molemmat kertamaksuna. Ei kuukausimaksuja.':
-      'Clear pricing without surprises. Basic site 500 euros and full site 800 euros, both one-time. No monthly fees.',
+    'Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto 898 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
+      'Websites for a one-time fee. Basic site 298 euros, full site 498 euros, showcase site 898 euros. Fixed price, no monthly fees, no hidden costs.',
+    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja.':
+      'Clear pricing without surprises. Basic site 298 euros, full site 498 euros and showcase site 898 euros, all one-time. No monthly fees.',
     'Ei. Sovittu kertamaksu kattaa suunnittelun, toteutuksen ja julkaisun. Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.':
       'No. The agreed one-time fee covers design, build and launch. If you later want more pages or features, we always agree the price in advance.',
     'Voinko laajentaa sivustoa myöhemmin?': 'Can I expand the site later?',
@@ -3914,6 +3914,27 @@
     'Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto. Jos haluat lisäksi kerronnallisen ja näyttävän sivuston, valitse Elämyssivusto.': 'Rule of thumb: if you need at most four pages and no forms, automations or deep search optimisation, the Basic site is enough. If you need more pages or those features, choose the Full site. If you also want a narrative, striking site, choose the Showcase site.',
     'Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia. Elämyssivusto on näistä näyttävin: kerronnallinen vieritys ja liike, ilman että sivusto hidastuu.': 'The Basic site suits a simple introduction. The Full site suits you if you need more pages, forms, automations or deeper search optimisation. The Showcase site is the most striking of the three: narrative scrolling and motion, without the site slowing down.',
     'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.': 'The Basic site is 298 euros, the Full site 498 euros and the Showcase site 898 euros, all one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
+
+    // ---------- hinnoittelu.html: strings the EN toggle missed ----------
+    'Paketit': 'Packages',
+    'Valitse tarpeesi mukaan.': 'Choose based on your needs.',
+    'valita?': 'to pick?',
+    'Suosituin': 'Most popular',
+    'Suosituksemme': 'Our recommendation',
+    '1, 4 sivua': '1 to 4 pages',
+    '4+ sivua': '4+ pages',
+    '✓ Suorituskykybudjetti': '✓ Performance budget',
+    'Kysyttyä': 'FAQ',
+    'kuukausimaksuja': 'monthly fees',
+
+    // ---------- yhteystiedot.html: strings the EN toggle missed ----------
+    'vasteaika': 'response time',
+    'maksuton kartoitus': 'free consultation',
+    'sitoumuksia': 'commitments',
+    'mukaisesti.': '.',
+    'Kesto: 2 min': 'Duration: 2 min',
+    'Kesto: 30 min': 'Duration: 30 min',
+    'Soita: 040 815 1122': 'Call: 040 815 1122',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

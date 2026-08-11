@@ -272,6 +272,21 @@
   var isOpen  = false;
   var loading = false;
 
+  /* Widget builds its chrome once at load, so a live FI/EN toggle click
+     (no reload) needs its own sync — otherwise the panel stays in whatever
+     language it was built in while the rest of the page switches. */
+  window.addEventListener('selora:langchange', function (e) {
+    var lang = e && e.detail && e.detail.lang === 'en' ? 'en' : 'fi';
+    UI = lang === 'en' ? UI_EN : UI_FI;
+    SUGGESTIONS = lang === 'en' ? SUGGESTIONS_EN : SUGGESTIONS_FI;
+    document.getElementById('slr-hd-title').textContent = UI.title;
+    document.getElementById('slr-hd-sub').textContent = UI.sub;
+    closeBtn.setAttribute('aria-label', UI.close);
+    inputEl.setAttribute('placeholder', UI.placeholder);
+    sendBtn.setAttribute('aria-label', UI.send);
+    if (history.length === 0) renderSuggestions();
+  });
+
   /* ── Open / close ──────────────────────────────────────────── */
   var formPanel = document.getElementById('slr-form');
   formPanel.inert = true; /* keeps the closed (opacity:0) panel out of tab order */
