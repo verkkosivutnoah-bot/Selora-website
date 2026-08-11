@@ -180,10 +180,13 @@ def extract_pkg_cards(html, en):
     """A pricing card's <li> features read fine inside the card but become
     unattributed fragments once flattened — 'CRM-integraatio' on its own
     bullet doesn't say which package has it. Fold each card into one
-    statement naming the package once for all its features."""
+    statement naming the package once for all its features.
+
+    The recurring-maintenance card (.upkeep) is the same shape and has the
+    same problem, so it reuses this by mirroring the pkg-* element names."""
     pairs = []
     out, pos = [], 0
-    for m in re.finditer(r'<div class="pkg-card[^"]*"[^>]*>', html):
+    for m in re.finditer(r'<div class="(?:pkg-card|upkeep)[ "][^"]*"[^>]*>', html):
         if m.start() < pos:
             continue
         out.append(html[pos:m.start()])
@@ -193,10 +196,10 @@ def extract_pkg_cards(html, en):
             pos = m.end()
             continue
 
-        name_m = re.search(r'<h3 class="pkg-name">(.*?)</h3>', block, re.DOTALL)
-        for_m = re.search(r'<p class="pkg-for">(.*?)</p>', block, re.DOTALL)
-        price_m = re.search(r'<span class="pkg-price">(.*?)</span>', block, re.DOTALL)
-        note_m = re.search(r'<p class="pkg-price-note">(.*?)</p>', block, re.DOTALL)
+        name_m = re.search(r'<h3 class="(?:pkg|upkeep)-name">(.*?)</h3>', block, re.DOTALL)
+        for_m = re.search(r'<p class="(?:pkg|upkeep)-for">(.*?)</p>', block, re.DOTALL)
+        price_m = re.search(r'<span class="(?:pkg|upkeep)-price">(.*?)</span>', block, re.DOTALL)
+        note_m = re.search(r'<p class="(?:pkg|upkeep)-price-note">(.*?)</p>', block, re.DOTALL)
         feats = re.findall(r'<li>(.*?)</li>', block, re.DOTALL)
 
         if name_m:
