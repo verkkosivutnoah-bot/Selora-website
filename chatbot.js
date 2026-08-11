@@ -18,21 +18,30 @@
     return html === 'en' ? 'en' : 'fi';
   }
 
+  /* Openers point at what the site actually sells now. The receptionist ones
+     these replaced outlived the product by months. */
   var SUGGESTIONS_FI = [
-    'Miten tekoälyvastaanottaja toimii?',
-    'Mitä palveluja tarjoatte?',
-    'Paljonko se maksaa?',
-    'Kuinka nopeasti pääsen alkuun?',
-    'Vertaa tekoälyä ja ihmisvastaanottajaa',
+    'Paljonko verkkosivut maksavat?',
+    'Mitä paketteihin sisältyy?',
+    'Kuinka nopeasti sivusto valmistuu?',
+    'Voinko nähdä esimerkkejä?',
+    'Näkyykö sivusto Googlessa?',
   ];
   var SUGGESTIONS_EN = [
-    'How does the AI receptionist work?',
-    'What services do you offer?',
-    'How much does it cost?',
-    'How fast can I get started?',
-    'Compare AI vs. human receptionist',
+    'What does a website cost?',
+    'What is included in each package?',
+    'How fast will my site be ready?',
+    'Can I see some examples?',
+    'Will the site show up on Google?',
   ];
   var SUGGESTIONS = getLang() === 'en' ? SUGGESTIONS_EN : SUGGESTIONS_FI;
+
+  /* Widget chrome, in both languages. These live here rather than in i18n.js
+     because the overlay walks the page's text nodes and this markup is built
+     after it runs. */
+  var UI_FI = { title: 'Selora Assistentti', sub: 'Vastaan yleensä heti', close: 'Sulje', send: 'Lähetä', placeholder: 'Kirjoita viestisi...' };
+  var UI_EN = { title: 'Selora Assistant',   sub: 'Usually replies right away', close: 'Close', send: 'Send', placeholder: 'Type your message...' };
+  var UI = getLang() === 'en' ? UI_EN : UI_FI;
 
   /* ── CSS ───────────────────────────────────────────────────── */
   var css = [
@@ -216,14 +225,14 @@
       '<div id="slr-form">' +
         '<div id="slr-hd">' +
           ORB +
-          '<div><div id="slr-hd-title">Selora Assistentti</div><div id="slr-hd-sub">Vastaan yleensa heti</div></div>' +
-          '<button id="slr-x" aria-label="Sulje">' + CLOSE_ICON + '</button>' +
+          '<div><div id="slr-hd-title">' + UI.title + '</div><div id="slr-hd-sub">' + UI.sub + '</div></div>' +
+          '<button id="slr-x" aria-label="' + UI.close + '">' + CLOSE_ICON + '</button>' +
         '</div>' +
         '<div id="slr-msgs"></div>' +
         '<div id="slr-sugg"></div>' +
         '<div id="slr-foot">' +
-          '<textarea id="slr-in" rows="1" placeholder="Kirjoita viestisi..." maxlength="800"></textarea>' +
-          '<button id="slr-send" aria-label="Laheta">' + SEND_ICON + '</button>' +
+          '<textarea id="slr-in" rows="1" placeholder="' + UI.placeholder + '" maxlength="800"></textarea>' +
+          '<button id="slr-send" aria-label="' + UI.send + '">' + SEND_ICON + '</button>' +
         '</div>' +
         '<div id="slr-pw">Selora AI</div>' +
       '</div>' +
