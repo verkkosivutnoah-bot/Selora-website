@@ -282,6 +282,174 @@
       .section-alt { padding: 3rem 0; }
       .service-card { grid-template-columns: 1fr !important; }
     }
+
+    /* ── SHOWCASE BELT: SEO, email automation, AI chatbot, Google reviews ── */
+    .showcase-belt { position: relative; overflow: hidden; background: #060c18; color: #fff; }
+    .showcase-mesh { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 56% 40% at 14% 6%, rgba(29,78,216,0.42), transparent 60%),
+        radial-gradient(ellipse 48% 34% at 88% 30%, rgba(59,130,246,0.26), transparent 60%),
+        radial-gradient(ellipse 60% 46% at 50% 98%, rgba(37,99,235,0.22), transparent 64%);
+    }
+    .showcase-grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
+      background-size: 48px 48px;
+      background-image: linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);
+      animation: showcaseGridDrift 24s linear infinite;
+    }
+    @keyframes showcaseGridDrift { from { background-position: 0 0; } to { background-position: 48px 48px; } }
+    .showcase-block { position: relative; z-index: 1; padding: 6.5rem 0; }
+    .showcase-block + .showcase-block { border-top: 1px solid rgba(255,255,255,0.06); }
+    .showcase-belt .section-label { color: #60A5FA; }
+    .showcase-belt .section-heading { color: #fff; }
+    .showcase-belt .section-sub { color: rgba(255,255,255,0.6); }
+
+    /* SEO */
+    .seo-showcase-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; }
+    .seo-chip-row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.75rem 0 0; }
+    .seo-chip { font-size: 0.74rem; font-weight: 500; color: #dbeafe; background: rgba(96,165,250,0.12); border: 1px solid rgba(96,165,250,0.28); border-radius: 9999px; padding: 0.4rem 0.9rem; }
+    .seo-visual { position: relative; }
+    .seo-serp-card {
+      background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 1.1rem;
+      padding: 1.5rem 1.6rem; box-shadow: 0 24px 60px -20px rgba(0,0,0,0.6);
+      max-width: 22rem;
+    }
+    .seo-serp-url { font-size: 0.72rem; color: #16a34a; margin-bottom: 0.3rem; font-family: 'Inter', sans-serif; }
+    .seo-serp-title { font-size: 1.02rem; color: #1a0dab; margin-bottom: 0.45rem; letter-spacing: -0.01em; }
+    .seo-serp-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+    .seo-rank-badge {
+      position: absolute; top: -1.4rem; right: -0.5rem; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+      background: var(--blue); color: #fff; border-radius: 1rem; padding: 0.85rem 1.15rem;
+      box-shadow: 0 18px 40px -14px rgba(29,78,216,0.55);
+      animation: seoBadgeFloat 4.5s ease-in-out infinite;
+    }
+    .seo-rank-num { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+    .seo-rank-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; }
+    @keyframes seoBadgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @media (max-width: 900px) { .seo-showcase-grid { grid-template-columns: 1fr; gap: 2.5rem; } .seo-visual { max-width: 22rem; margin: 0 auto; } }
+    @media (prefers-reduced-motion: reduce) { .seo-rank-badge { animation: none; } }
+
+    /* Email automation */
+    .email-head { max-width: 40rem; margin: 0 auto 3.5rem; text-align: center; }
+    .email-timeline { max-width: 38rem; margin: 0 auto; }
+    .email-step { position: relative; display: flex; gap: 1.4rem; padding-bottom: 2.6rem; }
+    .email-step:last-child { padding-bottom: 0; }
+    .email-step::before {
+      content: ''; position: absolute; left: 1.15rem; top: 2.6rem; bottom: 0; width: 1px;
+      background: linear-gradient(rgba(96,165,250,0.35), rgba(96,165,250,0.06));
+    }
+    .email-step:last-child::before { display: none; }
+    .email-step-icon {
+      flex-shrink: 0; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3);
+      display: flex; align-items: center; justify-content: center; color: #60A5FA;
+      box-shadow: 0 0 0 6px rgba(96,165,250,0.05);
+    }
+    .email-step-icon svg { width: 18px; height: 18px; }
+    .email-step h4 { font-size: 0.95rem; font-weight: 500; color: #fff; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+    .email-step p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin: 0; }
+
+    /* AI chatbot */
+    .cb-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 3.5rem; align-items: center; }
+    .cb-open-btn { cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.5rem; }
+    @property --cb-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+    .cb-mock {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 1.35rem;
+      padding: 1.5rem 1.5rem 1.75rem; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 30px 70px -30px rgba(0,0,0,0.75); max-width: 24rem;
+    }
+    .cb-mock-head { display: flex; align-items: center; gap: 0.65rem; padding-bottom: 1rem; margin-bottom: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.82rem; font-weight: 500; color: #fff; }
+    .cb-mock-orb {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(from var(--cb-angle), #1D4ED8, #60A5FA, #93C5FD, #1D4ED8);
+      filter: blur(0.6px) contrast(1.6);
+      animation: cbOrbSpin 6s linear infinite;
+    }
+    @keyframes cbOrbSpin { to { --cb-angle: 360deg; } }
+    .cb-mock-msgs { display: flex; flex-direction: column; gap: 0.7rem; }
+    .cb-bub { max-width: 84%; padding: 0.6rem 0.85rem; border-radius: 1rem; font-size: 0.8rem; line-height: 1.55; }
+    .cb-bub-ai { align-self: flex-start; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); border-bottom-left-radius: 0.3rem; }
+    .cb-bub-user { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 0.3rem; }
+    @media (max-width: 900px) { .cb-grid { grid-template-columns: 1fr; gap: 2.5rem; } .cb-mock { max-width: 24rem; margin: 0 auto; } }
+    @media (prefers-reduced-motion: reduce) { .cb-mock-orb { animation: none !important; } }
+
+    /* Google reviews */
+    .rev-inner { position: relative; z-index: 1; }
+    .rev-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,0.95fr); gap: 3rem; align-items: end; margin-bottom: 3.25rem; }
+    .rev-head .section-sub { margin: 0; }
+    .rev-flow { display: flex; flex-direction: column; gap: 3.5rem; }
+    .rev-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.15rem; }
+    .rev-steps .rev-step {
+      padding: 1.6rem 1.65rem; border-radius: 1.25rem;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
+    }
+    .rev-steps .rev-step:hover { transform: translateY(-3px); border-color: rgba(96,165,250,0.3); }
+    .rev-step { display: grid; grid-template-columns: auto 1fr; gap: 1.1rem; align-items: start; }
+    .rev-step-num { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: #60A5FA;
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.24);
+      width: 2.4rem; height: 2.4rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;
+      font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .rev-step-body h3 { font-size: 1rem; font-weight: 500; color: #fff; margin-bottom: 0.4rem; letter-spacing: -0.015em; }
+    .rev-step-body p { font-size: 0.82rem; color: rgba(255,255,255,0.58); line-height: 1.75; }
+    .rev-visual { max-width: 46rem; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: center; }
+    .rev-card-mail { width: 100%; max-width: 22rem; border-radius: 1.2rem; padding: 1.4rem;
+      background: linear-gradient(150deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 26px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.14);
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .rev-mail-top { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 1rem; }
+    .rev-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .rev-mail-label { margin-left: auto; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .rev-mail-subject { font-size: 0.92rem; font-weight: 500; color: #fff; margin-bottom: 0.35rem; }
+    .rev-mail-text { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1rem; }
+    .rev-stars { display: flex; gap: 0.3rem; }
+    .rev-star { font-size: 1.15rem; color: rgba(255,255,255,0.16); }
+    .rev-star.is-on { color: #fbbf24; text-shadow: 0 0 14px rgba(251,191,36,0.5); animation: revStar 3.6s ease-in-out infinite; }
+    .rev-star.is-on:nth-child(2) { animation-delay: 0.12s; }
+    .rev-star.is-on:nth-child(3) { animation-delay: 0.24s; }
+    .rev-star.is-on:nth-child(4) { animation-delay: 0.36s; }
+    .rev-star.is-on:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes revStar { 0%,72%,100% { transform: scale(1); } 80% { transform: scale(1.22); } }
+    .rev-branch { width: 100%; max-width: 22rem; height: 60px; }
+    .rev-branch-svg { width: 100%; height: 100%; }
+    .rev-outcomes { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%; max-width: 25rem; }
+    .rev-out { border-radius: 1rem; padding: 1rem; border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(150deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: 0 16px 36px -18px rgba(0,0,0,0.7); }
+    .rev-out-good { border-color: rgba(16,185,129,0.3); }
+    .rev-out-soft { border-color: rgba(251,191,36,0.28); }
+    .rev-out-top { margin-bottom: 0.7rem; }
+    .rev-out-pill { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.25rem 0.55rem; border-radius: 9999px; display: inline-block; }
+    .rev-pill-good { background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .rev-pill-soft { background: rgba(251,191,36,0.14); color: #fcd34d; border: 1px solid rgba(251,191,36,0.28); }
+    .rev-out-body { display: flex; gap: 0.6rem; align-items: flex-start; }
+    .rev-out-icon { flex-shrink: 0; width: 1.6rem; height: 1.6rem; border-radius: 0.5rem;
+      display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.07); }
+    .rev-out-icon svg { width: 0.85rem; height: 0.85rem; }
+    .rev-out-good .rev-out-icon { color: #6ee7b7; }
+    .rev-out-soft .rev-out-icon { color: #fcd34d; }
+    .rev-out-body p { font-size: 0.72rem; color: rgba(255,255,255,0.52); line-height: 1.5; }
+    .rev-out-body strong { display: block; font-size: 0.8rem; font-weight: 500; color: #fff; margin-bottom: 0.15rem; }
+    .rev-note { display: flex; gap: 0.85rem; align-items: flex-start; margin-top: 3.5rem;
+      max-width: 46rem; padding: 1.1rem 1.3rem; border-radius: 1rem;
+      background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); }
+    .rev-note-icon { flex-shrink: 0; color: #60A5FA; }
+    .rev-note-icon svg { width: 1.1rem; height: 1.1rem; }
+    .rev-note p { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+    @media (max-width: 939px) {
+      .rev-head { grid-template-columns: 1fr; gap: 1.5rem; align-items: start; margin-bottom: 2.5rem; }
+      .rev-steps { grid-template-columns: 1fr; }
+      .rev-visual { margin-top: 0.5rem; }
+    }
+    @media (max-width: 480px) {
+      .rev-outcomes { grid-template-columns: 1fr; }
+      .rev-branch { height: 40px; }
+      .rev-branch-svg { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .rev-star.is-on { animation: none !important; } }
+    @media (max-width: 640px) { .showcase-block { padding: 4.5rem 0; } }
   </style>
   <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
@@ -348,68 +516,198 @@
     <h2 class="section-heading sl-swipe-host" data-sl-split>Yksi palvelu. <span class="accent">Tehtynä kunnolla.</span></h2>
     <p class="section-sub" data-sl-words data-sl-reveal>Rakennamme verkkosivut, jotka näyttävät hyvältä, latautuvat nopeasti ja tuovat yhteydenottoja. Suunnittelusta julkaisuun.</p>
 
-    <div class="svc-bento">
+  </div>
+</div>
 
-      <a href="web-design.html" class="svc-tile svc-tile-hero reveal">
-        <div class="svc-hero-mesh" aria-hidden="true"></div>
-        <div class="svc-hero-photo" aria-hidden="true"></div>
-        <div class="svc-hero-grid" aria-hidden="true"></div>
-        <div class="svc-hero-inner">
-          <div class="svc-tile-top">
-            <span class="svc-badge">Ydinpalvelu</span>
-            <span class="svc-num">01</span>
+<!-- Showcase belt: SEO, email automation, AI chatbot, Google reviews -->
+<div class="showcase-belt">
+  <div class="showcase-mesh" aria-hidden="true"></div>
+  <div class="showcase-grid-bg" aria-hidden="true"></div>
+
+  <!-- SEO -->
+  <div class="showcase-block" id="seo-ominaisuus">
+    <div class="container seo-showcase-grid">
+      <div>
+        <p class="section-label" data-sl-reveal>Hakukoneoptimointi</p>
+        <h2 class="section-heading sl-swipe-host" data-sl-split>Näy siellä, <span class="accent">missä asiakkaasi etsivät.</span></h2>
+        <p class="section-sub" data-sl-reveal>Sivu ilman näkyvyyttä Googlessa on kuin kauppa ilman kylttiä. Rakennamme hakukoneoptimoinnin sisään heti alusta asti: otsikot, metatiedot, rakenne ja nopeus kuntoon, jotta asiakkaat löytävät sinut ilman mainoksia.</p>
+        <div class="seo-chip-row" data-sl-stagger="80">
+          <span class="seo-chip">Otsikot & metatiedot</span>
+          <span class="seo-chip">Sivukartta & rakenne</span>
+          <span class="seo-chip">Nopeat latausajat</span>
+          <span class="seo-chip">Mobiilioptimointi</span>
+          <span class="seo-chip">Paikallinen näkyvyys</span>
+        </div>
+      </div>
+      <div class="seo-visual" data-sl-tilt data-sl-reveal="scale">
+        <div class="seo-serp-card" data-sl-depth="0.3">
+          <div class="seo-serp-url">yrityksesi.fi</div>
+          <div class="seo-serp-title">Yrityksesi Oy | Ammattitaitoista palvelua</div>
+          <div class="seo-serp-desc">★★★★★ 4,9 · Google-arvostelut · Avoinna nyt</div>
+        </div>
+        <div class="seo-rank-badge" data-sl-depth="0.6">
+          <span class="seo-rank-num">#1</span>
+          <span class="seo-rank-label">Google-haussa</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email automation -->
+  <div class="showcase-block" id="sahkopostiautomaatio-ominaisuus">
+    <div class="container">
+      <div class="email-head">
+        <p class="section-label" data-sl-reveal>Sähköpostiautomaatiot</p>
+        <h2 class="section-heading sl-swipe-host" data-sl-split>Yhteydenotot hoituvat, <span class="accent">vaikket olisi paikalla.</span></h2>
+        <p class="section-sub" data-sl-reveal>Jokainen lomake, tilaus ja yhteydenotto laukaisee automaattisen viestin. Ei unohdettuja vastauksia, ei manuaalista selailua sähköpostilaatikossa.</p>
+      </div>
+      <div class="email-timeline" data-sl-stagger="140">
+        <div class="email-step">
+          <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+          <div>
+            <h4>Kävijä jättää yhteydenoton</h4>
+            <p>Lomake, tilaus tai varauspyyntö lähetetään sivustolta.</p>
           </div>
-          <div class="svc-hero-body">
-            <h3>Verkkosivusuunnittelu</h3>
-            <p>Suunnittelemme sivuston ulkoasun brändiisi sopivaksi ja rakennamme sen alusta asti. Ei valmiita teemoja eikä mallipohjia. Jokainen sivu suunnitellaan ensin mobiilille ja rakennetaan latautumaan nopeasti.</p>
-            <div class="svc-chips">
-              <span class="svc-chip">Räätälöity ulkoasu</span>
-              <span class="svc-chip">Mobiilioptimointi</span>
-              <span class="svc-chip">Nopeat latausajat</span>
-              <span class="svc-chip">Konversio-optimointi</span>
+        </div>
+        <div class="email-step">
+          <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div>
+            <h4>Vahvistus asiakkaalle heti</h4>
+            <p>Automaattinen viesti kertoo, että yhteydenotto on vastaanotettu ja mitä seuraavaksi tapahtuu.</p>
+          </div>
+        </div>
+        <div class="email-step">
+          <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+          <div>
+            <h4>Ilmoitus yrittäjälle</h4>
+            <p>Uusi yhteydenotto tippuu suoraan omaan sähköpostiisi, tiedot valmiiksi järjesteltynä.</p>
+          </div>
+        </div>
+        <div class="email-step">
+          <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div>
+            <h4>Muistutus, jos kukaan ei vastaa</h4>
+            <p>Selora huomauttaa, jos yhteydenotto jää roikkumaan, niin kukaan ei putoa väliin.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI chatbot -->
+  <div class="showcase-block" id="tekoalychatbot">
+    <div class="container cb-grid">
+      <div>
+        <p class="section-label" data-sl-reveal>Tekoälychatbot</p>
+        <h2 class="section-heading sl-swipe-host" data-sl-split>Assistentti, joka <span class="accent">ei koskaan nuku.</span></h2>
+        <p class="section-sub" data-sl-reveal>Sivustosi oikeassa alakulmassa asuu chatbot, joka tuntee palvelusi, hinnastosi ja aikataulusi. Se vastaa kysymyksiin heti ja ohjaa kävijän oikealle sivulle, myös kello kolmelta yöllä.</p>
+        <button type="button" class="btn btn-light cb-open-btn" onclick="window.SeloraChat && window.SeloraChat.open()">Kokeile chatia <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="cb-mock" data-sl-reveal="scale">
+        <div class="cb-mock-head">
+          <span class="cb-mock-orb" aria-hidden="true"></span>
+          <span>Selora Assistentti</span>
+        </div>
+        <div class="cb-mock-msgs" data-sl-stagger="220">
+          <div class="cb-bub cb-bub-ai">Hei! Voin kertoa palveluistamme ja hinnoista. Miten voin auttaa?</div>
+          <div class="cb-bub cb-bub-user">Paljonko verkkosivut maksavat?</div>
+          <div class="cb-bub cb-bub-ai">Kertaluontoiset paketit alkavat 298 eurosta. Kerron mielelläni lisää tarpeesi mukaan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google reviews -->
+  <div class="showcase-block" id="arvostelut">
+    <div class="container rev-inner">
+      <div class="rev-head">
+        <div>
+          <p class="section-label" data-sl-reveal>Google-arvostelut</p>
+          <h2 class="section-heading sl-swipe-host" data-sl-split>Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
+        </div>
+        <p class="section-sub" data-sl-reveal>Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
+      </div>
+
+      <div class="rev-flow">
+
+        <div class="rev-steps" data-sl-stagger="110">
+          <div class="rev-step" data-sl-reveal>
+            <div class="rev-step-num">01</div>
+            <div class="rev-step-body">
+              <h3>Asiakas ostaa tai käy</h3>
+              <p>Kun tilaus valmistuu tai käynti on ohi, järjestelmä poimii asiakkaan yhteystiedot automaattisesti.</p>
             </div>
           </div>
-          <span class="svc-cta">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+          <div class="rev-step" data-sl-reveal>
+            <div class="rev-step-num">02</div>
+            <div class="rev-step-body">
+              <h3>Automaattinen viesti lähtee</h3>
+              <p>Asiakas saa ystävällisen sähköpostin, jossa pyydetään lyhyt arvio kokemuksesta. Ajoituksen ja sanamuodon säädämme toimialaasi sopivaksi.</p>
+            </div>
+          </div>
+          <div class="rev-step" data-sl-reveal>
+            <div class="rev-step-num">03</div>
+            <div class="rev-step-body">
+              <h3>Palaute ohjautuu oikeaan paikkaan</h3>
+              <p>Tyytyväinen asiakas ohjataan suoraan Google-arvosteluun ja arvio näkyy myös sivustollasi. Jos kokemus jäi vajaaksi, palaute tulee ensin sinulle, jotta ehdit korjata tilanteen.</p>
+            </div>
+          </div>
         </div>
-      </a>
 
-      <a href="seo.html" class="svc-tile reveal reveal-delay-1">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+        <div class="rev-visual" data-sl-reveal="scale" aria-hidden="true">
+
+          <div class="rev-card rev-card-mail">
+            <div class="rev-mail-top">
+              <span class="rev-dot"></span><span class="rev-dot"></span><span class="rev-dot"></span>
+              <span class="rev-mail-label">Sähköposti</span>
+            </div>
+            <p class="rev-mail-subject">Miten palvelumme sujui?</p>
+            <p class="rev-mail-text">Kiitos käynnistäsi. Kerrotko lyhyesti miten meni?</p>
+            <div class="rev-stars">
+              <span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span>
+            </div>
+          </div>
+
+          <div class="rev-branch">
+            <svg class="rev-branch-svg" viewBox="0 0 240 60" preserveAspectRatio="none">
+              <path d="M120 0 V22 M120 22 H34 V58 M120 22 H206 V58" fill="none" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="rev-outcomes">
+            <div class="rev-out rev-out-good">
+              <div class="rev-out-top">
+                <span class="rev-out-pill rev-pill-good">4, 5 tähteä</span>
+              </div>
+              <div class="rev-out-body">
+                <span class="rev-out-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+                <p><strong>Google-arvostelu</strong>Julkaistaan myös sivustollasi</p>
+              </div>
+            </div>
+            <div class="rev-out rev-out-soft">
+              <div class="rev-out-top">
+                <span class="rev-out-pill rev-pill-soft">1, 3 tähteä</span>
+              </div>
+              <div class="rev-out-body">
+                <span class="rev-out-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+                </span>
+                <p><strong>Suoraan sinulle</strong>Ehdit korjata tilanteen ajoissa</p>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <h4>Hakukoneoptimointi</h4>
-        <p>Otsikot, metatiedot ja nopeus kuntoon, jotta asiakkaat löytävät sinut Googlesta.</p>
-              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
-      </a>
+      </div>
 
-
-      <a href="email-automation.html" class="svc-tile reveal reveal-delay-1">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        </div>
-        <h4>Sähköpostiautomaatiot</h4>
-        <p>Automaattiset vahvistus- ja ilmoitusviestit hoitavat yhteydenotot puolestasi.</p>
-              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
-      </a>
-
-      <a href="ai-chatbot.html" class="svc-tile reveal reveal-delay-2">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-        </div>
-        <h4>Tekoälychatbot</h4>
-        <p>Sivustollasi asuva assistentti vastaa kysymyksiin ja ohjaa kävijät eteenpäin, ympäri vuorokauden.</p>
-              <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
-      </a>
-
-      <a href="index.html#arvostelut" class="svc-tile svc-tile-accent reveal reveal-delay-2">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
-        </div>
-        <h4>Google-arvostelut</h4>
-        <p>Automaattinen järjestelmä kerää arvosteluja asiakkailtasi ja kasvattaa näkyvyyttäsi.</p>
-        <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
-      </a>
-
+      <div class="rev-note reveal">
+        <span class="rev-note-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </span>
+        <p>Toteutus noudattaa Googlen arvostelukäytäntöjä. Jokainen asiakas voi halutessaan jättää arvostelun Googleen, emmekä estä ketään. Sivustollasi näytämme julkaistavaksi hyväksytyt arviot.</p>
+      </div>
     </div>
   </div>
 </div>
