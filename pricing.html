@@ -116,6 +116,9 @@
     .pkg-card.is-premium .pkg-divider { background: rgba(255,255,255,0.12); }
     .pkg-card.is-premium .pkg-icon { background: rgba(96,165,250,0.16); border-color: rgba(96,165,250,0.3); color: #93c5fd; }
     .pkg-card.is-premium .pkg-example { color: #93c5fd; }
+    .pkg-price-was { font-size: 1.25rem; font-weight: 300; color: rgba(255,255,255,0.45); text-decoration-thickness: 1px; }
+    /* the sale badge has to out-shout the "most striking" badge it replaced */
+    .pkg-badge-sale { background: linear-gradient(90deg, #b91c1c, #ef4444); color: #fff; box-shadow: 0 8px 20px -8px rgba(239,68,68,0.9); }
     .pkg-badge-premium { background: linear-gradient(90deg, #1D4ED8, #60A5FA); color: #fff; }
     @media (prefers-reduced-motion: reduce) { .pkg-example { transition: none !important; } .pkg-example:hover { transform: none; } }
     .pkg-divider { height: 1px; background: rgba(15,23,42,0.1); margin: 1.5rem 0; }
@@ -371,12 +374,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/hinnoittelu.html" />
   <meta property="og:title" content="Hinnoittelu, Selora" />
-  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
+  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hinnoittelu, Selora" />
-  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
+  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
 <link rel="stylesheet" href="/assets/selora-ds.css" />
@@ -478,12 +481,15 @@
       </div>
 
       <div class="pkg-card is-premium reveal reveal-delay-2" id="pkg-elamyssivusto">
-        <span class="pkg-badge pkg-badge-premium">Näyttävin</span>
+        <span class="pkg-badge pkg-badge-sale">Tarjous, -33 %</span>
         <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 2.4 5.6 5.6 2.4-5.6 2.4L12 21l-2.4-5.6L4 13l5.6-2.4z"/></svg></div>
         <h3 class="pkg-name">Elämyssivusto</h3>
         <p class="pkg-for">Brändeille, jotka haluavat sivuston jonka muistaa. Kerronnallinen, liikkuva ja silti nopea.</p>
-        <div class="pkg-price-row"><span class="pkg-price">898 €</span></div>
-        <p class="pkg-price-note">kertamaksu</p>
+        <div class="pkg-price-row">
+          <span class="pkg-price">598 €</span>
+          <s class="pkg-price-was">898 €</s>
+        </div>
+        <p class="pkg-price-note">kertamaksu, säästät 300 €</p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
           <li>Kaikki mitä Täysi sivusto sisältää</li>
@@ -659,7 +665,7 @@
             <th style="width:37%">Ominaisuus</th>
             <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">298 €</span></th>
             <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">498 €</span></th>
-            <th class="col-premium">Elämyssivusto<br><span style="font-weight:400;font-size:0.8rem;">898 €</span></th>
+            <th class="col-premium">Elämyssivusto<br><span style="font-weight:400;font-size:0.8rem;">598 € <s style="opacity:0.55;">898 €</s></span></th>
           </tr>
         </thead>
         <tbody>

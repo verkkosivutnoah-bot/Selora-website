@@ -25,7 +25,7 @@
   if (!track || !marquee) return;
 
   var BASE_W = 1440, BASE_H = 900;
-  var SECONDS_PER_CARD = 9;   // constant travel speed as cards are added
+  var SECONDS_PER_CARD = 5.5; // constant travel speed as cards are added
 
   var originals = Array.prototype.slice.call(track.children);
   if (!originals.length) return;
@@ -161,15 +161,24 @@
   watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
   requestAnimationFrame(frame);
 
+  /* Watch the section, not the individual cards.
+
+     Per-card observation looked cheaper but was the reason cards showed up as
+     empty slabs: in a strip that never stops moving, every card crosses the
+     observer's margin on every pass, so each one tore its iframe down and
+     rebuilt it seconds later. A rebuilt iframe starts blank and only fades in
+     once the remote page has loaded again, which is exactly the gap you see.
+
+     Mounting per section means each preview loads once while the section is on
+     screen and simply stays. Nothing is destroyed until the whole section is
+     well out of view, so the strip is never mid-reload where you can see it. */
   function watchFrames(frames) {
     if (!frames.length) return;
     if (!('IntersectionObserver' in window)) { frames.forEach(mount); return; }
     var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) mount(e.target);
-        else unmount(e.target);
-      });
-    }, { rootMargin: '300px' });
-    frames.forEach(function (f) { obs.observe(f); });
+      var visible = entries[0].isIntersecting;
+      frames.forEach(visible ? mount : unmount);
+    }, { rootMargin: '600px 0px' });
+    obs.observe(marquee);
   }
 })();

@@ -3050,8 +3050,8 @@
     'Kertamaksu, ei yllätyksiä': 'One-time fee, no surprises',
     'Maksat sivustosta kerran ja se on sinun. Ylläpito ja hosting 20 € kuukaudessa, ei yllätyslaskuja.':
       'You pay for the site once and it is yours. Maintenance and hosting are 20 € a month, with no surprise invoices.',
-    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ylläpito ja hosting maksaa 20 euroa kuukaudessa. Ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
-      'A basic site is 298 euros, a full site 498 euros and a showcase site 898 euros, all as a one-time fee. Maintenance and hosting cost 20 euros a month. No hidden costs. The first discovery call is free, and after it you get a fixed price.',
+    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting maksaa 20 euroa kuukaudessa. Ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
+      'A basic site is 298 euros, a full site 498 euros and a showcase site at a sale price of 598 euros (normally 898 euros), all as a one-time fee. Maintenance and hosting cost 20 euros a month. No hidden costs. The first discovery call is free, and after it you get a fixed price.',
     'Sivusto on sinun. Ylläpito ja hosting maksaa 20 euroa kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit myös hoitaa sivuston itse, emmekä sido sinua pitkään sopimukseen.':
       'The site is yours. Maintenance and hosting cost 20 euros a month and include updates, backups and design changes. You can also run the site yourself, and we do not tie you into a long contract.',
     'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ylläpito 20 € kuukaudessa.':
@@ -3059,10 +3059,10 @@
 
 
     // ---------- REBRAND: hinnoittelu + palvelut ----------
-    'Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto 898 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
-      'Websites for a one-time fee. Basic site 298 euros, full site 498 euros, showcase site 898 euros. Fixed price, no monthly fees, no hidden costs.',
-    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja.':
-      'Clear pricing without surprises. Basic site 298 euros, full site 498 euros and showcase site 898 euros, all one-time. No monthly fees.',
+    'Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa). Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja.':
+      'Websites for a one-time fee. Basic site 298 euros, full site 498 euros, showcase site at a sale price of 598 euros (normally 898 euros). Fixed price, no monthly fees, no hidden costs.',
+    'Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ei kuukausimaksuja.':
+      'Clear pricing without surprises. Basic site 298 euros, full site 498 euros and showcase site at a sale price of 598 euros (normally 898 euros), all one-time. No monthly fees.',
     'Ei. Sovittu kertamaksu kattaa suunnittelun, toteutuksen ja julkaisun. Jos haluat myöhemmin lisää sivuja tai toimintoja, sovimme hinnan aina etukäteen.':
       'No. The agreed one-time fee covers design, build and launch. If you later want more pages or features, we always agree the price in advance.',
     'Voinko laajentaa sivustoa myöhemmin?': 'Can I expand the site later?',
@@ -3914,7 +3914,7 @@
     'Vastaustesi perusteella Elämyssivusto sopii sinulle. Voit vaihtaa vastauksia milloin tahansa.': 'Based on your answers the Showcase site suits you. You can change your answers at any time.',
     'Nyrkkisääntö: jos tarvitset enintään neljä sivua etkä lomakkeita, automaatioita tai syvällistä hakukoneoptimointia, Perussivu riittää. Jos tarvitset enemmän sivuja tai näitä toimintoja, valitse Täysi sivusto. Jos haluat lisäksi kerronnallisen ja näyttävän sivuston, valitse Elämyssivusto.': 'Rule of thumb: if you need at most four pages and no forms, automations or deep search optimisation, the Basic site is enough. If you need more pages or those features, choose the Full site. If you also want a narrative, striking site, choose the Showcase site.',
     'Perussivu sopii yksinkertaiseen esittelyyn. Täysi sivusto sopii, jos tarvitset enemmän sivuja, lomakkeita, automaatioita tai syvempää hakukoneoptimointia. Elämyssivusto on näistä näyttävin: kerronnallinen vieritys ja liike, ilman että sivusto hidastuu.': 'The Basic site suits a simple introduction. The Full site suits you if you need more pages, forms, automations or deeper search optimisation. The Showcase site is the most striking of the three: narrative scrolling and motion, without the site slowing down.',
-    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.': 'The Basic site is 298 euros, the Full site 498 euros and the Showcase site 898 euros, all one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
+    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ei kuukausimaksuja, ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.': 'The Basic site is 298 euros, the Full site 498 euros and the Showcase site 898 euros, all one-time. No monthly fees, no hidden costs. The first discovery call is free and after it you get a fixed price.',
 
     // ---------- hinnoittelu.html: strings the EN toggle missed ----------
     'Paketit': 'Packages',
@@ -3971,6 +3971,8 @@
     'Hei! Voin kertoa palveluistamme ja hinnoista. Miten voin auttaa?': 'Hi! I can tell you about our services and pricing. How can I help?',
     'Paljonko verkkosivut maksavat?': 'What does a website cost?',
     'Kertaluontoiset paketit alkavat 298 eurosta. Kerron mielelläni lisää tarpeesi mukaan.': 'One-time packages start at 298 euros. Happy to tell you more based on what you need.',
+    'kertamaksu, säästät 300 €': 'one-time payment, you save €300',
+    'Tarjous, -33 %': 'Sale, -33%',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
