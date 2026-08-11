@@ -39,8 +39,20 @@
   /* Widget chrome, in both languages. These live here rather than in i18n.js
      because the overlay walks the page's text nodes and this markup is built
      after it runs. */
-  var UI_FI = { title: 'Selora Assistentti', sub: 'Vastaan yleensä heti', close: 'Sulje', send: 'Lähetä', placeholder: 'Kirjoita viestisi...' };
-  var UI_EN = { title: 'Selora Assistant',   sub: 'Usually replies right away', close: 'Close', send: 'Send', placeholder: 'Type your message...' };
+  var UI_FI = {
+    title: 'Selora Assistentti', sub: 'Vastaan yleensä heti', close: 'Sulje', send: 'Lähetä',
+    placeholder: 'Kirjoita viestisi...', open: 'Avaa chat',
+    greeting: 'Hei. Olen Seloran AI-assistentti. Voin kertoa palveluistamme, vastata kysymyksiin ja ohjata sinut oikealle sivulle.\n\nMiten voin auttaa?',
+    genericError: 'Pahoittelen, tapahtui virhe.',
+    connError: 'Pahoittelen, yhteys katkesi. Kokeile uudelleen tai ota [yhteyttä](/yhteystiedot.html).',
+  };
+  var UI_EN = {
+    title: 'Selora Assistant', sub: 'Usually replies right away', close: 'Close', send: 'Send',
+    placeholder: 'Type your message...', open: 'Open chat',
+    greeting: 'Hi. I’m Selora’s AI assistant. I can tell you about our services, answer questions and point you to the right page.\n\nHow can I help?',
+    genericError: 'Sorry, something went wrong.',
+    connError: 'Sorry, the connection dropped. Try again or reach us via the [contact page](/yhteystiedot.html).',
+  };
   var UI = getLang() === 'en' ? UI_EN : UI_FI;
 
   /* ── CSS ───────────────────────────────────────────────────── */
@@ -238,7 +250,7 @@
       '</div>' +
 
       /* Dock bar */
-      '<div id="slr-dock">' +
+      '<div id="slr-dock" role="button" tabindex="0" aria-label="' + UI.open + '" aria-expanded="false">' +
         ORB +
         '<span id="slr-dock-label">Selora AI</span>' +
       '</div>' +
@@ -261,26 +273,40 @@
   var loading = false;
 
   /* ── Open / close ──────────────────────────────────────────── */
+  var formPanel = document.getElementById('slr-form');
+  formPanel.inert = true; /* keeps the closed (opacity:0) panel out of tab order */
+
   function open() {
     isOpen = true;
     morph.classList.add('open');
+    formPanel.inert = false;
+    dock.setAttribute('aria-expanded', 'true');
     if (history.length === 0) greeting();
     setTimeout(function () { inputEl.focus(); }, 360);
   }
-  function close() {
+  function close(returnFocus) {
     isOpen = false;
     morph.classList.remove('open');
+    formPanel.inert = true;
+    dock.setAttribute('aria-expanded', 'false');
+    /* Only pull focus back for keyboard/close-button closes — stealing it on
+       an outside click could yank focus away from whatever the visitor just
+       clicked. */
+    if (returnFocus) dock.focus();
   }
 
   dock.addEventListener('click', function () { if (!isOpen) open(); });
-  closeBtn.addEventListener('click', close);
+  dock.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && !isOpen) { e.preventDefault(); open(); }
+  });
+  closeBtn.addEventListener('click', function () { close(true); });
   document.addEventListener('mousedown', function (e) {
-    if (isOpen && !morph.contains(e.target)) close();
+    if (isOpen && !morph.contains(e.target)) close(false);
   });
 
   /* ── Greeting ──────────────────────────────────────────────── */
   function greeting() {
-    addBubble('ai', 'Hei. Olen Seloran AI-assistentti. Voin kertoa palveluistamme, vastata kysymyksiin ja ohjata sinut oikealle sivulle.\n\nMiten voin auttaa?');
+    addBubble('ai', UI.greeting);
     renderSuggestions();
   }
 
@@ -350,13 +376,13 @@
       })
       .then(function (data) {
         hideTyping();
-        var reply = data.content || 'Pahoittelen, tapahtui virhe.';
+        var reply = data.content || UI.genericError;
         addBubble('ai', reply);
         history.push({ role: 'assistant', content: reply });
       })
       .catch(function (err) {
         hideTyping();
-        addBubble('ai', 'Pahoittelen, yhteys katkesi. Kokeile uudelleen tai ota [yhteytta](/yhteystiedot.html).');
+        addBubble('ai', UI.connError);
         console.error('[Selora chat]', err);
       })
       .finally(function () {
@@ -374,7 +400,7 @@
   inputEl.addEventListener('input', resize);
   inputEl.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(inputEl.value); }
-    if (e.key === 'Escape') close();
+    if (e.key === 'Escape') close(true);
   });
   sendBtn.addEventListener('click', function () { sendMessage(inputEl.value); });
 
