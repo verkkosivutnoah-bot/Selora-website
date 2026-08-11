@@ -3869,6 +3869,7 @@
     'ei enempää.': 'no more.',
     'Sinä kerrot mitä tarvitset. Me hoidamme loput. Tiedät koko ajan missä mennään.': 'You tell us what you need. We handle the rest. You always know where things stand.',
     'Käymme puhelimessa läpi mitä teet ja mitä sivustolta halutaan. Saat kiinteän hinnan heti.': 'On the phone we go through what you do and what the site needs. You get a fixed price right away.',
+    'Jutellaan': 'We talk',
     'Me rakennamme': 'We build it',
     'Suunnittelemme ulkoasun ja rakennamme sivuston. Näytämme sen sinulle ja korjaamme mitä haluat.': 'We design the look and build the site. We show it to you and change whatever you want.',
     'Muutama päivä': 'A few days',
@@ -3935,6 +3936,41 @@
     'Kesto: 2 min': 'Duration: 2 min',
     'Kesto: 30 min': 'Duration: 30 min',
     'Soita: 040 815 1122': 'Call: 040 815 1122',
+
+    // ---------- index.html: SEO / email automation / AI chatbot feature sections ----------
+    'Tekoälychatbot': 'AI chatbot',
+    'Sivustollasi asuva assistentti vastaa kysymyksiin ja ohjaa kävijät eteenpäin, ympäri vuorokauden.': 'An assistant that lives on your site answers questions and points visitors onward, around the clock.',
+
+    'Näy siellä,': 'Be found where',
+    'missä asiakkaasi etsivät.': 'your customers are searching.',
+    'Sivu ilman näkyvyyttä Googlessa on kuin kauppa ilman kylttiä. Rakennamme hakukoneoptimoinnin sisään heti alusta asti: otsikot, metatiedot, rakenne ja nopeus kuntoon, jotta asiakkaat löytävät sinut ilman mainoksia.': 'A site with no visibility on Google is like a shop with no sign. We build search optimisation in from day one: headings, metadata, structure and speed sorted, so customers find you without ads.',
+    'Otsikot & metatiedot': 'Headings & metadata',
+    'Sivukartta & rakenne': 'Sitemap & structure',
+    'Paikallinen näkyvyys': 'Local visibility',
+    'Yrityksesi Oy | Ammattitaitoista palvelua': 'Your Company Ltd | Professional service',
+    '★★★★★ 4,9 · Google-arvostelut · Avoinna nyt': '★★★★★ 4.9 · Google reviews · Open now',
+    'Google-haussa': 'in Google search',
+
+    'Yhteydenotot hoituvat,': 'Enquiries get handled,',
+    'vaikket olisi paikalla.': 'even when you are not around.',
+    'Jokainen lomake, tilaus ja yhteydenotto laukaisee automaattisen viestin. Ei unohdettuja vastauksia, ei manuaalista selailua sähköpostilaatikossa.': 'Every form, order and enquiry triggers an automatic message. No forgotten replies, no manual digging through the inbox.',
+    'Kävijä jättää yhteydenoton': 'A visitor sends an enquiry',
+    'Lomake, tilaus tai varauspyyntö lähetetään sivustolta.': 'A form, order or booking request is sent from the site.',
+    'Vahvistus asiakkaalle heti': 'Instant confirmation to the customer',
+    'Automaattinen viesti kertoo, että yhteydenotto on vastaanotettu ja mitä seuraavaksi tapahtuu.': 'An automatic message confirms the enquiry was received and explains what happens next.',
+    'Ilmoitus yrittäjälle': 'Notification to you',
+    'Uusi yhteydenotto tippuu suoraan omaan sähköpostiisi, tiedot valmiiksi järjesteltynä.': 'The new enquiry lands straight in your inbox, details already organised.',
+    'Muistutus, jos kukaan ei vastaa': 'A reminder if no one replies',
+    'Selora huomauttaa, jos yhteydenotto jää roikkumaan, niin kukaan ei putoa väliin.': 'Selora flags it if an enquiry is left hanging, so no one falls through the cracks.',
+
+    'Assistentti, joka': 'An assistant that',
+    'ei koskaan nuku.': 'never sleeps.',
+    'Sivustosi oikeassa alakulmassa asuu chatbot, joka tuntee palvelusi, hinnastosi ja aikataulusi. Se vastaa kysymyksiin heti ja ohjaa kävijän oikealle sivulle, myös kello kolmelta yöllä.': 'In the bottom corner of your site lives a chatbot that knows your services, prices and schedule. It answers questions instantly and points visitors to the right page, even at three in the morning.',
+    'Kokeile chatia': 'Try the chat',
+    'Selora Assistentti': 'Selora Assistant',
+    'Hei! Voin kertoa palveluistamme ja hinnoista. Miten voin auttaa?': 'Hi! I can tell you about our services and pricing. How can I help?',
+    'Paljonko verkkosivut maksavat?': 'What does a website cost?',
+    'Kertaluontoiset paketit alkavat 298 eurosta. Kerron mielelläni lisää tarpeesi mukaan.': 'One-time packages start at 298 euros. Happy to tell you more based on what you need.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN

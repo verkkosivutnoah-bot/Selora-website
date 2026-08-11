@@ -46,3 +46,5 @@ linkedin-posts-*.csv
 # Python
 __pycache__/
 *.pyc
+.vercel
+.env*

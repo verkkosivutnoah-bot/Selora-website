@@ -310,6 +310,10 @@
     if (returnFocus) dock.focus();
   }
 
+  /* Lets other page elements (e.g. the AI-chatbot showcase section's CTA)
+     open the widget without reaching into this closure. */
+  window.SeloraChat = { open: open, close: function () { close(true); } };
+
   dock.addEventListener('click', function () { if (!isOpen) open(); });
   dock.addEventListener('keydown', function (e) {
     if ((e.key === 'Enter' || e.key === ' ') && !isOpen) { e.preventDefault(); open(); }

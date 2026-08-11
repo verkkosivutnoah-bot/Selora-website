@@ -13,9 +13,11 @@ after any copy change and the chatbot knows the new text:
 
     python3 scripts/build-chatbot-knowledge.py
 
-Deliberately not clever. No embeddings, no chunking, no vector store: the whole
-site is a few thousand words, which fits in a system prompt with room to spare.
-A retrieval layer here would be machinery without a problem to solve.
+Each page becomes one section (title, url, description, text) rather than one
+flat blob. api/chat.js picks the handful of sections relevant to what the
+visitor asked instead of sending the whole site on every call — the site grew
+past what a free-tier model's tokens-per-minute budget can take in one
+request, so dumping everything every time started failing outright.
 """
 import json
 import os
@@ -37,8 +39,11 @@ PAGES = [
     ('verkkosivusuunnittelu.html', 'Verkkosivusuunnittelu', '/verkkosivusuunnittelu.html'),
     ('hinnoittelu.html', 'Hinnoittelu', '/hinnoittelu.html'),
     ('yhteystiedot.html', 'Yhteystiedot', '/yhteystiedot.html'),
-    ('tietosuojaseloste.html', 'Tietosuojaseloste', '/tietosuojaseloste.html'),
 ]
+# tietosuojaseloste.html is deliberately excluded: it is 10k+ chars of legal
+# boilerplate that blew the knowledge base past Groq's per-request token cap
+# (see RULES_FI below — the model already points GDPR questions at the page
+# itself instead of quoting it verbatim).
 
 # Chrome that repeats on every page and tells the chatbot nothing.
 BOILERPLATE = {
@@ -57,6 +62,22 @@ DECORATIVE = re.compile(r'^[▼→←★]+$')
 # ✓ / ✕ read fine as symbols to a person but are ambiguous once a table row is
 # flattened to plain text, so spell them out in both languages.
 CHECK_WORDS = {'✓': ('kyllä', 'yes'), '✕': ('ei', 'no')}
+
+# Slogan halves ('Ensivaikutelma' / 'ratkaisee kaiken.') read fine split
+# across two elements on the page, but flattened into the knowledge base they
+# are just noise: no digit, no currency, short, and the fact they gesture at
+# is always restated in a nearby full sentence that survives this filter.
+# Cut these rather than the sentences, since the model answers from facts,
+# not taglines, and every page duplicating this filler was most of what
+# pushed a single request over Groq's per-request token cap.
+def _is_slogan_fluff(t):
+    if len(t.split()) > 4:
+        return False
+    if re.search(r'[0-9€%]', t):
+        return False
+    if t.rstrip().endswith(':'):
+        return False
+    return True
 
 
 def strip_tags(html_fragment):
@@ -272,6 +293,13 @@ def extract_feat_items(html, en):
     return new_html, pairs
 
 
+# Dedup is global across pages, not per page: nav, footer, cookie banner and
+# CTA copy repeats on every page verbatim, and duplicating it once per page
+# was a big share of what pushed a single chat request over Groq's per-
+# request token cap. First occurrence (in PAGES order) wins.
+SEEN_GLOBAL = set()
+
+
 def visible_text(path, en):
     """Visible copy, in document order, duplicates dropped. Structured
     blocks (tables, pricing cards, FAQ/feature accordions) are pulled out
@@ -287,14 +315,16 @@ def visible_text(path, en):
         html, pairs = extractor(html, en)
         structured += pairs
 
-    out, seen = [], set()
+    out = []
     for raw in re.findall(r'>([^<>]+)<', html):
         t = re.sub(r'\s+', ' ', raw).strip()
-        if len(t) < 3 or t in seen or t in BOILERPLATE:
+        if len(t) < 3 or t in SEEN_GLOBAL or t in BOILERPLATE:
             continue
         if re.fullmatch(r"[\d\s.,€%+/·:;→←★|'-]+", t):
             continue
-        seen.add(t)
+        if _is_slogan_fluff(t):
+            continue
+        SEEN_GLOBAL.add(t)
         out.append(t)
     return out, structured
 

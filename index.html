@@ -457,16 +457,83 @@
       .why-item:hover .why-icon { transform: none; }
     }
 
-    /* TESTIMONIALS */
-    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 3rem; }
-    .testimonial-card { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.08); border-radius: 1.25rem; padding: 1.75rem; box-shadow: 0 1px 4px rgba(15,23,42,0.06); display: flex; flex-direction: column; }
-    .testimonial-stars { color: #f59e0b; font-size: 0.78rem; margin-bottom: 1rem; letter-spacing: 0.05em; }
-    .testimonial-card blockquote { font-size: 0.82rem; color: #374151; line-height: 1.8; font-style: italic; font-weight: 300; margin-bottom: 1.5rem; flex: 1; }
-    .testimonial-metric { font-size: 0.72rem; font-weight: 600; color: var(--blue); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 1.25rem; }
-    .t-author { display: flex; align-items: center; gap: 0.75rem; border-top: 1px solid rgba(15,23,42,0.07); padding-top: 1rem; }
-    .t-avatar { width: 2.25rem; height: 2.25rem; border-radius: 50%; background: rgba(29,78,216,0.12); border: 1px solid rgba(29,78,216,0.2); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: var(--blue); flex-shrink: 0; }
-    .t-name { font-size: 0.78rem; font-weight: 500; color: #0f172a; }
-    .t-role { font-size: 0.7rem; color: var(--text-muted); }
+    /* TESTIMONIALS — immersive dark section */
+    .tm-section { position: relative; overflow: hidden; background: #060c18; padding: 7.5rem 0; isolation: isolate; }
+    .tm-section::before {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background-image: linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 72% 58% at 50% 38%, #000 0%, transparent 78%);
+      mask-image: radial-gradient(ellipse 72% 58% at 50% 38%, #000 0%, transparent 78%);
+      animation: tmGridDrift 26s linear infinite;
+      pointer-events: none;
+    }
+    .tm-section::after {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: radial-gradient(ellipse at 12% 15%, rgba(29,78,216,0.18) 0%, transparent 48%),
+                  radial-gradient(ellipse at 88% 80%, rgba(96,165,250,0.13) 0%, transparent 48%);
+      pointer-events: none;
+    }
+    @keyframes tmGridDrift { from { background-position: 0 0; } to { background-position: 56px 56px; } }
+    .tm-section .container { position: relative; z-index: 1; }
+    .tm-section .section-label { color: #60A5FA; }
+    .tm-section .section-heading { color: #fff; }
+    .tm-head { text-align: center; max-width: 620px; margin: 0 auto 3.75rem; }
+
+    .tm-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.35rem; }
+
+    .tm-card {
+      position: relative; isolation: isolate; overflow: hidden; z-index: 0;
+      display: flex; flex-direction: column;
+      background: linear-gradient(160deg, rgba(255,255,255,0.055), rgba(255,255,255,0.015));
+      border: 1px solid rgba(255,255,255,0.09); border-radius: 1.5rem;
+      padding: 2.15rem 1.9rem 1.85rem;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 24px 60px -30px rgba(0,0,0,0.75);
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), border-color 0.4s ease, box-shadow 0.5s ease;
+    }
+    .tm-card:hover { transform: translateY(-7px); border-color: rgba(96,165,250,0.35); box-shadow: 0 34px 74px -26px rgba(0,0,0,0.8), 0 0 0 1px rgba(96,165,250,0.12); }
+    /* cursor-tracked spotlight, position set by JS via --mx/--my */
+    .tm-card::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; opacity: 0; pointer-events: none;
+      background: radial-gradient(360px circle at var(--mx,50%) var(--my,50%), rgba(96,165,250,0.16), transparent 68%);
+      transition: opacity 0.4s ease;
+    }
+    .tm-card:hover::before { opacity: 1; }
+    .tm-quote-mark {
+      position: absolute; top: -1.1rem; right: 1.1rem; z-index: 0; pointer-events: none; user-select: none;
+      font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 6.5rem; line-height: 1;
+      color: rgba(96,165,250,0.14);
+    }
+    .tm-stars { position: relative; z-index: 1; display: flex; gap: 0.28rem; margin-bottom: 1.15rem; }
+    .tm-star { font-size: 0.85rem; color: #fbbf24; text-shadow: 0 0 12px rgba(251,191,36,0.45); animation: tmStarGlow 3.6s ease-in-out infinite; }
+    .tm-star:nth-child(1) { animation-delay: 0s; }
+    .tm-star:nth-child(2) { animation-delay: 0.12s; }
+    .tm-star:nth-child(3) { animation-delay: 0.24s; }
+    .tm-star:nth-child(4) { animation-delay: 0.36s; }
+    .tm-star:nth-child(5) { animation-delay: 0.48s; }
+    @keyframes tmStarGlow { 0%,70%,100% { transform: scale(1); } 80% { transform: scale(1.25); } }
+    .tm-metric {
+      position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 0.4rem; width: fit-content;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em; color: #93c5fd;
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.24);
+      padding: 0.35rem 0.75rem; border-radius: 9999px; margin-bottom: 1.5rem;
+    }
+    .tm-card blockquote { position: relative; z-index: 1; flex: 1; margin: 0 0 1.85rem; font-size: 0.86rem; font-weight: 300; font-style: italic; line-height: 1.85; color: rgba(255,255,255,0.82); }
+    .tm-author { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.85rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.09); }
+    .tm-avatar-wrap { position: relative; width: 2.6rem; height: 2.6rem; flex-shrink: 0; }
+    .tm-avatar-ring { position: absolute; inset: -2px; border-radius: 50%; background: conic-gradient(from 0deg, #1D4ED8, #60A5FA, #1D4ED8); animation: tmRingSpin 6s linear infinite; opacity: 0.55; }
+    .tm-avatar { position: absolute; inset: 2px; border-radius: 50%; background: #0b1424; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 600; color: #93c5fd; }
+    @keyframes tmRingSpin { to { transform: rotate(360deg); } }
+    .tm-name { font-size: 0.8rem; font-weight: 500; color: #fff; }
+    .tm-role { font-size: 0.7rem; color: rgba(255,255,255,0.45); }
+
+    @media (max-width: 900px) { .tm-grid { grid-template-columns: 1fr 1fr; } .tm-section { padding: 5.5rem 0; } }
+    @media (max-width: 640px) { .tm-grid { grid-template-columns: 1fr; } .tm-head { margin-bottom: 2.75rem; } }
+    @media (prefers-reduced-motion: reduce) {
+      .tm-section::before, .tm-star, .tm-avatar-ring { animation: none !important; }
+      .tm-card { transition: none !important; }
+    }
 
     /* ── SIRI ORB DEMO ───────────────────────────────────────────────── */
     @property --siri-angle {
@@ -705,8 +772,8 @@
 
     /* RESPONSIVE */
     @media(max-width:1100px){ .integration-grid{grid-template-columns:repeat(4,1fr);} }
-    @media(max-width:900px){ .grid-3{grid-template-columns:1fr 1fr;} .testimonials-grid{grid-template-columns:1fr 1fr;} .pricing-teaser-grid{grid-template-columns:1fr 1fr;} }
-    @media(max-width:640px){ .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} .integration-grid{grid-template-columns:repeat(3,1fr);} .testimonials-grid{grid-template-columns:1fr;} .pricing-teaser-grid{grid-template-columns:1fr;} .stats-inner{gap:1.5rem;} .stat-divider{display:none;} .cta-block{padding:2rem 1.5rem;} .footer-top{flex-direction:column;} .footer-links{gap:1.5rem;} }
+    @media(max-width:900px){ .grid-3{grid-template-columns:1fr 1fr;} .pricing-teaser-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:640px){ .grid-3{grid-template-columns:1fr;} .grid-2{grid-template-columns:1fr;} .integration-grid{grid-template-columns:repeat(3,1fr);} .pricing-teaser-grid{grid-template-columns:1fr;} .stats-inner{gap:1.5rem;} .stat-divider{display:none;} .cta-block{padding:2rem 1.5rem;} .footer-top{flex-direction:column;} .footer-links{gap:1.5rem;} }
 
     /* ═══════════════════════════════════════════════════════
        LIVE DEMO SECTION, unique dark section
@@ -1321,6 +1388,105 @@
       .hc-label { font-size: 0.58rem; }
       .hc-free-badge { font-size: 0.56rem; padding: 2px 7px; }
     }
+
+    /* ═══════════════════════════════════════════════════════
+       SEO / EMAIL AUTOMATION / AI CHATBOT — feature sections
+       ═══════════════════════════════════════════════════════ */
+
+    /* ── SEO ── */
+    .seo-showcase-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; align-items: center; margin-top: 2.5rem; }
+    .seo-chip-row { display: flex; flex-wrap: wrap; gap: 0.55rem; margin: 1.75rem 0 2.1rem; }
+    .seo-chip { font-size: 0.74rem; font-weight: 500; color: var(--blue); background: rgba(29,78,216,0.07); border: 1px solid rgba(29,78,216,0.16); border-radius: 9999px; padding: 0.4rem 0.9rem; }
+    .seo-visual { position: relative; }
+    .seo-serp-card {
+      background: #fff; border: 1px solid rgba(15,23,42,0.08); border-radius: 1.1rem;
+      padding: 1.5rem 1.6rem; box-shadow: 0 24px 60px -28px rgba(15,23,42,0.35);
+      max-width: 22rem;
+    }
+    .seo-serp-url { font-size: 0.72rem; color: #16a34a; margin-bottom: 0.3rem; font-family: 'Inter', sans-serif; }
+    .seo-serp-title { font-size: 1.02rem; color: #1a0dab; margin-bottom: 0.45rem; letter-spacing: -0.01em; }
+    .seo-serp-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+    .seo-rank-badge {
+      position: absolute; top: -1.4rem; right: -0.5rem; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+      background: var(--blue); color: #fff; border-radius: 1rem; padding: 0.85rem 1.15rem;
+      box-shadow: 0 18px 40px -14px rgba(29,78,216,0.55);
+      animation: seoBadgeFloat 4.5s ease-in-out infinite;
+    }
+    .seo-rank-num { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1; }
+    .seo-rank-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; }
+    @keyframes seoBadgeFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @media (max-width: 900px) { .seo-showcase-grid { grid-template-columns: 1fr; gap: 2.5rem; } .seo-visual { max-width: 22rem; margin: 0 auto; } }
+    @media (prefers-reduced-motion: reduce) { .seo-rank-badge { animation: none; } }
+
+    /* ── Email automation ── */
+    .email-showcase { position: relative; background: #080e1c; padding: 7.5rem 0; overflow: hidden; }
+    .email-showcase .section-label { color: #60A5FA; }
+    .email-showcase .section-heading { color: #fff; }
+    .email-showcase .section-sub { color: rgba(255,255,255,0.55); }
+    .email-showcase::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 85% 20%, rgba(29,78,216,0.16) 0%, transparent 50%);
+    }
+    .email-head { max-width: 40rem; margin: 0 auto 3.5rem; text-align: center; position: relative; z-index: 1; }
+    .email-timeline { position: relative; z-index: 1; max-width: 38rem; margin: 0 auto; }
+    .email-step { position: relative; display: flex; gap: 1.4rem; padding-bottom: 2.6rem; }
+    .email-step:last-child { padding-bottom: 0; }
+    .email-step::before {
+      content: ''; position: absolute; left: 1.15rem; top: 2.6rem; bottom: 0; width: 1px;
+      background: linear-gradient(rgba(96,165,250,0.35), rgba(96,165,250,0.06));
+    }
+    .email-step:last-child::before { display: none; }
+    .email-step-icon {
+      flex-shrink: 0; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.3);
+      display: flex; align-items: center; justify-content: center; color: #60A5FA;
+      box-shadow: 0 0 0 6px rgba(96,165,250,0.05);
+    }
+    .email-step-icon svg { width: 18px; height: 18px; }
+    .email-step h4 { font-size: 0.95rem; font-weight: 500; color: #fff; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
+    .email-step p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.7; margin: 0; }
+    @media (max-width: 640px) { .email-showcase { padding: 5rem 0; } }
+
+    /* ── AI chatbot ── */
+    .cb-section { position: relative; background: #060c18; padding: 7.5rem 0; overflow: hidden; isolation: isolate; }
+    .cb-section::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(96,165,250,0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.045) 1px, transparent 1px);
+      background-size: 44px 44px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 78% 45%, #000 0%, transparent 78%);
+      mask-image: radial-gradient(ellipse 70% 60% at 78% 45%, #000 0%, transparent 78%);
+      animation: cbGridDrift 22s linear infinite;
+    }
+    @keyframes cbGridDrift { from { background-position: 0 0; } to { background-position: 44px 44px; } }
+    .cb-section .container { position: relative; z-index: 1; }
+    .cb-grid { display: grid; grid-template-columns: 1fr 0.95fr; gap: 3.5rem; align-items: center; }
+    .cb-section .section-label { color: #60A5FA; }
+    .cb-section .section-heading { color: #fff; }
+    .cb-section .section-sub { color: rgba(255,255,255,0.55); margin-bottom: 2rem; }
+    .cb-open-btn { cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.85rem; font-weight: 500; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.5rem; }
+
+    @property --cb-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+    .cb-mock {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 1.35rem;
+      padding: 1.5rem 1.5rem 1.75rem; backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 30px 70px -30px rgba(0,0,0,0.75); max-width: 24rem;
+    }
+    .cb-mock-head { display: flex; align-items: center; gap: 0.65rem; padding-bottom: 1rem; margin-bottom: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.82rem; font-weight: 500; color: #fff; }
+    .cb-mock-orb {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: conic-gradient(from var(--cb-angle), #1D4ED8, #60A5FA, #93C5FD, #1D4ED8);
+      filter: blur(0.6px) contrast(1.6);
+      animation: cbOrbSpin 6s linear infinite;
+    }
+    @keyframes cbOrbSpin { to { --cb-angle: 360deg; } }
+    .cb-mock-msgs { display: flex; flex-direction: column; gap: 0.7rem; }
+    .cb-bub { max-width: 84%; padding: 0.6rem 0.85rem; border-radius: 1rem; font-size: 0.8rem; line-height: 1.55; }
+    .cb-bub-ai { align-self: flex-start; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); border-bottom-left-radius: 0.3rem; }
+    .cb-bub-user { align-self: flex-end; background: var(--blue); color: #fff; border-bottom-right-radius: 0.3rem; }
+    @media (max-width: 900px) { .cb-grid { grid-template-columns: 1fr; gap: 2.5rem; } .cb-mock { max-width: 24rem; margin: 0 auto; } }
+    @media (max-width: 640px) { .cb-section { padding: 5rem 0; } }
+    @media (prefers-reduced-motion: reduce) { .cb-section::before, .cb-mock-orb { animation: none !important; } }
 </style>
   <!-- Open Graph / Social sharing -->
   <meta property="og:type" content="website" />
@@ -1542,7 +1708,7 @@
         </div>
       </a>
 
-      <a href="palvelut.html#seo" class="svc-tile reveal reveal-delay-1">
+      <a href="#seo-ominaisuus" class="svc-tile reveal reveal-delay-1">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
         </div>
@@ -1552,7 +1718,7 @@
       </a>
 
 
-      <a href="palvelut.html#sahkopostiautomaatiot" class="svc-tile reveal reveal-delay-1">
+      <a href="#sahkopostiautomaatio-ominaisuus" class="svc-tile reveal reveal-delay-1">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
         </div>
@@ -1561,7 +1727,16 @@
         <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
       </a>
 
-      <a href="#arvostelut" class="svc-tile svc-tile-accent svc-tile-wide reveal reveal-delay-2">
+      <a href="#tekoalychatbot" class="svc-tile reveal reveal-delay-2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h4>Tekoälychatbot</h4>
+        <p>Sivustollasi asuva assistentti vastaa kysymyksiin ja ohjaa kävijät eteenpäin, ympäri vuorokauden.</p>
+        <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a href="#arvostelut" class="svc-tile svc-tile-accent reveal reveal-delay-2">
         <div class="svc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
         </div>
@@ -1570,6 +1745,100 @@
         <span class="svc-cta svc-cta-sm">Lue lisää <span class="svc-cta-arrow" aria-hidden="true">→</span></span>
       </a>
 
+    </div>
+  </div>
+</div>
+
+<!-- SEO feature -->
+<div class="section section-alt" id="seo-ominaisuus">
+  <div class="container seo-showcase-grid">
+    <div>
+      <p class="section-label" data-sl-reveal>Hakukoneoptimointi</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Näy siellä, <span class="accent">missä asiakkaasi etsivät.</span></h2>
+      <p class="section-sub" data-sl-reveal>Sivu ilman näkyvyyttä Googlessa on kuin kauppa ilman kylttiä. Rakennamme hakukoneoptimoinnin sisään heti alusta asti: otsikot, metatiedot, rakenne ja nopeus kuntoon, jotta asiakkaat löytävät sinut ilman mainoksia.</p>
+      <div class="seo-chip-row" data-sl-stagger="80">
+        <span class="seo-chip">Otsikot & metatiedot</span>
+        <span class="seo-chip">Sivukartta & rakenne</span>
+        <span class="seo-chip">Nopeat latausajat</span>
+        <span class="seo-chip">Mobiilioptimointi</span>
+        <span class="seo-chip">Paikallinen näkyvyys</span>
+      </div>
+      <a href="palvelut.html#seo" class="btn btn-ghost">Tutustu palveluun <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="seo-visual" data-sl-tilt data-sl-reveal="scale">
+      <div class="seo-serp-card" data-sl-depth="0.3">
+        <div class="seo-serp-url">yrityksesi.fi</div>
+        <div class="seo-serp-title">Yrityksesi Oy | Ammattitaitoista palvelua</div>
+        <div class="seo-serp-desc">★★★★★ 4,9 · Google-arvostelut · Avoinna nyt</div>
+      </div>
+      <div class="seo-rank-badge" data-sl-depth="0.6">
+        <span class="seo-rank-num">#1</span>
+        <span class="seo-rank-label">Google-haussa</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Email automation feature -->
+<div class="email-showcase" id="sahkopostiautomaatio-ominaisuus">
+  <div class="container">
+    <div class="email-head">
+      <p class="section-label" data-sl-reveal>Sähköpostiautomaatiot</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Yhteydenotot hoituvat, <span class="accent">vaikket olisi paikalla.</span></h2>
+      <p class="section-sub" data-sl-reveal>Jokainen lomake, tilaus ja yhteydenotto laukaisee automaattisen viestin. Ei unohdettuja vastauksia, ei manuaalista selailua sähköpostilaatikossa.</p>
+    </div>
+    <div class="email-timeline" data-sl-stagger="140">
+      <div class="email-step">
+        <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+        <div>
+          <h4>Kävijä jättää yhteydenoton</h4>
+          <p>Lomake, tilaus tai varauspyyntö lähetetään sivustolta.</p>
+        </div>
+      </div>
+      <div class="email-step">
+        <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <div>
+          <h4>Vahvistus asiakkaalle heti</h4>
+          <p>Automaattinen viesti kertoo, että yhteydenotto on vastaanotettu ja mitä seuraavaksi tapahtuu.</p>
+        </div>
+      </div>
+      <div class="email-step">
+        <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
+        <div>
+          <h4>Ilmoitus yrittäjälle</h4>
+          <p>Uusi yhteydenotto tippuu suoraan omaan sähköpostiisi, tiedot valmiiksi järjesteltynä.</p>
+        </div>
+      </div>
+      <div class="email-step">
+        <span class="email-step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+        <div>
+          <h4>Muistutus, jos kukaan ei vastaa</h4>
+          <p>Selora huomauttaa, jos yhteydenotto jää roikkumaan, niin kukaan ei putoa väliin.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI chatbot feature -->
+<div class="cb-section" id="tekoalychatbot">
+  <div class="container cb-grid">
+    <div>
+      <p class="section-label" data-sl-reveal>Tekoälychatbot</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Assistentti, joka <span class="accent">ei koskaan nuku.</span></h2>
+      <p class="section-sub" data-sl-reveal>Sivustosi oikeassa alakulmassa asuu chatbot, joka tuntee palvelusi, hinnastosi ja aikataulusi. Se vastaa kysymyksiin heti ja ohjaa kävijän oikealle sivulle, myös kello kolmelta yöllä.</p>
+      <button type="button" class="btn btn-light cb-open-btn" onclick="window.SeloraChat &amp;&amp; window.SeloraChat.open()">Kokeile chatia <span aria-hidden="true">→</span></button>
+    </div>
+    <div class="cb-mock" data-sl-reveal="scale">
+      <div class="cb-mock-head">
+        <span class="cb-mock-orb" aria-hidden="true"></span>
+        <span>Selora Assistentti</span>
+      </div>
+      <div class="cb-mock-msgs" data-sl-stagger="220">
+        <div class="cb-bub cb-bub-ai">Hei! Voin kertoa palveluistamme ja hinnoista. Miten voin auttaa?</div>
+        <div class="cb-bub cb-bub-user">Paljonko verkkosivut maksavat?</div>
+        <div class="cb-bub cb-bub-ai">Kertaluontoiset paketit alkavat 298 eurosta. Kerron mielelläni lisää tarpeesi mukaan.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -1899,49 +2168,67 @@
 </div>
 
 <!-- Testimonials -->
-<div class="section">
+<div class="tm-section" id="asiakastarinat">
   <div class="container">
-    <div style="text-align:center;margin-bottom:1rem;" class="reveal">
-      <p class="section-label">Asiakastarinat</p>
-      <h2 class="section-heading">Mitä asiakkaamme <span class="accent">sanovat</span></h2>
+    <div class="tm-head">
+      <p class="section-label" data-sl-reveal>Asiakastarinat</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Mitä asiakkaamme <span class="accent">sanovat</span></h2>
     </div>
-    <div class="testimonials-grid reveal reveal-delay-1">
+    <div class="tm-grid" data-sl-stagger="120">
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-metric">+34% enemmän yhteydenottoja</p>
+      <div class="tm-card" data-sl-tilt data-sl-reveal="scale">
+        <span class="tm-quote-mark" data-sl-depth="0.4" aria-hidden="true">&rdquo;</span>
+        <div class="tm-stars" aria-hidden="true">
+          <span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span>
+        </div>
+        <p class="tm-metric">+34% enemmän yhteydenottoja</p>
         <blockquote>"Vanhat sivumme olivat hitaat eivätkä toimineet puhelimella. Selora rakensi uudet ja ero näkyi heti. Yhteydenotot kasvoivat ensimmäisen kuukauden aikana reippaasti ja asiakkaat löytävät nyt hinnaston ilman että pitää soittaa."</blockquote>
-        <div class="t-author">
-          <div class="t-avatar">KV</div>
+        <div class="tm-author">
+          <div class="tm-avatar-wrap">
+            <div class="tm-avatar-ring" aria-hidden="true"></div>
+            <div class="tm-avatar">KV</div>
+          </div>
           <div>
-            <div class="t-name">Kaisa Virtanen</div>
-            <div class="t-role">Kampaamoyrittäjä, Tampere</div>
+            <div class="tm-name">Kaisa Virtanen</div>
+            <div class="tm-role">Kampaamoyrittäjä, Tampere</div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-metric">Käyttöönotto alle kahdessa päivässä</p>
+      <div class="tm-card" data-sl-tilt data-sl-reveal="scale">
+        <span class="tm-quote-mark" data-sl-depth="0.4" aria-hidden="true">&rdquo;</span>
+        <div class="tm-stars" aria-hidden="true">
+          <span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span>
+        </div>
+        <p class="tm-metric">Käyttöönotto alle kahdessa päivässä</p>
         <blockquote>"Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu. En joutunut koskemaan mihinkään tekniseen."</blockquote>
-        <div class="t-author">
-          <div class="t-avatar">MH</div>
+        <div class="tm-author">
+          <div class="tm-avatar-wrap">
+            <div class="tm-avatar-ring" aria-hidden="true"></div>
+            <div class="tm-avatar">MH</div>
+          </div>
           <div>
-            <div class="t-name">Mikael Heikkinen</div>
-            <div class="t-role">Autokorjaamon omistaja, Oulu</div>
+            <div class="tm-name">Mikael Heikkinen</div>
+            <div class="tm-role">Autokorjaamon omistaja, Oulu</div>
           </div>
         </div>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-metric">Sivusto latautuu alle sekunnissa</p>
+      <div class="tm-card" data-sl-tilt data-sl-reveal="scale">
+        <span class="tm-quote-mark" data-sl-depth="0.4" aria-hidden="true">&rdquo;</span>
+        <div class="tm-stars" aria-hidden="true">
+          <span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span><span class="tm-star">★</span>
+        </div>
+        <p class="tm-metric">Sivusto latautuu alle sekunnissa</p>
         <blockquote>"Olen paljon kentällä, joten sivujen pitää hoitaa myynti puolestani. Nyt asiakas näkee palvelut ja hinnat suoraan puhelimesta ja jättää yhteydenottopyynnön. Soitan takaisin silloin kun on sopiva hetki."</blockquote>
-        <div class="t-author">
-          <div class="t-avatar">SL</div>
+        <div class="tm-author">
+          <div class="tm-avatar-wrap">
+            <div class="tm-avatar-ring" aria-hidden="true"></div>
+            <div class="tm-avatar">SL</div>
+          </div>
           <div>
-            <div class="t-name">Sara Leinonen</div>
-            <div class="t-role">Kiinteistövälittäjä, Helsinki</div>
+            <div class="tm-name">Sara Leinonen</div>
+            <div class="tm-role">Kiinteistövälittäjä, Helsinki</div>
           </div>
         </div>
       </div>
@@ -2066,6 +2353,17 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); obs.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  document.querySelectorAll('.tm-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+    });
+  });
 })();
 
 
