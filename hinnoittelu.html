@@ -9,7 +9,7 @@
   <meta name="format-detection" content="telephone=no, address=no, email=no, date=no" />
   <title>Hinnoittelu, Selora</title>
   <link rel="canonical" href="https://selora.fi/hinnoittelu.html" />
-  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto 898 euroa. Kiinteä hinta, ei kuukausimaksuja, ei piilokuluja." />
+  <meta name="description" content="Verkkosivut kertamaksulla. Perussivu 298 euroa, täysi sivusto 498 euroa, elämyssivusto 898 euroa. Ylläpito ja hosting 20 euroa kuukaudessa. Kiinteä hinta, ei piilokuluja." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -122,6 +122,23 @@
     .pkg-features li::before { content: '✓'; color: var(--blue-light); font-weight: 700; font-size: 0.72rem; margin-top: 0.15rem; flex-shrink: 0; }
     .pkg-cta { width: 100%; justify-content: center; text-align: center; }
     @media (prefers-reduced-motion: reduce) { .pkg-card { transition: none !important; } .pkg-card:hover { transform: none; } }
+
+    /* ── Upkeep: the recurring half of the price, under the one-time cards ── */
+    .upkeep {
+      margin-top: 1.5rem; background: #fff; border: 1px solid rgba(15,23,42,0.09);
+      border-radius: 1.5rem; padding: 2.5rem; display: grid; gap: 2rem;
+      box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+    }
+    @media (min-width: 900px) { .upkeep { grid-template-columns: minmax(0,1fr) minmax(0,1.2fr); gap: 3rem; align-items: center; } }
+    .upkeep-name { font-size: 1.3rem; font-weight: 500; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 0.4rem; }
+    .upkeep-for { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-top: 1.25rem; }
+    .upkeep-price-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem; }
+    .upkeep-price { font-size: 3rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; font-variant-numeric: tabular-nums; }
+    .upkeep-price-note { font-size: 0.78rem; color: var(--text-muted); }
+    .upkeep-features { list-style: none; display: grid; gap: 0.65rem; }
+    @media (min-width: 620px) { .upkeep-features { grid-template-columns: 1fr 1fr; column-gap: 1.75rem; } }
+    .upkeep-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.83rem; color: #475569; line-height: 1.55; }
+    .upkeep-features li::before { content: '✓'; color: var(--blue-light); font-weight: 700; font-size: 0.72rem; margin-top: 0.15rem; flex-shrink: 0; }
 
     /* ── PAYMENT FLOW (dark) ──────────────────────────────────── */
     .pay-section { position: relative; background: #050C1A; padding: 7rem 0; overflow: hidden; }
@@ -351,12 +368,12 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.selora.fi/hinnoittelu.html" />
   <meta property="og:title" content="Hinnoittelu, Selora" />
-  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja." />
+  <meta property="og:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
   <meta property="og:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <meta property="og:locale" content="fi_FI" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Hinnoittelu, Selora" />
-  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ei kuukausimaksuja." />
+  <meta name="twitter:description" content="Selkeä hinnoittelu ilman yllätyksiä. Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto 898 euroa, kaikki kertamaksuna. Ylläpito ja hosting 20 euroa kuukaudessa." />
   <meta name="twitter:image" content="https://www.selora.fi/selora-logo.jpeg" />
   <script defer data-domain="selora.fi" src="https://plausible.io/js/script.js"></script>
 <link rel="stylesheet" href="/assets/selora-ds.css" />
@@ -396,11 +413,11 @@
   <div class="page-title-block">
     <p class="page-label" data-sl-reveal>Investointi</p>
     <h1 data-sl-split>Kertamaksu.<br><span class="accent">Ei yllätyksiä.</span></h1>
-    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat kerran. Sivusto on sinun, heti ja vuosia eteenpäin. Ei kuukausilaskuja, ei piilokuluja.</p>
+    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat sivustosta kerran, vasta julkaisun jälkeen. Ylläpito ja hosting 20 € kuukaudessa. Ei piilokuluja.</p>
     <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
       <span class="phc"><b>298 €</b> alkaen, kertamaksu</span>
       <span class="phc"><b>48 h</b> rakennusaika</span>
-      <span class="phc"><b>0 €</b> kuukausimaksuja</span>
+      <span class="phc"><b>20 €</b> /kk ylläpito</span>
     </div>
   </div>
 </div>
@@ -478,6 +495,23 @@
           <a href="verkkosivusuunnittelu.html#esimerkkitoita" class="pkg-example">Katso esimerkki →</a>
         </div>
       </div>
+    </div>
+
+    <div class="upkeep reveal" id="yllapito">
+      <div>
+        <h3 class="upkeep-name">Ylläpito ja hosting</h3>
+        <div class="upkeep-price-row"><span class="upkeep-price">20 €</span></div>
+        <p class="upkeep-price-note">kuukaudessa</p>
+        <p class="upkeep-for">Sivuston jatkuva ylläpito julkaisun jälkeen. Sama hinta kaikille paketeille, irtisanottavissa milloin tahansa ilman pitkää sopimusta.</p>
+      </div>
+      <ul class="upkeep-features">
+        <li>Hosting ja verkkotunnuksen hallinta</li>
+        <li>Design-muutokset ja sisältöpäivitykset</li>
+        <li>Tietoturva- ja ohjelmistopäivitykset</li>
+        <li>Varmuuskopiot ja palautus</li>
+        <li>Käyttökatkojen seuranta</li>
+        <li>Tuki sähköpostitse</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -764,7 +798,7 @@
     <aside class="money-aside">
       <p class="section-label" data-sl-reveal>Maksat kerran</p>
       <h2 class="section-heading sl-swipe-host" data-sl-split>Näin hinta toimii.<br><span class="accent">Sinun eduksesi.</span></h2>
-      <p class="section-sub" data-sl-reveal>Ei kuukausilaskuja eikä pitkiä sopimuksia. Tässä mitä kertamaksu tarkoittaa käytännössä.</p>
+      <p class="section-sub" data-sl-reveal>Ei pitkiä sopimuksia eikä yllätyslaskuja. Tässä mitä kertamaksu ja ylläpito tarkoittavat käytännössä.</p>
       <a href="yhteystiedot.html" class="btn btn-blue money-cta" data-sl-reveal>Varaa maksuton kartoitus →</a>
     </aside>
     <ol class="money-list">
@@ -783,9 +817,9 @@
         <div class="money-body">
           <div class="money-title">
             <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg></span>
-            <h3>Puolet etukäteen, puolet julkaisussa</h3>
+            <h3>Maksat vasta julkaisun jälkeen</h3>
           </div>
-          <p>Et maksa koko summaa kerralla. Loppuerä laskutetaan vasta kun sivusto on valmis.</p>
+          <p>Et maksa mitään etukäteen. Lasku lähtee vasta kun sivusto on julkaistu ja olet hyväksynyt sen.</p>
         </div>
       </li>
       <li class="money-item" data-sl-pop>
@@ -803,9 +837,9 @@
         <div class="money-body">
           <div class="money-title">
             <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <h3>Ylläpito on valinnainen</h3>
+            <h3>Ylläpito 20 € kuukaudessa</h3>
           </div>
-          <p>Voit hoitaa sivuston itse tai jatkaa ylläpitosopimuksella, joka on irtisanottavissa milloin tahansa.</p>
+          <p>Sisältää hostingin, päivitykset ja design-muutokset. Irtisanottavissa milloin tahansa.</p>
         </div>
       </li>
       <li class="money-item" data-sl-pop>
@@ -843,12 +877,12 @@
         <p class="faq-a">Ei. Sovittu hinta kattaa suunnittelun, rakennuksen ja julkaisun. Jos haluat myöhemmin lisää, sovimme hinnan aina ensin.</p>
       </details>
       <details class="faq-item">
-        <summary class="faq-q">Miten maksu jakautuu? <span class="faq-chevron">▼</span></summary>
-        <p class="faq-a">Maksat puolet projektin alussa ja puolet julkaisussa. Hyväksymme kortin, laskun ja verkkopankin.</p>
+        <summary class="faq-q">Milloin maksan? <span class="faq-chevron">▼</span></summary>
+        <p class="faq-a">Maksat vasta kun sivusto on julkaistu. Et maksa mitään etukäteen. Hyväksymme kortin, laskun ja verkkopankin.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Kuuluuko ylläpito hintaan? <span class="faq-chevron">▼</span></summary>
-        <p class="faq-a">Ei automaattisesti. Kertamaksu kattaa valmiin sivuston. Ylläpito on valinnainen lisäpalvelu, jonka voi lopettaa milloin tahansa.</p>
+        <p class="faq-a">Kertamaksu kattaa valmiin sivuston. Ylläpito ja hosting maksaa 20 € kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit lopettaa sen milloin tahansa.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Voinko laajentaa sivustoa myöhemmin? <span class="faq-chevron">▼</span></summary>
