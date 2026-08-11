@@ -4186,8 +4186,9 @@
   }
 
   function init() {
-    let saved = 'fi';
-    try { saved = localStorage.getItem('seloraLang') || 'fi'; } catch (_) {}
+    let saved = null;
+    try { saved = localStorage.getItem('seloraLang'); } catch (_) {}
+    if (!saved) saved = document.documentElement.getAttribute('lang') === 'en' ? 'en' : 'fi';
     state.lang = saved === 'en' ? 'en' : 'fi';
     document.documentElement.setAttribute('lang', state.lang);
     injectToggle();
