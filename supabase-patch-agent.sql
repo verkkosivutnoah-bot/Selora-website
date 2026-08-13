@@ -66,6 +66,9 @@ CREATE TABLE IF NOT EXISTS public.agent_runs (
   status         TEXT NOT NULL DEFAULT 'queued',
                  -- 'queued' | 'running' | 'success' | 'failed' | 'cancelled'
   trigger        TEXT NOT NULL DEFAULT 'manual',   -- 'manual' | 'schedule'
+  input          JSONB,            -- per-run data for workflows that act on one
+                                   -- thing: { business_name, website_url } for a
+                                   -- demo build, { slug } for a takedown
   output         TEXT,             -- what the agent reported back
   error          TEXT,
   github_run_url TEXT,             -- deep link to the Actions run, for debugging
@@ -98,6 +101,47 @@ CREATE POLICY "own agent jobs" ON public.agent_jobs
 DROP POLICY IF EXISTS "own agent runs" ON public.agent_runs;
 CREATE POLICY "own agent runs" ON public.agent_runs
   FOR SELECT USING (auth.uid() = user_id);
+
+
+-- ── 3b. DEMOS ─────────────────────────────────────────────────────────────
+-- One row per concept site built by the demo-build workflow. Separate from
+-- agent_runs because a demo outlives the run that produced it: it stays live,
+-- gets sent to someone, and may be taken down months later.
+--
+-- `status` tracks where the file actually is, not what the agent intended:
+--   built      the branch exists, nothing is public yet
+--   live       merged and deployed
+--   sent       Noah has sent the link to the business
+--   taken_down removed on request or on second thoughts
+
+CREATE TABLE IF NOT EXISTS public.demos (
+  id             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id        UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+  slug           TEXT NOT NULL,
+  business_name  TEXT NOT NULL,
+  source_url     TEXT,
+  city           TEXT,
+  industry       TEXT,
+  status         TEXT NOT NULL DEFAULT 'built',
+  demo_url       TEXT,
+  run_id         UUID REFERENCES public.agent_runs(id) ON DELETE SET NULL,
+  notes          TEXT,             -- how it went, what was omitted
+  sent_at        TIMESTAMPTZ,
+  taken_down_at  TIMESTAMPTZ,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  UNIQUE (user_id, slug)           -- one demo per business, no silent overwrite
+);
+
+CREATE INDEX IF NOT EXISTS idx_demos_user
+  ON public.demos (user_id, created_at DESC);
+
+ALTER TABLE public.demos ENABLE ROW LEVEL SECURITY;
+
+-- Unlike agent_runs, this one is writable from the client: marking a demo as
+-- sent, or adding a note, is Noah's bookkeeping and never queues any work.
+DROP POLICY IF EXISTS "own demos" ON public.demos;
+CREATE POLICY "own demos" ON public.demos
+  FOR ALL USING (auth.uid() = user_id) WITH CHECK (auth.uid() = user_id);
 
 
 -- ── 4. KEEP updated_at HONEST ─────────────────────────────────────────────

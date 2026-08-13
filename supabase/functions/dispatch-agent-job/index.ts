@@ -39,6 +39,32 @@ const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE);
 interface Body {
   job_id:   string;
   trigger?: "manual" | "schedule";
+  input?:   Record<string, unknown>;
+}
+
+// Per-run input reaches the model's prompt, so it is bounded here rather than
+// trusted. Depth is not the concern — size and shape are: a huge or deeply
+// nested object would crowd out the workflow's own instructions.
+const MAX_INPUT_KEYS  = 12;
+const MAX_INPUT_BYTES = 4000;
+
+function checkInput(input: unknown): string | null {
+  if (input === undefined || input === null) return null;
+  if (typeof input !== "object" || Array.isArray(input)) return "input must be an object";
+
+  const keys = Object.keys(input as Record<string, unknown>);
+  if (keys.length > MAX_INPUT_KEYS) return `input has ${keys.length} keys, max ${MAX_INPUT_KEYS}`;
+
+  for (const [k, v] of Object.entries(input as Record<string, unknown>)) {
+    const t = typeof v;
+    if (t !== "string" && t !== "number" && t !== "boolean" && v !== null) {
+      return `input.${k} must be a string, number, boolean or null`;
+    }
+  }
+  if (JSON.stringify(input).length > MAX_INPUT_BYTES) {
+    return `input exceeds ${MAX_INPUT_BYTES} bytes`;
+  }
+  return null;
 }
 
 serve(async (req) => {
@@ -52,6 +78,9 @@ serve(async (req) => {
     return json({ error: "Invalid JSON" }, 400);
   }
   if (!body.job_id) return json({ error: "job_id required" }, 400);
+
+  const inputError = checkInput(body.input);
+  if (inputError) return json({ error: inputError }, 400);
 
   const trigger = body.trigger === "schedule" ? "schedule" : "manual";
 
@@ -95,7 +124,7 @@ serve(async (req) => {
 
   const { data: run, error: runErr } = await admin
     .from("agent_runs")
-    .insert({ job_id: job.id, user_id: job.user_id, status: "queued", trigger })
+    .insert({ job_id: job.id, user_id: job.user_id, status: "queued", trigger, input: body.input ?? null })
     .select("id")
     .single();
 
