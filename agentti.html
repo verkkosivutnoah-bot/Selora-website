@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Selora-agentin ohjauspaneeli: ajastetut työnkulut, ajohistoria ja manuaalinen käynnistys.">
+  <title>Agentti, Selora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #1D4ED8;
+      --blue-light: #60A5FA;
+      --bg:         #060c18;
+      --card:       rgba(255,255,255,0.035);
+      --card-b:     rgba(255,255,255,0.07);
+      --text:       #fff;
+      --text-2:     rgba(255,255,255,0.58);
+      --text-3:     rgba(255,255,255,0.28);
+      --green:      #22c55e;
+      --amber:      #f59e0b;
+      --red:        #ef4444;
+      --border:     rgba(255,255,255,0.06);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100%;
+    }
+
+    /* Same grid wash as the client dashboard, so the two read as one product. */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(96,165,250,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(96,165,250,0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 1.25rem 5rem; }
+
+    /* ── TOPBAR ─────────────────────────────── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.9rem 1.25rem;
+      padding-top: max(0.9rem, env(safe-area-inset-top));
+      background: rgba(6,12,24,0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topbar-inner { max-width: 900px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 0.9rem; }
+    .topbar h1 { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+    .topbar .spacer { flex: 1; }
+    .back-link {
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .back-link:hover { color: var(--text-2); }
+
+    /* ── BUTTONS ─────────────────────────────── */
+    .btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 9px;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-primary { background: var(--blue); color: #fff; }
+    .btn-primary:not(:disabled):hover { background: #1e40af; }
+    .btn-ghost { background: rgba(255,255,255,0.04); border-color: var(--card-b); color: var(--text-2); }
+    .btn-ghost:not(:disabled):hover { background: rgba(255,255,255,0.08); color: var(--text); }
+    .btn-danger { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.25); color: #fca5a5; }
+    .btn-danger:not(:disabled):hover { background: rgba(239,68,68,0.2); }
+    .btn-sm { padding: 0.4rem 0.7rem; font-size: 0.76rem; }
+
+    /* ── SECTION HEADS ─────────────────────────────── */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin: 2.25rem 0 1rem;
+    }
+    .section-head h2 { font-size: 1.05rem; font-weight: 500; letter-spacing: -0.02em; }
+    .section-head .spacer { flex: 1; }
+
+    /* ── JOB CARDS ─────────────────────────────── */
+    .job {
+      background: var(--card);
+      border: 1px solid var(--card-b);
+      border-radius: 14px;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 0.85rem;
+    }
+    .job.disabled { opacity: 0.5; }
+    .job-top { display: flex; align-items: flex-start; gap: 0.8rem; }
+    .job-name { font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em; }
+    .job-workflow {
+      font-size: 0.72rem;
+      color: var(--text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      margin-top: 0.15rem;
+    }
+    .job-meta { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .chip {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .chip.sched { background: rgba(29,78,216,0.15); border-color: rgba(96,165,250,0.2); color: #bfdbfe; }
+    .job-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+
+    /* Status dot doubles as the live indicator during a run. */
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .dot.success  { background: var(--green); }
+    .dot.failed   { background: var(--red); }
+    .dot.running  { background: var(--blue-light); animation: pulse 1.2s ease-in-out infinite; }
+    .dot.queued   { background: var(--amber); animation: pulse 1.2s ease-in-out infinite; }
+    .dot.idle     { background: var(--text-3); }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+    /* ── RUN HISTORY ─────────────────────────────── */
+    .run {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+    .run-head {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.75rem 0.95rem;
+      cursor: pointer;
+      width: 100%;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+      color: var(--text);
+    }
+    .run-head:hover { background: rgba(255,255,255,0.03); }
+    .run-title { font-size: 0.85rem; font-weight: 500; }
+    .run-sub { font-size: 0.72rem; color: var(--text-3); margin-top: 0.1rem; }
+    .run-body {
+      padding: 0 0.95rem 0.95rem;
+      font-size: 0.8rem;
+      color: var(--text-2);
+      white-space: pre-wrap;
+      word-break: break-word;
+      border-top: 1px solid var(--border);
+      padding-top: 0.8rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      line-height: 1.6;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .run-body a { color: var(--blue-light); }
+
+    /* ── EMPTY / LOADING ─────────────────────────────── */
+    .empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--text-3);
+      font-size: 0.88rem;
+      border: 1px dashed var(--card-b);
+      border-radius: 14px;
+    }
+    #loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; color: var(--text-3); font-size: 0.85rem; }
+
+    /* ── MODAL ─────────────────────────────── */
+    .modal-back {
+      position: fixed;
+      inset: 0;
+      background: rgba(3,8,16,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+    .modal-back.open { display: flex; }
+    .modal {
+      background: #0a1222;
+      border: 1px solid var(--card-b);
+      border-radius: 18px 18px 0 0;
+      width: 100%;
+      max-width: 560px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 1.5rem 1.35rem;
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+    .modal h3 { font-size: 1.05rem; font-weight: 500; margin-bottom: 1.25rem; letter-spacing: -0.02em; }
+
+    .field { margin-bottom: 1.1rem; }
+    .field label {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-3);
+      margin-bottom: 0.45rem;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--card-b);
+      border-radius: 9px;
+      padding: 0.65rem 0.8rem;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: rgba(96,165,250,0.45);
+    }
+    .field textarea { resize: vertical; min-height: 74px; }
+    .field select option { background: #0a1222; }
+    .field-hint { font-size: 0.72rem; color: var(--text-3); margin-top: 0.4rem; line-height: 1.45; }
+
+    /* Weekday picker. Checkbox underneath so it stays keyboard reachable. */
+    .days { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .day input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .day span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 38px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--card-b);
+      font-size: 0.76rem;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .day input:checked + span {
+      background: rgba(29,78,216,0.3);
+      border-color: rgba(96,165,250,0.45);
+      color: #fff;
+    }
+    .day input:focus-visible + span { border-color: var(--blue-light); }
+
+    .modal-actions { display: flex; gap: 0.6rem; margin-top: 1.5rem; }
+    .modal-actions .spacer { flex: 1; }
+
+    /* ── TOAST ─────────────────────────────── */
+    #toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(1.5rem + env(safe-area-inset-bottom));
+      transform: translate(-50%, 140%);
+      background: #0a1222;
+      border: 1px solid var(--card-b);
+      border-radius: 11px;
+      padding: 0.75rem 1.15rem;
+      font-size: 0.82rem;
+      z-index: 300;
+      transition: transform 0.28s cubic-bezier(0.16,1,0.3,1);
+      max-width: calc(100vw - 2.5rem);
+      text-align: center;
+    }
+    #toast.show { transform: translate(-50%, 0); }
+
+    @media (min-width: 640px) {
+      .modal-back { align-items: center; padding: 1.5rem; }
+      .modal { border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">Ladataan…</div>
+
+<div id="app" style="display:none">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <h1>Agentti</h1>
+      <div class="spacer"></div>
+      <a class="back-link" href="dashboard.html">← Dashboard</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Työnkulut</h2>
+      <div class="spacer"></div>
+      <button class="btn btn-primary btn-sm" id="btn-new">+ Uusi</button>
+    </div>
+    <div id="jobs"></div>
+
+    <div class="section-head">
+      <h2>Ajohistoria</h2>
+    </div>
+    <div id="runs"></div>
+  </div>
+</div>
+
+<div class="modal-back" id="modal-back">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h3 id="modal-title">Uusi työnkulku</h3>
+
+    <div class="field">
+      <label for="f-name">Nimi</label>
+      <input id="f-name" type="text" placeholder="Esim. Aamun käännöstarkistus" maxlength="80">
+    </div>
+
+    <div class="field">
+      <label for="f-workflow">Työnkulku</label>
+      <select id="f-workflow"></select>
+      <p class="field-hint" id="workflow-hint"></p>
+    </div>
+
+    <div class="field">
+      <label for="f-notes">Lisäohjeet (valinnainen)</label>
+      <textarea id="f-notes" placeholder="Liitetään työnkulun ohjeen perään." maxlength="2000"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="f-time">Kellonaika</label>
+      <input id="f-time" type="time">
+      <p class="field-hint">Jätä tyhjäksi, jos työnkulku ajetaan vain käsin.</p>
+    </div>
+
+    <div class="field">
+      <label>Päivät</label>
+      <div class="days" id="f-days"></div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger btn-sm" id="btn-delete" style="display:none">Poista</button>
+      <div class="spacer"></div>
+      <button class="btn btn-ghost" id="btn-cancel">Peruuta</button>
+      <button class="btn btn-primary" id="btn-save">Tallenna</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const SUPABASE_URL  = 'https://zubhxdlssoochwbwyxlp.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1Ymh4ZGxzc29vY2h3Ynd5eGxwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYyOTM1ODQsImV4cCI6MjA5MTg2OTU4NH0.czrg_VzVMobfT0lMSZhggBYSV-VEIcggmufUOCntexU';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON, { auth: { storageKey: 'selora-client' } });
+
+// Mirrors the files in agent/workflows/. The runner validates the slug against
+// what is actually on disk, so a stale entry here fails the run rather than
+// doing something unexpected — but keep the two in step when adding a workflow.
+const WORKFLOWS = [
+  { slug: 'i18n-audit',                name: 'Käännöstarkistus',
+    hint: 'Etsii suomenkieliset tekstit joilta puuttuu englanninkielinen käännös, ja täydentää i18n.js:n.' },
+  { slug: 'chatbot-knowledge-refresh', name: 'Chatbotin tietojen päivitys',
+    hint: 'Rakentaa api/site-knowledge.js uudelleen sivuston nykyisestä sisällöstä.' },
+];
+
+const DAYS = [
+  { n: 1, label: 'Ma' }, { n: 2, label: 'Ti' }, { n: 3, label: 'Ke' },
+  { n: 4, label: 'To' }, { n: 5, label: 'Pe' }, { n: 6, label: 'La' }, { n: 7, label: 'Su' },
+];
+
+const STATUS_FI = {
+  queued:  'Jonossa',
+  running: 'Käynnissä',
+  success: 'Valmis',
+  failed:  'Epäonnistui',
+  cancelled: 'Peruttu',
+};
+
+let user = null;
+let jobs = [];
+let runs = [];
+let editingId = null;   // null while creating
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+
+async function init() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = 'kirjaudu.html'; return; }
+  user = session.user;
+
+  buildForm();
+  await load();
+  render();
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+
+  subscribeToRuns();
+}
+
+async function load() {
+  const [j, r] = await Promise.all([
+    sb.from('agent_jobs').select('*').eq('user_id', user.id).order('created_at', { ascending: true }),
+    sb.from('agent_runs').select('*').eq('user_id', user.id).order('queued_at', { ascending: false }).limit(40),
+  ]);
+  jobs = j.data || [];
+  runs = r.data || [];
+}
+
+// A run's status changes on the server as Actions works through it, so the
+// page follows the table rather than polling.
+function subscribeToRuns() {
+  sb.channel('agent-runs')
+    .on('postgres_changes',
+      { event: '*', schema: 'public', table: 'agent_runs', filter: `user_id=eq.${user.id}` },
+      async () => { await load(); render(); })
+    .subscribe();
+}
+
+// ── Rendering ─────────────────────────────────────────────────────────────
+
+function render() { renderJobs(); renderRuns(); }
+
+function latestRunFor(jobId) {
+  return runs.find(r => r.job_id === jobId) || null;
+}
+
+function scheduleLabel(job) {
+  if (!job.run_at_time || !job.run_on_days?.length) return 'Vain käsin';
+  const time = job.run_at_time.slice(0, 5);
+  const set = new Set(job.run_on_days);
+  let days;
+  if (set.size === 7)                                          days = 'joka päivä';
+  else if (set.size === 5 && [1,2,3,4,5].every(d => set.has(d))) days = 'arkisin';
+  else if (set.size === 2 && set.has(6) && set.has(7))          days = 'viikonloppuisin';
+  else days = DAYS.filter(d => set.has(d.n)).map(d => d.label).join(', ');
+  return `${time} · ${days}`;
+}
+
+function renderJobs() {
+  const el = document.getElementById('jobs');
+
+  if (!jobs.length) {
+    el.innerHTML = `<div class="empty">Ei työnkulkuja vielä.<br>Luo ensimmäinen "+ Uusi" -painikkeesta.</div>`;
+    return;
+  }
+
+  el.innerHTML = jobs.map(job => {
+    const wf   = WORKFLOWS.find(w => w.slug === job.workflow);
+    const last = latestRunFor(job.id);
+    const busy = last && (last.status === 'queued' || last.status === 'running');
+    const dot  = busy ? last.status : (last ? last.status : 'idle');
+
+    return `
+      <div class="job ${job.enabled ? '' : 'disabled'}">
+        <div class="job-top">
+          <div class="dot ${esc(dot)}"></div>
+          <div style="flex:1;min-width:0">
+            <div class="job-name">${esc(job.name)}</div>
+            <div class="job-workflow">${esc(wf ? wf.name : job.workflow)}</div>
+          </div>
+        </div>
+        <div class="job-meta">
+          <span class="chip sched">${esc(scheduleLabel(job))}</span>
+          ${job.enabled ? '' : '<span class="chip">Pois käytöstä</span>'}
+          ${last ? `<span class="chip">Viimeksi: ${esc(STATUS_FI[last.status] || last.status)} · ${esc(shortDate(last.queued_at))}</span>` : ''}
+        </div>
+        <div class="job-actions">
+          <button class="btn btn-primary btn-sm" data-run="${esc(job.id)}" ${busy || !job.enabled ? 'disabled' : ''}>
+            ${busy ? 'Käynnissä…' : 'Aja nyt'}
+          </button>
+          <button class="btn btn-ghost btn-sm" data-edit="${esc(job.id)}">Muokkaa</button>
+          <button class="btn btn-ghost btn-sm" data-toggle="${esc(job.id)}">
+            ${job.enabled ? 'Poista käytöstä' : 'Ota käyttöön'}
+          </button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderRuns() {
+  const el = document.getElementById('runs');
+
+  if (!runs.length) {
+    el.innerHTML = `<div class="empty">Ei ajoja vielä.</div>`;
+    return;
+  }
+
+  el.innerHTML = runs.map(run => {
+    const job  = jobs.find(j => j.id === run.job_id);
+    const body = run.error || run.output;
+    const dur  = run.duration_secs != null ? ` · ${run.duration_secs}s` : '';
+    const trig = run.trigger === 'schedule' ? 'ajastettu' : 'käsin';
+
+    return `
+      <div class="run">
+        <button class="run-head" data-toggle-run="${esc(run.id)}">
+          <div class="dot ${esc(run.status)}"></div>
+          <div style="flex:1;min-width:0">
+            <div class="run-title">${esc(job ? job.name : 'Poistettu työnkulku')}</div>
+            <div class="run-sub">${esc(STATUS_FI[run.status] || run.status)} · ${esc(shortDate(run.queued_at))} · ${esc(trig)}${esc(dur)}</div>
+          </div>
+        </button>
+        <div class="run-body" id="run-body-${esc(run.id)}" style="display:none">${
+          body
+            ? esc(body) + (run.github_run_url ? `\n\n<a href="${esc(run.github_run_url)}" target="_blank" rel="noopener">Actions-loki →</a>` : '')
+            : '<span style="opacity:.5">Ei tulostetta vielä.</span>'
+        }</div>
+      </div>`;
+  }).join('');
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────
+
+function buildForm() {
+  document.getElementById('f-workflow').innerHTML =
+    WORKFLOWS.map(w => `<option value="${esc(w.slug)}">${esc(w.name)}</option>`).join('');
+
+  document.getElementById('f-days').innerHTML = DAYS.map(d => `
+    <label class="day">
+      <input type="checkbox" value="${d.n}">
+      <span>${d.label}</span>
+    </label>`).join('');
+
+  updateWorkflowHint();
+  document.getElementById('f-workflow').addEventListener('change', updateWorkflowHint);
+}
+
+function updateWorkflowHint() {
+  const slug = document.getElementById('f-workflow').value;
+  const wf   = WORKFLOWS.find(w => w.slug === slug);
+  document.getElementById('workflow-hint').textContent = wf ? wf.hint : '';
+}
+
+function openModal(job) {
+  editingId = job?.id ?? null;
+
+  document.getElementById('modal-title').textContent = job ? 'Muokkaa työnkulkua' : 'Uusi työnkulku';
+  document.getElementById('f-name').value     = job?.name ?? '';
+  document.getElementById('f-workflow').value = job?.workflow ?? WORKFLOWS[0].slug;
+  document.getElementById('f-notes').value    = job?.notes ?? '';
+  document.getElementById('f-time').value     = job?.run_at_time ? job.run_at_time.slice(0, 5) : '';
+
+  const days = new Set(job?.run_on_days ?? []);
+  document.querySelectorAll('#f-days input').forEach(cb => {
+    cb.checked = days.has(Number(cb.value));
+  });
+
+  document.getElementById('btn-delete').style.display = job ? 'inline-flex' : 'none';
+  updateWorkflowHint();
+  document.getElementById('modal-back').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modal-back').classList.remove('open');
+  editingId = null;
+}
+
+async function saveJob() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { toast('Anna työnkululle nimi.'); return; }
+
+  const time = document.getElementById('f-time').value;
+  const days = [...document.querySelectorAll('#f-days input:checked')].map(cb => Number(cb.value));
+
+  // A time with no days would never fire, and days with no time have nothing
+  // to fire at. Treat either half-filled state as an error rather than
+  // silently saving a schedule that can never run.
+  if (time && !days.length) { toast('Valitse ainakin yksi päivä.'); return; }
+  if (!time && days.length) { toast('Anna kellonaika.'); return; }
+
+  const row = {
+    user_id:     user.id,
+    name,
+    workflow:    document.getElementById('f-workflow').value,
+    notes:       document.getElementById('f-notes').value.trim() || null,
+    run_at_time: time || null,
+    run_on_days: days.length ? days : null,
+    timezone:    'Europe/Helsinki',
+  };
+
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
+
+  const { error } = editingId
+    ? await sb.from('agent_jobs').update(row).eq('id', editingId)
+    : await sb.from('agent_jobs').insert(row);
+
+  btn.disabled = false;
+
+  if (error) { toast(`Tallennus epäonnistui: ${error.message}`); return; }
+
+  closeModal();
+  await load();
+  render();
+  toast('Tallennettu.');
+}
+
+async function deleteJob() {
+  if (!editingId) return;
+  if (!confirm('Poistetaanko työnkulku ja sen ajohistoria?')) return;
+
+  const { error } = await sb.from('agent_jobs').delete().eq('id', editingId);
+  if (error) { toast(`Poisto epäonnistui: ${error.message}`); return; }
+
+  closeModal();
+  await load();
+  render();
+  toast('Poistettu.');
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────
+
+async function runNow(jobId) {
+  const { data, error } = await sb.functions.invoke('dispatch-agent-job', {
+    body: { job_id: jobId, trigger: 'manual' },
+  });
+
+  if (error) {
+    // The function answers 409 when a run is already in flight, which is
+    // information rather than a fault — say which it is.
+    const msg = data?.error || error.message || 'Käynnistys epäonnistui.';
+    toast(msg === 'Job already running' ? 'Työnkulku on jo käynnissä.' : msg);
+    return;
+  }
+
+  toast('Käynnistetty.');
+  await load();
+  render();
+}
+
+async function toggleJob(jobId) {
+  const job = jobs.find(j => j.id === jobId);
+  if (!job) return;
+
+  const { error } = await sb.from('agent_jobs').update({ enabled: !job.enabled }).eq('id', jobId);
+  if (error) { toast(`Muutos epäonnistui: ${error.message}`); return; }
+
+  await load();
+  render();
+}
+
+// ── Events ────────────────────────────────────────────────────────────────
+
+document.getElementById('btn-new').addEventListener('click', () => openModal(null));
+document.getElementById('btn-cancel').addEventListener('click', closeModal);
+document.getElementById('btn-save').addEventListener('click', saveJob);
+document.getElementById('btn-delete').addEventListener('click', deleteJob);
+
+document.getElementById('modal-back').addEventListener('click', (e) => {
+  if (e.target.id === 'modal-back') closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Cards are re-rendered wholesale, so listen on the containers instead of
+// rebinding every button each time.
+document.getElementById('jobs').addEventListener('click', (e) => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  if (btn.dataset.run)    runNow(btn.dataset.run);
+  if (btn.dataset.toggle) toggleJob(btn.dataset.toggle);
+  if (btn.dataset.edit)   openModal(jobs.find(j => j.id === btn.dataset.edit));
+});
+
+document.getElementById('runs').addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-toggle-run]');
+  if (!btn) return;
+  const body = document.getElementById(`run-body-${btn.dataset.toggleRun}`);
+  if (body) body.style.display = body.style.display === 'none' ? 'block' : 'none';
+});
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+
+// Run output is model-generated text going into innerHTML, so it is escaped
+// on the way in. The Actions link is built from an escaped URL separately.
+function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+
+function shortDate(iso) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString('fi-FI', {
+    day: 'numeric', month: 'numeric', hour: '2-digit', minute: '2-digit',
+  });
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 3600);
+}
+
+init();
+</script>
+</body>
+</html>

@@ -34,5 +34,6 @@ jobs:
           supabase functions deploy send-newsletter --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy send-push-notification --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
           supabase functions deploy daily-summary --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
+          supabase functions deploy dispatch-agent-job --project-ref zubhxdlssoochwbwyxlp --use-api --no-verify-jwt
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
