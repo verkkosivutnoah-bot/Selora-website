@@ -199,11 +199,12 @@ All pages have custom `<meta name="description">` tags. Sitemap and robots.txt n
 - [ ] **Blog articles**: Write and publish actual blog posts (currently 3 "coming soon")
 
 ### Scheduled agent (setup pending)
-Code is in place; none of it runs until these are done. Full detail in `agent/README.md`.
+Code is in place across this repo and `selora-agent`; none of it runs until these are done. Full detail in the selora-agent README.
 - [ ] **Run SQL**: `supabase-patch-agent.sql` in the SQL editor
 - [ ] **Database settings**: `app.supabase_url` + `app.service_role_key` via `ALTER DATABASE` — pg_cron runs outside any function's environment, so these cannot be function secrets
-- [ ] **GitHub secrets**: `ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
-- [ ] **Edge function secrets**: `GITHUB_TOKEN` (fine-grained PAT, Actions read+write), `GITHUB_REPO`, `GITHUB_REF`
+- [ ] **Edge function secrets**: `GITHUB_TOKEN` (PAT, Actions read+write on selora-agent), `GITHUB_REPO=verkkosivutnoah-bot/selora-agent`, `GITHUB_REF=main`
+- [ ] **Secrets in selora-agent**: `ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TARGET_TOKEN` (PAT, Contents read+write on this repo)
+- [ ] **Vercel**: import selora-agent as its own project for the dashboard
 
 ### Client Portal (priority)
 - [ ] **Deploy Edge Functions**: `supabase functions deploy generate-demo-agent` + `supabase functions deploy create-web-call`
@@ -305,32 +306,38 @@ supabase secrets set ANTHROPIC_API_KEY=sk-ant-... RETELL_API_KEY=key_...
 
 ## Scheduled agent
 
-Runs workflows on a schedule and reports to `agentti.html`, which any device can
-open. Setup steps and a diagram of the flow are in `agent/README.md`.
+The agent lives in its own repository,
+[selora-agent](https://github.com/verkkosivutnoah-bot/selora-agent) — the
+dashboard, the runner, and the workflow prompts are all there, along with the
+full setup guide. It is deliberately kept out of this repo so agent machinery
+never lands in the site's history.
+
+Only the Supabase half stays here, because that is where the other edge
+functions and schema patches already live and they all deploy together:
 
 | File | Role |
 |---|---|
-| `agentti.html` | dashboard — job list, schedule editor, run history, manual trigger |
 | `supabase-patch-agent.sql` | `agent_jobs` + `agent_runs`, RLS, and the pg_cron scheduler |
-| `supabase/functions/dispatch-agent-job/` | creates the run row, then fires `workflow_dispatch` |
-| `.github/workflows/agent-runner.yml` | the runner, started only by that dispatch |
-| `agent/run.mjs` | executes one run: reads the workflow, calls Claude, writes results back |
-| `agent/workflows/*.md` | one markdown file per workflow — the file *is* the prompt |
+| `supabase/functions/dispatch-agent-job/` | creates the run row, then fires `workflow_dispatch` at selora-agent |
 
-Things that will bite if forgotten:
+What that means for this repo day to day: **the agent pushes `agent/*` branches
+here and nothing else.** It never commits to `main`. A branch named
+`agent/<workflow>-<timestamp>` is a finished agent run waiting for review —
+read the diff, merge or delete it.
 
-- **The agent never pushes to `main`.** Changes go to `agent/<workflow>-<timestamp>`
-  and wait for a human. Keep it that way.
+Two things about the Supabase side that will bite if forgotten:
+
 - **The schedule is a time plus ISO weekdays (1 = Monday), not a cron string.**
   `enqueue_due_agent_runs()` resolves it against the job's own timezone and
   compares against local midnight, so a missed tick still fires once, late,
   rather than never or every minute after.
-- **Adding a workflow is two steps**: the markdown file, and the slug in the
-  `WORKFLOWS` array in `agentti.html`. A slug with no file fails the run.
 - **`agent_runs` is SELECT-only under RLS.** Runs are created by the edge
   function so the dashboard cannot queue work nothing will pick up.
-- OmniRoute was evaluated as the model-routing layer and dropped: it needs a
-  persistent host, which this stack otherwise does not.
+- `dispatch-agent-job` needs `GITHUB_REPO` pointed at **selora-agent**, not
+  this repo. Pointing it here dispatches a workflow that no longer exists.
+
+OmniRoute was evaluated as the model-routing layer and dropped: it needs a
+persistent host, which this stack otherwise does not.
 
 ---
 
