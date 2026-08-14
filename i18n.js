@@ -3879,6 +3879,7 @@
     'Muotibrändi · Verkkokauppa': 'Fashion brand · Online store',
     'Sähköurakointi · Toronto': 'Electrical contracting · Toronto',
     'Interaktiivinen konsepti · Scroll': 'Interactive concept · Scroll',
+    'Kiinteistönvälitys · Parallax': 'Real estate · Parallax',
     'Latausnopeuden optimointi': 'Load speed optimisation',
     'Kolme vaihetta,': 'Three steps,',
     'Noin 45 min': 'About 45 min',

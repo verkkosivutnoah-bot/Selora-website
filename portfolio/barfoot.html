@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barfoot &amp; Thompson — Upper North Island Real Estate</title>
+<meta name="description" content="Auckland, Northland, Bay of Plenty &amp; Waikato real estate. 80+ branches, 1,800+ salespeople, since 1923.">
+<style>
+:root{
+  --ink:#07131F; --ink-2:#0C2136; --sea:#1E7F9B; --sea-lt:#48B6C9;
+  --gold:#E9B44C; --gold-lt:#F6D48A; --coral:#EE7B5C;
+  --paper:#F6F2EA; --muted:rgba(246,242,234,.6);
+  --muted-ink:rgba(7,19,31,.55);
+  --line:rgba(246,242,234,.14); --line-ink:rgba(7,19,31,.12);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --pad:clamp(20px,5vw,84px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--gold);color:var(--ink)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.02;letter-spacing:-.025em;margin:0}
+.h-xl{font-size:clamp(3.2rem,11vw,9rem)}
+.h-lg{font-size:clamp(2.6rem,7.5vw,6rem)}
+.wrap{width:min(1440px,100% - var(--pad)*2);margin-inline:auto}
+.eyebrow{
+  font-size:.64rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:.8em;margin:0 0 1.1rem;
+}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;opacity:.7}
+.on-paper{background:var(--paper);color:var(--ink)}
+.on-paper .eyebrow{color:var(--sea)}
+
+/* ── chrome ───────────────────────────────── */
+#grain{
+  position:fixed;inset:-150%;z-index:9998;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 700ms steps(4) infinite;
+}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(0,0)}}
+#progress{position:fixed;top:0;left:0;height:2px;width:100%;z-index:9999;transform:scaleX(0);transform-origin:0 50%;background:linear-gradient(90deg,var(--sea-lt),var(--gold),var(--coral))}
+#cursor{position:fixed;top:0;left:0;width:26px;height:26px;border-radius:50%;border:1px solid rgba(233,180,76,.85);z-index:9997;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s var(--ease),height .3s var(--ease),background .3s,opacity .3s;mix-blend-mode:difference;opacity:0}
+#cursor.on{opacity:1}
+#cursor.grow{width:66px;height:66px;background:rgba(233,180,76,.16)}
+@media (hover:none),(max-width:900px){#cursor{display:none}}
+
+#loader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:grid;place-items:center;transition:opacity .8s var(--ease),visibility .8s}
+#loader.done{opacity:0;visibility:hidden}
+.load-mark{text-align:center}
+.load-mark .bar{width:180px;height:1px;background:var(--line);margin:26px auto 0;overflow:hidden}
+.load-mark .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s linear}
+.load-mark p{font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin:16px 0 0}
+.draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900);animation:draw 2s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ── nav ──────────────────────────────────── */
+#nav{position:fixed;top:0;left:0;right:0;height:76px;z-index:900;display:flex;align-items:center;transition:background .5s var(--ease),backdrop-filter .5s,height .5s var(--ease),border-color .5s;border-bottom:1px solid transparent}
+#nav.solid{background:rgba(7,19,31,.72);backdrop-filter:blur(18px) saturate(1.4);border-bottom-color:var(--line);height:62px}
+#nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .bt-name{font-family:var(--serif);font-size:1.1rem;white-space:nowrap}
+.brand .bt-sub{display:block;font-family:var(--sans);font-size:.48rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:clamp(16px,2vw,32px)}
+.nav-links a{position:relative;font-size:.76rem;letter-spacing:.13em;text-transform:uppercase;font-weight:500;padding:6px 0;color:rgba(246,242,234,.8);transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--gold);transform:scaleX(0);transform-origin:100% 50%;transition:transform .45s var(--ease)}
+.nav-links a:hover{color:var(--paper)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:0 50%}
+.btn{position:relative;display:inline-flex;align-items:center;gap:.7em;padding:.86em 1.6em;border-radius:100px;overflow:hidden;font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;border:1px solid var(--gold);color:var(--gold);isolation:isolate;transition:color .45s var(--ease);white-space:nowrap}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--gold);transform:translateY(101%);transition:transform .5s var(--ease)}
+.btn:hover{color:var(--ink)}
+.btn:hover::before{transform:translateY(0)}
+.btn.solid{background:var(--gold);color:var(--ink)}
+.btn.solid::before{background:var(--paper)}
+.btn.ghost{border-color:var(--line);color:var(--paper)}
+.btn.ghost::before{background:var(--paper)}
+.btn.ghost:hover{color:var(--ink)}
+.btn .arw{transition:transform .45s var(--ease)}
+.btn:hover .arw{transform:translateX(4px)}
+#burger{display:none;width:44px;height:44px;position:relative;z-index:960}
+#burger span{position:absolute;left:11px;width:22px;height:1.5px;background:var(--paper);transition:transform .45s var(--ease)}
+#burger span:nth-child(1){top:18px}
+#burger span:nth-child(2){top:25px}
+#burger.x span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+#burger.x span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+#drawer{position:fixed;inset:0;z-index:950;background:var(--ink-2);clip-path:circle(0% at calc(100% - 40px) 40px);transition:clip-path .8s var(--ease);display:flex;flex-direction:column;justify-content:center;padding:var(--pad)}
+#drawer.open{clip-path:circle(150% at calc(100% - 40px) 40px)}
+#drawer a{font-family:var(--serif);font-size:clamp(2rem,8vw,3.2rem);padding:.14em 0;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease),color .3s;border-bottom:1px solid var(--line)}
+#drawer.open a{opacity:1;transform:none}
+#drawer a:hover{color:var(--gold)}
+@media(max-width:1080px){.nav-links{display:none}#burger{display:block}}
+
+/* ── scroll scenes ────────────────────────── */
+.scene{position:relative}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.layer{position:absolute;inset:-8% -4%;will-change:transform}
+.layer>svg{width:100%;height:100%}
+.sky{position:absolute;inset:0;will-change:opacity}
+.vig{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(7,19,31,.6) 0%,transparent 24%,transparent 46%,rgba(7,19,31,.88) 94%),
+    radial-gradient(120% 78% at 50% 22%,transparent 38%,rgba(7,19,31,.52) 100%);
+}
+#fadeout{position:absolute;inset:0;background:var(--ink);opacity:0;pointer-events:none}
+
+.hero-copy{
+  position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-bottom:clamp(96px,15vh,168px);z-index:20;will-change:transform,opacity;
+}
+.mask{overflow:hidden;display:block}
+.mask>span{display:block;transform:translateY(108%) rotate(2.5deg);transition:transform 1.2s var(--ease)}
+.ready .mask>span{transform:none}
+.ready .mask:nth-of-type(2)>span{transition-delay:.12s}
+.hero-title em{font-style:italic;background:linear-gradient(105deg,var(--gold-lt),var(--gold) 40%,var(--coral));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:clamp(20px,3vw,34px);opacity:0;transform:translateY(20px);transition:opacity .9s .55s var(--ease),transform .9s .55s var(--ease)}
+.ready .hero-sub{opacity:1;transform:none}
+.hero-sub .tagline{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+
+.cue{position:absolute;bottom:78px;right:var(--pad);z-index:21;display:flex;flex-direction:column;align-items:center;gap:12px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl;will-change:opacity}
+.cue .rail{writing-mode:horizontal-tb;width:1px;height:56px;background:var(--line);position:relative;overflow:hidden}
+.cue .rail::after{content:"";position:absolute;inset:0;background:var(--gold);transform:translateY(-100%);animation:railrun 2.2s cubic-bezier(.65,.05,.36,1) infinite}
+@keyframes railrun{0%{transform:translateY(-100%)}45%{transform:translateY(0)}100%{transform:translateY(100%)}}
+@media(max-width:1080px){.cue{display:none}}
+
+@keyframes drift{from{transform:translateX(-16vw)}to{transform:translateX(116vw)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-.7deg)}50%{transform:translateY(-6px) rotate(.7deg)}}
+@keyframes twinkle{0%,100%{opacity:.15}50%{opacity:.95}}
+@keyframes shimmer{to{transform:translateX(-140px)}}
+@keyframes beacon{0%,88%,100%{opacity:.25}92%{opacity:1}}
+.cloud{animation:drift linear infinite}
+.boat{animation:bob 5s ease-in-out infinite;transform-origin:50% 100%}
+.star{animation:twinkle 4s ease-in-out infinite}
+
+/* ── numbers band ─────────────────────────── */
+#numbers{position:relative;z-index:30;background:var(--ink);border-block:1px solid var(--line);padding:clamp(30px,5vw,54px) 0;overflow:hidden}
+.nmq{display:flex;width:max-content}
+.nmq .trk{display:flex;align-items:baseline;gap:clamp(30px,5vw,66px);padding-right:clamp(30px,5vw,66px);animation:mq 34s linear infinite}
+#numbers:hover .nmq .trk{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-100%)}}
+.nmq b{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,7vw,5.4rem);line-height:1;white-space:nowrap}
+.nmq b i{font-style:normal;color:var(--gold);font-size:.42em}
+.nmq em{font-style:normal;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.nmq s{text-decoration:none;color:rgba(246,242,234,.16);font-family:var(--serif);font-size:clamp(2.6rem,7vw,5.4rem)}
+
+/* ── horizontal gallery ───────────────────── */
+#gallery{position:relative;z-index:30;background:var(--ink)}
+.gal-pin{position:sticky;top:0;height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.gal-head{padding:0 var(--pad);margin-bottom:clamp(20px,3vw,38px);display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.gal-head .count{font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.gal-track{display:flex;gap:clamp(14px,2vw,28px);padding-inline:var(--pad);will-change:transform}
+.tile{
+  position:relative;flex:0 0 auto;width:clamp(260px,30vw,440px);border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);background:var(--ink-2);transition:border-color .5s;
+}
+.tile:hover{border-color:rgba(233,180,76,.45)}
+.tile .art{aspect-ratio:4/5;overflow:hidden}
+.tile .art svg{width:100%;height:100%;transition:transform 1.5s var(--ease)}
+.tile:hover .art svg{transform:scale(1.07)}
+.tile .cap{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:clamp(46px,6vw,74px) clamp(18px,2vw,26px) clamp(18px,2vw,26px);
+  background:linear-gradient(0deg,
+    rgba(4,10,17,.97) 0%,rgba(4,10,17,.93) 42%,rgba(4,10,17,.6) 72%,transparent 100%);
+}
+.tile .sub{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.tile .price{font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.85rem);line-height:1.1}
+.tile .spx{display:flex;gap:16px;margin-top:12px;font-size:.78rem;color:var(--muted)}
+.tile .spx span{display:flex;align-items:center;gap:6px}
+.tile .flag{position:absolute;top:14px;left:14px;padding:.4em .85em;border-radius:100px;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:rgba(7,19,31,.65);backdrop-filter:blur(8px);border:1px solid var(--line);color:var(--gold)}
+.tile .flag.live{color:var(--coral);border-color:rgba(238,123,92,.5)}
+.tile .flag.live::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--coral);margin-right:7px;vertical-align:middle;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+.gal-bar{margin:clamp(20px,3vw,36px) var(--pad) 0;height:1px;background:var(--line);position:relative}
+.gal-bar i{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--gold)}
+
+/* ── map ──────────────────────────────────── */
+#regions{position:relative;z-index:30;padding-block:clamp(70px,10vw,140px)}
+.map-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(30px,5vw,74px);align-items:center}
+@media(max-width:960px){.map-grid{grid-template-columns:1fr}}
+.pin-g{cursor:pointer}
+.pin-g circle.dot{transition:r .4s var(--ease),fill .4s}
+.pin-g:hover circle.dot,.pin-g.on circle.dot{fill:var(--coral)}
+.pin-g circle.ring{transform-origin:center;transform-box:fill-box;animation:ping 2.6s cubic-bezier(.65,.05,.36,1) infinite}
+@keyframes ping{0%{transform:scale(.4);opacity:.8}100%{transform:scale(2.7);opacity:0}}
+.pin-g text{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink);opacity:.6;transition:opacity .3s}
+.pin-g:hover text,.pin-g.on text{opacity:1;font-weight:700}
+#r-name{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:6px}
+.r-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line-ink)}
+.r-stats span{display:block;font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.3rem);color:var(--sea);line-height:1}
+.r-stats small{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-ink);margin-top:7px}
+.r-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+.r-list b{font-weight:500;font-size:.72rem;padding:.4em .9em;border:1px solid var(--line-ink);border-radius:100px}
+
+/* ── auction ──────────────────────────────── */
+#auction{position:relative;z-index:30;padding-block:clamp(70px,10vw,140px)}
+.auc{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,76px);align-items:center}
+@media(max-width:900px){.auc{grid-template-columns:1fr}}
+.bidbox{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--ink-2)}
+.bidbox .top{padding:18px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.bidbox .top span{font-family:var(--serif);font-size:1.02rem}
+.bidbox .top small{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--coral);white-space:nowrap}
+.bidbox .amt{padding:34px 24px;text-align:center}
+.bidbox .amt span{font-family:var(--serif);font-size:clamp(2.4rem,6.5vw,4.2rem);color:var(--gold-lt)}
+.bidbox .amt small{display:block;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+#bidfeed{max-height:172px;overflow:hidden;border-top:1px solid var(--line)}
+#bidfeed div{display:flex;justify-content:space-between;padding:13px 24px;font-size:.84rem;border-bottom:1px solid rgba(246,242,234,.06);animation:slidein .5s var(--ease)}
+#bidfeed b{color:var(--sea-lt);font-weight:500}
+#bidfeed span{color:var(--muted)}
+@keyframes slidein{from{opacity:0;transform:translateY(-12px)}}
+
+/* ── cta / footer ─────────────────────────── */
+#cta{position:relative;z-index:30;overflow:hidden;text-align:center;padding-block:clamp(80px,12vw,170px)}
+#cta .glow{position:absolute;left:50%;top:50%;width:min(1100px,150vw);aspect-ratio:1;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(30,127,155,.34),transparent 62%);filter:blur(18px);animation:breathe 9s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.75}50%{transform:translate(-50%,-50%) scale(1.14);opacity:1}}
+footer{position:relative;z-index:30;border-top:1px solid var(--line);padding-block:clamp(34px,4vw,52px) 30px}
+.f-row{display:flex;flex-wrap:wrap;gap:18px 34px;justify-content:space-between;align-items:center}
+.f-row nav{display:flex;flex-wrap:wrap;gap:18px}
+.f-row a{font-size:.78rem;color:var(--muted);transition:color .3s}
+.f-row a:hover{color:var(--paper)}
+.f-note{margin-top:22px;font-size:.68rem;color:rgba(246,242,234,.32);max-width:74ch}
+
+[data-rv]{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+[data-rv].in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+  [data-rv]{opacity:1 !important;transform:none !important}
+  .mask>span{transform:none !important}
+  .hero-sub{opacity:1 !important;transform:none !important}
+  .scene{height:auto !important}
+  .pin,.gal-pin{position:relative;height:auto;min-height:100svh}
+  .gal-track{flex-wrap:wrap;transform:none !important}
+}
+</style>
+</head>
+<body>
+
+<div id="grain"></div>
+<div id="progress"></div>
+<div id="cursor"></div>
+
+<div id="loader">
+  <div class="load-mark">
+    <svg width="110" height="110" viewBox="0 0 120 120" fill="none" aria-hidden="true">
+      <path class="draw" style="--len:340" d="M20 96 L20 52 L60 22 L100 52 L100 96 Z" stroke="#E9B44C" stroke-width="1.2"/>
+      <path class="draw" style="--len:120" d="M48 96 L48 66 L72 66 L72 96" stroke="#48B6C9" stroke-width="1.2" opacity=".8"/>
+      <circle class="draw" style="--len:100" cx="60" cy="44" r="6" stroke="#F6F2EA" stroke-width="1"/>
+    </svg>
+    <div class="bar"><i id="loadbar"></i></div>
+    <p>Barfoot &amp; Thompson</p>
+  </div>
+</div>
+
+<header id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Barfoot and Thompson home">
+      <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M4 34V17L20 5l16 12v17z" stroke="#E9B44C" stroke-width="1.4"/>
+        <path d="M14 34V23h12v11" stroke="#48B6C9" stroke-width="1.4"/>
+        <circle cx="20" cy="14.5" r="2.4" fill="#E9B44C"/>
+      </svg>
+      <span class="bt-name">Barfoot &amp; Thompson<span class="bt-sub">Est. 1923 · Aotearoa</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#gallery">Buy</a><a href="#regions">Regions</a>
+      <a href="#auction">Auctions</a><a class="btn" href="#cta">Find an agent <span class="arw">→</span></a>
+    </nav>
+    <button id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<div id="drawer">
+  <a href="#gallery">Buy</a><a href="#regions">Regions</a>
+  <a href="#auction">Auctions</a><a href="#cta">Contact</a>
+</div>
+
+<!-- ════════ SCENE 1 · DAWN OVER THE WAITEMATĀ ════════ -->
+<section id="top" class="scene" data-scene data-len="320">
+  <div class="pin" id="heropin">
+
+    <!-- three stacked skies, cross-faded by scroll -->
+    <div class="sky" data-sky="0">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <defs><linearGradient id="sk-night" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#03080F"/><stop offset="42%" stop-color="#071A2C"/>
+          <stop offset="72%" stop-color="#0E3348"/><stop offset="100%" stop-color="#1B5064"/>
+        </linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#sk-night)"/>
+      </svg>
+    </div>
+    <div class="sky" data-sky="1" style="opacity:0">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <defs><linearGradient id="sk-dawn" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0B1E38"/><stop offset="36%" stop-color="#2A4A6B"/>
+          <stop offset="64%" stop-color="#7B6B84"/><stop offset="86%" stop-color="#D08C74"/>
+          <stop offset="100%" stop-color="#F0B279"/>
+        </linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#sk-dawn)"/>
+      </svg>
+    </div>
+    <div class="sky" data-sky="2" style="opacity:0">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <defs><linearGradient id="sk-gold" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1D4C6E"/><stop offset="34%" stop-color="#4E86A0"/>
+          <stop offset="62%" stop-color="#B9A489"/><stop offset="84%" stop-color="#F0B36C"/>
+          <stop offset="100%" stop-color="#FBDDA0"/>
+        </linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#sk-gold)"/>
+      </svg>
+    </div>
+
+    <!-- stars (fade out as the sun climbs) -->
+    <div class="layer" data-depth="0.04" id="starlayer">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><g id="stars"></g></svg>
+    </div>
+
+    <!-- sun, travels an arc across the whole scene -->
+    <div class="layer" data-depth="0.02">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs><radialGradient id="glow">
+          <stop offset="0%" stop-color="#FFE7B8" stop-opacity=".95"/>
+          <stop offset="42%" stop-color="#F0A45E" stop-opacity=".46"/>
+          <stop offset="100%" stop-color="#F0A45E" stop-opacity="0"/>
+        </radialGradient></defs>
+        <g id="sun"><circle r="320" fill="url(#glow)"/><circle r="48" fill="#FFEDC8" opacity=".94"/></g>
+      </svg>
+    </div>
+
+    <!-- clouds -->
+    <div class="layer" data-depth="0.1">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <g fill="#F6D9BC" opacity=".2" id="cloudg">
+          <g class="cloud" style="animation-duration:74s"><ellipse cx="200" cy="196" rx="152" ry="17"/><ellipse cx="272" cy="181" rx="94" ry="13"/></g>
+          <g class="cloud" style="animation-duration:108s;animation-delay:-40s" opacity=".62"><ellipse cx="700" cy="298" rx="212" ry="14"/><ellipse cx="618" cy="284" rx="112" ry="10"/></g>
+          <g class="cloud" style="animation-duration:92s;animation-delay:-66s" opacity=".8"><ellipse cx="1180" cy="146" rx="178" ry="12"/></g>
+          <g class="cloud" style="animation-duration:126s;animation-delay:-18s" opacity=".5"><ellipse cx="420" cy="398" rx="252" ry="11"/></g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- distant islands -->
+    <div class="layer" data-depth="0.2">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <g fill="#132F42" opacity=".9">
+          <path d="M980 700 Q1130 592 1290 700 L1600 700 L1600 780 L900 780 Z"/>
+          <path d="M0 706 Q120 664 240 706 L340 706 L340 780 L0 780 Z" opacity=".72"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- skyline -->
+    <div class="layer" data-depth="0.36">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="city" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0C2739"/><stop offset="100%" stop-color="#061424"/>
+        </linearGradient></defs>
+        <g fill="url(#city)">
+          <rect x="300" y="600" width="52" height="180"/><rect x="360" y="640" width="38" height="140"/>
+          <rect x="406" y="580" width="60" height="200"/><rect x="474" y="654" width="44" height="126"/>
+          <rect x="526" y="618" width="34" height="162"/><rect x="568" y="560" width="56" height="220"/>
+          <rect x="632" y="636" width="40" height="144"/><rect x="680" y="596" width="48" height="184"/>
+          <rect x="748" y="470" width="16" height="310"/>
+          <path d="M736 470 h40 l-6 -34 h-28 z"/><ellipse cx="756" cy="436" rx="27" ry="13"/>
+          <rect x="754" y="350" width="5" height="78"/>
+          <rect x="792" y="620" width="42" height="160"/><rect x="842" y="586" width="52" height="194"/>
+          <rect x="902" y="648" width="36" height="132"/><rect x="946" y="608" width="46" height="172"/>
+          <rect x="1000" y="660" width="40" height="120"/>
+        </g>
+        <g fill="#E9B44C" id="windows"></g>
+        <circle cx="756" cy="350" r="3.4" fill="#EE7B5C" style="animation:beacon 3.4s infinite"/>
+      </svg>
+    </div>
+
+    <!-- harbour -->
+    <div class="layer" data-depth="0.54">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2A6377"/><stop offset="55%" stop-color="#10354C"/><stop offset="100%" stop-color="#061B2A"/>
+          </linearGradient>
+          <linearGradient id="sunpath" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F7CE8C" stop-opacity=".5"/><stop offset="100%" stop-color="#F7CE8C" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect y="768" width="1600" height="240" fill="url(#water)"/>
+        <path id="sunpath-p" d="M1090 768 L1190 768 L1330 1008 L950 1008 Z" fill="url(#sunpath)"/>
+        <g id="waves" stroke="#8FC7D6" stroke-width="1.1" opacity=".3" fill="none"></g>
+        <g class="boat" transform="translate(430,754)">
+          <path d="M0 14 L26 14 L20 22 L4 22 Z" fill="#08182A"/>
+          <path d="M13 14 L13 -18 L30 12 Z" fill="#F2E3CC" opacity=".92"/>
+          <path d="M11 14 L11 -10 L-3 13 Z" fill="#E9B44C" opacity=".78"/>
+        </g>
+        <g class="boat" style="animation-delay:-2.4s;animation-duration:6.4s" transform="translate(1240,772) scale(.7)">
+          <path d="M0 14 L26 14 L20 22 L4 22 Z" fill="#08182A"/><path d="M13 14 L13 -20 L31 12 Z" fill="#F2E3CC" opacity=".88"/>
+        </g>
+        <g class="boat" style="animation-delay:-4s;animation-duration:7.2s" transform="translate(866,760) scale(.5)">
+          <path d="M0 14 L26 14 L20 22 L4 22 Z" fill="#08182A"/><path d="M13 14 L13 -18 L29 12 Z" fill="#EE7B5C" opacity=".82"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- foreground headland — the closest layer, sweeps up over the frame -->
+    <div class="layer" data-depth="0.95">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <path d="M0 826 Q210 754 420 806 Q560 842 720 900 L0 900 Z" fill="#03101B"/>
+        <path d="M1600 846 Q1400 780 1180 834 Q1020 874 900 900 L1600 900 Z" fill="#03101B"/>
+        <g fill="#03101B">
+          <path d="M150 810 q-6 -52 20 -76 q-38 4 -52 -26 q34 8 56 -14 q6 -34 40 -38 q28 4 34 34 q26 20 54 12 q-14 30 -48 30 q26 26 18 78 z"/>
+          <rect x="176" y="788" width="7" height="48"/>
+        </g>
+        <g fill="#EE7B5C" opacity=".55">
+          <circle cx="164" cy="734" r="3"/><circle cx="212" cy="714" r="2.6"/><circle cx="248" cy="744" r="3"/>
+          <circle cx="192" cy="760" r="2.2"/><circle cx="140" cy="766" r="2.4"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="vig"></div>
+
+    <div class="hero-copy" id="herocopy">
+      <div class="wrap">
+        <h1 class="hero-title h-xl">
+          <span class="mask"><span>Where Auckland</span></span>
+          <span class="mask"><span><em>wakes up.</em></span></span>
+        </h1>
+        <div class="hero-sub">
+          <span class="tagline">Auckland · Northland · Bay of Plenty · Waikato</span>
+          <a class="btn solid" href="#gallery">See what's listed <span class="arw">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cue" id="cue"><span>Scroll</span><span class="rail"></span></div>
+    <div id="fadeout"></div>
+  </div>
+</section>
+
+<!-- ════════ NUMBERS ════════ -->
+<section id="numbers" aria-label="Company at a glance">
+  <div class="nmq" id="nmq"></div>
+</section>
+
+<!-- ════════ SCENE 2 · HORIZONTAL GALLERY ════════ -->
+<section id="gallery" data-scene data-len="360">
+  <div class="gal-pin">
+    <div class="gal-head">
+      <div><span class="eyebrow">On the market</span><h2 class="h-lg">This week</h2></div>
+      <span class="count" id="galcount">01 / 06</span>
+    </div>
+    <div class="gal-track" id="galtrack"></div>
+    <div class="gal-bar"><i id="galbar"></i></div>
+  </div>
+</section>
+
+<!-- ════════ SCENE 3 · NIGHT VALLEY ════════ -->
+<section class="scene" data-scene data-len="230">
+  <div class="pin">
+    <div class="sky">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%">
+        <defs><linearGradient id="nsky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#03090F"/><stop offset="52%" stop-color="#0A2033"/>
+          <stop offset="100%" stop-color="#17414F"/>
+        </linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#nsky)"/>
+      </svg>
+    </div>
+    <div class="layer" data-depth="0.05">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"><g id="stars2"></g></svg>
+    </div>
+    <div class="layer" data-depth="0.22">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <path d="M0 560 L200 470 L400 556 L600 462 L820 570 L1040 470 L1260 566 L1460 480 L1600 552 L1600 900 L0 900 Z" fill="#0B2434" opacity=".9"/>
+      </svg>
+    </div>
+    <div class="layer" data-depth="0.46">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <path d="M0 660 L220 590 L440 664 L680 586 L920 676 L1180 596 L1420 680 L1600 636 L1600 900 L0 900 Z" fill="#061725"/>
+        <g id="houselights"></g>
+      </svg>
+    </div>
+    <div class="layer" data-depth="0.85">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <path d="M0 800 Q400 736 800 806 Q1200 876 1600 796 L1600 900 L0 900 Z" fill="#020A12"/>
+        <g fill="#020A12">
+          <path d="M1330 796 q-10 -72 22 -102 q-46 8 -62 -28 q40 12 66 -14 q10 -40 48 -44 q34 6 40 42 q30 22 64 12 q-18 36 -58 34 q30 32 20 98 z"/>
+          <rect x="1362" y="768" width="8" height="58"/>
+        </g>
+      </svg>
+    </div>
+    <div class="vig"></div>
+    <div class="hero-copy" style="justify-content:center;padding-bottom:0;text-align:center">
+      <div class="wrap">
+        <h2 class="h-lg" data-rv>Every lit window<br>is somebody's <em style="font-style:italic;color:var(--gold)">whole life.</em></h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ MAP ════════ -->
+<section id="regions" class="on-paper">
+  <div class="wrap">
+    <div class="map-grid">
+      <div data-rv>
+        <svg viewBox="0 0 560 660" style="width:100%;height:auto" role="img" aria-label="Stylised map of the Upper North Island">
+          <defs>
+            <linearGradient id="land" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#DCE9E4"/><stop offset="100%" stop-color="#C4DAD5"/>
+            </linearGradient>
+            <filter id="soft"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0A2A3A" flood-opacity=".14"/></filter>
+          </defs>
+          <path filter="url(#soft)" fill="url(#land)" stroke="#1E7F9B" stroke-width="1.2" stroke-opacity=".45"
+            d="M180 24 C214 8 246 30 250 66 C256 112 238 140 250 176 C262 210 292 214 300 246
+               C310 284 286 306 296 334 C306 362 344 358 366 380 C392 406 386 442 410 462
+               C440 486 486 476 506 506 C528 538 508 578 470 588 C430 598 402 574 372 566
+               C330 554 300 578 264 570 C224 560 214 522 186 502 C152 478 108 490 88 462
+               C66 430 92 396 88 362 C84 322 52 306 58 268 C64 226 106 220 122 188
+               C140 152 128 118 144 84 C154 60 162 34 180 24 Z"/>
+          <g stroke="#1E7F9B" stroke-opacity=".14" fill="none">
+            <path d="M120 170 q80 30 150 10"/><path d="M110 300 q120 40 210 4"/><path d="M180 440 q120 34 220 -6"/>
+          </g>
+          <g id="pins"></g>
+        </svg>
+      </div>
+      <div data-rv>
+        <span class="eyebrow" id="r-eyebrow">Tāmaki Makaurau</span>
+        <h3 id="r-name">Central Auckland</h3>
+        <div class="r-stats">
+          <div><span id="r-1">21</span><small>Branches</small></div>
+          <div><span id="r-2">$1.28m</span><small>Median</small></div>
+          <div><span id="r-3">27</span><small>Days to sell</small></div>
+        </div>
+        <div class="r-list" id="r-list"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AUCTION ════════ -->
+<section id="auction">
+  <div class="wrap">
+    <div class="auc">
+      <div data-rv>
+        <span class="eyebrow">Live now</span>
+        <h2 class="h-lg">Sold in the<br>open air</h2>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:30px">
+          <a class="btn solid" href="#">Watch live <span class="arw">→</span></a>
+          <a class="btn ghost" href="#">Schedule</a>
+        </div>
+      </div>
+      <div class="bidbox" data-rv>
+        <div class="top"><span>14 Rawhiti Road, Ōrākei</span><small>● Live</small></div>
+        <div class="amt"><span id="bidamt">$1,850,000</span><small id="bidstate">Current bid — reserve met</small></div>
+        <div id="bidfeed"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="cta">
+  <div class="glow"></div>
+  <div class="wrap" style="position:relative;z-index:2">
+    <div data-rv>
+      <span class="eyebrow" style="justify-content:center">Free appraisal</span>
+      <h2 class="h-lg">What's your place<br>actually worth?</h2>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px">
+        <a class="btn solid" href="#">Find out <span class="arw">→</span></a>
+        <a class="btn ghost" href="#">Find your branch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-row">
+      <a class="brand" href="#top">
+        <svg width="30" height="30" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M4 34V17L20 5l16 12v17z" stroke="#E9B44C" stroke-width="1.4"/>
+          <path d="M14 34V23h12v11" stroke="#48B6C9" stroke-width="1.4"/>
+          <circle cx="20" cy="14.5" r="2.4" fill="#E9B44C"/>
+        </svg>
+        <span class="bt-name">Barfoot &amp; Thompson<span class="bt-sub">Est. 1923 · Aotearoa</span></span>
+      </a>
+      <nav><a href="#">Buy</a><a href="#">Sell</a><a href="#">Rent</a><a href="#">Commercial</a><a href="#">Branches</a><a href="#">Privacy</a></nav>
+      <span style="font-size:.74rem;color:var(--muted)">© <span id="yr">2026</span> Barfoot &amp; Thompson Ltd — MREINZ</span>
+    </div>
+    <p class="f-note">Independent concept design — an unofficial visual exploration, not affiliated with or endorsed by Barfoot &amp; Thompson Ltd. All listings, prices, statistics and figures shown are illustrative placeholders.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+"use strict";
+const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $  = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
+const NS = "http://www.w3.org/2000/svg";
+const clamp=(v,a=0,b=1)=>v<a?a:v>b?b:v;
+const lerp=(a,b,t)=>a+(b-a)*t;
+// map v from [a,b] into 0..1, clamped
+const norm=(v,a,b)=>clamp((v-a)/(b-a));
+const rand=(s)=>{let a=s>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^a>>>15,1|a);t=(t+Math.imul(t^t>>>7,61|t))^t;return((t^t>>>14)>>>0)/4294967296}};
+
+/* ── loader ─────────────────────────────────
+   Skipped when embedded (portfolio thumbnails
+   iframe this page — a loading screen would be
+   all the preview ever shows).                */
+const EMBED=(()=>{try{return window.self!==window.top}catch(e){return true}})();
+if(EMBED||RM){
+  $("#loader").classList.add("done");
+  document.body.classList.add("ready");
+}else{
+  let prog=0;const barEl=$("#loadbar");
+  const tick=setInterval(()=>{prog=Math.min(100,prog+Math.random()*22);barEl.style.width=prog+"%"},110);
+  addEventListener("load",()=>setTimeout(()=>{
+    clearInterval(tick);barEl.style.width="100%";
+    setTimeout(()=>{$("#loader").classList.add("done");document.body.classList.add("ready")},420);
+  },900));
+}
+
+/* ── scene heights (data-len is vh of scroll runway) ── */
+$$("[data-scene]").forEach(s=>{s.style.height=s.dataset.len+"vh"});
+
+/* ── procedural sky detail ──────────────── */
+(function detail(){
+  const mkStars=(g,n,seed,h)=>{
+    const r=rand(seed);
+    for(let i=0;i<n;i++){
+      const c=document.createElementNS(NS,"circle");
+      c.setAttribute("cx",(r()*1600).toFixed(1));
+      c.setAttribute("cy",(r()*h).toFixed(1));
+      c.setAttribute("r",(r()*1.4+.3).toFixed(2));
+      c.setAttribute("fill","#F6F2EA");c.setAttribute("class","star");
+      c.style.animationDelay=(r()*4).toFixed(2)+"s";
+      c.style.opacity=(.2+r()*.6).toFixed(2);
+      g.appendChild(c);
+    }
+  };
+  mkStars($("#stars"),170,7,470);
+  mkStars($("#stars2"),110,19,420);
+
+  // lit city windows
+  const w=$("#windows"),r3=rand(31);
+  [[300,600,52,180],[360,640,38,140],[406,580,60,200],[474,654,44,126],[526,618,34,162],
+   [568,560,56,220],[632,636,40,144],[680,596,48,184],[792,620,42,160],[842,586,52,194],
+   [902,648,36,132],[946,608,46,172],[1000,660,40,120]].forEach(([x,y,bw,bh])=>{
+    for(let cx=x+5;cx<x+bw-6;cx+=9)
+      for(let cy=y+8;cy<y+bh-8;cy+=13){
+        if(r3()>.52) continue;
+        const rect=document.createElementNS(NS,"rect");
+        rect.setAttribute("x",cx);rect.setAttribute("y",cy);
+        rect.setAttribute("width",4);rect.setAttribute("height",6);
+        rect.setAttribute("opacity",(.3+r3()*.65).toFixed(2));
+        if(r3()>.86){rect.setAttribute("class","star");rect.style.animationDelay=(r3()*6).toFixed(1)+"s"}
+        w.appendChild(rect);
+      }
+  });
+
+  // harbour ripples
+  const wv=$("#waves");
+  for(let i=0;i<10;i++){
+    const y=790+i*20, amp=3+i*.8, len=120+i*16;
+    let d=`M-160 ${y}`;
+    for(let x=-160;x<1760;x+=len) d+=` q ${len/2} ${amp} ${len} 0`;
+    const p=document.createElementNS(NS,"path");
+    p.setAttribute("d",d);p.setAttribute("opacity",(.34-i*.028).toFixed(2));
+    if(!RM) p.style.animation=`shimmer ${5+i*1.1}s linear infinite`;
+    wv.appendChild(p);
+  }
+
+  // valley house lights
+  const hl=$("#houselights"),r4=rand(53);
+  for(let i=0;i<90;i++){
+    const rect=document.createElementNS(NS,"rect");
+    rect.setAttribute("x",(r4()*1600).toFixed(0));
+    rect.setAttribute("y",(640+r4()*210).toFixed(0));
+    rect.setAttribute("width",3);rect.setAttribute("height",4);
+    rect.setAttribute("fill","#E9B44C");rect.setAttribute("class","star");
+    rect.style.animationDelay=(r4()*6).toFixed(1)+"s";
+    hl.appendChild(rect);
+  }
+})();
+
+/* ── generative property artwork ────────── */
+function scene(cfg){
+  const r=rand(cfg.seed), P=cfg.palette, H=314;
+  const win=(x,y,w,h,lit)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="1" fill="${lit?'#FFD79A':'#22485E'}" opacity="${lit?.92:.5}"/>`;
+  let body="",i;
+
+  body+=`<rect width="600" height="450" fill="url(#sk${cfg.seed})"/>`;
+  body+=`<circle cx="${cfg.sunX}" cy="${cfg.sunY}" r="${cfg.sunR*3.4}" fill="${P.sun}" opacity=".13"/>`;
+  body+=`<circle cx="${cfg.sunX}" cy="${cfg.sunY}" r="${cfg.sunR}" fill="${P.sun}" opacity=".85"/>`;
+  for(i=0;i<3;i++)
+    body+=`<ellipse cx="${(r()*600).toFixed(0)}" cy="${(40+r()*90).toFixed(0)}" rx="${(40+r()*80).toFixed(0)}" ry="${(4+r()*5).toFixed(0)}" fill="${P.cloud}" opacity=".26"/>`;
+  body+=`<path d="M0 268 L110 224 L210 266 L320 214 L440 268 L540 232 L600 264 L600 ${H} L0 ${H} Z" fill="${P.hillFar}" opacity=".75"/>`;
+  body+=`<path d="M0 292 L140 254 L280 296 L420 250 L600 294 L600 ${H} L0 ${H} Z" fill="${P.hillNear}" opacity=".9"/>`;
+  if(cfg.water){
+    body+=`<rect y="${H}" width="600" height="${cfg.groundY-H}" fill="${P.water}"/>`;
+    for(i=0;i<5;i++){
+      const y=H+8+i*7;
+      body+=`<path d="M0 ${y} q40 3 80 0 t80 0 t80 0 t80 0 t80 0 t80 0 t80 0" stroke="${P.foam}" stroke-width="1" fill="none" opacity="${(.34-i*.05).toFixed(2)}"/>`;
+    }
+  }
+  body+=`<rect y="${cfg.water?cfg.groundY:H}" width="600" height="${450-(cfg.water?cfg.groundY:H)}" fill="${P.ground}"/>`;
+
+  if(cfg.type==="tower"){
+    const bx=190,bw=210,by=96;
+    body+=`<rect x="${bx}" y="${by}" width="${bw}" height="${cfg.groundY-by+8}" fill="${P.wall}"/>`;
+    body+=`<rect x="${bx}" y="${by}" width="${bw*.35}" height="${cfg.groundY-by+8}" fill="${P.wall2}" opacity=".55"/>`;
+    for(let y=by+14;y<cfg.groundY-10;y+=22)
+      for(let x=bx+12;x<bx+bw-16;x+=24) body+=win(x,y,14,12,r()>.42);
+    body+=`<rect x="${bx-16}" y="${by-10}" width="${bw+32}" height="12" fill="${P.trim}"/>`;
+    body+=`<rect x="${bx+bw-60}" y="60" width="6" height="40" fill="${P.trim}"/>`;
+    body+=`<rect x="70" y="180" width="100" height="${cfg.groundY-180+8}" fill="${P.wall2}" opacity=".8"/>`;
+    body+=`<rect x="420" y="152" width="118" height="${cfg.groundY-152+8}" fill="${P.wall2}" opacity=".65"/>`;
+  } else if(cfg.type==="villa"){
+    const bx=140,bw=320,by=176;
+    body+=`<path d="M${bx-30} ${by} L${bx+bw/2} ${by-72} L${bx+bw+30} ${by} Z" fill="${P.roof}"/>`;
+    body+=`<rect x="${bx}" y="${by}" width="${bw}" height="${cfg.groundY-by+6}" fill="${P.wall}"/>`;
+    for(let x=bx+16;x<bx+bw;x+=52) body+=`<rect x="${x}" y="${by+40}" width="5" height="${cfg.groundY-by-34}" fill="${P.trim}" opacity=".9"/>`;
+    body+=`<rect x="${bx-8}" y="${by+34}" width="${bw+16}" height="8" fill="${P.trim}"/>`;
+    body+=win(bx+34,by+62,58,54,true)+win(bx+124,by+62,58,54,r()>.4)+win(bx+218,by+62,58,54,true);
+    body+=`<rect x="${bx+bw-70}" y="${by+58}" width="34" height="${cfg.groundY-by-52}" fill="${P.door}"/>`;
+    body+=`<rect x="${bx+58}" y="${by-96}" width="18" height="30" fill="${P.roof}"/>`;
+  } else if(cfg.type==="modern"){
+    const by=196;
+    body+=`<rect x="120" y="${by}" width="230" height="${cfg.groundY-by+6}" fill="${P.wall}"/>`;
+    body+=`<rect x="330" y="${by-52}" width="170" height="${cfg.groundY-by+58}" fill="${P.wall2}"/>`;
+    body+=`<rect x="108" y="${by-12}" width="254" height="13" fill="${P.trim}"/>`;
+    body+=`<rect x="320" y="${by-64}" width="192" height="13" fill="${P.trim}"/>`;
+    body+=`<rect x="146" y="${by+30}" width="176" height="66" fill="#FFD79A" opacity=".9"/>`;
+    body+=`<rect x="230" y="${by+30}" width="3" height="66" fill="${P.wall}" opacity=".7"/>`;
+    body+=`<rect x="356" y="${by-18}" width="120" height="86" fill="#FFD79A" opacity=".75"/>`;
+    body+=`<rect x="404" y="${by-18}" width="3" height="86" fill="${P.wall2}"/>`;
+  } else if(cfg.type==="bach"){
+    const bx=196,bw=210,by=214;
+    body+=`<path d="M${bx-24} ${by} L${bx+bw/2} ${by-58} L${bx+bw+24} ${by} Z" fill="${P.roof}"/>`;
+    body+=`<rect x="${bx}" y="${by}" width="${bw}" height="${cfg.groundY-by+4}" fill="${P.wall}"/>`;
+    for(let y=by+6;y<cfg.groundY;y+=9) body+=`<line x1="${bx}" y1="${y}" x2="${bx+bw}" y2="${y}" stroke="${P.wall2}" stroke-width=".8" opacity=".5"/>`;
+    body+=win(bx+26,by+30,52,42,true)+win(bx+110,by+30,52,42,r()>.5);
+    body+=`<rect x="${bx+bw/2-16}" y="${by+82}" width="32" height="${cfg.groundY-by-78}" fill="${P.door}"/>`;
+    body+=`<rect x="${bx-40}" y="${cfg.groundY}" width="${bw+80}" height="7" fill="${P.trim}"/>`;
+    for(let x=bx-34;x<bx+bw+40;x+=40) body+=`<rect x="${x}" y="${cfg.groundY+7}" width="5" height="26" fill="${P.trim}" opacity=".85"/>`;
+  } else {
+    [0,1,2,3].forEach(c=>{
+      const bx=96+c*104, by=180+(c%2?14:0);
+      body+=`<path d="M${bx-6} ${by} L${bx+46} ${by-42} L${bx+98} ${by} Z" fill="${c%2?P.roof:P.wall2}"/>`;
+      body+=`<rect x="${bx}" y="${by}" width="92" height="${cfg.groundY-by+5}" fill="${c%2?P.wall:P.wall2}"/>`;
+      body+=win(bx+14,by+22,26,26,r()>.4)+win(bx+52,by+22,26,26,r()>.4);
+      body+=`<rect x="${bx+34}" y="${by+66}" width="24" height="${cfg.groundY-by-62}" fill="${P.door}"/>`;
+    });
+  }
+
+  const tree=(x,y,s,c)=>`<g transform="translate(${x} ${y}) scale(${s})">
+    <rect x="-2.5" y="-6" width="5" height="34" fill="#2E2118" opacity=".85"/>
+    <circle cx="0" cy="-18" r="22" fill="${c}"/><circle cx="-16" cy="-6" r="15" fill="${c}" opacity=".92"/>
+    <circle cx="17" cy="-8" r="14" fill="${c}" opacity=".92"/></g>`;
+  for(i=0;i<cfg.trees;i++)
+    body+=tree(r()<.5?20+r()*90:500+r()*80, cfg.groundY+8+r()*22, .7+r()*.6, P.tree);
+  for(i=0;i<4;i++)
+    body+=`<path transform="translate(${(60+r()*460).toFixed(0)} ${(54+r()*80).toFixed(0)}) scale(${(.45+r()*.5).toFixed(2)})" d="M0 0 q6 -6 12 0 q6 -6 12 0" stroke="${P.bird}" stroke-width="1.4" fill="none" opacity=".5"/>`;
+  body+=`<path d="M0 ${cfg.groundY+56} Q150 ${cfg.groundY+40} 300 ${cfg.groundY+58} T600 ${cfg.groundY+46} L600 450 L0 450 Z" fill="${P.fg}" opacity=".9"/>`;
+
+  return `<svg viewBox="0 0 600 450" preserveAspectRatio="xMidYMid slice" role="img" aria-label="${cfg.alt}">
+    <defs><linearGradient id="sk${cfg.seed}" x1="0" y1="0" x2="0" y2="1">
+    ${P.sky.map((c,n)=>`<stop offset="${(n/(P.sky.length-1)*100).toFixed(0)}%" stop-color="${c}"/>`).join("")}
+    </linearGradient></defs>${body}</svg>`;
+}
+
+const PAL={
+  dusk:{sky:["#12314A","#2E5F72","#8B7E7A","#E5A06B","#F6CE8E"],sun:"#FFE3B0",cloud:"#FBE0C4",hillFar:"#2A5462",hillNear:"#1D3D4C",ground:"#20402F",water:"#1F4A5C",foam:"#8FC7D6",wall:"#F1E7D8",wall2:"#D9CCB9",roof:"#5A3E38",trim:"#FFF6E7",door:"#3E5C63",tree:"#254B33",bird:"#0E2233",fg:"#16301F"},
+  morning:{sky:["#8FC4DA","#BEDDE8","#E4EFF0","#F6F0E1","#FBF3DE"],sun:"#FFF3CE",cloud:"#FFFFFF",hillFar:"#9DBFB4",hillNear:"#7FA894",ground:"#69935F",water:"#6FA9C0",foam:"#FFFFFF",wall:"#FFFFFF",wall2:"#E8E1D2",roof:"#33556A",trim:"#FFFFFF",door:"#B5583F",tree:"#3E7A4B",bird:"#33556A",fg:"#548050"},
+  golden:{sky:["#2B3F63","#6C6289","#C08277","#F0A96C","#FBD59A"],sun:"#FFF0C4",cloud:"#F7CFB2",hillFar:"#5A5478",hillNear:"#3E3E5C",ground:"#4A5237",water:"#4A6E80",foam:"#F6D8AE",wall:"#EFDCC2",wall2:"#CDB294",roof:"#6B3F33",trim:"#FFF7E6",door:"#2F4650",tree:"#3B5236",bird:"#2B2135",fg:"#3A4630"},
+  coastal:{sky:["#0E3A55","#2E7A94","#77B8C4","#CDE6E3","#F1E7CF"],sun:"#FFFAE2",cloud:"#EAF6F7",hillFar:"#3E7E88",hillNear:"#2A5F6C",ground:"#D9C79E",water:"#2E86A0",foam:"#FFFFFF",wall:"#FBF6EA",wall2:"#DCEAE7",roof:"#1E5C6B",trim:"#FFFFFF",door:"#E07A50",tree:"#2F6B4E",bird:"#14424F",fg:"#CBB68C"},
+  night:{sky:["#050D18","#0B2237","#1B4257","#39647A","#6E8C93"],sun:"#DCE9F2",cloud:"#4A6478",hillFar:"#12293B",hillNear:"#0C1D2C",ground:"#101F2B",water:"#0D2637",foam:"#4E7E92",wall:"#1D3346",wall2:"#16293A",roof:"#0E1F2D",trim:"#31536A",door:"#2A4459",tree:"#0F2A25",bird:"#3A5A6E",fg:"#0A1721"},
+  meadow:{sky:["#4E86AE","#8FBCD4","#C4DDE6","#EDF0E2","#F7F2DD"],sun:"#FFF6D4",cloud:"#FFFFFF",hillFar:"#8FAE86",hillNear:"#6E9268",ground:"#8AA860",water:"#6E9EAE",foam:"#FFFFFF",wall:"#F4EADA",wall2:"#DCCEB4",roof:"#7C4A34",trim:"#FFFFFF",door:"#3D5B44",tree:"#4C7A42",bird:"#40584A",fg:"#77974F"}
+};
+
+const LISTINGS=[
+  {sub:"Ponsonby",price:"Auction Wed 11am",bed:4,bath:2,car:2,flag:"Auction",type:"villa",pal:"dusk",seed:11,sunX:470,sunY:190,sunR:24,groundY:352,trees:3,water:false,alt:"Restored villa at dusk"},
+  {sub:"Ōrākei",price:"$3,450,000",bed:3,bath:3,car:2,flag:"New",type:"tower",pal:"golden",seed:23,sunX:110,sunY:150,sunR:26,groundY:356,trees:2,water:true,alt:"Harbourside tower at golden hour"},
+  {sub:"Matakana",price:"By negotiation",bed:5,bath:3,car:4,flag:"Open home",type:"modern",pal:"meadow",seed:37,sunX:498,sunY:120,sunR:22,groundY:344,trees:5,water:false,alt:"Modern pavilion in a meadow"},
+  {sub:"Mount Maunganui",price:"$1,895,000",bed:3,bath:2,car:1,flag:"Live",type:"bach",pal:"coastal",seed:41,sunX:120,sunY:110,sunR:20,groundY:362,trees:2,water:true,alt:"Coastal bach by the sea"},
+  {sub:"Hamilton East",price:"$799,000",bed:2,bath:1,car:1,flag:"Project",type:"terrace",pal:"morning",seed:59,sunX:520,sunY:96,sunR:18,groundY:346,trees:3,water:false,alt:"Terrace row in morning light"},
+  {sub:"Kerikeri",price:"Deadline sale",bed:4,bath:3,car:3,flag:"Deadline",type:"villa",pal:"night",seed:71,sunX:440,sunY:96,sunR:16,groundY:360,trees:4,water:true,alt:"Homestead above an inlet at night"}
+];
+const ic={
+  bed:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 18v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5M2 18h20M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/></svg>`,
+  bath:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4zM6 12V6a2 2 0 0 1 4 0"/></svg>`,
+  car:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 16h16M5 16v2M19 16v2M4 16l2-6h12l2 6"/><circle cx="8" cy="16" r="1.4"/><circle cx="16" cy="16" r="1.4"/></svg>`
+};
+$("#galtrack").innerHTML=LISTINGS.map(L=>`
+  <article class="tile">
+    <div class="art">${scene({...L,palette:PAL[L.pal]})}</div>
+    <span class="flag ${L.flag==="Live"?"live":""}">${L.flag}</span>
+    <div class="cap">
+      <div class="sub">${L.sub}</div>
+      <div class="price">${L.price}</div>
+      <div class="spx"><span>${ic.bed}${L.bed}</span><span>${ic.bath}${L.bath}</span><span>${ic.car}${L.car}</span></div>
+    </div>
+  </article>`).join("");
+
+/* ── kinetic numbers band ───────────────── */
+const NUMS=[["80","+","Branches"],["1,800","+","Salespeople"],["102","yrs","Family owned"],["18","k","Rentals managed"],["4,218","","Live listings"]];
+const numRow=NUMS.map(([n,u,l])=>`<b>${n}<i>${u}</i></b><em>${l}</em><s>/</s>`).join("");
+$("#nmq").innerHTML=`<div class="trk">${numRow}</div><div class="trk" aria-hidden="true">${numRow}</div>`;
+
+/* ── regions ────────────────────────────── */
+const REGIONS=[
+  {x:196,y:96,n:"Northland",e:"Te Tai Tokerau",s:["11","$785k","46"],p:["Kerikeri","Paihia","Whangārei","Mangawhai"]},
+  {x:150,y:262,n:"West Auckland",e:"Waitākere",s:["9","$1.02m","31"],p:["Titirangi","Henderson","Piha","Kumeū"]},
+  {x:248,y:302,n:"Central Auckland",e:"Tāmaki Makaurau",s:["21","$1.28m","27"],p:["Ponsonby","Remuera","Grey Lynn","Ōrākei"]},
+  {x:352,y:392,n:"South Auckland",e:"Manukau",s:["16","$895k","33"],p:["Manukau","Papakura","Pukekohe","Howick"]},
+  {x:452,y:492,n:"Bay of Plenty",e:"Te Moana-a-Toi",s:["8","$965k","38"],p:["Mount Maunganui","Tauranga","Pāpāmoa"]},
+  {x:268,y:520,n:"Waikato",e:"Te Rohe Pōtae",s:["12","$742k","41"],p:["Hamilton","Cambridge","Raglan"]}
+];
+$("#pins").innerHTML=REGIONS.map((R,i)=>`
+  <g class="pin-g ${i===2?'on':''}" data-i="${i}" transform="translate(${R.x} ${R.y})">
+    <circle class="ring" r="8" fill="none" stroke="#1E7F9B" stroke-width="1.4" style="animation-delay:${i*.4}s"/>
+    <circle class="dot" r="6" fill="#1E7F9B"/><circle r="2" fill="#F6F2EA"/>
+    <text x="14" y="4">${R.n}</text></g>`).join("");
+function setRegion(i){
+  const R=REGIONS[i];
+  $("#r-eyebrow").textContent=R.e;$("#r-name").textContent=R.n;
+  $("#r-1").textContent=R.s[0];$("#r-2").textContent=R.s[1];$("#r-3").textContent=R.s[2];
+  $("#r-list").innerHTML=R.p.map(p=>`<b>${p}</b>`).join("");
+  $$(".pin-g").forEach(p=>p.classList.toggle("on",+p.dataset.i===i));
+}
+$$(".pin-g").forEach(p=>{
+  const go=()=>setRegion(+p.dataset.i);
+  p.addEventListener("click",go);p.addEventListener("mouseenter",go);
+});
+setRegion(2);
+
+/* ── reveal ─────────────────────────────── */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}
+}),{threshold:.2,rootMargin:"0px 0px -6% 0px"});
+$$("[data-rv]").forEach(el=>io.observe(el));
+
+/* ══════════════════════════════════════════
+   SCROLL ENGINE
+   Scene 1 is scrubbed: sky cross-fade, sun arc,
+   star fade and per-layer dolly, then the next
+   section scrolls up over the pinned frame.
+   ══════════════════════════════════════════ */
+const hero      = $("#top");
+const heroLayers= $$("#heropin .layer");
+const skies     = $$("#heropin .sky");
+const sunG      = $("#sun");
+const starLayer = $("#starlayer");
+const heroCopy  = $("#herocopy");
+const cue       = $("#cue");
+const fadeout   = $("#fadeout");
+const gallery   = $("#gallery");
+const galTrack  = $("#galtrack");
+const galBar    = $("#galbar");
+const galCount  = $("#galcount");
+const valley    = $$("[data-scene]")[2];
+
+// progress of a scene's sticky runway, 0 → 1
+function sceneP(el){
+  const r=el.getBoundingClientRect();
+  const runway=el.offsetHeight-innerHeight;
+  return runway<=0?0:clamp(-r.top/runway);
+}
+
+let queued=false;
+function frame(){
+  queued=false;
+  const doc=document.documentElement;
+  $("#progress").style.transform=`scaleX(${scrollY/((doc.scrollHeight-innerHeight)||1)})`;
+  $("#nav").classList.toggle("solid",scrollY>60);
+  if(RM) return;
+
+  /* ── scene 1 ── */
+  const p=sceneP(hero);
+  // camera dolly: near layers move + scale far more than distant ones
+  // scale always outruns the lift, so a rising layer can never expose its own bottom edge
+  heroLayers.forEach(l=>{
+    const d=+l.dataset.depth;
+    l.style.transform=`translate3d(0,${(-p*innerHeight*d*.22).toFixed(1)}px,0) scale(${(1+p*d*.55).toFixed(4)})`;
+  });
+  // dawn: night → dawn → gold
+  skies[1].style.opacity=norm(p,.06,.46).toFixed(3);
+  skies[2].style.opacity=norm(p,.42,.82).toFixed(3);
+  starLayer.style.opacity=(1-norm(p,.02,.34)).toFixed(3);
+  // sun climbs a shallow arc from below the right headland to upper-centre
+  const sp=norm(p,.05,.9);
+  const sx=lerp(1300,720,sp), sy=lerp(940,330,sp)+Math.sin(sp*Math.PI)*46;
+  sunG.setAttribute("transform",`translate(${sx.toFixed(0)} ${sy.toFixed(0)})`);
+  // copy lifts away and dissolves
+  heroCopy.style.transform=`translate3d(0,${(-p*innerHeight*.42).toFixed(1)}px,0) scale(${(1-p*.1).toFixed(3)})`;
+  heroCopy.style.opacity=(1-norm(p,.12,.5)).toFixed(3);
+  cue.style.opacity=(1-norm(p,0,.12)).toFixed(3);
+  // final darkening so the next section arrives out of black, not a hard cut
+  fadeout.style.opacity=norm(p,.82,1).toFixed(3);
+
+  /* ── scene 3 (valley) parallax ── */
+  const vp=sceneP(valley);
+  $$(".layer",valley).forEach(l=>{
+    const d=+l.dataset.depth;
+    l.style.transform=`translate3d(0,${(-vp*innerHeight*d*.2).toFixed(1)}px,0) scale(${(1+vp*d*.5).toFixed(4)})`;
+  });
+
+  /* ── scene 2: vertical scroll drives the gallery sideways ── */
+  const gp=sceneP(gallery);
+  const dist=Math.max(0,galTrack.scrollWidth-innerWidth);
+  galTrack.style.transform=`translate3d(${(-gp*dist).toFixed(1)}px,0,0)`;
+  galBar.style.width=(gp*100).toFixed(1)+"%";
+  galCount.textContent=String(Math.min(LISTINGS.length,Math.floor(gp*LISTINGS.length)+1)).padStart(2,"0")+" / 0"+LISTINGS.length;
+}
+addEventListener("scroll",()=>{if(!queued){queued=true;requestAnimationFrame(frame)}},{passive:true});
+addEventListener("resize",frame);
+frame();
+
+/* ── cursor ─────────────────────────────── */
+if(matchMedia("(hover:hover)").matches && !RM){
+  const cur=$("#cursor");let cx=0,cy=0,tx=0,ty=0;
+  addEventListener("mousemove",e=>{tx=e.clientX;ty=e.clientY;cur.classList.add("on")});
+  (function loop(){cx+=(tx-cx)*.18;cy+=(ty-cy)*.18;cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`;requestAnimationFrame(loop)})();
+  $$("a,button,.tile,.pin-g").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cur.classList.add("grow"));
+    el.addEventListener("mouseleave",()=>cur.classList.remove("grow"));
+  });
+}
+
+/* ── drawer ─────────────────────────────── */
+const burger=$("#burger"),drawer=$("#drawer");
+burger.addEventListener("click",()=>{
+  const open=drawer.classList.toggle("open");
+  burger.classList.toggle("x",open);
+  burger.setAttribute("aria-expanded",open);
+  document.body.style.overflow=open?"hidden":"";
+  $$("#drawer a").forEach((a,i)=>a.style.transitionDelay=open?`${.18+i*.06}s`:"0s");
+});
+$$("#drawer a").forEach(a=>a.addEventListener("click",()=>burger.click()));
+
+/* ── live auction ───────────────────────── */
+(function(){
+  const feed=$("#bidfeed"),amt=$("#bidamt");
+  const names=["Bidder 4","Bidder 11","Phone bidder","Bidder 7","Bidder 2","Bidder 19"];
+  let v=1850000,n=0;
+  const o=new IntersectionObserver(es=>{
+    if(!es[0].isIntersecting||RM) return;
+    o.disconnect();
+    (function push(){
+      v+=[5000,10000,10000,20000,25000][Math.floor(Math.random()*5)];
+      amt.textContent="$"+v.toLocaleString("en-NZ");
+      const row=document.createElement("div");
+      row.innerHTML=`<b>${names[n%names.length]}</b><span>$${v.toLocaleString("en-NZ")}</span>`;
+      feed.prepend(row);
+      while(feed.children.length>6) feed.lastChild.remove();
+      if(++n<28) setTimeout(push,1400+Math.random()*2200);
+      else $("#bidstate").textContent="Sold under the hammer";
+    })();
+  },{threshold:.4});
+  o.observe($("#auction"));
+})();
+
+$("#yr").textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
