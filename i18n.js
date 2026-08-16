@@ -3880,6 +3880,7 @@
     'Sähköurakointi · Toronto': 'Electrical contracting · Toronto',
     'Interaktiivinen konsepti · Scroll': 'Interactive concept · Scroll',
     'Kiinteistönvälitys · Parallax': 'Real estate · Parallax',
+    'Yksityispankki · Three.js': 'Private bank · Three.js',
     'Latausnopeuden optimointi': 'Load speed optimisation',
     'Kolme vaihetta,': 'Three steps,',
     'Noin 45 min': 'About 45 min',
