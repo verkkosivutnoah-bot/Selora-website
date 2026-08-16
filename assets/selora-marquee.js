@@ -243,6 +243,11 @@
 
   function onUp(e) {
     if (!drag || drag.id !== e.pointerId) return;
+    // Hand the pointer back, or the capture outlives the gesture and keeps
+    // retargeting later events at the track.
+    if (track.hasPointerCapture && track.hasPointerCapture(e.pointerId)) {
+      track.releasePointerCapture(e.pointerId);
+    }
     var d = drag;
     drag = null;
     // Let a flick carry, but never more than two cards.
@@ -262,20 +267,29 @@
     // different slop.
     if (lastDragDistance > dragSlop) { e.preventDefault(); e.stopPropagation(); return; }
 
-    // An off-centre card is a target for rotation, not navigation: the first
-    // click brings it to the middle, a second one follows its link. Without
-    // this, every card except the centre one reads as a dead link.
-    var node = e.target;
+    // onDown takes pointer capture on the track so a drag survives leaving the
+    // card. The side effect is that the resulting click is retargeted to the
+    // track, so e.target is never the card and the anchor never sees the click
+    // at all -- which is why pressing an example did nothing. Resolve the card
+    // under the cursor instead, and do the navigating ourselves.
+    var node = document.elementFromPoint(e.clientX, e.clientY);
     while (node && node !== track && !(node.classList && node.classList.contains('story-card'))) {
       node = node.parentNode;
     }
     if (!node || node === track) return;
     var i = cards.indexOf(node);
-    if (i !== -1 && indexAt(pos) !== i) {
-      e.preventDefault();
-      e.stopPropagation();
-      goTo(i);
-    }
+    if (i === -1) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // First click on an off-centre card brings it to the middle.
+    if (indexAt(pos) !== i) { goTo(i); return; }
+
+    var href = node.getAttribute('href');
+    if (!href) return;
+    if (node.getAttribute('target') === '_blank') window.open(href, '_blank', 'noopener');
+    else window.location.href = href;
   }, true);
   var lastDragDistance = 0;
   var dragSlop = 6; // widened to 14 for touch/pen in onDown
