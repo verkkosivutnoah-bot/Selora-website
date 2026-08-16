@@ -323,28 +323,14 @@
    ============================================================ */
 .contact-2026 { position: relative; }
 
-/* ---- aurora hero ---- */
-.c-hero { position: relative; overflow: hidden; padding: 8.5rem 0 4.5rem; isolation: isolate; }
-.c-hero-field { position: absolute; inset: -25% -10%; z-index: 0; pointer-events: none; }
-.c-hero-field span { position: absolute; display: block; border-radius: 50%; will-change: transform; }
-.c-hero-field .cf1 { left: 2%;  top: 4%;   width: 40rem; height: 40rem;
-  background: radial-gradient(circle, rgba(29,78,216,0.30), transparent 62%); animation: cField1 31s ease-in-out infinite; }
-.c-hero-field .cf2 { right: 0%;  top: 12%;  width: 34rem; height: 34rem;
-  background: radial-gradient(circle, rgba(96,165,250,0.24), transparent 62%); animation: cField2 43s ease-in-out infinite; }
-.c-hero-field .cf3 { left: 34%; bottom: -8%; width: 32rem; height: 32rem;
-  background: radial-gradient(circle, rgba(37,99,235,0.22), transparent 62%); animation: cField3 37s ease-in-out infinite; }
-@keyframes cField1 { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(7%,5%,0) scale(1.16)} }
-@keyframes cField2 { 0%,100%{transform:translate3d(0,0,0) scale(1.08)} 50%{transform:translate3d(-8%,6%,0) scale(0.94)} }
-@keyframes cField3 { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(5%,-7%,0) scale(1.14)} }
-
-/* contour linework, same family as the services belt so the site reads as one system */
-.c-hero-lines { position: absolute; inset: -30%; z-index: 0; pointer-events: none; opacity: .85;
-  background: repeating-radial-gradient(circle at 26% 10%,
-    transparent 0 54px, rgba(96,165,250,0.075) 54px 55.5px, transparent 55.5px 110px);
-  animation: cLines 79s ease-in-out infinite; }
-@keyframes cLines { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(2%,-2.5%,0) scale(1.1)} }
-
-.c-hero-inner { position: relative; z-index: 1; }
+/* ---- band that carries the contact rail, just under the hero ---- */
+.c-band { position: relative; overflow: hidden; padding: 3.25rem 0 1.25rem; }
+.c-band::before { content:''; position:absolute; inset:-40% -20%; pointer-events:none;
+  background: repeating-radial-gradient(circle at 24% 12%,
+    transparent 0 58px, rgba(96,165,250,0.055) 58px 59.5px, transparent 59.5px 118px);
+  animation: cBandLines 83s ease-in-out infinite; }
+@keyframes cBandLines { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(2%,-2%,0) scale(1.09)} }
+.c-band .container { position: relative; z-index: 1; }
 
 /* ---- contact rail ---- */
 .c-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3.25rem; }
@@ -400,9 +386,59 @@
 .contact-2026 .form-submit:hover::after { transform: translateX(101%); transition: transform .9s ease; }
 
 @media (prefers-reduced-motion: reduce) {
-  .c-hero-field span, .c-hero-lines { animation: none; }
+  .c-band::before { animation: none; }
   .c-card, .c-ico, .contact-2026 .tab-panel { transition: none; animation: none; }
   .c-ico svg path, .c-ico svg circle, .c-ico svg rect, .c-ico svg polyline, .c-ico svg line { stroke-dashoffset: 0; }
+}
+
+/* ============================================================
+   Everything below the hero
+   ============================================================ */
+
+/* booking + form shell */
+.contact-2026 .widget-shell, .contact-2026 .contact-widget { position: relative; }
+.contact-2026 #ajanvaraus { position: relative; overflow: hidden; }
+.contact-2026 #ajanvaraus::before { content:''; position:absolute; inset:-30% -15%; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 46% 30% at 12% 8%, rgba(29,78,216,0.18), transparent 62%),
+    radial-gradient(ellipse 40% 26% at 88% 72%, rgba(96,165,250,0.14), transparent 62%);
+  animation: cPanelField 47s ease-in-out infinite; }
+@keyframes cPanelField { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(-3%,3%,0) scale(1.1)} }
+.contact-2026 #ajanvaraus > .container { position: relative; z-index: 1; }
+
+/* process flow — cards lift, numbers glow, connector arrows draw themselves */
+.contact-2026 .flow-card { position: relative; overflow: hidden;
+  transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .5s, background .5s; }
+.contact-2026 .flow-node:hover .flow-card { transform: translateY(-8px); border-color: rgba(96,165,250,0.45); }
+.contact-2026 .flow-card::before { content:''; position:absolute; left:0; top:0; height:2px; width:100%;
+  background: linear-gradient(90deg,#1D4ED8,#60A5FA,#93C5FD);
+  transform: scaleX(0); transform-origin:0 50%; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.contact-2026 .flow-node:hover .flow-card::before { transform: scaleX(1); }
+.contact-2026 .flow-step { transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s; }
+.contact-2026 .flow-node:hover .flow-step { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(96,165,250,0.12); }
+.contact-2026 .proc-icon { display:inline-flex; transition: transform .6s cubic-bezier(.22,1,.36,1), color .5s; }
+.contact-2026 .flow-node:hover .proc-icon { transform: translateY(-3px) rotate(-8deg); color:#93C5FD; }
+.contact-2026 .flow-tag { transition: background .5s, color .5s; }
+.contact-2026 .flow-node:hover .flow-tag { background: rgba(96,165,250,0.16); color:#dbeafe; }
+
+/* the connector arrows pulse along their length */
+.contact-2026 .flow-arrow .fa-line { stroke-dasharray: 8 8; animation: cArrowFlow 1.9s linear infinite; }
+@keyframes cArrowFlow { to { stroke-dashoffset: -32; } }
+.contact-2026 .flow-arrow .fa-head { animation: cArrowHead 1.9s ease-in-out infinite; transform-origin: center; }
+@keyframes cArrowHead { 0%,100%{opacity:.55; transform: translateX(0)} 50%{opacity:1; transform: translateX(3px)} }
+
+/* closing CTA band */
+.contact-2026 .cta-btns .btn { position: relative; overflow: hidden;
+  transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s; }
+.contact-2026 .cta-btns .btn:hover { transform: translateY(-3px); box-shadow: 0 14px 34px -18px rgba(29,78,216,0.9); }
+.contact-2026 .cta-btns .btn::after { content:''; position:absolute; inset:0; transform: translateX(-101%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent); }
+.contact-2026 .cta-btns .btn:hover::after { transform: translateX(101%); transition: transform .85s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .c-band::before, .contact-2026 #ajanvaraus::before,
+  .contact-2026 .flow-arrow .fa-line, .contact-2026 .flow-arrow .fa-head { animation: none; }
+  .contact-2026 .flow-card, .contact-2026 .flow-step, .contact-2026 .proc-icon { transition: none; }
 }
 </style>
 </head>
@@ -432,50 +468,51 @@
       </div>
     </div>
   </header>
-  <div class="page-title-block c-hero">
-    <div class="c-hero-field" aria-hidden="true"><span class="cf1"></span><span class="cf2"></span><span class="cf3"></span></div>
-    <div class="c-hero-lines" aria-hidden="true"></div>
-    <div class="c-hero-inner">
-      <p class="page-label" data-sl-reveal>Ota yhteyttä</p>
-      <h1 data-sl-split>Kerro meille,<br><span class="accent">mitä tarvitset.</span></h1>
-      <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.</p>
-      <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
-        <span class="phc"><b>4 h</b> vasteaika</span>
-        <span class="phc"><b>30 min</b> maksuton kartoitus</span>
-        <span class="phc"><b>0 €</b> sitoumuksia</span>
-      </div>
-
-      <div class="c-rail">
-        <a class="c-card" href="mailto:selora.tuki@gmail.com">
-          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
-          <p class="c-card-k">Sähköposti</p>
-          <p class="c-card-v">selora.tuki@gmail.com</p>
-          <p class="c-card-m" data-i18n="Kirjoita meille milloin vain.">Kirjoita meille milloin vain.</p>
-        </a>
-        <a class="c-card" href="tel:+358408151122">
-          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
-          <p class="c-card-k">Puhelin</p>
-          <p class="c-card-v">040 815 1122</p>
-          <p class="c-card-m" data-i18n="Arkisin klo 9–17.">Arkisin klo 9–17.</p>
-        </a>
-        <div class="c-card">
-          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-          <p class="c-card-k">Vasteaika</p>
-          <p class="c-card-v">4 tuntia</p>
-          <p class="c-card-m" data-i18n="Arkipäivisin, ihmiseltä ihmiselle.">Arkipäivisin, ihmiseltä ihmiselle.</p>
-        </div>
-        <div class="c-card">
-          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-          <p class="c-card-k">Toimipiste</p>
-          <p class="c-card-v">Helsinki</p>
-          <p class="c-card-m" data-i18n="Palvelemme koko Suomessa.">Palvelemme koko Suomessa.</p>
-        </div>
-      </div>
+  <div class="page-title-block">
+    <p class="page-label" data-sl-reveal>Ota yhteyttä</p>
+    <h1 data-sl-split>Kerro meille,<br><span class="accent">mitä tarvitset.</span></h1>
+    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.</p>
+    <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
+      <span class="phc"><b>4 h</b> vasteaika</span>
+      <span class="phc"><b>30 min</b> maksuton kartoitus</span>
+      <span class="phc"><b>0 €</b> sitoumuksia</span>
     </div>
   </div>
 </div>
 
 <main id="main" class="contact-2026">
+
+<div class="section c-band">
+  <div class="container">
+    <div class="c-rail">
+      <a class="c-card" href="mailto:selora.tuki@gmail.com">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+        <p class="c-card-k">Sähköposti</p>
+        <p class="c-card-v">selora.tuki@gmail.com</p>
+        <p class="c-card-m" data-i18n="Kirjoita meille milloin vain.">Kirjoita meille milloin vain.</p>
+      </a>
+      <a class="c-card" href="tel:+358408151122">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        <p class="c-card-k">Puhelin</p>
+        <p class="c-card-v">040 815 1122</p>
+        <p class="c-card-m" data-i18n="Arkisin klo 9–17.">Arkisin klo 9–17.</p>
+      </a>
+      <div class="c-card">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <p class="c-card-k">Vasteaika</p>
+        <p class="c-card-v">4 tuntia</p>
+        <p class="c-card-m" data-i18n="Arkipäivisin, ihmiseltä ihmiselle.">Arkipäivisin, ihmiseltä ihmiselle.</p>
+      </div>
+      <div class="c-card">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <p class="c-card-k">Toimipiste</p>
+        <p class="c-card-v">Helsinki</p>
+        <p class="c-card-m" data-i18n="Palvelemme koko Suomessa.">Palvelemme koko Suomessa.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Contact -->
 <div class="section" id="ajanvaraus">
