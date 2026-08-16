@@ -200,11 +200,12 @@ All pages have custom `<meta name="description">` tags. Sitemap and robots.txt n
 
 ### Scheduled agent (setup pending)
 Code is in place across this repo and `selora-agent`; none of it runs until these are done. Full detail in the selora-agent README.
-- [ ] **Run SQL**: `supabase-patch-agent.sql` in the SQL editor
+- [ ] **Run SQL**: `supabase-patch-agent.sql`, then `supabase-patch-social.sql`, in the SQL editor
 - [ ] **Database settings**: `app.supabase_url` + `app.service_role_key` via `ALTER DATABASE` — pg_cron runs outside any function's environment, so these cannot be function secrets
 - [ ] **Edge function secrets**: `GITHUB_TOKEN` (PAT, Actions read+write on selora-agent), `GITHUB_REPO=verkkosivutnoah-bot/selora-agent`, `GITHUB_REF=main`
 - [ ] **Secrets in selora-agent**: `ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TARGET_TOKEN` (PAT, Contents read+write on this repo)
 - [ ] **Vercel**: import selora-agent as its own project for the dashboard
+- [ ] **Optional, social agent only**: rows in `social_tokens` for Instagram and TikTok, plus `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET` as selora-agent secrets. Without them the `social-ideas` workflow has nothing to read; everything else runs regardless.
 
 ### Client Portal (priority)
 - [ ] **Deploy Edge Functions**: `supabase functions deploy generate-demo-agent` + `supabase functions deploy create-web-call`
@@ -317,7 +318,8 @@ functions and schema patches already live and they all deploy together:
 
 | File | Role |
 |---|---|
-| `supabase-patch-agent.sql` | `agent_jobs` + `agent_runs`, RLS, and the pg_cron scheduler |
+| `supabase-patch-agent.sql` | `agent_jobs` + `agent_runs` + `demos`, RLS, and the pg_cron scheduler |
+| `supabase-patch-social.sql` | `social_tokens` + `social_posts` + `social_ideas`, RLS |
 | `supabase/functions/dispatch-agent-job/` | creates the run row, then fires `workflow_dispatch` at selora-agent |
 
 What that means for this repo day to day: **the agent pushes `agent/*` branches
@@ -333,6 +335,10 @@ Two things about the Supabase side that will bite if forgotten:
   rather than never or every minute after.
 - **`agent_runs` is SELECT-only under RLS.** Runs are created by the edge
   function so the dashboard cannot queue work nothing will pick up.
+- **`social_tokens` has RLS on and no policy.** That is not an omission. The
+  service role bypasses RLS and is the only thing that should ever read an
+  access token; adding an "own tokens" policy would put one within reach of a
+  browser session.
 - `dispatch-agent-job` needs `GITHUB_REPO` pointed at **selora-agent**, not
   this repo. Pointing it here dispatches a workflow that no longer exists.
 
