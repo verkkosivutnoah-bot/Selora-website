@@ -315,6 +315,96 @@
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
+<style>
+/* ============================================================
+   Contact page — 2026 redesign
+   Scoped to .contact-2026 so nothing here can leak into the
+   shared design system. Motion is transform/opacity only.
+   ============================================================ */
+.contact-2026 { position: relative; }
+
+/* ---- aurora hero ---- */
+.c-hero { position: relative; overflow: hidden; padding: 8.5rem 0 4.5rem; isolation: isolate; }
+.c-hero-field { position: absolute; inset: -25% -10%; z-index: 0; pointer-events: none; }
+.c-hero-field span { position: absolute; display: block; border-radius: 50%; will-change: transform; }
+.c-hero-field .cf1 { left: 2%;  top: 4%;   width: 40rem; height: 40rem;
+  background: radial-gradient(circle, rgba(29,78,216,0.30), transparent 62%); animation: cField1 31s ease-in-out infinite; }
+.c-hero-field .cf2 { right: 0%;  top: 12%;  width: 34rem; height: 34rem;
+  background: radial-gradient(circle, rgba(96,165,250,0.24), transparent 62%); animation: cField2 43s ease-in-out infinite; }
+.c-hero-field .cf3 { left: 34%; bottom: -8%; width: 32rem; height: 32rem;
+  background: radial-gradient(circle, rgba(37,99,235,0.22), transparent 62%); animation: cField3 37s ease-in-out infinite; }
+@keyframes cField1 { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(7%,5%,0) scale(1.16)} }
+@keyframes cField2 { 0%,100%{transform:translate3d(0,0,0) scale(1.08)} 50%{transform:translate3d(-8%,6%,0) scale(0.94)} }
+@keyframes cField3 { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(5%,-7%,0) scale(1.14)} }
+
+/* contour linework, same family as the services belt so the site reads as one system */
+.c-hero-lines { position: absolute; inset: -30%; z-index: 0; pointer-events: none; opacity: .85;
+  background: repeating-radial-gradient(circle at 26% 10%,
+    transparent 0 54px, rgba(96,165,250,0.075) 54px 55.5px, transparent 55.5px 110px);
+  animation: cLines 79s ease-in-out infinite; }
+@keyframes cLines { 0%,100%{transform:translate3d(0,0,0) scale(1)} 50%{transform:translate3d(2%,-2.5%,0) scale(1.1)} }
+
+.c-hero-inner { position: relative; z-index: 1; }
+
+/* ---- contact rail ---- */
+.c-rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3.25rem; }
+@media (max-width: 900px) { .c-rail { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .c-rail { grid-template-columns: 1fr; } }
+
+.c-card { position: relative; display: block; padding: 1.6rem 1.5rem 1.5rem; border-radius: 18px;
+  background: rgba(255,255,255,0.028); overflow: hidden; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.09);
+  transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .5s, background .5s; }
+.c-card:hover { transform: translateY(-6px); border-color: rgba(96,165,250,0.45); background: rgba(255,255,255,0.05); }
+/* pointer spotlight, fed by JS custom properties */
+.c-card::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .45s;
+  background: radial-gradient(320px circle at var(--cx,50%) var(--cy,50%), rgba(96,165,250,0.16), transparent 70%); }
+.c-card:hover::after { opacity: 1; }
+/* top hairline that wipes in */
+.c-card::before { content:''; position:absolute; left:0; top:0; height:2px; width:100%;
+  background: linear-gradient(90deg,#1D4ED8,#60A5FA,#93C5FD);
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform .7s cubic-bezier(.22,1,.36,1); }
+.c-card:hover::before { transform: scaleX(1); }
+
+.c-ico { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px;
+  background: rgba(96,165,250,0.10); margin-bottom: 1.1rem; color:#93C5FD;
+  transition: background .5s, color .5s, transform .6s cubic-bezier(.22,1,.36,1); }
+.c-card:hover .c-ico { background: rgba(96,165,250,0.20); color:#fff; transform: translateY(-2px) rotate(-6deg); }
+.c-ico svg { width:21px; height:21px; }
+/* icons draw themselves the first time they scroll in */
+.c-ico svg path, .c-ico svg circle, .c-ico svg rect, .c-ico svg polyline, .c-ico svg line {
+  stroke-dasharray: 90; stroke-dashoffset: 90; }
+.c-card.drawn .c-ico svg path, .c-card.drawn .c-ico svg circle, .c-card.drawn .c-ico svg rect,
+.c-card.drawn .c-ico svg polyline, .c-card.drawn .c-ico svg line {
+  stroke-dashoffset: 0; transition: stroke-dashoffset 1.15s cubic-bezier(.22,1,.36,1); }
+
+.c-card-k { font-size:0.7rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin:0 0 .45rem; }
+.c-card-v { font-size:1.02rem; font-weight:500; color:#fff; margin:0; line-height:1.45; word-break:break-word; }
+.c-card-m { font-size:0.82rem; color:rgba(255,255,255,0.5); margin:.5rem 0 0; line-height:1.55; }
+
+/* ---- widget polish ---- */
+.contact-2026 .widget-tab { position: relative; transition: color .4s; }
+.contact-2026 .widget-tab::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px;
+  background: linear-gradient(90deg,#1D4ED8,#60A5FA);
+  transform: scaleX(0); transform-origin: 50% 50%; transition: transform .55s cubic-bezier(.22,1,.36,1); }
+.contact-2026 .widget-tab.active::after { transform: scaleX(1); }
+.contact-2026 .tab-panel { animation: cPanelIn .55s cubic-bezier(.22,1,.36,1) both; }
+@keyframes cPanelIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+
+.contact-2026 .form-control { transition: border-color .35s, box-shadow .35s, background .35s; }
+.contact-2026 .form-control:focus { box-shadow: 0 0 0 4px rgba(96,165,250,0.14); }
+.contact-2026 .form-submit { position: relative; overflow: hidden; transition: transform .4s cubic-bezier(.22,1,.36,1); }
+.contact-2026 .form-submit:hover { transform: translateY(-2px); }
+.contact-2026 .form-submit::after { content:''; position:absolute; inset:0; transform: translateX(-101%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent); }
+.contact-2026 .form-submit:hover::after { transform: translateX(101%); transition: transform .9s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .c-hero-field span, .c-hero-lines { animation: none; }
+  .c-card, .c-ico, .contact-2026 .tab-panel { transition: none; animation: none; }
+  .c-ico svg path, .c-ico svg circle, .c-ico svg rect, .c-ico svg polyline, .c-ico svg line { stroke-dashoffset: 0; }
+}
+</style>
 </head>
 <body>
 <a href="#main" class="selora-skip">Hyppää sisältöön</a>
@@ -342,19 +432,50 @@
       </div>
     </div>
   </header>
-  <div class="page-title-block">
-    <p class="page-label" data-sl-reveal>Ota yhteyttä</p>
-    <h1 data-sl-split>Kerro meille,<br><span class="accent">mitä tarvitset.</span></h1>
-    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.</p>
-    <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
-      <span class="phc"><b>4 h</b> vasteaika</span>
-      <span class="phc"><b>30 min</b> maksuton kartoitus</span>
-      <span class="phc"><b>0 €</b> sitoumuksia</span>
+  <div class="page-title-block c-hero">
+    <div class="c-hero-field" aria-hidden="true"><span class="cf1"></span><span class="cf2"></span><span class="cf3"></span></div>
+    <div class="c-hero-lines" aria-hidden="true"></div>
+    <div class="c-hero-inner">
+      <p class="page-label" data-sl-reveal>Ota yhteyttä</p>
+      <h1 data-sl-split>Kerro meille,<br><span class="accent">mitä tarvitset.</span></h1>
+      <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Vastaamme viestiisi 4 tunnin sisällä arkipäivisin. Ei myyntipuhetta, vain selkeä ehdotus siitä miten voimme auttaa.</p>
+      <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
+        <span class="phc"><b>4 h</b> vasteaika</span>
+        <span class="phc"><b>30 min</b> maksuton kartoitus</span>
+        <span class="phc"><b>0 €</b> sitoumuksia</span>
+      </div>
+
+      <div class="c-rail">
+        <a class="c-card" href="mailto:selora.tuki@gmail.com">
+          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+          <p class="c-card-k">Sähköposti</p>
+          <p class="c-card-v">selora.tuki@gmail.com</p>
+          <p class="c-card-m" data-i18n="Kirjoita meille milloin vain.">Kirjoita meille milloin vain.</p>
+        </a>
+        <a class="c-card" href="tel:+358408151122">
+          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+          <p class="c-card-k">Puhelin</p>
+          <p class="c-card-v">040 815 1122</p>
+          <p class="c-card-m" data-i18n="Arkisin klo 9–17.">Arkisin klo 9–17.</p>
+        </a>
+        <div class="c-card">
+          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <p class="c-card-k">Vasteaika</p>
+          <p class="c-card-v">4 tuntia</p>
+          <p class="c-card-m" data-i18n="Arkipäivisin, ihmiseltä ihmiselle.">Arkipäivisin, ihmiseltä ihmiselle.</p>
+        </div>
+        <div class="c-card">
+          <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <p class="c-card-k">Toimipiste</p>
+          <p class="c-card-v">Helsinki</p>
+          <p class="c-card-m" data-i18n="Palvelemme koko Suomessa.">Palvelemme koko Suomessa.</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<main id="main">
+<main id="main" class="contact-2026">
 
 <!-- Contact -->
 <div class="section" id="ajanvaraus">
@@ -866,5 +987,36 @@ window.switchTab = function (tab, el) {
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/chatbot.js" defer></script>
+<script>
+/* Contact rail: pointer spotlight + one-shot icon draw-in.
+   Spotlight is written to CSS custom properties so a pointer sweep never
+   touches layout. The draw-in fires once per card via IntersectionObserver. */
+(function () {
+  var cards = document.querySelectorAll('.c-card');
+  if (!cards.length) return;
+
+  cards.forEach(function (card) {
+    card.addEventListener('pointermove', function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty('--cx', ((e.clientX - r.left) / r.width) * 100 + '%');
+      card.style.setProperty('--cy', ((e.clientY - r.top) / r.height) * 100 + '%');
+    });
+  });
+
+  if (!('IntersectionObserver' in window)) {
+    cards.forEach(function (c) { c.classList.add('drawn'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en, i) {
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      setTimeout(function () { el.classList.add('drawn'); }, i * 110);
+      io.unobserve(el);
+    });
+  }, { threshold: 0.25 });
+  cards.forEach(function (c) { io.observe(c); });
+})();
+</script>
 </body>
 </html>
