@@ -219,6 +219,7 @@
     if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
     track.setPointerCapture(e.pointerId);
     target = pos;
+    dragSlop = e.pointerType === 'mouse' ? 6 : 14;
     drag = { id: e.pointerId, x: e.clientX, pos: pos, v: 0, t: performance.now(), moved: 0 };
   }
 
@@ -256,7 +257,10 @@
 
   // A drag that ends on a card must not also follow its link.
   track.addEventListener('click', function (e) {
-    if (lastDragDistance > 6) { e.preventDefault(); e.stopPropagation(); return; }
+    // 6px was tight enough that an ordinary finger tap registered as a drag and
+    // got cancelled. A mouse is precise, a thumb is not, so the two get
+    // different slop.
+    if (lastDragDistance > dragSlop) { e.preventDefault(); e.stopPropagation(); return; }
 
     // An off-centre card is a target for rotation, not navigation: the first
     // click brings it to the middle, a second one follows its link. Without
@@ -274,6 +278,7 @@
     }
   }, true);
   var lastDragDistance = 0;
+  var dragSlop = 6; // widened to 14 for touch/pen in onDown
   track.addEventListener('pointerup', function () {
     lastDragDistance = drag ? drag.moved : lastDragDistance;
   }, true);
@@ -333,6 +338,19 @@
   marquee.addEventListener('mouseenter', pause);
   marquee.addEventListener('mouseleave', resume);
   marquee.addEventListener('focusin', pause);
+
+  // Touch never fires mouseenter, so on a phone the ring used to keep rotating
+  // while you were using it: a tap would centre a card and autoplay would carry
+  // it away before you could tap again. Any pointer interaction now holds the
+  // ring still, and it only resumes after a spell of no input.
+  var idleTimer = null;
+  function holdStill() {
+    paused = true;
+    if (idleTimer) clearTimeout(idleTimer);
+    idleTimer = setTimeout(function () { paused = false; }, 9000);
+  }
+  track.addEventListener('pointerdown', holdStill, true);
+  track.addEventListener('click', holdStill, true);
   marquee.addEventListener('focusout', resume);
 
   /* ---------- measure ---------- */
