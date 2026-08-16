@@ -334,12 +334,53 @@
     @media (prefers-reduced-motion: reduce) {
       .showcase-mesh, .showcase-mesh::before, .showcase-mesh::after { animation: none; }
     }
-    .showcase-grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
-      background-size: 48px 48px;
-      background-image: linear-gradient(rgba(96,165,250,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(96,165,250,0.05) 1px, transparent 1px);
-      animation: showcaseGridDrift 24s linear infinite;
+    /* Contour field. Replaces the old 48px grid: concentric rings from three
+       offset centres read as a topographic map rather than graph paper, and
+       because the centres sit outside the belt the arcs cross it as long sweeps
+       instead of closing into circles. Three sets on non-matching periods, each
+       drifting against the others so the interference pattern never settles. */
+    .showcase-art { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; opacity: 0.9; }
+    .showcase-art span { position: absolute; inset: -30%; display: block; will-change: transform; }
+    .showcase-art .art-a {
+      background: repeating-radial-gradient(circle at 18% 8%,
+        transparent 0 46px, rgba(96,165,250,0.085) 46px 47.5px, transparent 47.5px 94px);
+      animation: showcaseArtA 71s ease-in-out infinite;
     }
-    @keyframes showcaseGridDrift { from { background-position: 0 0; } to { background-position: 48px 48px; } }
+    .showcase-art .art-b {
+      background: repeating-radial-gradient(circle at 86% 62%,
+        transparent 0 58px, rgba(59,130,246,0.070) 58px 59.5px, transparent 59.5px 118px);
+      animation: showcaseArtB 97s ease-in-out infinite;
+    }
+    .showcase-art .art-c {
+      background: repeating-radial-gradient(circle at 46% 112%,
+        transparent 0 74px, rgba(125,211,252,0.055) 74px 75.5px, transparent 75.5px 150px);
+      animation: showcaseArtC 123s ease-in-out infinite;
+    }
+    /* a few long strokes over the contours, like pencil across a map */
+    .showcase-art .art-strokes {
+      background: repeating-linear-gradient(114deg,
+        transparent 0 118px, rgba(147,197,253,0.045) 118px 119px, transparent 119px 260px);
+      animation: showcaseArtStrokes 84s linear infinite;
+    }
+    @keyframes showcaseArtA {
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50%     { transform: translate3d(2.5%,-2%,0) scale(1.09); }
+    }
+    @keyframes showcaseArtB {
+      0%,100% { transform: translate3d(0,0,0) scale(1.05); }
+      50%     { transform: translate3d(-3%,2.5%,0) scale(1); }
+    }
+    @keyframes showcaseArtC {
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50%     { transform: translate3d(1.8%,3%,0) scale(1.12); }
+    }
+    @keyframes showcaseArtStrokes {
+      from { transform: translate3d(0,0,0); }
+      to   { transform: translate3d(-260px,0,0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .showcase-art span { animation: none; }
+    }
     .showcase-block { position: relative; z-index: 1; padding: 6.5rem 0; }
     .showcase-block + .showcase-block { border-top: 1px solid rgba(255,255,255,0.06); }
     .showcase-belt .section-label { color: #60A5FA; }
@@ -706,7 +747,7 @@
 
 <div class="showcase-belt">
   <div class="showcase-mesh" aria-hidden="true"></div>
-  <div class="showcase-grid-bg" aria-hidden="true"></div>
+  <div class="showcase-art" aria-hidden="true"><span class="art-a"></span><span class="art-b"></span><span class="art-c"></span><span class="art-strokes"></span></div>
 
   <!-- SEO -->
   <div class="showcase-block" id="seo-ominaisuus">
