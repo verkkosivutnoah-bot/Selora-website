@@ -695,15 +695,71 @@ html.sl-motion [data-sl-pop].is-in {
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
 }
+/* Coverflow mode, switched on by JS. A mask builds a containing block that
+   flattens preserve-3d, so the fade has to go once the rake is on -- the
+   cards fade themselves with opacity instead. */
+.stories-marquee.is-coverflow {
+  -webkit-mask-image: none;
+  mask-image: none;
+  padding: 0;
+  perspective: var(--sl-cf-lens, 1200px);
+}
+.stories-marquee.is-coverflow .stories-track {
+  display: block;
+  position: relative;
+  width: auto;
+  height: var(--sl-cf-h, 300px);
+  transform: none !important;
+  transform-style: preserve-3d;
+  /* horizontal drag is ours, the page keeps vertical scrolling */
+  touch-action: pan-y;
+  cursor: grab;
+  outline: none;
+}
+.stories-marquee.is-coverflow .stories-track:active { cursor: grabbing; }
+.stories-marquee.is-coverflow .stories-track:focus-visible {
+  outline: 2px solid var(--blue); outline-offset: 6px; border-radius: 22px;
+}
+.stories-marquee.is-coverflow .story-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-right: 0;
+  /* transform is painted every frame from JS -- leaving it in the transition
+     would ease an already-eased value and lag the drag behind the pointer */
+  transition: box-shadow 0.55s ease;
+  will-change: transform, opacity;
+}
+.stories-marquee.is-coverflow .story-card:hover { transform: none; }
+
+/* The springy entrance sets `transition: transform 0.75s` at (0,3,1), which
+   outranks the rule above and would ease every rAF-painted frame on top of the
+   settle -- the drag would trail the pointer by most of a second. Outrank it
+   back. Transform itself is left alone: the inline style from paint() already
+   beats any stylesheet rule. */
+html.sl-motion .stories-marquee.is-coverflow .story-card[data-sl-pop],
+html.sl-motion .stories-marquee.is-coverflow .story-card[data-sl-pop].is-in {
+  transition: box-shadow 0.55s ease;
+}
+
+/* pagination, built by JS so no page markup changes */
+.stories-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
+.stories-dot {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%; padding: 0; border: 0;
+  background: #0f172a; opacity: 0.25; cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.stories-dot:hover { opacity: 0.55; }
+.stories-dot[aria-current="true"] { opacity: 1; transform: scale(1.25); }
+.stories-dot:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .stories-track {
+  /* Base state is a plain centred wrap, so the strip is readable with no JS
+     and under reduced motion. JS swaps the parent into .is-coverflow. */
   display: flex;
-  /* spacing lives on the cards, not as flex gap: with gap, half the
-     track width is not exactly one card set and the loop jumps */
-  gap: 0;
-  width: max-content;
-  will-change: transform;
-  /* position is driven from JS so the arrows can nudge the same value
-     the auto-scroll animates */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  width: auto;
 }
 
 /* ---- arrows ---- */
@@ -789,8 +845,8 @@ html.sl-motion [data-sl-pop].is-in {
   .story-card { width: 82vw; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .stories-track { flex-wrap: wrap; width: auto; justify-content: center; gap: 0.75rem 0; transform: none !important; }
   .stories-nav { display: none; }
+  .stories-dots { display: none; }
   .stories-marquee { -webkit-mask-image: none; mask-image: none; }
   .story-card, .story-frame { transition: none !important; }
   .story-frame::after { animation: none !important; }
