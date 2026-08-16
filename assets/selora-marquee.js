@@ -158,11 +158,17 @@
       // A card is teleported across the ring at exactly half a turn out, so it
       // has to be invisible by then or the jump shows.
       var edge = Math.min(1, Math.max(0, count / 2 - distance));
-      card.style.opacity = String(Math.max(0, 1 - FADE * distance) * edge);
+      var opacity = Math.max(0, 1 - FADE * distance) * edge;
+      card.style.opacity = String(opacity);
       card.style.zIndex = String(100 - Math.round(distance));
-      // Only the centre card should be a tab stop or a click target.
+      // Anything you can actually see is a click target: the centre card
+      // follows its link, an off-centre one rotates to the middle first (see
+      // the click handler below). Cards faded past the edge stay inert so a
+      // click cannot land on something invisible.
       var centred = Math.round(distance) === 0;
-      card.style.pointerEvents = centred ? 'auto' : 'none';
+      card.style.pointerEvents = opacity > 0.12 ? 'auto' : 'none';
+      // Tab order still only ever holds the centre card; the arrow keys and
+      // the focus handler are how the keyboard reaches the rest.
       if (card.tagName === 'A') card.setAttribute('tabindex', centred ? '0' : '-1');
     }
   }
@@ -250,7 +256,22 @@
 
   // A drag that ends on a card must not also follow its link.
   track.addEventListener('click', function (e) {
-    if (lastDragDistance > 6) { e.preventDefault(); e.stopPropagation(); }
+    if (lastDragDistance > 6) { e.preventDefault(); e.stopPropagation(); return; }
+
+    // An off-centre card is a target for rotation, not navigation: the first
+    // click brings it to the middle, a second one follows its link. Without
+    // this, every card except the centre one reads as a dead link.
+    var node = e.target;
+    while (node && node !== track && !(node.classList && node.classList.contains('story-card'))) {
+      node = node.parentNode;
+    }
+    if (!node || node === track) return;
+    var i = cards.indexOf(node);
+    if (i !== -1 && indexAt(pos) !== i) {
+      e.preventDefault();
+      e.stopPropagation();
+      goTo(i);
+    }
   }, true);
   var lastDragDistance = 0;
   track.addEventListener('pointerup', function () {
