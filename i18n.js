@@ -3881,6 +3881,7 @@
     'Interaktiivinen konsepti · Scroll': 'Interactive concept · Scroll',
     'Kiinteistönvälitys · Parallax': 'Real estate · Parallax',
     'Yksityispankki · Three.js': 'Private bank · Three.js',
+    'Terapiapalvelut · Liquid glass': 'Therapy · Liquid glass',
     'Latausnopeuden optimointi': 'Load speed optimisation',
     'Kolme vaihetta,': 'Three steps,',
     'Noin 45 min': 'About 45 min',
