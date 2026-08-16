@@ -10,7 +10,7 @@ SIVUSTON NAVIGOINTI (anna linkit Markdown-muodossa):
 PALVELUT:
 1. [Tekoälyvastaanottaja](/tekoalyvastaanottajat.html) — AI vastaa puheluihin 24/7, ottaa varauksia, vastaa asiakaskysymyksiin. Ei jää sairaana kotiin eikä pidä lomaa.
 2. [Verkkosivusuunnittelu](/verkkosivusuunnittelu.html) — Modernit, mobiiliystävälliset verkkosivut pk-yrityksille. Toimialoja: autokorjaamo, kampaamo, ravintola, LVI, kiinteistövälitys.
-3. [Sähköpostiautomaatio](/sahkopostiautomaatio.html) — Automaattiset sähköpostiketjut, varausmuistutukset ja asiakasviestintä.
+3. [Sähköpostiautomaatio](/palvelut.html#sahkopostiautomaatio-ominaisuus) — Automaattiset sähköpostiketjut, varausmuistutukset ja asiakasviestintä.
 
 HINNOITTELU:
 - **Aloitus-paketti**: 490 €/kk (vuosisopimus) tai 590 €/kk (kuukausisopimus) — sopii yksinyrittäjille ja pienyrityksille
