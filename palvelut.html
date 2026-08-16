@@ -284,12 +284,55 @@
     }
 
     /* ── SHOWCASE BELT: SEO, email automation, AI chatbot, Google reviews ── */
-    .showcase-belt { position: relative; overflow: hidden; background: #060c18; color: #fff; }
-    .showcase-mesh { position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    .showcase-belt { position: relative; overflow: hidden; background: #060c18; color: #fff; isolation: isolate; }
+    /* One continuous animated field behind all four showcase blocks. Because the
+       layers live on the belt rather than on each block, the gradient reads as a
+       single sweep from SEO through to Google reviews instead of four backdrops.
+       Three layers on non-matching durations (29s / 37s / 53s) so the loop never
+       lines up and never visibly repeats. Transform and opacity only, so the whole
+       thing stays on the compositor and never repaints the copy above it. */
+    .showcase-mesh { position: absolute; inset: -12% -6%; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 56% 40% at 14% 6%, rgba(29,78,216,0.42), transparent 60%),
-        radial-gradient(ellipse 48% 34% at 88% 30%, rgba(59,130,246,0.26), transparent 60%),
-        radial-gradient(ellipse 60% 46% at 50% 98%, rgba(37,99,235,0.22), transparent 64%);
+        radial-gradient(ellipse 56% 26% at 14% 5%, rgba(29,78,216,0.44), transparent 62%),
+        radial-gradient(ellipse 48% 22% at 88% 24%, rgba(59,130,246,0.28), transparent 62%),
+        radial-gradient(ellipse 60% 26% at 46% 55%, rgba(37,99,235,0.26), transparent 64%),
+        radial-gradient(ellipse 52% 24% at 78% 78%, rgba(96,165,250,0.22), transparent 62%),
+        radial-gradient(ellipse 58% 26% at 22% 96%, rgba(29,78,216,0.30), transparent 64%);
+      animation: showcaseMeshDrift 37s ease-in-out infinite;
+      will-change: transform;
+    }
+    .showcase-mesh::before, .showcase-mesh::after { content: ''; position: absolute; inset: 0; }
+    /* travelling highlight — the part that makes the belt feel lit rather than painted */
+    .showcase-mesh::before {
+      background:
+        radial-gradient(circle at 32% 18%, rgba(125,211,252,0.20), transparent 42%),
+        radial-gradient(circle at 72% 66%, rgba(29,78,216,0.26), transparent 46%);
+      animation: showcaseMeshGlow 29s ease-in-out infinite;
+      will-change: transform;
+    }
+    /* slow aurora sweep, screened over the top so the blues bloom where they cross */
+    .showcase-mesh::after {
+      background: conic-gradient(from 200deg at 58% 40%,
+        rgba(59,130,246,0.18), transparent 26%, rgba(37,99,235,0.16) 52%, transparent 76%, rgba(96,165,250,0.14));
+      mix-blend-mode: screen;
+      animation: showcaseMeshSweep 53s linear infinite;
+      will-change: transform;
+    }
+    @keyframes showcaseMeshDrift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      33%      { transform: translate3d(-3%, 2%, 0) scale(1.08); }
+      66%      { transform: translate3d(2.5%, -1.5%, 0) scale(1.04); }
+    }
+    @keyframes showcaseMeshGlow {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); opacity: 0.9; }
+      50%      { transform: translate3d(4%, -3%, 0) scale(1.18); opacity: 1; }
+    }
+    @keyframes showcaseMeshSweep {
+      from { transform: rotate(0deg) scale(1.35); }
+      to   { transform: rotate(360deg) scale(1.35); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .showcase-mesh, .showcase-mesh::before, .showcase-mesh::after { animation: none; }
     }
     .showcase-grid-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
       background-size: 48px 48px;
