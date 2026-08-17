@@ -12,9 +12,16 @@
    it. Adding more cards changes nothing here: speed is per-card, so the strip
    travels at a constant rate however long it gets.
 
-   Each card's preview is the real page in a scaled, inert iframe, mounted when
-   the card nears the viewport and torn down once it is clear, so only the
-   handful on screen are ever live.
+   Each card shows a still of the page it links to. On hardware that can carry
+   it, the first few cards additionally mount the real page in a scaled, inert
+   iframe, layered over the still.
+
+   That budget is not a nicety. Every card is a full site — GSAP, ScrollTrigger,
+   Lenis and its own rAF loop — and the track is cloned, so mounting them all
+   meant eight live browsing contexts in one tab. iOS Safari answers that by
+   killing the page: "A problem repeatedly occurred". Phones and tablets now get
+   the stills only, which look the same standing still and cost a decoded image
+   each.
 
    Targets #storiesTrack / #storiesMarquee / #storiesPrev / #storiesNext.
    Bails out cleanly if a page does not have the marquee markup.
@@ -31,6 +38,23 @@
   if (!originals.length) return;
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- how many live previews this device gets ----------
+
+     A mouse on a wide screen is the one combination worth spending memory on:
+     it is where the hover states live, and it rules out phones and tablets in
+     one test. `deviceMemory` narrows it further where the browser reports it;
+     Safari does not, which is exactly why the pointer test carries the weight
+     rather than the memory one. */
+
+  function liveBudget() {
+    if (reduced || !window.matchMedia) return 0;
+    if (!window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)').matches) return 0;
+    if (navigator.deviceMemory && navigator.deviceMemory < 8) return 2;
+    return 3;
+  }
+
+  var MAX_LIVE = liveBudget();
 
   /* ---------- previews ---------- */
 
@@ -57,6 +81,22 @@
     else window.addEventListener('resize', function () { fit(frame, iframe); }, { passive: true });
   }
 
+  /* The frames allowed to go live, in DOM order and capped by the budget.
+
+     Only originals are eligible — clones keep their still. Since the still is
+     a screenshot of the same hero the iframe renders, the two halves of the
+     loop look alike at rest, and the seam the clones exist to hide stays
+     hidden. */
+  function liveFrames() {
+    if (!MAX_LIVE) return [];
+    var frames = [];
+    for (var i = 0; i < originals.length && frames.length < MAX_LIVE; i++) {
+      var frame = originals[i].querySelector('.story-frame[data-src]');
+      if (frame) frames.push(frame);
+    }
+    return frames;
+  }
+
   function unmount(frame) {
     if (!frame.dataset.mounted) return;
     delete frame.dataset.mounted;
@@ -68,7 +108,7 @@
 
   if (reduced) {
     // static, wrapped grid: no clones, no motion, arrows hidden by CSS
-    watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
+    watchFrames(liveFrames());
     return;
   }
 
@@ -158,7 +198,7 @@
     wrap();
   }, { passive: true });
 
-  watchFrames(Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]')));
+  watchFrames(liveFrames());
   requestAnimationFrame(frame);
 
   /* Watch the section, not the individual cards.
