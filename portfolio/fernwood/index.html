@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fernwood Animal Clinic — Veterinary Care for Dogs</title>
+<meta name="description" content="Fernwood Animal Clinic. Preventive care, dentistry, surgery and diagnostics for dogs, in a practice built to keep them calm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Outfit:wght@200;300;400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=5">
+</head>
+<body>
+
+
+<!-- ============ START-UP GATE ============ -->
+<div class="gate" id="gate">
+  <div class="gate__slats" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="gate__inner">
+    <div class="gate__mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path d="M16 30c-6 0-10-3.4-10-8 0-4 3.4-7 10-7s10 3 10 7c0 4.6-4 8-10 8z"/><ellipse cx="7" cy="10" rx="3.4" ry="4.6"/><ellipse cx="25" cy="10" rx="3.4" ry="4.6"/><ellipse cx="13" cy="4.4" rx="3.2" ry="4.4"/><ellipse cx="19" cy="4.4" rx="3.2" ry="4.4"/></svg>
+    </div>
+
+    <p class="gate__eyebrow">Est. 2009 · Fernwood Road</p>
+    <h1 class="gate__title"><span>Fernwood</span><em>Animal Clinic</em></h1>
+    <p class="gate__line">Veterinary care for dogs, built around how frightened they are of us.</p>
+
+    <button class="gate__btn" id="gateBtn" type="button" disabled>
+      <span class="gate__btn-ring"></span>
+      <span class="gate__btn-txt" id="gateTxt">Preparing</span>
+    </button>
+
+    <div class="gate__bar" aria-hidden="true"><span id="gateBar"></span></div>
+  </div>
+</div>
+
+<div class="progress" id="progress"><span></span></div>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <span class="nav__mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path d="M16 30c-6 0-10-3.4-10-8 0-4 3.4-7 10-7s10 3 10 7c0 4.6-4 8-10 8z"/><ellipse cx="7" cy="10" rx="3.4" ry="4.6"/><ellipse cx="25" cy="10" rx="3.4" ry="4.6"/><ellipse cx="13" cy="4.4" rx="3.2" ry="4.4"/><ellipse cx="19" cy="4.4" rx="3.2" ry="4.4"/></svg>
+    </span>
+    <span class="nav__name">FERNWOOD<i>animal clinic</i></span>
+  </a>
+  <nav class="nav__links">
+    <a href="#care">Care</a>
+    <a href="#patients">Patients</a>
+    <a href="#room">The room</a>
+    <a href="#voices">Voices</a>
+  </nav>
+  <a class="nav__cta" href="#book">Book a visit</a>
+</header>
+
+<!-- ============ ACT I — pinned hero ============ -->
+<div class="herostage" id="top">
+  <section class="hero" id="hero">
+
+    <div class="hero__layers" id="heroLayers">
+      <div class="hero__sky"></div>
+      <figure class="hero__plate" id="heroPlate">
+        <img id="heroImg"
+             src="https://images.unsplash.com/photo-1617181668756-68f6613051d0?w=2600&q=82&auto=format&fit=crop"
+             srcset="https://images.unsplash.com/photo-1617181668756-68f6613051d0?w=1600&q=82&auto=format&fit=crop 1600w,
+                     https://images.unsplash.com/photo-1617181668756-68f6613051d0?w=2600&q=82&auto=format&fit=crop 2600w,
+                     https://images.unsplash.com/photo-1617181668756-68f6613051d0?w=3600&q=80&auto=format&fit=crop 3600w"
+             sizes="100vw"
+             alt="A dog running across an open field" fetchpriority="high">
+      </figure>
+      <div class="hero__scrim"></div>
+      <div class="hero__grain" aria-hidden="true"></div>
+
+      <!-- soft foreground bokeh, moves fastest -->
+      <div class="bokeh" aria-hidden="true">
+        <span style="--x:8%;  --y:72%; --s:190px; --c:var(--sun)"></span>
+        <span style="--x:82%; --y:18%; --s:250px; --c:var(--moss)"></span>
+        <span style="--x:64%; --y:82%; --s:150px; --c:var(--coral)"></span>
+        <span style="--x:26%; --y:12%; --s:120px; --c:var(--sky)"></span>
+      </div>
+    </div>
+
+    <div class="hero__copy" id="heroCopy">
+      <p class="hero__kick"><span>Fernwood · Small animal practice</span></p>
+      <h1 class="hero__h1">
+        <span class="l"><span>They can't</span></span>
+        <span class="l"><span>tell you where</span></span>
+        <span class="l"><span><em>it hurts.</em></span></span>
+      </h1>
+      <p class="hero__sub">So we built a clinic that listens in other ways — slower appointments, quieter rooms, and the diagnostics to find what a wagging tail is hiding.</p>
+      <div class="hero__cta">
+        <a class="btn btn--fill" href="#book"><span>Book a visit</span></a>
+        <a class="btn btn--line" href="#care"><span>What we treat</span></a>
+      </div>
+    </div>
+
+    <div class="vitals" id="vitals" aria-hidden="true">
+      <div class="vital"><b data-count="12">0</b><span>minutes<br>average wait</span></div>
+      <div class="vital"><b data-count="7" data-suffix="d">0</b><span>days a week<br>open</span></div>
+      <div class="vital"><b data-count="4200" data-suffix="+">0</b><span>patients<br>on the books</span></div>
+    </div>
+
+    <div class="cue" id="cue" aria-hidden="true"><span></span></div>
+  </section>
+</div>
+
+<!-- ============ ACT II ============ -->
+<main class="page">
+
+  <!-- statement -->
+  <section class="statement">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs><path id="arc" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/></defs>
+        <circle class="seal__ring" cx="100" cy="100" r="86"/>
+        <circle class="seal__ring seal__ring--dash" cx="100" cy="100" r="58"/>
+        <text class="seal__text"><textPath href="#arc">FERNWOOD ANIMAL CLINIC · GENTLE HANDLING · FERNWOOD ANIMAL CLINIC · GENTLE HANDLING ·</textPath></text>
+        <path class="seal__paw" d="M100 118c-5 0-8-2.8-8-6.6 0-3.3 2.8-5.8 8-5.8s8 2.5 8 5.8c0 3.8-3 6.6-8 6.6z"/>
+        <ellipse class="seal__paw" cx="91" cy="98" rx="2.8" ry="3.8"/>
+        <ellipse class="seal__paw" cx="109" cy="98" rx="2.8" ry="3.8"/>
+        <ellipse class="seal__paw" cx="96" cy="90" rx="2.6" ry="3.6"/>
+        <ellipse class="seal__paw" cx="104" cy="90" rx="2.6" ry="3.6"/>
+      </svg>
+    </div>
+
+    <p class="kicker" data-reveal>Since 2009 · Fernwood Road</p>
+    <h2 class="statement__text" data-split>
+      A dog does not understand why it is here. Everything we do is designed around that one fact.
+    </h2>
+    <div class="statement__by" data-reveal><span class="rule"></span><span>The Fernwood approach</span></div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__row">
+      <span>Preventive care</span><i>✦</i><span>Dentistry</span><i>✦</i><span>Soft-tissue surgery</span><i>✦</i>
+      <span>Diagnostic imaging</span><i>✦</i><span>Senior wellness</span><i>✦</i><span>Puppy visits</span><i>✦</i>
+      <span>Preventive care</span><i>✦</i><span>Dentistry</span><i>✦</i><span>Soft-tissue surgery</span><i>✦</i>
+      <span>Diagnostic imaging</span><i>✦</i><span>Senior wellness</span><i>✦</i><span>Puppy visits</span><i>✦</i>
+    </div>
+  </div>
+
+  <!-- ============ CARE ============ -->
+  <section class="care" id="care">
+    <header class="sec">
+      <p class="kicker" data-reveal>01 — What we do</p>
+      <h2 class="sec__h2" data-split>Six rooms, one idea: find it early.</h2>
+    </header>
+
+    <div class="cards">
+      <article class="card" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 40h22l6-16 9 32 8-40 9 46 7-22h6l5 10h37"/>
+          </g>
+        </svg>
+        <h3>Preventive &amp; wellness</h3>
+        <p>Annual exams, vaccination planning and bloodwork that catches the slow problems while they are still small.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M30 22c-8 0-13 7-13 17 0 14 7 27 13 27 4 0 6-4 10-4s6 4 10 4c6 0 13-13 13-27 0-10-5-17-13-17-5 0-7 3-10 3s-5-3-10-3z"/>
+            <path d="M74 30h34M74 44h34M74 58h22"/>
+            <path d="M40 34v10M50 34v10"/>
+          </g>
+        </svg>
+        <h3>Dentistry</h3>
+        <p>Scaling, extractions and charting under monitored anaesthesia — with pre-op bloods every single time.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="34" cy="26" r="10"/>
+            <path d="M34 36v18a10 10 0 0 0 10 10h18"/>
+            <circle cx="72" cy="64" r="8"/>
+            <path d="M86 20h24v24H86z"/>
+            <path d="M92 32h12M98 26v12"/>
+          </g>
+        </svg>
+        <h3>Soft-tissue surgery</h3>
+        <p>Routine and referred procedures in a dedicated theatre, with a nurse whose only job is watching your dog breathe.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="12" y="14" width="60" height="52" rx="6"/>
+            <path d="M24 54c6-16 12-24 18-24s12 8 18 24"/>
+            <circle cx="42" cy="34" r="5"/>
+            <path d="M84 24h24M84 40h24M84 56h16"/>
+          </g>
+        </svg>
+        <h3>Imaging &amp; diagnostics</h3>
+        <p>Digital radiography and ultrasound on site, so you get an answer in the same visit rather than the next one.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M60 66c-14-9-28-20-28-34a14 14 0 0 1 28-6 14 14 0 0 1 28 6c0 14-14 25-28 34z"/>
+            <path d="M20 40h14M86 40h14"/>
+          </g>
+        </svg>
+        <h3>Senior care</h3>
+        <p>Mobility, kidneys, hearts and comfort. Older dogs get longer appointments because they need them.</p>
+      </article>
+
+      <article class="card card--accent" data-reveal>
+        <svg class="card__art" viewBox="0 0 120 80" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="60" cy="40" r="26"/>
+            <path d="M60 28v24M48 40h24"/>
+          </g>
+        </svg>
+        <h3>Urgent same-day</h3>
+        <p>We hold slots back every morning. If something is wrong today, ring us today.</p>
+        <a class="card__link" href="#book">Book urgent →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ PATIENTS — pinned horizontal ============ -->
+  <section class="gallery" id="patients">
+    <div class="gallery__pin">
+      <div class="gallery__track" id="galTrack">
+        <div class="gal-intro">
+          <p class="kicker">02 — Patients</p>
+          <h2>Everyone<br>who came in<br>this month.</h2>
+          <p class="gal-intro__note">Keep scrolling — they walk past sideways.</p>
+        </div>
+
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=1100&q=76&auto=format&fit=crop" alt="Golden retriever" loading="lazy"><figcaption><b>Biscuit</b> — 4 · annual</figcaption></figure>
+        <figure class="gal gal--tall"><img src="https://images.unsplash.com/photo-1566710582818-d673dc761201?w=900&q=76&auto=format&fit=crop" alt="Weimaraner" loading="lazy"><figcaption><b>Ash</b> — 6 · dental</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1612940960267-4549a58fb257?w=1100&q=76&auto=format&fit=crop" alt="Corgi puppy" loading="lazy"><figcaption><b>Pilot</b> — 5 mo · second jab</figcaption></figure>
+        <figure class="gal gal--wide"><img src="https://images.unsplash.com/photo-1610968755695-d7fcb5fd4b92?w=1400&q=76&auto=format&fit=crop" alt="German shepherd" loading="lazy"><figcaption><b>Nova</b> — 3 · hip check</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1517423440428-a5a00ad493e8?w=1100&q=76&auto=format&fit=crop" alt="Pug" loading="lazy"><figcaption><b>Dumpling</b> — 7 · breathing</figcaption></figure>
+        <figure class="gal gal--tall"><img src="https://images.unsplash.com/photo-1596490634801-c536934af56e?w=900&q=76&auto=format&fit=crop" alt="Tricolour dog" loading="lazy"><figcaption><b>Juno</b> — 2 · microchip</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1581562444313-98be7b621dc2?w=1100&q=76&auto=format&fit=crop" alt="Brown short-coat dog" loading="lazy"><figcaption><b>Rusty</b> — 9 · senior panel</figcaption></figure>
+        <figure class="gal gal--tall"><img src="https://images.unsplash.com/photo-1523626797181-8c5ae80d40c2?w=900&q=76&auto=format&fit=crop" alt="Small black dog" loading="lazy"><figcaption><b>Olive</b> — 1 · spay recheck</figcaption></figure>
+
+        <div class="gal-end" id="galEnd">
+          <svg class="paws" viewBox="0 0 220 120" aria-hidden="true">
+            <g class="paw" style="--i:0" transform="translate(14 84) rotate(-16)">
+              <ellipse cx="0" cy="6" rx="7.5" ry="6"/><ellipse cx="-7" cy="-4" rx="2.7" ry="3.6"/><ellipse cx="-2.4" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="2.8" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="7.4" cy="-4" rx="2.7" ry="3.6"/>
+            </g>
+            <g class="paw" style="--i:1" transform="translate(58 60) rotate(-8)">
+              <ellipse cx="0" cy="6" rx="7.5" ry="6"/><ellipse cx="-7" cy="-4" rx="2.7" ry="3.6"/><ellipse cx="-2.4" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="2.8" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="7.4" cy="-4" rx="2.7" ry="3.6"/>
+            </g>
+            <g class="paw" style="--i:2" transform="translate(104 76) rotate(4)">
+              <ellipse cx="0" cy="6" rx="7.5" ry="6"/><ellipse cx="-7" cy="-4" rx="2.7" ry="3.6"/><ellipse cx="-2.4" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="2.8" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="7.4" cy="-4" rx="2.7" ry="3.6"/>
+            </g>
+            <g class="paw" style="--i:3" transform="translate(150 50) rotate(12)">
+              <ellipse cx="0" cy="6" rx="7.5" ry="6"/><ellipse cx="-7" cy="-4" rx="2.7" ry="3.6"/><ellipse cx="-2.4" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="2.8" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="7.4" cy="-4" rx="2.7" ry="3.6"/>
+            </g>
+            <g class="paw" style="--i:4" transform="translate(196 30) rotate(20)">
+              <ellipse cx="0" cy="6" rx="7.5" ry="6"/><ellipse cx="-7" cy="-4" rx="2.7" ry="3.6"/><ellipse cx="-2.4" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="2.8" cy="-7.4" rx="2.7" ry="3.6"/><ellipse cx="7.4" cy="-4" rx="2.7" ry="3.6"/>
+            </g>
+          </svg>
+
+          <p class="kicker gal-end__el" style="--n:0">Your turn</p>
+          <p class="gal-end__text gal-end__el" style="--n:1">There is a slot with your dog&#39;s name on it.</p>
+          <a class="btn btn--fill gal-end__el" style="--n:2" href="#book"><span>Book a visit</span></a>
+        </div>
+      </div>
+      <div class="gallery__rail"><span id="galRail"></span></div>
+      <p class="gallery__hint" id="galHint">
+        <svg viewBox="0 0 40 12" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1 6h34M30 1l5 5-5 5"/>
+        </svg>
+        Drag, or let it walk past
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ THE ROOM — draggable carousel ============ -->
+  <section class="room" id="room">
+    <header class="sec sec--split">
+      <div>
+        <p class="kicker" data-reveal>03 — Inside</p>
+        <h2 class="sec__h2" data-split>What actually happens in the room.</h2>
+      </div>
+      <div class="cnav" data-reveal>
+        <button class="cbtn" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M15 5 8 12l7 7"/></svg></button>
+        <button class="cbtn" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </header>
+
+    <div class="carousel" id="carousel" tabindex="0" aria-label="Inside the clinic">
+      <div class="carousel__track" id="cTrack">
+        <article class="slide">
+          <div class="slide__img"><img src="https://images.unsplash.com/photo-1654895716780-b4664497420d?w=1100&q=76&auto=format&fit=crop" alt="A dog being held during an examination" loading="lazy"></div>
+          <span class="slide__n">01</span>
+          <h3>The hello</h3>
+          <p>Nobody goes straight on the table. We sit on the floor first and let your dog decide when.</p>
+        </article>
+        <article class="slide">
+          <div class="slide__img"><img src="https://images.unsplash.com/photo-1700665537604-412e89a285c3?w=1100&q=76&auto=format&fit=crop" alt="Owners with their dog at the clinic" loading="lazy"></div>
+          <span class="slide__n">02</span>
+          <h3>You stay in</h3>
+          <p>Owners come through for everything except theatre. Familiar hands lower the heart rate more than anything we own.</p>
+        </article>
+        <article class="slide">
+          <div class="slide__img"><img src="https://images.unsplash.com/photo-1644675272883-0c4d582528d8?w=1100&q=76&auto=format&fit=crop" alt="Clinician with a dog" loading="lazy"></div>
+          <span class="slide__n">03</span>
+          <h3>The full sweep</h3>
+          <p>Nose to tail, every visit, in the same order — so a change from last year shows up as a change.</p>
+        </article>
+        <article class="slide">
+          <div class="slide__img"><img src="https://images.unsplash.com/photo-1654895574745-82ef6b5970c4?w=1100&q=76&auto=format&fit=crop" alt="Dog wearing a recovery collar" loading="lazy"></div>
+          <span class="slide__n">04</span>
+          <h3>Going home</h3>
+          <p>Written notes, a phone number that reaches a human, and a call from us the next morning.</p>
+        </article>
+        <article class="slide">
+          <div class="slide__img"><img src="https://images.unsplash.com/photo-1618901977251-d57dd765d2e1?w=1100&q=76&auto=format&fit=crop" alt="Dog running outdoors" loading="lazy"></div>
+          <span class="slide__n">05</span>
+          <h3>Back to this</h3>
+          <p>The point of all of it. Everything we do is measured against how fast they get back outside.</p>
+        </article>
+      </div>
+    </div>
+    <div class="cbar"><span id="cBar"></span></div>
+  </section>
+
+  <!-- ============ VITALS / ECG ============ -->
+  <section class="ecg-sec">
+    <div class="ecg"><canvas id="ecg"></canvas></div>
+    <div class="stats">
+      <div class="stat" data-reveal><b data-count="16">0</b><span>Years on Fernwood Road</span></div>
+      <div class="stat" data-reveal><b data-count="4200" data-suffix="+">0</b><span>Dogs registered</span></div>
+      <div class="stat" data-reveal><b data-count="30">0</b><span>Minute appointments</span></div>
+      <div class="stat" data-reveal><b data-count="98" data-suffix="%">0</b><span>Same-day urgent seen</span></div>
+    </div>
+  </section>
+
+  <!-- ============ VOICES ============ -->
+  <section class="voices" id="voices">
+    <header class="sec sec--center">
+      <p class="kicker" data-reveal>04 — Voices</p>
+      <h2 class="sec__h2" data-split>From the other end of the lead.</h2>
+    </header>
+
+    <div class="quotes" id="qView" tabindex="0" aria-label="Testimonials">
+      <div class="quotes__track" id="qTrack">
+        <blockquote class="quote"><p>They found the lump at a routine check. Six months later she is chasing seagulls again.</p><cite>M. R. — with Biscuit</cite></blockquote>
+        <blockquote class="quote"><p>He hides under the car at the sound of the word vet. He walked into Fernwood on his own.</p><cite>D. A. — with Ash</cite></blockquote>
+        <blockquote class="quote"><p>They rang the next morning to ask how he slept. Nobody has ever done that.</p><cite>S. K. — with Rusty</cite></blockquote>
+        <blockquote class="quote"><p>Told us honestly that the expensive scan would not change the plan. That is why we stayed.</p><cite>J. P. — with Nova</cite></blockquote>
+      </div>
+    </div>
+    <div class="dots" id="qDots"></div>
+  </section>
+
+  <!-- ============ BOOK ============ -->
+  <section class="book" id="book">
+    <div class="book__grid">
+      <div class="book__intro">
+        <p class="kicker kicker--light" data-reveal>05 — Book</p>
+        <h2 class="book__h2" data-split>Tell us about your dog.</h2>
+        <p class="book__copy" data-reveal>Fill this in and we will call back the same working day. If it is urgent right now, phone instead — we hold slots every morning.</p>
+        <ul class="book__list" data-reveal>
+          <li><span>Phone</span><a href="tel:+15550142200">+1 555 0142 200</a></li>
+          <li><span>Address</span><b>28 Fernwood Road</b></li>
+          <li><span>Open</span><b>Mon–Sun · 8am to 7pm</b></li>
+          <li><span>Urgent</span><b>Same-day slots held daily</b></li>
+        </ul>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <div class="fld"><input id="fn" placeholder=" " required><label for="fn">Your name</label></div>
+        <div class="fld"><input id="fd" placeholder=" " required><label for="fd">Dog's name</label></div>
+        <div class="fld"><input id="fp" type="tel" placeholder=" " required><label for="fp">Phone</label></div>
+        <div class="fld">
+          <select id="fr">
+            <option value="">Choose…</option>
+            <option>Routine / annual check</option>
+            <option>Dental</option>
+            <option>Something seems wrong</option>
+            <option>Senior check</option>
+            <option>Puppy first visit</option>
+          </select>
+          <label for="fr">Reason</label>
+        </div>
+        <div class="fld"><textarea id="fm" rows="3" placeholder=" "></textarea><label for="fm">Anything we should know</label></div>
+        <button class="btn btn--fill btn--wide" type="submit"><span>Request a callback</span></button>
+        <p class="note" id="note" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot__top">
+      <span class="foot__brand">FERNWOOD ANIMAL CLINIC</span>
+      <nav class="foot__links">
+        <a href="#care">Care</a><a href="#patients">Patients</a><a href="#room">The room</a><a href="#book">Book</a>
+      </nav>
+    </div>
+    <p class="foot__fine">Fictional demonstration site. Photography via Unsplash.</p>
+  </footer>
+
+</main>
+
+<script src="js/site.js?v=5"></script>
+</body>
+</html>

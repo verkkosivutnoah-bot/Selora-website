@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ardenwood — Elena Vance, Private Residential Brokerage</title>
+<meta name="description" content="Elena Vance represents architecturally significant homes on the Ardenwood crescent and across the valley.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="site.css?v=6">
+</head>
+<body>
+
+<div class="progress" id="progress"><span></span></div>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top">
+    <span class="nav__mark">A</span>
+    <span class="nav__name">ARDENWOOD</span>
+  </a>
+  <nav class="nav__links">
+    <a href="#collection">The Crescent</a>
+    <a href="#gallery">Interiors</a>
+    <a href="#listings">Portfolio</a>
+    <a href="#agent">Elena</a>
+  </nav>
+  <a class="nav__cta" href="#contact">Private enquiry</a>
+</header>
+
+<!-- ============================================================
+     ACT I — the cinematic open
+============================================================= -->
+
+<div class="herostage" id="top">
+  <section class="hero" id="hero">
+    <div class="frame" id="frame">
+
+      <canvas class="stars" id="stars"></canvas>
+
+      <div class="scene" id="scene">
+        <img class="plate plate--base" src="assets/base.jpg" alt="Three estates at night" id="baseImg">
+
+        <img class="plate plate--lit" data-house="left"   src="assets/left-on.jpg"   alt="">
+        <img class="plate plate--lit" data-house="middle" src="assets/middle-on.jpg" alt="">
+        <img class="plate plate--lit" data-house="right"  src="assets/right-on.jpg"  alt="">
+
+        <div class="reflect">
+          <img class="reflect__img" data-house="left"   src="assets/left-on.jpg"   alt="">
+          <img class="reflect__img" data-house="middle" src="assets/middle-on.jpg" alt="">
+          <img class="reflect__img" data-house="right"  src="assets/right-on.jpg"  alt="">
+        </div>
+
+        <div class="spill" data-house="left"></div>
+        <div class="spill" data-house="middle"></div>
+        <div class="spill" data-house="right"></div>
+
+        <div class="panes" data-house="left"></div>
+        <div class="panes" data-house="middle"></div>
+        <div class="panes" data-house="right"></div>
+      </div>
+
+      <div class="haze"></div>
+      <div class="mist mist--far"></div>
+      <div class="mist mist--near"></div>
+      <div class="grade"></div>
+
+      <div class="zones" id="zones">
+        <button class="zone" data-house="left"   aria-label="Toggle lights: Villa Sol" aria-pressed="false">
+          <span class="zone__glow"></span><span class="zone__sill"></span>
+        </button>
+        <button class="zone" data-house="middle" aria-label="Toggle lights: The Glass Horizon" aria-pressed="false">
+          <span class="zone__glow"></span><span class="zone__sill"></span>
+        </button>
+        <button class="zone" data-house="right"  aria-label="Toggle lights: Crown Manor" aria-pressed="false">
+          <span class="zone__glow"></span><span class="zone__sill"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="opener" id="opener">
+      <p class="opener__eyebrow"><span>Ardenwood Crescent</span></p>
+      <h1 class="opener__title">
+        <span class="line"><span>Three homes.</span></span>
+        <span class="line"><span>One extraordinary</span></span>
+        <span class="line"><span>address.</span></span>
+      </h1>
+      <p class="opener__sub">Scroll to wake the street.</p>
+    </div>
+
+    <div class="cue" id="cue" aria-hidden="true"><span class="cue__line"></span></div>
+
+    <div class="tags" id="tags">
+      <span class="tag" data-house="left"   style="--x:21%">Villa Sol</span>
+      <span class="tag" data-house="middle" style="--x:49.5%">The Glass Horizon</span>
+      <span class="tag" data-house="right"  style="--x:77.5%">Crown Manor</span>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================
+     ACT II — editorial
+============================================================= -->
+
+<main class="page">
+
+  <section class="statement" id="statement">
+    <div class="seal" aria-hidden="true">
+      <svg viewBox="0 0 200 200">
+        <defs>
+          <path id="sealArc" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/>
+        </defs>
+        <circle class="seal__ring" cx="100" cy="100" r="88"/>
+        <circle class="seal__ring seal__ring--in" cx="100" cy="100" r="60"/>
+        <text class="seal__text"><textPath href="#sealArc" startOffset="0">
+          ARDENWOOD · PRIVATE BROKERAGE · EST 1998 · ARDENWOOD · PRIVATE BROKERAGE · EST 1998 ·
+        </textPath></text>
+        <path class="seal__mark" d="M100 74 L118 126 L100 116 L82 126 Z"/>
+      </svg>
+    </div>
+
+    <p class="kicker" data-reveal>Est. 1998 — Valley &amp; Coast</p>
+    <h2 class="statement__text" data-split>
+      A house is bought in daylight. A home is chosen at night, when the windows are lit and you can picture yourself inside one of them.
+    </h2>
+    <div class="statement__by" data-reveal>
+      <span class="rule"></span>
+      <span>Elena Vance, Principal Broker</span>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__row">
+      <span>Ardenwood Crescent</span><i>·</i><span>Hillcrest Park</span><i>·</i><span>The Bluffs</span><i>·</i><span>Old Quarry</span><i>·</i><span>Marin Ridge</span><i>·</i>
+      <span>Ardenwood Crescent</span><i>·</i><span>Hillcrest Park</span><i>·</i><span>The Bluffs</span><i>·</i><span>Old Quarry</span><i>·</i><span>Marin Ridge</span><i>·</i>
+    </div>
+  </div>
+
+  <!-- ---------- Day / night comparison slider ---------- -->
+  <section class="compare-sec" id="compare">
+    <header class="sec-head">
+      <p class="kicker" data-reveal>Twelve hours apart</p>
+      <h2 class="sec-title" data-split>Drag to move the sun.</h2>
+    </header>
+
+    <div class="compare" id="cmp" tabindex="0" role="slider"
+         aria-label="Day and night comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <img class="compare__img compare__img--night" src="assets/base.jpg" alt="The crescent at night">
+      <div class="compare__clip" id="cmpClip">
+        <img class="compare__img" src="assets/daytime.jpg" alt="The crescent by day">
+      </div>
+      <div class="compare__bar" id="cmpBar">
+        <span class="compare__handle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 6 L4 12 L9 18M15 6 L20 12 L15 18"/>
+          </svg>
+        </span>
+      </div>
+      <span class="compare__tag compare__tag--l">Day</span>
+      <span class="compare__tag compare__tag--r">Night</span>
+    </div>
+  </section>
+
+  <!-- ---------- The three residences ---------- -->
+  <section class="collection" id="collection">
+    <header class="sec-head">
+      <p class="kicker" data-reveal>The Crescent</p>
+      <h2 class="sec-title" data-split>Three residences, released together for the first time.</h2>
+    </header>
+
+    <article class="res" data-house="left">
+      <div class="res__media">
+        <div class="res__plate" data-parallax="0.14">
+          <img src="assets/left-on.jpg" alt="Villa Sol at night" style="object-position: 21% 60%;">
+        </div>
+        <figure class="res__inset res__inset--a" data-parallax="-0.08">
+          <img src="https://images.unsplash.com/photo-1666969442529-caa46ad29336?w=900&q=75&auto=format&fit=crop" alt="Sculptural stair beneath a chandelier" loading="lazy">
+        </figure>
+        <figure class="res__inset res__inset--b" data-parallax="0.06">
+          <img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=900&q=75&auto=format&fit=crop" alt="Living room with fireplace" loading="lazy">
+        </figure>
+      </div>
+      <div class="res__body">
+        <p class="res__index" data-reveal>01</p>
+        <h3 class="res__name" data-reveal>Villa Sol</h3>
+        <p class="res__style" data-reveal>Spanish Mediterranean</p>
+
+        <!-- drawn elevation -->
+        <svg class="elev" viewBox="0 0 420 200" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M30 180 H390"/>
+            <path d="M60 180 V96 L118 62 L176 96 V180"/>
+            <path d="M52 100 L118 56 L184 100"/>
+            <path d="M176 180 V118 L232 92 L288 118 V180"/>
+            <path d="M168 122 L232 86 L296 122"/>
+            <path d="M288 180 V132 L332 112 L376 132 V180"/>
+            <path d="M282 136 L332 108 L382 136"/>
+            <path d="M78 180 V146 a12 12 0 0 1 24 0 V180"/>
+            <path d="M112 180 V146 a12 12 0 0 1 24 0 V180"/>
+            <path d="M146 180 V146 a12 12 0 0 1 24 0 V180"/>
+            <path d="M198 180 V140 a14 14 0 0 1 28 0 V180"/>
+            <rect x="240" y="138" width="26" height="42"/>
+            <rect x="82" y="108" width="20" height="22"/>
+            <rect x="134" y="108" width="20" height="22"/>
+            <rect x="196" y="106" width="22" height="20"/>
+            <rect x="246" y="106" width="22" height="20"/>
+            <rect x="306" y="146" width="22" height="34"/>
+            <rect x="340" y="146" width="22" height="34"/>
+            <path d="M96 56 V38 H108 V50"/>
+            <path d="M30 180 H12 M390 180 H408"/>
+          </g>
+        </svg>
+
+        <p class="res__copy" data-reveal>Hand-troweled plaster, a clay tile roof aged on purpose, and an arcaded loggia that holds the last hour of sun. The courtyard was designed around an olive tree that predates the street.</p>
+        <dl class="res__specs" data-reveal>
+          <div><dt>Interior</dt><dd>6,400 sq ft</dd></div>
+          <div><dt>Bedrooms</dt><dd>Five</dd></div>
+          <div><dt>Baths</dt><dd>Six</dd></div>
+          <div><dt>Guide</dt><dd>$4.25M</dd></div>
+        </dl>
+        <a class="link" href="#contact" data-reveal><span>Arrange a viewing</span></a>
+      </div>
+    </article>
+
+    <article class="res res--flip" data-house="middle">
+      <div class="res__media">
+        <div class="res__plate" data-parallax="0.14">
+          <img src="assets/middle-on.jpg" alt="The Glass Horizon at night" style="object-position: 49% 58%;">
+        </div>
+        <figure class="res__inset res__inset--a" data-parallax="-0.08">
+          <img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=900&q=75&auto=format&fit=crop" alt="Chaise beside a full-height window" loading="lazy">
+        </figure>
+        <figure class="res__inset res__inset--b" data-parallax="0.06">
+          <img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=900&q=75&auto=format&fit=crop" alt="Minimal white kitchen" loading="lazy">
+        </figure>
+      </div>
+      <div class="res__body">
+        <p class="res__index" data-reveal>02</p>
+        <h3 class="res__name" data-reveal>The Glass Horizon</h3>
+        <p class="res__style" data-reveal>Modern Architectural</p>
+
+        <svg class="elev" viewBox="0 0 420 200" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 180 H400"/>
+            <path d="M64 180 V70 H356 V180"/>
+            <path d="M46 70 H374"/>
+            <path d="M52 62 H368"/>
+            <path d="M64 124 H356"/>
+            <path d="M150 70 V180 M270 70 V180"/>
+            <path d="M96 78 V118 M124 78 V118 M188 78 V118 M216 78 V118 M244 78 V118 M300 78 V118 M328 78 V118"/>
+            <path d="M96 132 V172 M124 132 V172 M188 132 V172 M216 132 V172 M300 132 V172 M328 132 V172"/>
+            <path d="M76 78 H140 M76 96 H140 M76 118 H140"/>
+            <path d="M280 78 H344 M280 96 H344 M280 118 H344"/>
+            <rect x="196" y="132" width="28" height="48"/>
+            <path d="M162 148 H186 M234 148 H258"/>
+            <path d="M150 56 V44 M270 56 V44"/>
+            <path d="M20 180 H4 M400 180 H416"/>
+          </g>
+        </svg>
+
+        <p class="res__copy" data-reveal>Two storeys of glazing set between quarried stone piers. The stair is a single folded plate of blackened steel. At dusk the whole ground floor reads as one continuous room, inside and out.</p>
+        <dl class="res__specs" data-reveal>
+          <div><dt>Interior</dt><dd>7,800 sq ft</dd></div>
+          <div><dt>Bedrooms</dt><dd>Six</dd></div>
+          <div><dt>Baths</dt><dd>Seven</dd></div>
+          <div><dt>Guide</dt><dd>$6.90M</dd></div>
+        </dl>
+        <a class="link" href="#contact" data-reveal><span>Arrange a viewing</span></a>
+      </div>
+    </article>
+
+    <article class="res" data-house="right">
+      <div class="res__media">
+        <div class="res__plate" data-parallax="0.14">
+          <img src="assets/right-on.jpg" alt="Crown Manor at night" style="object-position: 78% 60%;">
+        </div>
+        <figure class="res__inset res__inset--a" data-parallax="-0.08">
+          <img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?w=900&q=75&auto=format&fit=crop" alt="Formal living room" loading="lazy">
+        </figure>
+        <figure class="res__inset res__inset--b" data-parallax="0.06">
+          <img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?w=900&q=75&auto=format&fit=crop" alt="Principal bedroom" loading="lazy">
+        </figure>
+      </div>
+      <div class="res__body">
+        <p class="res__index" data-reveal>03</p>
+        <h3 class="res__name" data-reveal>Crown Manor</h3>
+        <p class="res__style" data-reveal>English Brick Estate</p>
+
+        <svg class="elev" viewBox="0 0 420 200" data-draw aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M24 180 H396"/>
+            <path d="M60 180 V112 H360 V180"/>
+            <path d="M60 112 L128 54 L196 112"/>
+            <path d="M196 112 L262 60 L328 112"/>
+            <path d="M328 112 V92 L360 70 V112"/>
+            <path d="M52 116 L128 48 L204 116"/>
+            <path d="M188 116 L262 54 L336 116"/>
+            <path d="M104 54 V30 H120 V44"/>
+            <path d="M292 60 V34 H308 V48"/>
+            <path d="M196 180 V138 a22 22 0 0 1 44 0 V180"/>
+            <path d="M196 154 H240 M218 138 V180"/>
+            <rect x="84" y="128" width="30" height="34"/>
+            <rect x="132" y="128" width="30" height="34"/>
+            <rect x="270" y="128" width="30" height="34"/>
+            <rect x="316" y="128" width="30" height="34"/>
+            <path d="M99 128 V162 M84 145 H114 M147 128 V162 M132 145 H162"/>
+            <path d="M285 128 V162 M270 145 H300 M331 128 V162 M316 145 H346"/>
+            <rect x="104" y="82" width="26" height="26"/>
+            <rect x="248" y="86" width="26" height="24"/>
+            <path d="M117 82 V108 M104 95 H130 M261 86 V110 M248 98 H274"/>
+            <path d="M24 180 H8 M396 180 H412"/>
+          </g>
+        </svg>
+
+        <p class="res__copy" data-reveal>Tumbled brick, limestone surrounds, and a slate roof with two gables facing the crescent. Inside, quarter-sawn oak and a library that keeps its own fireplace. Built to look like it has always been here.</p>
+        <dl class="res__specs" data-reveal>
+          <div><dt>Interior</dt><dd>7,100 sq ft</dd></div>
+          <div><dt>Bedrooms</dt><dd>Five</dd></div>
+          <div><dt>Baths</dt><dd>Six &amp; a half</dd></div>
+          <div><dt>Guide</dt><dd>$5.40M</dd></div>
+        </dl>
+        <a class="link" href="#contact" data-reveal><span>Arrange a viewing</span></a>
+      </div>
+    </article>
+  </section>
+
+  <!-- ---------- Pinned horizontal interiors gallery ---------- -->
+  <section class="gallery" id="gallery">
+    <div class="gallery__pin">
+      <div class="gallery__track" id="galTrack">
+        <div class="gal-intro">
+          <p class="kicker">Interiors</p>
+          <h2 class="gal-intro__title">Inside<br>the crescent.</h2>
+          <p class="gal-intro__note">Keep scrolling — the room moves sideways.</p>
+        </div>
+
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?w=1200&q=76&auto=format&fit=crop" alt="Living room with fireplace" loading="lazy"><figcaption><b>Villa Sol</b> — the hearth room</figcaption></figure>
+        <figure class="gal gal--tall"><img src="https://images.unsplash.com/photo-1666969442529-caa46ad29336?w=1000&q=76&auto=format&fit=crop" alt="Stair beneath a chandelier" loading="lazy"><figcaption><b>Villa Sol</b> — the turning stair</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=1200&q=76&auto=format&fit=crop" alt="Minimal kitchen" loading="lazy"><figcaption><b>Glass Horizon</b> — the working kitchen</figcaption></figure>
+        <figure class="gal gal--wide"><img src="https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=1400&q=76&auto=format&fit=crop" alt="Chaise by a tall window" loading="lazy"><figcaption><b>Glass Horizon</b> — the west glazing</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?w=1200&q=76&auto=format&fit=crop" alt="Formal living room" loading="lazy"><figcaption><b>Crown Manor</b> — the drawing room</figcaption></figure>
+        <figure class="gal gal--tall"><img src="https://images.unsplash.com/photo-1562438668-bcf0ca6578f0?w=1000&q=76&auto=format&fit=crop" alt="Principal bedroom" loading="lazy"><figcaption><b>Crown Manor</b> — the principal suite</figcaption></figure>
+        <figure class="gal"><img src="https://images.unsplash.com/photo-1613082294483-fec382d8367e?w=1200&q=76&auto=format&fit=crop" alt="Dining table and chairs" loading="lazy"><figcaption><b>Crown Manor</b> — dining, seats fourteen</figcaption></figure>
+
+        <div class="gal-end">
+          <p class="kicker">Private tours</p>
+          <p class="gal-end__text">Interiors shown by appointment, after six.</p>
+          <a class="link link--light" href="#contact"><span>Request access</span></a>
+        </div>
+      </div>
+      <div class="gallery__rail"><span id="galRail"></span></div>
+    </div>
+  </section>
+
+  <!-- ---------- Portfolio carousel ---------- -->
+  <section class="listings" id="listings">
+    <header class="sec-head sec-head--split">
+      <div>
+        <p class="kicker" data-reveal>Portfolio</p>
+        <h2 class="sec-title" data-split>Elsewhere in the valley.</h2>
+      </div>
+      <div class="carousel__nav" data-reveal>
+        <button class="cbtn" data-dir="-1" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 L8 12 L15 19"/></svg>
+        </button>
+        <button class="cbtn" data-dir="1" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5 L16 12 L9 19"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="carousel" id="carousel" tabindex="0" aria-label="Portfolio carousel">
+      <div class="carousel__track" id="cTrack">
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1745761320791-5ae142edee8c?w=1100&q=75&auto=format&fit=crop" alt="Modern house among palms" loading="lazy"></div>
+          <div class="card__meta"><h3>Palm Court</h3><span class="card__price">$8.2M</span></div>
+          <p class="card__sub">Marin Ridge · 8,900 sq ft · 6 Beds</p>
+          <span class="card__status">Available</span>
+        </a>
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1706808849780-7a04fbac83ef?w=1100&q=75&auto=format&fit=crop" alt="Modern house with pool" loading="lazy"></div>
+          <div class="card__meta"><h3>The Long House</h3><span class="card__price">$11.5M</span></div>
+          <p class="card__sub">The Bluffs · 12,000 sq ft · 7 Beds</p>
+          <span class="card__status">Available</span>
+        </a>
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1633354747567-e0682586f082?w=1100&q=75&auto=format&fit=crop" alt="House with pergola roof" loading="lazy"></div>
+          <div class="card__meta"><h3>Pergola House</h3><span class="card__price">$7.1M</span></div>
+          <p class="card__sub">Hillcrest Park · 6,800 sq ft · 5 Beds</p>
+          <span class="card__status">Available</span>
+        </a>
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1100&q=75&auto=format&fit=crop" alt="White and stone contemporary house" loading="lazy"></div>
+          <div class="card__meta"><h3>Quarry House</h3><span class="card__price">$6.75M</span></div>
+          <p class="card__sub">Old Quarry · 7,400 sq ft · 5 Beds</p>
+          <span class="card__status card__status--sold">Sold</span>
+        </a>
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1719887805632-de5be825f72b?w=1100&q=75&auto=format&fit=crop" alt="Glazed house behind palms" loading="lazy"></div>
+          <div class="card__meta"><h3>Ridgeline</h3><span class="card__price">$9.4M</span></div>
+          <p class="card__sub">Hillcrest Park · 9,600 sq ft · 6 Beds</p>
+          <span class="card__status card__status--sold">Sold</span>
+        </a>
+        <a class="card" href="#contact">
+          <div class="card__img"><img src="https://images.unsplash.com/photo-1706164971302-e30c0640cc3b?w=1100&q=75&auto=format&fit=crop" alt="Modern house with reflecting pool" loading="lazy"></div>
+          <div class="card__meta"><h3>Still Water</h3><span class="card__price">$12.8M</span></div>
+          <p class="card__sub">Marin Ridge · 11,200 sq ft · 7 Beds</p>
+          <span class="card__status card__status--sold">Sold</span>
+        </a>
+      </div>
+    </div>
+    <div class="carousel__bar"><span id="cBar"></span></div>
+  </section>
+
+  <!-- ---------- Agent ---------- -->
+  <section class="agent" id="agent">
+    <figure class="agent__portrait" data-parallax="0.1">
+      <img src="https://images.unsplash.com/photo-1685760259914-ee8d2c92d2e0?w=900&q=78&auto=format&fit=crop" alt="Portrait of Elena Vance" loading="lazy">
+    </figure>
+    <div class="agent__body">
+      <p class="kicker" data-reveal>The broker</p>
+      <h2 class="agent__name" data-split>Elena Vance</h2>
+      <p class="agent__lead" data-reveal>I represent eleven to fourteen homes a year. Not more. Every one of them I have walked at dawn, at noon, and after dark, because that is the only way to know what you are actually selling.</p>
+      <p class="agent__copy" data-reveal>Twenty-two years in architecturally significant residential property, the last nine of them independent. I work with a photographer, a stylist and a structural surveyor I have used since 2011, and I do not list a house until all three have been through it.</p>
+
+      <div class="stats" data-reveal>
+        <div class="stat"><span class="stat__num" data-count="1.4" data-suffix="B" data-prefix="$" data-dec="1"></span><span class="stat__label">Lifetime volume</span></div>
+        <div class="stat"><span class="stat__num" data-count="22"></span><span class="stat__label">Years representing</span></div>
+        <div class="stat"><span class="stat__num" data-count="98" data-suffix="%"></span><span class="stat__label">Of guide achieved</span></div>
+        <div class="stat"><span class="stat__num" data-count="31"></span><span class="stat__label">Days median to offer</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- Process, over drawn contour art ---------- -->
+  <section class="process" id="process">
+    <canvas class="contours" id="contours" aria-hidden="true"></canvas>
+
+    <header class="sec-head">
+      <p class="kicker" data-reveal>How it goes</p>
+      <h2 class="sec-title" data-split>Four conversations, then a sale.</h2>
+    </header>
+
+    <ol class="steps">
+      <li class="step" data-reveal>
+        <span class="step__n">01</span>
+        <h3>The walk</h3>
+        <p>Two hours, no valuation talk. I need to see the house the way a buyer will — where the light lands, what you apologise for, what you are proud of.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">02</span>
+        <h3>The number</h3>
+        <p>A written position with comparable evidence, the three prices I think it trades at, and which of them I would actually take. No flattery pricing.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">03</span>
+        <h3>The work</h3>
+        <p>Styling, survey, photography at the right hour, and a private release to my list before anything goes public. Most of my sales happen in this window.</p>
+      </li>
+      <li class="step" data-reveal>
+        <span class="step__n">04</span>
+        <h3>The close</h3>
+        <p>I run every negotiation myself and you hear from me the day something changes, including when nothing has. Through to keys.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ---------- Testimonials, draggable ---------- -->
+  <section class="quotes" id="quotes">
+    <div class="quotes__viewport" id="qView" tabindex="0" aria-label="Testimonials">
+      <div class="quotes__track" id="qTrack">
+        <blockquote class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <p>She told us not to list for six weeks. It cost her nothing to say it and made us four hundred thousand dollars.</p>
+          <cite>M. &amp; J. Halloran — Old Quarry</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <p>Three agents gave us a number they thought we wanted. Elena gave us the one the market gave back.</p>
+          <cite>D. Reyes — The Bluffs</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <p>She answered the phone on a Sunday in August, from a boat, and had the survey issue solved by Monday.</p>
+          <cite>A. Lindqvist — Hillcrest Park</cite>
+        </blockquote>
+        <blockquote class="quote">
+          <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+          <p>We were the buyers, not her clients, and she still told us what was wrong with the roof.</p>
+          <cite>S. Okonkwo — Ardenwood Crescent</cite>
+        </blockquote>
+      </div>
+    </div>
+    <div class="quotes__dots" id="quoteDots"></div>
+  </section>
+
+  <!-- ---------- Contact ---------- -->
+  <section class="contact" id="contact">
+    <div class="contact__grid">
+      <div class="contact__intro">
+        <p class="kicker kicker--light" data-reveal>Private enquiry</p>
+        <h2 class="contact__title" data-split>Tell me which window was yours.</h2>
+        <p class="contact__copy" data-reveal>Viewings on the crescent are by appointment, generally after six so you can see the houses lit. Everything you send stays between us.</p>
+        <ul class="contact__list" data-reveal>
+          <li><span>Office</span><a href="tel:+14155550142">+1 415 555 0142</a></li>
+          <li><span>Direct</span><a href="mailto:elena@ardenwood.example">elena@ardenwood.example</a></li>
+          <li><span>Studio</span><a href="#top">14 Crescent Row, Ardenwood</a></li>
+        </ul>
+      </div>
+
+      <form class="form" id="form" novalidate>
+        <div class="field">
+          <input id="f-name" name="name" type="text" placeholder=" " required>
+          <label for="f-name">Your name</label>
+        </div>
+        <div class="field">
+          <input id="f-email" name="email" type="email" placeholder=" " required>
+          <label for="f-email">Email</label>
+        </div>
+        <div class="field">
+          <select id="f-interest" name="interest">
+            <option value="">Select…</option>
+            <option>Villa Sol</option>
+            <option>The Glass Horizon</option>
+            <option>Crown Manor</option>
+            <option>Something else in the valley</option>
+            <option>I'm selling</option>
+          </select>
+          <label for="f-interest">Interested in</label>
+        </div>
+        <div class="field">
+          <textarea id="f-msg" name="message" rows="4" placeholder=" "></textarea>
+          <label for="f-msg">Anything I should know</label>
+        </div>
+        <button class="btn" type="submit"><span>Send enquiry</span></button>
+        <p class="form__note" id="formNote" role="status"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="foot__top">
+      <a class="foot__brand" href="#top">ARDENWOOD</a>
+      <nav class="foot__links">
+        <a href="#collection">The Crescent</a>
+        <a href="#gallery">Interiors</a>
+        <a href="#listings">Portfolio</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+    <div class="foot__bottom">
+      <p>© 2026 Ardenwood Private Brokerage. Fictional demonstration site.</p>
+      <p>DRE #01998442</p>
+    </div>
+  </footer>
+
+</main>
+
+<script src="script.js?v=6"></script>
+<script src="site.js?v=6"></script>
+</body>
+</html>

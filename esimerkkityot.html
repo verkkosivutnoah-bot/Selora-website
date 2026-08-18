@@ -7,12 +7,12 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no, address=no, email=no, date=no" />
-  <title>Verkkosivusuunnittelu, Selora</title>
-  <link rel="canonical" href="https://selora.fi/verkkosivusuunnittelu.html" />
-  <link rel="alternate" hreflang="fi" href="https://selora.fi/verkkosivusuunnittelu.html" />
+  <title>Esimerkkityöt, Selora</title>
+  <link rel="canonical" href="https://selora.fi/esimerkkityot.html" />
+  <link rel="alternate" hreflang="fi" href="https://selora.fi/esimerkkityot.html" />
   <link rel="alternate" hreflang="en" href="https://selora.fi/web-design.html" />
-  <link rel="alternate" hreflang="x-default" href="https://selora.fi/verkkosivusuunnittelu.html" />
-  <meta name="description" content="Selora suunnittelee selkeät, nopeat verkkosivustot suomalaisille yrityksille. Kertamaksu 298, 898 €, ylläpito 49 €/kk." />
+  <link rel="alternate" hreflang="x-default" href="https://selora.fi/esimerkkityot.html" />
+  <meta name="description" content="Yhdeksän esimerkkisivustoa Seloralta. Suodata toimialan mukaan ja avaa mikä tahansa niistä." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
@@ -390,9 +390,59 @@
 <script src="/assets/selora-motion.js" defer></script>
 <script src="/assets/selora-nebula.js" defer></script>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
+
+  <style>
+    .lib-section { padding-top: 4rem; }
+    .lib-head { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+    @media (min-width: 900px) { .lib-head { grid-template-columns: minmax(0,1fr) minmax(0,0.9fr); gap: 3rem; align-items: end; } }
+    .lib-head .section-sub { margin: 0; }
+
+    .lib-controls { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(15,23,42,0.1); }
+    .lib-chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .lib-chip {
+      min-height: 44px; padding: 0 0.95rem; border-radius: 9999px; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500;
+      color: #475569; background: #fff; border: 1px solid rgba(15,23,42,0.12);
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .lib-chip:hover { border-color: rgba(29,78,216,0.35); color: var(--blue); }
+    .lib-chip.is-on { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .lib-chip:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .lib-sort { display: flex; align-items: center; gap: 0.5rem; }
+    .lib-sort label { font-size: 0.75rem; color: var(--text-muted); }
+    .lib-sort select {
+      min-height: 44px; padding: 0 0.75rem; border-radius: 0.7rem; background: #fff;
+      border: 1px solid rgba(15,23,42,0.12); font-family: 'Inter', sans-serif; font-size: 0.8rem; color: #0f172a;
+    }
+    .lib-count { margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted); }
+
+    .lib-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1rem; }
+    @media (min-width: 700px) { .lib-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1100px) { .lib-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; } }
+
+    .lib-card { display: flex; flex-direction: column; text-decoration: none; border-radius: 1.25rem; overflow: hidden; background: #fff; border: 1px solid rgba(15,23,42,0.09); box-shadow: 0 2px 12px rgba(15,23,42,0.06); transition: transform 0.45s cubic-bezier(0.16,1,0.3,1), box-shadow 0.45s ease, border-color 0.3s ease; }
+    .lib-card:hover { transform: translateY(-5px); box-shadow: 0 24px 50px -26px rgba(15,23,42,0.45); border-color: rgba(29,78,216,0.28); }
+    .lib-card[hidden] { display: none; }
+    .lib-shot { aspect-ratio: 16 / 10; overflow: hidden; background: #0b1220; }
+    .lib-shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .lib-card:hover .lib-shot img { transform: scale(1.05); }
+    .lib-body { padding: 1.15rem 1.25rem 1.35rem; }
+    .lib-title { font-size: 1rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; margin-bottom: 0.25rem; }
+    .lib-meta { font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.85rem; }
+    .lib-cta { font-size: 0.78rem; font-weight: 500; color: var(--blue); }
+
+    .lib-empty { margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted); }
+    .lib-foot { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(15,23,42,0.1); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+    .lib-foot p { font-size: 0.9rem; color: #0f172a; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lib-card, .lib-shot img, .lib-chip { transition: none !important; }
+      .lib-card:hover { transform: none; }
+      .lib-card:hover .lib-shot img { transform: none; }
+    }
+  </style>
 </head>
 <body>
-<a href="#main" class="selora-skip">Hyppää sisältöön</a>
   <div class="page-hero" id="main" tabindex="-1">
     <canvas id="pageCanvas"></canvas>
     <header class="site-header" id="site-header">
@@ -400,7 +450,7 @@
         <a href="index.html" class="logo"><img src="/assets/img/logo-90.webp" width="30" height="30" alt="Selora" style="flex-shrink:0;border-radius:25%;display:block;" loading="eager" fetchpriority="high">SELORA</a>
         <nav class="desktop-nav">
           <a href="index.html">Etusivu</a>
-          <a href="palvelut.html" class="active">Palvelut</a>
+          <a href="palvelut.html">Palvelut</a>
 <a href="hinnoittelu.html">Hinnoittelu</a>
           <a href="yhteystiedot.html">Yhteystiedot</a>
         </nav>
@@ -417,9 +467,9 @@
       </div>
     </header>
     <div class="page-title-block">
-      <p class="page-label" data-sl-reveal>Verkkosivusuunnittelu</p>
-      <h1 data-sl-split>Sivusto joka <span class="accent">myy puolestasi.</span></h1>
-      <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Selkeät, nopeat verkkosivustot, jotka on suunniteltu muuttamaan vierailijat asiakkaiksi.</p>
+      <p class="page-label" data-sl-reveal>Esimerkkityöt</p>
+      <h1 data-sl-split>Katso mitä olemme <span class="accent">rakentaneet.</span></h1>
+      <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Yhdeksän esimerkkisivustoa, jotka voit avata ja kokeilla itse.</p>
       <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
         <span class="phc"><b>0,6 s</b> latausaika</span>
         <span class="phc"><b>100 %</b> mobiilioptimoitu</span>
@@ -430,412 +480,128 @@
 
   <div style="padding:1.25rem 2rem;background:#F8FAFF;border-bottom:1px solid rgba(15,23,42,0.07);">
     <div style="max-width:1160px;margin:0 auto;">
-      <a href="palvelut.html" class="back-link" style="font-size:0.75rem;color:#64748b;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;transition:color 0.2s;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#64748b'">
+      <a href="verkkosivusuunnittelu.html" class="back-link" style="font-size:0.75rem;color:#64748b;text-decoration:none;display:inline-flex;align-items:center;gap:0.35rem;transition:color 0.2s;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#64748b'">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Takaisin palveluihin
+        Takaisin verkkosivusuunnitteluun
       </a>
     </div>
   </div>
 
-    <section class="section">
+  <section class="section lib-section">
     <div class="container">
-      <div class="vs-head">
+      <div class="lib-head">
         <div>
-          <p class="section-label" data-sl-reveal>Mitä saat</p>
-          <h2 class="section-heading sl-swipe-host" data-sl-split>Sivusto, joka tekee<br><span class="accent">työn puolestasi.</span></h2>
+          <p class="section-label" data-sl-reveal>Esimerkkityöt</p>
+          <h2 class="section-heading sl-swipe-host" data-sl-split>Yhdeksän sivustoa, <span class="accent">yksi tapa tehdä.</span></h2>
         </div>
-        <p class="section-sub" data-sl-words data-sl-reveal>Rakennamme sivuston alusta asti sinun yrityksellesi. Ei valmiita mallipohjia. Maksat kerran, ja sivusto on sinun.</p>
+        <p class="section-sub" data-sl-words data-sl-reveal>Jokainen näistä on rakennettu alusta asti. Suodata toimialan mukaan ja avaa mikä tahansa, ne ovat oikeita sivustoja eivätkä kuvia.</p>
       </div>
 
-      <div class="vs-cards" data-sl-stagger="110">
-        <div class="vs-card" data-sl-pop>
-          <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg></span>
-          <h3>Asiakkaat löytävät sinut</h3>
-          <p>Sivusto näkyy Googlessa silloin, kun joku etsii sinun palveluitasi omalta alueeltasi.</p>
+      <div class="lib-controls">
+        <div class="lib-chips" role="tablist" aria-label="Suodata toimialan mukaan">
+          <button class="lib-chip is-on" type="button" role="tab" aria-selected="true" data-filter="kaikki">Kaikki</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="kiinteisto">Kiinteistö</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="kauppa">Verkkokauppa</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="palvelut">Palveluala</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="terveys">Terveys</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="hyvinvointi">Hyvinvointi</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="rahoitus">Rahoitus</button>
+          <button class="lib-chip" type="button" role="tab" aria-selected="false" data-filter="brandi">Brändi</button>
         </div>
-        <div class="vs-card" data-sl-pop>
-          <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg></span>
-          <h3>Sivusto aukeaa heti</h3>
-          <p>Alle sekunnissa myös puhelimella. Kukaan ei ehdi turhautua ja poistua kilpailijalle.</p>
-        </div>
-        <div class="vs-card" data-sl-pop>
-          <span class="vs-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
-          <h3>Yhteydenotot tulevat sinulle</h3>
-          <p>Selkeä lomake ohjaa asiakkaan ottamaan yhteyttä. Viesti tulee suoraan sähköpostiisi.</p>
+        <div class="lib-sort">
+          <label for="libSort">Järjestys</label>
+          <select id="libSort">
+            <option value="newest">Uusimmat ensin</option>
+            <option value="name">Nimi A, Ö</option>
+          </select>
         </div>
       </div>
 
-      <ul class="vs-checks" data-sl-reveal>
-        <li>Nopea latausaika</li>
-        <li>Toimii puhelimella</li>
-        <li>Näkyy Googlessa</li>
-        <li>Yhteydenottolomake</li>
-        <li>Kävijätilastot</li>
-        <li>Evästeet kuntoon</li>
-        <li>Suomi ja englanti</li>
-        <li>Ohjeet ylläpitoon</li>
-      </ul>
-    </div>
-  </section>
+      <p class="lib-count" id="libCount" role="status" aria-live="polite"></p>
 
-  
-
-<section class="section-alt" id="esimerkkitoita">
-    <div class="container">
-      <div class="stories-head reveal">
-        <div class="section-label" data-i18n="Esimerkkitöitä">Esimerkkitöitä</div>
-        <h2 class="section-heading" data-i18n="Sivut, joita olemme rakentaneet.">Sivut, joita olemme <span class="accent" data-i18n="rakentaneet">rakentaneet</span>.</h2>
-        <p class="section-sub" data-i18n="Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.">Alla olevat sivustot ovat esimerkkiprojekteja, jotka olemme suunnitelleet havainnollistamaan sitä, millaisen verkkosivuston voimme rakentaa toimialallesi. Ne eivät ole oikeita asiakasprojekteja.</p>
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="stories-marquee" id="storiesMarquee">
-        <button class="stories-nav stories-nav-prev" id="storiesPrev" type="button" aria-label="Edellinen">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <button class="stories-nav stories-nav-next" id="storiesNext" type="button" aria-label="Seuraava">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-        <div class="stories-track" id="storiesTrack">
-      <a class="story-card" data-sl-pop href="portfolio/vantage-site.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/vantage-site.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-vantage-site.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Vantage</div>
-          <div class="story-meta" data-i18n="Interaktiivinen konsepti · Scroll">Interaktiivinen konsepti · Scroll</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/plume.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/plume.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-plume.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Plume</div>
-          <div class="story-meta" data-i18n="Markkinointitoimisto · Brändi">Markkinointitoimisto · Brändi</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/nocturne.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/nocturne.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-nocturne.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Nocturne</div>
-          <div class="story-meta" data-i18n="Muotibrändi · Verkkokauppa">Muotibrändi · Verkkokauppa</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/green-electrician.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/green-electrician.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-green-electrician.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">The Green Electrician</div>
-          <div class="story-meta" data-i18n="Sähköurakointi · Toronto">Sähköurakointi · Toronto</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/harbourline.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/harbourline.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-harbourline.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Harbourline</div>
-          <div class="story-meta" data-i18n="Kiinteistönvälitys · Parallax">Kiinteistönvälitys · Parallax</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/aurelian/index.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/aurelian/index.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-aurelian.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Aurelian</div>
-          <div class="story-meta" data-i18n="Yksityispankki · Three.js">Yksityispankki · Three.js</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/stillpoint/index.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/stillpoint/index.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-stillpoint.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Stillpoint</div>
-          <div class="story-meta" data-i18n="Terapiapalvelut · Liquid glass">Terapiapalvelut · Liquid glass</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-                                                  </div>
+      <div class="lib-grid" id="libGrid">
+        <a class="lib-card" data-sl-pop data-cat="terveys" data-name="fernwood animal clinic" data-order="0" href="portfolio/fernwood/index.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-fernwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Fernwood Animal Clinic</h2>
+            <p class="lib-meta">Eläinklinikka · Ajanvaraus</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="kiinteisto" data-name="ardenwood" data-order="1" href="portfolio/ardenwood/index.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-ardenwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Ardenwood</h2>
+            <p class="lib-meta">Kiinteistönvälitys · Luksusasunnot</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="hyvinvointi" data-name="stillpoint" data-order="2" href="portfolio/stillpoint/index.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-stillpoint.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Stillpoint</h2>
+            <p class="lib-meta">Terapiapalvelut · Liquid glass</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="rahoitus" data-name="aurelian" data-order="3" href="portfolio/aurelian/index.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-aurelian.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Aurelian</h2>
+            <p class="lib-meta">Yksityispankki · Three.js</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="kiinteisto" data-name="harbourline" data-order="4" href="portfolio/harbourline.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-harbourline.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Harbourline</h2>
+            <p class="lib-meta">Kiinteistönvälitys · Parallax</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="palvelut" data-name="the green electrician" data-order="5" href="portfolio/green-electrician.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-green-electrician.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">The Green Electrician</h2>
+            <p class="lib-meta">Sähköurakointi · Toronto</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="kauppa" data-name="nocturne" data-order="6" href="portfolio/nocturne.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-nocturne.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Nocturne</h2>
+            <p class="lib-meta">Muotibrändi · Verkkokauppa</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="brandi" data-name="plume" data-order="7" href="portfolio/plume.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-plume.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Plume</h2>
+            <p class="lib-meta">Markkinointitoimisto · Brändi</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
+        <a class="lib-card" data-sl-pop data-cat="brandi" data-name="vantage" data-order="8" href="portfolio/vantage-site.html" target="_blank" rel="noopener">
+          <div class="lib-shot"><img src="/assets/img/story-vantage-site.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-body">
+            <h2 class="lib-title">Vantage</h2>
+            <p class="lib-meta">Interaktiivinen konsepti · Scroll</p>
+            <span class="lib-cta">Katso sivusto →</span>
+          </div>
+        </a>
       </div>
 
-      <div class="stories-more">
-        <a class="btn btn-blue esimerkki-lib-cta" href="esimerkkityot.html">Katso kaikki esimerkit →</a>
+      <p class="lib-empty" id="libEmpty" hidden>Ei osumia tällä suodattimella.</p>
+
+      <div class="lib-foot">
+        <p>Haluatko oman sivuston tälle listalle?</p>
+        <a class="btn btn-blue" href="yhteystiedot.html">Varaa maksuton kartoitus →</a>
       </div>
     </div>
   </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="vs-head">
-        <div>
-          <p class="section-label" data-sl-reveal>Näin se etenee</p>
-          <h2 class="section-heading sl-swipe-host" data-sl-split>Kolme vaihetta, <span class="accent">ei enempää.</span></h2>
-        </div>
-        <p class="section-sub" data-sl-words data-sl-reveal>Sinä kerrot mitä tarvitset. Me hoidamme loput. Tiedät koko ajan missä mennään.</p>
-      </div>
-      <div class="flow-track">
-        <div class="flow-node" data-sl-reveal>
-          <div class="flow-card">
-            <span class="flow-step">1</span>
-            <h3>Jutellaan</h3>
-            <p>Käymme puhelimessa läpi mitä teet ja mitä sivustolta halutaan. Saat kiinteän hinnan heti.</p>
-            <span class="flow-tag">Noin 45 min</span>
-          </div>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">
-          <svg viewBox="0 0 80 34" preserveAspectRatio="none">
-            <path class="fa-line" d="M2 17 H66"/>
-            <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
-          </svg>
-        </div>
-        <div class="flow-node" data-sl-reveal>
-          <div class="flow-card">
-            <span class="flow-step">2</span>
-            <h3>Me rakennamme</h3>
-            <p>Suunnittelemme ulkoasun ja rakennamme sivuston. Näytämme sen sinulle ja korjaamme mitä haluat.</p>
-            <span class="flow-tag">Muutama päivä</span>
-          </div>
-        </div>
-        <div class="flow-arrow" aria-hidden="true">
-          <svg viewBox="0 0 80 34" preserveAspectRatio="none">
-            <path class="fa-line" d="M2 17 H66"/>
-            <path class="fa-head" d="M64 11 L76 17 L64 23 Z"/>
-          </svg>
-        </div>
-        <div class="flow-node" data-sl-reveal>
-          <div class="flow-card">
-            <span class="flow-step">3</span>
-            <h3>Sivusto aukeaa</h3>
-            <p>Julkaisemme sivuston ja hoidamme tekniikan. Sinun ei tarvitse osata koodata mitään.</p>
-            <span class="flow-tag">Sitten se on valmis</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="section-alt">
-    <div class="container">
-      <div class="reveal">
-        <h2 class="section-heading">Mitä sisältyy</h2>
-        <p class="section-sub">Suunnittelu ja tekniikka, jotka tekevät sivustosta tehokkaan.</p>
-      </div>
-      <div class="feat-accordion">
-        <div>
-          <div class="feat-group">
-            <div class="feat-group-label">Suunnittelu & sisältö</div>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/></svg></div>
-                <span class="feat-item-title">Visuaalinen suunnittelu</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Räätälöity ulkoasu brändisi väreillä, fonteilla ja kuvastolla. Ei valmiita malleja.</p>
-                <ul class="feat-item-bullets">
-                  <li>Brändilähtöinen väripaletti</li>
-                  <li>Typografia ja ikonisto</li>
-                  <li>Kuvavalinnat ja visuaalinen hierarkia</li>
-                </ul>
-              </div>
-            </details>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-                <span class="feat-item-title">Tekstisuunnittelu</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Kirjoitamme myyvät tekstit suomeksi, jotka puhuttelevat kohderyhmääsi ja ohjaavat toimintaan.</p>
-                <ul class="feat-item-bullets">
-                  <li>Otsikot ja CTA-tekstit</li>
-                  <li>Palvelukuvaukset ja hyödyt</li>
-                  <li>SEO-avainsanojen integrointi</li>
-                </ul>
-              </div>
-            </details>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                <span class="feat-item-title">Responsiivinen mobiilisuunnittelu</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Sivusto näyttää täydelliseltä kaikilla laitteilla: puhelin, tabletti, tietokone.</p>
-                <ul class="feat-item-bullets">
-                  <li>Mobile-first lähestymistapa</li>
-                  <li>Testattu yleisimmillä selaimilla</li>
-                  <li>Nopea lataus myös mobiiliverkossa</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-        <div>
-          <div class="feat-group">
-            <div class="feat-group-label">Tekniikka & optimointi</div>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
-                <span class="feat-item-title">SEO-optimointi</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Rakennamme sivuston hakukoneystävälliseksi alusta asti: nopeus, rakenne, metatiedot.</p>
-                <ul class="feat-item-bullets">
-                  <li>Core Web Vitals -optimointi</li>
-                  <li>Meta-otsikot ja kuvaukset</li>
-                  <li>Sivukartta ja robots.txt</li>
-                </ul>
-              </div>
-            </details>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg></div>
-                <span class="feat-item-title">Analytiikka & seuranta</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Asennamme Google Analyticsin ja konversioseurannan, joten tiedät tarkalleen mistä asiakkaat tulevat.</p>
-                <ul class="feat-item-bullets">
-                  <li>Google Analytics 4</li>
-                  <li>Konversiotapahtumien seuranta</li>
-                  <li>Google Search Console -yhteys</li>
-                </ul>
-              </div>
-            </details>
-            <details class="feat-item">
-              <summary>
-                <div class="feat-item-icon"><svg fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-                <span class="feat-item-title">Lomakkeet & integraatiot</span>
-                <span class="feat-item-chevron">▼</span>
-              </summary>
-              <div class="feat-item-body">
-                <p class="feat-item-desc">Yhteydenottolomakkeet, varausjärjestelmät ja CRM-integraatiot valmiina.</p>
-                <ul class="feat-item-bullets">
-                  <li>Yhteydenottolomake</li>
-                  <li>Kalenterivaraus (Calendly tai vastaava)</li>
-                  <li>CRM-integraatio</li>
-                </ul>
-              </div>
-            </details>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="rev-section" id="arvostelut">
-    <div class="rev-mesh" aria-hidden="true"></div>
-    <div class="rev-grid-bg" aria-hidden="true"></div>
-    <div class="container rev-inner">
-      <div class="rev-head">
-        <div>
-          <p class="section-label" data-sl-reveal>Google-arvostelut</p>
-          <h2 class="section-heading sl-swipe-host" data-sl-split>Enemmän arvosteluja. <span class="accent">Automaattisesti.</span></h2>
-        </div>
-        <p class="section-sub" data-sl-reveal>Google-arvostelut ratkaisevat kenet asiakas valitsee. Rakennamme sivustollesi järjestelmän, joka pyytää arvostelun jokaiselta asiakkaalta ilman että sinun tarvitsee muistaa kysyä.</p>
-      </div>
-  
-      <div class="rev-flow">
-  
-        <div class="rev-steps" data-sl-stagger="110">
-          <div class="rev-step" data-sl-reveal>
-            <div class="rev-step-num">01</div>
-            <div class="rev-step-body">
-              <h3>Asiakas ostaa tai käy</h3>
-              <p>Kun tilaus valmistuu tai käynti on ohi, järjestelmä poimii asiakkaan yhteystiedot automaattisesti.</p>
-            </div>
-          </div>
-          <div class="rev-step" data-sl-reveal>
-            <div class="rev-step-num">02</div>
-            <div class="rev-step-body">
-              <h3>Automaattinen viesti lähtee</h3>
-              <p>Asiakas saa ystävällisen sähköpostin, jossa pyydetään lyhyt arvio kokemuksesta. Ajoituksen ja sanamuodon säädämme toimialaasi sopivaksi.</p>
-            </div>
-          </div>
-          <div class="rev-step" data-sl-reveal>
-            <div class="rev-step-num">03</div>
-            <div class="rev-step-body">
-              <h3>Palaute ohjautuu oikeaan paikkaan</h3>
-              <p>Tyytyväinen asiakas ohjataan suoraan Google-arvosteluun ja arvio näkyy myös sivustollasi. Jos kokemus jäi vajaaksi, palaute tulee ensin sinulle, jotta ehdit korjata tilanteen.</p>
-            </div>
-          </div>
-        </div>
-  
-        <div class="rev-visual" data-sl-reveal="scale" aria-hidden="true">
-  
-          <div class="rev-card rev-card-mail">
-            <div class="rev-mail-top">
-              <span class="rev-dot"></span><span class="rev-dot"></span><span class="rev-dot"></span>
-              <span class="rev-mail-label">Sähköposti</span>
-            </div>
-            <p class="rev-mail-subject">Miten palvelumme sujui?</p>
-            <p class="rev-mail-text">Kiitos käynnistäsi. Kerrotko lyhyesti miten meni?</p>
-            <div class="rev-stars">
-              <span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span><span class="rev-star is-on">★</span>
-            </div>
-          </div>
-  
-          <div class="rev-branch">
-            <svg class="rev-branch-svg" viewBox="0 0 240 60" preserveAspectRatio="none">
-              <path d="M120 0 V22 M120 22 H34 V58 M120 22 H206 V58" fill="none" stroke="rgba(96,165,250,0.4)" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-  
-          <div class="rev-outcomes">
-            <div class="rev-out rev-out-good">
-              <div class="rev-out-top">
-                <span class="rev-out-pill rev-pill-good">4, 5 tähteä</span>
-              </div>
-              <div class="rev-out-body">
-                <span class="rev-out-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                </span>
-                <p><strong>Google-arvostelu</strong>Julkaistaan myös sivustollasi</p>
-              </div>
-            </div>
-            <div class="rev-out rev-out-soft">
-              <div class="rev-out-top">
-                <span class="rev-out-pill rev-pill-soft">1, 3 tähteä</span>
-              </div>
-              <div class="rev-out-body">
-                <span class="rev-out-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-                </span>
-                <p><strong>Suoraan sinulle</strong>Ehdit korjata tilanteen ajoissa</p>
-              </div>
-            </div>
-          </div>
-  
-        </div>
-      </div>
-  
-      <div class="rev-note reveal">
-        <span class="rev-note-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </span>
-        <p>Toteutus noudattaa Googlen arvostelukäytäntöjä. Jokainen asiakas voi halutessaan jättää arvostelun Googleen, emmekä estä ketään. Sivustollasi näytämme julkaistavaksi hyväksytyt arviot.</p>
-      </div>
-    </div>
-  </div>
-
-
-
-
-<section class="section">
-    <div class="container">
-      <div class="cta-block reveal">
-        <h2>Pyydä <span class="accent">maksuton tarjous</span></h2>
-        <p>Kerro meille tarpeistasi, saat tarjouksen 24 tunnin sisällä. Ei sitoumuksia, ei piilokuluja, ei yllätyksiä.</p>
-        <div class="cta-btns">
-          <a href="yhteystiedot.html" class="btn btn-light">Pyydä tarjous →</a>
-          <a href="hinnoittelu.html" class="btn btn-ghost">Katso hinnat</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
   <footer>
     <div class="footer-inner">
       <span class="footer-copy">© 2025 Selora Oy · Y-tunnus: 3535677-9 · Kaikki oikeudet pidätetään.</span>
@@ -959,23 +725,7 @@
       <div style="margin-top:1rem;padding-top:0.85rem;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;">
         <a href="/tietosuojaseloste.html" style="font-size:0.7rem;color:rgba(255,255,255,0.4);text-decoration:underline;text-underline-offset:2px;">Tietosuojaseloste</a>
         <button onclick="cookieSavePrefs()" style="font-family:'Inter',sans-serif;font-size:0.72rem;font-weight:500;padding:0.45rem 1rem;border-radius:9999px;border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.75);cursor:pointer;" onmouseover="this.style.borderColor='rgba(255,255,255,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">Tallenna valinnat</button>
-            <a class="story-card" data-sl-pop href="portfolio/ardenwood/index.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/ardenwood/index.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-ardenwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Ardenwood</div>
-          <div class="story-meta" data-i18n="Kiinteistönvälitys · Luksusasunnot">Kiinteistönvälitys · Luksusasunnot</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-      <a class="story-card" data-sl-pop href="portfolio/fernwood/index.html" target="_blank" rel="noopener">
-        <div class="story-frame" data-src="portfolio/fernwood/index.html" aria-hidden="true"><img class="story-shot" src="/assets/img/story-fernwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
-        <div class="story-bottom">
-          <div class="story-title">Fernwood Animal Clinic</div>
-          <div class="story-meta" data-i18n="Eläinklinikka · Ajanvaraus">Eläinklinikka · Ajanvaraus</div>
-          <div class="story-cta" data-i18n="Katso sivusto →">Katso sivusto →</div>
-        </div>
-      </a>
-</div>
+      </div>
     </div>
 
   </div>
@@ -1014,5 +764,53 @@
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/assets/selora-marquee.js" defer></script>
 <script src="/chatbot.js" defer></script>
+
+<script>
+/* Library filter and sort. Order lives in data-order (newest first as authored)
+   so sorting never has to parse anything out of the markup. Cards are hidden
+   with the hidden attribute rather than a class, so they leave the
+   accessibility tree too, not just the layout. */
+(function () {
+  var grid = document.getElementById('libGrid');
+  if (!grid) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.lib-card'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.lib-chip'));
+  var sort = document.getElementById('libSort');
+  var count = document.getElementById('libCount');
+  var empty = document.getElementById('libEmpty');
+  var filter = 'kaikki';
+
+  function apply() {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var on = filter === 'kaikki' || c.getAttribute('data-cat') === filter;
+      if (on) { c.removeAttribute('hidden'); shown++; } else { c.setAttribute('hidden', ''); }
+    });
+
+    var by = sort.value;
+    cards.slice().sort(function (a, b) {
+      if (by === 'name') return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'), 'fi');
+      return (+a.getAttribute('data-order')) - (+b.getAttribute('data-order'));
+    }).forEach(function (c) { grid.appendChild(c); });
+
+    count.textContent = shown + (shown === 1 ? ' sivusto' : ' sivustoa');
+    if (shown) { empty.setAttribute('hidden', ''); } else { empty.removeAttribute('hidden'); }
+  }
+
+  chips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      filter = chip.getAttribute('data-filter');
+      chips.forEach(function (c) {
+        var on = c === chip;
+        c.classList.toggle('is-on', on);
+        c.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      apply();
+    });
+  });
+  sort.addEventListener('change', apply);
+  apply();
+})();
+</script>
 </body>
 </html>

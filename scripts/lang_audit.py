@@ -26,7 +26,7 @@ os.chdir(ROOT)
 
 PUBLIC = [
     'index.html', 'palvelut.html', 'hinnoittelu.html',
-    'yhteystiedot.html', 'verkkosivusuunnittelu.html',
+    'yhteystiedot.html', 'verkkosivusuunnittelu.html', 'esimerkkityot.html',
     'tietosuojaseloste.html', '404.html', 'unsubscribe.html',
 ]
 
