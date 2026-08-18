@@ -1,5 +1,20 @@
 {
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+  "headers": [
+    {
+      "//": "Vercel serves everything with max-age=0, must-revalidate by default, so even an unchanged image costs a conditional request on every page load. These files are only ever replaced under a new name — the portfolio stills are regenerated as story-<slug>.webp and the logo as logo-<size>.webp — so there is nothing to revalidate and a year is safe. Anything edited in place (the stylesheets, the scripts) is deliberately left on the default.",
+      "source": "/assets/img/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(favicon-32.png|favicon-192.png|apple-touch-icon.png|favicon.svg)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
+      ]
+    }
   ]
 }
