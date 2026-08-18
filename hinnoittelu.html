@@ -207,17 +207,46 @@
     .check-partial { color: #d97706; font-size: 0.72rem; }
     .compare-table .col-featured { background: rgba(29,78,216,0.04); }
     .compare-section-row td { background: #F8FAFF; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; padding: 0.6rem 1.1rem; }
-    @media (max-width: 600px) {
+    /* Column name inside each cell, hidden until the table stacks. Real text
+       rather than CSS content, so it translates with everything else. */
+    .cmp-k { display: none; }
+
+    /* The old mobile rules assumed two packages: a 1fr 5rem 5rem grid and
+       ::before labels on cells 2 and 3 only. A third package overflowed that
+       grid and arrived unlabelled. Rows now stack as a card: the feature on
+       its own line, the three verdicts side by side under it, which fits a
+       375px screen without any horizontal scroll. */
+    @media (max-width: 700px) {
       .compare-wrap { overflow-x: visible; }
+      .compare-table { min-width: 0; }
       .compare-table, .compare-table tbody { display: block; }
       .compare-table thead { display: none; }
       .compare-table tbody tr.compare-section-row { display: block; }
       .compare-table tbody tr.compare-section-row td { display: block; }
-      .compare-table tbody tr:not(.compare-section-row) { display: grid; grid-template-columns: 1fr 5rem 5rem; align-items: center; border-bottom: 1px solid rgba(15,23,42,0.07); }
-      .compare-table tbody tr:not(.compare-section-row) td { border-bottom: none; padding: 0.6rem 0.5rem; }
-      .compare-table .col-check { text-align: center; font-size: 0.65rem; word-break: break-word; white-space: normal; }
-      .compare-table tbody tr:not(.compare-section-row) td:nth-child(2)::before { content: 'Perussivu'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #64748b; margin-bottom: 2px; }
-      .compare-table tbody tr:not(.compare-section-row) td:nth-child(3)::before { content: 'Täysi sivusto'; display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 2px; }
+      .compare-table tbody tr:not(.compare-section-row) {
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0 0.4rem; padding: 0.85rem 0.15rem;
+        border-bottom: 1px solid rgba(15,23,42,0.07);
+      }
+      .compare-table tbody tr:not(.compare-section-row) td { border-bottom: none; padding: 0; }
+      .compare-table .col-feature {
+        grid-column: 1 / -1; font-weight: 500; color: #0f172a;
+        font-size: 0.82rem; line-height: 1.4; margin-bottom: 0.6rem;
+      }
+      .compare-table .col-check {
+        text-align: center; font-size: 0.72rem; white-space: normal; word-break: break-word;
+        border-radius: 0.6rem; padding: 0.5rem 0.3rem;
+        background: rgba(15,23,42,0.03);
+      }
+      .compare-table .col-check.col-featured { background: rgba(29,78,216,0.07); }
+      .compare-table .col-check.col-premium { background: rgba(96,165,250,0.12); }
+      .cmp-k {
+        display: block; font-size: 0.55rem; font-weight: 600; letter-spacing: 0.06em;
+        text-transform: uppercase; color: #64748b; margin-bottom: 0.25rem;
+      }
+      .compare-table .col-featured .cmp-k { color: var(--blue); }
+      .compare-table tbody tr:hover td { background: rgba(15,23,42,0.03); }
+      .compare-table tbody tr:hover td.col-featured { background: rgba(29,78,216,0.07); }
     }
 
     /* ── MONEY / STICKY ASIDE LIST ────────────────────────────── */
@@ -677,128 +706,128 @@
           <tr class="compare-section-row"><td colspan="4">Sivusto</td></tr>
           <tr>
             <td class="col-feature">Sivumäärä</td>
-            <td class="col-check"><span class="check-partial">1, 4 sivua</span></td>
-            <td class="col-check col-featured"><span class="check-yes">4+ sivua</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-partial">1, 4 sivua</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">4+ sivua</span></td>
           
-            <td class="col-check col-premium"><span class="check-partial">4+ sivua</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-partial">4+ sivua</span></td>
           </tr>
           <tr>
             <td class="col-feature">Räätälöity ulkoasu yrityksesi brändiin</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓ Täysin räätälöity</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-yes">✓</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓ Täysin räätälöity</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓ Täysin räätälöity</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓ Täysin räätälöity</span></td>
           </tr>
           <tr>
             <td class="col-feature">Mobiilioptimointi</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-yes">✓</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Latausnopeuden optimointi</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-yes">✓</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓ Suorituskykybudjetti</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓ Suorituskykybudjetti</span></td>
           </tr>
 
           <tr class="compare-section-row"><td colspan="4">Toiminnot</td></tr>
           <tr>
             <td class="col-feature">Yhteydenottolomake</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-yes">✓</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Google Maps -upotus</td>
-            <td class="col-check"><span class="check-yes">✓</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-yes">✓</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Lomakkeet ja sähköpostiautomaatiot</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">CRM-integraatio</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Verkkokauppa valinnainen lisä</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
 
           <tr class="compare-section-row"><td colspan="4">Markkinointi ja SEO</td></tr>
           <tr>
             <td class="col-feature">Hakukoneoptimointi</td>
-            <td class="col-check"><span class="check-partial">Perusteet</span></td>
-            <td class="col-check col-featured"><span class="check-yes">Syväluotaava</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-partial">Perusteet</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">Syväluotaava</span></td>
           
-            <td class="col-check col-premium"><span class="check-partial">Syväluotaava</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-partial">Syväluotaava</span></td>
           </tr>
           <tr>
             <td class="col-feature">Avainsanatutkimus</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Google-arvostelujen automaatio</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Analytiikkakojelauta (kävijät, liidit, konversiot)</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">✓</span></td>
           
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
 
 
           <tr class="compare-section-row"><td colspan="4">Visuaalinen kerronta</td></tr>
           <tr>
             <td class="col-feature">Kerronnallinen vieritys ja parallax</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-no">✕</span></td>
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-no">✕</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Näyttävät liikkeet ja taustagrafiikat</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-partial">Kevyet</span></td>
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-partial">Kevyet</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
           <tr>
             <td class="col-feature">Kuvitus ja visuaalinen suunta</td>
-            <td class="col-check"><span class="check-no">✕</span></td>
-            <td class="col-check col-featured"><span class="check-no">✕</span></td>
-            <td class="col-check col-premium"><span class="check-yes">✓</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-no">✕</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-no">✕</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-yes">✓</span></td>
           </tr>
 
           <tr class="compare-section-row"><td colspan="4">Toimitus ja tuki</td></tr>
           <tr>
             <td class="col-feature">Käyttöönottotuki</td>
-            <td class="col-check"><span class="check-partial">Sähköpostitse</span></td>
-            <td class="col-check col-featured"><span class="check-yes">Prioriteettituki</span></td>
+            <td class="col-check"><span class="cmp-k">Perussivu</span><span class="check-partial">Sähköpostitse</span></td>
+            <td class="col-check col-featured"><span class="cmp-k">Täysi sivusto</span><span class="check-yes">Prioriteettituki</span></td>
           
-            <td class="col-check col-premium"><span class="check-partial">Prioriteettituki</span></td>
+            <td class="col-check col-premium"><span class="cmp-k">Elämyssivusto</span><span class="check-partial">Prioriteettituki</span></td>
           </tr>
         </tbody>
       </table>

@@ -90,16 +90,61 @@
     .section .btn-light:hover, .section-alt .btn-light:hover, .cta-block .btn-light:hover { background: #1e293b; }
 
     /* ── CONTACT GRID ─────────────────────────────────────────── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; margin-top: 3rem; }
-    .contact-panel-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem; }
+    /* ── BOOKING ──────────────────────────────────────────────────
+       The calendar used to sit behind a tab, so the page's main action
+       was one click away and the column beside it held two sentences.
+       The calendar is now visible on arrival and the space next to it
+       carries what the call actually covers. */
+    .book-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; align-items: start; }
+    @media (min-width: 1000px) { .book-grid { grid-template-columns: minmax(0,0.82fr) minmax(0,1.18fr); gap: 3.5rem; } }
+
+    .book-agenda { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-direction: column; gap: 1.5rem; }
+    .book-agenda li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+    .book-agenda-n {
+      width: 1.9rem; height: 1.9rem; border-radius: 50%; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 600; color: #fff;
+      background: linear-gradient(150deg, #1D4ED8, #2563EB);
+      box-shadow: 0 6px 16px -6px rgba(37,99,235,0.8);
+    }
+    .book-agenda h3 { font-size: 0.95rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; margin-bottom: 0.25rem; }
+    .book-agenda p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
+    .book-alt { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
+    /* a standalone action rather than a link buried mid-sentence, which
+       also keeps it above the 44px tap target floor */
+    .book-alt-cta {
+      display: inline-flex; align-items: center; min-height: 44px; margin-top: 0.35rem;
+      font-size: 0.82rem; font-weight: 500; color: var(--blue); text-decoration: none;
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    }
+    .book-alt-cta:hover { transform: translateX(3px); text-decoration: underline; }
+    @media (prefers-reduced-motion: reduce) { .book-alt-cta { transition: none !important; } .book-alt-cta:hover { transform: none; } }
+
+    .book-panel {
+      background: #F8FAFF; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem;
+      box-shadow: 0 2px 20px rgba(15,23,42,0.08); overflow: hidden;
+    }
+    .book-panel-top {
+      display: flex; align-items: center; gap: 0.55rem;
+      padding: 0.9rem 1.35rem; border-bottom: 1px solid rgba(15,23,42,0.07);
+      font-size: 0.74rem; color: var(--text-muted); letter-spacing: 0.02em;
+    }
+    .book-dot { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.15); }
+
+    /* ── MESSAGE FORM ─────────────────────────────────────────── */
+    .form-card {
+      margin-top: 3rem; background: #fff; border: 1px solid rgba(15,23,42,0.09);
+      border-radius: 1.5rem; padding: 2.25rem; box-shadow: 0 2px 20px rgba(15,23,42,0.06);
+      max-width: 46rem;
+    }
+    @media (max-width: 640px) { .form-card { padding: 1.4rem; border-radius: 1.25rem; } }
+
     .trust-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
     .trust-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
     .trust-item::before { content: '✓'; color: var(--blue); font-size: 0.68rem; font-weight: 700; flex-shrink: 0; margin-top: 0.2rem; }
 
     /* WIDGET CARD */
-    .widget-card { background: #F8FAFF; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem; padding: 1.75rem; box-shadow: 0 2px 20px rgba(15,23,42,0.08); overflow: hidden; }
-    #tab-booking { margin: 0 -1.75rem -1.75rem; border-radius: 0 0 1.5rem 1.5rem; overflow: hidden; }
-    #cal-inline { width: 100%; min-height: 720px; max-height: 84vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #fff; border-radius: 0 0 1.5rem 1.5rem; }
+    #cal-inline { width: 100%; min-height: 720px; max-height: 84vh; overflow-y: auto; -webkit-overflow-scrolling: touch; background: #fff; }
     #cal-inline iframe { width: 100% !important; min-height: 720px !important; border: 0 !important; display: block; }
     #cal-inline::-webkit-scrollbar { width: 8px; }
     #cal-inline::-webkit-scrollbar-track { background: transparent; }
@@ -107,9 +152,6 @@
     #cal-inline::-webkit-scrollbar-thumb:hover { background: rgba(15,23,42,0.32); }
 
     /* TABS */
-    .widget-tabs { display: flex; background: #f1f5f9; border-radius: 0.7rem; padding: 0.22rem; margin-bottom: 1.5rem; }
-    .widget-tab { flex: 1; min-height: 44px; padding: 0.55rem 0.75rem; border-radius: 0.5rem; font-size: 0.8rem; font-weight: 500; cursor: pointer; border: none; background: transparent; color: #64748b; transition: all 0.18s; font-family: 'Inter', sans-serif; }
-    .widget-tab.active { background: #F8FAFF; color: #0f172a; box-shadow: 0 1px 4px rgba(15,23,42,0.09); }
     .tab-panel.hidden { display: none; }
 
     /* FORM */
@@ -150,7 +192,6 @@
     .success-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.25rem; max-width: 26rem; margin-left: auto; margin-right: auto; }
     .success-badge { display: inline-block; font-size: 0.76rem; font-weight: 500; color: var(--blue); background: rgba(29,78,216,0.08); border: 1px solid rgba(29,78,216,0.18); border-radius: 0.5rem; padding: 0.55rem 1rem; }
 
-    @media(max-width:900px){ .contact-grid{grid-template-columns:1fr;gap:2.75rem;} }
     @media(max-width:640px){ .form-row{grid-template-columns:1fr;} }
 
     /* ── FLOW / "NÄIN HOMMA ETENEE" (dark) ───────────────────── */
@@ -284,7 +325,6 @@
       .steps-section { padding: 4rem 0; }
       .cta-block { padding: 2.5rem 1.5rem; }
       .widget-card { padding: 1.25rem; }
-      #tab-booking { margin: 0 -1.25rem -1.25rem; }
       #cal-inline { min-height: 620px; max-height: 78vh; }
       #cal-inline iframe { min-height: 620px !important; }
     }
@@ -380,11 +420,6 @@
 .c-card-m { font-size:0.82rem; color:#64748b; margin:.5rem 0 0; line-height:1.55; }
 
 /* ---- widget polish ---- */
-.contact-2026 .widget-tab { position: relative; transition: color .4s; }
-.contact-2026 .widget-tab::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px;
-  background: linear-gradient(90deg,#1D4ED8,#60A5FA);
-  transform: scaleX(0); transform-origin: 50% 50%; transition: transform .55s cubic-bezier(.22,1,.36,1); }
-.contact-2026 .widget-tab.active::after { transform: scaleX(1); }
 .contact-2026 .tab-panel { animation: cPanelIn .55s cubic-bezier(.22,1,.36,1) both; }
 @keyframes cPanelIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
 
@@ -493,69 +528,55 @@
 
 <main id="main" tabindex="-1" class="contact-2026">
 
-<div class="section c-band">
-  <div class="container">
-    <div class="c-rail">
-      <a class="c-card" href="mailto:selora.tuki@gmail.com">
-        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
-        <p class="c-card-k">Sähköposti</p>
-        <p class="c-card-v">selora.tuki@gmail.com</p>
-        <p class="c-card-m" data-i18n="Kirjoita meille milloin vain.">Kirjoita meille milloin vain.</p>
-      </a>
-      <a class="c-card" href="tel:+358408151122">
-        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
-        <p class="c-card-k">Puhelin</p>
-        <p class="c-card-v">040 815 1122</p>
-        <p class="c-card-m" data-i18n="Arkisin klo 9–17.">Arkisin klo 9–17.</p>
-      </a>
-      <div class="c-card">
-        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-        <p class="c-card-k">Vasteaika</p>
-        <p class="c-card-v">4 tuntia</p>
-        <p class="c-card-m" data-i18n="Arkipäivisin, ihmiseltä ihmiselle.">Arkipäivisin, ihmiseltä ihmiselle.</p>
-      </div>
-      <div class="c-card">
-        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
-        <p class="c-card-k">Toimipiste</p>
-        <p class="c-card-v">Helsinki</p>
-        <p class="c-card-m" data-i18n="Palvelemme koko Suomessa.">Palvelemme koko Suomessa.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- Contact -->
+<!-- Booking, the primary route -->
 <div class="section" id="ajanvaraus">
   <div class="container">
-    <p class="section-label" data-sl-reveal>Ota yhteyttä</p>
-    <h2 class="section-heading sl-swipe-host" data-sl-split>Varaa aika, tai <span class="accent">kirjoita meille.</span></h2>
-    <p class="section-sub" data-sl-words data-sl-reveal>Kumpi vain sopii. Käymme läpi tilanteesi ja kerromme suoraan, kannattaako edetä.</p>
+    <p class="section-label" data-sl-reveal>Varaa aika</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Puhutaan <span class="accent">30 minuuttia.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Käymme läpi tilanteesi ja kerromme suoraan, kannattaako edetä. Maksuton eikä sido mihinkään.</p>
 
-    <div class="contact-grid">
+    <div class="book-grid">
 
-      <!-- Left info panel -->
-      <div class="reveal">
-        <p class="contact-panel-desc">Kalenteri näyttää vapaat ajat reaaliajassa. Jos mikään niistä ei sovi, kirjoita lomakkeella ja ehdotamme sinulle aikaa.</p>
+      <aside class="book-aside" data-sl-reveal>
+        <ol class="book-agenda">
+          <li>
+            <span class="book-agenda-n">1</span>
+            <div>
+              <h3>Kerrot mitä olet suunnittelemassa</h3>
+              <p>Ei tarvitse olla valmista suunnitelmaa. Riittää että tiedät mitä yrityksesi tekee.</p>
+            </div>
+          </li>
+          <li>
+            <span class="book-agenda-n">2</span>
+            <div>
+              <h3>Katsomme mitä sivusto tarvitsee</h3>
+              <p>Sivumäärä, sisällöt ja aikataulu. Kerromme myös jos et mielestämme tarvitse uutta sivustoa.</p>
+            </div>
+          </li>
+          <li>
+            <span class="book-agenda-n">3</span>
+            <div>
+              <h3>Saat hinnan ja aikataulun</h3>
+              <p>Kiinteä hinta kirjallisena puhelun jälkeen. Ei tarjouskikkailua.</p>
+            </div>
+          </li>
+        </ol>
 
         <div class="trust-list">
-          <div class="trust-item">Ensimmäinen tapaaminen on maksuton ja sitoumukseton</div>
-          <div class="trust-item">Ei pitkiä sopimuksia, kertamaksu tai irtisanottavissa milloin tahansa</div>
+          <div class="trust-item">Maksuton ja sitoumukseton</div>
+          <div class="trust-item">Puhut suoraan tekijän kanssa, ei myyjän</div>
         </div>
-      </div>
 
-      <!-- Right, Widget card -->
-      <div class="reveal reveal-delay-1">
-        <div class="widget-card">
+        <p class="book-alt">Eikö kalenterista löydy sopivaa aikaa? Kerro tilanteestasi, niin ehdotamme aikaa.</p>
+        <a class="book-alt-cta" href="#viesti">Kirjoita meille →</a>
+      </aside>
 
-          <!-- Tab switcher -->
-          <div class="widget-tabs" role="tablist" aria-label="Valitse yhteydenottotapa">
-            <button class="widget-tab active" role="tab" id="tabbtn-booking" aria-selected="true" aria-controls="tab-booking" onclick="switchTab('booking',this)">Varaa 30 min demo</button>
-            <button class="widget-tab" role="tab" id="tabbtn-contact" aria-selected="false" aria-controls="tab-contact" tabindex="-1" onclick="switchTab('contact',this)">Lähetä viesti</button>
-          </div>
+      <div class="book-panel" data-sl-reveal="scale">
+        <div class="book-panel-top">
+          <span class="book-dot" aria-hidden="true"></span>
+          <span>Vapaat ajat reaaliajassa</span>
+        </div>
 
-          <!-- ======== BOOKING TAB ======== -->
-          <div class="tab-panel" id="tab-booking" role="tabpanel" aria-labelledby="tabbtn-booking">
             <div id="cal-inline" aria-label="Varaa esittelypuhelu"></div>
             <script type="text/javascript">
               (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -582,10 +603,21 @@
                 "layout": "month_view"
               });
             </script>
-          </div>
+      </div>
 
-          <!-- ======== CONTACT TAB ======== -->
-          <div class="tab-panel hidden" id="tab-contact" role="tabpanel" aria-labelledby="tabbtn-contact" hidden>
+    </div>
+  </div>
+</div>
+
+<!-- Message, the second route -->
+<div class="section-alt" id="viesti">
+  <div class="container">
+    <p class="section-label" data-sl-reveal>Lähetä viesti</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Tai kirjoita, <span class="accent">niin vastaamme.</span></h2>
+    <p class="section-sub" data-sl-words data-sl-reveal>Kerro lyhyesti mitä tarvitset. Vastaamme neljän tunnin sisällä arkipäivisin.</p>
+
+    <div class="form-card" data-sl-reveal>
+
             <form class="contact-form" id="contactForm" novalidate>
               <input type="hidden" name="_subject" value="Uusi yhteydenotto, Selora" />
               <p class="form-summary" id="formSummary" role="alert" tabindex="-1"></p>
@@ -663,26 +695,41 @@
               <div class="success-title">Viesti lähetetty!</div>
               <div class="success-sub">Kiitos yhteydenotostasi. Palaamme sinulle 4 tunnin sisällä arkipäivisin ja sovimme maksuttoman kartoituspuhelun.</div>
             </div>
-          </div>
-
-        </div><!-- /widget-card -->
-      </div>
-
     </div>
+  </div>
+</div>
 
-    <div class="reach-grid">
-      <div class="reach-card" data-sl-pop>
-        <div class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-        <h3>Sähköposti</h3>
-        <p>Kerro lyhyesti mitä olet suunnittelemassa, niin ehdotamme sopivaa ratkaisua.</p>
-        <a class="reach-link" href="mailto:selora.tuki@gmail.com">selora.tuki@gmail.com →</a>
+<!-- Direct channels -->
+<div class="section c-band">
+  <div class="container">
+    <p class="section-label" data-sl-reveal>Muut kanavat</p>
+    <h2 class="section-heading sl-swipe-host" data-sl-split>Tai tavoita meidät <span class="accent">suoraan.</span></h2>
+<div class="c-rail">
+      <a class="c-card" href="mailto:selora.tuki@gmail.com">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+        <p class="c-card-k">Sähköposti</p>
+        <p class="c-card-v">selora.tuki@gmail.com</p>
+        <p class="c-card-m" data-i18n="Kirjoita meille milloin vain.">Kirjoita meille milloin vain.</p>
+      </a>
+      <a class="c-card" href="tel:+358408151122">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+        <p class="c-card-k">Puhelin</p>
+        <p class="c-card-v">040 815 1122</p>
+        <p class="c-card-m" data-i18n="Arkisin klo 9–17.">Arkisin klo 9–17.</p>
+      </a>
+      <div class="c-card">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+        <p class="c-card-k">Vasteaika</p>
+        <p class="c-card-v">4 tuntia</p>
+        <p class="c-card-m" data-i18n="Arkipäivisin, ihmiseltä ihmiselle.">Arkipäivisin, ihmiseltä ihmiselle.</p>
       </div>
-      <div class="reach-card" data-sl-pop>
-        <div class="reach-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.72 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.63 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-        <h3>Puhelin</h3>
-        <p>Kiireellinen asia? Soita, niin jutellaan saman tien.</p>
-        <a class="reach-link" href="tel:+358408151122">040 815 1122 →</a>
+      <div class="c-card">
+        <span class="c-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+        <p class="c-card-k">Toimipiste</p>
+        <p class="c-card-v">Helsinki</p>
+        <p class="c-card-m" data-i18n="Palvelemme koko Suomessa.">Palvelemme koko Suomessa.</p>
       </div>
+    
     </div>
   </div>
 </div>
@@ -793,19 +840,6 @@
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 
-window.switchTab = function (tab, el) {
-  document.querySelectorAll('.widget-tab').forEach(function (t) {
-    const selected = t === el;
-    t.classList.toggle('active', selected);
-    t.setAttribute('aria-selected', selected ? 'true' : 'false');
-    t.tabIndex = selected ? 0 : -1;
-  });
-  document.querySelectorAll('.tab-panel').forEach(function (p) {
-    const show = p.id === 'tab-' + tab;
-    p.classList.toggle('hidden', !show);
-    if (show) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
-  });
-};
 
 (function () {
   const form = document.getElementById('contactForm');
