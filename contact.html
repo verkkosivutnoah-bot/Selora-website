@@ -342,14 +342,20 @@
 @media (max-width: 900px) { .c-rail { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .c-rail { grid-template-columns: 1fr; } }
 
+/* These cards were coloured for a dark band, but .c-band has no background of
+   its own and the page body is #F8FAFF — so white text sat on near-white and
+   the white-alpha border left the card with no visible edge. Everything here
+   is the light-background equivalent of what was intended. */
 .c-card { position: relative; display: block; padding: 1.6rem 1.5rem 1.5rem; border-radius: 18px;
-  background: rgba(255,255,255,0.028); overflow: hidden; text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.09);
-  transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .5s, background .5s; }
-.c-card:hover { transform: translateY(-6px); border-color: rgba(96,165,250,0.45); background: rgba(255,255,255,0.05); }
+  background: #fff; overflow: hidden; text-decoration: none;
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 12px 28px -18px rgba(15,23,42,0.25);
+  transition: transform .6s cubic-bezier(.22,1,.36,1), border-color .5s, box-shadow .5s; }
+.c-card:hover { transform: translateY(-6px); border-color: rgba(29,78,216,0.35);
+  box-shadow: 0 2px 4px rgba(15,23,42,0.05), 0 22px 44px -20px rgba(15,23,42,0.35); }
 /* pointer spotlight, fed by JS custom properties */
 .c-card::after { content:''; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .45s;
-  background: radial-gradient(320px circle at var(--cx,50%) var(--cy,50%), rgba(96,165,250,0.16), transparent 70%); }
+  background: radial-gradient(320px circle at var(--cx,50%) var(--cy,50%), rgba(29,78,216,0.07), transparent 70%); }
 .c-card:hover::after { opacity: 1; }
 /* top hairline that wipes in */
 .c-card::before { content:''; position:absolute; left:0; top:0; height:2px; width:100%;
@@ -358,9 +364,9 @@
 .c-card:hover::before { transform: scaleX(1); }
 
 .c-ico { display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px;
-  background: rgba(96,165,250,0.10); margin-bottom: 1.1rem; color:#93C5FD;
+  background: rgba(29,78,216,0.09); margin-bottom: 1.1rem; color:#2563EB;
   transition: background .5s, color .5s, transform .6s cubic-bezier(.22,1,.36,1); }
-.c-card:hover .c-ico { background: rgba(96,165,250,0.20); color:#fff; transform: translateY(-2px) rotate(-6deg); }
+.c-card:hover .c-ico { background: rgba(29,78,216,0.16); color:#1D4ED8; transform: translateY(-2px) rotate(-6deg); }
 .c-ico svg { width:21px; height:21px; }
 /* icons draw themselves the first time they scroll in */
 .c-ico svg path, .c-ico svg circle, .c-ico svg rect, .c-ico svg polyline, .c-ico svg line {
@@ -369,9 +375,9 @@
 .c-card.drawn .c-ico svg polyline, .c-card.drawn .c-ico svg line {
   stroke-dashoffset: 0; transition: stroke-dashoffset 1.15s cubic-bezier(.22,1,.36,1); }
 
-.c-card-k { font-size:0.7rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin:0 0 .45rem; }
-.c-card-v { font-size:1.02rem; font-weight:500; color:#fff; margin:0; line-height:1.45; word-break:break-word; }
-.c-card-m { font-size:0.82rem; color:rgba(255,255,255,0.5); margin:.5rem 0 0; line-height:1.55; }
+.c-card-k { font-size:0.7rem; letter-spacing:.16em; text-transform:uppercase; color:#64748b; margin:0 0 .45rem; }
+.c-card-v { font-size:1.02rem; font-weight:500; color:#0f172a; margin:0; line-height:1.45; word-break:break-word; }
+.c-card-m { font-size:0.82rem; color:#64748b; margin:.5rem 0 0; line-height:1.55; }
 
 /* ---- widget polish ---- */
 .contact-2026 .widget-tab { position: relative; transition: color .4s; }

@@ -3023,7 +3023,7 @@
 
     // monthly maintenance + pay-after-launch terms
     'Ylläpito ja hosting': 'Maintenance and hosting',
-    'Ylläpito 20 € kuukaudessa': 'Maintenance 20 € a month',
+    'Ylläpito 49 € kuukaudessa': 'Maintenance 49 € a month',
     '/kk ylläpito': '/mo maintenance',
     'Sivuston jatkuva ylläpito julkaisun jälkeen. Sama hinta kaikille paketeille, irtisanottavissa milloin tahansa ilman pitkää sopimusta.':
       'Ongoing maintenance for your site after launch. The same price for every package, cancellable at any time with no long contract.',
@@ -3041,21 +3041,21 @@
       'You pay nothing up front. The invoice goes out only once the site is live and you have approved it.',
     'Maksat vasta kun sivusto on julkaistu. Et maksa mitään etukäteen. Hyväksymme kortin, laskun ja verkkopankin.':
       'You pay only once the site is live. Nothing is due up front. We accept card, invoice and online banking.',
-    'Kertamaksu kattaa valmiin sivuston. Ylläpito ja hosting maksaa 20 € kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit lopettaa sen milloin tahansa.':
-      'The one-time fee covers the finished site. Maintenance and hosting cost 20 € a month and include updates, backups and design changes. You can cancel it at any time.',
+    'Kertamaksu kattaa valmiin sivuston. Ylläpito ja hosting maksaa 49 € kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit lopettaa sen milloin tahansa.':
+      'The one-time fee covers the finished site. Maintenance and hosting cost 49 € a month and include updates, backups and design changes. You can cancel it at any time.',
     'Ei pitkiä sopimuksia eikä yllätyslaskuja. Tässä mitä kertamaksu ja ylläpito tarkoittavat käytännössä.':
       'No long contracts and no surprise invoices. Here is what the one-time fee and the maintenance mean in practice.',
-    'Maksat sivustosta kerran, vasta julkaisun jälkeen. Ylläpito ja hosting 20 € kuukaudessa. Ei piilokuluja.':
-      'You pay for the site once, only after launch. Maintenance and hosting are 20 € a month. No hidden costs.',
+    'Maksat sivustosta kerran, vasta julkaisun jälkeen. Ylläpito ja hosting 49 € kuukaudessa. Ei piilokuluja.':
+      'You pay for the site once, only after launch. Maintenance and hosting are 49 € a month. No hidden costs.',
     'Kertamaksu, ei yllätyksiä': 'One-time fee, no surprises',
-    'Maksat sivustosta kerran ja se on sinun. Ylläpito ja hosting 20 € kuukaudessa, ei yllätyslaskuja.':
-      'You pay for the site once and it is yours. Maintenance and hosting are 20 € a month, with no surprise invoices.',
-    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting maksaa 20 euroa kuukaudessa. Ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
+    'Maksat sivustosta kerran ja se on sinun. Ylläpito ja hosting 49 € kuukaudessa, ei yllätyslaskuja.':
+      'You pay for the site once and it is yours. Maintenance and hosting are 49 € a month, with no surprise invoices.',
+    'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting maksaa 49 euroa kuukaudessa. Ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
       'A basic site is 298 euros, a full site 498 euros and a showcase site at a sale price of 598 euros (normally 898 euros), all as a one-time fee. Maintenance and hosting cost 20 euros a month. No hidden costs. The first discovery call is free, and after it you get a fixed price.',
-    'Sivusto on sinun. Ylläpito ja hosting maksaa 20 euroa kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit myös hoitaa sivuston itse, emmekä sido sinua pitkään sopimukseen.':
+    'Sivusto on sinun. Ylläpito ja hosting maksaa 49 euroa kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit myös hoitaa sivuston itse, emmekä sido sinua pitkään sopimukseen.':
       'The site is yours. Maintenance and hosting cost 20 euros a month and include updates, backups and design changes. You can also run the site yourself, and we do not tie you into a long contract.',
-    'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ylläpito 20 € kuukaudessa.':
-      'Design, content, search optimisation and launch. One one-time fee, maintenance 20 € a month.',
+    'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ylläpito 49 € kuukaudessa.':
+      'Design, content, search optimisation and launch. One one-time fee, maintenance 49 € a month.',
 
 
     // ---------- REBRAND: hinnoittelu + palvelut ----------

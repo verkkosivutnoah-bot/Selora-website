@@ -116,6 +116,7 @@
   }
 
   var splitObserver = null;
+  var splitFailsafe = null;
 
   function observeSplit(heads) {
     if (!('IntersectionObserver' in window)) {
@@ -131,6 +132,21 @@
       });
     }, { threshold: 0.2 });
     heads.forEach(function (h) { splitObserver.observe(h); });
+
+    /* The same failsafe the reveal observer above has, for the same reason and
+       because this is where it was missing. These characters sit at opacity 0
+       until the observer reaches them, and renderSplit() throws the spans away
+       and builds new ones on every language pass — so a rebuild landing in the
+       wrong order leaves a heading permanently invisible, which is what
+       happened to "Näin homma etenee." on the contact page. Intermittently,
+       which is worse than always: it looks fine when you check.
+
+       Clearing the previous timer matters because renderSplit calls this again
+       on each pass, and a stale timer would target the old spans. */
+    clearTimeout(splitFailsafe);
+    splitFailsafe = setTimeout(function () {
+      heads.forEach(revealChars);
+    }, 2500);
   }
 
   function doSplit() {
