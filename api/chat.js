@@ -155,6 +155,23 @@ module.exports = async function handler(req, res) {
    * env var: set OMNIROUTE_URL and it leads, leave it unset and the direct
    * providers carry the traffic exactly as they do now.
    */
+  /* The whole request has a budget, not each attempt.
+   *
+   * Vercel's Hobby plan stops a function at 10 seconds, so a per-attempt
+   * timeout longer than that can never fire — the function is killed first and
+   * the visitor gets nothing. And attempts add up: two candidates that each
+   * hang for their full allowance spend the budget twice over.
+   *
+   * So the deadline is shared. Each attempt gets whatever is left, capped, and
+   * once too little remains to be worth starting the loop stops and answers
+   * with what it knows rather than being cut off mid-call. */
+  const startedAt = Date.now();
+  const TOTAL_BUDGET_MS = 8500;   // under Vercel's 10s, with room to reply
+  const PER_TRY_CAP_MS = 5000;    // a healthy completion is 1-3s
+  const WORTH_STARTING_MS = 1200;
+
+  const remainingBudget = () => TOTAL_BUDGET_MS - (Date.now() - startedAt);
+
   const providers = [];
 
   if (process.env.OMNIROUTE_URL) {
@@ -182,6 +199,25 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  if (process.env.GEMINI_API_KEY) {
+    // A second company, which is the point. Everything above this line is one
+    // Groq account: if Groq retires a model, runs out of free quota or has a
+    // bad afternoon, every candidate before this one fails together. Gemini
+    // has its own free tier, its own limits and its own outages, and it reads
+    // Finnish well — which rules out most of the other free options, since a
+    // model that answers a Finnish question in stilted Finnish is worse for
+    // this site than no chatbot.
+    //
+    // It sits last because Groq is markedly faster and is normally healthy;
+    // this is the net under it, not the default.
+    providers.push({
+      name: 'gemini',
+      url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+      key: process.env.GEMINI_API_KEY,
+      model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+    });
+  }
+
   if (!providers.length) {
     console.error('[chat] no provider configured: set GROQ_API_KEY or OMNIROUTE_URL');
     return res.status(500).json({ error: 'API key not configured' });
@@ -198,11 +234,26 @@ module.exports = async function handler(req, res) {
   // Remembered across candidates so the visitor is told the truth when every
   // one of them was merely busy, rather than being told the service is broken.
   let sawRateLimit = null;
+  let skipProvider = null;
 
   for (const p of providers) {
+    if (p.name === skipProvider) continue;
+
+    const left = remainingBudget();
+    if (left < WORTH_STARTING_MS) {
+      console.error(`[chat] out of time before ${p.name}/${p.model}`);
+      break;
+    }
+
     try {
+      // A fallback chain is only worth having if it moves on. Without a
+      // deadline a provider that accepts the connection and then goes quiet
+      // holds the whole request until the function itself is killed, and the
+      // candidates below never get tried — the visitor waits and then gets an
+      // apology, which is the exact failure the list exists to prevent.
       const response = await fetch(p.url, {
         method: 'POST',
+        signal: AbortSignal.timeout(Math.min(left, PER_TRY_CAP_MS)),
         headers: {
           ...(p.key ? { Authorization: 'Bearer ' + p.key } : {}),
           'Content-Type': 'application/json',
@@ -232,11 +283,19 @@ module.exports = async function handler(req, res) {
       // remembered and only reported if nothing else answers either.
       if (response.status === 429) {
         sawRateLimit = response.headers.get('retry-after');
+        // A rate limit belongs to the account, not the model, so the other
+        // entries for this same provider will fail identically. Skip straight
+        // to the next provider rather than spending a round trip proving it.
+        skipProvider = p.name;
       }
     } catch (err) {
       // Network-level failure reaching this candidate: unreachable OmniRoute,
-      // DNS, timeout. Same treatment — try the next one.
+      // DNS, timeout. Same treatment — try the next one, but not the other
+      // models at the same host: if it did not answer, it will not answer for
+      // a different model name either, and the budget is better spent
+      // elsewhere.
       console.error(`[chat] ${p.name}/${p.model} unreachable:`, String(err.message ?? err));
+      skipProvider = p.name;
     }
   }
 

@@ -197,6 +197,27 @@ in order and returns the first real answer.
 | 1 | OmniRoute, model `auto` | only if `OMNIROUTE_URL` is set |
 | 2 | Groq `openai/gpt-oss-120b` | whenever `GROQ_API_KEY` is set |
 | 3 | Groq `openai/gpt-oss-20b` | fallback for 2 |
+| 4 | Gemini `gemini-3.7-flash` | only if `GEMINI_API_KEY` is set |
+
+**Gemini is the one that makes this a real chain.** Everything above it is a
+single Groq account: one retirement, one exhausted quota or one bad afternoon
+fails all of it together. Gemini is a different company with its own free tier
+and its own outages, and it handles Finnish well — which rules out most other
+free options, because a model that answers a Finnish question in stilted
+Finnish is worse for this site than no chatbot. It sits last because Groq is
+markedly faster and normally healthy; this is the net, not the default.
+
+Get a key at [aistudio.google.com](https://aistudio.google.com/apikey) (free
+tier, no billing needed), add `GEMINI_API_KEY` to the Vercel project, redeploy.
+`GEMINI_MODEL` overrides the model if the name changes — and it will.
+
+**Timing.** The whole request shares an 8.5s budget, under Vercel Hobby's 10s
+function limit, with each attempt capped at 5s and the loop stopping once too
+little is left to be worth starting. Per-attempt timeouts alone were wrong
+here: two candidates hanging for 12s each spent 24 seconds and the function was
+killed before any of it reached the visitor. A provider that fails to respond
+also disqualifies its own other entries, since a host that will not answer for
+one model name will not answer for another.
 
 **Why a list.** Groq retired `llama-3.3-70b-versatile` on 2026-08-16 and the
 chatbot answered every visitor with an apology until someone noticed. One
