@@ -187,6 +187,48 @@ All pages have custom `<meta name="description">` tags. Sitemap and robots.txt n
 
 ---
 
+## Chatbot routing (`api/chat.js`)
+
+The widget (`chatbot.js`) posts to `/api/chat`, which tries a list of providers
+in order and returns the first real answer.
+
+| Order | Provider | When |
+|---|---|---|
+| 1 | OmniRoute, model `auto` | only if `OMNIROUTE_URL` is set |
+| 2 | Groq `openai/gpt-oss-120b` | whenever `GROQ_API_KEY` is set |
+| 3 | Groq `openai/gpt-oss-20b` | fallback for 2 |
+
+**Why a list.** Groq retired `llama-3.3-70b-versatile` on 2026-08-16 and the
+chatbot answered every visitor with an apology until someone noticed. One
+hardcoded model at one provider is the failure; the list makes a retirement
+cost a few hundred milliseconds instead of taking the assistant off the site.
+Anything that is not a usable answer — a dead model, an unreachable host, an
+empty completion — falls through to the next candidate.
+
+**OmniRoute.** It is an OpenAI-compatible gateway that fans requests across
+providers itself, so pointing at it replaces this small list with a real
+router. It is a **long-running server** (`/v1` on port 20128 by default), not a
+library, so it needs a host that is always up before it is any use. Set these
+on the Vercel project when one exists:
+
+| Variable | Value |
+|---|---|
+| `OMNIROUTE_URL` | `https://<host>` or `https://<host>/v1` — both forms work |
+| `OMNIROUTE_API_KEY` | the gateway key, if it requires one |
+| `OMNIROUTE_MODEL` | optional, defaults to `auto` |
+
+Leave `OMNIROUTE_URL` unset and nothing changes. Set it at a host that is down
+and the chatbot still answers from Groq — verified, because a gateway that can
+take the widget offline would be worse than no gateway. That instance holds
+every provider key you give it and would be reachable from the internet, so it
+needs its own auth.
+
+**Status codes matter here.** 429 is passed through as 429 with `Retry-After`,
+and only when *every* candidate was rate-limited; the widget then says to wait
+rather than offering the contact page. 502 means nothing could answer.
+
+---
+
 ## Pending Tasks
 
 ### Website

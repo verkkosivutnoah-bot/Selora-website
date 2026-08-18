@@ -140,55 +140,109 @@ module.exports = async function handler(req, res) {
     ? RULES_EN + pickKnowledge(SITE_KNOWLEDGE.en, queryText)
     : RULES_FI + pickKnowledge(SITE_KNOWLEDGE.fi, queryText);
 
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
-    console.error('[chat] GROQ_API_KEY not set');
+  /* ── Who answers, and in what order ──────────────────────────────────
+   *
+   * Groq retired llama-3.3-70b-versatile on 2026-08-16 and the chatbot was
+   * down until somebody noticed. One hardcoded model at one provider is the
+   * bug; a list is the fix. Each candidate is tried in turn and the first one
+   * that answers wins, so a model disappearing costs a few hundred
+   * milliseconds instead of taking the assistant off the site.
+   *
+   * OmniRoute goes first when it is configured. It is an OpenAI-compatible
+   * gateway that fans a request across providers on its own, so pointing at it
+   * replaces this little list with a real router — but it is a long-running
+   * server, and until one is up there is nothing at that address. Hence the
+   * env var: set OMNIROUTE_URL and it leads, leave it unset and the direct
+   * providers carry the traffic exactly as they do now.
+   */
+  const providers = [];
+
+  if (process.env.OMNIROUTE_URL) {
+    providers.push({
+      name: 'omniroute',
+      // Accepts either form, since the README quotes the base with /v1 on it.
+      url: process.env.OMNIROUTE_URL.replace(/\/+$/, '').replace(/\/v1$/, '') + '/v1/chat/completions',
+      key: process.env.OMNIROUTE_API_KEY || '',
+      // "auto" is OmniRoute's own routing: it picks across its provider tiers
+      // and falls back internally. Override per deployment if you want one.
+      model: process.env.OMNIROUTE_MODEL || 'auto',
+    });
+  }
+
+  if (process.env.GROQ_API_KEY) {
+    // Both of Groq's remaining production text models. 120b answers better,
+    // 20b is faster and is the fallback rather than a downgrade anyone chose.
+    for (const model of ['openai/gpt-oss-120b', 'openai/gpt-oss-20b']) {
+      providers.push({
+        name: 'groq',
+        url: 'https://api.groq.com/openai/v1/chat/completions',
+        key: process.env.GROQ_API_KEY,
+        model,
+      });
+    }
+  }
+
+  if (!providers.length) {
+    console.error('[chat] no provider configured: set GROQ_API_KEY or OMNIROUTE_URL');
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + apiKey,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        // llama-3.3-70b-versatile was retired by Groq on 2026-08-16 and every
-        // request has failed since. This is the replacement Groq named in the
-        // deprecation notice; keep an eye on their deprecations page, because
-        // a hosted model disappearing takes the chatbot down silently — the
-        // visitor only sees an apology.
-        model: 'openai/gpt-oss-120b',
-        max_tokens: 600,
-        messages: [
-          { role: 'system', content: systemForLang },
-          ...recentHistory,
-        ],
-      }),
-    });
+  const body = {
+    max_tokens: 600,
+    messages: [
+      { role: 'system', content: systemForLang },
+      ...recentHistory,
+    ],
+  };
 
-    if (!response.ok) {
+  // Remembered across candidates so the visitor is told the truth when every
+  // one of them was merely busy, rather than being told the service is broken.
+  let sawRateLimit = null;
+
+  for (const p of providers) {
+    try {
+      const response = await fetch(p.url, {
+        method: 'POST',
+        headers: {
+          ...(p.key ? { Authorization: 'Bearer ' + p.key } : {}),
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ model: p.model, ...body }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content;
+        // An empty completion is a failure of this candidate, not an answer to
+        // hand the visitor, so it falls through to the next one.
+        if (content) {
+          if (p !== providers[0]) console.warn(`[chat] served by fallback ${p.name}/${p.model}`);
+          return res.status(200).json({ content });
+        }
+        console.error(`[chat] ${p.name}/${p.model} returned no content`);
+        continue;
+      }
+
       const err = await response.text();
-      console.error('[chat] Groq error:', response.status, err);
+      console.error(`[chat] ${p.name}/${p.model} error:`, response.status, err.slice(0, 300));
 
       // Being over the rate limit is a different thing from being broken, and
       // the visitor can act on it — waiting works, where retrying a dead
-      // service does not. Flattening both into 502 hid that, and it hid the
-      // difference from us too while debugging.
+      // service does not. Another provider may well not be limited, so this is
+      // remembered and only reported if nothing else answers either.
       if (response.status === 429) {
-        const retry = response.headers.get('retry-after');
-        if (retry) res.setHeader('Retry-After', retry);
-        return res.status(429).json({ error: 'rate_limited' });
+        sawRateLimit = response.headers.get('retry-after');
       }
-      return res.status(502).json({ error: 'AI service unavailable' });
+    } catch (err) {
+      // Network-level failure reaching this candidate: unreachable OmniRoute,
+      // DNS, timeout. Same treatment — try the next one.
+      console.error(`[chat] ${p.name}/${p.model} unreachable:`, String(err.message ?? err));
     }
-
-    const data = await response.json();
-    const content = data.choices?.[0]?.message?.content ?? 'Pahoittelen, en saanut vastausta.';
-    return res.status(200).json({ content });
-  } catch (err) {
-    console.error('[chat] Error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
   }
+
+  if (sawRateLimit !== null) {
+    if (sawRateLimit) res.setHeader('Retry-After', sawRateLimit);
+    return res.status(429).json({ error: 'rate_limited' });
+  }
+  return res.status(502).json({ error: 'AI service unavailable' });
 };
