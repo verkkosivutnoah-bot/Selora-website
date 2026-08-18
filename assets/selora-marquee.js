@@ -17,8 +17,16 @@
    far ones still recede. Tilt is capped short of edge-on so no card ever
    turns its back.
 
-   Each card's preview is the real page in a scaled, inert iframe, mounted
-   while the section is near the viewport and torn down once it is well clear.
+   Each card shows a still of the page it links to. On hardware that can carry
+   it, the first few cards additionally mount the real page in a scaled, inert
+   iframe, layered over the still and torn down once the section is well clear.
+
+   That budget is not a nicety. Every card is a full site — GSAP, ScrollTrigger,
+   Lenis and its own rAF loop — so mounting all seven meant seven live browsing
+   contexts in one tab, on top of this page's own smooth scrolling. iOS Safari
+   answers that by killing the page: "A problem repeatedly occurred". Phones and
+   tablets now get the stills alone, which look the same standing still and cost
+   a decoded image each.
 
    Targets #storiesTrack / #storiesMarquee / #storiesPrev / #storiesNext.
    Bails out cleanly if a page does not have the marquee markup.
@@ -47,7 +55,24 @@
   var reduced = window.matchMedia &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- previews (unchanged behaviour) ---------- */
+  /* ---------- how many live previews this device gets ----------
+
+     A mouse on a wide screen is the one combination worth spending memory on:
+     it is where the hover states live, and it rules out phones and tablets in
+     a single test. `deviceMemory` narrows it further where the browser reports
+     it — Safari does not, which is exactly why the pointer test carries the
+     weight here and the memory one only trims. */
+
+  function liveBudget() {
+    if (reduced || !window.matchMedia) return 0;
+    if (!window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)').matches) return 0;
+    if (navigator.deviceMemory && navigator.deviceMemory < 8) return 2;
+    return 3;
+  }
+
+  var MAX_LIVE = liveBudget();
+
+  /* ---------- previews ---------- */
 
   function fit(frame, iframe) {
     var scale = frame.offsetWidth / BASE_W;
@@ -99,7 +124,12 @@
     obs.observe(marquee);
   }
 
-  var frames = Array.prototype.slice.call(track.querySelectorAll('.story-frame[data-src]'));
+  /* The frames allowed to go live: the first MAX_LIVE, in DOM order. The rest
+     keep their still, which is a screenshot of the same hero the iframe would
+     render — so a card that never goes live is not a card that looks unfinished. */
+  var frames = Array.prototype.slice
+    .call(track.querySelectorAll('.story-frame[data-src]'))
+    .slice(0, MAX_LIVE);
 
   // Reduced motion keeps the plain wrapped grid the stylesheet already gives
   // us: no rake, no autoplay, nothing to pause.
