@@ -85,7 +85,11 @@ exports.handler = async function (event) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
+        // Retired by Groq alongside the rest of the llama 3.x line; only the
+        // gpt-oss models remain in production. This copy is not the one
+        // selora.fi serves — the site runs on Vercel and uses api/chat.js —
+        // but leaving a dead model here would just hide the same bug twice.
+        model: 'openai/gpt-oss-20b',
         max_tokens: 600,
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },

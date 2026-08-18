@@ -45,6 +45,7 @@
     greeting: 'Hei. Olen Seloran AI-assistentti. Voin kertoa palveluistamme, vastata kysymyksiin ja ohjata sinut oikealle sivulle.\n\nMiten voin auttaa?',
     genericError: 'Pahoittelen, tapahtui virhe.',
     connError: 'Pahoittelen, yhteys katkesi. Kokeile uudelleen tai ota [yhteyttä](/yhteystiedot.html).',
+    serverError: 'Pahoittelen, assistentti ei juuri nyt vastaa. Ota [yhteyttä](/yhteystiedot.html), niin vastaamme itse.',
   };
   var UI_EN = {
     title: 'Selora Assistant', sub: 'Usually replies right away', close: 'Close', send: 'Send',
@@ -52,6 +53,7 @@
     greeting: 'Hi. I’m Selora’s AI assistant. I can tell you about our services, answer questions and point you to the right page.\n\nHow can I help?',
     genericError: 'Sorry, something went wrong.',
     connError: 'Sorry, the connection dropped. Try again or reach us via the [contact page](/yhteystiedot.html).',
+    serverError: 'Sorry, the assistant is not answering right now. Reach us via the [contact page](/yhteystiedot.html) and a human will reply.',
   };
   var UI = getLang() === 'en' ? UI_EN : UI_FI;
 
@@ -390,7 +392,11 @@
       body: JSON.stringify({ messages: history, lang: getLang() }),
     })
       .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
+        if (!r.ok) {
+          var e = new Error('HTTP ' + r.status);
+          e.fromServer = true;   // it answered, it just answered badly
+          throw e;
+        }
         return r.json();
       })
       .then(function (data) {
@@ -401,7 +407,7 @@
       })
       .catch(function (err) {
         hideTyping();
-        addBubble('ai', UI.connError);
+        addBubble('ai', err && err.fromServer ? UI.serverError : UI.connError);
         console.error('[Selora chat]', err);
       })
       .finally(function () {

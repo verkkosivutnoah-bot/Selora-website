@@ -154,7 +154,12 @@ module.exports = async function handler(req, res) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        // llama-3.3-70b-versatile was retired by Groq on 2026-08-16 and every
+        // request has failed since. This is the replacement Groq named in the
+        // deprecation notice; keep an eye on their deprecations page, because
+        // a hosted model disappearing takes the chatbot down silently — the
+        // visitor only sees an apology.
+        model: 'openai/gpt-oss-120b',
         max_tokens: 600,
         messages: [
           { role: 'system', content: systemForLang },
