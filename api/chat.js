@@ -171,6 +171,16 @@ module.exports = async function handler(req, res) {
     if (!response.ok) {
       const err = await response.text();
       console.error('[chat] Groq error:', response.status, err);
+
+      // Being over the rate limit is a different thing from being broken, and
+      // the visitor can act on it — waiting works, where retrying a dead
+      // service does not. Flattening both into 502 hid that, and it hid the
+      // difference from us too while debugging.
+      if (response.status === 429) {
+        const retry = response.headers.get('retry-after');
+        if (retry) res.setHeader('Retry-After', retry);
+        return res.status(429).json({ error: 'rate_limited' });
+      }
       return res.status(502).json({ error: 'AI service unavailable' });
     }
 

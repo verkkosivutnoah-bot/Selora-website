@@ -46,6 +46,7 @@
     genericError: 'Pahoittelen, tapahtui virhe.',
     connError: 'Pahoittelen, yhteys katkesi. Kokeile uudelleen tai ota [yhteyttä](/yhteystiedot.html).',
     serverError: 'Pahoittelen, assistentti ei juuri nyt vastaa. Ota [yhteyttä](/yhteystiedot.html), niin vastaamme itse.',
+    busyError: 'Hetki — kysyttiin liian monta kertaa kerralla. Odota noin minuutti ja kokeile uudelleen.',
   };
   var UI_EN = {
     title: 'Selora Assistant', sub: 'Usually replies right away', close: 'Close', send: 'Send',
@@ -54,6 +55,7 @@
     genericError: 'Sorry, something went wrong.',
     connError: 'Sorry, the connection dropped. Try again or reach us via the [contact page](/yhteystiedot.html).',
     serverError: 'Sorry, the assistant is not answering right now. Reach us via the [contact page](/yhteystiedot.html) and a human will reply.',
+    busyError: 'One moment — too many questions at once. Wait about a minute and try again.',
   };
   var UI = getLang() === 'en' ? UI_EN : UI_FI;
 
@@ -395,6 +397,7 @@
         if (!r.ok) {
           var e = new Error('HTTP ' + r.status);
           e.fromServer = true;   // it answered, it just answered badly
+          e.busy = r.status === 429;
           throw e;
         }
         return r.json();
@@ -407,7 +410,11 @@
       })
       .catch(function (err) {
         hideTyping();
-        addBubble('ai', err && err.fromServer ? UI.serverError : UI.connError);
+        addBubble('ai',
+          !err ? UI.connError
+            : err.busy ? UI.busyError
+            : err.fromServer ? UI.serverError
+            : UI.connError);
         console.error('[Selora chat]', err);
       })
       .finally(function () {
