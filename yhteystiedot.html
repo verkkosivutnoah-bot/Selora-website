@@ -90,54 +90,63 @@
     .section .btn-light:hover, .section-alt .btn-light:hover, .cta-block .btn-light:hover { background: #1e293b; }
 
     /* ── CONTACT GRID ─────────────────────────────────────────── */
-    /* ── BOOKING ──────────────────────────────────────────────────
-       The calendar used to sit behind a tab, so the page's main action
-       was one click away and the column beside it held two sentences.
-       The calendar is now visible on arrival and the space next to it
-       carries what the call actually covers. */
-    .book-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 3rem; align-items: start; }
-    @media (min-width: 1000px) { .book-grid { grid-template-columns: minmax(0,0.82fr) minmax(0,1.18fr); gap: 3.5rem; } }
+    /* ── BOOKING + MESSAGE, one panel ─────────────────────────────
+       Two columns split by hairlines: what the call is worth on the
+       left, the panel that does the work on the right, sitting over a
+       muted product shot. Both routes live in the same card, the
+       calendar showing first. */
+    .bd { padding-top: 4.5rem; }
+    .bd-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+    @media (min-width: 1000px) {
+      .bd-grid {
+        grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+        gap: 0;
+        border-top: 1px solid rgba(15,23,42,0.1);
+        border-bottom: 1px solid rgba(15,23,42,0.1);
+      }
+      .bd-left { padding: 4rem 3.5rem 4rem 0; }
+    }
 
-    .book-agenda { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-direction: column; gap: 1.5rem; }
-    .book-agenda li { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
-    .book-agenda-n {
-      width: 1.9rem; height: 1.9rem; border-radius: 50%; flex-shrink: 0;
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 600; color: #fff;
-      background: linear-gradient(150deg, #1D4ED8, #2563EB);
-      box-shadow: 0 6px 16px -6px rgba(37,99,235,0.8);
+    .bd-points { list-style: none; margin: 2.5rem 0 0; padding: 0; border-top: 1px solid rgba(15,23,42,0.1); }
+    .bd-points li {
+      display: flex; align-items: center; gap: 0.85rem;
+      padding: 1rem 0; border-bottom: 1px solid rgba(15,23,42,0.1);
     }
-    .book-agenda h3 { font-size: 0.95rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; margin-bottom: 0.25rem; }
-    .book-agenda p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; }
-    .book-alt { margin-top: 1.5rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; }
-    /* a standalone action rather than a link buried mid-sentence, which
-       also keeps it above the 44px tap target floor */
-    .book-alt-cta {
-      display: inline-flex; align-items: center; min-height: 44px; margin-top: 0.35rem;
-      font-size: 0.82rem; font-weight: 500; color: var(--blue); text-decoration: none;
-      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
-    }
-    .book-alt-cta:hover { transform: translateX(3px); text-decoration: underline; }
-    @media (prefers-reduced-motion: reduce) { .book-alt-cta { transition: none !important; } .book-alt-cta:hover { transform: none; } }
+    .bd-points p { font-size: 0.85rem; color: #334155; line-height: 1.6; }
+    .bd-ico { width: 1.15rem; height: 1.15rem; flex-shrink: 0; color: var(--blue); }
+    .bd-ico svg { width: 100%; height: 100%; display: block; }
 
-    .book-panel {
-      background: #F8FAFF; border: 1px solid rgba(15,23,42,0.09); border-radius: 1.5rem;
-      box-shadow: 0 2px 20px rgba(15,23,42,0.08); overflow: hidden;
+    .bd-quote { margin: 2.25rem 0 0; padding: 1.6rem 1.75rem; border: 1px solid rgba(15,23,42,0.1); border-radius: 1.1rem; background: #F8FAFF; }
+    .bd-quote blockquote { font-size: 0.9rem; font-weight: 400; color: #0f172a; line-height: 1.75; margin-bottom: 1rem; }
+    .bd-quote figcaption { font-size: 0.8rem; font-weight: 500; color: #0f172a; }
+    .bd-quote figcaption span { display: block; margin-top: 0.15rem; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+
+    .bd-right { position: relative; }
+    /* the product shot is a backdrop, not content: muted hard so the
+       panel on top stays the thing you read */
+    .bd-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0.28; filter: saturate(0.5); }
+    .bd-right::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(248,250,255,0.86), rgba(248,250,255,0.96)); }
+    .bd-frame { position: relative; z-index: 2; padding: 1.5rem 0; }
+    @media (min-width: 1000px) { .bd-frame { padding: 3rem 0 3rem 3.5rem; border-left: 1px solid rgba(15,23,42,0.1); } }
+
+    .bd-card { background: #fff; border: 1px solid rgba(15,23,42,0.1); border-radius: 1.35rem; box-shadow: 0 18px 50px -24px rgba(15,23,42,0.4); overflow: hidden; }
+    .bd-switch { display: flex; gap: 0.25rem; padding: 0.3rem; margin: 1rem 1rem 0; background: #f1f5f9; border-radius: 0.8rem; }
+    .bd-tab {
+      flex: 1; min-height: 44px; border: 0; border-radius: 0.6rem; cursor: pointer;
+      font-family: 'Inter', sans-serif; font-size: 0.82rem; font-weight: 500;
+      background: transparent; color: #64748b; transition: background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
     }
-    .book-panel-top {
-      display: flex; align-items: center; gap: 0.55rem;
-      padding: 0.9rem 1.35rem; border-bottom: 1px solid rgba(15,23,42,0.07);
-      font-size: 0.74rem; color: var(--text-muted); letter-spacing: 0.02em;
-    }
+    .bd-tab.is-active { background: #fff; color: #0f172a; box-shadow: 0 1px 4px rgba(15,23,42,0.12); }
+    .bd-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+    .bd-panel { padding: 1rem; }
+    .bd-panel[hidden] { display: none; }
+    .bd-panel-top { display: flex; align-items: center; gap: 0.55rem; padding: 0.35rem 0.35rem 0.85rem; font-size: 0.74rem; color: var(--text-muted); }
     .book-dot { width: 7px; height: 7px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 3px rgba(22,163,74,0.15); }
+    .bd-card-lead { font-size: 0.83rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+    @media (max-width: 640px) { .bd-panel { padding: 0.75rem; } .bd-switch { margin: 0.75rem 0.75rem 0; } }
 
-    /* ── MESSAGE FORM ─────────────────────────────────────────── */
-    .form-card {
-      margin-top: 3rem; background: #fff; border: 1px solid rgba(15,23,42,0.09);
-      border-radius: 1.5rem; padding: 2.25rem; box-shadow: 0 2px 20px rgba(15,23,42,0.06);
-      max-width: 46rem;
-    }
-    @media (max-width: 640px) { .form-card { padding: 1.4rem; border-radius: 1.25rem; } }
+    @media (prefers-reduced-motion: reduce) { .bd-tab { transition: none !important; } }
 
     .trust-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.75rem; }
     .trust-item { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
@@ -528,173 +537,164 @@
 
 <main id="main" tabindex="-1" class="contact-2026">
 
-<!-- Booking, the primary route -->
-<div class="section" id="ajanvaraus">
+<!-- Booking and message, one panel -->
+<div class="section bd" id="ajanvaraus">
   <div class="container">
-    <p class="section-label" data-sl-reveal>Varaa aika</p>
-    <h2 class="section-heading sl-swipe-host" data-sl-split>Puhutaan <span class="accent">30 minuuttia.</span></h2>
-    <p class="section-sub" data-sl-words data-sl-reveal>Käymme läpi tilanteesi ja kerromme suoraan, kannattaako edetä. Maksuton eikä sido mihinkään.</p>
+    <div class="bd-grid">
 
-    <div class="book-grid">
+      <div class="bd-left">
+        <p class="section-label" data-sl-reveal>Ota yhteyttä</p>
+        <h2 class="section-heading sl-swipe-host" data-sl-split>Puhutaan <span class="accent">30 minuuttia.</span></h2>
 
-      <aside class="book-aside" data-sl-reveal>
-        <ol class="book-agenda">
+        <ul class="bd-points">
           <li>
-            <span class="book-agenda-n">1</span>
-            <div>
-              <h3>Kerrot mitä olet suunnittelemassa</h3>
-              <p>Ei tarvitse olla valmista suunnitelmaa. Riittää että tiedät mitä yrityksesi tekee.</p>
-            </div>
+            <span class="bd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.8a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.4 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+            <p>Maksuton kartoituspuhelu, ei myyntipuhetta</p>
           </li>
           <li>
-            <span class="book-agenda-n">2</span>
-            <div>
-              <h3>Katsomme mitä sivusto tarvitsee</h3>
-              <p>Sivumäärä, sisällöt ja aikataulu. Kerromme myös jos et mielestämme tarvitse uutta sivustoa.</p>
-            </div>
+            <span class="bd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg></span>
+            <p>Käymme läpi mitä sivustosi tarvitsee ja mitä ei</p>
           </li>
           <li>
-            <span class="book-agenda-n">3</span>
-            <div>
-              <h3>Saat hinnan ja aikataulun</h3>
-              <p>Kiinteä hinta kirjallisena puhelun jälkeen. Ei tarjouskikkailua.</p>
-            </div>
+            <span class="bd-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <p>Saat kiinteän hinnan ja aikataulun kirjallisena</p>
           </li>
-        </ol>
+        </ul>
 
-        <div class="trust-list">
-          <div class="trust-item">Maksuton ja sitoumukseton</div>
-          <div class="trust-item">Puhut suoraan tekijän kanssa, ei myyjän</div>
-        </div>
-
-        <p class="book-alt">Eikö kalenterista löydy sopivaa aikaa? Kerro tilanteestasi, niin ehdotamme aikaa.</p>
-        <a class="book-alt-cta" href="#viesti">Kirjoita meille →</a>
-      </aside>
-
-      <div class="book-panel" data-sl-reveal="scale">
-        <div class="book-panel-top">
-          <span class="book-dot" aria-hidden="true"></span>
-          <span>Vapaat ajat reaaliajassa</span>
-        </div>
-
-            <div id="cal-inline" aria-label="Varaa esittelypuhelu"></div>
-            <script type="text/javascript">
-              (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-              Cal("init", "esittelypuhelu", {origin:"https://app.cal.com"});
-              Cal.ns.esittelypuhelu("inline", {
-                elementOrSelector: "#cal-inline",
-                config: { "layout": "month_view", "theme": "light" },
-                calLink: "noah-yxf8kg/esittelypuhelu",
-              });
-              Cal.ns.esittelypuhelu("ui", {
-                "theme": "light",
-                "cssVarsPerTheme": {
-                  "light": {
-                    "cal-brand": "#1D4ED8",
-                    "cal-text": "#0f172a",
-                    "cal-text-emphasis": "#0f172a",
-                    "cal-bg": "#ffffff",
-                    "cal-bg-emphasis": "#f1f5f9",
-                    "cal-border": "rgba(15,23,42,0.10)",
-                    "cal-border-subtle": "rgba(15,23,42,0.06)"
-                  }
-                },
-                "hideEventTypeDetails": false,
-                "layout": "month_view"
-              });
-            </script>
+        <figure class="bd-quote" data-sl-reveal>
+          <blockquote>Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu.</blockquote>
+          <figcaption>Mikael Heikkinen <span>Autokorjaamon omistaja, Oulu</span></figcaption>
+        </figure>
       </div>
 
-    </div>
-  </div>
-</div>
+      <div class="bd-right">
+        <img class="bd-bg" src="/assets/img/verkkosivusuunnittelu-mockup.jpg" alt="" aria-hidden="true" loading="lazy" />
+        <div class="bd-frame">
+          <div class="bd-card">
 
-<!-- Message, the second route -->
-<div class="section-alt" id="viesti">
-  <div class="container">
-    <p class="section-label" data-sl-reveal>Lähetä viesti</p>
-    <h2 class="section-heading sl-swipe-host" data-sl-split>Tai kirjoita, <span class="accent">niin vastaamme.</span></h2>
-    <p class="section-sub" data-sl-words data-sl-reveal>Kerro lyhyesti mitä tarvitset. Vastaamme neljän tunnin sisällä arkipäivisin.</p>
-
-    <div class="form-card" data-sl-reveal>
-
-            <form class="contact-form" id="contactForm" novalidate>
-              <input type="hidden" name="_subject" value="Uusi yhteydenotto, Selora" />
-              <p class="form-summary" id="formSummary" role="alert" tabindex="-1"></p>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="f-etunimi">Etunimi</label>
-                  <input type="text" id="f-etunimi" name="etunimi" class="form-control" placeholder="Matti" autocomplete="given-name" required aria-describedby="err-etunimi" />
-                  <p class="form-error" id="err-etunimi" role="alert"></p>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="f-sukunimi">Sukunimi</label>
-                  <input type="text" id="f-sukunimi" name="sukunimi" class="form-control" placeholder="Virtanen" autocomplete="family-name" required aria-describedby="err-sukunimi" />
-                  <p class="form-error" id="err-sukunimi" role="alert"></p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f-sahkoposti">Sähköpostiosoite</label>
-                <input type="email" id="f-sahkoposti" name="sahkoposti" class="form-control" placeholder="matti@yrityksesi.fi" autocomplete="email" required aria-describedby="err-sahkoposti" />
-                <p class="form-error" id="err-sahkoposti" role="alert"></p>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f-puhelin">Puhelinnumero <span class="opt">(valinnainen)</span></label>
-                <input type="tel" id="f-puhelin" name="puhelinnumero" class="form-control" placeholder="+358 04X XXX XXXX" autocomplete="tel" aria-describedby="err-puhelin" />
-                <p class="form-error" id="err-puhelin" role="alert"></p>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f-yritys">Yrityksen nimi</label>
-                <input type="text" id="f-yritys" name="yritys" class="form-control" placeholder="Yritys Oy" autocomplete="organization" required aria-describedby="err-yritys" />
-                <p class="form-error" id="err-yritys" role="alert"></p>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="f-toimiala">Toimiala <span class="opt">(valinnainen)</span></label>
-                  <select id="f-toimiala" name="toimiala" class="form-control">
-                    <option value="" selected>Valitse…</option>
-                    <option>Terveydenhuolto / Hammashoito</option>
-                    <option>Kauneusala / Kampaamo</option>
-                    <option>Kiinteistöala</option>
-                    <option>Autokorjaamo / Autoliike</option>
-                    <option>Kotitalouspalvelut (LVI, Sähkö)</option>
-                    <option>Lakipalvelut</option>
-                    <option>Ravintola / Hotelli</option>
-                    <option>Tilitoimisto / Rahoitus</option>
-                    <option>Rakentaminen</option>
-                    <option>Vakuutus</option>
-                    <option>Muu</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="f-henkilosto">Henkilöstömäärä <span class="opt">(valinnainen)</span></label>
-                  <select id="f-henkilosto" name="henkilosto" class="form-control">
-                    <option value="" selected>Valitse…</option>
-                    <option>1, 9 henkilöä</option>
-                    <option>10, 49 henkilöä</option>
-                    <option>50, 199 henkilöä</option>
-                    <option>200+ henkilöä</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="f-viesti">Viesti <span class="opt">(valinnainen)</span></label>
-                <textarea id="f-viesti" name="viesti" class="form-control" placeholder="Kerro yrityksestäsi ja suurimmasta kasvuhaasteestasi…"></textarea>
-              </div>
-              <div class="form-check">
-                <input type="checkbox" id="gdprConsent" required aria-describedby="err-gdpr" />
-                <label for="gdprConsent">Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti.</label>
-              </div>
-              <p class="form-error" id="err-gdpr" role="alert"></p>
-              <button type="submit" class="form-submit" id="lahetaBtn">Lähetä viesti →</button>
-            </form>
-            <div class="success-state hidden" id="successMsg" role="status" aria-live="polite">
-              <div class="success-icon-wrap" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="success-title">Viesti lähetetty!</div>
-              <div class="success-sub">Kiitos yhteydenotostasi. Palaamme sinulle 4 tunnin sisällä arkipäivisin ja sovimme maksuttoman kartoituspuhelun.</div>
+            <div class="bd-switch" role="tablist" aria-label="Valitse yhteydenottotapa">
+              <button class="bd-tab is-active" role="tab" id="tabbtn-booking" aria-selected="true" aria-controls="tab-booking" onclick="switchPanel('booking', this)">Varaa aika</button>
+              <button class="bd-tab" role="tab" id="tabbtn-contact" aria-selected="false" aria-controls="tab-contact" tabindex="-1" onclick="switchPanel('contact', this)">Lähetä viesti</button>
             </div>
+
+            <div class="bd-panel" id="tab-booking" role="tabpanel" aria-labelledby="tabbtn-booking">
+              <div class="bd-panel-top">
+                <span class="book-dot" aria-hidden="true"></span>
+                <span>Vapaat ajat reaaliajassa</span>
+              </div>
+              <div id="cal-inline" aria-label="Varaa esittelypuhelu"></div>
+                          <script type="text/javascript">
+                            (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                            Cal("init", "esittelypuhelu", {origin:"https://app.cal.com"});
+                            Cal.ns.esittelypuhelu("inline", {
+                              elementOrSelector: "#cal-inline",
+                              config: { "layout": "month_view", "theme": "light" },
+                              calLink: "noah-yxf8kg/esittelypuhelu",
+                            });
+                            Cal.ns.esittelypuhelu("ui", {
+                              "theme": "light",
+                              "cssVarsPerTheme": {
+                                "light": {
+                                  "cal-brand": "#1D4ED8",
+                                  "cal-text": "#0f172a",
+                                  "cal-text-emphasis": "#0f172a",
+                                  "cal-bg": "#ffffff",
+                                  "cal-bg-emphasis": "#f1f5f9",
+                                  "cal-border": "rgba(15,23,42,0.10)",
+                                  "cal-border-subtle": "rgba(15,23,42,0.06)"
+                                }
+                              },
+                              "hideEventTypeDetails": false,
+                              "layout": "month_view"
+                            });
+                          </script>
+            </div>
+
+            <div class="bd-panel" id="tab-contact" role="tabpanel" aria-labelledby="tabbtn-contact" hidden>
+              <p class="bd-card-lead">Kerro lyhyesti mitä tarvitset. Vastaamme neljän tunnin sisällä arkipäivisin.</p>
+              <form class="contact-form" id="contactForm" novalidate>
+                            <input type="hidden" name="_subject" value="Uusi yhteydenotto, Selora" />
+                            <p class="form-summary" id="formSummary" role="alert" tabindex="-1"></p>
+                            <div class="form-row">
+                              <div class="form-group">
+                                <label class="form-label" for="f-etunimi">Etunimi</label>
+                                <input type="text" id="f-etunimi" name="etunimi" class="form-control" placeholder="Matti" autocomplete="given-name" required aria-describedby="err-etunimi" />
+                                <p class="form-error" id="err-etunimi" role="alert"></p>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label" for="f-sukunimi">Sukunimi</label>
+                                <input type="text" id="f-sukunimi" name="sukunimi" class="form-control" placeholder="Virtanen" autocomplete="family-name" required aria-describedby="err-sukunimi" />
+                                <p class="form-error" id="err-sukunimi" role="alert"></p>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="f-sahkoposti">Sähköpostiosoite</label>
+                              <input type="email" id="f-sahkoposti" name="sahkoposti" class="form-control" placeholder="matti@yrityksesi.fi" autocomplete="email" required aria-describedby="err-sahkoposti" />
+                              <p class="form-error" id="err-sahkoposti" role="alert"></p>
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="f-puhelin">Puhelinnumero <span class="opt">(valinnainen)</span></label>
+                              <input type="tel" id="f-puhelin" name="puhelinnumero" class="form-control" placeholder="+358 04X XXX XXXX" autocomplete="tel" aria-describedby="err-puhelin" />
+                              <p class="form-error" id="err-puhelin" role="alert"></p>
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="f-yritys">Yrityksen nimi</label>
+                              <input type="text" id="f-yritys" name="yritys" class="form-control" placeholder="Yritys Oy" autocomplete="organization" required aria-describedby="err-yritys" />
+                              <p class="form-error" id="err-yritys" role="alert"></p>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group">
+                                <label class="form-label" for="f-toimiala">Toimiala <span class="opt">(valinnainen)</span></label>
+                                <select id="f-toimiala" name="toimiala" class="form-control">
+                                  <option value="" selected>Valitse…</option>
+                                  <option>Terveydenhuolto / Hammashoito</option>
+                                  <option>Kauneusala / Kampaamo</option>
+                                  <option>Kiinteistöala</option>
+                                  <option>Autokorjaamo / Autoliike</option>
+                                  <option>Kotitalouspalvelut (LVI, Sähkö)</option>
+                                  <option>Lakipalvelut</option>
+                                  <option>Ravintola / Hotelli</option>
+                                  <option>Tilitoimisto / Rahoitus</option>
+                                  <option>Rakentaminen</option>
+                                  <option>Vakuutus</option>
+                                  <option>Muu</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label class="form-label" for="f-henkilosto">Henkilöstömäärä <span class="opt">(valinnainen)</span></label>
+                                <select id="f-henkilosto" name="henkilosto" class="form-control">
+                                  <option value="" selected>Valitse…</option>
+                                  <option>1, 9 henkilöä</option>
+                                  <option>10, 49 henkilöä</option>
+                                  <option>50, 199 henkilöä</option>
+                                  <option>200+ henkilöä</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label class="form-label" for="f-viesti">Viesti <span class="opt">(valinnainen)</span></label>
+                              <textarea id="f-viesti" name="viesti" class="form-control" placeholder="Kerro yrityksestäsi ja suurimmasta kasvuhaasteestasi…"></textarea>
+                            </div>
+                            <div class="form-check">
+                              <input type="checkbox" id="gdprConsent" required aria-describedby="err-gdpr" />
+                              <label for="gdprConsent">Hyväksyn, että Selora Oy käsittelee henkilötietojani yhteydenottoa varten <a href="tietosuojaseloste.html">tietosuojaselosteen</a> mukaisesti.</label>
+                            </div>
+                            <p class="form-error" id="err-gdpr" role="alert"></p>
+                            <button type="submit" class="form-submit" id="lahetaBtn">Lähetä viesti →</button>
+                          </form>
+              <div class="success-state hidden" id="successMsg" role="status" aria-live="polite">
+                            <div class="success-icon-wrap" aria-hidden="true">
+                              <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                            <div class="success-title">Viesti lähetetty!</div>
+                            <div class="success-sub">Kiitos yhteydenotostasi. Palaamme sinulle 4 tunnin sisällä arkipäivisin ja sovimme maksuttoman kartoituspuhelun.</div>
+                          </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -840,6 +840,37 @@
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 })();
 
+
+/* Both routes live in one card; this swaps which is showing. Keyboard users
+   get proper tab semantics, and the panel that is hidden is hidden from
+   assistive tech too, not just visually. */
+window.switchPanel = function (name, el) {
+  document.querySelectorAll('.bd-tab').forEach(function (t) {
+    var on = t === el;
+    t.classList.toggle('is-active', on);
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
+    t.tabIndex = on ? 0 : -1;
+  });
+  document.querySelectorAll('.bd-panel').forEach(function (p) {
+    var show = p.id === 'tab-' + name;
+    if (show) { p.removeAttribute('hidden'); } else { p.setAttribute('hidden', ''); }
+  });
+};
+
+/* Arrow keys move between the two tabs, which is what a tablist should do. */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.bd-tab'));
+  if (!tabs.length) return;
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('keydown', function (e) {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      e.preventDefault();
+      var next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus();
+      next.click();
+    });
+  });
+})();
 
 (function () {
   const form = document.getElementById('contactForm');

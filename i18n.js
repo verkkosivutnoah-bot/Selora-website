@@ -4002,6 +4002,10 @@
     'suoraan.': 'directly.',
     'Eikö kalenterista löydy sopivaa aikaa? Kerro tilanteestasi, niin ehdotamme aikaa.': 'Nothing in the calendar suits you? Tell us your situation and we will suggest a time.',
     'Kirjoita meille →': 'Write to us →',
+    'Maksuton kartoituspuhelu, ei myyntipuhetta': 'A free discovery call, no sales pitch',
+    'Käymme läpi mitä sivustosi tarvitsee ja mitä ei': 'We go through what your site needs, and what it does not',
+    'Saat kiinteän hinnan ja aikataulun kirjallisena': 'You get a fixed price and a schedule in writing',
+    'Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu.': 'I expected this to be a complicated project. It was not. One discovery call and a few weeks later the new site was live.',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
