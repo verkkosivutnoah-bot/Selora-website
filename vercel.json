@@ -4,21 +4,18 @@
   ],
   "headers": [
     {
-      "//": "Vercel serves everything with max-age=0, must-revalidate by default, so even an unchanged image costs a conditional request on every page load. These files are only ever replaced under a new name — the portfolio stills are regenerated as story-<slug>.webp and the logo as logo-<size>.webp — so there is nothing to revalidate and a year is safe. Anything edited in place (the stylesheets, the scripts) is deliberately left on the default.",
       "source": "/assets/img/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "//": "The vendored animation libraries are version-pinned in their filenames, so a change is always a new URL.",
       "source": "/assets/vendor/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
-      "//": "The stylesheets and scripts are edited in place, so they cannot be immutable. stale-while-revalidate gives a repeat visitor the cached copy immediately and checks for a new one in the background, which means a deploy lands on their next navigation rather than costing every visitor a blocking round trip on every page. The exposure is a visitor mid-session seeing the previous file for up to a minute.",
       "source": "/assets/(.*)\\.(css|js)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=86400" }
