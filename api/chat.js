@@ -215,6 +215,14 @@ module.exports = async function handler(req, res) {
       url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
       key: process.env.GEMINI_API_KEY,
       model: process.env.GEMINI_MODEL || 'gemini-3.7-flash',
+      // Gemini 3 thinks before it answers and those tokens come out of
+      // max_tokens, so the 600 that is plenty for Groq leaves nothing for the
+      // reply — measured: 600 gave finish_reason "length" with an empty
+      // message and 0 completion tokens, twice. At 2000 the thinking takes
+      // about 200 and the answer arrives whole in around two seconds.
+      // reasoning_effort was the other lever and it was worse: "low" answered
+      // but took 25 seconds, and "none" did not come back at all.
+      maxTokens: 2000,
     });
   }
 
@@ -223,17 +231,22 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'API key not configured' });
   }
 
-  const body = {
-    max_tokens: 600,
-    messages: [
-      { role: 'system', content: systemForLang },
-      ...recentHistory,
-    ],
-  };
+  // Shared by every candidate except the token budget, which is per provider:
+  // a model that thinks before answering needs headroom the others do not.
+  const promptMessages = [
+    { role: 'system', content: systemForLang },
+    ...recentHistory,
+  ];
+  const DEFAULT_MAX_TOKENS = 600;
 
   // Remembered across candidates so the visitor is told the truth when every
   // one of them was merely busy, rather than being told the service is broken.
-  let sawRateLimit = null;
+  // Two separate facts: whether anything was rate-limited at all, and how long
+  // it asked us to wait. Keying the first on the second was a bug — Gemini
+  // returns 429 with no Retry-After header, and that read as "no rate limit
+  // seen", so a quota error was reported to the visitor as a dead service.
+  let sawRateLimit = false;
+  let retryAfter = null;
   let skipProvider = null;
 
   for (const p of providers) {
@@ -258,7 +271,11 @@ module.exports = async function handler(req, res) {
           ...(p.key ? { Authorization: 'Bearer ' + p.key } : {}),
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ model: p.model, ...body }),
+        body: JSON.stringify({
+          model: p.model,
+          max_tokens: p.maxTokens ?? DEFAULT_MAX_TOKENS,
+          messages: promptMessages,
+        }),
       });
 
       if (response.ok) {
@@ -282,7 +299,8 @@ module.exports = async function handler(req, res) {
       // service does not. Another provider may well not be limited, so this is
       // remembered and only reported if nothing else answers either.
       if (response.status === 429) {
-        sawRateLimit = response.headers.get('retry-after');
+        sawRateLimit = true;
+        retryAfter = response.headers.get('retry-after') || retryAfter;
         // A rate limit belongs to the account, not the model, so the other
         // entries for this same provider will fail identically. Skip straight
         // to the next provider rather than spending a round trip proving it.
@@ -299,8 +317,8 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  if (sawRateLimit !== null) {
-    if (sawRateLimit) res.setHeader('Retry-After', sawRateLimit);
+  if (sawRateLimit) {
+    if (retryAfter) res.setHeader('Retry-After', retryAfter);
     return res.status(429).json({ error: 'rate_limited' });
   }
   return res.status(502).json({ error: 'AI service unavailable' });

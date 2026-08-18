@@ -209,7 +209,23 @@ markedly faster and normally healthy; this is the net, not the default.
 
 Get a key at [aistudio.google.com](https://aistudio.google.com/apikey) (free
 tier, no billing needed), add `GEMINI_API_KEY` to the Vercel project, redeploy.
-`GEMINI_MODEL` overrides the model if the name changes — and it will.
+`GEMINI_MODEL` overrides the model if the name changes — and it will:
+`gemini-2.5-flash` and `gemini-2.0-flash` already 404, and
+`gemini-flash-latest` works if you would rather track whatever is current.
+
+Two things measured against the real endpoint, both of which cost a working
+answer if forgotten:
+
+- **Gemini needs a bigger `max_tokens`.** Gemini 3 thinks before it answers and
+  those tokens come out of the same budget, so the 600 that suits Groq returned
+  `finish_reason: "length"` with an empty message and zero completion tokens. It
+  gets 2000, where thinking takes ~200 and the reply arrives whole in ~2s.
+  `reasoning_effort` was the other lever and it was worse: `low` answered but
+  took 25 seconds, `none` did not come back at all.
+- **The free quota is small.** Roughly twenty requests at this prompt size
+  exhausted it, after which every call is 429 until it resets. Fine for a
+  fallback that only runs when Groq is already failing; not something to route
+  normal traffic through. Expect intermittent 503 "high demand" too.
 
 **Timing.** The whole request shares an 8.5s budget, under Vercel Hobby's 10s
 function limit, with each attempt capped at 5s and the loop stopping once too
