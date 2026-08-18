@@ -11,6 +11,20 @@
       ]
     },
     {
+      "//": "The vendored animation libraries are version-pinned in their filenames, so a change is always a new URL.",
+      "source": "/assets/vendor/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "//": "The stylesheets and scripts are edited in place, so they cannot be immutable. stale-while-revalidate gives a repeat visitor the cached copy immediately and checks for a new one in the background, which means a deploy lands on their next navigation rather than costing every visitor a blocking round trip on every page. The exposure is a visitor mid-session seeing the previous file for up to a minute.",
+      "source": "/assets/(.*)\\.(css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=86400" }
+      ]
+    },
+    {
       "source": "/(favicon-32.png|favicon-192.png|apple-touch-icon.png|favicon.svg)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=604800" }

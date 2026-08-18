@@ -341,7 +341,12 @@
       .mobile-menu-close:hover, .mobile-menu-cta a:hover { transform: none; }
       .mobile-menu-nav a:hover, .mobile-menu-nav a.active { padding-left: 0; }
     }
-    @media (max-width: 768px) { .desktop-nav { display: none; } .hamburger { display: flex; } .btn-nav-cta { display: none !important; } }
+    @media (max-width: 768px) {
+      /* clear the fixed header when the hero content is taller than the hero:
+         margin-top:auto keeps short heroes bottom-aligned, so this only
+         takes effect in the overflow case that used to collide */
+      .page-hero { padding-top: 4.25rem; }
+ .desktop-nav { display: none; } .hamburger { display: flex; } .btn-nav-cta { display: none !important; } }
 
     @media(max-width:768px) {
       html, body { overflow-x: hidden; max-width: 100vw; }

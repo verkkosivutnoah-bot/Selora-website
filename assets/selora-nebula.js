@@ -8,6 +8,7 @@
    - Targets #pageCanvas. If WebGL is missing, the canvas is left
      alone so any 2D fallback still shows.
    - prefers-reduced-motion renders exactly one static frame.
+   - So does a software renderer: see below.
    - Pauses while the tab is hidden or the hero is scrolled away,
      so it never burns GPU behind other content.
    ============================================================ */
@@ -22,6 +23,36 @@
   if (!gl) return; // leave the existing canvas untouched
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Is this WebGL actually on a GPU?
+
+     When it is not — a blocklisted driver, a stripped-down Android browser, a
+     VM — the browser quietly falls back to a software rasteriser, and every
+     one of these fragments is ray-marched on the CPU instead. The shader does
+     not care, but the main thread does: measured against SwiftShader this loop
+     produced 53 long tasks and over five seconds of blocked main thread in a
+     five-second window, which is a page that cannot be scrolled, not a page
+     with a nice background.
+
+     Those visitors get the same treatment as prefers-reduced-motion: one
+     frame, drawn once. The nebula still looks like the nebula; it just holds
+     still. A composed static image beats a beautiful one nobody can scroll. */
+  function softwareRenderer(gl) {
+    try {
+      var ext = gl.getExtension('WEBGL_debug_renderer_info');
+      var name = String(
+        gl.getParameter(ext ? ext.UNMASKED_RENDERER_WEBGL : gl.RENDERER) || ''
+      ).toLowerCase();
+      // The three names browsers actually report for a CPU rasteriser.
+      return name.indexOf('swiftshader') !== -1 ||
+             name.indexOf('llvmpipe') !== -1 ||
+             name.indexOf('software') !== -1;
+    } catch (e) {
+      // Some privacy modes refuse the renderer string. Not knowing is not a
+      // reason to assume the worst — a real GPU is the common case.
+      return false;
+    }
+  }
 
   var VERT = [
     'attribute vec2 p;',
@@ -139,7 +170,7 @@
   resize();
   window.addEventListener('resize', resize, { passive: true });
 
-  if (reduced) { render(0.0); return; } // one static frame, no loop
+  if (reduced || softwareRenderer(gl)) { render(0.0); return; } // one static frame, no loop
 
   window.addEventListener('mousemove', function (e) {
     var r = canvas.getBoundingClientRect();
