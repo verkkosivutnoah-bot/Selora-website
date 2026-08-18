@@ -39,8 +39,29 @@ def load_keys():
     return keys
 
 
-def is_finnish(t):
-    return classify(t) == 'fi' and not is_proper_name(t)
+def needs_translation(t):
+    """Finnish is the source language, so the question is not "does this look
+    Finnish?" but "is there any reason this string should be missing from the
+    dictionary?".
+
+    Asking it the other way round let real gaps through: "4 tuntia",
+    "TOIMIPISTE", "etenee." and "Maksuton kartoituspuhelu" all carry no
+    a-umlaut, no common function word and no listed suffix, so the classifier
+    called them neutral and the audit stayed quiet while the English page
+    showed Finnish.
+
+    Anything visible is now assumed to need an entry unless it is clearly
+    English already, a proper name, or has no words in it at all.
+    """
+    if is_proper_name(t):
+        return False
+    if classify(t) == 'en':
+        return False
+    if not re.search(r'[A-Za-zÄÖÅäöå]{2,}', t):
+        return False        # numbers, currency, arrows, lone symbols
+    if re.fullmatch(r'(&[a-z]+;|\s)+', t):
+        return False        # bare HTML entities such as &rdquo;
+    return True
 
 
 def strings_in(path):
@@ -72,7 +93,7 @@ def main():
         if not os.path.exists(page):
             continue
         for t in strings_in(page):
-            if is_finnish(t) and t not in keys:
+            if t not in keys and needs_translation(t):
                 missing.setdefault(t, set()).add(page)
 
     print(f'DICT entries: {len(keys)}')

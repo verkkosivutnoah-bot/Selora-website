@@ -116,10 +116,23 @@
     .bd-ico { width: 1.15rem; height: 1.15rem; flex-shrink: 0; color: var(--blue); }
     .bd-ico svg { width: 100%; height: 100%; display: block; }
 
-    .bd-quote { margin: 2.25rem 0 0; padding: 1.6rem 1.75rem; border: 1px solid rgba(15,23,42,0.1); border-radius: 1.1rem; background: #F8FAFF; }
-    .bd-quote blockquote { font-size: 0.9rem; font-weight: 400; color: #0f172a; line-height: 1.75; margin-bottom: 1rem; }
-    .bd-quote figcaption { font-size: 0.8rem; font-weight: 500; color: #0f172a; }
-    .bd-quote figcaption span { display: block; margin-top: 0.15rem; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+    /* Not everyone is ready to pick a slot. Rather than lose them, point at
+       the two things that decide it: the work, and the price. */
+    .bd-cta { margin-top: 2.25rem; padding: 1.6rem 1.75rem; border: 1px solid rgba(29,78,216,0.18); border-radius: 1.1rem; background: linear-gradient(158deg, rgba(37,99,235,0.06), rgba(37,99,235,0.02)); }
+    .bd-cta-k { font-size: 0.92rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; margin-bottom: 0.4rem; }
+    .bd-cta-t { font-size: 0.82rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.15rem; }
+    .bd-cta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .bd-cta-btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 44px;
+      padding: 0 1.15rem; border-radius: 9999px; text-decoration: none;
+      font-size: 0.8rem; font-weight: 500; white-space: nowrap;
+      background: var(--blue); color: #fff; border: 1px solid var(--blue);
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), background 0.2s ease;
+    }
+    .bd-cta-btn:hover { background: #1e40af; border-color: #1e40af; transform: translateY(-2px); }
+    .bd-cta-btn.is-ghost { background: transparent; color: var(--blue); }
+    .bd-cta-btn.is-ghost:hover { background: rgba(37,99,235,0.08); }
+    @media (prefers-reduced-motion: reduce) { .bd-cta-btn { transition: none !important; } .bd-cta-btn:hover { transform: none; } }
 
     .bd-right { position: relative; }
     /* the product shot is a backdrop, not content: muted hard so the
@@ -561,10 +574,14 @@
           </li>
         </ul>
 
-        <figure class="bd-quote" data-sl-reveal>
-          <blockquote>Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu.</blockquote>
-          <figcaption>Mikael Heikkinen <span>Autokorjaamon omistaja, Oulu</span></figcaption>
-        </figure>
+                <div class="bd-cta">
+          <p class="bd-cta-k">Etkö ole vielä valmis varaamaan?</p>
+          <p class="bd-cta-t">Katso mitä olemme rakentaneet ja mitä sivusto maksaa. Molemmat vievät minuutin.</p>
+          <div class="bd-cta-row">
+            <a class="bd-cta-btn" href="verkkosivusuunnittelu.html#esimerkkitoita">Katso esimerkit →</a>
+            <a class="bd-cta-btn is-ghost" href="pricing.html">Hinnat alkaen 298 €</a>
+          </div>
+        </div>
       </div>
 
       <div class="bd-right">

@@ -4006,6 +4006,18 @@
     'Käymme läpi mitä sivustosi tarvitsee ja mitä ei': 'We go through what your site needs, and what it does not',
     'Saat kiinteän hinnan ja aikataulun kirjallisena': 'You get a fixed price and a schedule in writing',
     'Odotin, että tämä olisi monimutkainen projekti. Se ei ollut. Yksi kartoituspuhelu ja muutama viikko myöhemmin uudet sivut olivat julkaistu.': 'I expected this to be a complicated project. It was not. One discovery call and a few weeks later the new site was live.',
+    '4 tuntia': '4 hours',
+    'Toimipiste': 'Location',
+    '30 min': '30 min',
+    'Maksuton kartoituspuhelu': 'A free discovery call',
+    'Valitse yhteydenottotapa': 'Choose how to get in touch',
+    'etenee.': 'works.',
+    'latausaika': 'load time',
+    'mobiilioptimoitu': 'mobile optimised',
+    'Etkö ole vielä valmis varaamaan?': 'Not ready to book yet?',
+    'Katso mitä olemme rakentaneet ja mitä sivusto maksaa. Molemmat vievät minuutin.': 'See what we have built and what a site costs. Both take a minute.',
+    'Katso esimerkit →': 'See the examples →',
+    'Hinnat alkaen 298 €': 'Prices from €298',
   };
 
   // Reverse map for completeness when the page already happens to be in EN
