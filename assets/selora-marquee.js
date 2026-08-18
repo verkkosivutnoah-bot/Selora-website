@@ -17,16 +17,18 @@
    far ones still recede. Tilt is capped short of edge-on so no card ever
    turns its back.
 
-   Each card shows a still of the page it links to. On hardware that can carry
-   it, the first few cards additionally mount the real page in a scaled, inert
-   iframe, layered over the still and torn down once the section is well clear.
+   Each card shows a still of the page it links to. On a desktop with a mouse
+   every card also mounts the real page in a scaled, inert iframe, layered over
+   the still and torn down once the section is well clear, so the whole strip
+   is live rather than the first few.
 
-   That budget is not a nicety. Every card is a full site — GSAP, ScrollTrigger,
-   Lenis and its own rAF loop — so mounting all seven meant seven live browsing
-   contexts in one tab, on top of this page's own smooth scrolling. iOS Safari
-   answers that by killing the page: "A problem repeatedly occurred". Phones and
-   tablets now get the stills alone, which look the same standing still and cost
-   a decoded image each.
+   Phones and tablets still get the stills alone, and that is not a nicety.
+   Every card is a full site — GSAP, ScrollTrigger, Lenis and its own rAF loop
+   — so mounting them all meant that many live browsing contexts in one tab, on
+   top of this page's own smooth scrolling. iOS Safari answers that by killing
+   the page: "A problem repeatedly occurred". The pointer test below is what
+   keeps that from coming back; the stills look the same standing still and
+   cost a decoded image each.
 
    Targets #storiesTrack / #storiesMarquee / #storiesPrev / #storiesNext.
    Bails out cleanly if a page does not have the marquee markup.
@@ -65,9 +67,12 @@
 
   function liveBudget() {
     if (reduced || !window.matchMedia) return 0;
+    // A mouse on a wide screen rules out the phones and tablets that could not
+    // survive this, in one test. Everything else gets every cover live.
     if (!window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)').matches) return 0;
-    if (navigator.deviceMemory && navigator.deviceMemory < 8) return 2;
-    return 3;
+    // A desktop reporting little memory still gets a strip, just not all of it.
+    if (navigator.deviceMemory && navigator.deviceMemory < 8) return 4;
+    return Infinity;
   }
 
   var MAX_LIVE = liveBudget();
@@ -124,12 +129,13 @@
     obs.observe(marquee);
   }
 
-  /* The frames allowed to go live: the first MAX_LIVE, in DOM order. The rest
-     keep their still, which is a screenshot of the same hero the iframe would
-     render — so a card that never goes live is not a card that looks unfinished. */
+  /* The frames allowed to go live. MAX_LIVE is Infinity on a desktop, so this
+     is normally every card; a low-memory desktop takes the first few and the
+     rest keep their still, which is a screenshot of the same hero the iframe
+     would render, so a card that never goes live still does not look unfinished. */
   var frames = Array.prototype.slice
-    .call(track.querySelectorAll('.story-frame[data-src]'))
-    .slice(0, MAX_LIVE);
+    .call(track.querySelectorAll('.story-frame[data-src]'));
+  if (MAX_LIVE !== Infinity) frames = frames.slice(0, MAX_LIVE);
 
   // Reduced motion keeps the plain wrapped grid the stylesheet already gives
   // us: no rake, no autoplay, nothing to pause.

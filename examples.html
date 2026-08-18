@@ -431,6 +431,21 @@
     .lib-meta { font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.85rem; }
     .lib-cta { font-size: 0.78rem; font-weight: 500; color: var(--blue); }
 
+    /* Live cover, mounted on hover or keyboard focus.
+
+       The strip on the other pages can afford every cover live at once; nine
+       full sites on one screen is the load that killed iOS Safari before, so
+       here a cover goes live only for the card you are actually looking at,
+       and is torn down when you leave. The still underneath is a shot of the
+       same hero, so nothing shifts when it swaps. */
+    .lib-shot { position: relative; }
+    .lib-shot iframe {
+      position: absolute; top: 0; left: 0; width: 1440px; height: 900px;
+      transform-origin: 0 0; border: 0; pointer-events: none;
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .lib-shot iframe.is-ready { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .lib-shot iframe { transition: none !important; } }
     .lib-empty { margin-top: 2rem; font-size: 0.85rem; color: var(--text-muted); }
     .lib-foot { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(15,23,42,0.1); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
     .lib-foot p { font-size: 0.9rem; color: #0f172a; }
@@ -521,7 +536,7 @@
 
       <div class="lib-grid" id="libGrid">
         <a class="lib-card" data-sl-pop data-cat="terveys" data-name="fernwood animal clinic" data-order="0" href="portfolio/fernwood/index.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-fernwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/fernwood/index.html"><img src="/assets/img/story-fernwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Fernwood Animal Clinic</h2>
             <p class="lib-meta">Eläinklinikka · Ajanvaraus</p>
@@ -529,7 +544,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="kiinteisto" data-name="ardenwood" data-order="1" href="portfolio/ardenwood/index.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-ardenwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/ardenwood/index.html"><img src="/assets/img/story-ardenwood.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Ardenwood</h2>
             <p class="lib-meta">Kiinteistönvälitys · Luksusasunnot</p>
@@ -537,7 +552,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="hyvinvointi" data-name="stillpoint" data-order="2" href="portfolio/stillpoint/index.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-stillpoint.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/stillpoint/index.html"><img src="/assets/img/story-stillpoint.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Stillpoint</h2>
             <p class="lib-meta">Terapiapalvelut · Liquid glass</p>
@@ -545,7 +560,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="rahoitus" data-name="aurelian" data-order="3" href="portfolio/aurelian/index.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-aurelian.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/aurelian/index.html"><img src="/assets/img/story-aurelian.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Aurelian</h2>
             <p class="lib-meta">Yksityispankki · Three.js</p>
@@ -553,7 +568,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="kiinteisto" data-name="harbourline" data-order="4" href="portfolio/harbourline.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-harbourline.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/harbourline.html"><img src="/assets/img/story-harbourline.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Harbourline</h2>
             <p class="lib-meta">Kiinteistönvälitys · Parallax</p>
@@ -561,7 +576,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="palvelut" data-name="the green electrician" data-order="5" href="portfolio/green-electrician.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-green-electrician.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/green-electrician.html"><img src="/assets/img/story-green-electrician.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">The Green Electrician</h2>
             <p class="lib-meta">Sähköurakointi · Toronto</p>
@@ -569,7 +584,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="kauppa" data-name="nocturne" data-order="6" href="portfolio/nocturne.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-nocturne.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/nocturne.html"><img src="/assets/img/story-nocturne.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Nocturne</h2>
             <p class="lib-meta">Muotibrändi · Verkkokauppa</p>
@@ -577,7 +592,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="brandi" data-name="plume" data-order="7" href="portfolio/plume.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-plume.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/plume.html"><img src="/assets/img/story-plume.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Plume</h2>
             <p class="lib-meta">Markkinointitoimisto · Brändi</p>
@@ -585,7 +600,7 @@
           </div>
         </a>
         <a class="lib-card" data-sl-pop data-cat="brandi" data-name="vantage" data-order="8" href="portfolio/vantage-site.html" target="_blank" rel="noopener">
-          <div class="lib-shot"><img src="/assets/img/story-vantage-site.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
+          <div class="lib-shot" data-src="portfolio/vantage-site.html"><img src="/assets/img/story-vantage-site.webp" alt="" width="920" height="575" loading="lazy" decoding="async"></div>
           <div class="lib-body">
             <h2 class="lib-title">Vantage</h2>
             <p class="lib-meta">Interaktiivinen konsepti · Scroll</p>
@@ -810,6 +825,56 @@
   });
   sort.addEventListener('change', apply);
   apply();
+})();
+</script>
+
+<script>
+/* Mount the real page behind a card while it is hovered or focused.
+
+   Every cover is live in the sense that matters: the one you are pointing at
+   is the running site, not a picture of it. Mounting all nine at once is what
+   took iOS Safari down, so they are created on enter and destroyed on leave,
+   which also means a phone, where there is no hover, never creates any. */
+(function () {
+  var BASE_W = 1440, BASE_H = 900;
+  var shots = Array.prototype.slice.call(document.querySelectorAll('.lib-shot[data-src]'));
+  if (!shots.length) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  function fit(shot, iframe) {
+    var scale = Math.max(shot.offsetWidth / BASE_W, shot.offsetHeight / BASE_H);
+    iframe.style.transform = 'scale(' + scale + ')';
+  }
+
+  function mount(shot) {
+    if (shot.dataset.mounted) return;
+    shot.dataset.mounted = '1';
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('tabindex', '-1');
+    iframe.setAttribute('aria-hidden', 'true');
+    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('loading', 'lazy');
+    iframe.src = shot.getAttribute('data-src');
+    iframe.addEventListener('load', function () { iframe.classList.add('is-ready'); });
+    shot.appendChild(iframe);
+    fit(shot, iframe);
+  }
+
+  function unmount(shot) {
+    if (!shot.dataset.mounted) return;
+    delete shot.dataset.mounted;
+    var iframe = shot.querySelector('iframe');
+    if (iframe) iframe.remove();
+  }
+
+  shots.forEach(function (shot) {
+    var card = shot.closest('.lib-card');
+    card.addEventListener('mouseenter', function () { mount(shot); });
+    card.addEventListener('mouseleave', function () { unmount(shot); });
+    card.addEventListener('focusin', function () { mount(shot); });
+    card.addEventListener('focusout', function () { unmount(shot); });
+  });
 })();
 </script>
 </body>
