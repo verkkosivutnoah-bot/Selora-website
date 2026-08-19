@@ -123,7 +123,20 @@
           form.hidden = true;
           if (done) done.hidden = false;
         })
-        .catch(function () {
+        .catch(function (err) {
+          /* The fetch can be blocked outright — a privacy extension, a
+             corporate proxy, an offline moment — and on a lead form a silent
+             failure is the worst outcome: the visitor typed their address and
+             nothing happened to it. So fall back to submitting the form the
+             way a browser did before fetch existed. It leaves the page for
+             Formspree's own confirmation, which is a worse experience than
+             staying put and a far better one than losing the lead.
+
+             The normalised URL goes back into the field first, so the native
+             POST carries exactly what the fetch would have sent. */
+          console.error('[Selora audit] fetch failed, falling back to a normal post:', err);
+          urlEl.value = url;
+          if (form.getAttribute('action')) { form.submit(); return; }
           say(form.getAttribute('data-msg-fail') || 'Lähetys epäonnistui. Yritä uudelleen tai kirjoita meille.');
           btn.disabled = false;
           btn.textContent = label;

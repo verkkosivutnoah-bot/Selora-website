@@ -1920,9 +1920,12 @@
 
         <div>
           <form class="sl-audit-form" novalidate
+                action="https://formspree.io/f/mwvwrdne" method="POST"
                 data-msg-url="Tarkista sivuston osoite."
                 data-msg-mail="Tarkista sähköpostiosoite."
                 data-msg-fail="Lähetys epäonnistui. Yritä uudelleen tai kirjoita meille.">
+            <input type="hidden" name="_subject" value="Maksuton sivustoarvio">
+            <input type="hidden" name="tyyppi" value="sivustoarvio">
             <div>
               <label for="audit-site">Nykyinen sivustosi</label>
               <input id="audit-site" name="sivusto" type="text" inputmode="url"
