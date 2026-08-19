@@ -161,6 +161,11 @@ def extract_tables(html, en):
             cells = re.findall(r'<td[^>]*>(.*?)</td>', row, re.DOTALL)
             if not cells:
                 continue
+            # .cmp-k is a mobile-only row-label span (display:none on desktop)
+            # repeating the column header inside every cell for small screens.
+            # It carries no information a sighted reader on desktop sees, and
+            # duplicates the header this row statement already names.
+            cells = [re.sub(r'<span class="cmp-k">.*?</span>', '', c, flags=re.DOTALL) for c in cells]
             if len(cells) == 1:
                 section_fi, section_en = translate_cell(cell_nodes(cells[0]), en)
                 continue

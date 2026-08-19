@@ -3051,9 +3051,9 @@
     'Maksat sivustosta kerran ja se on sinun. Ylläpito ja hosting 49 € kuukaudessa, ei yllätyslaskuja.':
       'You pay for the site once and it is yours. Maintenance and hosting are 49 € a month, with no surprise invoices.',
     'Perussivu 298 euroa, täysi sivusto 498 euroa ja elämyssivusto tarjoushintaan 598 euroa (norm. 898 euroa), kaikki kertamaksuna. Ylläpito ja hosting maksaa 49 euroa kuukaudessa. Ei piilokuluja. Ensimmäinen kartoituspuhelu on maksuton ja sen jälkeen saat kiinteän hinnan.':
-      'A basic site is 298 euros, a full site 498 euros and a showcase site at a sale price of 598 euros (normally 898 euros), all as a one-time fee. Maintenance and hosting cost 20 euros a month. No hidden costs. The first discovery call is free, and after it you get a fixed price.',
+      'A basic site is 298 euros, a full site 498 euros and a showcase site at a sale price of 598 euros (normally 898 euros), all as a one-time fee. Maintenance and hosting cost 49 euros a month. No hidden costs. The first discovery call is free, and after it you get a fixed price.',
     'Sivusto on sinun. Ylläpito ja hosting maksaa 49 euroa kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit myös hoitaa sivuston itse, emmekä sido sinua pitkään sopimukseen.':
-      'The site is yours. Maintenance and hosting cost 20 euros a month and include updates, backups and design changes. You can also run the site yourself, and we do not tie you into a long contract.',
+      'The site is yours. Maintenance and hosting cost 49 euros a month and include updates, backups and design changes. You can also run the site yourself, and we do not tie you into a long contract.',
     'Suunnittelu, sisältö, hakukoneoptimointi ja julkaisu. Yksi kertamaksu, ylläpito 49 € kuukaudessa.':
       'Design, content, search optimisation and launch. One one-time fee, maintenance 49 € a month.',
 
