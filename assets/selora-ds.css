@@ -883,3 +883,96 @@ html.sl-motion .stories-marquee.is-coverflow .story-card[data-sl-pop].is-in {
   font-weight: 500;
 }
 .story-card:hover .story-cta { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   PROMO STRIP + SITE AUDIT OFFER
+   ============================================================ */
+
+/* The strip is fixed above the header, so the header has to move down by
+   exactly its height. Driving that from :has() rather than a class means
+   removing the element is the whole dismissal — the variable falls back to 0
+   and every offset below corrects itself, with no state to keep in sync. */
+:root { --sl-promo-h: 0px; }
+html:has(.sl-promo) { --sl-promo-h: 2.5rem; }
+@media (max-width: 600px) { html:has(.sl-promo) { --sl-promo-h: 3.25rem; } }
+
+/* Higher specificity than the pages' own inline `.site-header { top: 0 }`,
+   so this wins wherever the inline block sits in the cascade. */
+html .site-header { top: var(--sl-promo-h); }
+
+/* The hero clears the fixed header on short phones (see each page's 768px
+   block). With the strip up, it has to clear both. */
+@media (max-width: 768px) {
+  html:has(.sl-promo) .page-hero { padding-top: calc(4.25rem + var(--sl-promo-h)); }
+}
+
+.sl-promo {
+  position: fixed; inset: 0 0 auto; z-index: 60;
+  min-height: var(--sl-promo-h);
+  display: flex; align-items: center; justify-content: center; gap: 0.75rem;
+  padding: 0.4rem 2.75rem 0.4rem 1rem;
+  background: linear-gradient(90deg, #12224d 0%, #1D4ED8 100%);
+  color: #fff; font-size: 0.82rem; font-weight: 400; line-height: 1.35;
+  text-align: center;
+}
+.sl-promo a {
+  color: #fff; text-decoration: underline; text-underline-offset: 3px;
+  font-weight: 600; white-space: nowrap;
+}
+.sl-promo a:hover { text-decoration-thickness: 2px; }
+.sl-promo-x {
+  position: absolute; right: 0.45rem; top: 50%; transform: translateY(-50%);
+  width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center;
+  background: none; border: 0; cursor: pointer; border-radius: 8px;
+  color: rgba(255,255,255,0.75); font-size: 1.1rem; line-height: 1;
+}
+.sl-promo-x:hover { color: #fff; background: rgba(255,255,255,0.14); }
+.sl-promo-x:focus-visible { outline: 2px solid #fff; outline-offset: -2px; }
+
+/* ---- audit offer ---- */
+.sl-audit {
+  background: linear-gradient(158deg, #12224d 0%, #0b1220 100%);
+  border-radius: var(--r-xl); padding: clamp(2rem, 4vw, 3.25rem);
+  color: #fff; position: relative; overflow: hidden;
+}
+.sl-audit-grid { display: grid; gap: clamp(1.75rem, 4vw, 3rem); align-items: start; }
+@media (min-width: 880px) { .sl-audit-grid { grid-template-columns: 1.05fr 1fr; } }
+
+.sl-audit h2 { font-size: var(--fs-h2); font-weight: 300; letter-spacing: -0.028em; line-height: 1.12; margin: 0 0 1rem; }
+.sl-audit .sl-audit-lead { font-size: 1.02rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.66); margin: 0 0 1.5rem; }
+.sl-audit-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+.sl-audit-list li { display: flex; gap: 0.65rem; font-size: 0.92rem; line-height: 1.5; color: rgba(255,255,255,0.82); }
+.sl-audit-list li::before { content: '✓'; color: #60A5FA; font-weight: 600; flex-shrink: 0; }
+
+.sl-audit-form { display: flex; flex-direction: column; gap: 0.85rem; }
+.sl-audit-form label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 0.4rem; display: block; }
+.sl-audit-form input {
+  width: 100%; padding: 0.85rem 1rem; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.06);
+  color: #fff; font-family: inherit; font-size: 0.95rem; font-weight: 300;
+  transition: border-color .25s, background .25s;
+}
+.sl-audit-form input::placeholder { color: rgba(255,255,255,0.38); }
+.sl-audit-form input:focus { outline: none; border-color: #60A5FA; background: rgba(255,255,255,0.1); }
+.sl-audit-form input:user-invalid { border-color: #f87171; }
+.sl-audit-btn {
+  margin-top: 0.3rem; align-self: flex-start;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  padding: 0.85rem 1.7rem; border: 0; border-radius: var(--r-full); cursor: pointer;
+  background: #fff; color: #0f172a;
+  font-family: inherit; font-size: 0.86rem; font-weight: 600; letter-spacing: -0.005em;
+  transition: transform .25s var(--ease-out-quart), box-shadow .25s, background .25s;
+}
+.sl-audit-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(0,0,0,0.7); }
+.sl-audit-btn:focus-visible { outline: 2px solid #60A5FA; outline-offset: 3px; }
+.sl-audit-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+.sl-audit-note { font-size: 0.76rem; line-height: 1.5; color: rgba(255,255,255,0.45); margin: 0.2rem 0 0; }
+.sl-audit-note a { color: rgba(255,255,255,0.72); }
+.sl-audit-msg { font-size: 0.9rem; line-height: 1.55; color: #86efac; margin: 0; }
+.sl-audit-err { font-size: 0.86rem; line-height: 1.5; color: #fca5a5; margin: 0; min-height: 0; }
+.sl-audit-done { display: flex; flex-direction: column; gap: 0.6rem; }
+
+/* A class that sets `display` outranks the user-agent rule behind the `hidden`
+   attribute, so without this the form never hid and the thank-you block was
+   on screen from the start. */
+.sl-audit-form[hidden], .sl-audit-done[hidden] { display: none; }

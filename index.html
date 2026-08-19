@@ -1380,6 +1380,11 @@
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
 </head>
 <body>
+<div class="sl-promo" data-until="2026-09-30">
+  <span>Syyskuun loppuun asti: maksuton sivustoarvio, kolme korjausta 24 h:ssa.</span>
+  <a href="#arviointi">Pyydä arvio</a>
+  <button class="sl-promo-x" type="button" aria-label="Sulje ilmoitus">&times;</button>
+</div>
 <a href="#main" class="selora-skip">Hyppää sisältöön</a>
 
 <!-- Announcement Banner -->
@@ -1897,6 +1902,52 @@
 </div>
 
 
+<!-- Free site audit -->
+<div class="section" id="arviointi">
+  <div class="container">
+    <div class="sl-audit" data-sl-reveal>
+      <div class="sl-audit-grid">
+        <div>
+          <p class="sl-eyebrow">Maksuton sivustoarvio</p>
+          <h2>Kerro osoitteesi, saat <span class="sl-accent">kolme korjausta</span>.</h2>
+          <p class="sl-audit-lead">Katsomme nykyisen sivustosi läpi ja lähetämme kolme konkreettista parannusta 24 tunnin sisällä arkipäivisin. Ei myyntipuhetta, ei sitoumusta.</p>
+          <ul class="sl-audit-list">
+            <li>Mikä hidastaa sivustoa ja kuinka paljon</li>
+            <li>Mitä Google näkee, ja mitä se ei löydä</li>
+            <li>Missä kohtaa kävijä luovuttaa ennen yhteydenottoa</li>
+          </ul>
+        </div>
+
+        <div>
+          <form class="sl-audit-form" novalidate
+                data-msg-url="Tarkista sivuston osoite."
+                data-msg-mail="Tarkista sähköpostiosoite."
+                data-msg-fail="Lähetys epäonnistui. Yritä uudelleen tai kirjoita meille.">
+            <div>
+              <label for="audit-site">Nykyinen sivustosi</label>
+              <input id="audit-site" name="sivusto" type="text" inputmode="url"
+                     autocomplete="url" placeholder="yrityksesi.fi" required>
+            </div>
+            <div>
+              <label for="audit-mail">Sähköposti</label>
+              <input id="audit-mail" name="email" type="email"
+                     autocomplete="email" placeholder="etunimi@yritys.fi" required>
+            </div>
+            <p class="sl-audit-err" role="alert"></p>
+            <button type="submit" class="sl-audit-btn" data-sending="Lähetetään…">Pyydä arvio →</button>
+            <p class="sl-audit-note">Käytämme osoitettasi vain tämän arvion lähettämiseen. Emme lisää sinua postituslistalle. <a href="tietosuojaseloste.html">Tietosuojaseloste</a></p>
+          </form>
+
+          <div class="sl-audit-done" hidden>
+            <p class="sl-audit-msg">Kiitos. Katsomme sivustosi läpi ja lähetämme kolme parannusta 24 tunnin sisällä arkipäivisin.</p>
+            <p class="sl-audit-note">Jos asia on kiireellinen, soita 040 815 1122.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Final CTA -->
 <div class="section">
   <div class="container">
@@ -2159,5 +2210,6 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/chatbot.js" defer></script>
+<script src="/assets/selora-offer.js" defer></script>
 </body>
 </html>

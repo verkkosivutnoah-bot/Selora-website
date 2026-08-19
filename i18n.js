@@ -2901,6 +2901,31 @@
     'Varaa maksuton 30 minuutin kartoituspuhelu. Käymme läpi mitä sivustosi tarvitsee ja saat kiinteän hinnan. Ei paineita, ei sitoumuksia.':
       'Book a free 30-minute discovery call. We go through what your site needs and you get a fixed price. No pressure, no commitments.',
     'Varaa maksuton kartoitus →': 'Book a free consultation →',
+    'Maksuton sivustoarvio': 'Free site review',
+    'Kerro osoitteesi, saat kolme korjausta.': 'Give us your address, get three fixes.',
+    'Kerro osoitteesi, saat': 'Give us your address, get',
+    'kolme korjausta': 'three fixes',
+    'Katsomme nykyisen sivustosi läpi ja lähetämme kolme konkreettista parannusta 24 tunnin sisällä arkipäivisin. Ei myyntipuhetta, ei sitoumusta.':
+      'We look through your current site and send you three concrete improvements within 24 hours on weekdays. No sales pitch, no commitment.',
+    'Mikä hidastaa sivustoa ja kuinka paljon': 'What is slowing the site down, and by how much',
+    'Mitä Google näkee, ja mitä se ei löydä': 'What Google sees, and what it cannot find',
+    'Missä kohtaa kävijä luovuttaa ennen yhteydenottoa': 'Where visitors give up before getting in touch',
+    'Nykyinen sivustosi': 'Your current site',
+    'Sähköposti': 'Email',
+    'Pyydä arvio →': 'Request a review →',
+    'Pyydä arvio': 'Request a review',
+    'Lähetetään…': 'Sending…',
+    'Tarkista sivuston osoite.': 'Check the site address.',
+    'Tarkista sähköpostiosoite.': 'Check the email address.',
+    'Lähetys epäonnistui. Yritä uudelleen tai kirjoita meille.': 'Sending failed. Try again or write to us.',
+    'Käytämme osoitettasi vain tämän arvion lähettämiseen. Emme lisää sinua postituslistalle.':
+      'We use your address only to send this review. We will not add you to a mailing list.',
+    'Kiitos. Katsomme sivustosi läpi ja lähetämme kolme parannusta 24 tunnin sisällä arkipäivisin.':
+      'Thank you. We will look through your site and send three improvements within 24 hours on weekdays.',
+    'Jos asia on kiireellinen, soita 040 815 1122.': 'If it is urgent, call 040 815 1122.',
+    'Syyskuun loppuun asti: maksuton sivustoarvio, kolme korjausta 24 h:ssa.':
+      'Until the end of September: a free site review, three fixes within 24 h.',
+    'Sulje ilmoitus': 'Close notice',
     'Varaa kartoitus': 'Book a consultation',
     'Verkkosivusuunnittelu suomalaisille yrityksille. Nopeat, konvertoivat sivustot kertamaksulla.':
       'Web design for Finnish businesses. Fast, high-converting sites for a one-time fee.',
