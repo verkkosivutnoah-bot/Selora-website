@@ -266,6 +266,42 @@ rather than offering the contact page. 502 means nothing could answer.
 
 ---
 
+## Scheduled agent (Supabase half)
+
+The agent itself — the runner, the workflow prompts, the demo builder and the
+dashboard — lives in its own repository, **verkkosivutnoah-bot/Selora-Agent-**.
+Only the Supabase half is here, because that is where the other edge functions
+and schema patches already live and they all deploy to the same project.
+
+| File | Role |
+|---|---|
+| `supabase-patch-agent.sql` | `agent_jobs` + `agent_runs` + `demos`, RLS, the pg_cron scheduler |
+| `supabase-patch-social.sql` | `social_tokens` + `social_posts` + `social_ideas`, RLS |
+| `supabase/functions/dispatch-agent-job/` | creates the run row, then fires `workflow_dispatch` at the agent repo |
+
+What that means for this repo day to day: **the agent pushes `agent/*` branches
+here and nothing else.** It never commits to `main`. A branch named
+`agent/<workflow>-<timestamp>` is a finished run waiting for review — read the
+diff, merge or delete it.
+
+Three things about the Supabase side that will bite if forgotten:
+
+- **`agent_runs` is SELECT-only under RLS.** Runs are created by the edge
+  function, so the dashboard cannot queue work nothing will pick up.
+- **`social_tokens` has RLS on and no policy.** That is not an omission. The
+  service role bypasses RLS and is the only thing that should ever read an
+  access token; adding an "own tokens" policy would put one within reach of a
+  browser session.
+- **The scheduler needs two database settings**, not function secrets, because
+  pg_cron runs outside any function's environment:
+  `ALTER DATABASE postgres SET app.supabase_url = '...'` and
+  `app.service_role_key = '...'`. Reconnect afterwards — open sessions keep the
+  old values, so a test right after this looks broken when it is not.
+
+Nothing here runs until the setup checklist below is done. The full,
+dependency-ordered version is in the agent repository's README.
+
+---
 ## Pending Tasks
 
 ### Website
@@ -276,6 +312,13 @@ rather than offering the contact page. 502 means nothing could answer.
 - [ ] **Newsletter**: Wire subscription form backend (user said: later)
 - [ ] **Blog articles**: Write and publish actual blog posts (currently 3 "coming soon")
 
+### Scheduled agent (nothing runs until all of this is done)
+- [ ] **Run SQL**: `supabase-patch-agent.sql`, then `supabase-patch-social.sql`
+- [ ] **Database settings**: `app.supabase_url` + `app.service_role_key` via `ALTER DATABASE`
+- [ ] **Edge function**: deploy `dispatch-agent-job`; secrets `GITHUB_TOKEN` (Actions read+write on Selora-Agent-), `GITHUB_REPO`, `GITHUB_REF=main`
+- [ ] **Secrets in Selora-Agent-**: `ANTHROPIC_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `TARGET_TOKEN` (Contents read+write on this repo)
+- [ ] **Vercel**: import Selora-Agent- as its own project for the dashboard, then let yourself in with the secret link
+- [ ] **Optional, social agent only**: rows in `social_tokens`, plus `TIKTOK_CLIENT_KEY` / `TIKTOK_CLIENT_SECRET`
 ### Client Portal (priority)
 - [ ] **Deploy Edge Functions**: `supabase functions deploy generate-demo-agent` + `supabase functions deploy create-web-call`
 - [ ] **Set secrets**: `ANTHROPIC_API_KEY` + `RETELL_API_KEY` via `supabase secrets set` or dashboard
