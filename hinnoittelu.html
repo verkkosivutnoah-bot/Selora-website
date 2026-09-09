@@ -141,6 +141,13 @@
     .upkeep-price-row { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem; }
     .upkeep-price { font-size: 3rem; font-weight: 300; letter-spacing: -0.04em; color: #0f172a; font-variant-numeric: tabular-nums; }
     .upkeep-price-note { font-size: 0.78rem; color: var(--text-muted); }
+
+    /* ── Currency switch for the package prices ─────────────────────────── */
+    .cur-toggle-row { display: flex; justify-content: flex-start; margin: 1.4rem 0 2.2rem; }
+    .cur-toggle { display: inline-flex; padding: 2px; border-radius: 9999px; background: rgba(15,23,42,0.045); border: 1px solid rgba(15,23,42,0.1); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em; line-height: 1; }
+    .cur-toggle button { appearance: none; background: transparent; border: 0; color: #64748b; padding: 0.32rem 0.66rem; border-radius: 9999px; cursor: pointer; font: inherit; letter-spacing: inherit; transition: background 0.18s ease, color 0.18s ease; }
+    .cur-toggle button:hover { color: #0f172a; }
+    .cur-toggle button.is-active { background: #0f172a; color: #fff; }
     .upkeep-features { list-style: none; display: grid; gap: 0.65rem; }
     @media (min-width: 620px) { .upkeep-features { grid-template-columns: 1fr 1fr; column-gap: 1.75rem; } }
     .upkeep-features li { display: flex; align-items: flex-start; gap: 0.6rem; font-size: 0.83rem; color: #475569; line-height: 1.55; }
@@ -458,11 +465,11 @@
   <div class="page-title-block">
     <p class="page-label" data-sl-reveal>Investointi</p>
     <h1 data-sl-split>Kertamaksu.<br><span class="accent">Ei yllätyksiä.</span></h1>
-    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat sivustosta kerran, vasta julkaisun jälkeen. Ylläpito ja hosting 29 € kuukaudessa. Ei piilokuluja.</p>
+    <p class="page-hero-sub" data-sl-reveal style="--sl-delay:520ms">Maksat sivustosta kerran, vasta julkaisun jälkeen. Ylläpito ja hosting <span data-price="29" data-i18n-skip>29 €</span> kuukaudessa. Ei piilokuluja.</p>
     <div class="page-hero-chips" data-sl-reveal style="--sl-delay:760ms">
-      <span class="phc"><b>298 €</b> alkaen, kertamaksu</span>
+      <span class="phc"><b data-price="298" data-i18n-skip>298 €</b> alkaen, kertamaksu</span>
       <span class="phc"><b>48 h</b> rakennusaika</span>
-      <span class="phc"><b>29 €</b> /kk ylläpito</span>
+      <span class="phc"><b data-price="29" data-i18n-skip>29 €</b> /kk ylläpito</span>
     </div>
   </div>
 </div>
@@ -476,12 +483,20 @@
     <h2 class="section-heading sl-swipe-host" data-sl-split>Kolme pakettia.<br><span class="accent">Valitse tarpeesi mukaan.</span></h2>
     <p class="section-sub" data-sl-words data-sl-reveal>Molemmat sisältävät suunnittelun, rakennuksen ja julkaisun. Ero on laajuudessa, ei laadussa.</p>
 
+    <div class="cur-toggle-row" data-sl-reveal>
+      <div class="cur-toggle" role="group" aria-label="Valuutta" data-i18n-skip>
+        <button type="button" data-currency="eur" class="is-active" aria-pressed="true">EUR</button>
+        <button type="button" data-currency="usd" aria-pressed="false">USD</button>
+        <button type="button" data-currency="cad" aria-pressed="false">CAD</button>
+      </div>
+    </div>
+
     <div class="pkg-grid">
       <div class="pkg-card reveal" id="pkg-perussivu">
         <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
         <h3 class="pkg-name">Perussivu</h3>
         <p class="pkg-for">Yksinyrittäjille ja pienille yrityksille, jotka tarvitsevat selkeän esittelysivun.</p>
-        <div class="pkg-price-row"><span class="pkg-price">298 €</span></div>
+        <div class="pkg-price-row"><span class="pkg-price" data-price="298" data-i18n-skip>298 €</span></div>
         <p class="pkg-price-note">kertamaksu</p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
@@ -502,7 +517,7 @@
         <div class="pkg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5-10-5 10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></svg></div>
         <h3 class="pkg-name">Täysi sivusto</h3>
         <p class="pkg-for">Yrityksille, jotka tarvitsevat enemmän sivuja, automaatioita ja syvempää näkyvyyttä.</p>
-        <div class="pkg-price-row"><span class="pkg-price">498 €</span></div>
+        <div class="pkg-price-row"><span class="pkg-price" data-price="498" data-i18n-skip>498 €</span></div>
         <p class="pkg-price-note">kertamaksu</p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
@@ -525,10 +540,10 @@
         <h3 class="pkg-name">Elämyssivusto</h3>
         <p class="pkg-for">Brändeille, jotka haluavat sivuston jonka muistaa. Kerronnallinen, liikkuva ja silti nopea.</p>
         <div class="pkg-price-row">
-          <span class="pkg-price">598 €</span>
-          <s class="pkg-price-was">898 €</s>
+          <span class="pkg-price" data-price="598" data-i18n-skip>598 €</span>
+          <s class="pkg-price-was" data-price="898" data-i18n-skip>898 €</s>
         </div>
-        <p class="pkg-price-note">kertamaksu, säästät 300 €</p>
+        <p class="pkg-price-note">kertamaksu, säästät <span data-price="300" data-i18n-skip>300 €</span></p>
         <div class="pkg-divider"></div>
         <ul class="pkg-features">
           <li>Kaikki mitä Täysi sivusto sisältää</li>
@@ -548,7 +563,7 @@
     <div class="upkeep reveal" id="yllapito">
       <div>
         <h3 class="upkeep-name">Ylläpito ja hosting</h3>
-        <div class="upkeep-price-row"><span class="upkeep-price">29 €</span></div>
+        <div class="upkeep-price-row"><span class="upkeep-price" data-price="29" data-i18n-skip>29 €</span></div>
         <p class="upkeep-price-note">kuukaudessa</p>
         <p class="upkeep-for">Sivuston jatkuva ylläpito julkaisun jälkeen. Sama hinta kaikille paketeille, irtisanottavissa milloin tahansa ilman pitkää sopimusta.</p>
       </div>
@@ -702,9 +717,9 @@
         <thead>
           <tr>
             <th style="width:37%">Ominaisuus</th>
-            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;">298 €</span></th>
-            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;">498 €</span></th>
-            <th class="col-premium">Elämyssivusto<br><span style="font-weight:400;font-size:0.8rem;">598 € <s style="opacity:0.55;">898 €</s></span></th>
+            <th>Perussivu<br><span style="font-weight:400;font-size:0.8rem;" data-price="298" data-i18n-skip>298 €</span></th>
+            <th class="col-featured">Täysi sivusto<br><span style="font-weight:400;font-size:0.8rem;" data-price="498" data-i18n-skip>498 €</span></th>
+            <th class="col-premium">Elämyssivusto<br><span style="font-weight:400;font-size:0.8rem;"><span data-price="598" data-i18n-skip>598 €</span> <s style="opacity:0.55;" data-price="898" data-i18n-skip>898 €</s></span></th>
           </tr>
         </thead>
         <tbody>
@@ -885,7 +900,7 @@
         <div class="money-body">
           <div class="money-title">
             <span class="money-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <h3>Ylläpito 29 € kuukaudessa</h3>
+            <h3>Ylläpito <span data-price="29" data-i18n-skip>29 €</span> kuukaudessa</h3>
           </div>
           <p>Sisältää hostingin, päivitykset ja design-muutokset. Irtisanottavissa milloin tahansa.</p>
         </div>
@@ -930,7 +945,7 @@
       </details>
       <details class="faq-item">
         <summary class="faq-q">Kuuluuko ylläpito hintaan? <span class="faq-chevron">▼</span></summary>
-        <p class="faq-a">Kertamaksu kattaa valmiin sivuston. Ylläpito ja hosting maksaa 29 € kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit lopettaa sen milloin tahansa.</p>
+        <p class="faq-a">Kertamaksu kattaa valmiin sivuston. Ylläpito ja hosting maksaa <span data-price="29" data-i18n-skip>29 €</span> kuukaudessa ja sisältää päivitykset, varmuuskopiot ja design-muutokset. Voit lopettaa sen milloin tahansa.</p>
       </details>
       <details class="faq-item">
         <summary class="faq-q">Voinko laajentaa sivustoa myöhemmin? <span class="faq-chevron">▼</span></summary>
@@ -1161,5 +1176,6 @@
 <script src="/chatbot.js" defer></script>
 <script src="/assets/selora-offer.js" defer></script>
 <script src="/assets/klaviyo.js" defer></script>
+<script src="/assets/selora-currency.js" defer></script>
 </body>
 </html>
