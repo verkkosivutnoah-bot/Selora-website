@@ -63,6 +63,14 @@ DECORATIVE = re.compile(r'^[▼→←★]+$')
 # flattened to plain text, so spell them out in both languages.
 CHECK_WORDS = {'✓': ('kyllä', 'yes'), '✕': ('ei', 'no')}
 
+# The currency toggle (hinnoittelu.html) wraps every price in its own
+# <span data-price="…"> so JS can rewrite it to USD/CAD. That splits a cell's
+# text into its own node with no DICT entry, which used to make ok=False and
+# silently drop the whole surrounding sentence from the English side. A bare
+# amount like '298 €' reads identically in Finnish and English, so treat it
+# like a CHECK_WORD instead of a translatable sentence.
+PRICE_TOKEN = re.compile(r'^-?[\d][\d\s.,]*\s?€$')
+
 # Slogan halves ('Ensivaikutelma' / 'ratkaisee kaiken.') read fine split
 # across two elements on the page, but flattened into the knowledge base they
 # are just noise: no digit, no currency, short, and the fact they gesture at
@@ -103,6 +111,8 @@ def translate_cell(nodes, en):
             continue
         if n in CHECK_WORDS:
             fi_w, en_w = CHECK_WORDS[n]
+        elif PRICE_TOKEN.match(n):
+            fi_w, en_w = n, n
         else:
             fi_w, en_w = n, en.get(n)
         fi_words.append(fi_w)
@@ -224,7 +234,7 @@ def extract_pkg_cards(html, en):
 
         name_m = re.search(r'<h3 class="(?:pkg|upkeep)-name">(.*?)</h3>', block, re.DOTALL)
         for_m = re.search(r'<p class="(?:pkg|upkeep)-for">(.*?)</p>', block, re.DOTALL)
-        price_m = re.search(r'<span class="(?:pkg|upkeep)-price">(.*?)</span>', block, re.DOTALL)
+        price_m = re.search(r'<span class="(?:pkg|upkeep)-price"[^>]*>(.*?)</span>', block, re.DOTALL)
         note_m = re.search(r'<p class="(?:pkg|upkeep)-price-note">(.*?)</p>', block, re.DOTALL)
         feats = re.findall(r'<li>(.*?)</li>', block, re.DOTALL)
 
@@ -319,6 +329,13 @@ def visible_text(path, en):
     for extractor in (extract_tables, extract_pkg_cards, extract_faq, extract_feat_items):
         html, pairs = extractor(html, en)
         structured += pairs
+
+    # Whatever <span data-price>/<b data-price>/<s data-price> the currency
+    # toggle left outside those structured blocks (a hero subhead, a price
+    # chip, a plain heading) still splits its sentence into orphan fragments
+    # for the generic scan below. Unwrap to plain text so the sentence reads
+    # as one node again, the same way it did before prices were tagged.
+    html = re.sub(r'<(span|b|s)\b[^>]*\bdata-price="[^"]*"[^>]*>(.*?)</\1>', r'\2', html, flags=re.DOTALL)
 
     out = []
     for raw in re.findall(r'>([^<>]+)<', html):
