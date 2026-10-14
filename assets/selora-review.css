@@ -1,0 +1,157 @@
+/* ============================================================
+   SELORA REVIEW
+   Star rating plus feedback form. Every rating is emailed to us
+   through Web3Forms; four and five star raters also get a link
+   to leave the same review on Google.
+
+   Loaded only on the contact pages (yhteystiedot.html,
+   contact.html), not site-wide. Every visible string lives in
+   the HTML so the i18n overlay owns it: this file and
+   selora-review.js only toggle visibility.
+   ============================================================ */
+
+.rv-section { background: #eef2f7; }
+
+.rv-head { max-width: 40rem; margin: 0 auto 2.5rem; text-align: center; }
+.rv-head .section-sub { margin-top: 0.9rem; }
+
+.rv-card {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  background: #fff;
+  border: 1px solid rgba(15,23,42,0.07);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 18px 48px -28px rgba(15,23,42,0.22);
+}
+
+/* ---- stars ------------------------------------------------- */
+
+.rv-stars { border: 0; text-align: center; }
+.rv-stars legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.rv-stars-row { display: flex; justify-content: center; gap: 0.25rem; }
+
+.rv-star { position: relative; display: block; padding: 0.35rem; border-radius: 0.6rem; cursor: pointer; }
+.rv-star input { position: absolute; opacity: 0; width: 100%; height: 100%; inset: 0; margin: 0; cursor: pointer; }
+.rv-star svg {
+  display: block;
+  width: clamp(2.3rem, 7vw, 2.9rem);
+  height: clamp(2.3rem, 7vw, 2.9rem);
+  fill: #fff;
+  stroke: rgba(15,23,42,0.28);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  transition: fill 0.18s ease, stroke 0.18s ease, transform 0.18s ease;
+}
+.rv-star:hover svg { transform: translateY(-2px); }
+.rv-star.is-on svg { fill: var(--blue, #1D4ED8); stroke: #1e40af; }
+.rv-star:has(input:focus-visible) { outline: 2px solid var(--blue, #1D4ED8); outline-offset: 2px; }
+
+.rv-word {
+  min-height: 1.6em;
+  margin-top: 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+.rv-word .rv-w { display: none; }
+.rv-word .rv-w.is-on { display: inline; }
+
+/* ---- form -------------------------------------------------- */
+
+.rv-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(15,23,42,0.08);
+}
+.rv-form[hidden] { display: none; }
+
+.rv-lead { margin: 0; font-size: 0.95rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; }
+.rv-lead-sub { margin: 0.35rem 0 0; font-size: 0.85rem; font-weight: 300; line-height: 1.65; color: var(--text-muted, #475569); }
+
+.rv-fld { display: grid; gap: 0.4rem; }
+.rv-fld > span { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #475569; }
+.rv-fld > span em { font-style: normal; letter-spacing: 0.04em; text-transform: none; color: var(--text-muted, #64748b); }
+.rv-fld input,
+.rv-fld textarea {
+  width: 100%;
+  padding: 0.8rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid rgba(15,23,42,0.12);
+  border-radius: 0.7rem;
+  resize: vertical;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+.rv-fld textarea { min-height: 7rem; line-height: 1.6; }
+.rv-fld input:focus,
+.rv-fld textarea:focus { outline: none; background: #fff; border-color: var(--blue, #1D4ED8); }
+.rv-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.rv-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.rv-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.7rem; }
+.rv-msg { min-height: 1.5em; margin: 0; font-size: 0.85rem; font-weight: 400; }
+.rv-msg .rv-m { display: none; }
+.rv-msg .rv-m.is-on { display: inline; }
+.rv-msg.is-ok { color: #15803d; }
+.rv-msg.is-bad { color: #b91c1c; }
+
+.rv-note { margin: 0; font-size: 0.78rem; font-weight: 300; line-height: 1.6; color: var(--text-muted, #64748b); }
+
+/* ---- Google follow-up ------------------------------------- */
+
+.rv-google {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 1.4rem;
+  padding: 1.25rem 1.35rem;
+  background: linear-gradient(158deg, rgba(37,99,235,0.07), rgba(37,99,235,0.02));
+  border: 1px solid rgba(29,78,216,0.18);
+  border-radius: 1rem;
+}
+.rv-google[hidden] { display: none; }
+.rv-google-t { margin: 0; font-size: 0.9rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; }
+.rv-google-s { margin: 0; font-size: 0.82rem; font-weight: 300; line-height: 1.65; color: var(--text-muted, #475569); }
+.rv-google-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+.rv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.25rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: #fff;
+  background: var(--blue, #1D4ED8);
+  border: 1px solid var(--blue, #1D4ED8);
+  border-radius: 0.65rem;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+.rv-btn:hover { background: #1e40af; border-color: #1e40af; transform: translateY(-2px); }
+.rv-btn[disabled] { opacity: 0.55; cursor: default; transform: none; }
+.rv-btn.is-ghost { color: var(--blue, #1D4ED8); background: transparent; }
+.rv-btn.is-ghost:hover { background: rgba(37,99,235,0.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-btn, .rv-star svg { transition: none !important; }
+  .rv-btn:hover, .rv-star:hover svg { transform: none; }
+}
+
+@media (max-width: 640px) {
+  .rv-row { grid-template-columns: 1fr; }
+  .rv-actions { flex-direction: column; align-items: stretch; }
+  .rv-btn { width: 100%; min-height: 44px; }
+  .rv-note, .rv-google-s { font-size: 0.8125rem; }  /* 13px floor, as in selora-mobile.css */
+}

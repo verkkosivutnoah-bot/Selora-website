@@ -2721,6 +2721,49 @@
     'Useimmat asiakkaat ovat live-tilassa 24, 48 tunnin sisällä sopimuksen allekirjoittamisesta. Konfigurointi on yksinkertaista, tarvitsemme vain perustiedot yrityksestäsi ja palveluistasi.':
       'Most customers are live within 24 to 48 hours of signing. Configuration is simple: we only need the basics about your business and services.',
 
+    // review card (yhteystiedot.html / contact.html)
+    'Miten meidän kanssa': 'How did it go',
+    'meni?': 'with us?',
+    'Kerro kokemuksesi lyhyesti. Arvio tulee suoraan meille sähköpostilla, ja luemme jokaisen itse.':
+      'Tell us about it in a few words. Your review is emailed straight to us, and we read every one ourselves.',
+    'Arvosana 1 - 5 tähteä': 'Rating, 1 to 5 stars',
+    '1 tähti': '1 star',
+    '2 tähteä': '2 stars',
+    '3 tähteä': '3 stars',
+    '4 tähteä': '4 stars',
+    '5 tähteä': '5 stars',
+    'Napauta tähtiä': 'Tap the stars',
+    'Huono': 'Poor',
+    'Välttävä': 'Fair',
+    'Ihan ok': 'Okay',
+    'Hyvä!': 'Good!',
+    'Erinomainen!': 'Excellent!',
+    'Kiitos, tuo lämmittää.': 'Thank you, that means a lot.',
+    'Kerro lyhyesti mikä toimi, niin tiedämme mitä kannattaa tehdä jatkossakin samalla tavalla.':
+      'Tell us briefly what worked, so we know what to keep doing the same way.',
+    'Harmi kuulla.': 'Sorry to hear that.',
+    'Kerro suoraan mikä meni pieleen. Viesti tulee vain meille, ja korjaamme asian.':
+      'Tell us directly what went wrong. The message comes only to us, and we will put it right.',
+    'Arviosi': 'Your review',
+    'Kerro vapaasti': 'Write freely',
+    'Nimi tai yritys': 'Name or company',
+    'Sähköposti tai puhelin': 'Email or phone',
+    '(jos haluat vastauksen)': '(if you want a reply)',
+    'Jätä tämä tyhjäksi': 'Leave this empty',
+    'Lähetä arvio': 'Send review',
+    'Valitse ensin tähdet.': 'Pick the stars first.',
+    'Kirjoita muutama sana arviostasi.': 'Write a few words about your experience.',
+    'Kiitos arviostasi! Se tuli meille perille.': 'Thank you for the review! It reached us.',
+    'Sähköpostiohjelmasi avautuu valmiilla viestillä. Paina siellä Lähetä.':
+      'Your email app opens with the message ready. Press Send there.',
+    'Lähetys ei onnistunut. Yritä hetken päästä uudelleen.': 'Sending failed. Please try again in a moment.',
+    'Emme julkaise arviota sivustolla ilman lupaasi. Yhteystietoja käytetään vain vastaamiseen.':
+      'We do not publish your review on the site without your permission. Contact details are used only to reply.',
+    'Auttaisitko muita löytämään meidät?': 'Would you help others find us?',
+    'Jos samat sanat sopivat julkisesti, voit jättää arvion myös Googleen. Se vie alle minuutin.':
+      'If the same words work publicly, you can leave the review on Google too. It takes under a minute.',
+    'Arvioi Googlessa →': 'Review us on Google →',
+
     // page titles + meta descriptions (SEO relevant, EN mirrors help canonical alt-lang)
     'Selora Oy, Tekoälyvastaanottaja suomalaisille pk-yrityksille': 'Selora, AI receptionist for Finnish SMBs',
     'Selora Oy, Tekoälyvastaanottaja suomalaisille pk-yrityksille | selora.fi':
