@@ -4,9 +4,8 @@
 
    Every rating is emailed to us through Web3Forms, which binds
    the recipient to the access key, so no address is exposed in
-   the page. Four and five star raters get an extra link to
-   leave the same words on Google after they have sent it; the
-   send never depends on the rating, so nothing is gated.
+   the page. Every rating takes the same path: no star count
+   routes a visitor anywhere but our inbox.
 
    No string lives in here. Every piece of copy sits in the
    HTML and this file only toggles `hidden` / `is-on`, which
@@ -22,7 +21,6 @@
   var words  = Array.prototype.slice.call(card.querySelectorAll('.rv-word .rv-w'));
   var form   = card.querySelector('.rv-form');
   var prompts = Array.prototype.slice.call(card.querySelectorAll('[data-rv-prompt]'));
-  var google = card.querySelector('.rv-google');
   var msgBox = card.querySelector('.rv-msg');
   var submit = form ? form.querySelector('[type="submit"]') : null;
   if (!stars.length || !form) return;
@@ -131,11 +129,13 @@
   function done() {
     sent = true;
     form.reset();
-    Array.prototype.forEach.call(form.querySelectorAll('.rv-fld, .rv-row, .rv-actions, [data-rv-prompt]'), function (el) {
+    // The thank-you lives in .rv-actions next to the button, so hide the
+    // button rather than the row that carries the message.
+    Array.prototype.forEach.call(form.querySelectorAll('.rv-fld, .rv-row, [data-rv-prompt]'), function (el) {
       el.hidden = true;
     });
+    if (submit) submit.hidden = true;
     message('ok');
-    if (google && rating >= 4) google.hidden = false;
     stars.forEach(function (s) {
       var input = s.querySelector('input');
       if (input) input.disabled = true;

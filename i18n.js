@@ -2759,10 +2759,6 @@
     'Lähetys ei onnistunut. Yritä hetken päästä uudelleen.': 'Sending failed. Please try again in a moment.',
     'Emme julkaise arviota sivustolla ilman lupaasi. Yhteystietoja käytetään vain vastaamiseen.':
       'We do not publish your review on the site without your permission. Contact details are used only to reply.',
-    'Auttaisitko muita löytämään meidät?': 'Would you help others find us?',
-    'Jos samat sanat sopivat julkisesti, voit jättää arvion myös Googleen. Se vie alle minuutin.':
-      'If the same words work publicly, you can leave the review on Google too. It takes under a minute.',
-    'Arvioi Googlessa →': 'Review us on Google →',
 
     // page titles + meta descriptions (SEO relevant, EN mirrors help canonical alt-lang)
     'Selora Oy, Tekoälyvastaanottaja suomalaisille pk-yrityksille': 'Selora, AI receptionist for Finnish SMBs',

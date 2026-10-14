@@ -1,8 +1,7 @@
 /* ============================================================
    SELORA REVIEW
    Star rating plus feedback form. Every rating is emailed to us
-   through Web3Forms; four and five star raters also get a link
-   to leave the same review on Google.
+   through Web3Forms, whatever the star count.
 
    Loaded only on the contact pages (yhteystiedot.html,
    contact.html), not site-wide. Every visible string lives in
@@ -68,6 +67,10 @@
   border-top: 1px solid rgba(15,23,42,0.08);
 }
 .rv-form[hidden] { display: none; }
+/* The card's own display rules outrank the default [hidden], so each
+   element the script hides needs the attribute spelled out. */
+.rv-fld[hidden], .rv-row[hidden], .rv-actions[hidden],
+.rv-btn[hidden], [data-rv-prompt][hidden] { display: none; }
 
 .rv-lead { margin: 0; font-size: 0.95rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; }
 .rv-lead-sub { margin: 0.35rem 0 0; font-size: 0.85rem; font-weight: 300; line-height: 1.65; color: var(--text-muted, #475569); }
@@ -105,21 +108,7 @@
 
 .rv-note { margin: 0; font-size: 0.78rem; font-weight: 300; line-height: 1.6; color: var(--text-muted, #64748b); }
 
-/* ---- Google follow-up ------------------------------------- */
-
-.rv-google {
-  display: grid;
-  gap: 0.85rem;
-  margin-top: 1.4rem;
-  padding: 1.25rem 1.35rem;
-  background: linear-gradient(158deg, rgba(37,99,235,0.07), rgba(37,99,235,0.02));
-  border: 1px solid rgba(29,78,216,0.18);
-  border-radius: 1rem;
-}
-.rv-google[hidden] { display: none; }
-.rv-google-t { margin: 0; font-size: 0.9rem; font-weight: 500; color: #0f172a; letter-spacing: -0.015em; }
-.rv-google-s { margin: 0; font-size: 0.82rem; font-weight: 300; line-height: 1.65; color: var(--text-muted, #475569); }
-.rv-google-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+/* ---- buttons ---------------------------------------------- */
 
 .rv-btn {
   display: inline-flex;
@@ -153,5 +142,5 @@
   .rv-row { grid-template-columns: 1fr; }
   .rv-actions { flex-direction: column; align-items: stretch; }
   .rv-btn { width: 100%; min-height: 44px; }
-  .rv-note, .rv-google-s { font-size: 0.8125rem; }  /* 13px floor, as in selora-mobile.css */
+  .rv-note { font-size: 0.8125rem; }  /* 13px floor, as in selora-mobile.css */
 }
