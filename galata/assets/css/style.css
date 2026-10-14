@@ -802,3 +802,8 @@ section{position:relative}
 .nav__lang + .nav__social{margin-left:-.4rem}
 .nav__social + .nav__social{margin-left:-.4rem}
 @media (max-width:400px){.nav__social{width:2rem;height:2rem}.nav{gap:.6rem}}
+
+/* hero-kuva v3: kirkas tulikuva, ei kirkastusta; kokki vasemmalla, tuli ja liha oikealla */
+.hero__media img{filter:saturate(1.05);object-position:58% 50%}
+@media (max-width:860px){.hero__media img{filter:saturate(1.05);object-position:64% 55%}}
+.hero__eyebrow{text-shadow:0 1px 14px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.8)}
