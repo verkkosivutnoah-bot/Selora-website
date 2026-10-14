@@ -773,3 +773,32 @@ section{position:relative}
 .ftr__social svg{width:19px;height:19px}
 .ftr__social:hover{color:var(--ember);border-color:var(--ember);transform:translateY(-2px)}
 .contact__row--social div{display:flex;flex-direction:column;gap:.15rem}
+
+/* uusi hero-kuva: döner ja grilli oikealla, otsikko vasemman tumman alueen päällä */
+.hero__media img{object-position:62% 38%}
+@media (max-width:640px){.hero__media img{object-position:72% 40%}}
+/* Uusi kuva on tummempi kuin vanha: vanha peittokerros nielaisi sen. Nyt
+   tummennus vain otsikon puolella, döner ja grilli jäävät kirkkaiksi. */
+.hero__media img{filter:brightness(1.12) saturate(1.08) contrast(1.04)}
+.hero__scrim{background:
+  linear-gradient(90deg,rgba(11,10,9,.88) 0%,rgba(11,10,9,.62) 32%,rgba(11,10,9,.18) 58%,rgba(11,10,9,0) 78%),
+  linear-gradient(to top,var(--ink) 2%,rgba(11,10,9,.4) 26%,rgba(11,10,9,0) 52%,rgba(11,10,9,.45) 100%)}
+@media (max-width:860px){
+  .hero__scrim{background:
+    linear-gradient(to top,var(--ink) 6%,rgba(11,10,9,.82) 40%,rgba(11,10,9,.3) 72%,rgba(11,10,9,.55) 100%)}
+}
+@media (max-width:860px){
+  .hero__scrim{background:
+    linear-gradient(to top,var(--ink) 3%,rgba(11,10,9,.72) 28%,rgba(11,10,9,.28) 55%,rgba(11,10,9,.12) 78%,rgba(11,10,9,.5) 100%)}
+  .hero__media img{filter:brightness(1.22) saturate(1.1) contrast(1.05)}
+}
+
+/* Instagram + TikTok navissa kielivalitsimen oikealla puolella */
+.nav__social{display:inline-grid;place-items:center;width:2.1rem;height:2.1rem;border:1px solid var(--line);
+  border-radius:50%;color:var(--dim);transition:color .25s,border-color .25s}
+.nav__social svg{width:15px;height:15px}
+.nav__social:hover{color:var(--ember);border-color:var(--ember)}
+.nav__lang{margin-left:auto}
+.nav__lang + .nav__social{margin-left:-.4rem}
+.nav__social + .nav__social{margin-left:-.4rem}
+@media (max-width:400px){.nav__social{width:2rem;height:2rem}.nav{gap:.6rem}}
