@@ -382,6 +382,7 @@
 <script src="/i18n.js" defer></script>
 <style>.selora-skip{position:absolute;left:-999px;top:0;background:#1D4ED8;color:#fff;padding:0.65rem 1rem;border-radius:0 0 9px 9px;font-family:Inter,sans-serif;font-size:0.85rem;font-weight:600;z-index:100000;text-decoration:none;}.selora-skip:focus{left:0;top:0;}</style>
 <link rel="stylesheet" href="/assets/selora-mobile.css" />
+<link rel="stylesheet" href="/assets/selora-review.css" />
 <style>
 /* ============================================================
    Contact page — 2026 redesign
@@ -821,6 +822,89 @@
   </div>
 </div>
 
+<!-- Arviot: tähdet, palaute sähköpostiin, 4-5 tähden kohdalla myös Google -->
+<div class="section rv-section" id="arviot">
+  <div class="container">
+    <div class="rv-head">
+      <p class="section-label" data-sl-reveal>Palaute</p>
+      <h2 class="section-heading sl-swipe-host" data-sl-split>Miten meidän kanssa <span class="accent">meni?</span></h2>
+      <p class="section-sub" data-sl-reveal>Kerro kokemuksesi lyhyesti. Arvio tulee suoraan meille sähköpostilla, ja luemme jokaisen itse.</p>
+    </div>
+
+    <div class="rv-card" data-selora-review data-sl-reveal
+         data-rv-key="cf8d3328-3b6d-4506-b5bf-6dfa8fa77ba0"
+         data-rv-email="verkkosivut.noah@gmail.com"
+         data-rv-from="Selora-sivusto">
+      <fieldset class="rv-stars">
+        <legend>Arvosana 1 - 5 tähteä</legend>
+        <div class="rv-stars-row">
+          <label class="rv-star"><input type="radio" name="rate" value="1" aria-label="1 tähti" /><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></label>
+          <label class="rv-star"><input type="radio" name="rate" value="2" aria-label="2 tähteä" /><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></label>
+          <label class="rv-star"><input type="radio" name="rate" value="3" aria-label="3 tähteä" /><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></label>
+          <label class="rv-star"><input type="radio" name="rate" value="4" aria-label="4 tähteä" /><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></label>
+          <label class="rv-star"><input type="radio" name="rate" value="5" aria-label="5 tähteä" /><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3-5.8 3 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></label>
+        </div>
+        <p class="rv-word" aria-live="polite">
+          <span class="rv-w is-on" data-rv-w="0">Napauta tähtiä</span>
+          <span class="rv-w" data-rv-w="1">Huono</span>
+          <span class="rv-w" data-rv-w="2">Välttävä</span>
+          <span class="rv-w" data-rv-w="3">Ihan ok</span>
+          <span class="rv-w" data-rv-w="4">Hyvä!</span>
+          <span class="rv-w" data-rv-w="5">Erinomainen!</span>
+        </p>
+      </fieldset>
+
+      <form class="rv-form" hidden novalidate>
+        <div data-rv-prompt="good" hidden>
+          <p class="rv-lead">Kiitos, tuo lämmittää.</p>
+          <p class="rv-lead-sub">Kerro lyhyesti mikä toimi, niin tiedämme mitä kannattaa tehdä jatkossakin samalla tavalla.</p>
+        </div>
+        <div data-rv-prompt="bad" hidden>
+          <p class="rv-lead">Harmi kuulla.</p>
+          <p class="rv-lead-sub">Kerro suoraan mikä meni pieleen. Viesti tulee vain meille, ja korjaamme asian.</p>
+        </div>
+
+        <label class="rv-fld">
+          <span>Arviosi</span>
+          <textarea name="msg" rows="4" maxlength="1500" required placeholder="Kerro vapaasti"></textarea>
+        </label>
+        <div class="rv-row">
+          <label class="rv-fld">
+            <span>Nimi tai yritys <em>(valinnainen)</em></span>
+            <input name="name" autocomplete="name" maxlength="60" />
+          </label>
+          <label class="rv-fld">
+            <span>Sähköposti tai puhelin <em>(jos haluat vastauksen)</em></span>
+            <input name="contact" maxlength="80" />
+          </label>
+        </div>
+        <label class="rv-hp" aria-hidden="true">Jätä tämä tyhjäksi<input name="website" tabindex="-1" autocomplete="off" /></label>
+
+        <div class="rv-actions">
+          <button class="rv-btn" type="submit">Lähetä arvio</button>
+          <p class="rv-msg" role="status" aria-live="polite">
+            <span class="rv-m" data-rv-msg="sending">Lähetetään...</span>
+            <span class="rv-m" data-rv-msg="rating">Valitse ensin tähdet.</span>
+            <span class="rv-m" data-rv-msg="short">Kirjoita muutama sana arviostasi.</span>
+            <span class="rv-m" data-rv-msg="ok">Kiitos arviostasi! Se tuli meille perille.</span>
+            <span class="rv-m" data-rv-msg="mail">Sähköpostiohjelmasi avautuu valmiilla viestillä. Paina siellä Lähetä.</span>
+            <span class="rv-m" data-rv-msg="fail">Lähetys ei onnistunut. Yritä hetken päästä uudelleen.</span>
+          </p>
+        </div>
+        <p class="rv-note">Emme julkaise arviota sivustolla ilman lupaasi. Yhteystietoja käytetään vain vastaamiseen.</p>
+      </form>
+
+      <div class="rv-google" hidden>
+        <p class="rv-google-t">Auttaisitko muita löytämään meidät?</p>
+        <p class="rv-google-s">Jos samat sanat sopivat julkisesti, voit jättää arvion myös Googleen. Se vie alle minuutin.</p>
+        <div class="rv-google-row">
+          <a class="rv-btn" href="https://www.google.com/maps/search/?api=1&query=Selora+Oy+Helsinki" target="_blank" rel="noopener">Arvioi Googlessa →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CTA -->
 <div class="section">
   <div class="container">
@@ -1116,6 +1200,7 @@ window.switchPanel = function (name, el) {
 
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/selora-review.js" defer></script>
 <script src="/chatbot.js" defer></script>
 <script>
 /* Contact rail: pointer spotlight + one-shot icon draw-in.
