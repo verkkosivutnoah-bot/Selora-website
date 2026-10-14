@@ -1,0 +1,5 @@
+*.py
+README.md
+_mobile.html
+__pycache__
+serve.sh

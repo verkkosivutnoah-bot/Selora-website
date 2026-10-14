@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 900" fill="none"
+     stroke="currentColor" stroke-width="3" stroke-linecap="round"
+     stroke-linejoin="round" aria-hidden="true">
+  <path d="M 60 878 H 340" data-i="0" class="g-ground" pathLength="1000"/>
+  <path d="M 142 878 C 141 760 143 620 147 452" data-i="1" pathLength="1000"/>
+  <path d="M 258 878 C 259 760 257 620 253 452" data-i="2" pathLength="1000"/>
+  <path d="M 142 820 H 258" data-i="3" class="g-hair" pathLength="1000"/>
+  <path d="M 143 742 H 257" data-i="4" class="g-hair" pathLength="1000"/>
+  <path d="M 144 664 H 256" data-i="5" class="g-hair" pathLength="1000"/>
+  <path d="M 144 586 H 256" data-i="6" class="g-hair" pathLength="1000"/>
+  <path d="M 145 508 H 255" data-i="7" class="g-hair" pathLength="1000"/>
+  <path d="M 178 878 V 812 A 22 22 0 0 1 222 812 V 878" data-i="8" pathLength="1000"/>
+  <path d="M 153 700 V 674 A 9 9 0 0 1 171 674 V 700" data-i="9" class="g-win" pathLength="1000"/>
+  <path d="M 191 700 V 674 A 9 9 0 0 1 209 674 V 700" data-i="10" class="g-win" pathLength="1000"/>
+  <path d="M 229 700 V 674 A 9 9 0 0 1 247 674 V 700" data-i="11" class="g-win" pathLength="1000"/>
+  <path d="M 153 596 V 570 A 9 9 0 0 1 171 570 V 596" data-i="12" class="g-win" pathLength="1000"/>
+  <path d="M 191 596 V 570 A 9 9 0 0 1 209 570 V 596" data-i="13" class="g-win" pathLength="1000"/>
+  <path d="M 229 596 V 570 A 9 9 0 0 1 247 570 V 596" data-i="14" class="g-win" pathLength="1000"/>
+  <path d="M 128 452 H 272" data-i="15" pathLength="1000"/>
+  <path d="M 126 452 V 426 H 274 V 452" data-i="16" pathLength="1000"/>
+  <path d="M 126 426 H 274" data-i="17" class="g-hair" pathLength="1000"/>
+  <path d="M 132.0 452 V 428" data-i="18" class="g-hair" pathLength="1000"/>
+  <path d="M 143.4 452 V 428" data-i="19" class="g-hair" pathLength="1000"/>
+  <path d="M 154.8 452 V 428" data-i="20" class="g-hair" pathLength="1000"/>
+  <path d="M 166.2 452 V 428" data-i="21" class="g-hair" pathLength="1000"/>
+  <path d="M 177.6 452 V 428" data-i="22" class="g-hair" pathLength="1000"/>
+  <path d="M 189.0 452 V 428" data-i="23" class="g-hair" pathLength="1000"/>
+  <path d="M 200.4 452 V 428" data-i="24" class="g-hair" pathLength="1000"/>
+  <path d="M 211.8 452 V 428" data-i="25" class="g-hair" pathLength="1000"/>
+  <path d="M 223.2 452 V 428" data-i="26" class="g-hair" pathLength="1000"/>
+  <path d="M 234.6 452 V 428" data-i="27" class="g-hair" pathLength="1000"/>
+  <path d="M 246.0 452 V 428" data-i="28" class="g-hair" pathLength="1000"/>
+  <path d="M 257.4 452 V 428" data-i="29" class="g-hair" pathLength="1000"/>
+  <path d="M 268.8 452 V 428" data-i="30" class="g-hair" pathLength="1000"/>
+  <path d="M 152 426 V 344" data-i="31" pathLength="1000"/>
+  <path d="M 248 426 V 344" data-i="32" pathLength="1000"/>
+  <path d="M 153 424 V 382 A 13 13 0 0 1 179 382 V 424" data-i="33" class="g-win" pathLength="1000"/>
+  <path d="M 187 424 V 382 A 13 13 0 0 1 213 382 V 424" data-i="34" class="g-win" pathLength="1000"/>
+  <path d="M 221 424 V 382 A 13 13 0 0 1 247 382 V 424" data-i="35" class="g-win" pathLength="1000"/>
+  <path d="M 140 344 H 260" data-i="36" pathLength="1000"/>
+  <path d="M 143 336 H 257" data-i="37" class="g-hair" pathLength="1000"/>
+  <path d="M 140 344 L 200 214" data-i="38" pathLength="1000"/>
+  <path d="M 260 344 L 200 214" data-i="39" pathLength="1000"/>
+  <path d="M 140 344 Q 200 366 260 344" data-i="40" class="g-hair" pathLength="1000"/>
+  <path d="M 170 352 L 200 222" data-i="41" class="g-hair" pathLength="1000"/>
+  <path d="M 200 352 L 200 222" data-i="42" class="g-hair" pathLength="1000"/>
+  <path d="M 230 352 L 200 222" data-i="43" class="g-hair" pathLength="1000"/>
+  <path d="M 200 214 V 178" data-i="44" pathLength="1000"/>
+  <path d="M 193 178 A 7 7 0 1 1 207 178 A 7 7 0 1 1 193 178" data-i="45" pathLength="1000"/>
+  <path d="M 200 164 V 140" data-i="46" pathLength="1000"/>
+  <path d="M 200 146 L 232 152 L 200 158" data-i="47" class="g-flag" pathLength="1000"/>
+</svg>
