@@ -807,3 +807,7 @@ section{position:relative}
 .hero__media img{filter:saturate(1.05);object-position:58% 50%}
 @media (max-width:860px){.hero__media img{filter:saturate(1.05);object-position:64% 55%}}
 .hero__eyebrow{text-shadow:0 1px 14px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.8)}
+
+/* Kielivalitsin + some-napit näkyvämmiksi: valkoinen teksti/ikoni ja reuna */
+.nav__lang,.nav__social{color:var(--cream);border-color:rgba(246,239,227,.6);background:rgba(11,10,9,.35)}
+.nav__lang:hover,.nav__social:hover{color:#170A03;background:var(--cream);border-color:var(--cream)}
