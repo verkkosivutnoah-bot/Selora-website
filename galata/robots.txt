@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://galata-kebab-house.vercel.app/sitemap.xml
+Sitemap: https://galata.fi/sitemap.xml
